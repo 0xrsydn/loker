@@ -3,7 +3,7 @@ use std::sync::Arc;
 
 use clap::{Parser, Subcommand};
 use loker::App;
-use loker_core::api::{IngestParams, SearchParams, SearchResult};
+use loker_core::api::{IngestParams, SearchParams, SearchResult, SourcesEval};
 use loker_core::home::loker_home;
 use serde::Serialize;
 
@@ -22,9 +22,9 @@ struct Cli {
 enum Command {
     /// Fetch a source once and store what it returns.
     Ingest {
-        /// Source id (available: himalayas).
+        /// Source: himalayas, jobicy, remoteok, greenhouse:<board>, ashby:<board>.
         source: String,
-        /// Pages to fetch (20 jobs each for himalayas).
+        /// Pages to fetch (himalayas: 20 jobs each).
         #[arg(long)]
         pages: Option<u32>,
         /// Only fetch jobs the source says are open to this country (ISO code).
@@ -46,6 +46,11 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Inspect sources.
+    Sources {
+        #[command(subcommand)]
+        command: SourcesCommand,
+    },
     /// Show what is stored.
     Stats {
         #[arg(long)]
@@ -53,6 +58,15 @@ enum Command {
     },
     /// Serve the MCP tools over stdio (for Claude Code, Cursor, etc.).
     Mcp,
+}
+
+#[derive(Subcommand)]
+enum SourcesCommand {
+    /// Per-source coverage, overlap, blocked merges and eligibility conflicts.
+    Eval {
+        #[arg(long)]
+        json: bool,
+    },
 }
 
 #[tokio::main]
@@ -81,8 +95,8 @@ async fn main() -> anyhow::Result<()> {
                 })
                 .await?;
             println!(
-                "{source}: fetched {}, new {}, updated {}, unchanged {}, skipped {}",
-                s.fetched, s.new, s.updated, s.unchanged, s.skipped
+                "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, skipped {}",
+                s.fetched, s.new, s.updated, s.unchanged, s.merged, s.ambiguous, s.skipped
             );
         }
         Command::Search {
@@ -118,6 +132,16 @@ async fn main() -> anyhow::Result<()> {
                 println!("{:>10}  {}", "total", stats.total);
             }
         }
+        Command::Sources {
+            command: SourcesCommand::Eval { json },
+        } => {
+            let eval = app.sources_eval().await?;
+            if json {
+                print_json(&eval)?;
+            } else {
+                print_eval(&eval);
+            }
+        }
         Command::Mcp => loker::mcp::serve_stdio(Arc::new(app)).await?,
     }
     Ok(())
@@ -140,10 +164,69 @@ fn print_search(r: &SearchResult) {
             Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
             None => format!("{:?}", job.eligibility.scope).to_lowercase(),
         };
+        let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
         println!(
-            "{}  {} — {}\n    {elig} · {pay}\n    {}",
-            job.id, job.title, job.company, job.url
+            "{}  {} — {}\n    {elig} · {pay}\n    {}  (via {})",
+            job.id,
+            job.title,
+            job.company,
+            job.url,
+            via.join(", ")
         );
     }
     eprintln!("{} result(s)", r.count);
+}
+
+fn print_eval(e: &SourcesEval) {
+    println!(
+        "{} jobs from {} listings ({:.2} listings per job), {} blocked merges\n",
+        e.canonical_jobs, e.source_jobs, e.listings_per_job, e.blocked_keys
+    );
+    println!(
+        "{:<22} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  last run",
+        "source", "jobs", "unique", "scope", "tz", "pay", "pay_usd", "posted", "desc", "unmapped"
+    );
+    let pct = |v: f64| format!("{:.0}%", v * 100.0);
+    for s in &e.sources {
+        let c = &s.coverage;
+        let run = s
+            .last_run
+            .as_ref()
+            .map(|r| match &r.error {
+                Some(err) => format!("{} FAILED: {err}", r.status),
+                None => format!(
+                    "{} new, {} merged, {} ambiguous, {} skipped",
+                    r.new.unwrap_or(0),
+                    r.merged.unwrap_or(0),
+                    r.ambiguous.unwrap_or(0),
+                    r.skipped.unwrap_or(0)
+                ),
+            })
+            .unwrap_or_default();
+        println!(
+            "{:<22} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  {run}",
+            s.source,
+            s.jobs,
+            s.unique,
+            pct(c.scope),
+            pct(c.timezone),
+            pct(c.pay),
+            pct(c.pay_usd),
+            pct(c.posted_at),
+            pct(c.description),
+            s.location_unmapped
+        );
+    }
+    if !e.overlaps.is_empty() {
+        println!("\noverlaps");
+        for o in &e.overlaps {
+            println!("  {:<22} ∩ {:<22} {}", o.a, o.b, o.shared);
+        }
+    }
+    if !e.scope_conflicts.is_empty() {
+        println!("\neligibility conflicts ({})", e.scope_conflicts.len());
+        for c in e.scope_conflicts.iter().take(10) {
+            println!("  {}  {}\n      {}", c.job_id, c.job, c.scopes);
+        }
+    }
 }

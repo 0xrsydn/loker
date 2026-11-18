@@ -8,8 +8,9 @@ records each job's eligibility (worldwide, listed countries, required or preferr
 time zones), and answers searches from your point of view: "open to someone in
 Indonesia at UTC+7", not just "remote".
 
-> Status: early foundation. One source (Himalayas); CLI and MCP (stdio).
-> REST, more sources and the web UI come next.
+> Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, and any
+> company's Greenhouse or Ashby board. CLI and MCP (stdio). REST and the web UI
+> come next.
 
 ## Try it
 
@@ -17,6 +18,9 @@ Indonesia at UTC+7", not just "remote".
 direnv allow                                  # or `nix develop`: toolchain, sqlite, litestream, secretspec
 cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwide + ID listed)
 cargo run -- search engineer --country ID --tz 7
+cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>
+cargo run -- ingest remoteok                   # also: jobicy
+cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts
 cargo run -- stats
 ```
 
@@ -29,6 +33,17 @@ Data lives in `~/.loker/loker.db` (override with `LOKER_HOME`; inside the repo,
 `.envrc` points it at `./.loker-dev` so development never touches your real data).
 Running `ingest` twice is safe: unchanged jobs are only marked as seen again.
 
+### One job, many listings
+
+The same role often appears on an aggregator and on the company's own board.
+Each listing is kept per source; listings with the same company and title
+(normalized: "Lemon.io, Inc." = "lemon.io") become one job, unless one source
+lists that title twice (e.g. one per city), in which case nothing is merged.
+The outcome depends only on what is stored, never on ingest order. A merged job
+takes its link and text from the employer board, its eligibility from the most
+confident source, and lists every source it came from (`sources`) so
+aggregators that require attribution (Remote OK, Jobicy) get their link.
+
 ### As an MCP server
 
 `loker mcp` serves the tools over stdio. For Claude Code:
@@ -38,7 +53,7 @@ claude mcp add loker -- loker mcp
 ```
 
 Tools: `search_jobs` (query, `country`, `tz`, `limit`; each job carries an
-eligibility verdict with a reason) and `stats`. Bad input comes back as a tool
+eligibility verdict with a reason), `sources_eval` and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
 
 Build the binary reproducibly with `nix build` (output in `./result/bin/loker`).
@@ -49,7 +64,7 @@ Every operation is defined once and every interface calls it the same way:
 
 ```
 CLI flags ──┐                                     ┌── loker_core::api (search_jobs, stats)
-MCP args  ──┼─► params (api::*Params) ─► App ─────┤
+MCP args  ──┼─► params (api::*Params) ─► App ─────┤   (+ sources_eval)
 REST body ──┘   (later)                           └── loker_sources::ingest
 ```
 
@@ -59,11 +74,12 @@ prints exactly what the MCP tool returns as structured content.
 
 | Crate | Role |
 |---|---|
-| `loker-core` | Domain model, eligibility verdicts, country mapping, SQLite store, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
-| `loker-sources` | Source adapters (Himalayas so far) and `ingest`, the one fetch → transform → store path |
+| `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), SQLite store with cross-source dedup, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
+| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
-`nix flake check` builds the release binary and runs clippy with warnings denied.
+`nix flake check` builds the release binary, runs the tests (one offline test
+file for the dedup rules) and runs clippy with warnings denied.
 
 ## License
 

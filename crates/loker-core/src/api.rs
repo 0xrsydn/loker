@@ -155,6 +155,178 @@ pub async fn stats(store: &Store) -> Result<Stats> {
     })
 }
 
+// ---------- sources_eval ----------
+
+/// How good each source is, and how sources overlap: the numbers used to
+/// decide whether a source or a normalization rule earns its keep.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct SourcesEval {
+    pub contract_version: u32,
+    /// Active canonical (deduplicated) jobs.
+    pub canonical_jobs: i64,
+    /// Source jobs (one per source listing).
+    pub source_jobs: i64,
+    /// Source jobs per canonical job; 1.0 means no cross-source duplicates.
+    pub listings_per_job: f64,
+    pub sources: Vec<SourceEval>,
+    /// Canonical jobs listed by both sources.
+    pub overlaps: Vec<Overlap>,
+    /// Company + title keys listed by several sources where one source has the
+    /// key twice, so no merge was made. High numbers mean the key is too coarse.
+    pub blocked_keys: i64,
+    /// Merged jobs whose sources disagree on eligibility scope (unknown ignored).
+    pub scope_conflicts: Vec<ScopeConflict>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct SourceEval {
+    pub source: String,
+    pub jobs: i64,
+    /// Jobs no other source lists.
+    pub unique: i64,
+    /// Share of fields each normalizer filled, 0..1.
+    pub coverage: Coverage,
+    /// Jobs whose location text had parts no rule recognized.
+    pub location_unmapped: i64,
+    pub last_run: Option<RunSummary>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct Coverage {
+    /// Eligibility scope is not `unknown`.
+    pub scope: f64,
+    pub timezone: f64,
+    /// Any pay text.
+    pub pay: f64,
+    /// Pay converted to USD per month.
+    pub pay_usd: f64,
+    pub posted_at: f64,
+    pub description: f64,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct RunSummary {
+    pub at: String,
+    pub status: String,
+    pub error: Option<String>,
+    pub fetched: Option<i64>,
+    pub new: Option<i64>,
+    pub updated: Option<i64>,
+    pub unchanged: Option<i64>,
+    pub merged: Option<i64>,
+    pub ambiguous: Option<i64>,
+    pub skipped: Option<i64>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+pub struct Overlap {
+    pub a: String,
+    pub b: String,
+    pub shared: i64,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct ScopeConflict {
+    pub job_id: String,
+    pub job: String,
+    /// "source=scope, …"
+    pub scopes: String,
+}
+
+pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
+    let rows = store.source_eval().await?;
+    let mut runs: std::collections::BTreeMap<String, RunSummary> = rows
+        .last_runs
+        .into_iter()
+        .map(|r| {
+            (
+                r.source,
+                RunSummary {
+                    at: r.at,
+                    status: r.status,
+                    error: r.error,
+                    fetched: r.fetched,
+                    new: r.new,
+                    updated: r.updated,
+                    unchanged: r.unchanged,
+                    merged: r.merged,
+                    ambiguous: r.ambiguous,
+                    skipped: r.skipped,
+                },
+            )
+        })
+        .collect();
+    let rate = |n: i64, d: i64| {
+        if d == 0 {
+            0.0
+        } else {
+            (n as f64 / d as f64 * 1000.0).round() / 1000.0
+        }
+    };
+    let mut sources: Vec<SourceEval> = rows
+        .per_source
+        .into_iter()
+        .map(|s| SourceEval {
+            last_run: runs.remove(&s.source),
+            source: s.source,
+            jobs: s.jobs,
+            unique: s.jobs - s.shared,
+            coverage: Coverage {
+                scope: rate(s.scope_known, s.jobs),
+                timezone: rate(s.tz, s.jobs),
+                pay: rate(s.pay, s.jobs),
+                pay_usd: rate(s.pay_usd, s.jobs),
+                posted_at: rate(s.posted, s.jobs),
+                description: rate(s.described, s.jobs),
+            },
+            location_unmapped: s.unmapped,
+        })
+        .collect();
+    // Sources whose only runs failed still show up.
+    sources.extend(runs.into_iter().map(|(source, run)| SourceEval {
+        source,
+        jobs: 0,
+        unique: 0,
+        coverage: Coverage {
+            scope: 0.0,
+            timezone: 0.0,
+            pay: 0.0,
+            pay_usd: 0.0,
+            posted_at: 0.0,
+            description: 0.0,
+        },
+        location_unmapped: 0,
+        last_run: Some(run),
+    }));
+    Ok(SourcesEval {
+        contract_version: CONTRACT_VERSION,
+        canonical_jobs: rows.canonical_jobs,
+        source_jobs: rows.source_jobs,
+        listings_per_job: rate(rows.source_jobs, rows.canonical_jobs),
+        sources,
+        overlaps: rows
+            .overlaps
+            .into_iter()
+            .map(|(a, b, shared)| Overlap { a, b, shared })
+            .collect(),
+        blocked_keys: rows.blocked_keys,
+        scope_conflicts: rows
+            .conflicts
+            .into_iter()
+            .map(|(job_id, job, scopes)| ScopeConflict {
+                job_id,
+                job,
+                scopes,
+            })
+            .collect(),
+    })
+}
+
 // ---------- ingest ----------
 // The params live here so the contract is in one place; the operation itself
 // lives in `loker-sources`, which owns the adapters.
@@ -162,10 +334,10 @@ pub async fn stats(store: &Store) -> Result<Stats> {
 #[derive(Debug, Clone, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
-    /// Source id, e.g. `himalayas`.
+    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.
     pub source: String,
-    /// Pages to fetch (source-defined size), default 3.
+    /// Pages to fetch where the source paginates (himalayas), default 3.
     pub pages: Option<u32>,
-    /// Ask the source for jobs open to this country only (ISO alpha-2), if it supports that.
+    /// Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).
     pub country: Option<String>,
 }

@@ -5,7 +5,7 @@
 //! read the message ("unknown country `Narnia`") and retry.
 use std::sync::Arc;
 
-use loker_core::api::{SearchParams, SearchResult, Stats};
+use loker_core::api::{SearchParams, SearchResult, SourcesEval, Stats};
 use rmcp::handler::server::wrapper::{Json, Parameters};
 use rmcp::{ServerHandler, ServiceExt, tool, tool_handler, tool_router};
 
@@ -40,6 +40,20 @@ impl LokerMcp {
     )]
     async fn stats(&self) -> Result<Json<Stats>, String> {
         self.app.stats().await.map(Json).map_err(|e| e.to_string())
+    }
+
+    #[tool(
+        description = "Per-source quality and overlap: job counts, unique jobs, field coverage \
+                       (eligibility scope, timezone, pay, posted date), last run, cross-source \
+                       overlaps, blocked merges and eligibility conflicts between merged sources.",
+        annotations(read_only_hint = true)
+    )]
+    async fn sources_eval(&self) -> Result<Json<SourcesEval>, String> {
+        self.app
+            .sources_eval()
+            .await
+            .map(Json)
+            .map_err(|e| e.to_string())
     }
 }
 
