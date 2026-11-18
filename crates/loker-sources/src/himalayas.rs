@@ -5,6 +5,7 @@ use anyhow::Context;
 use chrono::DateTime;
 use loker_core::country;
 use loker_core::model::{Eligibility, Method, NewJob, Pay, Scope, TzStrength, TzWindow};
+use loker_core::normalize::{self, clean_url};
 use serde::Deserialize;
 use serde_json::Value;
 
@@ -95,11 +96,14 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         source_job_id: item.guid.clone(),
         source_url: item.guid.clone(),
         canonical_url: item.guid.clone(),
-        apply_url: item.application_link.as_deref().map(strip_tracking),
+        apply_url: item.application_link.as_deref().map(clean_url),
         title: item.title.trim().to_string(),
         company: item.company_name.trim().to_string(),
         seniority: item.seniority.first().map(|s| s.to_lowercase()),
-        employment_type: item.employment_type.as_deref().map(employment_type),
+        employment_type: item
+            .employment_type
+            .as_deref()
+            .map(normalize::employment_type),
         eligibility,
         pay,
         tech_tags: Vec::new(),
@@ -142,63 +146,11 @@ fn eligibility(item: &Item) -> Eligibility {
     }
 }
 
-/// USD only for now; other currencies keep the raw text until the FX table lands.
 fn pay(item: &Item) -> Option<Pay> {
-    let (min, max) = (item.min_salary, item.max_salary);
-    if min.is_none() && max.is_none() {
-        return None;
-    }
-    let currency = item.currency.clone().unwrap_or_default();
-    let period = item
-        .salary_period
-        .clone()
-        .unwrap_or_else(|| "annual".into());
-    let per_month = match period.as_str() {
-        "annual" | "yearly" => Some(1.0 / 12.0),
-        "monthly" => Some(1.0),
-        "weekly" => Some(52.0 / 12.0),
-        "daily" => Some(21.0),
-        "hourly" => Some(160.0),
-        _ => None,
-    };
-    let usd = |v: Option<f64>| match (currency.as_str(), per_month, v) {
-        ("USD", Some(f), Some(v)) => Some((v * f).round() as u32),
-        _ => None,
-    };
-    let fmt = |v: Option<f64>| v.map(|v| format!("{v}")).unwrap_or_else(|| "?".into());
-    Some(Pay {
-        usd_month_min: usd(min),
-        usd_month_max: usd(max),
-        raw: format!("{currency} {}–{} {period}", fmt(min), fmt(max)),
-    })
-}
-
-fn employment_type(s: &str) -> String {
-    match s.to_lowercase().as_str() {
-        "full time" | "full-time" => "full_time".into(),
-        "part time" | "part-time" => "part_time".into(),
-        "contractor" | "contract" => "contract".into(),
-        "intern" | "internship" => "internship".into(),
-        "temporary" => "temporary".into(),
-        other => other.replace(' ', "_"),
-    }
-}
-
-/// Drop `utm_*` and `ref` query parameters so the same posting always has the same URL.
-fn strip_tracking(url: &str) -> String {
-    let Some((base, query)) = url.split_once('?') else {
-        return url.to_string();
-    };
-    let kept: Vec<&str> = query
-        .split('&')
-        .filter(|kv| {
-            let key = kv.split('=').next().unwrap_or("");
-            !(key.starts_with("utm_") || key == "ref")
-        })
-        .collect();
-    if kept.is_empty() {
-        base.to_string()
-    } else {
-        format!("{base}?{}", kept.join("&"))
-    }
+    normalize::pay(
+        item.min_salary,
+        item.max_salary,
+        item.currency.as_deref(),
+        item.salary_period.as_deref(),
+    )
 }

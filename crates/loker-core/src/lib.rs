@@ -5,5 +5,6 @@ pub mod api;
 pub mod country;
 pub mod home;
 pub mod model;
+pub mod normalize;
 pub mod store;
 pub mod verdict;

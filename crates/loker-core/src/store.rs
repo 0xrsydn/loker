@@ -1,4 +1,15 @@
 //! SQLite store: one file, WAL mode, migrations embedded at compile time.
+//!
+//! Ingest is idempotent per source and dedup is order-independent:
+//!
+//! 1. Each source job is upserted into `source_jobs` with its normalized
+//!    content, its own hash and its match key (company_key, title_key).
+//! 2. Every key the batch touched is re-clustered from the stored rows alone
+//!    (see [`recluster`]), so the outcome never depends on which source was
+//!    ingested first.
+//! 3. Every canonical job whose members changed is rebuilt from its members
+//!    with a fixed precedence (see [`merge`]).
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 use std::str::FromStr;
 use std::time::Duration;
@@ -6,12 +17,31 @@ use std::time::Duration;
 use anyhow::Context;
 use chrono::{DateTime, Utc};
 use sqlx::Row;
-use sqlx::sqlite::{SqliteConnectOptions, SqliteJournalMode, SqlitePool, SqlitePoolOptions};
+use sqlx::sqlite::{
+    SqliteConnectOptions, SqliteConnection, SqliteJournalMode, SqlitePool, SqlitePoolOptions,
+};
 
-use crate::model::{IngestStats, Job, NewJob};
+use crate::model::{IngestStats, Job, JobSource, NewJob, SourceKind};
+use crate::normalize::{company_key, title_key};
 
 pub struct Store {
     pool: SqlitePool,
+}
+
+/// The `sources` column of a job row: every source listing it, for attribution.
+macro_rules! sources_col {
+    () => {
+        "(SELECT json_group_array(json_object('source', s.source_id, 'url', s.source_url))
+          FROM source_jobs s WHERE s.canonical_job_id = c.id) AS sources"
+    };
+}
+
+/// Which source a batch came from.
+#[derive(Debug, Clone)]
+pub struct SourceMeta {
+    /// Instance id, e.g. `himalayas` or `greenhouse:binance`.
+    pub id: String,
+    pub kind: SourceKind,
 }
 
 impl Store {
@@ -34,107 +64,148 @@ impl Store {
         Ok(Self { pool })
     }
 
-    /// Upsert one source's batch in a single transaction. Re-ingesting identical
+    /// Store one source's batch in a single transaction. Re-ingesting identical
     /// content only touches `last_seen`, so running ingest twice is a no-op.
     pub async fn ingest(
         &self,
-        source_id: &str,
+        source: &SourceMeta,
         jobs: Vec<NewJob>,
         skipped: u32,
     ) -> anyhow::Result<IngestStats> {
         let started = now();
+        let ts = now();
         let mut stats = IngestStats {
             fetched: jobs.len() as u32 + skipped,
             skipped,
             ..Default::default()
         };
         let mut tx = self.pool.begin().await?;
-        for job in jobs {
-            let id = job_id(&job.canonical_url);
-            let eligibility = serde_json::to_string(&job.eligibility)?;
-            let pay = job.pay.as_ref().map(serde_json::to_string).transpose()?;
-            let tags = serde_json::to_string(&job.tech_tags)?;
-            let posted = job.posted_at.map(|t| t.to_rfc3339());
-            let hash = content_hash(&[
-                &job.title,
-                &job.company,
-                &eligibility,
-                pay.as_deref().unwrap_or(""),
-                &tags,
-                job.description_md.as_deref().unwrap_or(""),
-                job.apply_url.as_deref().unwrap_or(""),
-                posted.as_deref().unwrap_or(""),
-                job.seniority.as_deref().unwrap_or(""),
-                job.employment_type.as_deref().unwrap_or(""),
-            ]);
-            let ts = now();
-            let existing: Option<String> =
-                sqlx::query_scalar("SELECT content_hash FROM canonical_jobs WHERE id = ?")
-                    .bind(&id)
-                    .fetch_optional(&mut *tx)
-                    .await?;
+
+        let mut touched_keys: BTreeSet<(String, String)> = BTreeSet::new();
+        let mut rebuild: BTreeSet<String> = BTreeSet::new();
+        // Source jobs that are new or changed in this batch, with their key.
+        let mut changed: Vec<(String, (String, String))> = Vec::new();
+
+        for mut job in jobs {
+            job.source_id = source.id.clone();
+            let key = (company_key(&job.company), title_key(&job.title));
+            let json = serde_json::to_string(&job)?;
+            let hash = content_hash(&[&json]);
+            let existing = sqlx::query(
+                "SELECT canonical_job_id, content_hash, company_key, title_key FROM source_jobs
+                 WHERE source_id = ? AND source_job_id = ?",
+            )
+            .bind(&source.id)
+            .bind(&job.source_job_id)
+            .fetch_optional(&mut *tx)
+            .await?;
+
             match existing {
-                Some(h) if h == hash => {
+                Some(row) if row.get::<String, _>("content_hash") == hash => {
+                    let cid: String = row.get("canonical_job_id");
+                    sqlx::query("UPDATE source_jobs SET fetched_at = ? WHERE source_id = ? AND source_job_id = ?")
+                        .bind(&ts).bind(&source.id).bind(&job.source_job_id)
+                        .execute(&mut *tx).await?;
                     sqlx::query(
                         "UPDATE canonical_jobs SET last_seen = ?, status = 'active' WHERE id = ?",
                     )
                     .bind(&ts)
-                    .bind(&id)
+                    .bind(&cid)
                     .execute(&mut *tx)
                     .await?;
                     stats.unchanged += 1;
                 }
-                existing => {
+                Some(row) => {
+                    let mut cid: String = row.get("canonical_job_id");
+                    let old_key = (
+                        row.get::<String, _>("company_key"),
+                        row.get::<String, _>("title_key"),
+                    );
+                    if old_key != key {
+                        // The match key changed: leave the old cluster before re-clustering both keys.
+                        let shared: i64 = sqlx::query_scalar(
+                            "SELECT count(*) FROM source_jobs WHERE canonical_job_id = ?",
+                        )
+                        .bind(&cid)
+                        .fetch_one(&mut *tx)
+                        .await?;
+                        if shared > 1 {
+                            rebuild.insert(cid.clone());
+                            cid = new_canonical(&mut tx, &job, &ts).await?;
+                        }
+                        touched_keys.insert(old_key);
+                    }
                     sqlx::query(
-                        "INSERT INTO canonical_jobs (id, canonical_url, apply_url, title, company, seniority,
-                           employment_type, eligibility, pay, tech_tags, description_md, content_hash,
-                           posted_at, first_seen, last_seen, status)
-                         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?14, 'active')
-                         ON CONFLICT (id) DO UPDATE SET
-                           apply_url = excluded.apply_url, title = excluded.title, company = excluded.company,
-                           seniority = excluded.seniority, employment_type = excluded.employment_type,
-                           eligibility = excluded.eligibility, pay = excluded.pay, tech_tags = excluded.tech_tags,
-                           description_md = excluded.description_md, content_hash = excluded.content_hash,
-                           posted_at = excluded.posted_at, last_seen = excluded.last_seen, status = 'active'",
+                        "UPDATE source_jobs SET canonical_job_id = ?, source_url = ?, source_kind = ?, job = ?,
+                           raw_data = ?, content_hash = ?, company_key = ?, title_key = ?, fetched_at = ?
+                         WHERE source_id = ? AND source_job_id = ?",
                     )
-                    .bind(&id).bind(&job.canonical_url).bind(&job.apply_url).bind(&job.title)
-                    .bind(&job.company).bind(&job.seniority).bind(&job.employment_type).bind(&eligibility)
-                    .bind(&pay).bind(&tags).bind(&job.description_md).bind(&hash).bind(&posted).bind(&ts)
+                    .bind(&cid).bind(&job.source_url).bind(source.kind.as_str()).bind(&json)
+                    .bind(job.raw.to_string()).bind(&hash).bind(&key.0).bind(&key.1).bind(&ts)
+                    .bind(&source.id).bind(&job.source_job_id)
                     .execute(&mut *tx)
                     .await?;
-                    sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
-                        .bind(&id)
-                        .execute(&mut *tx)
-                        .await?;
-                    sqlx::query("INSERT INTO jobs_fts (job_id, title, company, description) VALUES (?, ?, ?, ?)")
-                        .bind(&id).bind(&job.title).bind(&job.company).bind(&job.description_md)
-                        .execute(&mut *tx)
-                        .await?;
-                    if existing.is_some() {
-                        stats.updated += 1
-                    } else {
-                        stats.new += 1
-                    }
+                    rebuild.insert(cid);
+                    touched_keys.insert(key.clone());
+                    changed.push((job.source_job_id.clone(), key));
+                    stats.updated += 1;
+                }
+                None => {
+                    let cid = new_canonical(&mut tx, &job, &ts).await?;
+                    sqlx::query(
+                        "INSERT INTO source_jobs (source_id, source_job_id, source_url, canonical_job_id, raw_data,
+                           fetched_at, source_kind, job, content_hash, company_key, title_key, first_seen)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    )
+                    .bind(&source.id).bind(&job.source_job_id).bind(&job.source_url).bind(&cid)
+                    .bind(job.raw.to_string()).bind(&ts).bind(source.kind.as_str()).bind(&json)
+                    .bind(&hash).bind(&key.0).bind(&key.1).bind(&ts)
+                    .execute(&mut *tx)
+                    .await?;
+                    rebuild.insert(cid);
+                    touched_keys.insert(key.clone());
+                    changed.push((job.source_job_id.clone(), key));
+                    stats.new += 1;
                 }
             }
-            sqlx::query(
-                "INSERT INTO source_jobs (source_id, source_job_id, source_url, canonical_job_id, raw_data, fetched_at)
-                 VALUES (?, ?, ?, ?, ?, ?)
-                 ON CONFLICT (source_id, source_job_id) DO UPDATE SET
-                   source_url = excluded.source_url, canonical_job_id = excluded.canonical_job_id,
-                   raw_data = excluded.raw_data, fetched_at = excluded.fetched_at",
-            )
-            .bind(&job.source_id).bind(&job.source_job_id).bind(&job.source_url).bind(&id)
-            .bind(job.raw.to_string()).bind(&ts)
-            .execute(&mut *tx)
-            .await?;
         }
+
+        let mut ambiguous_keys = BTreeSet::new();
+        for key in &touched_keys {
+            if !recluster(&mut tx, key, &ts, &mut rebuild).await? {
+                ambiguous_keys.insert(key.clone());
+            }
+        }
+        for cid in &rebuild {
+            rebuild_canonical(&mut tx, cid, &ts).await?;
+        }
+
+        for (source_job_id, key) in &changed {
+            let sources: i64 = sqlx::query_scalar(
+                "SELECT count(DISTINCT o.source_id) FROM source_jobs s
+                 JOIN source_jobs o ON o.canonical_job_id = s.canonical_job_id
+                 WHERE s.source_id = ? AND s.source_job_id = ?",
+            )
+            .bind(&source.id)
+            .bind(source_job_id)
+            .fetch_one(&mut *tx)
+            .await?;
+            if sources > 1 {
+                stats.merged += 1;
+            }
+            if ambiguous_keys.contains(key) {
+                stats.ambiguous += 1;
+            }
+        }
+
         sqlx::query(
             "INSERT INTO ingestion_runs (source_id, started_at, completed_at, status, jobs_fetched, jobs_new,
-               jobs_updated, jobs_unchanged, jobs_skipped) VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?)",
+               jobs_updated, jobs_unchanged, jobs_skipped, jobs_merged, jobs_ambiguous)
+             VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?, ?, ?)",
         )
-        .bind(source_id).bind(&started).bind(now()).bind(stats.fetched).bind(stats.new)
-        .bind(stats.updated).bind(stats.unchanged).bind(stats.skipped)
+        .bind(&source.id).bind(&started).bind(now()).bind(stats.fetched).bind(stats.new)
+        .bind(stats.updated).bind(stats.unchanged).bind(stats.skipped).bind(stats.merged)
+        .bind(stats.ambiguous)
         .execute(&mut *tx)
         .await?;
         tx.commit().await?;
@@ -154,17 +225,26 @@ impl Store {
     pub async fn search(&self, query: &str, limit: u32) -> anyhow::Result<Vec<Job>> {
         let rows = match fts_query(query) {
             Some(q) => {
-                sqlx::query(
-                    "SELECT c.* FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
+                sqlx::query(concat!(
+                    "SELECT c.*, ",
+                    sources_col!(),
+                    " FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
                      WHERE jobs_fts MATCH ? AND c.status = 'active'
-                     ORDER BY bm25(jobs_fts) LIMIT ?",
-                )
-                .bind(q).bind(limit).fetch_all(&self.pool).await?
+                     ORDER BY bm25(jobs_fts) LIMIT ?"
+                ))
+                .bind(q)
+                .bind(limit)
+                .fetch_all(&self.pool)
+                .await?
             }
-            None => {
-                sqlx::query("SELECT * FROM canonical_jobs WHERE status = 'active' ORDER BY posted_at DESC LIMIT ?")
-                    .bind(limit).fetch_all(&self.pool).await?
-            }
+            None => sqlx::query(concat!(
+                "SELECT c.*, ",
+                sources_col!(),
+                " FROM canonical_jobs c WHERE c.status = 'active' ORDER BY c.posted_at DESC LIMIT ?"
+            ))
+            .bind(limit)
+            .fetch_all(&self.pool)
+            .await?,
         };
         rows.iter().map(row_to_job).collect()
     }
@@ -180,13 +260,430 @@ impl Store {
             .map(|r| (r.get::<String, _>("remote_scope"), r.get::<i64, _>("n")))
             .collect())
     }
+
+    /// Raw numbers for `sources eval`; the api layer shapes them.
+    pub async fn source_eval(&self) -> anyhow::Result<SourceEvalRows> {
+        let per_source = sqlx::query(
+            "SELECT s.source_id,
+               count(*) AS jobs,
+               sum(json_extract(s.job, '$.eligibility.scope') != 'unknown') AS scope_known,
+               sum(json_extract(s.job, '$.eligibility.evidence') LIKE 'unmapped%') AS unmapped,
+               sum(json_extract(s.job, '$.eligibility.tz') IS NOT NULL) AS tz,
+               sum(json_extract(s.job, '$.pay') IS NOT NULL) AS pay,
+               sum(coalesce(json_extract(s.job, '$.pay.usdMonthMax'), json_extract(s.job, '$.pay.usdMonthMin')) IS NOT NULL) AS pay_usd,
+               sum(json_extract(s.job, '$.postedAt') IS NOT NULL) AS posted,
+               sum(length(coalesce(json_extract(s.job, '$.descriptionMd'), '')) > 0) AS described,
+               sum((SELECT count(DISTINCT o.source_id) FROM source_jobs o
+                    WHERE o.canonical_job_id = s.canonical_job_id) > 1) AS shared
+             FROM source_jobs s WHERE s.job IS NOT NULL GROUP BY s.source_id ORDER BY jobs DESC",
+        )
+        .fetch_all(&self.pool)
+        .await?
+        .iter()
+        .map(|r| SourceRow {
+            source: r.get("source_id"),
+            jobs: r.get("jobs"),
+            scope_known: r.get("scope_known"),
+            unmapped: r.get("unmapped"),
+            tz: r.get("tz"),
+            pay: r.get("pay"),
+            pay_usd: r.get("pay_usd"),
+            posted: r.get("posted"),
+            described: r.get("described"),
+            shared: r.get("shared"),
+        })
+        .collect();
+
+        let overlaps = sqlx::query(
+            "SELECT a.source_id AS a, b.source_id AS b, count(DISTINCT a.canonical_job_id) AS n
+             FROM source_jobs a JOIN source_jobs b
+               ON a.canonical_job_id = b.canonical_job_id AND a.source_id < b.source_id
+             GROUP BY 1, 2 ORDER BY n DESC",
+        )
+        .fetch_all(&self.pool)
+        .await?
+        .iter()
+        .map(|r| (r.get("a"), r.get("b"), r.get("n")))
+        .collect();
+
+        let conflicts = sqlx::query(
+            "SELECT c.id, c.title, c.company,
+               group_concat(s.source_id || '=' || json_extract(s.job, '$.eligibility.scope'), ', ') AS scopes
+             FROM canonical_jobs c JOIN source_jobs s ON s.canonical_job_id = c.id
+             WHERE s.job IS NOT NULL AND json_extract(s.job, '$.eligibility.scope') != 'unknown'
+             GROUP BY c.id
+             HAVING count(DISTINCT json_extract(s.job, '$.eligibility.scope')) > 1
+             ORDER BY c.id",
+        )
+        .fetch_all(&self.pool)
+        .await?
+        .iter()
+        .map(|r| {
+            (
+                r.get::<String, _>("id"),
+                format!("{} — {}", r.get::<String, _>("title"), r.get::<String, _>("company")),
+                r.get::<String, _>("scopes"),
+            )
+        })
+        .collect();
+
+        let blocked_keys: i64 = sqlx::query_scalar(
+            "SELECT count(*) FROM (SELECT 1 FROM source_jobs WHERE job IS NOT NULL
+               GROUP BY company_key, title_key
+               HAVING count(DISTINCT source_id) > 1 AND count(*) > count(DISTINCT source_id))",
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        let (canonical_jobs, source_jobs): (i64, i64) = sqlx::query_as(
+            "SELECT (SELECT count(*) FROM canonical_jobs WHERE status = 'active'),
+                    (SELECT count(*) FROM source_jobs)",
+        )
+        .fetch_one(&self.pool)
+        .await?;
+
+        let last_runs = sqlx::query(
+            "SELECT r.* FROM ingestion_runs r
+             WHERE r.id = (SELECT max(id) FROM ingestion_runs WHERE source_id = r.source_id)
+             ORDER BY r.source_id",
+        )
+        .fetch_all(&self.pool)
+        .await?
+        .iter()
+        .map(|r| RunRow {
+            source: r.get("source_id"),
+            at: r.get("started_at"),
+            status: r.get("status"),
+            error: r.get("error"),
+            fetched: r.get("jobs_fetched"),
+            new: r.get("jobs_new"),
+            updated: r.get("jobs_updated"),
+            unchanged: r.get("jobs_unchanged"),
+            merged: r.get("jobs_merged"),
+            ambiguous: r.get("jobs_ambiguous"),
+            skipped: r.get("jobs_skipped"),
+        })
+        .collect();
+
+        Ok(SourceEvalRows {
+            canonical_jobs,
+            source_jobs,
+            per_source,
+            overlaps,
+            conflicts,
+            blocked_keys,
+            last_runs,
+        })
+    }
 }
+
+pub struct SourceEvalRows {
+    pub canonical_jobs: i64,
+    pub source_jobs: i64,
+    pub per_source: Vec<SourceRow>,
+    /// (source a, source b, canonical jobs both list)
+    pub overlaps: Vec<(String, String, i64)>,
+    /// (job id, "title — company", "source=scope, …")
+    pub conflicts: Vec<(String, String, String)>,
+    pub blocked_keys: i64,
+    pub last_runs: Vec<RunRow>,
+}
+
+pub struct SourceRow {
+    pub source: String,
+    pub jobs: i64,
+    pub scope_known: i64,
+    pub unmapped: i64,
+    pub tz: i64,
+    pub pay: i64,
+    pub pay_usd: i64,
+    pub posted: i64,
+    pub described: i64,
+    pub shared: i64,
+}
+
+pub struct RunRow {
+    pub source: String,
+    pub at: String,
+    pub status: String,
+    pub error: Option<String>,
+    pub fetched: Option<i64>,
+    pub new: Option<i64>,
+    pub updated: Option<i64>,
+    pub unchanged: Option<i64>,
+    pub merged: Option<i64>,
+    pub ambiguous: Option<i64>,
+    pub skipped: Option<i64>,
+}
+
+// ---------- dedup ----------
+
+/// Re-cluster every source job sharing `key`, from the stored rows alone.
+///
+/// If each source contributes at most one job under the key, they are one job
+/// and end up on one canonical job. If any source has two (one title posted in
+/// several cities, say), the key cannot tell them apart, so every job stays on
+/// its own canonical job. Returns `false` in that ambiguous case.
+async fn recluster(
+    conn: &mut SqliteConnection,
+    key: &(String, String),
+    ts: &str,
+    rebuild: &mut BTreeSet<String>,
+) -> anyhow::Result<bool> {
+    let members: Vec<(String, String, String)> = sqlx::query_as(
+        "SELECT s.source_id, s.source_job_id, s.canonical_job_id FROM source_jobs s
+         JOIN canonical_jobs c ON c.id = s.canonical_job_id
+         WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL
+         ORDER BY c.first_seen, c.id, s.source_id, s.source_job_id",
+    )
+    .bind(&key.0)
+    .bind(&key.1)
+    .fetch_all(&mut *conn)
+    .await?;
+    if members.len() <= 1 || key.0.is_empty() || key.1.is_empty() {
+        return Ok(true);
+    }
+    let distinct_sources: BTreeSet<&str> = members.iter().map(|m| m.0.as_str()).collect();
+    if distinct_sources.len() == 1 {
+        // One source repeating a title: nothing to merge, and nothing was blocked.
+        return Ok(true);
+    }
+    if distinct_sources.len() == members.len() {
+        // One job: move everyone onto the oldest canonical job (members are sorted by it).
+        let target = members[0].2.clone();
+        for (sid, sjid, cid) in &members {
+            if *cid != target {
+                relink(conn, sid, sjid, &target).await?;
+                rebuild.insert(cid.clone());
+            }
+        }
+        rebuild.insert(target);
+        Ok(true)
+    } else {
+        // Ambiguous: the first member on each canonical job keeps it, the rest get their own.
+        let mut seen: BTreeMap<String, ()> = BTreeMap::new();
+        for (sid, sjid, cid) in &members {
+            if seen.insert(cid.clone(), ()).is_some() {
+                let job = load_job(conn, sid, sjid).await?;
+                let fresh = new_canonical(conn, &job, ts).await?;
+                relink(conn, sid, sjid, &fresh).await?;
+                rebuild.insert(cid.clone());
+                rebuild.insert(fresh);
+            }
+        }
+        Ok(false)
+    }
+}
+
+async fn relink(
+    conn: &mut SqliteConnection,
+    sid: &str,
+    sjid: &str,
+    cid: &str,
+) -> anyhow::Result<()> {
+    sqlx::query(
+        "UPDATE source_jobs SET canonical_job_id = ? WHERE source_id = ? AND source_job_id = ?",
+    )
+    .bind(cid)
+    .bind(sid)
+    .bind(sjid)
+    .execute(&mut *conn)
+    .await?;
+    Ok(())
+}
+
+async fn load_job(conn: &mut SqliteConnection, sid: &str, sjid: &str) -> anyhow::Result<NewJob> {
+    let json: String =
+        sqlx::query_scalar("SELECT job FROM source_jobs WHERE source_id = ? AND source_job_id = ?")
+            .bind(sid)
+            .bind(sjid)
+            .fetch_one(&mut *conn)
+            .await?;
+    Ok(serde_json::from_str(&json)?)
+}
+
+/// Insert a canonical job seeded from one source job; `rebuild_canonical` fills it properly.
+async fn new_canonical(
+    conn: &mut SqliteConnection,
+    job: &NewJob,
+    ts: &str,
+) -> anyhow::Result<String> {
+    let seed = format!("{}\n{}", job.source_id, job.source_job_id);
+    let mut id = job_id(&seed);
+    let mut n = 0;
+    while sqlx::query_scalar::<_, i64>("SELECT count(*) FROM canonical_jobs WHERE id = ?")
+        .bind(&id)
+        .fetch_one(&mut *conn)
+        .await?
+        > 0
+    {
+        n += 1;
+        id = job_id(&format!("{seed}\n{n}"));
+    }
+    sqlx::query(
+        "INSERT INTO canonical_jobs (id, canonical_url, title, company, eligibility, content_hash, first_seen, last_seen)
+         VALUES (?, ?, ?, ?, ?, '', ?, ?)",
+    )
+    .bind(&id)
+    .bind(&job.canonical_url)
+    .bind(&job.title)
+    .bind(&job.company)
+    .bind(serde_json::to_string(&job.eligibility)?)
+    .bind(ts)
+    .bind(ts)
+    .execute(&mut *conn)
+    .await?;
+    Ok(id)
+}
+
+/// Recompute a canonical job from all its source jobs. Deletes it when nothing
+/// links to it any more.
+async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> anyhow::Result<()> {
+    let rows: Vec<(String, String, String, Option<String>)> = sqlx::query_as(
+        "SELECT source_kind, source_id, source_job_id, job FROM source_jobs WHERE canonical_job_id = ?",
+    )
+    .bind(cid)
+    .fetch_all(&mut *conn)
+    .await?;
+    if rows.is_empty() {
+        sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
+            .bind(cid)
+            .execute(&mut *conn)
+            .await?;
+        sqlx::query("DELETE FROM canonical_jobs WHERE id = ?")
+            .bind(cid)
+            .execute(&mut *conn)
+            .await?;
+        return Ok(());
+    }
+    let mut members = Vec::new();
+    for (kind, sid, sjid, job) in rows {
+        // Rows from before migration 0002 have no stored job; they refresh on the next ingest.
+        let Some(job) = job else { continue };
+        let kind = if kind == "employer" {
+            SourceKind::Employer
+        } else {
+            SourceKind::Aggregator
+        };
+        members.push(((kind, sid, sjid), serde_json::from_str::<NewJob>(&job)?));
+    }
+    if members.is_empty() {
+        return Ok(());
+    }
+    members.sort_by(|a, b| a.0.cmp(&b.0));
+    let jobs: Vec<NewJob> = members.into_iter().map(|(_, j)| j).collect();
+    let m = merge(&jobs);
+
+    let eligibility = serde_json::to_string(&m.eligibility)?;
+    let pay = m.pay.as_ref().map(serde_json::to_string).transpose()?;
+    let tags = serde_json::to_string(&m.tech_tags)?;
+    let posted = m.posted_at.map(|t| t.to_rfc3339());
+    let hash = content_hash(&[
+        &m.canonical_url,
+        m.apply_url.as_deref().unwrap_or(""),
+        &m.title,
+        &m.company,
+        m.seniority.as_deref().unwrap_or(""),
+        m.employment_type.as_deref().unwrap_or(""),
+        &eligibility,
+        pay.as_deref().unwrap_or(""),
+        &tags,
+        m.description_md.as_deref().unwrap_or(""),
+        posted.as_deref().unwrap_or(""),
+    ]);
+    let current: String =
+        sqlx::query_scalar("SELECT content_hash FROM canonical_jobs WHERE id = ?")
+            .bind(cid)
+            .fetch_one(&mut *conn)
+            .await?;
+    if current == hash {
+        return Ok(());
+    }
+    sqlx::query(
+        "UPDATE canonical_jobs SET canonical_url = ?, apply_url = ?, title = ?, company = ?, seniority = ?,
+           employment_type = ?, eligibility = ?, pay = ?, tech_tags = ?, description_md = ?, content_hash = ?,
+           posted_at = ?, last_seen = ?, status = 'active'
+         WHERE id = ?",
+    )
+    .bind(&m.canonical_url).bind(&m.apply_url).bind(&m.title).bind(&m.company).bind(&m.seniority)
+    .bind(&m.employment_type).bind(&eligibility).bind(&pay).bind(&tags).bind(&m.description_md)
+    .bind(&hash).bind(&posted).bind(ts).bind(cid)
+    .execute(&mut *conn)
+    .await?;
+    sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
+        .bind(cid)
+        .execute(&mut *conn)
+        .await?;
+    sqlx::query("INSERT INTO jobs_fts (job_id, title, company, description) VALUES (?, ?, ?, ?)")
+        .bind(cid)
+        .bind(&m.title)
+        .bind(&m.company)
+        .bind(&m.description_md)
+        .execute(&mut *conn)
+        .await?;
+    Ok(())
+}
+
+/// Merge source jobs (sorted: employer boards first, then by source id) into
+/// one. The first job supplies identity and text; eligibility comes from
+/// whichever source is most confident; pay prefers a normalized USD figure.
+fn merge(jobs: &[NewJob]) -> NewJob {
+    let primary = &jobs[0];
+    let first = |f: fn(&NewJob) -> Option<String>| jobs.iter().find_map(f);
+    let eligibility = jobs
+        .iter()
+        .map(|j| &j.eligibility)
+        .fold(&primary.eligibility, |best, e| {
+            if e.confidence > best.confidence {
+                e
+            } else {
+                best
+            }
+        })
+        .clone();
+    let pay = jobs
+        .iter()
+        .filter_map(|j| j.pay.as_ref())
+        .find(|p| p.usd_month_max.is_some() || p.usd_month_min.is_some())
+        .or_else(|| jobs.iter().find_map(|j| j.pay.as_ref()))
+        .cloned();
+    let mut tech_tags: Vec<String> = jobs
+        .iter()
+        .flat_map(|j| j.tech_tags.iter().cloned())
+        .collect();
+    tech_tags.sort();
+    tech_tags.dedup();
+    NewJob {
+        source_id: primary.source_id.clone(),
+        source_job_id: primary.source_job_id.clone(),
+        source_url: primary.source_url.clone(),
+        canonical_url: primary.canonical_url.clone(),
+        apply_url: primary
+            .apply_url
+            .clone()
+            .or_else(|| Some(primary.source_url.clone())),
+        title: primary.title.clone(),
+        company: primary.company.clone(),
+        seniority: first(|j| j.seniority.clone()),
+        employment_type: first(|j| j.employment_type.clone()),
+        eligibility,
+        pay,
+        tech_tags,
+        description_md: first(|j| j.description_md.clone().filter(|d| !d.trim().is_empty())),
+        posted_at: jobs.iter().filter_map(|j| j.posted_at).min(),
+        raw: serde_json::Value::Null,
+    }
+}
+
+// ---------- rows ----------
 
 fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     let parse_ts = |s: Option<String>| -> anyhow::Result<Option<DateTime<Utc>>> {
         s.map(|s| Ok(DateTime::parse_from_rfc3339(&s)?.with_timezone(&Utc)))
             .transpose()
     };
+    let mut sources: Vec<JobSource> = serde_json::from_str(&r.get::<String, _>("sources"))?;
+    sources.sort_by(|a, b| a.source.cmp(&b.source));
     Ok(Job {
         id: r.get("id"),
         title: r.get("title"),
@@ -205,6 +702,7 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         posted_at: parse_ts(r.get("posted_at"))?,
         first_seen: parse_ts(Some(r.get("first_seen")))?.expect("first_seen is NOT NULL"),
         status: r.get("status"),
+        sources,
     })
 }
 
@@ -217,11 +715,8 @@ fn fts_query(q: &str) -> Option<String> {
     (!terms.is_empty()).then(|| terms.join(" "))
 }
 
-pub fn job_id(canonical_url: &str) -> String {
-    format!(
-        "j_{}",
-        &blake3::hash(canonical_url.as_bytes()).to_hex()[..10]
-    )
+pub fn job_id(seed: &str) -> String {
+    format!("j_{}", &blake3::hash(seed.as_bytes()).to_hex()[..10])
 }
 
 fn content_hash(parts: &[&str]) -> String {

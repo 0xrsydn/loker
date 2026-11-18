@@ -115,8 +115,31 @@ pub struct Pay {
     pub raw: String,
 }
 
-/// A job as an adapter produces it, before the store assigns an id.
-#[derive(Debug, Clone)]
+/// Employer boards (Greenhouse, Ashby, …) are the primary record of a job;
+/// aggregators repost them. When both have a job, the employer's fields win.
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "snake_case")]
+pub enum SourceKind {
+    Employer,
+    Aggregator,
+}
+
+impl SourceKind {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            SourceKind::Employer => "employer",
+            SourceKind::Aggregator => "aggregator",
+        }
+    }
+}
+
+/// A job as an adapter produces it, normalized, before it is linked to a
+/// canonical job. Stored per source (without `raw`) so the canonical job can be
+/// rebuilt from all its sources.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct NewJob {
     pub source_id: String,
     pub source_job_id: String,
@@ -132,6 +155,7 @@ pub struct NewJob {
     pub tech_tags: Vec<String>,
     pub description_md: Option<String>,
     pub posted_at: Option<DateTime<Utc>>,
+    #[serde(skip)]
     pub raw: serde_json::Value,
 }
 
@@ -151,14 +175,29 @@ pub struct Job {
     pub posted_at: Option<DateTime<Utc>>,
     pub first_seen: DateTime<Utc>,
     pub status: String,
+    /// Every source that lists this job, with its page there (for attribution).
+    pub sources: Vec<JobSource>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+pub struct JobSource {
+    pub source: String,
+    pub url: String,
 }
 
 #[derive(Debug, Clone, Default, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct IngestStats {
     pub fetched: u32,
+    /// Source jobs seen for the first time.
     pub new: u32,
+    /// Source jobs whose normalized content changed.
     pub updated: u32,
     pub unchanged: u32,
+    /// New or updated source jobs that share a canonical job with another source.
+    pub merged: u32,
+    /// New or updated source jobs whose company + title key is shared by more
+    /// than one job from the same source, so no cross-source merge was made.
+    pub ambiguous: u32,
     pub skipped: u32,
 }
