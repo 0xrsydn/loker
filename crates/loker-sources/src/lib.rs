@@ -399,6 +399,16 @@ pub fn check_fetch(f: &Fetched, now: chrono::DateTime<chrono::Utc>) -> SourceChe
     }
 }
 
+/// `default_base` unless `LOKER_FETCH_BASE` is set, in which case every
+/// source is fetched from that base instead (a local stub in the e2e test,
+/// or a caching proxy).
+fn url(default_base: &str, path: &str) -> String {
+    match std::env::var("LOKER_FETCH_BASE") {
+        Ok(base) if !base.is_empty() => format!("{}{path}", base.trim_end_matches('/')),
+        _ => format!("{default_base}{path}"),
+    }
+}
+
 // ---------- helpers shared by adapters ----------
 
 async fn get_json(client: &HttpClient, url: &str) -> anyhow::Result<Value> {

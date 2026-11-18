@@ -13,7 +13,10 @@ use serde_json::Value;
 use crate::{HttpClient, decode_entities, get_json, html_to_md};
 
 pub async fn fetch(client: &HttpClient, board: &str) -> anyhow::Result<Vec<Value>> {
-    let url = format!("https://boards-api.greenhouse.io/v1/boards/{board}/jobs?content=true");
+    let url = crate::url(
+        "https://boards-api.greenhouse.io",
+        &format!("/v1/boards/{board}/jobs?content=true"),
+    );
     let body = get_json(client, &url).await?;
     Ok(body
         .get("jobs")

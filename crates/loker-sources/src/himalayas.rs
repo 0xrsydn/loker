@@ -10,9 +10,9 @@ use serde::Deserialize;
 use serde_json::Value;
 
 pub const SOURCE_ID: &str = "himalayas";
-const API: &str = "https://himalayas.app/jobs/api";
-/// Filtered search (e.g. `country=ID` returns worldwide jobs plus jobs listing that country).
-const SEARCH_API: &str = "https://himalayas.app/jobs/api/search";
+/// Feed: `/jobs/api` (cursor). Filtered search: `/jobs/api/search` (e.g. `country=ID`
+/// returns worldwide jobs plus jobs listing that country; page-numbered).
+const BASE: &str = "https://himalayas.app";
 const PAGE_SIZE: u32 = 20;
 
 #[derive(Deserialize)]
@@ -37,12 +37,14 @@ pub async fn fetch(
             tokio::time::sleep(Duration::from_secs(1)).await;
         }
         let mut req = match country {
-            Some(c) => client.get(SEARCH_API).query(&[
+            Some(c) => client.get(crate::url(BASE, "/jobs/api/search")).query(&[
                 ("country", c.to_string()),
                 ("sort", "recent".into()),
                 ("page", (page + 1).to_string()),
             ]),
-            None => client.get(API).query(&[("limit", PAGE_SIZE.to_string())]),
+            None => client
+                .get(crate::url(BASE, "/jobs/api"))
+                .query(&[("limit", PAGE_SIZE.to_string())]),
         };
         if let Some(c) = &cursor {
             req = req.query(&[("cursor", c)]);

@@ -13,7 +13,11 @@ use crate::{HttpClient, as_f64, as_string, decode_entities, get_json, html_to_md
 pub const SOURCE_ID: &str = "jobicy";
 
 pub async fn fetch(client: &HttpClient) -> anyhow::Result<Vec<Value>> {
-    let body = get_json(client, "https://jobicy.com/api/v2/remote-jobs?count=100").await?;
+    let body = get_json(
+        client,
+        &crate::url("https://jobicy.com", "/api/v2/remote-jobs?count=100"),
+    )
+    .await?;
     Ok(body
         .get("jobs")
         .and_then(Value::as_array)

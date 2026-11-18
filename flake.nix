@@ -14,10 +14,14 @@
       build = pkgs:
         let
           craneLib = crane.mkLib pkgs;
-          # Cargo sources plus the SQL migrations embedded by `sqlx::migrate!`.
+          # Cargo sources, the SQL migrations embedded by `sqlx::migrate!`, and the
+          # committed contract schemas the e2e test compares against.
           src = pkgs.lib.cleanSourceWith {
             src = ./.;
-            filter = path: type: (pkgs.lib.hasSuffix ".sql" path) || (craneLib.filterCargoSources path type);
+            filter = path: type:
+              (pkgs.lib.hasSuffix ".sql" path)
+              || (pkgs.lib.hasInfix "/schema" path)
+              || (craneLib.filterCargoSources path type);
           };
           commonArgs = {
             inherit src;
@@ -43,7 +47,7 @@
           default = b.package;
         });
 
-      # `nix flake check`: the build plus clippy with warnings denied.
+      # `nix flake check`: the build (which runs the tests) plus clippy with warnings denied.
       checks = forAll (pkgs:
         let b = build pkgs; in {
           inherit (b) package clippy;

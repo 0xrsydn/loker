@@ -14,7 +14,7 @@ use crate::{HttpClient, as_f64, as_string, decode_entities, get_json, html_to_md
 pub const SOURCE_ID: &str = "remoteok";
 
 pub async fn fetch(client: &HttpClient) -> anyhow::Result<Vec<Value>> {
-    let body = get_json(client, "https://remoteok.com/api").await?;
+    let body = get_json(client, &crate::url("https://remoteok.com", "/api")).await?;
     Ok(body
         .as_array()
         .map(|a| {

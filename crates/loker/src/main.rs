@@ -32,6 +32,8 @@ enum Command {
         /// Only fetch jobs the source says are open to this country (ISO code).
         #[arg(long)]
         country: Option<String>,
+        #[arg(long)]
+        json: bool,
     },
     /// Search stored jobs (every word must match).
     Search {
@@ -107,6 +109,7 @@ async fn main() -> anyhow::Result<()> {
             source,
             pages,
             country,
+            json,
         } => {
             let s = app
                 .ingest(IngestParams {
@@ -115,20 +118,24 @@ async fn main() -> anyhow::Result<()> {
                     country,
                 })
                 .await?;
-            println!(
-                "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, \
-                 closed {}, reopened {}, held {}, skipped {}",
-                s.fetched,
-                s.new,
-                s.updated,
-                s.unchanged,
-                s.merged,
-                s.ambiguous,
-                s.closed,
-                s.reopened,
-                s.held,
-                s.skipped
-            );
+            if json {
+                print_json(&s)?;
+            } else {
+                println!(
+                    "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, \
+                     closed {}, reopened {}, held {}, skipped {}",
+                    s.fetched,
+                    s.new,
+                    s.updated,
+                    s.unchanged,
+                    s.merged,
+                    s.ambiguous,
+                    s.closed,
+                    s.reopened,
+                    s.held,
+                    s.skipped
+                );
+            }
         }
         Command::Search {
             query,
