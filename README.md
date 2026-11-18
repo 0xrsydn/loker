@@ -22,9 +22,38 @@ cargo run -- ingest ashby:clera                # one company's board: ashby:<slu
 cargo run -- ingest remoteok                   # also: jobicy
 cargo run -- search --country ID --offset 20   # next page (each page reports its next offset)
 cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts, closed jobs
-cargo run -- verify                           # live check of every stored source; non-zero exit on failure
+cargo run -- verify                           # live check of every configured source; non-zero exit on failure
 cargo run -- stats
 ```
+
+### Running it unattended
+
+List your sources once in `$LOKER_HOME/config.toml` (`loker config init` writes
+a starting one; `loker config check` validates it):
+
+```toml
+version = 1
+
+[[sources]]
+id = "himalayas"
+country = "ID"         # only jobs open to Indonesia
+pages = 5
+
+[[sources]]
+id = "ashby:clera"
+company = "Clera"      # display name; Ashby only gives the slug
+
+[[sources]]
+id = "remoteok"
+enabled = false        # listed but skipped
+```
+
+`loker ingest --all` fetches every enabled source in order; one failing source
+doesn't stop the others, and the exit status is non-zero if any failed.
+`loker verify` checks the same sources with the same parameters.
+`contrib/systemd/` has a oneshot service (ingest, then verify) and a timer
+that runs it every 6 hours; the service file says how to install it as a user
+unit.
 
 ```
 j_6b78581675  Senior Engineer, Service Delivery — dell
@@ -60,8 +89,8 @@ listings closes nothing and reports them as `held`.
 `loker verify` fetches each source live, stores nothing, and checks what
 every adapter must keep true: items returned, parse rate, unique ids, title,
 company and URL present, ids for closures, dates. It is how an upstream API
-change shows up. Note: for Himalayas it checks the unfiltered feed, not the
-`--country` search endpoint, until sources and their parameters live in config.
+change shows up. With no names it checks the sources in config.toml, each with
+its configured parameters.
 
 ### As an MCP server
 
@@ -112,8 +141,9 @@ with warnings denied; CI runs it on every push and pull request.
   and search (eligible jobs behind many ineligible ones, offset paging).
 - `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one
   hand-written payload per adapter: ingest, idempotent re-runs, order
-  independence, CLI = MCP parity, closing through a real fetch, `verify`, and
-  schema drift. `LOKER_FETCH_BASE` points every adapter at the stub (or at a
+  independence, CLI = MCP parity, closing through a real fetch, `verify`,
+  config-driven `ingest --all` (a failing source, a disabled one, a display
+  name), and schema drift. `LOKER_FETCH_BASE` points every adapter at the stub (or at a
   caching proxy).
 
 ## Repository

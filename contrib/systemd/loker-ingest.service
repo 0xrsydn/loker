@@ -1,0 +1,25 @@
+# Ingest every enabled source in $LOKER_HOME/config.toml, then verify them.
+# The unit fails (and `systemctl status` shows it) if any source fails to
+# ingest or verify; per-source results are also in the database
+# (`loker sources eval`).
+#
+# User unit: copy to ~/.config/systemd/user/ with loker-ingest.timer, then
+#   systemctl --user daemon-reload && systemctl --user enable --now loker-ingest.timer
+# and `loginctl enable-linger $USER` so it runs while you're logged out.
+[Unit]
+Description=loker: ingest configured job sources, then verify them
+Documentation=https://github.com/0xrsydn/loker
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Defaults to ~/.loker; set LOKER_HOME to use another directory.
+#Environment=LOKER_HOME=%h/.loker
+Environment=RUST_LOG=warn
+# /usr/bin/env finds loker on the service PATH; use an absolute path if it doesn't.
+ExecStart=/usr/bin/env loker ingest --all
+ExecStart=/usr/bin/env loker verify
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=30min
