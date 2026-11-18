@@ -81,6 +81,11 @@ prints exactly what the MCP tool returns as structured content.
 `nix flake check` builds the release binary, runs the tests (one offline test
 file for the dedup rules) and runs clippy with warnings denied.
 
+## Repository
+
+Development, issues and pull requests: https://github.com/0xrsydn/loker.
+Read-only mirror: https://git.rasyidanaf.com/0xrsydn/loker.
+
 ## License
 
 Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or
