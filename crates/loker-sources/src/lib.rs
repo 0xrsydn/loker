@@ -13,8 +13,8 @@ pub mod jobicy;
 pub mod remoteok;
 
 use loker_core::api::{
-    CONTRACT_VERSION, Check, CheckStatus, Error, IngestParams, Result, SourceCheck, VerifyParams,
-    VerifyReport,
+    CONTRACT_VERSION, Check, CheckStatus, Error, IngestAllReport, IngestOutcome, IngestParams,
+    Result, SourceCheck, VerifyReport,
 };
 use loker_core::model::{IngestStats, NewJob, SourceKind};
 use loker_core::store::{Batch, SourceMeta, Store};
@@ -158,6 +158,12 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
             source.id()
         )));
     }
+    if p.company.is_some() && source.kind() != SourceKind::Employer {
+        return Err(Error::Invalid(format!(
+            "`company` only applies to employer boards, not {}",
+            source.id()
+        )));
+    }
     let raw = source.fetch(client, p).await?;
     // Ids come from the raw items, so an item that fails to transform is still
     // "present" and never closed by mistake. Any item without an id makes the
@@ -171,7 +177,12 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
     let (mut jobs, mut errors) = (Vec::new(), Vec::new());
     for item in raw {
         match source.transform(item) {
-            Ok(job) => jobs.push(job),
+            Ok(mut job) => {
+                if let Some(name) = &p.company {
+                    job.company = name.clone();
+                }
+                jobs.push(job)
+            }
             Err(e) => errors.push(format!("{e:#}")),
         }
     }
@@ -227,29 +238,22 @@ pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Resu
 /// Fetch each source once (without storing anything) and check what came back
 /// against invariants every adapter must keep. This is how upstream API
 /// changes show up: an empty feed, items that stop parsing, missing fields.
-pub async fn verify(store: &Store, client: &HttpClient, p: VerifyParams) -> Result<VerifyReport> {
-    let mut ids = p.sources;
-    if ids.is_empty() {
-        ids = store.source_ids().await?;
-    }
-    if ids.is_empty() {
+/// Each target is fetched with its own parameters (country, company), one page.
+pub async fn verify(client: &HttpClient, targets: Vec<IngestParams>) -> Result<VerifyReport> {
+    if targets.is_empty() {
         return Err(Error::Invalid(
-            "nothing ingested yet; name the sources to verify".into(),
+            "no sources to verify: add some to config.toml or name them".into(),
         ));
     }
     let mut sources = Vec::new();
-    for id in ids {
-        Source::parse(&id)?;
+    for mut params in targets {
+        Source::parse(&params.source)?;
         // One page is enough to check the shape, and keeps verify light on the source.
-        let params = IngestParams {
-            source: id.clone(),
-            pages: Some(1),
-            country: None,
-        };
+        params.pages = Some(1);
         let check = match fetch_batch(client, &params).await {
             Ok(f) => check_fetch(&f, chrono::Utc::now()),
             Err(e) => SourceCheck {
-                source: id,
+                source: params.source,
                 status: CheckStatus::Fail,
                 fetched: 0,
                 checks: vec![Check::new("fetch", CheckStatus::Fail, e.to_string())],
@@ -261,6 +265,48 @@ pub async fn verify(store: &Store, client: &HttpClient, p: VerifyParams) -> Resu
         contract_version: CONTRACT_VERSION,
         ok: sources.iter().all(|s| s.status != CheckStatus::Fail),
         sources,
+    })
+}
+
+/// Ingest each source in turn. A failing source doesn't stop the others; the
+/// report says which failed. Sources are fetched one at a time, a second apart.
+pub async fn ingest_all(
+    store: &Store,
+    client: &HttpClient,
+    sources: Vec<IngestParams>,
+) -> Result<IngestAllReport> {
+    if sources.is_empty() {
+        return Err(Error::Invalid(
+            "no enabled sources in config.toml (`loker config init` writes a starting one)".into(),
+        ));
+    }
+    let mut outcomes = Vec::new();
+    for (i, params) in sources.into_iter().enumerate() {
+        if i > 0 {
+            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+        }
+        let source = params.source.clone();
+        let outcome = match ingest(store, client, params).await {
+            Ok(stats) => IngestOutcome {
+                source,
+                stats: Some(stats),
+                error: None,
+            },
+            Err(e) => {
+                tracing::warn!(%source, "ingest failed: {e}");
+                IngestOutcome {
+                    source,
+                    stats: None,
+                    error: Some(e.to_string()),
+                }
+            }
+        };
+        outcomes.push(outcome);
+    }
+    Ok(IngestAllReport {
+        contract_version: CONTRACT_VERSION,
+        ok: outcomes.iter().all(|o| o.error.is_none()),
+        sources: outcomes,
     })
 }
 

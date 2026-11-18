@@ -4,7 +4,7 @@
   "properties": {
     "sources": {
       "default": [],
-      "description": "Sources to check; default: every source in the store.",
+      "description": "Sources to check; default: the enabled sources in config.toml, or every\nsource in the store when there is no config.",
       "items": {
         "type": "string"
       },

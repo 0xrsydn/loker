@@ -4,7 +4,8 @@ use std::sync::Arc;
 use clap::{Parser, Subcommand};
 use loker::App;
 use loker_core::api::{
-    CheckStatus, IngestParams, SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport,
+    CheckStatus, IngestAllReport, IngestParams, SearchParams, SearchResult, SourcesEval,
+    VerifyParams, VerifyReport,
 };
 use loker_core::home::loker_home;
 use serde::Serialize;
@@ -22,16 +23,23 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
-    /// Fetch a source once and store what it returns.
+    /// Fetch a source once and store what it returns (or every configured source with --all).
     Ingest {
         /// Source: himalayas, jobicy, remoteok, greenhouse:<board>, ashby:<board>.
-        source: String,
+        #[arg(required_unless_present = "all")]
+        source: Option<String>,
+        /// Every enabled source in config.toml; exits non-zero if any fails.
+        #[arg(long, conflicts_with_all = ["source", "pages", "country", "company"])]
+        all: bool,
         /// Pages to fetch (himalayas: 20 jobs each).
         #[arg(long)]
         pages: Option<u32>,
         /// Only fetch jobs the source says are open to this country (ISO code).
         #[arg(long)]
         country: Option<String>,
+        /// Company display name for an employer board (Ashby only gives the slug).
+        #[arg(long)]
+        company: Option<String>,
         #[arg(long)]
         json: bool,
     },
@@ -52,6 +60,11 @@ enum Command {
         /// Print the contract JSON (identical to MCP structured content).
         #[arg(long)]
         json: bool,
+    },
+    /// Manage $LOKER_HOME/config.toml.
+    Config {
+        #[command(subcommand)]
+        command: ConfigCommand,
     },
     /// Inspect sources.
     Sources {
@@ -81,6 +94,14 @@ enum Command {
 }
 
 #[derive(Subcommand)]
+enum ConfigCommand {
+    /// Write a starting config.toml (refuses to overwrite one).
+    Init,
+    /// Parse config.toml and list the sources it enables.
+    Check,
+}
+
+#[derive(Subcommand)]
 enum SourcesCommand {
     /// Per-source coverage, overlap, blocked merges and eligibility conflicts.
     Eval {
@@ -106,36 +127,73 @@ async fn main() -> anyhow::Result<()> {
 
     match cli.command {
         Command::Ingest {
+            all: true, json, ..
+        } => {
+            let report = app.ingest_all().await?;
+            if json {
+                print_json(&report)?;
+            } else {
+                print_ingest_all(&report);
+            }
+            if !report.ok {
+                std::process::exit(1);
+            }
+        }
+        Command::Ingest {
             source,
             pages,
             country,
+            company,
             json,
+            ..
         } => {
+            let source = source.expect("clap requires a source without --all");
             let s = app
                 .ingest(IngestParams {
                     source: source.clone(),
                     pages,
                     country,
+                    company,
                 })
                 .await?;
             if json {
                 print_json(&s)?;
             } else {
-                println!(
-                    "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, \
-                     closed {}, reopened {}, held {}, skipped {}",
-                    s.fetched,
-                    s.new,
-                    s.updated,
-                    s.unchanged,
-                    s.merged,
-                    s.ambiguous,
-                    s.closed,
-                    s.reopened,
-                    s.held,
-                    s.skipped
-                );
+                println!("{source}: {}", ingest_line(&s));
             }
+        }
+        Command::Config {
+            command: ConfigCommand::Init,
+        } => {
+            let path = loker_core::config::path(app.home());
+            if path.exists() {
+                anyhow::bail!("{} already exists", path.display());
+            }
+            std::fs::write(&path, loker_core::config::TEMPLATE)?;
+            println!("wrote {}", path.display());
+        }
+        Command::Config {
+            command: ConfigCommand::Check,
+        } => {
+            let path = loker_core::config::path(app.home());
+            let config = app
+                .config()?
+                .ok_or_else(|| anyhow::anyhow!("no {} (`loker config init`)", path.display()))?;
+            let mut bad = 0;
+            for s in &config.sources {
+                let state = if s.enabled { "enabled " } else { "disabled" };
+                match loker_sources::Source::parse(&s.id) {
+                    Ok(_) => println!("{state} {}", s.id),
+                    Err(e) => {
+                        bad += 1;
+                        println!("INVALID  {}: {e}", s.id)
+                    }
+                }
+            }
+            if bad > 0 {
+                anyhow::bail!("{bad} invalid source(s) in {}", path.display());
+            }
+            println!("{} ok", path.display());
         }
         Command::Search {
             query,
@@ -339,4 +397,31 @@ fn write_schemas(out: Option<&std::path::Path>) -> anyhow::Result<()> {
         }
     }
     Ok(())
+}
+
+fn ingest_line(s: &loker_core::model::IngestStats) -> String {
+    format!(
+        "fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, \
+         closed {}, reopened {}, held {}, skipped {}",
+        s.fetched,
+        s.new,
+        s.updated,
+        s.unchanged,
+        s.merged,
+        s.ambiguous,
+        s.closed,
+        s.reopened,
+        s.held,
+        s.skipped
+    )
+}
+
+fn print_ingest_all(r: &IngestAllReport) {
+    for o in &r.sources {
+        match (&o.stats, &o.error) {
+            (Some(s), _) => println!("{}: {}", o.source, ingest_line(s)),
+            (None, Some(e)) => println!("{}: FAILED: {e}", o.source),
+            (None, None) => {}
+        }
+    }
 }

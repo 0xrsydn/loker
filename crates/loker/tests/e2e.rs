@@ -10,8 +10,8 @@ use std::io::{BufRead, BufReader, Read, Write};
 use std::net::TcpListener;
 use std::path::PathBuf;
 use std::process::{Command, Output, Stdio};
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc, Mutex};
 
 use serde_json::{Value, json};
 
@@ -22,6 +22,8 @@ use serde_json::{Value, json};
 struct Stub {
     base: String,
     shrink: Arc<AtomicBool>,
+    /// Every request target served, in order.
+    log: Arc<Mutex<Vec<String>>>,
 }
 
 fn stub() -> Stub {
@@ -29,6 +31,8 @@ fn stub() -> Stub {
     let base = format!("http://{}", listener.local_addr().unwrap());
     let shrink = Arc::new(AtomicBool::new(false));
     let flag = shrink.clone();
+    let log = Arc::new(Mutex::new(Vec::new()));
+    let served = log.clone();
     std::thread::spawn(move || {
         for stream in listener.incoming() {
             let Ok(mut stream) = stream else { continue };
@@ -39,6 +43,7 @@ fn stub() -> Stub {
             }
             let line = String::from_utf8_lossy(&head);
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
+            served.lock().unwrap().push(target.clone());
             let (status, body) = route(&target, flag.load(Ordering::SeqCst));
             let body = body.to_string();
             let _ = write!(
@@ -48,7 +53,7 @@ fn stub() -> Stub {
             );
         }
     });
-    Stub { base, shrink }
+    Stub { base, shrink, log }
 }
 
 fn route(target: &str, shrink: bool) -> (&'static str, Value) {
@@ -429,5 +434,111 @@ fn contract_schemas_match_committed_v1() {
         drift.is_empty(),
         "the v1 contract changed: {drift:?}. If the change is additive, run \
          `cargo run -- schema --out schema/v1` and commit; if not, it needs a new contract version."
+    );
+}
+
+#[test]
+fn config_drives_ingest_all_and_verify() {
+    let stub = stub();
+    let home = Home::new("config", &stub);
+    std::fs::create_dir_all(&home.dir).unwrap();
+    std::fs::write(
+        home.dir.join("config.toml"),
+        r#"
+version = 1
+
+[[sources]]
+id = "himalayas"
+country = "ID"
+pages = 1
+
+[[sources]]
+id = "greenhouse:acme"
+
+[[sources]]
+id = "ashby:globex"
+company = "Globex"
+
+[[sources]]
+id = "greenhouse:broken"
+
+[[sources]]
+id = "jobicy"
+
+[[sources]]
+id = "remoteok"
+enabled = false
+"#,
+    )
+    .unwrap();
+
+    // One broken source fails the run but not the others; disabled ones are skipped.
+    let out = home.run(&["ingest", "--all", "--json"]);
+    assert!(
+        !out.status.success(),
+        "a failed source must fail `ingest --all`"
+    );
+    let report: Value = serde_json::from_slice(&out.stdout).unwrap();
+    let sources: Vec<&str> = report["sources"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|o| o["source"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        sources,
+        [
+            "himalayas",
+            "greenhouse:acme",
+            "ashby:globex",
+            "greenhouse:broken",
+            "jobicy"
+        ]
+    );
+    let failed: Vec<&Value> = report["sources"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|o| !o["error"].is_null())
+        .collect();
+    assert_eq!(failed.len(), 1);
+    assert_eq!(failed[0]["source"], "greenhouse:broken");
+
+    // The board's display name from config replaces Ashby's slug.
+    let r = home.json(&["search", "support", "--json"]);
+    assert_eq!(r["jobs"][0]["company"], "Globex");
+
+    // verify with no names checks the enabled config sources with their own
+    // parameters: Himalayas on the country search endpoint ingest uses.
+    stub.log.lock().unwrap().clear();
+    let out = home.run(&["verify", "--json"]);
+    let report: Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert!(!out.status.success());
+    let checked: Vec<&str> = report["sources"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|s| s["source"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        checked,
+        [
+            "himalayas",
+            "greenhouse:acme",
+            "ashby:globex",
+            "greenhouse:broken",
+            "jobicy"
+        ]
+    );
+    let served = stub.log.lock().unwrap().clone();
+    assert!(
+        served
+            .iter()
+            .any(|t| t.starts_with("/jobs/api/search?") && t.contains("country=ID")),
+        "{served:?}"
+    );
+    assert!(
+        !served.iter().any(|t| t.starts_with("/jobs/api?")),
+        "{served:?}"
     );
 }

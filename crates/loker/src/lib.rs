@@ -7,17 +7,20 @@
 
 pub mod mcp;
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use loker_core::api::{
-    self, IngestParams, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
+    self, Error, IngestAllReport, IngestParams, SearchParams, SearchResult, SourcesEval, Stats,
+    VerifyParams, VerifyReport,
 };
+use loker_core::config::{self, Config};
 use loker_core::home::db_path;
 use loker_core::model::IngestStats;
 use loker_core::store::Store;
 use loker_sources::HttpClient;
 
 pub struct App {
+    home: PathBuf,
     store: Store,
     http: HttpClient,
 }
@@ -26,6 +29,7 @@ impl App {
     /// Open (or create) the database under a loker home directory.
     pub async fn open(home: &Path) -> anyhow::Result<Self> {
         Ok(Self {
+            home: home.to_path_buf(),
             store: Store::open(&db_path(home)).await?,
             http: loker_sources::http_client()?,
         })
@@ -47,8 +51,58 @@ impl App {
         loker_sources::ingest(&self.store, &self.http, p).await
     }
 
+    /// Ingest every enabled source in config.toml.
+    pub async fn ingest_all(&self) -> api::Result<IngestAllReport> {
+        let config = self.config()?.ok_or_else(|| {
+            Error::Invalid(format!(
+                "no {} yet (`loker config init` writes a starting one)",
+                config::path(&self.home).display()
+            ))
+        })?;
+        let sources = config.enabled().map(|s| s.params()).collect();
+        loker_sources::ingest_all(&self.store, &self.http, sources).await
+    }
+
+    /// Named sources use their config.toml parameters when listed there; with
+    /// no names, the enabled config sources (or, without a config, every
+    /// source in the store).
     pub async fn verify(&self, p: VerifyParams) -> api::Result<VerifyReport> {
-        loker_sources::verify(&self.store, &self.http, p).await
+        let config = self.config()?;
+        let configured = |id: &str| {
+            config
+                .as_ref()
+                .and_then(|c| c.sources.iter().find(|s| s.id == id))
+                .map(|s| s.params())
+        };
+        let plain = |id: String| IngestParams {
+            source: id,
+            ..Default::default()
+        };
+        let targets = if !p.sources.is_empty() {
+            p.sources
+                .into_iter()
+                .map(|id| configured(&id).unwrap_or_else(|| plain(id)))
+                .collect()
+        } else if let Some(c) = &config {
+            c.enabled().map(|s| s.params()).collect()
+        } else {
+            self.store
+                .source_ids()
+                .await?
+                .into_iter()
+                .map(plain)
+                .collect()
+        };
+        loker_sources::verify(&self.http, targets).await
+    }
+
+    /// The current config.toml, read fresh so edits apply without a restart.
+    pub fn config(&self) -> api::Result<Option<Config>> {
+        config::load(&self.home).map_err(|e| Error::Invalid(format!("{e:#}")))
+    }
+
+    pub fn home(&self) -> &Path {
+        &self.home
     }
 }
 
@@ -69,6 +123,7 @@ pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
         ("sources_eval.json", schema!(SourcesEval)),
         ("ingest_params.json", schema!(IngestParams)),
         ("ingest_stats.json", schema!(IngestStats)),
+        ("ingest_all_report.json", schema!(IngestAllReport)),
         ("verify_params.json", schema!(VerifyParams)),
         ("verify_report.json", schema!(VerifyReport)),
     ]

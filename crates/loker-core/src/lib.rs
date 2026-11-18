@@ -2,6 +2,7 @@
 //! No transport code lives here; the CLI, REST and MCP are thin layers on top.
 
 pub mod api;
+pub mod config;
 pub mod country;
 pub mod home;
 pub mod model;

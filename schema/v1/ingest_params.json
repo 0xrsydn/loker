@@ -2,6 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
+    "company": {
+      "description": "Company display name for an employer board (`greenhouse:`/`ashby:`); Ashby only gives the slug.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "country": {
       "description": "Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).",
       "type": [

@@ -368,7 +368,8 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct VerifyParams {
-    /// Sources to check; default: every source in the store.
+    /// Sources to check; default: the enabled sources in config.toml, or every
+    /// source in the store when there is no config.
     #[serde(default)]
     pub sources: Vec<String>,
 }
@@ -422,7 +423,7 @@ pub enum CheckStatus {
 // The params live here so the contract is in one place; the operation itself
 // lives in `loker-sources`, which owns the adapters.
 
-#[derive(Debug, Clone, Deserialize, JsonSchema)]
+#[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
     /// Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.
@@ -431,4 +432,25 @@ pub struct IngestParams {
     pub pages: Option<u32>,
     /// Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).
     pub country: Option<String>,
+    /// Company display name for an employer board (`greenhouse:`/`ashby:`); Ashby only gives the slug.
+    pub company: Option<String>,
+}
+
+// ---------- ingest_all ----------
+
+/// One `loker ingest --all` run over the configured sources.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct IngestAllReport {
+    pub contract_version: u32,
+    /// Every source ingested without error.
+    pub ok: bool,
+    pub sources: Vec<IngestOutcome>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+pub struct IngestOutcome {
+    pub source: String,
+    pub stats: Option<crate::model::IngestStats>,
+    pub error: Option<String>,
 }

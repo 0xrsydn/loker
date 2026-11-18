@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "IngestOutcome": {
+      "properties": {
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "stats": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IngestStats"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "type": "object"
+    },
+    "IngestStats": {
+      "properties": {
+        "ambiguous": {
+          "description": "New or updated source jobs whose company + title key is shared by more\nthan one job from the same source, so no cross-source merge was made.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "closed": {
+          "description": "Listings closed during this run (any source: absent, expired or stale).",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "fetched": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "held": {
+          "description": "Listings missing from this fetch but not closed, because the fetch\nlooked truncated (it would have closed more than half the source).",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "merged": {
+          "description": "New or updated source jobs that share a canonical job with another source.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "new": {
+          "description": "Source jobs seen for the first time.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "reopened": {
+          "description": "Gone listings seen again.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "skipped": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unchanged": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "updated": {
+          "description": "Source jobs whose normalized content changed.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fetched",
+        "new",
+        "updated",
+        "unchanged",
+        "merged",
+        "ambiguous",
+        "closed",
+        "reopened",
+        "held",
+        "skipped"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "One `loker ingest --all` run over the configured sources.",
+  "properties": {
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "ok": {
+      "description": "Every source ingested without error.",
+      "type": "boolean"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/IngestOutcome"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "ok",
+    "sources"
+  ],
+  "title": "IngestAllReport",
+  "type": "object"
+}
