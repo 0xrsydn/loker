@@ -42,6 +42,9 @@ enum Command {
         tz: Option<f64>,
         #[arg(long)]
         limit: Option<u32>,
+        /// Skip this many results (the previous page's "next offset").
+        #[arg(long)]
+        offset: Option<u32>,
         /// Print the contract JSON (identical to MCP structured content).
         #[arg(long)]
         json: bool,
@@ -114,6 +117,7 @@ async fn main() -> anyhow::Result<()> {
             country,
             tz,
             limit,
+            offset,
             json,
         } => {
             let q = query.join(" ");
@@ -123,6 +127,7 @@ async fn main() -> anyhow::Result<()> {
                     country,
                     tz,
                     limit,
+                    offset,
                 })
                 .await?;
             if json {
@@ -184,7 +189,10 @@ fn print_search(r: &SearchResult) {
             via.join(", ")
         );
     }
-    eprintln!("{} result(s)", r.count);
+    match r.next_offset {
+        Some(n) => eprintln!("{} result(s); more with --offset {n}", r.count),
+        None => eprintln!("{} result(s)", r.count),
+    }
 }
 
 fn print_eval(e: &SourcesEval) {

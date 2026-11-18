@@ -101,7 +101,7 @@ pub async fn ingest_at(
 }
 
 pub async fn clusters(s: &Store) -> Clusters {
-    s.search("", 10_000)
+    s.search("", None, 10_000, 0)
         .await
         .unwrap()
         .into_iter()

@@ -63,6 +63,8 @@ pub struct SearchParams {
     pub tz: Option<f64>,
     /// Maximum results, default 20, at most 100.
     pub limit: Option<u32>,
+    /// Skip this many results (for the next page, pass the previous `nextOffset`).
+    pub offset: Option<u32>,
 }
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -71,6 +73,8 @@ pub struct SearchResult {
     pub contract_version: u32,
     pub count: usize,
     pub jobs: Vec<SearchHit>,
+    /// Pass as `offset` to get the next page; absent when this page is the last.
+    pub next_offset: Option<u32>,
 }
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -103,22 +107,40 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         return Err(Error::Invalid(format!("tz {tz} is outside -12..=14")));
     }
 
-    // Fetch wider than `limit` so eligibility filtering still fills the page.
-    let candidates = store.search(&p.q, (limit * 10).max(200)).await?;
-    let mut jobs = Vec::new();
-    for job in candidates {
-        let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
-        if eligible.as_ref().is_some_and(|v| v.kind == VerdictKind::No) {
-            continue;
+    // Page through the store until the page fills: the verdict can drop jobs
+    // the SQL predicate keeps (time zones, on-site), so one fixed-size read
+    // could come back short even when matches exist further down.
+    const BATCH: u32 = 200;
+    let offset = p.offset.unwrap_or(0);
+    let country = viewer.as_ref().map(|v| v.country.as_str());
+    let (mut to_skip, mut read, mut jobs, mut more) = (offset, 0u32, Vec::new(), false);
+    'pages: loop {
+        let rows = store.search(&p.q, country, BATCH, read).await?;
+        let n = rows.len() as u32;
+        read += n;
+        for job in rows {
+            let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
+            if eligible.as_ref().is_some_and(|v| v.kind == VerdictKind::No) {
+                continue;
+            }
+            if to_skip > 0 {
+                to_skip -= 1;
+                continue;
+            }
+            if jobs.len() as u32 == limit {
+                more = true;
+                break 'pages;
+            }
+            jobs.push(SearchHit { job, eligible });
         }
-        jobs.push(SearchHit { job, eligible });
-        if jobs.len() as u32 >= limit {
+        if n < BATCH {
             break;
         }
     }
     Ok(SearchResult {
         contract_version: CONTRACT_VERSION,
         count: jobs.len(),
+        next_offset: more.then_some(offset + limit),
         jobs,
     })
 }

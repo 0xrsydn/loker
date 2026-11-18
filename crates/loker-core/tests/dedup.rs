@@ -78,7 +78,7 @@ async fn merge_is_order_independent_and_idempotent() {
 
     // Employer board supplies identity; the most confident source supplies eligibility.
     for s in [&forward, &backward] {
-        let merged = s.search("expert", 10).await.unwrap();
+        let merged = s.search("expert", None, 10, 0).await.unwrap();
         assert_eq!(merged.len(), 1);
         assert_eq!(merged[0].url, "https://ashby:clera.example/a1");
         assert_eq!(merged[0].eligibility.scope, Scope::Worldwide);

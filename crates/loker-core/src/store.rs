@@ -43,6 +43,24 @@ macro_rules! sources_col {
     };
 }
 
+/// Drops jobs restricted to countries that don't include the viewer (bound
+/// as `?N`, NULL for no viewer). It must never be stricter than
+/// `verdict::eligible_for`: search pages until the limit fills, so this is only
+/// an optimization. If on-site preferences start producing `no` in the
+/// verdict, they can be mirrored here too.
+macro_rules! viewer_location {
+    ($n:literal) => {
+        concat!(
+            "(?",
+            $n,
+            " IS NULL OR c.remote_scope <> 'countries' OR EXISTS ",
+            "(SELECT 1 FROM json_each(c.eligibility, '$.countries') WHERE value = ?",
+            $n,
+            "))"
+        )
+    };
+}
+
 /// Listings nobody has seen for this long are closed, whatever the source.
 /// A backstop for partial feeds (an aggregator's newest N) and for sources
 /// that stopped being ingested.
@@ -307,31 +325,49 @@ impl Store {
         Ok(())
     }
 
-    /// Full-text search over active jobs (every word must match), best match first.
-    /// An empty query lists the newest jobs.
-    pub async fn search(&self, query: &str, limit: u32) -> anyhow::Result<Vec<Job>> {
+    /// Full-text search over active jobs (every word must match), best match
+    /// first; an empty query lists the newest. With `country`, jobs restricted
+    /// to other countries are skipped in SQL (see [`viewer_location`]).
+    /// `offset` counts rows of this query; ties are broken by id so pages
+    /// never overlap.
+    pub async fn search(
+        &self,
+        query: &str,
+        country: Option<&str>,
+        limit: u32,
+        offset: u32,
+    ) -> anyhow::Result<Vec<Job>> {
         let rows = match fts_query(query) {
             Some(q) => {
                 sqlx::query(concat!(
                     "SELECT c.*, ",
                     sources_col!(),
                     " FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
-                     WHERE jobs_fts MATCH ? AND c.status = 'active'
-                     ORDER BY bm25(jobs_fts) LIMIT ?"
+                     WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
+                    viewer_location!("2"),
+                    " ORDER BY bm25(jobs_fts), c.id LIMIT ?3 OFFSET ?4"
                 ))
                 .bind(q)
+                .bind(country)
                 .bind(limit)
+                .bind(offset)
                 .fetch_all(&self.pool)
                 .await?
             }
-            None => sqlx::query(concat!(
-                "SELECT c.*, ",
-                sources_col!(),
-                " FROM canonical_jobs c WHERE c.status = 'active' ORDER BY c.posted_at DESC LIMIT ?"
-            ))
-            .bind(limit)
-            .fetch_all(&self.pool)
-            .await?,
+            None => {
+                sqlx::query(concat!(
+                    "SELECT c.*, ",
+                    sources_col!(),
+                    " FROM canonical_jobs c WHERE c.status = 'active' AND ",
+                    viewer_location!("1"),
+                    " ORDER BY c.posted_at DESC, c.id LIMIT ?2 OFFSET ?3"
+                ))
+                .bind(country)
+                .bind(limit)
+                .bind(offset)
+                .fetch_all(&self.pool)
+                .await?
+            }
         };
         rows.iter().map(row_to_job).collect()
     }
