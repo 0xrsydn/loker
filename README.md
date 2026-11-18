@@ -20,7 +20,9 @@ cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwid
 cargo run -- search engineer --country ID --tz 7
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>
 cargo run -- ingest remoteok                   # also: jobicy
-cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts
+cargo run -- search --country ID --offset 20   # next page (each page reports its next offset)
+cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts, closed jobs
+cargo run -- verify                           # live check of every stored source; non-zero exit on failure
 cargo run -- stats
 ```
 
@@ -44,6 +46,23 @@ takes its link and text from the employer board, its eligibility from the most
 confident source, and lists every source it came from (`sources`) so
 aggregators that require attribution (Remote OK, Jobicy) get their link.
 
+### Jobs close
+
+A listing closes when a complete fetch of its source no longer has it (a
+company's Greenhouse or Ashby board), when the source's own expiry passes
+(Himalayas), or after 30 days unseen (the backstop for feeds that only return
+their newest jobs). It reopens when seen again. A job stays active while any
+of its listings is live. A fetch that would close more than half of a source's
+listings closes nothing and reports them as `held`.
+
+### Checking sources
+
+`loker verify` fetches each source live, stores nothing, and checks what
+every adapter must keep true: items returned, parse rate, unique ids, title,
+company and URL present, ids for closures, dates. It is how an upstream API
+change shows up. Note: for Himalayas it checks the unfiltered feed, not the
+`--country` search endpoint, until sources and their parameters live in config.
+
 ### As an MCP server
 
 `loker mcp` serves the tools over stdio. For Claude Code:
@@ -52,8 +71,9 @@ aggregators that require attribution (Remote OK, Jobicy) get their link.
 claude mcp add loker -- loker mcp
 ```
 
-Tools: `search_jobs` (query, `country`, `tz`, `limit`; each job carries an
-eligibility verdict with a reason), `sources_eval` and `stats`. Bad input comes back as a tool
+Tools: `search_jobs` (query, `country`, `tz`, `limit`, `offset`; each job
+carries an eligibility verdict with a reason), `sources_eval`, `verify_sources`
+and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
 
 Build the binary reproducibly with `nix build` (output in `./result/bin/loker`).
@@ -78,8 +98,23 @@ prints exactly what the MCP tool returns as structured content.
 | `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
-`nix flake check` builds the release binary, runs the tests (one offline test
-file for the dedup rules) and runs clippy with warnings denied.
+The v1 contract is committed as JSON Schemas in `schema/v1/` (`loker schema
+--out schema/v1` regenerates them); a test fails if the code and the committed
+files disagree, so contract changes are always deliberate.
+
+## Tests
+
+`nix flake check` builds the release binary, runs every test and runs clippy
+with warnings denied; CI runs it on every push and pull request.
+
+- `crates/loker-core/tests/`: dedup rules (order independence, blocked merges),
+  lifecycle (closing, reopening, truncated fetches, expiry with a moved clock)
+  and search (eligible jobs behind many ineligible ones, offset paging).
+- `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one
+  hand-written payload per adapter: ingest, idempotent re-runs, order
+  independence, CLI = MCP parity, closing through a real fetch, `verify`, and
+  schema drift. `LOKER_FETCH_BASE` points every adapter at the stub (or at a
+  caching proxy).
 
 ## Repository
 
