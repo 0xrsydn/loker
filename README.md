@@ -111,7 +111,7 @@ Build the binary reproducibly with `nix build` (output in `./result/bin/loker`).
 
 [ARCHITECTURE.md](ARCHITECTURE.md) has the pipeline, the rules every change
 follows, and when the design should change. Read it before changing the core or
-adding a source.
+adding a source. Coding agents start at [AGENTS.md](AGENTS.md).
 
 Every operation is defined once and every interface calls it the same way:
 
