@@ -109,6 +109,10 @@ Build the binary reproducibly with `nix build` (output in `./result/bin/loker`).
 
 ## Layout
 
+[ARCHITECTURE.md](ARCHITECTURE.md) has the pipeline, the rules every change
+follows, and when the design should change. Read it before changing the core or
+adding a source.
+
 Every operation is defined once and every interface calls it the same way:
 
 ```
