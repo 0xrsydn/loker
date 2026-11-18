@@ -6,11 +6,12 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-anyhow = "1.0.104"
+anyhow.workspace = true
 blake3 = "1.8.7"
-chrono = { version = "0.4.45", features = ["serde"] }
+chrono.workspace = true
 isocountry = "0.3.2"
-serde = { version = "1.0.229", features = ["derive"] }
-serde_json = "1.0.154"
+schemars.workspace = true
+serde.workspace = true
+serde_json.workspace = true
 sqlx = { version = "0.9.1", default-features = false, features = ["runtime-tokio", "sqlite", "migrate", "macros"] }
-tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread"] }
+tokio.workspace = true

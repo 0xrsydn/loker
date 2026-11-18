@@ -1,7 +1,8 @@
 use chrono::{DateTime, Utc};
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Scope {
     Worldwide,
@@ -12,14 +13,14 @@ pub enum Scope {
     Unknown,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum TzStrength {
     Required,
     Preferred,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Method {
     Source,
@@ -29,16 +30,16 @@ pub enum Method {
 
 /// Allowed UTC offsets as a window in hours, e.g. `+1.0 ..= +7.0`.
 /// The window may wrap around the date line (`from > to`).
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct TzWindow {
-    pub from: f32,
-    pub to: f32,
+    pub from: f64,
+    pub to: f64,
     pub strength: TzStrength,
 }
 
 impl TzWindow {
-    pub fn contains(&self, offset: f32) -> bool {
+    pub fn contains(&self, offset: f64) -> bool {
         if self.from <= self.to {
             (self.from..=self.to).contains(&offset)
         } else {
@@ -48,8 +49,8 @@ impl TzWindow {
 
     /// Build a window from a list of allowed offsets. Returns `None` when the list
     /// covers (nearly) every time zone, which means "no restriction".
-    pub fn from_offsets(offsets: &[f32], strength: TzStrength) -> Option<Self> {
-        let mut xs: Vec<f32> = offsets.iter().map(|o| normalize_offset(*o)).collect();
+    pub fn from_offsets(offsets: &[f64], strength: TzStrength) -> Option<Self> {
+        let mut xs: Vec<f64> = offsets.iter().map(|o| normalize_offset(*o)).collect();
         xs.sort_by(|a, b| a.total_cmp(b));
         xs.dedup();
         if xs.is_empty() {
@@ -77,7 +78,7 @@ impl TzWindow {
 }
 
 /// Map an offset into `[-12, 12)`, so `+14` (Kiribati) sits next to `-10`.
-fn normalize_offset(o: f32) -> f32 {
+fn normalize_offset(o: f64) -> f64 {
     let mut x = o;
     while x >= 12.0 {
         x -= 24.0;
@@ -88,7 +89,7 @@ fn normalize_offset(o: f32) -> f32 {
     x
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Eligibility {
     pub scope: Scope,
@@ -99,14 +100,14 @@ pub struct Eligibility {
     pub countries: Vec<String>,
     pub onsite_city: Option<String>,
     pub tz: Option<TzWindow>,
-    pub confidence: f32,
+    pub confidence: f64,
     pub method: Method,
     pub evidence: Option<String>,
     /// Original location text, kept for the evidence trail.
     pub raw: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Pay {
     pub usd_month_min: Option<u32>,
@@ -135,7 +136,7 @@ pub struct NewJob {
 }
 
 /// A stored job, as functions return it.
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Job {
     pub id: String,
@@ -152,7 +153,7 @@ pub struct Job {
     pub status: String,
 }
 
-#[derive(Debug, Clone, Default, Serialize)]
+#[derive(Debug, Clone, Default, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct IngestStats {
     pub fetched: u32,

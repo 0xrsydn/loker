@@ -6,12 +6,12 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-anyhow = "1.0.104"
-chrono = "0.4.45"
+anyhow.workspace = true
+chrono.workspace = true
 htmd = "0.6.0"
-loker-core = { path = "../loker-core" }
+loker-core.workspace = true
 reqwest = { version = "0.13.5", default-features = false, features = ["json", "query", "rustls"] }
-serde = { version = "1.0.229", features = ["derive"] }
-serde_json = "1.0.154"
-tokio = { version = "1.54.1", features = ["time"] }
-tracing = "0.1.44"
+serde.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["time"] }
+tracing.workspace = true

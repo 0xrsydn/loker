@@ -24,7 +24,11 @@ struct Page {
 
 /// Fetch up to `pages` pages, newest first, politely (one request per second).
 /// With `country`, uses the search endpoint (page-numbered); without, the full feed (cursor).
-pub async fn fetch(client: &reqwest::Client, pages: u32, country: Option<&str>) -> anyhow::Result<Vec<Value>> {
+pub async fn fetch(
+    client: &reqwest::Client,
+    pages: u32,
+    country: Option<&str>,
+) -> anyhow::Result<Vec<Value>> {
     let mut items = Vec::new();
     let mut cursor: Option<String> = None;
     for page in 0..pages {
@@ -69,7 +73,7 @@ struct Item {
     #[serde(default)]
     location_restrictions: Vec<String>,
     #[serde(default)]
-    timezone_restrictions: Vec<f32>,
+    timezone_restrictions: Vec<f64>,
     min_salary: Option<f64>,
     max_salary: Option<f64>,
     currency: Option<String>,

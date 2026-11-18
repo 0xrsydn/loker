@@ -5,12 +5,21 @@ edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "loker"
+path = "src/main.rs"
+
 [dependencies]
-anyhow = "1.0.104"
+anyhow.workspace = true
 clap = { version = "4.6.8", features = ["derive"] }
-loker-core = { path = "../loker-core" }
-loker-sources = { path = "../loker-sources" }
-serde_json = "1.0.154"
-tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread"] }
-tracing = "0.1.44"
+loker-core.workspace = true
+loker-sources.workspace = true
+rmcp = { version = "3.11", features = ["server", "transport-io", "macros", "schemars"] }
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tracing.workspace = true
 tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }

@@ -1,9 +1,10 @@
 //! The per-viewer eligibility verdict: computed per request, never stored.
+use schemars::JsonSchema;
 use serde::Serialize;
 
 use crate::model::{Eligibility, Scope, TzStrength};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum VerdictKind {
     Yes,
@@ -12,7 +13,7 @@ pub enum VerdictKind {
     No,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, JsonSchema)]
 pub struct Verdict {
     pub kind: VerdictKind,
     pub reason: String,
@@ -23,7 +24,7 @@ pub struct Viewer {
     /// ISO 3166-1 alpha-2.
     pub country: String,
     /// UTC offset in hours.
-    pub tz: Option<f32>,
+    pub tz: Option<f64>,
     pub accept_onsite_in: Vec<String>,
 }
 
