@@ -123,7 +123,7 @@ prints exactly what the MCP tool returns as structured content.
 
 | Crate | Role |
 |---|---|
-| `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), SQLite store with cross-source dedup, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
+| `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), `dedup` (which listings are one job and what that job says, with no IO), the SQLite store that loads rows for those rules and writes their answers, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
 | `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
@@ -136,7 +136,8 @@ files disagree, so contract changes are always deliberate.
 `nix flake check` builds the release binary, runs every test and runs clippy
 with warnings denied; CI runs it on every push and pull request.
 
-- `crates/loker-core/tests/`: dedup rules (order independence, blocked merges),
+- `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
+  a table of `dedup::cluster` cases),
   lifecycle (closing, reopening, truncated fetches, expiry with a moved clock)
   and search (eligible jobs behind many ineligible ones, offset paging).
 - `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one

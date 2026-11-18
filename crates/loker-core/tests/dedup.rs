@@ -194,3 +194,73 @@ async fn retitled_job_leaves_its_cluster() {
     assert_eq!(st.updated, 1);
     assert_eq!(clusters(&s).await.len(), 2);
 }
+
+#[test]
+fn cluster_rules() {
+    use loker_core::dedup::{Member, Plan, cluster};
+    // Rows as the store hands them over: oldest canonical job first.
+    let m = |source: &str, id: &str, canonical: &str| Member {
+        source_id: source.into(),
+        source_job_id: id.into(),
+        canonical_id: canonical.into(),
+    };
+    let key = ("acme".to_string(), "backend engineer".to_string());
+    let no_company = (String::new(), "backend engineer".to_string());
+    let merge = |into: &str, moves: &[usize]| Plan::Merge {
+        into: into.into(),
+        moves: moves.to_vec(),
+    };
+    let cases = [
+        (
+            "one listing",
+            &key,
+            vec![m("himalayas", "h1", "j_a")],
+            Plan::Keep,
+        ),
+        (
+            "empty key never merges",
+            &no_company,
+            vec![m("himalayas", "h1", "j_a"), m("jobicy", "j1", "j_b")],
+            Plan::Keep,
+        ),
+        (
+            "one source repeating a title is not ambiguous",
+            &key,
+            vec![
+                m("greenhouse:acme", "g1", "j_a"),
+                m("greenhouse:acme", "g2", "j_b"),
+            ],
+            Plan::Keep,
+        ),
+        (
+            "one per source merges onto the oldest canonical job",
+            &key,
+            vec![
+                m("himalayas", "h1", "j_a"),
+                m("jobicy", "j1", "j_b"),
+                m("remoteok", "r1", "j_a"),
+            ],
+            merge("j_a", &[1]),
+        ),
+        (
+            "already merged: nothing moves",
+            &key,
+            vec![m("himalayas", "h1", "j_a"), m("jobicy", "j1", "j_a")],
+            merge("j_a", &[]),
+        ),
+        (
+            "a repeated source splits everyone sharing a canonical job",
+            &key,
+            vec![
+                m("himalayas", "h1", "j_a"),
+                m("greenhouse:acme", "g1", "j_a"),
+                m("greenhouse:acme", "g2", "j_b"),
+                m("remoteok", "r1", "j_a"),
+            ],
+            Plan::Split { evict: vec![1, 3] },
+        ),
+    ];
+    for (name, key, members, want) in cases {
+        assert_eq!(cluster(key, &members), want, "{name}");
+    }
+}

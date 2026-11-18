@@ -5,17 +5,20 @@
 //! 1. Each source job is upserted into `source_jobs` with its normalized
 //!    content, its own hash and its match key (company_key, title_key).
 //! 2. Every key the batch touched is re-clustered from the stored rows alone
-//!    (see [`recluster`]), so the outcome never depends on which source was
-//!    ingested first.
+//!    (see [`dedup::cluster`]), so the outcome never depends on which source
+//!    was ingested first.
 //! 3. Every canonical job whose members changed is rebuilt from its members
-//!    with a fixed precedence (see [`merge`]).
+//!    with a fixed precedence (see [`dedup::resolve`]).
+//!
+//! The rules live in [`dedup`], which does no IO; this module loads the rows
+//! they need and writes their answers back.
 //!
 //! Liveness: a listing goes `gone` when a complete fetch of its source no
 //! longer has it, when its source's expiry passes, or after [`STALE_AFTER_DAYS`]
 //! unseen; it comes back `live` when seen again. Only live listings are
 //! clustered, and a canonical job is `active` exactly while at least one of its
 //! listings is live, so status too depends only on stored rows.
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::BTreeSet;
 use std::path::Path;
 use std::str::FromStr;
 use std::time::Duration;
@@ -27,6 +30,7 @@ use sqlx::sqlite::{
     SqliteConnectOptions, SqliteConnection, SqliteJournalMode, SqlitePool, SqlitePoolOptions,
 };
 
+use crate::dedup::{self, Linked, Member, Plan};
 use crate::model::{IngestStats, Job, JobSource, NewJob, SourceKind};
 use crate::normalize::{company_key, title_key};
 
@@ -569,21 +573,17 @@ pub struct RunRow {
     pub held: Option<i64>,
 }
 
-// ---------- dedup ----------
+// ---------- dedup (IO side; the rules are in `dedup`) ----------
 
-/// Re-cluster every source job sharing `key`, from the stored rows alone.
-///
-/// If each source contributes at most one job under the key, they are one job
-/// and end up on one canonical job. If any source has two (one title posted in
-/// several cities, say), the key cannot tell them apart, so every job stays on
-/// its own canonical job. Returns `false` in that ambiguous case.
+/// Re-cluster the live listings sharing `key` and carry out
+/// [`dedup::cluster`]'s plan. Returns `false` when the key is ambiguous.
 async fn recluster(
     conn: &mut SqliteConnection,
     key: &(String, String),
     ts: &str,
     rebuild: &mut BTreeSet<String>,
 ) -> anyhow::Result<bool> {
-    let members: Vec<(String, String, String)> = sqlx::query_as(
+    let members: Vec<Member> = sqlx::query_as::<_, (String, String, String)>(
         "SELECT s.source_id, s.source_job_id, s.canonical_job_id FROM source_jobs s
          JOIN canonical_jobs c ON c.id = s.canonical_job_id
          WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL AND s.status = 'live'
@@ -592,40 +592,35 @@ async fn recluster(
     .bind(&key.0)
     .bind(&key.1)
     .fetch_all(&mut *conn)
-    .await?;
-    if members.len() <= 1 || key.0.is_empty() || key.1.is_empty() {
-        return Ok(true);
-    }
-    let distinct_sources: BTreeSet<&str> = members.iter().map(|m| m.0.as_str()).collect();
-    if distinct_sources.len() == 1 {
-        // One source repeating a title: nothing to merge, and nothing was blocked.
-        return Ok(true);
-    }
-    if distinct_sources.len() == members.len() {
-        // One job: move everyone onto the oldest canonical job (members are sorted by it).
-        let target = members[0].2.clone();
-        for (sid, sjid, cid) in &members {
-            if *cid != target {
-                relink(conn, sid, sjid, &target).await?;
-                rebuild.insert(cid.clone());
+    .await?
+    .into_iter()
+    .map(|(source_id, source_job_id, canonical_id)| Member {
+        source_id,
+        source_job_id,
+        canonical_id,
+    })
+    .collect();
+    let plan = dedup::cluster(key, &members);
+    match &plan {
+        Plan::Keep => {}
+        Plan::Merge { into, moves } => {
+            for m in moves.iter().map(|&i| &members[i]) {
+                relink(conn, &m.source_id, &m.source_job_id, into).await?;
+                rebuild.insert(m.canonical_id.clone());
             }
+            rebuild.insert(into.clone());
         }
-        rebuild.insert(target);
-        Ok(true)
-    } else {
-        // Ambiguous: the first member on each canonical job keeps it, the rest get their own.
-        let mut seen: BTreeMap<String, ()> = BTreeMap::new();
-        for (sid, sjid, cid) in &members {
-            if seen.insert(cid.clone(), ()).is_some() {
-                let job = load_job(conn, sid, sjid).await?;
+        Plan::Split { evict } => {
+            for m in evict.iter().map(|&i| &members[i]) {
+                let job = load_job(conn, &m.source_id, &m.source_job_id).await?;
                 let fresh = new_canonical(conn, &job, ts).await?;
-                relink(conn, sid, sjid, &fresh).await?;
-                rebuild.insert(cid.clone());
+                relink(conn, &m.source_id, &m.source_job_id, &fresh).await?;
+                rebuild.insert(m.canonical_id.clone());
                 rebuild.insert(fresh);
             }
         }
-        Ok(false)
     }
+    Ok(!plan.is_ambiguous())
 }
 
 async fn mark_gone(
@@ -709,9 +704,8 @@ async fn new_canonical(
     Ok(id)
 }
 
-/// Recompute a canonical job from its source jobs: fields from the live
-/// listings (all of them once none is live), status `active` exactly while one
-/// is live. Deletes the job when nothing links to it any more.
+/// Recompute a canonical job from its listings (see [`dedup::resolve`]).
+/// Deletes the job when nothing links to it any more.
 async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> anyhow::Result<()> {
     let rows: Vec<(String, String, String, Option<String>, String)> = sqlx::query_as(
         "SELECT source_kind, source_id, source_job_id, job, status FROM source_jobs WHERE canonical_job_id = ?",
@@ -730,28 +724,26 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
             .await?;
         return Ok(());
     }
-    let any_live = rows.iter().any(|r| r.4 == "live");
-    let mut members = Vec::new();
-    for (kind, sid, sjid, job, status) in rows {
-        // Rows from before migration 0002 have no stored job; they refresh on the next ingest.
-        let Some(job) = job else { continue };
-        if any_live && status != "live" {
-            continue;
-        }
-        let kind = if kind == "employer" {
-            SourceKind::Employer
-        } else {
-            SourceKind::Aggregator
-        };
-        members.push(((kind, sid, sjid), serde_json::from_str::<NewJob>(&job)?));
-    }
-    if members.is_empty() {
+    let linked = rows
+        .into_iter()
+        .map(|(kind, source_id, source_job_id, job, status)| {
+            Ok(Linked {
+                kind: if kind == "employer" {
+                    SourceKind::Employer
+                } else {
+                    SourceKind::Aggregator
+                },
+                source_id,
+                source_job_id,
+                job: job.map(|j| serde_json::from_str(&j)).transpose()?,
+                live: status == "live",
+            })
+        })
+        .collect::<anyhow::Result<Vec<_>>>()?;
+    let Some(dedup::Resolved { job: m, active }) = dedup::resolve(linked) else {
         return Ok(());
-    }
-    members.sort_by(|a, b| a.0.cmp(&b.0));
-    let jobs: Vec<NewJob> = members.into_iter().map(|(_, j)| j).collect();
-    let m = merge(&jobs);
-    let status = if any_live { "active" } else { "closed" };
+    };
+    let status = if active { "active" } else { "closed" };
 
     let eligibility = serde_json::to_string(&m.eligibility)?;
     let pay = m.pay.as_ref().map(serde_json::to_string).transpose()?;
@@ -780,7 +772,7 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     if current == hash {
         return Ok(());
     }
-    let closed_at = (!any_live).then(|| closed_at.unwrap_or_else(|| ts.to_string()));
+    let closed_at = (!active).then(|| closed_at.unwrap_or_else(|| ts.to_string()));
     sqlx::query(
         "UPDATE canonical_jobs SET canonical_url = ?, apply_url = ?, title = ?, company = ?, seniority = ?,
            employment_type = ?, eligibility = ?, pay = ?, tech_tags = ?, description_md = ?, content_hash = ?,
@@ -804,58 +796,6 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
         .execute(&mut *conn)
         .await?;
     Ok(())
-}
-
-/// Merge source jobs (sorted: employer boards first, then by source id) into
-/// one. The first job supplies identity and text; eligibility comes from
-/// whichever source is most confident; pay prefers a normalized USD figure.
-fn merge(jobs: &[NewJob]) -> NewJob {
-    let primary = &jobs[0];
-    let first = |f: fn(&NewJob) -> Option<String>| jobs.iter().find_map(f);
-    let eligibility = jobs
-        .iter()
-        .map(|j| &j.eligibility)
-        .fold(&primary.eligibility, |best, e| {
-            if e.confidence > best.confidence {
-                e
-            } else {
-                best
-            }
-        })
-        .clone();
-    let pay = jobs
-        .iter()
-        .filter_map(|j| j.pay.as_ref())
-        .find(|p| p.usd_month_max.is_some() || p.usd_month_min.is_some())
-        .or_else(|| jobs.iter().find_map(|j| j.pay.as_ref()))
-        .cloned();
-    let mut tech_tags: Vec<String> = jobs
-        .iter()
-        .flat_map(|j| j.tech_tags.iter().cloned())
-        .collect();
-    tech_tags.sort();
-    tech_tags.dedup();
-    NewJob {
-        source_id: primary.source_id.clone(),
-        source_job_id: primary.source_job_id.clone(),
-        source_url: primary.source_url.clone(),
-        canonical_url: primary.canonical_url.clone(),
-        apply_url: primary
-            .apply_url
-            .clone()
-            .or_else(|| Some(primary.source_url.clone())),
-        title: primary.title.clone(),
-        company: primary.company.clone(),
-        seniority: first(|j| j.seniority.clone()),
-        employment_type: first(|j| j.employment_type.clone()),
-        eligibility,
-        pay,
-        tech_tags,
-        description_md: first(|j| j.description_md.clone().filter(|d| !d.trim().is_empty())),
-        posted_at: jobs.iter().filter_map(|j| j.posted_at).min(),
-        expires_at: jobs.iter().filter_map(|j| j.expires_at).max(),
-        raw: serde_json::Value::Null,
-    }
 }
 
 // ---------- rows ----------

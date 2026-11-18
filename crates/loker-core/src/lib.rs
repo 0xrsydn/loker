@@ -4,6 +4,7 @@
 pub mod api;
 pub mod config;
 pub mod country;
+pub mod dedup;
 pub mod home;
 pub mod model;
 pub mod normalize;
