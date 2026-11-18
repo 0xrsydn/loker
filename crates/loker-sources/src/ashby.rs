@@ -99,6 +99,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
             .as_deref()
             .and_then(|s| DateTime::parse_from_rfc3339(s).ok())
             .map(|t| t.to_utc()),
+        expires_at: None,
         raw,
     })
 }

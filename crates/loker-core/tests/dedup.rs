@@ -1,86 +1,12 @@
 //! Cross-source dedup rules, offline: hand-written jobs into a temp database.
 //! Clusters are compared as sets of (source, url), never by id, because ids
 //! legitimately depend on which source arrived first.
+mod common;
+
 use std::collections::BTreeSet;
 
-use loker_core::model::{Eligibility, IngestStats, Method, NewJob, Scope, SourceKind};
-use loker_core::store::{SourceMeta, Store};
-
-type Clusters = BTreeSet<Vec<String>>;
-
-async fn store(name: &str) -> Store {
-    let dir = std::env::temp_dir().join(format!("loker-test-{}-{name}", std::process::id()));
-    let _ = std::fs::remove_dir_all(&dir);
-    Store::open(&dir.join("loker.db")).await.unwrap()
-}
-
-fn src(id: &str) -> SourceMeta {
-    let kind = if id.contains(':') {
-        SourceKind::Employer
-    } else {
-        SourceKind::Aggregator
-    };
-    SourceMeta {
-        id: id.into(),
-        kind,
-    }
-}
-
-fn job(
-    source: &str,
-    id: &str,
-    company: &str,
-    title: &str,
-    scope: Scope,
-    confidence: f64,
-) -> NewJob {
-    let url = format!("https://{source}.example/{id}");
-    NewJob {
-        source_id: source.into(),
-        source_job_id: id.into(),
-        source_url: url.clone(),
-        canonical_url: url,
-        apply_url: None,
-        title: title.into(),
-        company: company.into(),
-        seniority: None,
-        employment_type: None,
-        eligibility: Eligibility {
-            scope,
-            regions: vec![],
-            countries: vec![],
-            onsite_city: None,
-            tz: None,
-            confidence,
-            method: Method::Rules,
-            evidence: None,
-            raw: None,
-        },
-        pay: None,
-        tech_tags: vec![],
-        description_md: None,
-        posted_at: None,
-        raw: serde_json::Value::Null,
-    }
-}
-
-async fn ingest(s: &Store, source: &str, jobs: &[NewJob]) -> IngestStats {
-    s.ingest(&src(source), jobs.to_vec(), 0).await.unwrap()
-}
-
-async fn clusters(s: &Store) -> Clusters {
-    s.search("", 1000)
-        .await
-        .unwrap()
-        .into_iter()
-        .map(|j| {
-            j.sources
-                .into_iter()
-                .map(|x| format!("{} {}", x.source, x.url))
-                .collect()
-        })
-        .collect()
-}
+use common::{clusters, ingest, job, store};
+use loker_core::model::Scope;
 
 #[tokio::test]
 async fn merge_is_order_independent_and_idempotent() {

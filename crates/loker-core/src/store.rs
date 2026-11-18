@@ -9,6 +9,12 @@
 //!    ingested first.
 //! 3. Every canonical job whose members changed is rebuilt from its members
 //!    with a fixed precedence (see [`merge`]).
+//!
+//! Liveness: a listing goes `gone` when a complete fetch of its source no
+//! longer has it, when its source's expiry passes, or after [`STALE_AFTER_DAYS`]
+//! unseen; it comes back `live` when seen again. Only live listings are
+//! clustered, and a canonical job is `active` exactly while at least one of its
+//! listings is live, so status too depends only on stored rows.
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::Path;
 use std::str::FromStr;
@@ -32,8 +38,28 @@ pub struct Store {
 macro_rules! sources_col {
     () => {
         "(SELECT json_group_array(json_object('source', s.source_id, 'url', s.source_url))
-          FROM source_jobs s WHERE s.canonical_job_id = c.id) AS sources"
+          FROM source_jobs s WHERE s.canonical_job_id = c.id
+            AND (s.status = 'live' OR c.status = 'closed')) AS sources"
     };
+}
+
+/// Listings nobody has seen for this long are closed, whatever the source.
+/// A backstop for partial feeds (an aggregator's newest N) and for sources
+/// that stopped being ingested.
+pub const STALE_AFTER_DAYS: i64 = 30;
+
+/// One fetch of one source, ready to store.
+pub struct Batch {
+    pub source: SourceMeta,
+    pub jobs: Vec<NewJob>,
+    /// Items the adapter could not transform.
+    pub skipped: u32,
+    /// Ids of every item in the fetch, when the fetch is the source's complete
+    /// list (a company's whole board): listings missing from it are closed.
+    /// `None` for partial feeds.
+    pub complete_ids: Option<BTreeSet<String>>,
+    /// The run's clock (tests move it).
+    pub now: DateTime<Utc>,
 }
 
 /// Which source a batch came from.
@@ -65,15 +91,16 @@ impl Store {
     }
 
     /// Store one source's batch in a single transaction. Re-ingesting identical
-    /// content only touches `last_seen`, so running ingest twice is a no-op.
-    pub async fn ingest(
-        &self,
-        source: &SourceMeta,
-        jobs: Vec<NewJob>,
-        skipped: u32,
-    ) -> anyhow::Result<IngestStats> {
-        let started = now();
-        let ts = now();
+    /// content only touches `fetched_at`/`last_seen`, so running ingest twice is a no-op.
+    pub async fn ingest(&self, batch: Batch) -> anyhow::Result<IngestStats> {
+        let Batch {
+            source,
+            jobs,
+            skipped,
+            complete_ids,
+            now,
+        } = batch;
+        let ts = now.to_rfc3339();
         let mut stats = IngestStats {
             fetched: jobs.len() as u32 + skipped,
             skipped,
@@ -91,8 +118,9 @@ impl Store {
             let key = (company_key(&job.company), title_key(&job.title));
             let json = serde_json::to_string(&job)?;
             let hash = content_hash(&[&json]);
+            let expires = job.expires_at.map(|t| t.to_rfc3339());
             let existing = sqlx::query(
-                "SELECT canonical_job_id, content_hash, company_key, title_key FROM source_jobs
+                "SELECT canonical_job_id, content_hash, company_key, title_key, status FROM source_jobs
                  WHERE source_id = ? AND source_job_id = ?",
             )
             .bind(&source.id)
@@ -103,20 +131,33 @@ impl Store {
             match existing {
                 Some(row) if row.get::<String, _>("content_hash") == hash => {
                     let cid: String = row.get("canonical_job_id");
-                    sqlx::query("UPDATE source_jobs SET fetched_at = ? WHERE source_id = ? AND source_job_id = ?")
-                        .bind(&ts).bind(&source.id).bind(&job.source_job_id)
-                        .execute(&mut *tx).await?;
+                    let was_gone = row.get::<String, _>("status") == "gone";
                     sqlx::query(
-                        "UPDATE canonical_jobs SET last_seen = ?, status = 'active' WHERE id = ?",
+                        "UPDATE source_jobs SET fetched_at = ?, status = 'live', gone_at = NULL, gone_reason = NULL
+                         WHERE source_id = ? AND source_job_id = ?",
                     )
-                    .bind(&ts)
-                    .bind(&cid)
+                    .bind(&ts).bind(&source.id).bind(&job.source_job_id)
                     .execute(&mut *tx)
                     .await?;
-                    stats.unchanged += 1;
+                    // Status is only ever set by `rebuild_canonical`.
+                    sqlx::query("UPDATE canonical_jobs SET last_seen = ? WHERE id = ?")
+                        .bind(&ts)
+                        .bind(&cid)
+                        .execute(&mut *tx)
+                        .await?;
+                    if was_gone {
+                        stats.reopened += 1;
+                        rebuild.insert(cid);
+                        touched_keys.insert(key);
+                    } else {
+                        stats.unchanged += 1;
+                    }
                 }
                 Some(row) => {
                     let mut cid: String = row.get("canonical_job_id");
+                    if row.get::<String, _>("status") == "gone" {
+                        stats.reopened += 1;
+                    }
                     let old_key = (
                         row.get::<String, _>("company_key"),
                         row.get::<String, _>("title_key"),
@@ -137,12 +178,13 @@ impl Store {
                     }
                     sqlx::query(
                         "UPDATE source_jobs SET canonical_job_id = ?, source_url = ?, source_kind = ?, job = ?,
-                           raw_data = ?, content_hash = ?, company_key = ?, title_key = ?, fetched_at = ?
+                           raw_data = ?, content_hash = ?, company_key = ?, title_key = ?, fetched_at = ?,
+                           expires_at = ?, status = 'live', gone_at = NULL, gone_reason = NULL
                          WHERE source_id = ? AND source_job_id = ?",
                     )
                     .bind(&cid).bind(&job.source_url).bind(source.kind.as_str()).bind(&json)
                     .bind(job.raw.to_string()).bind(&hash).bind(&key.0).bind(&key.1).bind(&ts)
-                    .bind(&source.id).bind(&job.source_job_id)
+                    .bind(&expires).bind(&source.id).bind(&job.source_job_id)
                     .execute(&mut *tx)
                     .await?;
                     rebuild.insert(cid);
@@ -154,12 +196,12 @@ impl Store {
                     let cid = new_canonical(&mut tx, &job, &ts).await?;
                     sqlx::query(
                         "INSERT INTO source_jobs (source_id, source_job_id, source_url, canonical_job_id, raw_data,
-                           fetched_at, source_kind, job, content_hash, company_key, title_key, first_seen)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                           fetched_at, source_kind, job, content_hash, company_key, title_key, first_seen, expires_at)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     )
                     .bind(&source.id).bind(&job.source_job_id).bind(&job.source_url).bind(&cid)
                     .bind(job.raw.to_string()).bind(&ts).bind(source.kind.as_str()).bind(&json)
-                    .bind(&hash).bind(&key.0).bind(&key.1).bind(&ts)
+                    .bind(&hash).bind(&key.0).bind(&key.1).bind(&ts).bind(&expires)
                     .execute(&mut *tx)
                     .await?;
                     rebuild.insert(cid);
@@ -168,6 +210,49 @@ impl Store {
                     stats.new += 1;
                 }
             }
+        }
+
+        // Close listings a complete fetch no longer has, unless the fetch looks truncated.
+        if let Some(ids) = &complete_ids {
+            let live: Vec<(String, String, String, String)> = sqlx::query_as(
+                "SELECT source_job_id, canonical_job_id, company_key, title_key FROM source_jobs
+                 WHERE source_id = ? AND status = 'live'",
+            )
+            .bind(&source.id)
+            .fetch_all(&mut *tx)
+            .await?;
+            let absent: Vec<_> = live.iter().filter(|r| !ids.contains(&r.0)).collect();
+            if ids.is_empty() || absent.len() * 2 > live.len() {
+                stats.held = absent.len() as u32;
+            } else {
+                for (sjid, cid, ck, tk) in absent {
+                    mark_gone(&mut tx, &source.id, sjid, "absent", &ts).await?;
+                    rebuild.insert(cid.clone());
+                    touched_keys.insert((ck.clone(), tk.clone()));
+                    stats.closed += 1;
+                }
+            }
+        }
+
+        // Expiry and staleness, for every source.
+        let stale_before = (now - chrono::Duration::days(STALE_AFTER_DAYS)).to_rfc3339();
+        let expired: Vec<(String, String, String, String, String, String)> = sqlx::query_as(
+            "SELECT source_id, source_job_id, canonical_job_id, company_key, title_key,
+               CASE WHEN expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1)
+                    THEN 'expired' ELSE 'stale' END
+             FROM source_jobs
+             WHERE status = 'live' AND ((expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1))
+                                        OR julianday(fetched_at) < julianday(?2))",
+        )
+        .bind(&ts)
+        .bind(&stale_before)
+        .fetch_all(&mut *tx)
+        .await?;
+        for (sid, sjid, cid, ck, tk, reason) in expired {
+            mark_gone(&mut tx, &sid, &sjid, &reason, &ts).await?;
+            rebuild.insert(cid);
+            touched_keys.insert((ck, tk));
+            stats.closed += 1;
         }
 
         let mut ambiguous_keys = BTreeSet::new();
@@ -183,7 +268,7 @@ impl Store {
         for (source_job_id, key) in &changed {
             let sources: i64 = sqlx::query_scalar(
                 "SELECT count(DISTINCT o.source_id) FROM source_jobs s
-                 JOIN source_jobs o ON o.canonical_job_id = s.canonical_job_id
+                 JOIN source_jobs o ON o.canonical_job_id = s.canonical_job_id AND o.status = 'live'
                  WHERE s.source_id = ? AND s.source_job_id = ?",
             )
             .bind(&source.id)
@@ -200,12 +285,14 @@ impl Store {
 
         sqlx::query(
             "INSERT INTO ingestion_runs (source_id, started_at, completed_at, status, jobs_fetched, jobs_new,
-               jobs_updated, jobs_unchanged, jobs_skipped, jobs_merged, jobs_ambiguous)
-             VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?, ?, ?)",
+               jobs_updated, jobs_unchanged, jobs_skipped, jobs_merged, jobs_ambiguous, jobs_closed,
+               jobs_reopened, jobs_held)
+             VALUES (?, ?, ?, 'completed', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         )
-        .bind(&source.id).bind(&started).bind(now()).bind(stats.fetched).bind(stats.new)
-        .bind(stats.updated).bind(stats.unchanged).bind(stats.skipped).bind(stats.merged)
-        .bind(stats.ambiguous)
+        .bind(&source.id).bind(&ts).bind(Utc::now().to_rfc3339()).bind(stats.fetched)
+        .bind(stats.new).bind(stats.updated).bind(stats.unchanged).bind(stats.skipped)
+        .bind(stats.merged).bind(stats.ambiguous).bind(stats.closed).bind(stats.reopened)
+        .bind(stats.held)
         .execute(&mut *tx)
         .await?;
         tx.commit().await?;
@@ -264,7 +351,12 @@ impl Store {
     /// Raw numbers for `sources eval`; the api layer shapes them.
     pub async fn source_eval(&self) -> anyhow::Result<SourceEvalRows> {
         let per_source = sqlx::query(
-            "SELECT s.source_id,
+            "WITH live AS (SELECT * FROM source_jobs WHERE job IS NOT NULL AND status = 'live'),
+                  shared AS (SELECT canonical_job_id FROM live GROUP BY canonical_job_id
+                             HAVING count(DISTINCT source_id) > 1),
+                  gone AS (SELECT source_id, count(*) AS n FROM source_jobs WHERE status = 'gone'
+                           GROUP BY source_id)
+             SELECT s.source_id,
                count(*) AS jobs,
                sum(json_extract(s.job, '$.eligibility.scope') != 'unknown') AS scope_known,
                sum(json_extract(s.job, '$.eligibility.evidence') LIKE 'unmapped%') AS unmapped,
@@ -273,9 +365,10 @@ impl Store {
                sum(coalesce(json_extract(s.job, '$.pay.usdMonthMax'), json_extract(s.job, '$.pay.usdMonthMin')) IS NOT NULL) AS pay_usd,
                sum(json_extract(s.job, '$.postedAt') IS NOT NULL) AS posted,
                sum(length(coalesce(json_extract(s.job, '$.descriptionMd'), '')) > 0) AS described,
-               sum((SELECT count(DISTINCT o.source_id) FROM source_jobs o
-                    WHERE o.canonical_job_id = s.canonical_job_id) > 1) AS shared
-             FROM source_jobs s WHERE s.job IS NOT NULL GROUP BY s.source_id ORDER BY jobs DESC",
+               sum(s.canonical_job_id IN (SELECT canonical_job_id FROM shared)) AS shared,
+               coalesce(max(g.n), 0) AS gone
+             FROM live s LEFT JOIN gone g ON g.source_id = s.source_id
+             GROUP BY s.source_id ORDER BY jobs DESC",
         )
         .fetch_all(&self.pool)
         .await?
@@ -291,6 +384,7 @@ impl Store {
             posted: r.get("posted"),
             described: r.get("described"),
             shared: r.get("shared"),
+            gone: r.get("gone"),
         })
         .collect();
 
@@ -298,6 +392,7 @@ impl Store {
             "SELECT a.source_id AS a, b.source_id AS b, count(DISTINCT a.canonical_job_id) AS n
              FROM source_jobs a JOIN source_jobs b
                ON a.canonical_job_id = b.canonical_job_id AND a.source_id < b.source_id
+             WHERE a.status = 'live' AND b.status = 'live'
              GROUP BY 1, 2 ORDER BY n DESC",
         )
         .fetch_all(&self.pool)
@@ -310,7 +405,8 @@ impl Store {
             "SELECT c.id, c.title, c.company,
                group_concat(s.source_id || '=' || json_extract(s.job, '$.eligibility.scope'), ', ') AS scopes
              FROM canonical_jobs c JOIN source_jobs s ON s.canonical_job_id = c.id
-             WHERE s.job IS NOT NULL AND json_extract(s.job, '$.eligibility.scope') != 'unknown'
+             WHERE s.job IS NOT NULL AND s.status = 'live'
+               AND json_extract(s.job, '$.eligibility.scope') != 'unknown'
              GROUP BY c.id
              HAVING count(DISTINCT json_extract(s.job, '$.eligibility.scope')) > 1
              ORDER BY c.id",
@@ -328,16 +424,17 @@ impl Store {
         .collect();
 
         let blocked_keys: i64 = sqlx::query_scalar(
-            "SELECT count(*) FROM (SELECT 1 FROM source_jobs WHERE job IS NOT NULL
+            "SELECT count(*) FROM (SELECT 1 FROM source_jobs WHERE job IS NOT NULL AND status = 'live'
                GROUP BY company_key, title_key
                HAVING count(DISTINCT source_id) > 1 AND count(*) > count(DISTINCT source_id))",
         )
         .fetch_one(&self.pool)
         .await?;
 
-        let (canonical_jobs, source_jobs): (i64, i64) = sqlx::query_as(
+        let (canonical_jobs, closed_jobs, source_jobs): (i64, i64, i64) = sqlx::query_as(
             "SELECT (SELECT count(*) FROM canonical_jobs WHERE status = 'active'),
-                    (SELECT count(*) FROM source_jobs)",
+                    (SELECT count(*) FROM canonical_jobs WHERE status = 'closed'),
+                    (SELECT count(*) FROM source_jobs WHERE status = 'live')",
         )
         .fetch_one(&self.pool)
         .await?;
@@ -362,11 +459,15 @@ impl Store {
             merged: r.get("jobs_merged"),
             ambiguous: r.get("jobs_ambiguous"),
             skipped: r.get("jobs_skipped"),
+            closed: r.get("jobs_closed"),
+            reopened: r.get("jobs_reopened"),
+            held: r.get("jobs_held"),
         })
         .collect();
 
         Ok(SourceEvalRows {
             canonical_jobs,
+            closed_jobs,
             source_jobs,
             per_source,
             overlaps,
@@ -378,7 +479,10 @@ impl Store {
 }
 
 pub struct SourceEvalRows {
+    /// Active canonical jobs.
     pub canonical_jobs: i64,
+    pub closed_jobs: i64,
+    /// Live listings.
     pub source_jobs: i64,
     pub per_source: Vec<SourceRow>,
     /// (source a, source b, canonical jobs both list)
@@ -400,6 +504,7 @@ pub struct SourceRow {
     pub posted: i64,
     pub described: i64,
     pub shared: i64,
+    pub gone: i64,
 }
 
 pub struct RunRow {
@@ -414,6 +519,9 @@ pub struct RunRow {
     pub merged: Option<i64>,
     pub ambiguous: Option<i64>,
     pub skipped: Option<i64>,
+    pub closed: Option<i64>,
+    pub reopened: Option<i64>,
+    pub held: Option<i64>,
 }
 
 // ---------- dedup ----------
@@ -433,7 +541,7 @@ async fn recluster(
     let members: Vec<(String, String, String)> = sqlx::query_as(
         "SELECT s.source_id, s.source_job_id, s.canonical_job_id FROM source_jobs s
          JOIN canonical_jobs c ON c.id = s.canonical_job_id
-         WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL
+         WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL AND s.status = 'live'
          ORDER BY c.first_seen, c.id, s.source_id, s.source_job_id",
     )
     .bind(&key.0)
@@ -473,6 +581,26 @@ async fn recluster(
         }
         Ok(false)
     }
+}
+
+async fn mark_gone(
+    conn: &mut SqliteConnection,
+    sid: &str,
+    sjid: &str,
+    reason: &str,
+    ts: &str,
+) -> anyhow::Result<()> {
+    sqlx::query(
+        "UPDATE source_jobs SET status = 'gone', gone_at = ?, gone_reason = ?
+         WHERE source_id = ? AND source_job_id = ?",
+    )
+    .bind(ts)
+    .bind(reason)
+    .bind(sid)
+    .bind(sjid)
+    .execute(&mut *conn)
+    .await?;
+    Ok(())
 }
 
 async fn relink(
@@ -536,11 +664,12 @@ async fn new_canonical(
     Ok(id)
 }
 
-/// Recompute a canonical job from all its source jobs. Deletes it when nothing
-/// links to it any more.
+/// Recompute a canonical job from its source jobs: fields from the live
+/// listings (all of them once none is live), status `active` exactly while one
+/// is live. Deletes the job when nothing links to it any more.
 async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> anyhow::Result<()> {
-    let rows: Vec<(String, String, String, Option<String>)> = sqlx::query_as(
-        "SELECT source_kind, source_id, source_job_id, job FROM source_jobs WHERE canonical_job_id = ?",
+    let rows: Vec<(String, String, String, Option<String>, String)> = sqlx::query_as(
+        "SELECT source_kind, source_id, source_job_id, job, status FROM source_jobs WHERE canonical_job_id = ?",
     )
     .bind(cid)
     .fetch_all(&mut *conn)
@@ -556,10 +685,14 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
             .await?;
         return Ok(());
     }
+    let any_live = rows.iter().any(|r| r.4 == "live");
     let mut members = Vec::new();
-    for (kind, sid, sjid, job) in rows {
+    for (kind, sid, sjid, job, status) in rows {
         // Rows from before migration 0002 have no stored job; they refresh on the next ingest.
         let Some(job) = job else { continue };
+        if any_live && status != "live" {
+            continue;
+        }
         let kind = if kind == "employer" {
             SourceKind::Employer
         } else {
@@ -573,12 +706,15 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     members.sort_by(|a, b| a.0.cmp(&b.0));
     let jobs: Vec<NewJob> = members.into_iter().map(|(_, j)| j).collect();
     let m = merge(&jobs);
+    let status = if any_live { "active" } else { "closed" };
 
     let eligibility = serde_json::to_string(&m.eligibility)?;
     let pay = m.pay.as_ref().map(serde_json::to_string).transpose()?;
     let tags = serde_json::to_string(&m.tech_tags)?;
     let posted = m.posted_at.map(|t| t.to_rfc3339());
+    // Status is part of the hash: a job that only opens or closes must still be written.
     let hash = content_hash(&[
+        status,
         &m.canonical_url,
         m.apply_url.as_deref().unwrap_or(""),
         &m.title,
@@ -591,23 +727,24 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
         m.description_md.as_deref().unwrap_or(""),
         posted.as_deref().unwrap_or(""),
     ]);
-    let current: String =
-        sqlx::query_scalar("SELECT content_hash FROM canonical_jobs WHERE id = ?")
+    let (current, closed_at): (String, Option<String>) =
+        sqlx::query_as("SELECT content_hash, closed_at FROM canonical_jobs WHERE id = ?")
             .bind(cid)
             .fetch_one(&mut *conn)
             .await?;
     if current == hash {
         return Ok(());
     }
+    let closed_at = (!any_live).then(|| closed_at.unwrap_or_else(|| ts.to_string()));
     sqlx::query(
         "UPDATE canonical_jobs SET canonical_url = ?, apply_url = ?, title = ?, company = ?, seniority = ?,
            employment_type = ?, eligibility = ?, pay = ?, tech_tags = ?, description_md = ?, content_hash = ?,
-           posted_at = ?, last_seen = ?, status = 'active'
+           posted_at = ?, last_seen = ?, status = ?, closed_at = ?
          WHERE id = ?",
     )
     .bind(&m.canonical_url).bind(&m.apply_url).bind(&m.title).bind(&m.company).bind(&m.seniority)
     .bind(&m.employment_type).bind(&eligibility).bind(&pay).bind(&tags).bind(&m.description_md)
-    .bind(&hash).bind(&posted).bind(ts).bind(cid)
+    .bind(&hash).bind(&posted).bind(ts).bind(status).bind(&closed_at).bind(cid)
     .execute(&mut *conn)
     .await?;
     sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
@@ -671,6 +808,7 @@ fn merge(jobs: &[NewJob]) -> NewJob {
         tech_tags,
         description_md: first(|j| j.description_md.clone().filter(|d| !d.trim().is_empty())),
         posted_at: jobs.iter().filter_map(|j| j.posted_at).min(),
+        expires_at: jobs.iter().filter_map(|j| j.expires_at).max(),
         raw: serde_json::Value::Null,
     }
 }

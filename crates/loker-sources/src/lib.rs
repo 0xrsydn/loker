@@ -14,8 +14,9 @@ pub mod remoteok;
 
 use loker_core::api::{Error, IngestParams, Result};
 use loker_core::model::{IngestStats, NewJob, SourceKind};
-use loker_core::store::{SourceMeta, Store};
+use loker_core::store::{Batch, SourceMeta, Store};
 use serde_json::Value;
+use std::collections::BTreeSet;
 
 pub use reqwest::Client as HttpClient;
 
@@ -83,6 +84,16 @@ impl Source {
         }
     }
 
+    /// The id of a raw item, for sources whose fetch is the complete list of
+    /// open jobs (a company's whole board). `None` for partial feeds, whose
+    /// missing items mean nothing.
+    fn complete_id(&self, raw: &Value) -> Option<Option<String>> {
+        match self {
+            Source::Greenhouse(_) | Source::Ashby(_) => Some(raw.get("id").and_then(as_string)),
+            _ => None,
+        }
+    }
+
     async fn fetch(&self, client: &HttpClient, p: &IngestParams) -> anyhow::Result<Vec<Value>> {
         let pages = p.pages.unwrap_or(3).clamp(1, 50);
         match self {
@@ -135,6 +146,14 @@ pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Resu
             return Err(e.into());
         }
     };
+    // Ids come from the raw items, so an item that fails to transform is still
+    // "present" and never closed by mistake. Any item without an id makes the
+    // set untrustworthy, and nothing is closed.
+    let complete_ids: Option<BTreeSet<String>> = raw
+        .iter()
+        .map(|item| source.complete_id(item))
+        .collect::<Option<Vec<Option<String>>>>()
+        .and_then(|ids| ids.into_iter().collect());
     let (mut jobs, mut skipped) = (Vec::new(), 0);
     for item in raw {
         match source.transform(item) {
@@ -145,7 +164,23 @@ pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Resu
             }
         }
     }
-    Ok(store.ingest(&meta, jobs, skipped).await?)
+    let stats = store
+        .ingest(Batch {
+            source: meta.clone(),
+            jobs,
+            skipped,
+            complete_ids,
+            now: chrono::Utc::now(),
+        })
+        .await?;
+    if stats.held > 0 {
+        tracing::warn!(
+            source = %meta.id,
+            held = stats.held,
+            "fetch looks truncated; not closing listings it is missing"
+        );
+    }
+    Ok(stats)
 }
 
 // ---------- helpers shared by adapters ----------

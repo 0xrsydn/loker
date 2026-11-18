@@ -83,6 +83,7 @@ struct Item {
     seniority: Vec<String>,
     employment_type: Option<String>,
     pub_date: Option<i64>,
+    expiry_date: Option<i64>,
     description: Option<String>,
 }
 
@@ -109,6 +110,9 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         tech_tags: Vec::new(),
         description_md,
         posted_at: item.pub_date.and_then(|s| DateTime::from_timestamp(s, 0)),
+        expires_at: item
+            .expiry_date
+            .and_then(|s| DateTime::from_timestamp(s, 0)),
         raw,
     })
 }

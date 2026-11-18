@@ -95,8 +95,18 @@ async fn main() -> anyhow::Result<()> {
                 })
                 .await?;
             println!(
-                "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, skipped {}",
-                s.fetched, s.new, s.updated, s.unchanged, s.merged, s.ambiguous, s.skipped
+                "{source}: fetched {}, new {}, updated {}, unchanged {}, merged {}, ambiguous {}, \
+                 closed {}, reopened {}, held {}, skipped {}",
+                s.fetched,
+                s.new,
+                s.updated,
+                s.unchanged,
+                s.merged,
+                s.ambiguous,
+                s.closed,
+                s.reopened,
+                s.held,
+                s.skipped
             );
         }
         Command::Search {
@@ -179,12 +189,22 @@ fn print_search(r: &SearchResult) {
 
 fn print_eval(e: &SourcesEval) {
     println!(
-        "{} jobs from {} listings ({:.2} listings per job), {} blocked merges\n",
-        e.canonical_jobs, e.source_jobs, e.listings_per_job, e.blocked_keys
+        "{} active jobs from {} live listings ({:.2} listings per job), {} closed jobs, {} blocked merges\n",
+        e.canonical_jobs, e.source_jobs, e.listings_per_job, e.closed_jobs, e.blocked_keys
     );
     println!(
-        "{:<22} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  last run",
-        "source", "jobs", "unique", "scope", "tz", "pay", "pay_usd", "posted", "desc", "unmapped"
+        "{:<22} {:>5} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  last run",
+        "source",
+        "live",
+        "gone",
+        "unique",
+        "scope",
+        "tz",
+        "pay",
+        "pay_usd",
+        "posted",
+        "desc",
+        "unmapped"
     );
     let pct = |v: f64| format!("{:.0}%", v * 100.0);
     for s in &e.sources {
@@ -195,18 +215,20 @@ fn print_eval(e: &SourcesEval) {
             .map(|r| match &r.error {
                 Some(err) => format!("{} FAILED: {err}", r.status),
                 None => format!(
-                    "{} new, {} merged, {} ambiguous, {} skipped",
+                    "{} new, {} merged, {} closed, {} held, {} skipped",
                     r.new.unwrap_or(0),
                     r.merged.unwrap_or(0),
-                    r.ambiguous.unwrap_or(0),
+                    r.closed.unwrap_or(0),
+                    r.held.unwrap_or(0),
                     r.skipped.unwrap_or(0)
                 ),
             })
             .unwrap_or_default();
         println!(
-            "{:<22} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  {run}",
+            "{:<22} {:>5} {:>5} {:>6}  {:>5} {:>5} {:>5} {:>7} {:>6} {:>5}  {:>8}  {run}",
             s.source,
             s.jobs,
+            s.gone,
             s.unique,
             pct(c.scope),
             pct(c.timezone),

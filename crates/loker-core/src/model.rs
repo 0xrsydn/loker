@@ -155,6 +155,9 @@ pub struct NewJob {
     pub tech_tags: Vec<String>,
     pub description_md: Option<String>,
     pub posted_at: Option<DateTime<Utc>>,
+    /// When the source says the listing ends, if it says.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub expires_at: Option<DateTime<Utc>>,
     #[serde(skip)]
     pub raw: serde_json::Value,
 }
@@ -199,5 +202,12 @@ pub struct IngestStats {
     /// New or updated source jobs whose company + title key is shared by more
     /// than one job from the same source, so no cross-source merge was made.
     pub ambiguous: u32,
+    /// Listings closed during this run (any source: absent, expired or stale).
+    pub closed: u32,
+    /// Gone listings seen again.
+    pub reopened: u32,
+    /// Listings missing from this fetch but not closed, because the fetch
+    /// looked truncated (it would have closed more than half the source).
+    pub held: u32,
     pub skipped: u32,
 }

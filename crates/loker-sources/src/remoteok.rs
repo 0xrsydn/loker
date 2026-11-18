@@ -67,6 +67,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         posted_at: s("date")
             .and_then(|d| DateTime::parse_from_rfc3339(&d).ok())
             .map(|t| t.to_utc()),
+        expires_at: None,
         raw,
     })
 }

@@ -165,9 +165,11 @@ pub struct SourcesEval {
     pub contract_version: u32,
     /// Active canonical (deduplicated) jobs.
     pub canonical_jobs: i64,
-    /// Source jobs (one per source listing).
+    /// Jobs whose every listing is gone.
+    pub closed_jobs: i64,
+    /// Live listings (one per source per job).
     pub source_jobs: i64,
-    /// Source jobs per canonical job; 1.0 means no cross-source duplicates.
+    /// Live listings per active job; 1.0 means no cross-source duplicates.
     pub listings_per_job: f64,
     pub sources: Vec<SourceEval>,
     /// Canonical jobs listed by both sources.
@@ -183,7 +185,10 @@ pub struct SourcesEval {
 #[serde(rename_all = "camelCase")]
 pub struct SourceEval {
     pub source: String,
+    /// Live listings.
     pub jobs: i64,
+    /// Listings closed (absent from a full fetch, expired, or stale).
+    pub gone: i64,
     /// Jobs no other source lists.
     pub unique: i64,
     /// Share of fields each normalizer filled, 0..1.
@@ -219,6 +224,9 @@ pub struct RunSummary {
     pub unchanged: Option<i64>,
     pub merged: Option<i64>,
     pub ambiguous: Option<i64>,
+    pub closed: Option<i64>,
+    pub reopened: Option<i64>,
+    pub held: Option<i64>,
     pub skipped: Option<i64>,
 }
 
@@ -256,6 +264,9 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
                     unchanged: r.unchanged,
                     merged: r.merged,
                     ambiguous: r.ambiguous,
+                    closed: r.closed,
+                    reopened: r.reopened,
+                    held: r.held,
                     skipped: r.skipped,
                 },
             )
@@ -275,6 +286,7 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
             last_run: runs.remove(&s.source),
             source: s.source,
             jobs: s.jobs,
+            gone: s.gone,
             unique: s.jobs - s.shared,
             coverage: Coverage {
                 scope: rate(s.scope_known, s.jobs),
@@ -291,6 +303,7 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
     sources.extend(runs.into_iter().map(|(source, run)| SourceEval {
         source,
         jobs: 0,
+        gone: 0,
         unique: 0,
         coverage: Coverage {
             scope: 0.0,
@@ -306,6 +319,7 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
     Ok(SourcesEval {
         contract_version: CONTRACT_VERSION,
         canonical_jobs: rows.canonical_jobs,
+        closed_jobs: rows.closed_jobs,
         source_jobs: rows.source_jobs,
         listings_per_job: rate(rows.source_jobs, rows.canonical_jobs),
         sources,
