@@ -9,7 +9,9 @@ pub mod mcp;
 
 use std::path::Path;
 
-use loker_core::api::{self, IngestParams, SearchParams, SearchResult, SourcesEval, Stats};
+use loker_core::api::{
+    self, IngestParams, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
+};
 use loker_core::home::db_path;
 use loker_core::model::IngestStats;
 use loker_core::store::Store;
@@ -44,4 +46,9 @@ impl App {
     pub async fn ingest(&self, p: IngestParams) -> api::Result<IngestStats> {
         loker_sources::ingest(&self.store, &self.http, p).await
     }
+
+    pub async fn verify(&self, p: VerifyParams) -> api::Result<VerifyReport> {
+        loker_sources::verify(&self.store, &self.http, p).await
+    }
 }
+

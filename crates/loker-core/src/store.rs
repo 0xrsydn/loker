@@ -372,6 +372,15 @@ impl Store {
         rows.iter().map(row_to_job).collect()
     }
 
+    /// Every source that has ever stored a listing.
+    pub async fn source_ids(&self) -> anyhow::Result<Vec<String>> {
+        Ok(
+            sqlx::query_scalar("SELECT DISTINCT source_id FROM source_jobs ORDER BY source_id")
+                .fetch_all(&self.pool)
+                .await?,
+        )
+    }
+
     pub async fn counts(&self) -> anyhow::Result<Vec<(String, i64)>> {
         let rows = sqlx::query(
             "SELECT remote_scope, count(*) AS n FROM canonical_jobs WHERE status = 'active' GROUP BY remote_scope ORDER BY n DESC",

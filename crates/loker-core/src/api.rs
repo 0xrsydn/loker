@@ -363,6 +363,61 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
     })
 }
 
+// ---------- verify ----------
+
+#[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct VerifyParams {
+    /// Sources to check; default: every source in the store.
+    #[serde(default)]
+    pub sources: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct VerifyReport {
+    pub contract_version: u32,
+    /// No source failed.
+    pub ok: bool,
+    pub sources: Vec<SourceCheck>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct SourceCheck {
+    pub source: String,
+    /// The worst of its checks.
+    pub status: CheckStatus,
+    /// Raw items fetched.
+    pub fetched: u32,
+    pub checks: Vec<Check>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+pub struct Check {
+    pub name: String,
+    pub status: CheckStatus,
+    pub detail: String,
+}
+
+impl Check {
+    pub fn new(name: &str, status: CheckStatus, detail: String) -> Self {
+        Check {
+            name: name.into(),
+            status,
+            detail,
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum CheckStatus {
+    Pass,
+    Warn,
+    Fail,
+}
+
 // ---------- ingest ----------
 // The params live here so the contract is in one place; the operation itself
 // lives in `loker-sources`, which owns the adapters.

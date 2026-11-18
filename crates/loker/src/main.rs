@@ -3,7 +3,9 @@ use std::sync::Arc;
 
 use clap::{Parser, Subcommand};
 use loker::App;
-use loker_core::api::{IngestParams, SearchParams, SearchResult, SourcesEval};
+use loker_core::api::{
+    CheckStatus, IngestParams, SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport,
+};
 use loker_core::home::loker_home;
 use serde::Serialize;
 
@@ -56,6 +58,14 @@ enum Command {
     },
     /// Show what is stored.
     Stats {
+        #[arg(long)]
+        json: bool,
+    },
+    /// Fetch sources live (storing nothing) and check adapter invariants.
+    /// Exits non-zero if any source fails.
+    Verify {
+        /// Sources to check (default: every source in the store).
+        sources: Vec<String>,
         #[arg(long)]
         json: bool,
     },
@@ -155,6 +165,17 @@ async fn main() -> anyhow::Result<()> {
                 print_json(&eval)?;
             } else {
                 print_eval(&eval);
+            }
+        }
+        Command::Verify { sources, json } => {
+            let report = app.verify(VerifyParams { sources }).await?;
+            if json {
+                print_json(&report)?;
+            } else {
+                print_verify(&report);
+            }
+            if !report.ok {
+                std::process::exit(1);
             }
         }
         Command::Mcp => loker::mcp::serve_stdio(Arc::new(app)).await?,
@@ -260,3 +281,23 @@ fn print_eval(e: &SourcesEval) {
         }
     }
 }
+
+fn print_verify(r: &VerifyReport) {
+    let mark = |s: CheckStatus| match s {
+        CheckStatus::Pass => "pass",
+        CheckStatus::Warn => "WARN",
+        CheckStatus::Fail => "FAIL",
+    };
+    for src in &r.sources {
+        println!(
+            "{} {}  ({} items)",
+            mark(src.status),
+            src.source,
+            src.fetched
+        );
+        for c in &src.checks {
+            println!("    {:<4} {:<16} {}", mark(c.status), c.name, c.detail);
+        }
+    }
+}
+
