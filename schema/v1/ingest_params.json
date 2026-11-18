@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "country": {
+      "description": "Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pages": {
+      "description": "Pages to fetch where the source paginates (himalayas), default 3.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source": {
+      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source"
+  ],
+  "title": "IngestParams",
+  "type": "object"
+}

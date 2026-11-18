@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "Coverage": {
+      "properties": {
+        "description": {
+          "format": "double",
+          "type": "number"
+        },
+        "pay": {
+          "description": "Any pay text.",
+          "format": "double",
+          "type": "number"
+        },
+        "payUsd": {
+          "description": "Pay converted to USD per month.",
+          "format": "double",
+          "type": "number"
+        },
+        "postedAt": {
+          "format": "double",
+          "type": "number"
+        },
+        "scope": {
+          "description": "Eligibility scope is not `unknown`.",
+          "format": "double",
+          "type": "number"
+        },
+        "timezone": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "scope",
+        "timezone",
+        "pay",
+        "payUsd",
+        "postedAt",
+        "description"
+      ],
+      "type": "object"
+    },
+    "Overlap": {
+      "properties": {
+        "a": {
+          "type": "string"
+        },
+        "b": {
+          "type": "string"
+        },
+        "shared": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "a",
+        "b",
+        "shared"
+      ],
+      "type": "object"
+    },
+    "RunSummary": {
+      "properties": {
+        "ambiguous": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "at": {
+          "type": "string"
+        },
+        "closed": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fetched": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "held": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "merged": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "new": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "reopened": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "skipped": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "unchanged": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "updated": {
+          "format": "int64",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "at",
+        "status"
+      ],
+      "type": "object"
+    },
+    "ScopeConflict": {
+      "properties": {
+        "job": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "scopes": {
+          "description": "\"source=scope, …\"",
+          "type": "string"
+        }
+      },
+      "required": [
+        "jobId",
+        "job",
+        "scopes"
+      ],
+      "type": "object"
+    },
+    "SourceEval": {
+      "properties": {
+        "coverage": {
+          "$ref": "#/$defs/Coverage",
+          "description": "Share of fields each normalizer filled, 0..1."
+        },
+        "gone": {
+          "description": "Listings closed (absent from a full fetch, expired, or stale).",
+          "format": "int64",
+          "type": "integer"
+        },
+        "jobs": {
+          "description": "Live listings.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "lastRun": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RunSummary"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "locationUnmapped": {
+          "description": "Jobs whose location text had parts no rule recognized.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "unique": {
+          "description": "Jobs no other source lists.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source",
+        "jobs",
+        "gone",
+        "unique",
+        "coverage",
+        "locationUnmapped"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "How good each source is, and how sources overlap: the numbers used to\ndecide whether a source or a normalization rule earns its keep.",
+  "properties": {
+    "blockedKeys": {
+      "description": "Company + title keys listed by several sources where one source has the\nkey twice, so no merge was made. High numbers mean the key is too coarse.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "canonicalJobs": {
+      "description": "Active canonical (deduplicated) jobs.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "closedJobs": {
+      "description": "Jobs whose every listing is gone.",
+      "format": "int64",
+      "type": "integer"
+    },
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "listingsPerJob": {
+      "description": "Live listings per active job; 1.0 means no cross-source duplicates.",
+      "format": "double",
+      "type": "number"
+    },
+    "overlaps": {
+      "description": "Canonical jobs listed by both sources.",
+      "items": {
+        "$ref": "#/$defs/Overlap"
+      },
+      "type": "array"
+    },
+    "scopeConflicts": {
+      "description": "Merged jobs whose sources disagree on eligibility scope (unknown ignored).",
+      "items": {
+        "$ref": "#/$defs/ScopeConflict"
+      },
+      "type": "array"
+    },
+    "sourceJobs": {
+      "description": "Live listings (one per source per job).",
+      "format": "int64",
+      "type": "integer"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceEval"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "canonicalJobs",
+    "closedJobs",
+    "sourceJobs",
+    "listingsPerJob",
+    "sources",
+    "overlaps",
+    "blockedKeys",
+    "scopeConflicts"
+  ],
+  "title": "SourcesEval",
+  "type": "object"
+}

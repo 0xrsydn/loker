@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "country": {
+      "description": "Where the viewer lives: ISO 3166-1 alpha-2 code or English name (\"ID\", \"Indonesia\").\nAdds an eligibility verdict to each job and drops jobs whose verdict is `no`.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limit": {
+      "description": "Maximum results, default 20, at most 100.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "offset": {
+      "description": "Skip this many results (for the next page, pass the previous `nextOffset`).",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "q": {
+      "default": "",
+      "description": "Full-text query; every word must match. Empty lists the newest jobs.",
+      "type": "string"
+    },
+    "tz": {
+      "description": "Viewer's UTC offset in hours (7, -5, 5.5). Used with `country`.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "title": "SearchParams",
+  "type": "object"
+}

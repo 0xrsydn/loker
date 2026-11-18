@@ -52,3 +52,24 @@ impl App {
     }
 }
 
+/// JSON Schemas of the v1 contract: every operation's params and result, by
+/// file name. Committed under `schema/v1/`; the e2e test fails when they drift,
+/// so contract changes are always deliberate (and additive within v1).
+pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
+    use loker_core::model::IngestStats;
+    macro_rules! schema {
+        ($t:ty) => {
+            serde_json::to_value(schemars::schema_for!($t)).expect("schema serializes")
+        };
+    }
+    vec![
+        ("search_params.json", schema!(SearchParams)),
+        ("search_result.json", schema!(SearchResult)),
+        ("stats.json", schema!(Stats)),
+        ("sources_eval.json", schema!(SourcesEval)),
+        ("ingest_params.json", schema!(IngestParams)),
+        ("ingest_stats.json", schema!(IngestStats)),
+        ("verify_params.json", schema!(VerifyParams)),
+        ("verify_report.json", schema!(VerifyReport)),
+    ]
+}

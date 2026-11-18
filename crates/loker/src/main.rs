@@ -69,6 +69,11 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Print the v1 contract's JSON Schemas, or write them to a directory.
+    Schema {
+        #[arg(long)]
+        out: Option<std::path::PathBuf>,
+    },
     /// Serve the MCP tools over stdio (for Claude Code, Cursor, etc.).
     Mcp,
 }
@@ -92,6 +97,9 @@ async fn main() -> anyhow::Result<()> {
         .with_writer(std::io::stderr)
         .init();
     let cli = Cli::parse();
+    if let Command::Schema { out } = &cli.command {
+        return write_schemas(out.as_deref());
+    }
     let app = App::open(&loker_home()?).await?;
 
     match cli.command {
@@ -178,6 +186,7 @@ async fn main() -> anyhow::Result<()> {
                 std::process::exit(1);
             }
         }
+        Command::Schema { .. } => unreachable!("handled before opening the store"),
         Command::Mcp => loker::mcp::serve_stdio(Arc::new(app)).await?,
     }
     Ok(())
@@ -301,3 +310,26 @@ fn print_verify(r: &VerifyReport) {
     }
 }
 
+fn write_schemas(out: Option<&std::path::Path>) -> anyhow::Result<()> {
+    let schemas = loker::contract_schemas();
+    match out {
+        Some(dir) => {
+            std::fs::create_dir_all(dir)?;
+            for (name, schema) in &schemas {
+                std::fs::write(
+                    dir.join(name),
+                    format!("{}\n", serde_json::to_string_pretty(schema)?),
+                )?;
+            }
+            eprintln!("wrote {} schemas to {}", schemas.len(), dir.display());
+        }
+        None => {
+            let all: serde_json::Map<String, serde_json::Value> = schemas
+                .into_iter()
+                .map(|(n, s)| (n.to_string(), s))
+                .collect();
+            print_json(&all)?;
+        }
+    }
+    Ok(())
+}

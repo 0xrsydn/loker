@@ -17,6 +17,7 @@ anyhow.workspace = true
 clap = { version = "4.6.8", features = ["derive"] }
 loker-core.workspace = true
 loker-sources.workspace = true
+schemars.workspace = true
 rmcp = { version = "3.11", features = ["server", "transport-io", "macros", "schemars"] }
 serde.workspace = true
 serde_json.workspace = true

@@ -1,0 +1,47 @@
+{
+  "$defs": {
+    "ScopeCount": {
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "scope": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scope",
+        "count"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "byScope": {
+      "description": "Active jobs per eligibility scope.",
+      "items": {
+        "$ref": "#/$defs/ScopeCount"
+      },
+      "type": "array"
+    },
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "total": {
+      "description": "Active jobs.",
+      "format": "int64",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "total",
+    "byScope"
+  ],
+  "title": "Stats",
+  "type": "object"
+}

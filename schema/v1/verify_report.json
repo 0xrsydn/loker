@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Check": {
+      "properties": {
+        "detail": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CheckStatus"
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "detail"
+      ],
+      "type": "object"
+    },
+    "CheckStatus": {
+      "enum": [
+        "pass",
+        "warn",
+        "fail"
+      ],
+      "type": "string"
+    },
+    "SourceCheck": {
+      "properties": {
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/Check"
+          },
+          "type": "array"
+        },
+        "fetched": {
+          "description": "Raw items fetched.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CheckStatus",
+          "description": "The worst of its checks."
+        }
+      },
+      "required": [
+        "source",
+        "status",
+        "fetched",
+        "checks"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "ok": {
+      "description": "No source failed.",
+      "type": "boolean"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceCheck"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "ok",
+    "sources"
+  ],
+  "title": "VerifyReport",
+  "type": "object"
+}

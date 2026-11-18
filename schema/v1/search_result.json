@@ -1,0 +1,309 @@
+{
+  "$defs": {
+    "Eligibility": {
+      "properties": {
+        "confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "countries": {
+          "default": [],
+          "description": "ISO 3166-1 alpha-2 codes.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "evidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "$ref": "#/$defs/Method"
+        },
+        "onsiteCity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "raw": {
+          "description": "Original location text, kept for the evidence trail.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "regions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "tz": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TzWindow"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "scope",
+        "confidence",
+        "method"
+      ],
+      "type": "object"
+    },
+    "JobSource": {
+      "properties": {
+        "source": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "url"
+      ],
+      "type": "object"
+    },
+    "Method": {
+      "enum": [
+        "source",
+        "rules",
+        "jev"
+      ],
+      "type": "string"
+    },
+    "Pay": {
+      "properties": {
+        "raw": {
+          "type": "string"
+        },
+        "usdMonthMax": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "usdMonthMin": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "raw"
+      ],
+      "type": "object"
+    },
+    "Scope": {
+      "enum": [
+        "worldwide",
+        "region",
+        "countries",
+        "onsite",
+        "hybrid",
+        "unknown"
+      ],
+      "type": "string"
+    },
+    "SearchHit": {
+      "description": "A stored job, as functions return it.",
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "eligibility": {
+          "$ref": "#/$defs/Eligibility"
+        },
+        "eligible": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Verdict"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Verdict for the viewer in `country`/`tz`; absent when no country was given."
+        },
+        "employmentType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstSeen": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "pay": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Pay"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "postedAt": {
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "seniority": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sources": {
+          "description": "Every source that lists this job, with its page there (for attribution).",
+          "items": {
+            "$ref": "#/$defs/JobSource"
+          },
+          "type": "array"
+        },
+        "status": {
+          "type": "string"
+        },
+        "techTags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "company",
+        "eligibility",
+        "techTags",
+        "url",
+        "firstSeen",
+        "status",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "TzStrength": {
+      "enum": [
+        "required",
+        "preferred"
+      ],
+      "type": "string"
+    },
+    "TzWindow": {
+      "description": "Allowed UTC offsets as a window in hours, e.g. `+1.0 ..= +7.0`.\nThe window may wrap around the date line (`from > to`).",
+      "properties": {
+        "from": {
+          "format": "double",
+          "type": "number"
+        },
+        "strength": {
+          "$ref": "#/$defs/TzStrength"
+        },
+        "to": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "strength"
+      ],
+      "type": "object"
+    },
+    "Verdict": {
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/VerdictKind"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "VerdictKind": {
+      "enum": [
+        "yes",
+        "maybe",
+        "unknown",
+        "no"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "count": {
+      "format": "uint",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "jobs": {
+      "items": {
+        "$ref": "#/$defs/SearchHit"
+      },
+      "type": "array"
+    },
+    "nextOffset": {
+      "description": "Pass as `offset` to get the next page; absent when this page is the last.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "contractVersion",
+    "count",
+    "jobs"
+  ],
+  "title": "SearchResult",
+  "type": "object"
+}
