@@ -10,9 +10,8 @@
     let
       systems = [ "x86_64-linux" "aarch64-linux" ];
       forAll = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
-    in
-    {
-      packages = forAll (pkgs:
+
+      build = pkgs:
         let
           craneLib = crane.mkLib pkgs;
           # Cargo sources plus the SQL migrations embedded by `sqlx::migrate!`.
@@ -28,15 +27,33 @@
           cargoArtifacts = craneLib.buildDepsOnly commonArgs;
         in
         {
-          default = craneLib.buildPackage (commonArgs // {
+          package = craneLib.buildPackage (commonArgs // {
             inherit cargoArtifacts;
             meta.mainProgram = "loker";
           });
+          clippy = craneLib.cargoClippy (commonArgs // {
+            inherit cargoArtifacts;
+            cargoClippyExtraArgs = "--all-targets -- --deny warnings";
+          });
+        };
+    in
+    {
+      packages = forAll (pkgs:
+        let b = build pkgs; in {
+          default = b.package;
+        });
+
+      # `nix flake check`: the build plus clippy with warnings denied.
+      checks = forAll (pkgs:
+        let b = build pkgs; in {
+          inherit (b) package clippy;
         });
 
       devShells = forAll (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [ cargo rustc clippy rustfmt rust-analyzer sqlite litestream secretspec ];
+          # rust-analyzer needs the std sources of this exact toolchain.
+          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
         };
       });
     };
