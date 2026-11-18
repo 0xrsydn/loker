@@ -118,10 +118,18 @@ impl Source {
 }
 
 /// HTTP client with loker's User-Agent: the tool and its version, no personal details.
+///
+/// TLS trusts the platform's roots plus Mozilla's bundled ones, so the binary
+/// also works where the system has no CA certificates (minimal containers,
+/// the Nix build sandbox).
 pub fn http_client() -> anyhow::Result<HttpClient> {
+    let bundled = webpki_root_certs::TLS_SERVER_ROOT_CERTS
+        .iter()
+        .filter_map(|der| reqwest::Certificate::from_der(der).ok());
     Ok(reqwest::Client::builder()
         .user_agent(concat!("loker/", env!("CARGO_PKG_VERSION")))
         .timeout(std::time::Duration::from_secs(30))
+        .tls_certs_merge(bundled)
         .build()?)
 }
 
