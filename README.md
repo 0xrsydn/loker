@@ -138,8 +138,9 @@ with warnings denied; CI runs it on every push and pull request.
 
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),
-  lifecycle (closing, reopening, truncated fetches, expiry with a moved clock)
-  and search (eligible jobs behind many ineligible ones, offset paging).
+  lifecycle (closing, reopening, truncated fetches, expiry with a moved clock),
+  search (eligible jobs behind many ineligible ones, offset paging) and storage
+  (every JSON path the SQL reads still resolves).
 - `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one
   hand-written payload per adapter: ingest, idempotent re-runs, order
   independence, CLI = MCP parity, closing through a real fetch, `verify`,
