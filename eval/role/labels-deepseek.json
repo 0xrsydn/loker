@@ -1,0 +1,3827 @@
+{
+ "v1|1|j_004f83fcfe": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_007aabb5cb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_01911257fa": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_03277fc15a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_03a98fe055": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_03cbb4e176": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_0406f19731": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_042162e8fc": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_045164d5cb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_04d790d4be": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_05561072ab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_062cf7df93": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_06328d7b5f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_063ec4a7c7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "education",
+  "secondary": []
+ },
+ "v1|1|j_06486940e7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_064f7e5a99": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_069c5be345": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": [
+   "legal"
+  ]
+ },
+ "v1|1|j_069e000fb6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_07341e6bb0": {
+  "missing": "video editing",
+  "modifiers": [],
+  "primary": "design",
+  "secondary": []
+ },
+ "v1|1|j_073b0dea18": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_08340afc40": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_0853800add": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": [
+   "customer_success"
+  ]
+ },
+ "v1|1|j_0877d7ec70": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_08decfb4de": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_08ee88b3bd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": [
+   "hardware"
+  ]
+ },
+ "v1|1|j_08fb419b09": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_097738ab36": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_09afb55877": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_09b74aaa37": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_0a34bb7a74": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_0a40723564": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_0b3df2cb77": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_0b7ceb5670": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_0c5819cdfc": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_0c6babf894": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_0c899f38d4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_0c9e98006c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_0cdcbd1f3c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_0cea1cf975": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_0eb10b18c6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_0f3575d6aa": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_0fc522c4d2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_0fdc188f0c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": [
+   "security"
+  ]
+ },
+ "v1|1|j_0fe4f11014": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_12481e6201": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_13d473cbb6": {
+  "missing": "clinical_data_manager",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_14e268bca1": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": [
+   "data_analysis"
+  ]
+ },
+ "v1|1|j_15ae21edde": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_15ae426990": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_15d712b4a0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_15fe17df32": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_160703a6b5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_16ae49b111": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_16f6d9096c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_17065ebeaf": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_1717f88628": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_17754caff4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_177d6ec985": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_17f7fb4acc": {
+  "missing": "algorithmic_trading",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_186c1df2f8": {
+  "missing": "macro_research_analyst",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_1883ab1107": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_19db4389c5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_19e77563b6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_1a63025e7e": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_1ac4ebea3f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_1acf065f12": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_1bc162917a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_1cdf337fe9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_1ce8020602": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_1db9426d82": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_1e2529d190": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_1e35a1d5a9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_1e94bcdb86": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_201d14ba08": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_20a65cbc7e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_20cca9caab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_20f59b1bc6": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "fullstack",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_2128303f46": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "hardware",
+  "secondary": []
+ },
+ "v1|1|j_214dad69b2": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": [
+   "data_science"
+  ]
+ },
+ "v1|1|j_21728a958f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_221fbc53d0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_22c7950b32": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_22f4581adf": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_22fd905c7a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_23bbddda8a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_23e730bd67": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": [
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_24715fefdc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_251aae03a7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": [
+   "security"
+  ]
+ },
+ "v1|1|j_2541f1d8a9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_254857348b": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_2548dad55b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_260d21b873": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_2683231041": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_2732f91681": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_278bb44992": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_27d35de722": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_2847a8c88d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_297cd40725": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_2a26c44881": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_2b1875bc52": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_2bade00d56": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_2bb8c095dd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_2bc5bfb3ac": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_2cac462ba8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_2d584a82e3": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_2d7f93d554": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_2eb490a816": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_2ee6e8ce63": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_2f8efba89c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_312b6ce30d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_31b2643950": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_321252cee1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_3230af9789": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_325dfc2f34": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
+  "secondary": []
+ },
+ "v1|1|j_32753b2024": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "it",
+  "secondary": []
+ },
+ "v1|1|j_32960e0b13": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_32b88ba008": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_32fb162365": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_339116e22c": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_33ed244d5e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_34377d3395": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": [
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_34ade7d7b8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_3523a5f10a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_356794525a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_357ce2fdb8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_35edad8992": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_35f3879144": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "embedded",
+  "secondary": []
+ },
+ "v1|1|j_3692f8dbd8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_36949da3e5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_36df3a6b5e": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_37337da156": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_373cae5f16": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_3759641b43": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_37aa111220": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_37eb80e646": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_38673aea0c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "healthcare",
+  "secondary": []
+ },
+ "v1|1|j_389ab97ec4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_394b4389ab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_3978d14d92": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_3a25669035": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_3a8befd493": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_3a8c609341": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": [
+   "backend"
+  ]
+ },
+ "v1|1|j_3ad29bcc39": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_3cef89d425": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_3e45b3a526": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_3e7f35e75c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_3e8c6887ad": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_3eedb35751": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_3f1256b293": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_404a8194b3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_410b345530": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_412580475e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_41f05483c8": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": [
+   "customer_success"
+  ]
+ },
+ "v1|1|j_422fabe62e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_425ddb3b81": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_425edb98f6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_4343de41ab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_437d8fd29c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_439efd13af": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_43e4b4146f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_442f1eecd4": {
+  "missing": "Estimator",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_447fd32efe": {
+  "missing": "Fellowship",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_44809fa265": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_44f9e13d8d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_453ce88a0d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_45b1ee9baf": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_45c148db7f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_45ed592e83": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_4624cb1168": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_4643b132a9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_46b3b970a8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": [
+   "ml_infrastructure"
+  ]
+ },
+ "v1|1|j_46c6e7247f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_46e9a80cb0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_478200deeb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_47fd76a571": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_4831111755": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_48ed6b74fc": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_491173e745": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_491be5ea2b": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_4976c82781": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed",
+   "founding"
+  ],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_498410eaf3": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "fullstack",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_4b0ab24952": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_4b1cc88292": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_4bedbead8b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_4c80ee7cdb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_4ca84d1328": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "education",
+  "secondary": []
+ },
+ "v1|1|j_4cced88cad": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_4d571f32bd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_4d5e6d1b8f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_4dc0f95049": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_4e42c64d8c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_4e44126058": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_4e89470f37": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_4edcf4c07c": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales",
+  "secondary": [
+   "marketing"
+  ]
+ },
+ "v1|1|j_4ede644580": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_4f3e7d7454": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_4f8926793c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_5059778e6b": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_51e8e9813d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_51e929e9a7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_51ecc2b466": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_540c8a47db": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_541ca1e424": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_549851e59b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_writing",
+  "secondary": []
+ },
+ "v1|1|j_54d8326aeb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_54fbc04e69": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_55aa03800a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_55f3a1f640": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_56e4fdac40": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_57f4338357": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_58078ce083": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_58ab3d6705": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_analysis",
+  "secondary": []
+ },
+ "v1|1|j_5a3d13fe1c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_5a43c5aee6": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_5a466aa192": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_5a46cb95b7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_5aa5265b67": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_5ad5251b5b": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": [
+   "product_engineer"
+  ]
+ },
+ "v1|1|j_5ad73fdb2f": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "design_engineer",
+  "secondary": [
+   "mobile"
+  ]
+ },
+ "v1|1|j_5b57c69524": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_5b94147b6e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_5b96540f05": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_5c0ffb99da": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_5c21850467": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_5c35457cfc": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_5cc74b926c": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_5d1c0c23dc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_5da9038b8e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_5e4e79b4bb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_5e6ebf5e20": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "healthcare",
+  "secondary": []
+ },
+ "v1|1|j_5e740713de": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_5e807e48b6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_5efbdda2c3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_5f606d7a09": {
+  "missing": "process_safety_engineer",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_5fe53c620b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_6000c2203e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_60253e47a0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_6075400107": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_61465132d9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_6167c54a97": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_616ece4fea": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_6173e2d4eb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_61b70bb2d0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
+  "secondary": []
+ },
+ "v1|1|j_61deaeb530": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_621bd04534": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_6247201619": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": [
+   "mobile"
+  ]
+ },
+ "v1|1|j_62696cf88f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": [
+   "backend"
+  ]
+ },
+ "v1|1|j_6308df1b6b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_6364847b87": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_63660da212": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "education",
+  "secondary": []
+ },
+ "v1|1|j_653b1075bc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_6548a6109e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_655819ce01": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_65b58ea973": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_66910ab46c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": [
+   "ml_engineering"
+  ]
+ },
+ "v1|1|j_66c7bb1b18": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_66cbe694e0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_67098a342e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_673fe82fd4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_67c4014614": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_67cfc00ad0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "it",
+  "secondary": []
+ },
+ "v1|1|j_67de8a4527": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_686f0d4114": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_687dd79730": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_68a577c93f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_analysis",
+  "secondary": []
+ },
+ "v1|1|j_68d92a970f": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_69e572486f": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_6a3a5c435b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_6a9ac9eddd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_6ab1751cfc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_6beba2fe39": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_6c441381b1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_6d6b998f04": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_6de467eaeb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "embedded",
+  "secondary": []
+ },
+ "v1|1|j_6e612b8a9c": {
+  "missing": "workforce planning",
+  "modifiers": [],
+  "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_6e7eee8df7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_6ea455db30": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_6ef0b90f4f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_6f8d756f4f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_70ced6b371": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_719bf59da5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_71db67eb7a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_720f45f74f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_7218212f9c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_7270dadd64": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_72ed1a1640": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_7420b46ada": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_7427dc1a04": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_74d9054996": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_761e5b8482": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": [
+   "program_management"
+  ]
+ },
+ "v1|1|j_76741dd35b": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_774370d6f8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_77cb1e8362": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_77f3479080": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
+  "secondary": []
+ },
+ "v1|1|j_780b78a211": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_7814b5d6c1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_7842a402cc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "it",
+  "secondary": []
+ },
+ "v1|1|j_7847f1c573": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_78d296f496": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_7918656ab7": {
+  "missing": "grant making panel member",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_791d28e88b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_793d7bf30a": {
+  "missing": "Power Systems Consultant",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_79f2ca2f78": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_79f8be3217": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_7ab0d8ddbe": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_7ba0229d78": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_7bba233fa8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_7bed12de56": {
+  "missing": "Proposal Writer",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_7c23c57e95": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_7c38f3e5f9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_7d5beeef30": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_7d6c0f955d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_7ec6aa15fa": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_7edb522726": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_7fac510287": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_7fe88527e1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": [
+   "sales"
+  ]
+ },
+ "v1|1|j_808f563342": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_80c2fe8ce0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_817cee5c20": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_82705b52a0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_8288b68fa9": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_82e25d0f37": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_83455edd50": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_8516abead4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_852621bcce": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_858fbfe7b8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_86507109b4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_86bcdf41d5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_86fa4046d2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_880ea47e50": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_8846e497e3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_88b2466f19": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "design_engineer",
+  "secondary": []
+ },
+ "v1|1|j_890657f634": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_8a1c9cb4eb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": [
+   "security"
+  ]
+ },
+ "v1|1|j_8a222cdc8b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_8a4316f0c7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": [
+   "qa"
+  ]
+ },
+ "v1|1|j_8a53d8ea33": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_8a701e8829": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": [
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_8b1ed99691": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "engineering_management",
+  "secondary": [
+   "software"
+  ]
+ },
+ "v1|1|j_8cd7a12023": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_8cdf3686d8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_8dda2e3881": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_8e40115469": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_8efdfb456e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_8fd9ef6c0e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_900d0062cc": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_9054abae5e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_91086b0005": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_9108c2d11f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_91a8d0c336": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_91ec0dfaeb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_92c6dbfc6c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_9315c8a8ae": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "research",
+  "secondary": [
+   "ai_engineering",
+   "engineering_management"
+  ]
+ },
+ "v1|1|j_9355e1c275": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "backend",
+  "secondary": [
+   "ai_engineering",
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_9448822031": {
+  "missing": "sales_enablement",
+  "modifiers": [],
+  "primary": "go_to_market",
+  "secondary": []
+ },
+ "v1|1|j_953d842975": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_95b9088bf2": {
+  "missing": "salesforce_developer",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_9609260c44": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_964e790759": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_9656a033bd": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_97c8b02aaa": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_97cdfa7b96": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_984972a5c9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_986ed3e7cd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_98f3e1b44b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_99ab807e70": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_99f43b5cc5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_9a5877d3c5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_9a973ccfd5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_9adbc33726": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_9b08154e40": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_9b2c2423fc": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_9b7490bd20": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_9c21b7b5db": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_9c96afe767": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_9cd117d817": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_9cdc659028": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_9d5127f539": {
+  "missing": "screenwriter",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_9da59ed173": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_9dfb77c5fc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_9ea8b434a2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_9feead8117": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_a09565c2f6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_a101ef351b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_a20b97bb90": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_a23d31c42d": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_a303df7a03": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_a309c2c156": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_a33f48882c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_a3f14b52ac": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_a3f420f015": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_a4a29f14e9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_a4b3c1dbb7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_a4e1b2adc9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_a5274f0d7b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_a537c83da7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_a5764dec40": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_a617acf7d9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_a636c601e9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_a6402e5e74": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_a65920719d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_a66dd7acb0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_a688469399": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_a68d3b62e6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_a6c3f4f884": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_a702cdad4f": {
+  "missing": "Physical Security Systems Engineer",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_a742af0ff9": {
+  "missing": "Interior Designer",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_a794d96b60": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": [
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_a8f8842c55": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_a9204542a7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_a989640499": {
+  "missing": "Concept Artist",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_aa25696103": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": [
+   "brand_design"
+  ]
+ },
+ "v1|1|j_ab3979c587": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_ab6f39a51b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_abb57f0741": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_acb5f75e7a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_accc6a0f56": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_acdbc5372c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_adc9c6c53a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_adef1583e4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_adf4f711ae": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_ae16613740": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_aec0db69b0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_aec8db2c0e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_aecb362e58": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_af633214ef": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_b0eecc24fc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_b1a89afc7e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": [
+   "security"
+  ]
+ },
+ "v1|1|j_b222a09830": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_b26e6b4ecc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_b2f41a87c3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_b2f65a8d03": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_b3152203e6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_b31c334bdb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_b34e986b47": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_b430332399": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_b470bf9292": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "devrel",
+  "secondary": []
+ },
+ "v1|1|j_b5711accbb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "healthcare",
+  "secondary": []
+ },
+ "v1|1|j_b625b2fff0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_b666276da7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_b68856957c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": [
+   "backend"
+  ]
+ },
+ "v1|1|j_b6be40c891": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_b71447e2d4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_b85e63df9d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_b8ca18d1d5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_b98de9a423": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_ba2bc45c02": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_babee2c08d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": [
+   "backend"
+  ]
+ },
+ "v1|1|j_bb50565f6c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "it",
+  "secondary": []
+ },
+ "v1|1|j_bb8c419855": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_bcaac3f7fd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_bdcee64847": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_bde5352409": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_be9e357840": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_bee35a9803": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_bf05aeee76": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_bf8e9d6317": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
+  "secondary": []
+ },
+ "v1|1|j_c020057ebf": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "hardware",
+  "secondary": []
+ },
+ "v1|1|j_c035bd43e0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_c1931cb24f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_c3108df945": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_c334fc159f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_c39d6842ba": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_c3c6044abc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_c44a264c51": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_c490e038de": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_c51042a667": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_c532350bab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_c579f890e3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_c58531d5e9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": [
+   "data_analysis"
+  ]
+ },
+ "v1|1|j_c625537b6a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_c691e7f295": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_c71909c5a8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_c807b29896": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_c807d7df62": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_c8b88b1b89": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_c9318646bc": {
+  "missing": "P&ID specialist",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_c95e186dc9": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "product_engineer",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_c967bd524b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_c976d06823": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_c9effb313c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_ca30e0cdc4": {
+  "missing": "privacy_engineering",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_ca527c78f5": {
+  "missing": "sales_management",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_caec8a14bc": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_cbc701b73d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": [
+   "sales_engineering"
+  ]
+ },
+ "v1|1|j_cc0b313b11": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_cc3f319678": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_cc4c637c88": {
+  "missing": "deployment_strategist",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_cc57ff2e1d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_cc60e39633": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_cc62200942": {
+  "missing": "underwriting",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_ccac216b1a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_ccc93197da": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_ccfffc001e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_cda0b87004": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_cdd5e5c902": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_cf50bd5308": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_cfbcd74731": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_cfd1d82305": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_d12dbbb19b": {
+  "missing": "story_writer",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_d1330a067c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d1e84164e7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "it",
+  "secondary": []
+ },
+ "v1|1|j_d21031e5c7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d22838753a": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d24ac54be6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_d29597cd82": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_d3200fe756": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_d3a1b9d788": {
+  "missing": "transport_planner",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_d3b330485d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_d3b8a38b09": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ux_research",
+  "secondary": []
+ },
+ "v1|1|j_d3d6ed003d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_d3fe39fcc9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_d458dff10e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d57f88e44f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_d59ec6a865": {
+  "missing": "lending operations",
+  "modifiers": [],
+  "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_d5f6fdc5e9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d6547615a5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_d6b5a7f901": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d6c08eb282": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d7db3926a3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_d8ee72ca58": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_d97c909560": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_d98a6dc053": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": [
+   "marketing"
+  ]
+ },
+ "v1|1|j_d9d5c319f7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_da40487bc4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_db64d84639": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_dbb873f5cc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_dbdb34c54e": {
+  "missing": "insurance verification",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_dbdb5db04f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_dca2d51f96": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_dcb235b629": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_dcfcdb213c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_de51c23fbb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_engineer",
+  "secondary": [
+   "backend"
+  ]
+ },
+ "v1|1|j_de8e2afda0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "design_engineer",
+  "secondary": []
+ },
+ "v1|1|j_df0eba789f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_df33580bec": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_dfeed28867": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_e02322202c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_e068d697e6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_e1769b1bb6": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e261313425": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e2a5534796": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_e2c7f20097": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": [
+   "it"
+  ]
+ },
+ "v1|1|j_e32c4ef54b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_e50643ea03": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e55c0839e8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_e571a4187e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_e5eb993038": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e60aedb08d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_e64759b65e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e6f9f86a92": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": [
+   "sales_engineering"
+  ]
+ },
+ "v1|1|j_e6fe578ba6": {
+  "missing": "",
+  "modifiers": [
+   "founding"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e760a84c6b": {
+  "missing": "video_editing",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_e7ff1ba326": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_e926fea423": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e93324f32b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_ea2a58d4f1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_eae5f00f38": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_eb0882345c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_eb3457b851": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_eb4bee007d": {
+  "missing": "translator",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_edd15a47cd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_edee811e5b": {
+  "missing": "trader",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_ee3b6dc0e3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_eec7e0c83a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_ef2874dc13": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_efcfaae732": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_f080f54847": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": [
+   "infrastructure"
+  ]
+ },
+ "v1|1|j_f123ad1b55": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_f17e1c88e6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_f19f03ef91": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_f230635d1b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_f29166a1df": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_f2b7e37c79": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_f3c3d42635": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_f4401c937d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_f559da8c33": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_f5ce870c0a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_f69d6b4b62": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_f7233709b1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_f76efb4a4d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_f931bbf889": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_fa401b71fb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_fa61f89d2f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_faf3850192": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_fb68b091ce": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_fbbe47bf3c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_fbfd49232c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_fc16f68d55": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_fd00bebc9c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_fd153de64a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_fd162fc9e6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_fdbae3bb77": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_fdc5e4c504": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_fe28419662": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_fe3f9272a1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_fe6eedbc14": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_fedc084198": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_ff3fecc180": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_ff7dafbb36": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ }
+}

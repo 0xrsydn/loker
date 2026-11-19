@@ -1,0 +1,11402 @@
+{
+ "typesafe/jev-1.14-20261014|1|j_004f83fcfe": {
+  "choice": "ml_engineering",
+  "confidence": 0.88,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.88
+   ],
+   [
+    "ai",
+    0.1
+   ],
+   [
+    "ai_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_007aabb5cb": {
+  "choice": "sales",
+  "confidence": 0.84,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "sales",
+    0.84
+   ],
+   [
+    "go_to_market",
+    0.16
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_01911257fa": {
+  "choice": "marketing",
+  "confidence": 0.44,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "marketing",
+    0.45
+   ],
+   [
+    "go_to_market",
+    0.26
+   ],
+   [
+    "sales",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_03277fc15a": {
+  "choice": "sales",
+  "confidence": 0.95,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "sales",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "sales_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_03a98fe055": {
+  "choice": "engineering_management",
+  "confidence": 0.83,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.83
+   ],
+   [
+    "security",
+    0.17
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_03cbb4e176": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0406f19731": {
+  "choice": "backend",
+  "confidence": 0.39,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "backend",
+    0.4
+   ],
+   [
+    "fullstack",
+    0.34
+   ],
+   [
+    "software",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_042162e8fc": {
+  "choice": "software",
+  "confidence": 0.33,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "software",
+    0.34
+   ],
+   [
+    "sales_engineering",
+    0.31
+   ],
+   [
+    "product_engineer",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_045164d5cb": {
+  "choice": "data_science",
+  "confidence": 0.81,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "data_science",
+    0.81
+   ],
+   [
+    "compliance",
+    0.14
+   ],
+   [
+    "data",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_04d790d4be": {
+  "choice": "software",
+  "confidence": 0.92,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "software",
+    0.92
+   ],
+   [
+    "engineering",
+    0.04
+   ],
+   [
+    "data",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_05561072ab": {
+  "choice": "brand_design",
+  "confidence": 0.94,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "brand_design",
+    0.94
+   ],
+   [
+    "design",
+    0.06
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_062cf7df93": {
+  "choice": "customer_success",
+  "confidence": 0.78,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "customer_success",
+    0.78
+   ],
+   [
+    "program_management",
+    0.11
+   ],
+   [
+    "sales_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_06328d7b5f": {
+  "choice": "ai_training",
+  "confidence": 0.6,
+  "cost": 7.77e-05,
+  "top": [
+   [
+    "ai_training",
+    0.61
+   ],
+   [
+    "marketing",
+    0.17
+   ],
+   [
+    "qa",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_063ec4a7c7": {
+  "choice": "education",
+  "confidence": 1,
+  "cost": 7.8078e-05,
+  "top": [
+   [
+    "education",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_06486940e7": {
+  "choice": "sales",
+  "confidence": 0.84,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "sales",
+    0.84
+   ],
+   [
+    "go_to_market",
+    0.15
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_064f7e5a99": {
+  "choice": "compliance",
+  "confidence": 0.96,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "compliance",
+    0.96
+   ],
+   [
+    "customer_support",
+    0.03
+   ],
+   [
+    "support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_069c5be345": {
+  "choice": "ai_training",
+  "confidence": 0.99,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "ai_training",
+    0.99
+   ],
+   [
+    "legal",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_069e000fb6": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_07341e6bb0": {
+  "choice": "marketing",
+  "confidence": 0.46,
+  "cost": 7.7868e-05,
+  "top": [
+   [
+    "marketing",
+    0.47
+   ],
+   [
+    "brand_design",
+    0.4
+   ],
+   [
+    "design",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_073b0dea18": {
+  "choice": "customer_success",
+  "confidence": 0.7,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "customer_success",
+    0.71
+   ],
+   [
+    "program_management",
+    0.1
+   ],
+   [
+    "sales_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_08340afc40": {
+  "choice": "product_marketing",
+  "confidence": 0.85,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.85
+   ],
+   [
+    "ai_training",
+    0.08
+   ],
+   [
+    "product_management",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0853800add": {
+  "choice": "sales_engineering",
+  "confidence": 1,
+  "cost": 7.434e-05,
+  "top": [
+   [
+    "sales_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0877d7ec70": {
+  "choice": "customer_support",
+  "confidence": 0.48,
+  "cost": 7.8918e-05,
+  "top": [
+   [
+    "customer_support",
+    0.49
+   ],
+   [
+    "customer_success",
+    0.39
+   ],
+   [
+    "support",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_08decfb4de": {
+  "choice": "customer_support",
+  "confidence": 0.52,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "customer_support",
+    0.53
+   ],
+   [
+    "customer_success",
+    0.27
+   ],
+   [
+    "support",
+    0.18
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_08ee88b3bd": {
+  "choice": "ai_training",
+  "confidence": 0.88,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "ai_training",
+    0.88
+   ],
+   [
+    "hardware",
+    0.11
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_08fb419b09": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_097738ab36": {
+  "choice": "compliance",
+  "confidence": 0.98,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "compliance",
+    0.98
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "security",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_09afb55877": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_09b74aaa37": {
+  "choice": "sales_engineering",
+  "confidence": 0.33,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "sales_engineering",
+    0.34
+   ],
+   [
+    "software",
+    0.31
+   ],
+   [
+    "customer_success",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0a34bb7a74": {
+  "choice": "infrastructure",
+  "confidence": 0.97,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.97
+   ],
+   [
+    "backend",
+    0.02
+   ],
+   [
+    "software",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0a40723564": {
+  "choice": "infrastructure",
+  "confidence": 0.4,
+  "cost": 7.6986e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.41
+   ],
+   [
+    "operations",
+    0.26
+   ],
+   [
+    "business_operations",
+    0.24
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0b3df2cb77": {
+  "choice": "ml_infrastructure",
+  "confidence": 0.44,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "ml_infrastructure",
+    0.45
+   ],
+   [
+    "ai_engineering",
+    0.23
+   ],
+   [
+    "ai_training",
+    0.22
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0b7ceb5670": {
+  "choice": "ml_engineering",
+  "confidence": 0.64,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.65
+   ],
+   [
+    "ai_engineering",
+    0.34
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0c5819cdfc": {
+  "choice": "software",
+  "confidence": 0.44,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "software",
+    0.45
+   ],
+   [
+    "sales_engineering",
+    0.19
+   ],
+   [
+    "engineering",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0c6babf894": {
+  "choice": "infrastructure",
+  "confidence": 0.99,
+  "cost": 7.6818e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.99
+   ],
+   [
+    "devrel",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0c899f38d4": {
+  "choice": "sales",
+  "confidence": 0.94,
+  "cost": 7.9296e-05,
+  "top": [
+   [
+    "sales",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "none",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0c9e98006c": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0cdcbd1f3c": {
+  "choice": "software",
+  "confidence": 0.94,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "software",
+    0.94
+   ],
+   [
+    "engineering",
+    0.03
+   ],
+   [
+    "backend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0cea1cf975": {
+  "choice": "product_engineer",
+  "confidence": 0.98,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.98
+   ],
+   [
+    "fullstack",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0eb10b18c6": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0f3575d6aa": {
+  "choice": "ai_engineering",
+  "confidence": 0.81,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.81
+   ],
+   [
+    "backend",
+    0.07
+   ],
+   [
+    "infrastructure",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0fc522c4d2": {
+  "choice": "program_management",
+  "confidence": 0.52,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "program_management",
+    0.53
+   ],
+   [
+    "business_operations",
+    0.2
+   ],
+   [
+    "legal",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0fdc188f0c": {
+  "choice": "security",
+  "confidence": 0.55,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "security",
+    0.56
+   ],
+   [
+    "ai_engineering",
+    0.2
+   ],
+   [
+    "ml_engineering",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_0fe4f11014": {
+  "choice": "recruiting",
+  "confidence": 0.91,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "recruiting",
+    0.91
+   ],
+   [
+    "go_to_market",
+    0.09
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_12481e6201": {
+  "choice": "ai_engineering",
+  "confidence": 0.78,
+  "cost": 7.623e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.78
+   ],
+   [
+    "product_engineer",
+    0.14
+   ],
+   [
+    "software",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_13d473cbb6": {
+  "choice": "data",
+  "confidence": 0.59,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "data",
+    0.6
+   ],
+   [
+    "healthcare",
+    0.25
+   ],
+   [
+    "data_analysis",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_14e268bca1": {
+  "choice": "customer_success",
+  "confidence": 0.78,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "customer_success",
+    0.78
+   ],
+   [
+    "program_management",
+    0.08
+   ],
+   [
+    "sales_engineering",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_15ae21edde": {
+  "choice": "sales",
+  "confidence": 0.78,
+  "cost": 7.707e-05,
+  "top": [
+   [
+    "sales",
+    0.78
+   ],
+   [
+    "customer_success",
+    0.11
+   ],
+   [
+    "go_to_market",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_15ae426990": {
+  "choice": "ai_engineering",
+  "confidence": 0.67,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.68
+   ],
+   [
+    "ml_infrastructure",
+    0.17
+   ],
+   [
+    "software",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_15d712b4a0": {
+  "choice": "marketing",
+  "confidence": 0.63,
+  "cost": 7.6146e-05,
+  "top": [
+   [
+    "marketing",
+    0.64
+   ],
+   [
+    "go_to_market",
+    0.31
+   ],
+   [
+    "product_marketing",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_15fe17df32": {
+  "choice": "ai_engineering",
+  "confidence": 0.51,
+  "cost": 7.4382e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.52
+   ],
+   [
+    "ml_engineering",
+    0.16
+   ],
+   [
+    "qa",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_160703a6b5": {
+  "choice": "marketing",
+  "confidence": 0.83,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "marketing",
+    0.83
+   ],
+   [
+    "go_to_market",
+    0.16
+   ],
+   [
+    "devrel",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_16ae49b111": {
+  "choice": "frontend",
+  "confidence": 1,
+  "cost": 7.4592e-05,
+  "top": [
+   [
+    "frontend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_16f6d9096c": {
+  "choice": "marketing",
+  "confidence": 0.62,
+  "cost": 7.8708e-05,
+  "top": [
+   [
+    "marketing",
+    0.63
+   ],
+   [
+    "frontend",
+    0.15
+   ],
+   [
+    "go_to_market",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_17065ebeaf": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1717f88628": {
+  "choice": "software",
+  "confidence": 0.74,
+  "cost": 7.6608e-05,
+  "top": [
+   [
+    "software",
+    0.74
+   ],
+   [
+    "engineering",
+    0.1
+   ],
+   [
+    "product_engineer",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_17754caff4": {
+  "choice": "marketing",
+  "confidence": 0.98,
+  "cost": 7.7616e-05,
+  "top": [
+   [
+    "marketing",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_177d6ec985": {
+  "choice": "mobile",
+  "confidence": 0.99,
+  "cost": 7.4298e-05,
+  "top": [
+   [
+    "mobile",
+    0.99
+   ],
+   [
+    "product_engineer",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_17f7fb4acc": {
+  "choice": "data_science",
+  "confidence": 0.36,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "data_science",
+    0.37
+   ],
+   [
+    "finance",
+    0.25
+   ],
+   [
+    "engineering",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_186c1df2f8": {
+  "choice": "research",
+  "confidence": 0.66,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "research",
+    0.67
+   ],
+   [
+    "data_analysis",
+    0.19
+   ],
+   [
+    "marketing",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1883ab1107": {
+  "choice": "sales",
+  "confidence": 0.69,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "sales",
+    0.7
+   ],
+   [
+    "sales_engineering",
+    0.26
+   ],
+   [
+    "go_to_market",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_19db4389c5": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_19e77563b6": {
+  "choice": "compliance",
+  "confidence": 0.99,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "compliance",
+    0.99
+   ],
+   [
+    "program_management",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1a63025e7e": {
+  "choice": "software",
+  "confidence": 0.83,
+  "cost": 7.8498e-05,
+  "top": [
+   [
+    "software",
+    0.83
+   ],
+   [
+    "engineering",
+    0.05
+   ],
+   [
+    "product_engineer",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1ac4ebea3f": {
+  "choice": "ai_training",
+  "confidence": 0.94,
+  "cost": 7.7028e-05,
+  "top": [
+   [
+    "ai_training",
+    0.94
+   ],
+   [
+    "people",
+    0.04
+   ],
+   [
+    "data",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1acf065f12": {
+  "choice": "business_operations",
+  "confidence": 0.9,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "business_operations",
+    0.9
+   ],
+   [
+    "operations",
+    0.06
+   ],
+   [
+    "marketing",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1bc162917a": {
+  "choice": "product_management",
+  "confidence": 0.71,
+  "cost": 7.623e-05,
+  "top": [
+   [
+    "product_management",
+    0.72
+   ],
+   [
+    "product",
+    0.28
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1cdf337fe9": {
+  "choice": "qa",
+  "confidence": 0.74,
+  "cost": 7.749e-05,
+  "top": [
+   [
+    "qa",
+    0.74
+   ],
+   [
+    "compliance",
+    0.26
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1ce8020602": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1db9426d82": {
+  "choice": "product_management",
+  "confidence": 0.9,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "product_management",
+    0.9
+   ],
+   [
+    "product",
+    0.1
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1e2529d190": {
+  "choice": "ai_training",
+  "confidence": 0.98,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "ai_training",
+    0.98
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1e35a1d5a9": {
+  "choice": "customer_success",
+  "confidence": 0.98,
+  "cost": 7.728e-05,
+  "top": [
+   [
+    "customer_success",
+    0.98
+   ],
+   [
+    "customer_support",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_1e94bcdb86": {
+  "choice": "operations",
+  "confidence": 0.93,
+  "cost": 7.4382e-05,
+  "top": [
+   [
+    "operations",
+    0.93
+   ],
+   [
+    "business_operations",
+    0.07
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_201d14ba08": {
+  "choice": "operations",
+  "confidence": 0.45,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "operations",
+    0.46
+   ],
+   [
+    "business_operations",
+    0.46
+   ],
+   [
+    "program_management",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_20a65cbc7e": {
+  "choice": "customer_success",
+  "confidence": 0.34,
+  "cost": 7.8036e-05,
+  "top": [
+   [
+    "customer_success",
+    0.35
+   ],
+   [
+    "technical_support",
+    0.26
+   ],
+   [
+    "support",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_20cca9caab": {
+  "choice": "compliance",
+  "confidence": 0.98,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "compliance",
+    0.98
+   ],
+   [
+    "security",
+    0.01
+   ],
+   [
+    "data_analysis",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_20f59b1bc6": {
+  "choice": "ai_engineering",
+  "confidence": 0.81,
+  "cost": 7.602e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.81
+   ],
+   [
+    "fullstack",
+    0.16
+   ],
+   [
+    "product_engineer",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2128303f46": {
+  "choice": "hardware",
+  "confidence": 0.99,
+  "cost": 7.4214e-05,
+  "top": [
+   [
+    "hardware",
+    0.99
+   ],
+   [
+    "engineering",
+    0.01
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_214dad69b2": {
+  "choice": "product_engineer",
+  "confidence": 0.99,
+  "cost": 7.4088e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.99
+   ],
+   [
+    "fullstack",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_21728a958f": {
+  "choice": "product_management",
+  "confidence": 0.98,
+  "cost": 7.5894e-05,
+  "top": [
+   [
+    "product_management",
+    0.98
+   ],
+   [
+    "product",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_221fbc53d0": {
+  "choice": "mobile",
+  "confidence": 1,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "mobile",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_22c7950b32": {
+  "choice": "frontend",
+  "confidence": 1,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "frontend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_22f4581adf": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_22fd905c7a": {
+  "choice": "product_management",
+  "confidence": 0.97,
+  "cost": 7.7238e-05,
+  "top": [
+   [
+    "product_management",
+    0.97
+   ],
+   [
+    "product",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_23bbddda8a": {
+  "choice": "fullstack",
+  "confidence": 0.8,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "fullstack",
+    0.8
+   ],
+   [
+    "product_engineer",
+    0.19
+   ],
+   [
+    "frontend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_23e730bd67": {
+  "choice": "data_engineering",
+  "confidence": 1,
+  "cost": 7.4508e-05,
+  "top": [
+   [
+    "data_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_24715fefdc": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_251aae03a7": {
+  "choice": "security",
+  "confidence": 0.79,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "security",
+    0.79
+   ],
+   [
+    "infrastructure",
+    0.19
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2541f1d8a9": {
+  "choice": "customer_support",
+  "confidence": 0.41,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "customer_support",
+    0.42
+   ],
+   [
+    "compliance",
+    0.22
+   ],
+   [
+    "technical_support",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_254857348b": {
+  "choice": "ai_engineering",
+  "confidence": 0.58,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.59
+   ],
+   [
+    "product_engineer",
+    0.4
+   ],
+   [
+    "fullstack",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2548dad55b": {
+  "choice": "customer_success",
+  "confidence": 0.94,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "customer_success",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "sales",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_260d21b873": {
+  "choice": "customer_success",
+  "confidence": 0.99,
+  "cost": 7.4424e-05,
+  "top": [
+   [
+    "customer_success",
+    0.99
+   ],
+   [
+    "program_management",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2683231041": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2732f91681": {
+  "choice": "finance",
+  "confidence": 0.71,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "finance",
+    0.72
+   ],
+   [
+    "compliance",
+    0.27
+   ],
+   [
+    "operations",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_278bb44992": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_27d35de722": {
+  "choice": "devrel",
+  "confidence": 0.38,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "devrel",
+    0.39
+   ],
+   [
+    "infrastructure",
+    0.25
+   ],
+   [
+    "software",
+    0.24
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2847a8c88d": {
+  "choice": "sales",
+  "confidence": 0.94,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "sales",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_297cd40725": {
+  "choice": "sales",
+  "confidence": 0.47,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "sales",
+    0.48
+   ],
+   [
+    "customer_success",
+    0.37
+   ],
+   [
+    "go_to_market",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2a26c44881": {
+  "choice": "research",
+  "confidence": 0.89,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "research",
+    0.89
+   ],
+   [
+    "ai",
+    0.06
+   ],
+   [
+    "ai_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2b1875bc52": {
+  "choice": "recruiting",
+  "confidence": 0.99,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "recruiting",
+    0.99
+   ],
+   [
+    "people",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2bade00d56": {
+  "choice": "data_engineering",
+  "confidence": 0.99,
+  "cost": 7.6818e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.99
+   ],
+   [
+    "fullstack",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2bb8c095dd": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2bc5bfb3ac": {
+  "choice": "data_engineering",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "data_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2cac462ba8": {
+  "choice": "marketing",
+  "confidence": 1,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "marketing",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2d584a82e3": {
+  "choice": "sales_engineering",
+  "confidence": 0.35,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "sales_engineering",
+    0.36
+   ],
+   [
+    "software",
+    0.33
+   ],
+   [
+    "product_engineer",
+    0.11
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2d7f93d554": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2eb490a816": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2ee6e8ce63": {
+  "choice": "infrastructure",
+  "confidence": 0.91,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.91
+   ],
+   [
+    "software",
+    0.07
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_2f8efba89c": {
+  "choice": "engineering_management",
+  "confidence": 0.92,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.92
+   ],
+   [
+    "fullstack",
+    0.06
+   ],
+   [
+    "infrastructure",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_312b6ce30d": {
+  "choice": "ai_training",
+  "confidence": 0.79,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "ai_training",
+    0.79
+   ],
+   [
+    "data",
+    0.12
+   ],
+   [
+    "data_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_31b2643950": {
+  "choice": "program_management",
+  "confidence": 0.88,
+  "cost": 7.6356e-05,
+  "top": [
+   [
+    "program_management",
+    0.88
+   ],
+   [
+    "marketing",
+    0.11
+   ],
+   [
+    "go_to_market",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_321252cee1": {
+  "choice": "ml_engineering",
+  "confidence": 0.8,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.8
+   ],
+   [
+    "ai",
+    0.13
+   ],
+   [
+    "ai_engineering",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3230af9789": {
+  "choice": "software",
+  "confidence": 0.32,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "software",
+    0.33
+   ],
+   [
+    "sales_engineering",
+    0.22
+   ],
+   [
+    "customer_success",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_325dfc2f34": {
+  "choice": "operations",
+  "confidence": 0.71,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "operations",
+    0.72
+   ],
+   [
+    "business_operations",
+    0.26
+   ],
+   [
+    "program_management",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_32753b2024": {
+  "choice": "infrastructure",
+  "confidence": 0.52,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.53
+   ],
+   [
+    "it",
+    0.37
+   ],
+   [
+    "technical_support",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_32960e0b13": {
+  "choice": "ai_engineering",
+  "confidence": 0.99,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.99
+   ],
+   [
+    "ai",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_32b88ba008": {
+  "choice": "marketing",
+  "confidence": 0.96,
+  "cost": 7.6398e-05,
+  "top": [
+   [
+    "marketing",
+    0.96
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_32fb162365": {
+  "choice": "operations",
+  "confidence": 0.55,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "operations",
+    0.56
+   ],
+   [
+    "business_operations",
+    0.42
+   ],
+   [
+    "none",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_339116e22c": {
+  "choice": "ai_engineering",
+  "confidence": 0.78,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.78
+   ],
+   [
+    "product_engineer",
+    0.12
+   ],
+   [
+    "ai",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_33ed244d5e": {
+  "choice": "technical_support",
+  "confidence": 0.96,
+  "cost": 7.749e-05,
+  "top": [
+   [
+    "technical_support",
+    0.96
+   ],
+   [
+    "support",
+    0.03
+   ],
+   [
+    "fullstack",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_34377d3395": {
+  "choice": "infrastructure",
+  "confidence": 0.51,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.52
+   ],
+   [
+    "security",
+    0.47
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_34ade7d7b8": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3523a5f10a": {
+  "choice": "frontend",
+  "confidence": 0.58,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "frontend",
+    0.59
+   ],
+   [
+    "fullstack",
+    0.21
+   ],
+   [
+    "software",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_356794525a": {
+  "choice": "ai_training",
+  "confidence": 0.72,
+  "cost": 7.6188e-05,
+  "top": [
+   [
+    "ai_training",
+    0.73
+   ],
+   [
+    "security",
+    0.16
+   ],
+   [
+    "ai_engineering",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_357ce2fdb8": {
+  "choice": "sales",
+  "confidence": 0.95,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "sales",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_35edad8992": {
+  "choice": "software",
+  "confidence": 0.78,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "software",
+    0.78
+   ],
+   [
+    "engineering",
+    0.07
+   ],
+   [
+    "product_engineer",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_35f3879144": {
+  "choice": "embedded",
+  "confidence": 0.98,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "embedded",
+    0.98
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3692f8dbd8": {
+  "choice": "ai_training",
+  "confidence": 0.99,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "ai_training",
+    0.99
+   ],
+   [
+    "security",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_36949da3e5": {
+  "choice": "sales",
+  "confidence": 0.89,
+  "cost": 7.749e-05,
+  "top": [
+   [
+    "sales",
+    0.89
+   ],
+   [
+    "go_to_market",
+    0.1
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_36df3a6b5e": {
+  "choice": "infrastructure",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_37337da156": {
+  "choice": "marketing",
+  "confidence": 0.55,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "marketing",
+    0.56
+   ],
+   [
+    "go_to_market",
+    0.42
+   ],
+   [
+    "sales",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_373cae5f16": {
+  "choice": "sales",
+  "confidence": 0.94,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "sales",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.06
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3759641b43": {
+  "choice": "marketing",
+  "confidence": 0.92,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "marketing",
+    0.92
+   ],
+   [
+    "brand_design",
+    0.08
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_37aa111220": {
+  "choice": "product_management",
+  "confidence": 0.92,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "product_management",
+    0.92
+   ],
+   [
+    "product",
+    0.08
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_37eb80e646": {
+  "choice": "finance",
+  "confidence": 0.66,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "finance",
+    0.67
+   ],
+   [
+    "operations",
+    0.18
+   ],
+   [
+    "business_operations",
+    0.15
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_38673aea0c": {
+  "choice": "healthcare",
+  "confidence": 1,
+  "cost": 7.8078e-05,
+  "top": [
+   [
+    "healthcare",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_389ab97ec4": {
+  "choice": "backend",
+  "confidence": 0.38,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "backend",
+    0.39
+   ],
+   [
+    "engineering",
+    0.28
+   ],
+   [
+    "operations",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_394b4389ab": {
+  "choice": "people",
+  "confidence": 0.99,
+  "cost": 7.6272e-05,
+  "top": [
+   [
+    "people",
+    0.99
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3978d14d92": {
+  "choice": "infrastructure",
+  "confidence": 0.99,
+  "cost": 7.2744e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.99
+   ],
+   [
+    "ml_infrastructure",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3a25669035": {
+  "choice": "software",
+  "confidence": 0.36,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "software",
+    0.37
+   ],
+   [
+    "product_engineer",
+    0.28
+   ],
+   [
+    "sales_engineering",
+    0.24
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3a8befd493": {
+  "choice": "compliance",
+  "confidence": 0.82,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "compliance",
+    0.82
+   ],
+   [
+    "finance",
+    0.17
+   ],
+   [
+    "program_management",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3a8c609341": {
+  "choice": "ai_engineering",
+  "confidence": 0.98,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.98
+   ],
+   [
+    "backend",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3ad29bcc39": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3cef89d425": {
+  "choice": "product_marketing",
+  "confidence": 1,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "product_marketing",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3e45b3a526": {
+  "choice": "operations",
+  "confidence": 0.64,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "operations",
+    0.65
+   ],
+   [
+    "business_operations",
+    0.32
+   ],
+   [
+    "engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3e7f35e75c": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3e8c6887ad": {
+  "choice": "customer_success",
+  "confidence": 1,
+  "cost": 7.602e-05,
+  "top": [
+   [
+    "customer_success",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3eedb35751": {
+  "choice": "legal",
+  "confidence": 0.94,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "legal",
+    0.94
+   ],
+   [
+    "operations",
+    0.04
+   ],
+   [
+    "business_operations",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_3f1256b293": {
+  "choice": "sales",
+  "confidence": 0.93,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "sales",
+    0.93
+   ],
+   [
+    "go_to_market",
+    0.06
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_404a8194b3": {
+  "choice": "infrastructure",
+  "confidence": 0.98,
+  "cost": 7.5894e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.98
+   ],
+   [
+    "software",
+    0.01
+   ],
+   [
+    "backend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_410b345530": {
+  "choice": "mobile",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "mobile",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_412580475e": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.7154e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_41f05483c8": {
+  "choice": "product_engineer",
+  "confidence": 1,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "product_engineer",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_422fabe62e": {
+  "choice": "product_design",
+  "confidence": 0.97,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "product_design",
+    0.97
+   ],
+   [
+    "design",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_425ddb3b81": {
+  "choice": "fullstack",
+  "confidence": 0.39,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "fullstack",
+    0.4
+   ],
+   [
+    "sales_engineering",
+    0.28
+   ],
+   [
+    "product_engineer",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_425edb98f6": {
+  "choice": "sales",
+  "confidence": 0.91,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "sales",
+    0.91
+   ],
+   [
+    "go_to_market",
+    0.09
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4343de41ab": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_437d8fd29c": {
+  "choice": "customer_support",
+  "confidence": 0.57,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "customer_support",
+    0.58
+   ],
+   [
+    "customer_success",
+    0.33
+   ],
+   [
+    "support",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_439efd13af": {
+  "choice": "fullstack",
+  "confidence": 0.69,
+  "cost": 7.9758e-05,
+  "top": [
+   [
+    "fullstack",
+    0.7
+   ],
+   [
+    "frontend",
+    0.12
+   ],
+   [
+    "engineering",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_43e4b4146f": {
+  "choice": "technical_support",
+  "confidence": 0.48,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "technical_support",
+    0.49
+   ],
+   [
+    "customer_support",
+    0.24
+   ],
+   [
+    "support",
+    0.22
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_442f1eecd4": {
+  "choice": "none",
+  "confidence": 0.42,
+  "cost": 7.7616e-05,
+  "top": [
+   [
+    "none",
+    0.43
+   ],
+   [
+    "operations",
+    0.37
+   ],
+   [
+    "business_operations",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_447fd32efe": {
+  "choice": "sales",
+  "confidence": 0.82,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "sales",
+    0.82
+   ],
+   [
+    "go_to_market",
+    0.1
+   ],
+   [
+    "recruiting",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_44809fa265": {
+  "choice": "sales",
+  "confidence": 0.93,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "sales",
+    0.93
+   ],
+   [
+    "sales_engineering",
+    0.06
+   ],
+   [
+    "go_to_market",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_44f9e13d8d": {
+  "choice": "backend",
+  "confidence": 0.52,
+  "cost": 7.6146e-05,
+  "top": [
+   [
+    "backend",
+    0.53
+   ],
+   [
+    "ai_engineering",
+    0.46
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_453ce88a0d": {
+  "choice": "sales",
+  "confidence": 1,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "sales",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_45b1ee9baf": {
+  "choice": "ai_engineering",
+  "confidence": 0.97,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.97
+   ],
+   [
+    "ml_engineering",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_45c148db7f": {
+  "choice": "customer_support",
+  "confidence": 0.79,
+  "cost": 7.9044e-05,
+  "top": [
+   [
+    "customer_support",
+    0.79
+   ],
+   [
+    "legal",
+    0.13
+   ],
+   [
+    "support",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_45ed592e83": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4624cb1168": {
+  "choice": "compliance",
+  "confidence": 0.99,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "compliance",
+    0.99
+   ],
+   [
+    "security",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4643b132a9": {
+  "choice": "ai_engineering",
+  "confidence": 1,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "ai_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_46b3b970a8": {
+  "choice": "ml_engineering",
+  "confidence": 0.72,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.73
+   ],
+   [
+    "ai_training",
+    0.2
+   ],
+   [
+    "ml_infrastructure",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_46c6e7247f": {
+  "choice": "ai_engineering",
+  "confidence": 0.89,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.89
+   ],
+   [
+    "product_engineer",
+    0.09
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_46e9a80cb0": {
+  "choice": "operations",
+  "confidence": 0.91,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "operations",
+    0.91
+   ],
+   [
+    "business_operations",
+    0.09
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_478200deeb": {
+  "choice": "software",
+  "confidence": 0.66,
+  "cost": 7.287e-05,
+  "top": [
+   [
+    "software",
+    0.67
+   ],
+   [
+    "backend",
+    0.18
+   ],
+   [
+    "engineering",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_47fd76a571": {
+  "choice": "compliance",
+  "confidence": 0.69,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "compliance",
+    0.7
+   ],
+   [
+    "operations",
+    0.27
+   ],
+   [
+    "business_operations",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4831111755": {
+  "choice": "operations",
+  "confidence": 0.83,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "operations",
+    0.83
+   ],
+   [
+    "business_operations",
+    0.06
+   ],
+   [
+    "customer_support",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_48ed6b74fc": {
+  "choice": "ai_engineering",
+  "confidence": 0.63,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.64
+   ],
+   [
+    "product_engineer",
+    0.36
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_491173e745": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_491be5ea2b": {
+  "choice": "sales",
+  "confidence": 0.57,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "sales",
+    0.58
+   ],
+   [
+    "go_to_market",
+    0.42
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4976c82781": {
+  "choice": "product_engineer",
+  "confidence": 0.86,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.86
+   ],
+   [
+    "software",
+    0.08
+   ],
+   [
+    "engineering",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_498410eaf3": {
+  "choice": "product_engineer",
+  "confidence": 0.64,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.65
+   ],
+   [
+    "fullstack",
+    0.22
+   ],
+   [
+    "ai_engineering",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4b0ab24952": {
+  "choice": "marketing",
+  "confidence": 0.96,
+  "cost": 7.7238e-05,
+  "top": [
+   [
+    "marketing",
+    0.96
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "sales",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4b1cc88292": {
+  "choice": "software",
+  "confidence": 0.69,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "software",
+    0.7
+   ],
+   [
+    "ai_training",
+    0.08
+   ],
+   [
+    "ai_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4bedbead8b": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.413e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4c80ee7cdb": {
+  "choice": "finance",
+  "confidence": 1,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "finance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4ca84d1328": {
+  "choice": "education",
+  "confidence": 0.99,
+  "cost": 7.6692e-05,
+  "top": [
+   [
+    "education",
+    0.99
+   ],
+   [
+    "fullstack",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4cced88cad": {
+  "choice": "people",
+  "confidence": 0.97,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "people",
+    0.97
+   ],
+   [
+    "program_management",
+    0.02
+   ],
+   [
+    "recruiting",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4d571f32bd": {
+  "choice": "marketing",
+  "confidence": 0.75,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "marketing",
+    0.75
+   ],
+   [
+    "product_marketing",
+    0.2
+   ],
+   [
+    "go_to_market",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4d5e6d1b8f": {
+  "choice": "product_management",
+  "confidence": 0.87,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "product_management",
+    0.87
+   ],
+   [
+    "ai_engineering",
+    0.06
+   ],
+   [
+    "product",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4dc0f95049": {
+  "choice": "people",
+  "confidence": 1,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "people",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4e42c64d8c": {
+  "choice": "marketing",
+  "confidence": 0.84,
+  "cost": 7.7532e-05,
+  "top": [
+   [
+    "marketing",
+    0.84
+   ],
+   [
+    "brand_design",
+    0.12
+   ],
+   [
+    "go_to_market",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4e44126058": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4e89470f37": {
+  "choice": "technical_support",
+  "confidence": 0.99,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "technical_support",
+    0.99
+   ],
+   [
+    "support",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4edcf4c07c": {
+  "choice": "go_to_market",
+  "confidence": 0.97,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.97
+   ],
+   [
+    "sales",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4ede644580": {
+  "choice": "frontend",
+  "confidence": 1,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "frontend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4f3e7d7454": {
+  "choice": "infrastructure",
+  "confidence": 0.94,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.94
+   ],
+   [
+    "software",
+    0.04
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_4f8926793c": {
+  "choice": "operations",
+  "confidence": 0.27,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "operations",
+    0.28
+   ],
+   [
+    "ai_training",
+    0.28
+   ],
+   [
+    "business_operations",
+    0.25
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5059778e6b": {
+  "choice": "software",
+  "confidence": 0.4,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "software",
+    0.41
+   ],
+   [
+    "engineering",
+    0.29
+   ],
+   [
+    "ai_engineering",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_51e8e9813d": {
+  "choice": "product_engineer",
+  "confidence": 0.88,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.88
+   ],
+   [
+    "fullstack",
+    0.11
+   ],
+   [
+    "software",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_51e929e9a7": {
+  "choice": "customer_support",
+  "confidence": 0.99,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "customer_support",
+    0.99
+   ],
+   [
+    "support",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_51ecc2b466": {
+  "choice": "finance",
+  "confidence": 1,
+  "cost": 7.6356e-05,
+  "top": [
+   [
+    "finance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_540c8a47db": {
+  "choice": "go_to_market",
+  "confidence": 0.9,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.9
+   ],
+   [
+    "sales",
+    0.08
+   ],
+   [
+    "product_marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_541ca1e424": {
+  "choice": "sales",
+  "confidence": 0.85,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "sales",
+    0.85
+   ],
+   [
+    "go_to_market",
+    0.14
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_549851e59b": {
+  "choice": "technical_writing",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "technical_writing",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_54d8326aeb": {
+  "choice": "research",
+  "confidence": 0.57,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "research",
+    0.58
+   ],
+   [
+    "ml_engineering",
+    0.19
+   ],
+   [
+    "ai_engineering",
+    0.15
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_54fbc04e69": {
+  "choice": "technical_support",
+  "confidence": 0.6,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "technical_support",
+    0.61
+   ],
+   [
+    "support",
+    0.26
+   ],
+   [
+    "customer_support",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_55aa03800a": {
+  "choice": "recruiting",
+  "confidence": 0.99,
+  "cost": 7.6776e-05,
+  "top": [
+   [
+    "recruiting",
+    0.99
+   ],
+   [
+    "people",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_55f3a1f640": {
+  "choice": "ai_training",
+  "confidence": 0.99,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "ai_training",
+    0.99
+   ],
+   [
+    "data",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_56e4fdac40": {
+  "choice": "software",
+  "confidence": 0.47,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "software",
+    0.48
+   ],
+   [
+    "ai_engineering",
+    0.17
+   ],
+   [
+    "ml_infrastructure",
+    0.15
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_57f4338357": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_58078ce083": {
+  "choice": "program_management",
+  "confidence": 0.87,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "program_management",
+    0.87
+   ],
+   [
+    "operations",
+    0.09
+   ],
+   [
+    "business_operations",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_58ab3d6705": {
+  "choice": "data_analysis",
+  "confidence": 0.62,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "data_analysis",
+    0.63
+   ],
+   [
+    "business_operations",
+    0.34
+   ],
+   [
+    "data",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5a3d13fe1c": {
+  "choice": "marketing",
+  "confidence": 0.5,
+  "cost": 7.9422e-05,
+  "top": [
+   [
+    "marketing",
+    0.51
+   ],
+   [
+    "brand_design",
+    0.4
+   ],
+   [
+    "design",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5a43c5aee6": {
+  "choice": "sales",
+  "confidence": 0.97,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "sales",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5a466aa192": {
+  "choice": "sales",
+  "confidence": 0.87,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "sales",
+    0.87
+   ],
+   [
+    "go_to_market",
+    0.13
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5a46cb95b7": {
+  "choice": "sales",
+  "confidence": 0.96,
+  "cost": 7.7742e-05,
+  "top": [
+   [
+    "sales",
+    0.96
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5aa5265b67": {
+  "choice": "product_design",
+  "confidence": 0.96,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "product_design",
+    0.96
+   ],
+   [
+    "design",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5ad5251b5b": {
+  "choice": "product_engineer",
+  "confidence": 0.56,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.57
+   ],
+   [
+    "ai_engineering",
+    0.31
+   ],
+   [
+    "fullstack",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5ad73fdb2f": {
+  "choice": "design_engineer",
+  "confidence": 0.87,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "design_engineer",
+    0.87
+   ],
+   [
+    "mobile",
+    0.12
+   ],
+   [
+    "product_engineer",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5b57c69524": {
+  "choice": "technical_support",
+  "confidence": 0.53,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "technical_support",
+    0.54
+   ],
+   [
+    "infrastructure",
+    0.34
+   ],
+   [
+    "support",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5b94147b6e": {
+  "choice": "product_marketing",
+  "confidence": 0.75,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.75
+   ],
+   [
+    "business_operations",
+    0.07
+   ],
+   [
+    "product_management",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5b96540f05": {
+  "choice": "fullstack",
+  "confidence": 0.98,
+  "cost": 7.812e-05,
+  "top": [
+   [
+    "fullstack",
+    0.98
+   ],
+   [
+    "product_engineer",
+    0.01
+   ],
+   [
+    "customer_support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5c0ffb99da": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5c21850467": {
+  "choice": "operations",
+  "confidence": 0.91,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "operations",
+    0.91
+   ],
+   [
+    "business_operations",
+    0.05
+   ],
+   [
+    "product",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5c35457cfc": {
+  "choice": "ml_infrastructure",
+  "confidence": 0.66,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "ml_infrastructure",
+    0.67
+   ],
+   [
+    "ai_engineering",
+    0.19
+   ],
+   [
+    "engineering_management",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5cc74b926c": {
+  "choice": "software",
+  "confidence": 0.34,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "software",
+    0.35
+   ],
+   [
+    "engineering",
+    0.27
+   ],
+   [
+    "ai_engineering",
+    0.21
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5d1c0c23dc": {
+  "choice": "technical_support",
+  "confidence": 0.99,
+  "cost": 7.7238e-05,
+  "top": [
+   [
+    "technical_support",
+    0.99
+   ],
+   [
+    "support",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5da9038b8e": {
+  "choice": "infrastructure",
+  "confidence": 0.92,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.92
+   ],
+   [
+    "backend",
+    0.07
+   ],
+   [
+    "software",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5e4e79b4bb": {
+  "choice": "research",
+  "confidence": 0.79,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "research",
+    0.79
+   ],
+   [
+    "ml_engineering",
+    0.11
+   ],
+   [
+    "ai",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5e6ebf5e20": {
+  "choice": "healthcare",
+  "confidence": 1,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "healthcare",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5e740713de": {
+  "choice": "customer_success",
+  "confidence": 0.41,
+  "cost": 7.7616e-05,
+  "top": [
+   [
+    "customer_success",
+    0.42
+   ],
+   [
+    "it",
+    0.24
+   ],
+   [
+    "engineering",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5e807e48b6": {
+  "choice": "customer_success",
+  "confidence": 0.98,
+  "cost": 7.6524e-05,
+  "top": [
+   [
+    "customer_success",
+    0.98
+   ],
+   [
+    "support",
+    0.01
+   ],
+   [
+    "customer_support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5efbdda2c3": {
+  "choice": "marketing",
+  "confidence": 0.78,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "marketing",
+    0.78
+   ],
+   [
+    "go_to_market",
+    0.21
+   ],
+   [
+    "product_marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5f606d7a09": {
+  "choice": "compliance",
+  "confidence": 0.55,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "compliance",
+    0.56
+   ],
+   [
+    "engineering",
+    0.36
+   ],
+   [
+    "none",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_5fe53c620b": {
+  "choice": "fullstack",
+  "confidence": 0.61,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "fullstack",
+    0.62
+   ],
+   [
+    "software",
+    0.14
+   ],
+   [
+    "finance",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6000c2203e": {
+  "choice": "ml_engineering",
+  "confidence": 0.95,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.95
+   ],
+   [
+    "ai",
+    0.04
+   ],
+   [
+    "data_science",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_60253e47a0": {
+  "choice": "backend",
+  "confidence": 0.97,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "backend",
+    0.97
+   ],
+   [
+    "data_engineering",
+    0.02
+   ],
+   [
+    "compliance",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6075400107": {
+  "choice": "frontend",
+  "confidence": 0.77,
+  "cost": 7.4592e-05,
+  "top": [
+   [
+    "frontend",
+    0.77
+   ],
+   [
+    "software",
+    0.14
+   ],
+   [
+    "engineering",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_61465132d9": {
+  "choice": "finance",
+  "confidence": 0.56,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "finance",
+    0.57
+   ],
+   [
+    "compliance",
+    0.28
+   ],
+   [
+    "operations",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6167c54a97": {
+  "choice": "customer_success",
+  "confidence": 0.7,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "customer_success",
+    0.71
+   ],
+   [
+    "program_management",
+    0.13
+   ],
+   [
+    "data",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_616ece4fea": {
+  "choice": "customer_success",
+  "confidence": 0.91,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "customer_success",
+    0.91
+   ],
+   [
+    "sales",
+    0.07
+   ],
+   [
+    "go_to_market",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6173e2d4eb": {
+  "choice": "sales",
+  "confidence": 0.94,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "sales",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_61b70bb2d0": {
+  "choice": "admin",
+  "confidence": 0.78,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "admin",
+    0.78
+   ],
+   [
+    "operations",
+    0.16
+   ],
+   [
+    "business_operations",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_61deaeb530": {
+  "choice": "backend",
+  "confidence": 0.95,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "backend",
+    0.95
+   ],
+   [
+    "infrastructure",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_621bd04534": {
+  "choice": "engineering_management",
+  "confidence": 0.91,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.91
+   ],
+   [
+    "ai_engineering",
+    0.06
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6247201619": {
+  "choice": "security",
+  "confidence": 0.88,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "security",
+    0.88
+   ],
+   [
+    "mobile",
+    0.11
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_62696cf88f": {
+  "choice": "ml_infrastructure",
+  "confidence": 0.37,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "ml_infrastructure",
+    0.38
+   ],
+   [
+    "backend",
+    0.31
+   ],
+   [
+    "infrastructure",
+    0.31
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6308df1b6b": {
+  "choice": "marketing",
+  "confidence": 1,
+  "cost": 7.9002e-05,
+  "top": [
+   [
+    "marketing",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6364847b87": {
+  "choice": "fullstack",
+  "confidence": 0.81,
+  "cost": 7.623e-05,
+  "top": [
+   [
+    "fullstack",
+    0.81
+   ],
+   [
+    "product_engineer",
+    0.19
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_63660da212": {
+  "choice": "education",
+  "confidence": 0.99,
+  "cost": 7.7406e-05,
+  "top": [
+   [
+    "education",
+    0.99
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_653b1075bc": {
+  "choice": "finance",
+  "confidence": 1,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "finance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6548a6109e": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_655819ce01": {
+  "choice": "data_engineering",
+  "confidence": 1,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "data_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_65b58ea973": {
+  "choice": "design",
+  "confidence": 0.78,
+  "cost": 7.7994e-05,
+  "top": [
+   [
+    "design",
+    0.78
+   ],
+   [
+    "brand_design",
+    0.14
+   ],
+   [
+    "product_design",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_66910ab46c": {
+  "choice": "research",
+  "confidence": 0.71,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "research",
+    0.72
+   ],
+   [
+    "ml_engineering",
+    0.15
+   ],
+   [
+    "ai_engineering",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_66c7bb1b18": {
+  "choice": "business_operations",
+  "confidence": 0.99,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "business_operations",
+    0.99
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_66cbe694e0": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_67098a342e": {
+  "choice": "software",
+  "confidence": 0.56,
+  "cost": 7.455e-05,
+  "top": [
+   [
+    "software",
+    0.57
+   ],
+   [
+    "engineering",
+    0.25
+   ],
+   [
+    "none",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_673fe82fd4": {
+  "choice": "research",
+  "confidence": 0.56,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "research",
+    0.57
+   ],
+   [
+    "ai_training",
+    0.34
+   ],
+   [
+    "ai",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_67c4014614": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_67cfc00ad0": {
+  "choice": "it",
+  "confidence": 0.81,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "it",
+    0.81
+   ],
+   [
+    "technical_support",
+    0.19
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_67de8a4527": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_686f0d4114": {
+  "choice": "marketing",
+  "confidence": 0.77,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "marketing",
+    0.77
+   ],
+   [
+    "go_to_market",
+    0.15
+   ],
+   [
+    "devrel",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_687dd79730": {
+  "choice": "software",
+  "confidence": 0.77,
+  "cost": 7.7784e-05,
+  "top": [
+   [
+    "software",
+    0.77
+   ],
+   [
+    "engineering",
+    0.11
+   ],
+   [
+    "backend",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_68a577c93f": {
+  "choice": "data_analysis",
+  "confidence": 0.98,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "data_analysis",
+    0.98
+   ],
+   [
+    "marketing",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_68d92a970f": {
+  "choice": "ai_engineering",
+  "confidence": 0.84,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.84
+   ],
+   [
+    "product_engineer",
+    0.11
+   ],
+   [
+    "fullstack",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_69e572486f": {
+  "choice": "fullstack",
+  "confidence": 0.64,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "fullstack",
+    0.65
+   ],
+   [
+    "product_engineer",
+    0.34
+   ],
+   [
+    "ai_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6a3a5c435b": {
+  "choice": "ai_training",
+  "confidence": 0.81,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "ai_training",
+    0.81
+   ],
+   [
+    "engineering",
+    0.11
+   ],
+   [
+    "data",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6a9ac9eddd": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6ab1751cfc": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6beba2fe39": {
+  "choice": "customer_success",
+  "confidence": 1,
+  "cost": 7.7616e-05,
+  "top": [
+   [
+    "customer_success",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6c441381b1": {
+  "choice": "infrastructure",
+  "confidence": 0.85,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.85
+   ],
+   [
+    "software",
+    0.12
+   ],
+   [
+    "backend",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6d6b998f04": {
+  "choice": "product_design",
+  "confidence": 0.97,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "product_design",
+    0.97
+   ],
+   [
+    "design",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6de467eaeb": {
+  "choice": "embedded",
+  "confidence": 0.62,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "embedded",
+    0.63
+   ],
+   [
+    "engineering",
+    0.33
+   ],
+   [
+    "hardware",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6e612b8a9c": {
+  "choice": "operations",
+  "confidence": 0.45,
+  "cost": 7.6272e-05,
+  "top": [
+   [
+    "operations",
+    0.46
+   ],
+   [
+    "data_analysis",
+    0.23
+   ],
+   [
+    "business_operations",
+    0.21
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6e7eee8df7": {
+  "choice": "customer_success",
+  "confidence": 0.93,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "customer_success",
+    0.93
+   ],
+   [
+    "technical_support",
+    0.06
+   ],
+   [
+    "support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6ea455db30": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6ef0b90f4f": {
+  "choice": "product_management",
+  "confidence": 0.57,
+  "cost": 7.749e-05,
+  "top": [
+   [
+    "product_management",
+    0.58
+   ],
+   [
+    "product_marketing",
+    0.31
+   ],
+   [
+    "product",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_6f8d756f4f": {
+  "choice": "data_engineering",
+  "confidence": 1,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "data_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_70ced6b371": {
+  "choice": "customer_support",
+  "confidence": 0.96,
+  "cost": 7.9086e-05,
+  "top": [
+   [
+    "customer_support",
+    0.96
+   ],
+   [
+    "support",
+    0.02
+   ],
+   [
+    "customer_success",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_719bf59da5": {
+  "choice": "business_operations",
+  "confidence": 0.79,
+  "cost": 7.4592e-05,
+  "top": [
+   [
+    "business_operations",
+    0.79
+   ],
+   [
+    "finance",
+    0.09
+   ],
+   [
+    "operations",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_71db67eb7a": {
+  "choice": "sales",
+  "confidence": 0.95,
+  "cost": 7.6188e-05,
+  "top": [
+   [
+    "sales",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_720f45f74f": {
+  "choice": "infrastructure",
+  "confidence": 0.99,
+  "cost": 7.749e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.99
+   ],
+   [
+    "recruiting",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7218212f9c": {
+  "choice": "marketing",
+  "confidence": 0.74,
+  "cost": 7.7154e-05,
+  "top": [
+   [
+    "marketing",
+    0.74
+   ],
+   [
+    "fullstack",
+    0.1
+   ],
+   [
+    "program_management",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7270dadd64": {
+  "choice": "people",
+  "confidence": 1,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "people",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_72ed1a1640": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7420b46ada": {
+  "choice": "fullstack",
+  "confidence": 0.44,
+  "cost": 7.7406e-05,
+  "top": [
+   [
+    "fullstack",
+    0.45
+   ],
+   [
+    "marketing",
+    0.39
+   ],
+   [
+    "go_to_market",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7427dc1a04": {
+  "choice": "research",
+  "confidence": 0.56,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "research",
+    0.57
+   ],
+   [
+    "ml_engineering",
+    0.16
+   ],
+   [
+    "ml_infrastructure",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_74d9054996": {
+  "choice": "operations",
+  "confidence": 0.65,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "operations",
+    0.66
+   ],
+   [
+    "support",
+    0.2
+   ],
+   [
+    "technical_support",
+    0.11
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_761e5b8482": {
+  "choice": "product_marketing",
+  "confidence": 0.88,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.88
+   ],
+   [
+    "program_management",
+    0.11
+   ],
+   [
+    "marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_76741dd35b": {
+  "choice": "customer_success",
+  "confidence": 0.49,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "customer_success",
+    0.5
+   ],
+   [
+    "program_management",
+    0.24
+   ],
+   [
+    "product",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_774370d6f8": {
+  "choice": "product_design",
+  "confidence": 0.97,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "product_design",
+    0.97
+   ],
+   [
+    "design",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_77cb1e8362": {
+  "choice": "ai_engineering",
+  "confidence": 1,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "ai_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_77f3479080": {
+  "choice": "admin",
+  "confidence": 0.87,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "admin",
+    0.87
+   ],
+   [
+    "operations",
+    0.08
+   ],
+   [
+    "legal",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_780b78a211": {
+  "choice": "technical_support",
+  "confidence": 0.76,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "technical_support",
+    0.76
+   ],
+   [
+    "sales_engineering",
+    0.19
+   ],
+   [
+    "support",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7814b5d6c1": {
+  "choice": "marketing",
+  "confidence": 0.91,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "marketing",
+    0.91
+   ],
+   [
+    "go_to_market",
+    0.08
+   ],
+   [
+    "devrel",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7842a402cc": {
+  "choice": "it",
+  "confidence": 0.85,
+  "cost": 7.6146e-05,
+  "top": [
+   [
+    "it",
+    0.85
+   ],
+   [
+    "operations",
+    0.05
+   ],
+   [
+    "software",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7847f1c573": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_78d296f496": {
+  "choice": "sales",
+  "confidence": 0.89,
+  "cost": 7.6314e-05,
+  "top": [
+   [
+    "sales",
+    0.89
+   ],
+   [
+    "go_to_market",
+    0.11
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7918656ab7": {
+  "choice": "none",
+  "confidence": 0.62,
+  "cost": 7.707e-05,
+  "top": [
+   [
+    "none",
+    0.63
+   ],
+   [
+    "operations",
+    0.18
+   ],
+   [
+    "finance",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_791d28e88b": {
+  "choice": "mobile",
+  "confidence": 1,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "mobile",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_793d7bf30a": {
+  "choice": "engineering",
+  "confidence": 0.24,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "engineering",
+    0.25
+   ],
+   [
+    "software",
+    0.25
+   ],
+   [
+    "fullstack",
+    0.25
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_79f2ca2f78": {
+  "choice": "sales_engineering",
+  "confidence": 0.89,
+  "cost": 7.7868e-05,
+  "top": [
+   [
+    "sales_engineering",
+    0.89
+   ],
+   [
+    "backend",
+    0.05
+   ],
+   [
+    "customer_success",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_79f8be3217": {
+  "choice": "data_engineering",
+  "confidence": 0.99,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.99
+   ],
+   [
+    "data",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7ab0d8ddbe": {
+  "choice": "software",
+  "confidence": 0.43,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "software",
+    0.44
+   ],
+   [
+    "sales_engineering",
+    0.23
+   ],
+   [
+    "product_engineer",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7ba0229d78": {
+  "choice": "finance",
+  "confidence": 0.98,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "finance",
+    0.98
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "people",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7bba233fa8": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.8414e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7bed12de56": {
+  "choice": "go_to_market",
+  "confidence": 0.41,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.42
+   ],
+   [
+    "sales",
+    0.31
+   ],
+   [
+    "marketing",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7c23c57e95": {
+  "choice": "ai_engineering",
+  "confidence": 1,
+  "cost": 7.4508e-05,
+  "top": [
+   [
+    "ai_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7c38f3e5f9": {
+  "choice": "technical_support",
+  "confidence": 0.97,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "technical_support",
+    0.97
+   ],
+   [
+    "customer_support",
+    0.02
+   ],
+   [
+    "support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7d5beeef30": {
+  "choice": "software",
+  "confidence": 0.39,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "software",
+    0.4
+   ],
+   [
+    "ai_engineering",
+    0.32
+   ],
+   [
+    "infrastructure",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7d6c0f955d": {
+  "choice": "software",
+  "confidence": 0.95,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "software",
+    0.95
+   ],
+   [
+    "engineering",
+    0.05
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7ec6aa15fa": {
+  "choice": "product_management",
+  "confidence": 0.98,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "product_management",
+    0.98
+   ],
+   [
+    "product",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7edb522726": {
+  "choice": "ml_infrastructure",
+  "confidence": 0.41,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "ml_infrastructure",
+    0.42
+   ],
+   [
+    "ai_engineering",
+    0.4
+   ],
+   [
+    "ml_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7fac510287": {
+  "choice": "backend",
+  "confidence": 0.45,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "backend",
+    0.46
+   ],
+   [
+    "software",
+    0.44
+   ],
+   [
+    "engineering",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_7fe88527e1": {
+  "choice": "go_to_market",
+  "confidence": 0.45,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.46
+   ],
+   [
+    "sales",
+    0.37
+   ],
+   [
+    "marketing",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_808f563342": {
+  "choice": "mobile",
+  "confidence": 0.9,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "mobile",
+    0.9
+   ],
+   [
+    "ai_engineering",
+    0.09
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_80c2fe8ce0": {
+  "choice": "ai_engineering",
+  "confidence": 0.56,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.57
+   ],
+   [
+    "ml_engineering",
+    0.2
+   ],
+   [
+    "ml_infrastructure",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_817cee5c20": {
+  "choice": "finance",
+  "confidence": 0.98,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "finance",
+    0.98
+   ],
+   [
+    "business_operations",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_82705b52a0": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8288b68fa9": {
+  "choice": "software",
+  "confidence": 0.35,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "software",
+    0.36
+   ],
+   [
+    "sales_engineering",
+    0.32
+   ],
+   [
+    "product_engineer",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_82e25d0f37": {
+  "choice": "customer_success",
+  "confidence": 0.96,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "customer_success",
+    0.96
+   ],
+   [
+    "program_management",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_83455edd50": {
+  "choice": "research",
+  "confidence": 0.7,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "research",
+    0.71
+   ],
+   [
+    "ai_training",
+    0.09
+   ],
+   [
+    "none",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8516abead4": {
+  "choice": "marketing",
+  "confidence": 0.51,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "marketing",
+    0.52
+   ],
+   [
+    "business_operations",
+    0.34
+   ],
+   [
+    "operations",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_852621bcce": {
+  "choice": "ai_training",
+  "confidence": 0.48,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "ai_training",
+    0.49
+   ],
+   [
+    "program_management",
+    0.2
+   ],
+   [
+    "data",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_858fbfe7b8": {
+  "choice": "recruiting",
+  "confidence": 0.96,
+  "cost": 7.8666e-05,
+  "top": [
+   [
+    "recruiting",
+    0.96
+   ],
+   [
+    "ai_training",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_86507109b4": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.7448e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_86bcdf41d5": {
+  "choice": "frontend",
+  "confidence": 0.99,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "frontend",
+    0.99
+   ],
+   [
+    "fullstack",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_86fa4046d2": {
+  "choice": "marketing",
+  "confidence": 0.58,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "marketing",
+    0.59
+   ],
+   [
+    "go_to_market",
+    0.4
+   ],
+   [
+    "product_marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_880ea47e50": {
+  "choice": "infrastructure",
+  "confidence": 0.93,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.93
+   ],
+   [
+    "software",
+    0.05
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8846e497e3": {
+  "choice": "finance",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "finance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_88b2466f19": {
+  "choice": "design_engineer",
+  "confidence": 0.97,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "design_engineer",
+    0.97
+   ],
+   [
+    "frontend",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_890657f634": {
+  "choice": "software",
+  "confidence": 0.94,
+  "cost": 7.4214e-05,
+  "top": [
+   [
+    "software",
+    0.94
+   ],
+   [
+    "ai",
+    0.02
+   ],
+   [
+    "ai_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8a1c9cb4eb": {
+  "choice": "security",
+  "confidence": 0.93,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "security",
+    0.93
+   ],
+   [
+    "engineering_management",
+    0.04
+   ],
+   [
+    "infrastructure",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8a222cdc8b": {
+  "choice": "engineering_management",
+  "confidence": 0.91,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.91
+   ],
+   [
+    "ai_engineering",
+    0.06
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8a4316f0c7": {
+  "choice": "qa",
+  "confidence": 0.98,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "qa",
+    0.98
+   ],
+   [
+    "engineering_management",
+    0.01
+   ],
+   [
+    "program_management",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8a53d8ea33": {
+  "choice": "marketing",
+  "confidence": 0.32,
+  "cost": 7.8456e-05,
+  "top": [
+   [
+    "marketing",
+    0.33
+   ],
+   [
+    "go_to_market",
+    0.3
+   ],
+   [
+    "product_management",
+    0.28
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8a701e8829": {
+  "choice": "infrastructure",
+  "confidence": 0.77,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.77
+   ],
+   [
+    "backend",
+    0.22
+   ],
+   [
+    "software",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8b1ed99691": {
+  "choice": "engineering_management",
+  "confidence": 0.94,
+  "cost": 7.7196e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.94
+   ],
+   [
+    "software",
+    0.03
+   ],
+   [
+    "ai_engineering",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8cd7a12023": {
+  "choice": "sales_engineering",
+  "confidence": 1,
+  "cost": 7.77e-05,
+  "top": [
+   [
+    "sales_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8cdf3686d8": {
+  "choice": "data_science",
+  "confidence": 0.97,
+  "cost": 7.6188e-05,
+  "top": [
+   [
+    "data_science",
+    0.97
+   ],
+   [
+    "data_analysis",
+    0.02
+   ],
+   [
+    "data",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8dda2e3881": {
+  "choice": "marketing",
+  "confidence": 0.63,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "marketing",
+    0.64
+   ],
+   [
+    "operations",
+    0.16
+   ],
+   [
+    "go_to_market",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8e40115469": {
+  "choice": "business_operations",
+  "confidence": 0.36,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "program_management",
+    0.37
+   ],
+   [
+    "business_operations",
+    0.37
+   ],
+   [
+    "operations",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8efdfb456e": {
+  "choice": "ai_engineering",
+  "confidence": 0.59,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.6
+   ],
+   [
+    "ml_engineering",
+    0.36
+   ],
+   [
+    "ai",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_8fd9ef6c0e": {
+  "choice": "frontend",
+  "confidence": 1,
+  "cost": 7.6944e-05,
+  "top": [
+   [
+    "frontend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_900d0062cc": {
+  "choice": "product_engineer",
+  "confidence": 0.98,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.98
+   ],
+   [
+    "fullstack",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9054abae5e": {
+  "choice": "compliance",
+  "confidence": 0.99,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "compliance",
+    0.99
+   ],
+   [
+    "data_analysis",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_91086b0005": {
+  "choice": "marketing",
+  "confidence": 0.95,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "marketing",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9108c2d11f": {
+  "choice": "recruiting",
+  "confidence": 0.99,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "recruiting",
+    0.99
+   ],
+   [
+    "people",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_91a8d0c336": {
+  "choice": "marketing",
+  "confidence": 0.99,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "marketing",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_91ec0dfaeb": {
+  "choice": "product_management",
+  "confidence": 0.98,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "product_management",
+    0.98
+   ],
+   [
+    "product",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_92c6dbfc6c": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.7364e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9315c8a8ae": {
+  "choice": "ai_engineering",
+  "confidence": 0.41,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.42
+   ],
+   [
+    "ml_engineering",
+    0.39
+   ],
+   [
+    "ai",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9355e1c275": {
+  "choice": "ai_engineering",
+  "confidence": 0.28,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.29
+   ],
+   [
+    "product_engineer",
+    0.18
+   ],
+   [
+    "ml_engineering",
+    0.18
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9448822031": {
+  "choice": "product_marketing",
+  "confidence": 0.9,
+  "cost": 7.6398e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.9
+   ],
+   [
+    "go_to_market",
+    0.08
+   ],
+   [
+    "sales",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_953d842975": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_95b9088bf2": {
+  "choice": "engineering",
+  "confidence": 0.41,
+  "cost": 7.8288e-05,
+  "top": [
+   [
+    "engineering",
+    0.42
+   ],
+   [
+    "software",
+    0.3
+   ],
+   [
+    "backend",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9609260c44": {
+  "choice": "software",
+  "confidence": 0.95,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "software",
+    0.95
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "backend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_964e790759": {
+  "choice": "software",
+  "confidence": 0.38,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "software",
+    0.39
+   ],
+   [
+    "engineering",
+    0.27
+   ],
+   [
+    "ai_engineering",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9656a033bd": {
+  "choice": "software",
+  "confidence": 0.42,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "software",
+    0.43
+   ],
+   [
+    "engineering",
+    0.25
+   ],
+   [
+    "ai_engineering",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_97c8b02aaa": {
+  "choice": "customer_support",
+  "confidence": 0.81,
+  "cost": 7.6986e-05,
+  "top": [
+   [
+    "customer_support",
+    0.81
+   ],
+   [
+    "technical_support",
+    0.11
+   ],
+   [
+    "support",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_97cdfa7b96": {
+  "choice": "sales",
+  "confidence": 0.88,
+  "cost": 7.6272e-05,
+  "top": [
+   [
+    "sales",
+    0.88
+   ],
+   [
+    "go_to_market",
+    0.08
+   ],
+   [
+    "sales_engineering",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_984972a5c9": {
+  "choice": "sales",
+  "confidence": 0.9,
+  "cost": 7.8036e-05,
+  "top": [
+   [
+    "sales",
+    0.9
+   ],
+   [
+    "marketing",
+    0.06
+   ],
+   [
+    "go_to_market",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_986ed3e7cd": {
+  "choice": "business_operations",
+  "confidence": 0.87,
+  "cost": 7.4592e-05,
+  "top": [
+   [
+    "business_operations",
+    0.87
+   ],
+   [
+    "data_analysis",
+    0.08
+   ],
+   [
+    "operations",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_98f3e1b44b": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_99ab807e70": {
+  "choice": "finance",
+  "confidence": 0.99,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "finance",
+    0.99
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_99f43b5cc5": {
+  "choice": "people",
+  "confidence": 0.98,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "people",
+    0.98
+   ],
+   [
+    "operations",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9a5877d3c5": {
+  "choice": "customer_success",
+  "confidence": 0.95,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "customer_success",
+    0.95
+   ],
+   [
+    "support",
+    0.02
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9a973ccfd5": {
+  "choice": "go_to_market",
+  "confidence": 0.74,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.74
+   ],
+   [
+    "marketing",
+    0.19
+   ],
+   [
+    "product_marketing",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9adbc33726": {
+  "choice": "sales_engineering",
+  "confidence": 0.37,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "sales_engineering",
+    0.38
+   ],
+   [
+    "software",
+    0.3
+   ],
+   [
+    "product_engineer",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9b08154e40": {
+  "choice": "compliance",
+  "confidence": 0.58,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "compliance",
+    0.59
+   ],
+   [
+    "legal",
+    0.41
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9b2c2423fc": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9b7490bd20": {
+  "choice": "go_to_market",
+  "confidence": 0.87,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.87
+   ],
+   [
+    "sales",
+    0.09
+   ],
+   [
+    "sales_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9c21b7b5db": {
+  "choice": "ai_engineering",
+  "confidence": 0.54,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.55
+   ],
+   [
+    "infrastructure",
+    0.23
+   ],
+   [
+    "ml_infrastructure",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9c96afe767": {
+  "choice": "customer_success",
+  "confidence": 1,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "customer_success",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9cd117d817": {
+  "choice": "infrastructure",
+  "confidence": 0.94,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.94
+   ],
+   [
+    "software",
+    0.05
+   ],
+   [
+    "backend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9cdc659028": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9d5127f539": {
+  "choice": "none",
+  "confidence": 0.87,
+  "cost": 7.791e-05,
+  "top": [
+   [
+    "none",
+    0.87
+   ],
+   [
+    "marketing",
+    0.05
+   ],
+   [
+    "fullstack",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9da59ed173": {
+  "choice": "marketing",
+  "confidence": 0.99,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "marketing",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9dfb77c5fc": {
+  "choice": "program_management",
+  "confidence": 0.28,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "program_management",
+    0.29
+   ],
+   [
+    "operations",
+    0.21
+   ],
+   [
+    "customer_success",
+    0.2
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9ea8b434a2": {
+  "choice": "operations",
+  "confidence": 0.98,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "operations",
+    0.98
+   ],
+   [
+    "business_operations",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_9feead8117": {
+  "choice": "mobile",
+  "confidence": 0.79,
+  "cost": 7.6146e-05,
+  "top": [
+   [
+    "mobile",
+    0.79
+   ],
+   [
+    "ai_engineering",
+    0.16
+   ],
+   [
+    "ai",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a09565c2f6": {
+  "choice": "mobile",
+  "confidence": 1,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "mobile",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a101ef351b": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.4466e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a20b97bb90": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a23d31c42d": {
+  "choice": "go_to_market",
+  "confidence": 0.77,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.77
+   ],
+   [
+    "sales_engineering",
+    0.17
+   ],
+   [
+    "product_engineer",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a303df7a03": {
+  "choice": "product_design",
+  "confidence": 0.99,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "product_design",
+    0.99
+   ],
+   [
+    "design",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a309c2c156": {
+  "choice": "compliance",
+  "confidence": 0.91,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "compliance",
+    0.91
+   ],
+   [
+    "legal",
+    0.05
+   ],
+   [
+    "operations",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a33f48882c": {
+  "choice": "compliance",
+  "confidence": 0.7,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "compliance",
+    0.71
+   ],
+   [
+    "operations",
+    0.14
+   ],
+   [
+    "program_management",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a3f14b52ac": {
+  "choice": "operations",
+  "confidence": 0.98,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "operations",
+    0.98
+   ],
+   [
+    "business_operations",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a3f420f015": {
+  "choice": "customer_success",
+  "confidence": 0.99,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "customer_success",
+    0.99
+   ],
+   [
+    "customer_support",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a4a29f14e9": {
+  "choice": "customer_success",
+  "confidence": 0.91,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "customer_success",
+    0.91
+   ],
+   [
+    "sales",
+    0.07
+   ],
+   [
+    "go_to_market",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a4b3c1dbb7": {
+  "choice": "recruiting",
+  "confidence": 0.4,
+  "cost": 7.8288e-05,
+  "top": [
+   [
+    "recruiting",
+    0.41
+   ],
+   [
+    "software",
+    0.3
+   ],
+   [
+    "fullstack",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a4e1b2adc9": {
+  "choice": "ai_engineering",
+  "confidence": 0.89,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.89
+   ],
+   [
+    "ml_engineering",
+    0.08
+   ],
+   [
+    "ai",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a5274f0d7b": {
+  "choice": "sales",
+  "confidence": 0.96,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "sales",
+    0.96
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a537c83da7": {
+  "choice": "finance",
+  "confidence": 0.99,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "finance",
+    0.99
+   ],
+   [
+    "operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a5764dec40": {
+  "choice": "go_to_market",
+  "confidence": 0.96,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.96
+   ],
+   [
+    "marketing",
+    0.02
+   ],
+   [
+    "sales",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a617acf7d9": {
+  "choice": "compliance",
+  "confidence": 0.99,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "compliance",
+    0.99
+   ],
+   [
+    "security",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a636c601e9": {
+  "choice": "none",
+  "confidence": 0.82,
+  "cost": 7.6734e-05,
+  "top": [
+   [
+    "none",
+    0.82
+   ],
+   [
+    "recruiting",
+    0.11
+   ],
+   [
+    "software",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a6402e5e74": {
+  "choice": "marketing",
+  "confidence": 0.78,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "marketing",
+    0.78
+   ],
+   [
+    "go_to_market",
+    0.12
+   ],
+   [
+    "sales",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a65920719d": {
+  "choice": "business_operations",
+  "confidence": 0.95,
+  "cost": 7.6608e-05,
+  "top": [
+   [
+    "business_operations",
+    0.95
+   ],
+   [
+    "operations",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a66dd7acb0": {
+  "choice": "business_operations",
+  "confidence": 1,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "business_operations",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a688469399": {
+  "choice": "sales",
+  "confidence": 0.85,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "sales",
+    0.85
+   ],
+   [
+    "go_to_market",
+    0.14
+   ],
+   [
+    "business_operations",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a68d3b62e6": {
+  "choice": "ai_training",
+  "confidence": 0.95,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "ai_training",
+    0.95
+   ],
+   [
+    "hardware",
+    0.04
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a6c3f4f884": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.4844e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a702cdad4f": {
+  "choice": "security",
+  "confidence": 0.96,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "security",
+    0.96
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "hardware",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a742af0ff9": {
+  "choice": "design",
+  "confidence": 0.74,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "design",
+    0.74
+   ],
+   [
+    "none",
+    0.25
+   ],
+   [
+    "product_design",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a794d96b60": {
+  "choice": "backend",
+  "confidence": 0.65,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "backend",
+    0.66
+   ],
+   [
+    "infrastructure",
+    0.33
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a8f8842c55": {
+  "choice": "research",
+  "confidence": 0.81,
+  "cost": 7.4928e-05,
+  "top": [
+   [
+    "research",
+    0.81
+   ],
+   [
+    "none",
+    0.09
+   ],
+   [
+    "ai",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a9204542a7": {
+  "choice": "program_management",
+  "confidence": 1,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "program_management",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_a989640499": {
+  "choice": "design",
+  "confidence": 0.72,
+  "cost": 7.665e-05,
+  "top": [
+   [
+    "design",
+    0.73
+   ],
+   [
+    "brand_design",
+    0.24
+   ],
+   [
+    "none",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_aa25696103": {
+  "choice": "design",
+  "confidence": 0.71,
+  "cost": 7.8498e-05,
+  "top": [
+   [
+    "design",
+    0.72
+   ],
+   [
+    "product_design",
+    0.12
+   ],
+   [
+    "brand_design",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ab3979c587": {
+  "choice": "education",
+  "confidence": 0.42,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "education",
+    0.43
+   ],
+   [
+    "operations",
+    0.37
+   ],
+   [
+    "people",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ab6f39a51b": {
+  "choice": "ai_engineering",
+  "confidence": 0.98,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.98
+   ],
+   [
+    "ai",
+    0.01
+   ],
+   [
+    "ml_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_abb57f0741": {
+  "choice": "product_management",
+  "confidence": 0.93,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "product_management",
+    0.93
+   ],
+   [
+    "product",
+    0.06
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_acb5f75e7a": {
+  "choice": "research",
+  "confidence": 0.47,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "research",
+    0.48
+   ],
+   [
+    "ai_engineering",
+    0.34
+   ],
+   [
+    "ml_engineering",
+    0.11
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_accc6a0f56": {
+  "choice": "backend",
+  "confidence": 0.97,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "backend",
+    0.97
+   ],
+   [
+    "compliance",
+    0.02
+   ],
+   [
+    "engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_acdbc5372c": {
+  "choice": "sales",
+  "confidence": 0.79,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "sales",
+    0.79
+   ],
+   [
+    "go_to_market",
+    0.16
+   ],
+   [
+    "customer_success",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_adc9c6c53a": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_adef1583e4": {
+  "choice": "ai_engineering",
+  "confidence": 0.99,
+  "cost": 7.6398e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.99
+   ],
+   [
+    "ai",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_adf4f711ae": {
+  "choice": "ai_engineering",
+  "confidence": 0.46,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.47
+   ],
+   [
+    "ai_training",
+    0.4
+   ],
+   [
+    "ml_engineering",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ae16613740": {
+  "choice": "marketing",
+  "confidence": 0.68,
+  "cost": 7.4298e-05,
+  "top": [
+   [
+    "marketing",
+    0.69
+   ],
+   [
+    "go_to_market",
+    0.3
+   ],
+   [
+    "product_marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_aec0db69b0": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.6398e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_aec8db2c0e": {
+  "choice": "compliance",
+  "confidence": 0.94,
+  "cost": 7.686e-05,
+  "top": [
+   [
+    "compliance",
+    0.94
+   ],
+   [
+    "legal",
+    0.04
+   ],
+   [
+    "operations",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_aecb362e58": {
+  "choice": "customer_success",
+  "confidence": 0.98,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "customer_success",
+    0.98
+   ],
+   [
+    "program_management",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_af633214ef": {
+  "choice": "business_operations",
+  "confidence": 0.86,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "business_operations",
+    0.86
+   ],
+   [
+    "program_management",
+    0.11
+   ],
+   [
+    "operations",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b0eecc24fc": {
+  "choice": "research",
+  "confidence": 0.47,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "research",
+    0.48
+   ],
+   [
+    "data_science",
+    0.44
+   ],
+   [
+    "ai",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b1a89afc7e": {
+  "choice": "mobile",
+  "confidence": 0.98,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "mobile",
+    0.98
+   ],
+   [
+    "frontend",
+    0.01
+   ],
+   [
+    "security",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b222a09830": {
+  "choice": "engineering_management",
+  "confidence": 0.86,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.86
+   ],
+   [
+    "ai_engineering",
+    0.1
+   ],
+   [
+    "ai",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b26e6b4ecc": {
+  "choice": "sales",
+  "confidence": 0.93,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "sales",
+    0.93
+   ],
+   [
+    "go_to_market",
+    0.07
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b2f41a87c3": {
+  "choice": "fullstack",
+  "confidence": 0.8,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "fullstack",
+    0.8
+   ],
+   [
+    "product_engineer",
+    0.12
+   ],
+   [
+    "software",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b2f65a8d03": {
+  "choice": "legal",
+  "confidence": 1,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "legal",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b3152203e6": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b31c334bdb": {
+  "choice": "finance",
+  "confidence": 0.8,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "finance",
+    0.8
+   ],
+   [
+    "ai_training",
+    0.16
+   ],
+   [
+    "operations",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b34e986b47": {
+  "choice": "marketing",
+  "confidence": 0.71,
+  "cost": 7.4592e-05,
+  "top": [
+   [
+    "marketing",
+    0.72
+   ],
+   [
+    "product_marketing",
+    0.22
+   ],
+   [
+    "go_to_market",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b430332399": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b470bf9292": {
+  "choice": "devrel",
+  "confidence": 1,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "devrel",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b5711accbb": {
+  "choice": "healthcare",
+  "confidence": 1,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "healthcare",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b625b2fff0": {
+  "choice": "frontend",
+  "confidence": 0.4,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "frontend",
+    0.41
+   ],
+   [
+    "infrastructure",
+    0.35
+   ],
+   [
+    "devrel",
+    0.2
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b666276da7": {
+  "choice": "marketing",
+  "confidence": 0.69,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "marketing",
+    0.7
+   ],
+   [
+    "none",
+    0.14
+   ],
+   [
+    "program_management",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b68856957c": {
+  "choice": "ai_engineering",
+  "confidence": 0.84,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.84
+   ],
+   [
+    "backend",
+    0.15
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b6be40c891": {
+  "choice": "software",
+  "confidence": 0.36,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "software",
+    0.37
+   ],
+   [
+    "ai_engineering",
+    0.29
+   ],
+   [
+    "ml_infrastructure",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b71447e2d4": {
+  "choice": "fullstack",
+  "confidence": 0.71,
+  "cost": 7.6272e-05,
+  "top": [
+   [
+    "fullstack",
+    0.72
+   ],
+   [
+    "devrel",
+    0.11
+   ],
+   [
+    "software",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b85e63df9d": {
+  "choice": "ai_engineering",
+  "confidence": 0.75,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.75
+   ],
+   [
+    "software",
+    0.08
+   ],
+   [
+    "ml_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b8ca18d1d5": {
+  "choice": "sales",
+  "confidence": 0.63,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "sales",
+    0.64
+   ],
+   [
+    "go_to_market",
+    0.34
+   ],
+   [
+    "sales_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_b98de9a423": {
+  "choice": "security",
+  "confidence": 1,
+  "cost": 7.4508e-05,
+  "top": [
+   [
+    "security",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ba2bc45c02": {
+  "choice": "sales",
+  "confidence": 0.89,
+  "cost": 7.6146e-05,
+  "top": [
+   [
+    "sales",
+    0.89
+   ],
+   [
+    "go_to_market",
+    0.11
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_babee2c08d": {
+  "choice": "infrastructure",
+  "confidence": 0.78,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.78
+   ],
+   [
+    "backend",
+    0.22
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bb50565f6c": {
+  "choice": "it",
+  "confidence": 0.84,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "it",
+    0.84
+   ],
+   [
+    "technical_support",
+    0.16
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bb8c419855": {
+  "choice": "brand_design",
+  "confidence": 0.95,
+  "cost": 7.581e-05,
+  "top": [
+   [
+    "brand_design",
+    0.95
+   ],
+   [
+    "design",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bcaac3f7fd": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.6188e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bdcee64847": {
+  "choice": "ai_engineering",
+  "confidence": 0.55,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.56
+   ],
+   [
+    "backend",
+    0.22
+   ],
+   [
+    "infrastructure",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bde5352409": {
+  "choice": "infrastructure",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_be9e357840": {
+  "choice": "infrastructure",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bee35a9803": {
+  "choice": "compliance",
+  "confidence": 0.85,
+  "cost": 7.5096e-05,
+  "top": [
+   [
+    "compliance",
+    0.85
+   ],
+   [
+    "operations",
+    0.12
+   ],
+   [
+    "qa",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bf05aeee76": {
+  "choice": "legal",
+  "confidence": 0.53,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "legal",
+    0.54
+   ],
+   [
+    "operations",
+    0.39
+   ],
+   [
+    "business_operations",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_bf8e9d6317": {
+  "choice": "admin",
+  "confidence": 0.95,
+  "cost": 7.4382e-05,
+  "top": [
+   [
+    "admin",
+    0.95
+   ],
+   [
+    "customer_support",
+    0.03
+   ],
+   [
+    "operations",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c020057ebf": {
+  "choice": "ai_training",
+  "confidence": 0.61,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "ai_training",
+    0.62
+   ],
+   [
+    "ai_engineering",
+    0.2
+   ],
+   [
+    "design_engineer",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c035bd43e0": {
+  "choice": "backend",
+  "confidence": 0.51,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "backend",
+    0.52
+   ],
+   [
+    "infrastructure",
+    0.35
+   ],
+   [
+    "software",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c1931cb24f": {
+  "choice": "operations",
+  "confidence": 0.65,
+  "cost": 7.7028e-05,
+  "top": [
+   [
+    "operations",
+    0.66
+   ],
+   [
+    "people",
+    0.23
+   ],
+   [
+    "business_operations",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c3108df945": {
+  "choice": "technical_support",
+  "confidence": 0.85,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "technical_support",
+    0.85
+   ],
+   [
+    "infrastructure",
+    0.1
+   ],
+   [
+    "support",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c334fc159f": {
+  "choice": "infrastructure",
+  "confidence": 0.99,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.99
+   ],
+   [
+    "software",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c39d6842ba": {
+  "choice": "sales",
+  "confidence": 0.86,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "sales",
+    0.86
+   ],
+   [
+    "go_to_market",
+    0.11
+   ],
+   [
+    "infrastructure",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c3c6044abc": {
+  "choice": "recruiting",
+  "confidence": 0.94,
+  "cost": 7.686e-05,
+  "top": [
+   [
+    "recruiting",
+    0.94
+   ],
+   [
+    "customer_support",
+    0.05
+   ],
+   [
+    "admin",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c44a264c51": {
+  "choice": "technical_support",
+  "confidence": 0.97,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "technical_support",
+    0.97
+   ],
+   [
+    "support",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c490e038de": {
+  "choice": "marketing",
+  "confidence": 0.95,
+  "cost": 7.9086e-05,
+  "top": [
+   [
+    "marketing",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c51042a667": {
+  "choice": "admin",
+  "confidence": 0.2,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "admin",
+    0.21
+   ],
+   [
+    "operations",
+    0.2
+   ],
+   [
+    "program_management",
+    0.19
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c532350bab": {
+  "choice": "software",
+  "confidence": 0.92,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "software",
+    0.92
+   ],
+   [
+    "engineering",
+    0.04
+   ],
+   [
+    "data",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c579f890e3": {
+  "choice": "operations",
+  "confidence": 0.84,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "operations",
+    0.84
+   ],
+   [
+    "business_operations",
+    0.08
+   ],
+   [
+    "program_management",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c58531d5e9": {
+  "choice": "data_engineering",
+  "confidence": 0.76,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.76
+   ],
+   [
+    "infrastructure",
+    0.11
+   ],
+   [
+    "data_analysis",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c625537b6a": {
+  "choice": "infrastructure",
+  "confidence": 0.99,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.99
+   ],
+   [
+    "software",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c691e7f295": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c71909c5a8": {
+  "choice": "ai_engineering",
+  "confidence": 0.6,
+  "cost": 7.959e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.61
+   ],
+   [
+    "ai",
+    0.28
+   ],
+   [
+    "ml_engineering",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c807b29896": {
+  "choice": "sales",
+  "confidence": 0.6,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "sales",
+    0.61
+   ],
+   [
+    "customer_success",
+    0.32
+   ],
+   [
+    "go_to_market",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c807d7df62": {
+  "choice": "product_management",
+  "confidence": 0.96,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "product_management",
+    0.96
+   ],
+   [
+    "product",
+    0.03
+   ],
+   [
+    "ai",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c8b88b1b89": {
+  "choice": "marketing",
+  "confidence": 0.98,
+  "cost": 7.8036e-05,
+  "top": [
+   [
+    "marketing",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c9318646bc": {
+  "choice": "engineering",
+  "confidence": 0.44,
+  "cost": 7.6734e-05,
+  "top": [
+   [
+    "engineering",
+    0.45
+   ],
+   [
+    "hardware",
+    0.29
+   ],
+   [
+    "design_engineer",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c95e186dc9": {
+  "choice": "product_engineer",
+  "confidence": 0.84,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.84
+   ],
+   [
+    "fullstack",
+    0.12
+   ],
+   [
+    "sales_engineering",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c967bd524b": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c976d06823": {
+  "choice": "backend",
+  "confidence": 0.84,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "backend",
+    0.84
+   ],
+   [
+    "ml_infrastructure",
+    0.05
+   ],
+   [
+    "ai_engineering",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_c9effb313c": {
+  "choice": "sales",
+  "confidence": 0.89,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "sales",
+    0.89
+   ],
+   [
+    "customer_success",
+    0.07
+   ],
+   [
+    "go_to_market",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ca30e0cdc4": {
+  "choice": "software",
+  "confidence": 0.51,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "software",
+    0.52
+   ],
+   [
+    "compliance",
+    0.24
+   ],
+   [
+    "engineering",
+    0.19
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ca527c78f5": {
+  "choice": "sales",
+  "confidence": 0.97,
+  "cost": 7.77e-05,
+  "top": [
+   [
+    "sales",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_caec8a14bc": {
+  "choice": "software",
+  "confidence": 0.36,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "software",
+    0.37
+   ],
+   [
+    "sales_engineering",
+    0.33
+   ],
+   [
+    "product_engineer",
+    0.11
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cbc701b73d": {
+  "choice": "infrastructure",
+  "confidence": 0.88,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.88
+   ],
+   [
+    "program_management",
+    0.08
+   ],
+   [
+    "engineering_management",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc0b313b11": {
+  "choice": "software",
+  "confidence": 0.2,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "software",
+    0.21
+   ],
+   [
+    "engineering",
+    0.19
+   ],
+   [
+    "ml_infrastructure",
+    0.15
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc3f319678": {
+  "choice": "data_engineering",
+  "confidence": 0.99,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.99
+   ],
+   [
+    "data",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc4c637c88": {
+  "choice": "customer_success",
+  "confidence": 0.77,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "customer_success",
+    0.77
+   ],
+   [
+    "sales_engineering",
+    0.09
+   ],
+   [
+    "program_management",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc57ff2e1d": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.791e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc60e39633": {
+  "choice": "mobile",
+  "confidence": 1,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "mobile",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cc62200942": {
+  "choice": "finance",
+  "confidence": 0.57,
+  "cost": 7.7196e-05,
+  "top": [
+   [
+    "finance",
+    0.58
+   ],
+   [
+    "compliance",
+    0.25
+   ],
+   [
+    "operations",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ccac216b1a": {
+  "choice": "sales",
+  "confidence": 0.6,
+  "cost": 7.6062e-05,
+  "top": [
+   [
+    "sales",
+    0.61
+   ],
+   [
+    "go_to_market",
+    0.22
+   ],
+   [
+    "customer_success",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ccc93197da": {
+  "choice": "customer_success",
+  "confidence": 0.44,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "customer_success",
+    0.45
+   ],
+   [
+    "program_management",
+    0.28
+   ],
+   [
+    "operations",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ccfffc001e": {
+  "choice": "software",
+  "confidence": 0.99,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "software",
+    0.99
+   ],
+   [
+    "engineering",
+    0.01
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cda0b87004": {
+  "choice": "compliance",
+  "confidence": 0.75,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "compliance",
+    0.75
+   ],
+   [
+    "program_management",
+    0.11
+   ],
+   [
+    "admin",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cdd5e5c902": {
+  "choice": "marketing",
+  "confidence": 0.97,
+  "cost": 7.5642e-05,
+  "top": [
+   [
+    "marketing",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cf50bd5308": {
+  "choice": "go_to_market",
+  "confidence": 0.71,
+  "cost": 7.4214e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.72
+   ],
+   [
+    "marketing",
+    0.24
+   ],
+   [
+    "sales",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cfbcd74731": {
+  "choice": "marketing",
+  "confidence": 0.93,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "marketing",
+    0.93
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "devrel",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_cfd1d82305": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d12dbbb19b": {
+  "choice": "fullstack",
+  "confidence": 0.27,
+  "cost": 7.7868e-05,
+  "top": [
+   [
+    "fullstack",
+    0.28
+   ],
+   [
+    "ai_engineering",
+    0.25
+   ],
+   [
+    "none",
+    0.17
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d1330a067c": {
+  "choice": "sales",
+  "confidence": 0.9,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "sales",
+    0.9
+   ],
+   [
+    "go_to_market",
+    0.09
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d1e84164e7": {
+  "choice": "business_operations",
+  "confidence": 0.34,
+  "cost": 7.7994e-05,
+  "top": [
+   [
+    "business_operations",
+    0.35
+   ],
+   [
+    "operations",
+    0.24
+   ],
+   [
+    "it",
+    0.19
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d21031e5c7": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.8666e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d22838753a": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d24ac54be6": {
+  "choice": "software",
+  "confidence": 0.43,
+  "cost": 7.7742e-05,
+  "top": [
+   [
+    "software",
+    0.44
+   ],
+   [
+    "fullstack",
+    0.33
+   ],
+   [
+    "engineering",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d29597cd82": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3200fe756": {
+  "choice": "product_design",
+  "confidence": 0.86,
+  "cost": 7.6356e-05,
+  "top": [
+   [
+    "product_design",
+    0.86
+   ],
+   [
+    "design",
+    0.13
+   ],
+   [
+    "recruiting",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3a1b9d788": {
+  "choice": "none",
+  "confidence": 0.66,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "none",
+    0.67
+   ],
+   [
+    "engineering",
+    0.2
+   ],
+   [
+    "design",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3b330485d": {
+  "choice": "software",
+  "confidence": 0.97,
+  "cost": 7.7154e-05,
+  "top": [
+   [
+    "software",
+    0.97
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "customer_support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3b8a38b09": {
+  "choice": "ux_research",
+  "confidence": 1,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "ux_research",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3d6ed003d": {
+  "choice": "infrastructure",
+  "confidence": 0.97,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.97
+   ],
+   [
+    "ml_infrastructure",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d3fe39fcc9": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5138e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d458dff10e": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.8078e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d57f88e44f": {
+  "choice": "recruiting",
+  "confidence": 1,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "recruiting",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d59ec6a865": {
+  "choice": "frontend",
+  "confidence": 0.99,
+  "cost": 7.665e-05,
+  "top": [
+   [
+    "frontend",
+    0.99
+   ],
+   [
+    "engineering_management",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d5f6fdc5e9": {
+  "choice": "sales",
+  "confidence": 0.9,
+  "cost": 7.7994e-05,
+  "top": [
+   [
+    "sales",
+    0.9
+   ],
+   [
+    "go_to_market",
+    0.09
+   ],
+   [
+    "sales_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d6547615a5": {
+  "choice": "security",
+  "confidence": 0.48,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "security",
+    0.49
+   ],
+   [
+    "compliance",
+    0.33
+   ],
+   [
+    "operations",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d6b5a7f901": {
+  "choice": "go_to_market",
+  "confidence": 0.41,
+  "cost": 7.728e-05,
+  "top": [
+   [
+    "go_to_market",
+    0.42
+   ],
+   [
+    "marketing",
+    0.31
+   ],
+   [
+    "sales",
+    0.27
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d6c08eb282": {
+  "choice": "sales",
+  "confidence": 0.89,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "sales",
+    0.89
+   ],
+   [
+    "sales_engineering",
+    0.09
+   ],
+   [
+    "go_to_market",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d7db3926a3": {
+  "choice": "customer_support",
+  "confidence": 0.98,
+  "cost": 7.6398e-05,
+  "top": [
+   [
+    "customer_support",
+    0.98
+   ],
+   [
+    "support",
+    0.01
+   ],
+   [
+    "none",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d8ee72ca58": {
+  "choice": "sales_engineering",
+  "confidence": 0.8,
+  "cost": 7.7574e-05,
+  "top": [
+   [
+    "sales_engineering",
+    0.8
+   ],
+   [
+    "engineering_management",
+    0.17
+   ],
+   [
+    "security",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d97c909560": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.5306e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d98a6dc053": {
+  "choice": "marketing",
+  "confidence": 0.69,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "marketing",
+    0.7
+   ],
+   [
+    "go_to_market",
+    0.14
+   ],
+   [
+    "product_marketing",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_d9d5c319f7": {
+  "choice": "product_design",
+  "confidence": 0.96,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "product_design",
+    0.96
+   ],
+   [
+    "design",
+    0.04
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_da40487bc4": {
+  "choice": "customer_success",
+  "confidence": 0.87,
+  "cost": 7.6104e-05,
+  "top": [
+   [
+    "customer_success",
+    0.87
+   ],
+   [
+    "technical_support",
+    0.09
+   ],
+   [
+    "support",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_db64d84639": {
+  "choice": "product_management",
+  "confidence": 0.99,
+  "cost": 7.644e-05,
+  "top": [
+   [
+    "product_management",
+    0.99
+   ],
+   [
+    "product",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dbb873f5cc": {
+  "choice": "ai_training",
+  "confidence": 0.99,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "ai_training",
+    0.99
+   ],
+   [
+    "legal",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dbdb34c54e": {
+  "choice": "healthcare",
+  "confidence": 0.48,
+  "cost": 7.8414e-05,
+  "top": [
+   [
+    "healthcare",
+    0.49
+   ],
+   [
+    "customer_support",
+    0.35
+   ],
+   [
+    "operations",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dbdb5db04f": {
+  "choice": "product_engineer",
+  "confidence": 0.98,
+  "cost": 7.7028e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.98
+   ],
+   [
+    "software",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dca2d51f96": {
+  "choice": "security",
+  "confidence": 0.83,
+  "cost": 7.623e-05,
+  "top": [
+   [
+    "security",
+    0.83
+   ],
+   [
+    "compliance",
+    0.17
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dcb235b629": {
+  "choice": "sales",
+  "confidence": 0.48,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "sales",
+    0.49
+   ],
+   [
+    "go_to_market",
+    0.28
+   ],
+   [
+    "operations",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dcfcdb213c": {
+  "choice": "frontend",
+  "confidence": 1,
+  "cost": 7.602e-05,
+  "top": [
+   [
+    "frontend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_de51c23fbb": {
+  "choice": "product_engineer",
+  "confidence": 0.86,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "product_engineer",
+    0.86
+   ],
+   [
+    "backend",
+    0.13
+   ],
+   [
+    "ai_engineering",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_de8e2afda0": {
+  "choice": "design_engineer",
+  "confidence": 0.86,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "design_engineer",
+    0.86
+   ],
+   [
+    "frontend",
+    0.13
+   ],
+   [
+    "marketing",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_df0eba789f": {
+  "choice": "infrastructure",
+  "confidence": 0.45,
+  "cost": 7.623e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.46
+   ],
+   [
+    "software",
+    0.33
+   ],
+   [
+    "backend",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_df33580bec": {
+  "choice": "ai_training",
+  "confidence": 1,
+  "cost": 7.7112e-05,
+  "top": [
+   [
+    "ai_training",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_dfeed28867": {
+  "choice": "customer_success",
+  "confidence": 0.76,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "customer_success",
+    0.76
+   ],
+   [
+    "program_management",
+    0.13
+   ],
+   [
+    "sales_engineering",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e02322202c": {
+  "choice": "infrastructure",
+  "confidence": 0.87,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.87
+   ],
+   [
+    "software",
+    0.1
+   ],
+   [
+    "backend",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e068d697e6": {
+  "choice": "software",
+  "confidence": 0.96,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "software",
+    0.96
+   ],
+   [
+    "engineering",
+    0.04
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e1769b1bb6": {
+  "choice": "ai_engineering",
+  "confidence": 0.57,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.58
+   ],
+   [
+    "ml_engineering",
+    0.31
+   ],
+   [
+    "ai",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e261313425": {
+  "choice": "sales",
+  "confidence": 0.82,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "sales",
+    0.82
+   ],
+   [
+    "go_to_market",
+    0.06
+   ],
+   [
+    "program_management",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e2a5534796": {
+  "choice": "customer_success",
+  "confidence": 0.65,
+  "cost": 7.4634e-05,
+  "top": [
+   [
+    "customer_success",
+    0.66
+   ],
+   [
+    "program_management",
+    0.34
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e2c7f20097": {
+  "choice": "product_management",
+  "confidence": 0.89,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "product_management",
+    0.89
+   ],
+   [
+    "product",
+    0.06
+   ],
+   [
+    "operations",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e32c4ef54b": {
+  "choice": "legal",
+  "confidence": 1,
+  "cost": 7.5516e-05,
+  "top": [
+   [
+    "legal",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e50643ea03": {
+  "choice": "data_engineering",
+  "confidence": 1,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "data_engineering",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e55c0839e8": {
+  "choice": "brand_design",
+  "confidence": 0.99,
+  "cost": 7.6482e-05,
+  "top": [
+   [
+    "brand_design",
+    0.99
+   ],
+   [
+    "design",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e571a4187e": {
+  "choice": "legal",
+  "confidence": 1,
+  "cost": 7.602e-05,
+  "top": [
+   [
+    "legal",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e5eb993038": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e60aedb08d": {
+  "choice": "data_engineering",
+  "confidence": 0.45,
+  "cost": 7.4718e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.46
+   ],
+   [
+    "ml_infrastructure",
+    0.35
+   ],
+   [
+    "infrastructure",
+    0.12
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e64759b65e": {
+  "choice": "sales",
+  "confidence": 0.97,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "sales",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e6f9f86a92": {
+  "choice": "customer_success",
+  "confidence": 0.65,
+  "cost": 7.4886e-05,
+  "top": [
+   [
+    "customer_success",
+    0.66
+   ],
+   [
+    "sales_engineering",
+    0.29
+   ],
+   [
+    "compliance",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e6fe578ba6": {
+  "choice": "ai_engineering",
+  "confidence": 0.64,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.65
+   ],
+   [
+    "ml_engineering",
+    0.2
+   ],
+   [
+    "ai",
+    0.13
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e760a84c6b": {
+  "choice": "brand_design",
+  "confidence": 0.7,
+  "cost": 7.7532e-05,
+  "top": [
+   [
+    "brand_design",
+    0.71
+   ],
+   [
+    "marketing",
+    0.22
+   ],
+   [
+    "design",
+    0.03
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e7ff1ba326": {
+  "choice": "product_marketing",
+  "confidence": 0.94,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "sales",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e926fea423": {
+  "choice": "ml_engineering",
+  "confidence": 0.62,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "ml_engineering",
+    0.63
+   ],
+   [
+    "ai",
+    0.21
+   ],
+   [
+    "ai_engineering",
+    0.16
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_e93324f32b": {
+  "choice": "product_management",
+  "confidence": 0.95,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "product_management",
+    0.95
+   ],
+   [
+    "product",
+    0.03
+   ],
+   [
+    "go_to_market",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ea2a58d4f1": {
+  "choice": "sales",
+  "confidence": 0.9,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "sales",
+    0.9
+   ],
+   [
+    "go_to_market",
+    0.1
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_eae5f00f38": {
+  "choice": "program_management",
+  "confidence": 0.8,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "program_management",
+    0.8
+   ],
+   [
+    "qa",
+    0.11
+   ],
+   [
+    "ai_training",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_eb0882345c": {
+  "choice": "compliance",
+  "confidence": 0.99,
+  "cost": 7.5978e-05,
+  "top": [
+   [
+    "compliance",
+    0.99
+   ],
+   [
+    "security",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_eb3457b851": {
+  "choice": "customer_success",
+  "confidence": 0.72,
+  "cost": 7.5768e-05,
+  "top": [
+   [
+    "customer_success",
+    0.73
+   ],
+   [
+    "program_management",
+    0.14
+   ],
+   [
+    "sales_engineering",
+    0.09
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_eb4bee007d": {
+  "choice": "ai_training",
+  "confidence": 0.9,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "ai_training",
+    0.9
+   ],
+   [
+    "none",
+    0.05
+   ],
+   [
+    "technical_writing",
+    0.04
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_edd15a47cd": {
+  "choice": "marketing",
+  "confidence": 0.93,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "marketing",
+    0.93
+   ],
+   [
+    "go_to_market",
+    0.07
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_edee811e5b": {
+  "choice": "sales",
+  "confidence": 0.68,
+  "cost": 7.476e-05,
+  "top": [
+   [
+    "sales",
+    0.69
+   ],
+   [
+    "go_to_market",
+    0.12
+   ],
+   [
+    "operations",
+    0.08
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ee3b6dc0e3": {
+  "choice": "engineering_management",
+  "confidence": 0.97,
+  "cost": 7.959e-05,
+  "top": [
+   [
+    "engineering_management",
+    0.97
+   ],
+   [
+    "ai_engineering",
+    0.02
+   ],
+   [
+    "fullstack",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_eec7e0c83a": {
+  "choice": "product_management",
+  "confidence": 0.98,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "product_management",
+    0.98
+   ],
+   [
+    "product",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ef2874dc13": {
+  "choice": "backend",
+  "confidence": 1,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "backend",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_efcfaae732": {
+  "choice": "data_engineering",
+  "confidence": 0.98,
+  "cost": 7.6524e-05,
+  "top": [
+   [
+    "data_engineering",
+    0.98
+   ],
+   [
+    "data",
+    0.01
+   ],
+   [
+    "data_analysis",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f080f54847": {
+  "choice": "security",
+  "confidence": 0.81,
+  "cost": 7.5726e-05,
+  "top": [
+   [
+    "security",
+    0.81
+   ],
+   [
+    "infrastructure",
+    0.17
+   ],
+   [
+    "engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f123ad1b55": {
+  "choice": "infrastructure",
+  "confidence": 0.98,
+  "cost": 7.5432e-05,
+  "top": [
+   [
+    "infrastructure",
+    0.98
+   ],
+   [
+    "software",
+    0.01
+   ],
+   [
+    "backend",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f17e1c88e6": {
+  "choice": "product_marketing",
+  "confidence": 0.94,
+  "cost": 7.5222e-05,
+  "top": [
+   [
+    "product_marketing",
+    0.94
+   ],
+   [
+    "go_to_market",
+    0.06
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f19f03ef91": {
+  "choice": "legal",
+  "confidence": 0.99,
+  "cost": 7.5012e-05,
+  "top": [
+   [
+    "legal",
+    0.99
+   ],
+   [
+    "compliance",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f230635d1b": {
+  "choice": "infrastructure",
+  "confidence": 1,
+  "cost": 7.7322e-05,
+  "top": [
+   [
+    "infrastructure",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f29166a1df": {
+  "choice": "sales",
+  "confidence": 0.98,
+  "cost": 7.6608e-05,
+  "top": [
+   [
+    "sales",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f2b7e37c79": {
+  "choice": "finance",
+  "confidence": 0.86,
+  "cost": 7.5852e-05,
+  "top": [
+   [
+    "finance",
+    0.86
+   ],
+   [
+    "operations",
+    0.14
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f3c3d42635": {
+  "choice": "software",
+  "confidence": 0.4,
+  "cost": 7.5264e-05,
+  "top": [
+   [
+    "software",
+    0.41
+   ],
+   [
+    "engineering",
+    0.34
+   ],
+   [
+    "backend",
+    0.22
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f4401c937d": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5558e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f559da8c33": {
+  "choice": "marketing",
+  "confidence": 0.99,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "marketing",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f5ce870c0a": {
+  "choice": "compliance",
+  "confidence": 1,
+  "cost": 7.5936e-05,
+  "top": [
+   [
+    "compliance",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f69d6b4b62": {
+  "choice": "marketing",
+  "confidence": 0.91,
+  "cost": 7.5474e-05,
+  "top": [
+   [
+    "marketing",
+    0.91
+   ],
+   [
+    "go_to_market",
+    0.04
+   ],
+   [
+    "operations",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f7233709b1": {
+  "choice": "marketing",
+  "confidence": 0.64,
+  "cost": 7.5684e-05,
+  "top": [
+   [
+    "marketing",
+    0.65
+   ],
+   [
+    "go_to_market",
+    0.26
+   ],
+   [
+    "product_marketing",
+    0.07
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f76efb4a4d": {
+  "choice": "operations",
+  "confidence": 0.95,
+  "cost": 7.56e-05,
+  "top": [
+   [
+    "operations",
+    0.95
+   ],
+   [
+    "finance",
+    0.03
+   ],
+   [
+    "business_operations",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_f931bbf889": {
+  "choice": "research",
+  "confidence": 0.56,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "research",
+    0.57
+   ],
+   [
+    "ml_engineering",
+    0.22
+   ],
+   [
+    "ai_engineering",
+    0.14
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fa401b71fb": {
+  "choice": "people",
+  "confidence": 1,
+  "cost": 7.6566e-05,
+  "top": [
+   [
+    "people",
+    1
+   ],
+   [
+    "engineering",
+    0
+   ],
+   [
+    "ai",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fa61f89d2f": {
+  "choice": "compliance",
+  "confidence": 0.96,
+  "cost": 7.539e-05,
+  "top": [
+   [
+    "compliance",
+    0.96
+   ],
+   [
+    "operations",
+    0.03
+   ],
+   [
+    "security",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_faf3850192": {
+  "choice": "sales",
+  "confidence": 0.97,
+  "cost": 7.665e-05,
+  "top": [
+   [
+    "sales",
+    0.97
+   ],
+   [
+    "go_to_market",
+    0.03
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fb68b091ce": {
+  "choice": "business_operations",
+  "confidence": 0.96,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "business_operations",
+    0.96
+   ],
+   [
+    "operations",
+    0.02
+   ],
+   [
+    "go_to_market",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fbbe47bf3c": {
+  "choice": "sales",
+  "confidence": 0.99,
+  "cost": 7.602e-05,
+  "top": [
+   [
+    "sales",
+    0.99
+   ],
+   [
+    "go_to_market",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fbfd49232c": {
+  "choice": "finance",
+  "confidence": 0.99,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "finance",
+    0.99
+   ],
+   [
+    "business_operations",
+    0.01
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fc16f68d55": {
+  "choice": "marketing",
+  "confidence": 0.95,
+  "cost": 7.8204e-05,
+  "top": [
+   [
+    "marketing",
+    0.95
+   ],
+   [
+    "go_to_market",
+    0.05
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fd00bebc9c": {
+  "choice": "ai_engineering",
+  "confidence": 0.89,
+  "cost": 7.4802e-05,
+  "top": [
+   [
+    "ai_engineering",
+    0.89
+   ],
+   [
+    "software",
+    0.04
+   ],
+   [
+    "ml_engineering",
+    0.02
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fd153de64a": {
+  "choice": "technical_support",
+  "confidence": 0.65,
+  "cost": 7.7952e-05,
+  "top": [
+   [
+    "technical_support",
+    0.66
+   ],
+   [
+    "embedded",
+    0.19
+   ],
+   [
+    "support",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fd162fc9e6": {
+  "choice": "sales",
+  "confidence": 0.68,
+  "cost": 7.5348e-05,
+  "top": [
+   [
+    "sales",
+    0.69
+   ],
+   [
+    "business_operations",
+    0.13
+   ],
+   [
+    "legal",
+    0.1
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fdbae3bb77": {
+  "choice": "legal",
+  "confidence": 0.95,
+  "cost": 7.5894e-05,
+  "top": [
+   [
+    "legal",
+    0.95
+   ],
+   [
+    "engineering",
+    0.02
+   ],
+   [
+    "software",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fdc5e4c504": {
+  "choice": "software",
+  "confidence": 0.24,
+  "cost": 7.4676e-05,
+  "top": [
+   [
+    "operations",
+    0.25
+   ],
+   [
+    "software",
+    0.25
+   ],
+   [
+    "engineering",
+    0.19
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fe28419662": {
+  "choice": "marketing",
+  "confidence": 0.87,
+  "cost": 7.5054e-05,
+  "top": [
+   [
+    "marketing",
+    0.87
+   ],
+   [
+    "go_to_market",
+    0.13
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fe3f9272a1": {
+  "choice": "marketing",
+  "confidence": 0.83,
+  "cost": 7.9296e-05,
+  "top": [
+   [
+    "marketing",
+    0.83
+   ],
+   [
+    "go_to_market",
+    0.1
+   ],
+   [
+    "business_operations",
+    0.06
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fe6eedbc14": {
+  "choice": "data_analysis",
+  "confidence": 0.81,
+  "cost": 7.7028e-05,
+  "top": [
+   [
+    "data_analysis",
+    0.81
+   ],
+   [
+    "data_engineering",
+    0.14
+   ],
+   [
+    "data",
+    0.05
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_fedc084198": {
+  "choice": "marketing",
+  "confidence": 0.98,
+  "cost": 7.518e-05,
+  "top": [
+   [
+    "marketing",
+    0.98
+   ],
+   [
+    "go_to_market",
+    0.02
+   ],
+   [
+    "engineering",
+    0
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ff3fecc180": {
+  "choice": "customer_success",
+  "confidence": 0.52,
+  "cost": 7.875e-05,
+  "top": [
+   [
+    "customer_success",
+    0.53
+   ],
+   [
+    "program_management",
+    0.46
+   ],
+   [
+    "support",
+    0.01
+   ]
+  ]
+ },
+ "typesafe/jev-1.14-20261014|1|j_ff7dafbb36": {
+  "choice": "fullstack",
+  "confidence": 0.75,
+  "cost": 7.497e-05,
+  "top": [
+   [
+    "fullstack",
+    0.75
+   ],
+   [
+    "product_engineer",
+    0.22
+   ],
+   [
+    "backend",
+    0.02
+   ]
+  ]
+ }
+}
