@@ -105,12 +105,18 @@ exactly while one of its listings is live.
 job has it without a re-fetch: level words in the title first, else the level
 the source states (`normalize::seniority`). About 40% of jobs name a level.
 
-**Roles.** `role.rs` is the vocabulary for what a job is: a two-level
-hierarchy of functions (`engineering` > `backend`, ...) and modifiers that cut
-across it (`forward_deployed`, `founding`). A job stores its most specific
-role; filters name any level and `Role::within` resolves them, like regions.
-`JobRole` records method, confidence and evidence (rule 6). Jobs don't carry
-a role yet: it is classified at ingest and stored, which first needs the
+**Roles.** `role.rs` is the vocabulary for what a job does: families
+(`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,
+`operations`, ...) with roles in them (`backend`, `ai_engineering`,
+`product_management`, ...), and modifiers that cut across them
+(`forward_deployed`, `founding`). Each role has one home family and may also
+sit in others (`data_engineering` is in data and engineering); `ai` sits
+inside engineering. Filters name any id or modifier and `Role::within`
+resolves them, like regions. Role is function only: seniority, domain (game,
+web3), company stage and employment type are other fields. A job stores its
+most specific id, a family alone when the evidence says no more, or nothing:
+there is no "other" role. `JobRole` records method, confidence, evidence and
+the vocabulary version (rule 6). Jobs don't carry a role yet: it waits on the
 merged job stored as JSON (see the triggers below).
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
@@ -136,6 +142,18 @@ not code.
    the hand-listed hash in `rebuild_canonical`. Read the triggers below first.
 5. The `Job` output type, then regenerate `schema/v1` (an optional field is an
    additive change within v1).
+
+**A change to the role vocabulary**
+Ids are stable: once data uses one it is never renamed, reused or given a new
+meaning; labels and definitions may change, and clients must accept ids they
+don't know. Bump `role::VERSION` and note the change here.
+- Add: a `Role` variant, its `info()`, its place in `Role::ALL`.
+- Split: new narrower roles with the old id in their `also_in`, so filters on
+  the old id still find them.
+- Move: change `home` and `also_in`; the id stays.
+- Retire: set `replaced_by`; stop emitting it.
+`tests/role.rs` checks the invariants (every id listed, homes are families,
+no cycles, no name shared with a modifier).
 
 **A new rule**
 A function with no IO next to the rules it belongs with, called from the store.
