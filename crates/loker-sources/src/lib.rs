@@ -460,19 +460,51 @@ fn url(default_base: &str, path: &str) -> String {
 // ---------- helpers shared by adapters ----------
 
 async fn get_json(client: &HttpClient, url: &str) -> anyhow::Result<Value> {
-    use anyhow::Context;
-    Ok(client
-        .get(url)
-        .send()
-        .await?
-        .error_for_status()
-        .with_context(|| format!("GET {url}"))?
-        .json()
-        .await?)
+    get_json_within(client, url, None).await
 }
 
-/// Decode the HTML entities job feeds actually use. `&amp;` goes last so
-/// `&amp;lt;` stays `&lt;`.
+/// `get_json` with its own time limit instead of the client's 30 s, for a
+/// source that is known to be slow.
+///
+/// Transient network failures (timeout, refused or dropped connection, a body
+/// cut off mid-way) are retried twice, after 2 s and 4 s. HTTP errors (a 404
+/// for a missing board, a 5xx) are not: they are answers, not accidents.
+async fn get_json_within(
+    client: &HttpClient,
+    url: &str,
+    timeout: Option<std::time::Duration>,
+) -> anyhow::Result<Value> {
+    use anyhow::Context;
+    const ATTEMPTS: u32 = 3;
+    let mut attempt = 1;
+    loop {
+        let mut req = client.get(url);
+        if let Some(t) = timeout {
+            req = req.timeout(t);
+        }
+        let result = async {
+            let resp = req.send().await?.error_for_status()?;
+            resp.json::<Value>().await
+        }
+        .await;
+        match result {
+            Ok(v) => return Ok(v),
+            Err(e) if attempt < ATTEMPTS && transient(&e) => {
+                tracing::warn!(%url, attempt, "retrying after a network error: {e}");
+                tokio::time::sleep(std::time::Duration::from_secs(2u64.pow(attempt))).await;
+                attempt += 1;
+            }
+            Err(e) => return Err(e).with_context(|| format!("GET {url}")),
+        }
+    }
+}
+
+/// A network failure worth another try: a timeout, a refused or dropped
+/// connection, a body cut off mid-way. Never an HTTP status.
+fn transient(e: &reqwest::Error) -> bool {
+    !e.is_status() && (e.is_timeout() || e.is_connect() || e.is_request() || e.is_body())
+}
+
 /// HTML → Markdown; `None` for empty input.
 fn html_to_md(html: Option<&str>) -> anyhow::Result<Option<String>> {
     match html.map(str::trim).filter(|h| !h.is_empty()) {

@@ -24,7 +24,8 @@ pub fn tidy(job: &mut NewJob) {
     job.description_md = non_empty(job.description_md.take());
 }
 
-/// Decode the HTML entities job feeds put in plain-text fields.
+/// Decode the HTML entities job feeds put in plain-text fields. `&amp;` goes
+/// last so `&amp;lt;` stays `&lt;`.
 pub fn decode_entities(s: &str) -> String {
     s.replace("&lt;", "<")
         .replace("&gt;", ">")
