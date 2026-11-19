@@ -140,6 +140,9 @@
         },
         {
           "$ref": "#/$defs/CompactHit"
+        },
+        {
+          "$ref": "#/$defs/TitleHit"
         }
       ],
       "description": "A job in a search result: full, or compact."
@@ -330,6 +333,51 @@
         }
       ]
     },
+    "TitleHit": {
+      "description": "The least needed to scan a list: open the picks with `get_jobs`.",
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "partial": {
+          "description": "Matches only some of the query words.",
+          "type": "boolean"
+        },
+        "seniority": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Seniority"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "verdict": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/VerdictKind"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The viewer's verdict (reason omitted); absent when no country was given."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "company"
+      ],
+      "type": "object"
+    },
     "TzStrength": {
       "enum": [
         "required",
@@ -396,8 +444,14 @@
       "minimum": 0,
       "type": "integer"
     },
+    "fullMatches": {
+      "description": "Of `total`, the jobs with every query word (the rest are `partial`).\n0 means no job has all the words. Equals `total` when `q` is empty.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
     "jobs": {
-      "description": "Each job as a `SearchHit`, or a `CompactHit` with `view: compact`.",
+      "description": "Each job as a `SearchHit`, a `CompactHit` (`view: compact`) or a\n`TitleHit` (`view: titles`).",
       "items": {
         "$ref": "#/$defs/Hit"
       },
@@ -411,11 +465,19 @@
         "integer",
         "null"
       ]
+    },
+    "total": {
+      "description": "Jobs matching every filter, across all pages.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
     }
   },
   "required": [
     "contractVersion",
     "count",
+    "total",
+    "fullMatches",
     "jobs"
   ],
   "title": "SearchResult",

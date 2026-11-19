@@ -82,9 +82,10 @@ pub struct SearchParams {
     /// level (most of them) are dropped, so leave this out to see everything.
     #[serde(default)]
     pub seniority: Vec<Seniority>,
-    /// `full` (default) or `compact`: only what's needed to pick jobs (id,
-    /// title, company, link, scope, level, pay text, date, verdict), about a
-    /// third of the size. Get full details for the picks with `get_jobs`.
+    /// `full` (default); `compact`: what's needed to pick jobs (id, title,
+    /// company, link, scope, level, pay text, date, verdict), about a third of
+    /// the size; `titles`: id, title, company, level and verdict only, for
+    /// scanning a long list. Get full details for the picks with `get_jobs`.
     #[serde(default)]
     pub view: View,
 }
@@ -104,6 +105,9 @@ pub enum View {
     #[default]
     Full,
     Compact,
+    /// Id, title, company, level and verdict: about 70 characters a job, for
+    /// scanning many.
+    Titles,
 }
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -111,7 +115,13 @@ pub enum View {
 pub struct SearchResult {
     pub contract_version: u32,
     pub count: usize,
-    /// Each job as a `SearchHit`, or a `CompactHit` with `view: compact`.
+    /// Jobs matching every filter, across all pages.
+    pub total: u32,
+    /// Of `total`, the jobs with every query word (the rest are `partial`).
+    /// 0 means no job has all the words. Equals `total` when `q` is empty.
+    pub full_matches: u32,
+    /// Each job as a `SearchHit`, a `CompactHit` (`view: compact`) or a
+    /// `TitleHit` (`view: titles`).
     pub jobs: Vec<Hit>,
     /// Pass as `offset` to get the next page; absent when this page is the last.
     pub next_offset: Option<u32>,
@@ -135,6 +145,22 @@ pub struct SearchHit {
 pub enum Hit {
     Full(Box<SearchHit>),
     Compact(CompactHit),
+    Titles(TitleHit),
+}
+
+/// The least needed to scan a list: open the picks with `get_jobs`.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct TitleHit {
+    pub id: String,
+    pub title: String,
+    pub company: String,
+    pub seniority: Option<Seniority>,
+    /// The viewer's verdict (reason omitted); absent when no country was given.
+    pub verdict: Option<VerdictKind>,
+    /// Matches only some of the query words.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub partial: bool,
 }
 
 /// Just enough of a job to choose it.
@@ -164,6 +190,7 @@ impl Hit {
         match self {
             Hit::Full(h) => &h.job.id,
             Hit::Compact(c) => &c.id,
+            Hit::Titles(t) => &t.id,
         }
     }
 
@@ -184,6 +211,14 @@ impl Hit {
                 url: job.url,
                 posted_at: job.posted_at,
                 eligible,
+                partial,
+            }),
+            View::Titles => Hit::Titles(TitleHit {
+                id: job.id,
+                title: job.title,
+                company: job.company,
+                seniority: job.seniority,
+                verdict: eligible.map(|v| v.kind),
                 partial,
             }),
         }
@@ -225,14 +260,14 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         None => VerdictKind::Unknown,
     };
 
-    // Page through the store until the page fills: the verdict can drop jobs
-    // the SQL predicate keeps (time zones, on-site), so one fixed-size read
-    // could come back short even when matches exist further down.
+    // Read every match: the verdict and level filters run here, not in SQL,
+    // so this is the only way to fill a page and to count `total`. A few
+    // thousand rows take milliseconds.
     const BATCH: u32 = 200;
     let offset = p.offset.unwrap_or(0);
     let country = viewer.as_ref().map(|v| v.country.as_str());
-    let (mut to_skip, mut read, mut jobs, mut more) = (offset, 0u32, Vec::new(), false);
-    'pages: loop {
+    let (mut read, mut total, mut full, mut jobs) = (0u32, 0u32, 0u32, Vec::new());
+    loop {
         let rows = store
             .search_with(&p.q, p.any_word, country, BATCH, read)
             .await?;
@@ -246,15 +281,11 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             if !p.seniority.is_empty() && !job.seniority.is_some_and(|s| p.seniority.contains(&s)) {
                 continue;
             }
-            if to_skip > 0 {
-                to_skip -= 1;
-                continue;
+            total += 1;
+            full += u32::from(!partial);
+            if total > offset && jobs.len() < limit as usize {
+                jobs.push(Hit::new(job, eligible, partial, p.view));
             }
-            if jobs.len() as u32 == limit {
-                more = true;
-                break 'pages;
-            }
-            jobs.push(Hit::new(job, eligible, partial, p.view));
         }
         if n < BATCH {
             break;
@@ -263,7 +294,9 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
     Ok(SearchResult {
         contract_version: CONTRACT_VERSION,
         count: jobs.len(),
-        next_offset: more.then_some(offset + limit),
+        total,
+        full_matches: full,
+        next_offset: (total > offset + limit).then_some(offset + limit),
         jobs,
     })
 }

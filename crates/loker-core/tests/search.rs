@@ -5,7 +5,7 @@ mod common;
 use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
-use loker_core::api::{Hit, SearchParams, search_jobs};
+use loker_core::api::{Hit, SearchParams, View, search_jobs};
 use loker_core::model::{Scope, Seniority};
 
 fn params(limit: u32, offset: Option<u32>) -> SearchParams {
@@ -113,6 +113,7 @@ async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
             Hit::Full(h) if h.partial => format!("~{}", h.job.title),
             Hit::Full(h) => h.job.title,
             Hit::Compact(c) => c.title,
+            Hit::Titles(t) => t.title,
         })
         .collect()
 }
@@ -160,6 +161,18 @@ async fn ranking() {
         ranked(&s, "pipelines kotlin").await,
         ["~Data Engineering Lead"]
     );
+
+    // `total` counts every match across pages; `fullMatches` those with
+    // every word.
+    let p = SearchParams {
+        q: "rust team".into(),
+        limit: Some(1),
+        view: View::Titles,
+        ..Default::default()
+    };
+    let r = search_jobs(&s, p).await.unwrap();
+    assert_eq!((r.count, r.total, r.full_matches), (1, 2, 1));
+    assert!(r.next_offset.is_some());
 
     // A level filter keeps only jobs at those levels.
     for (level, want) in [(Seniority::Lead, 1), (Seniority::Senior, 0)] {

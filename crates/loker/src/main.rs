@@ -73,6 +73,9 @@ enum Command {
         /// Return only id, title, company, link, scope, level, pay, date and verdict.
         #[arg(long)]
         compact: bool,
+        /// Return only id, title, company, level and verdict.
+        #[arg(long, conflicts_with = "compact")]
+        titles: bool,
         /// Print the contract JSON (identical to MCP structured content).
         #[arg(long)]
         json: bool,
@@ -234,6 +237,7 @@ async fn main() -> anyhow::Result<()> {
             min_verdict,
             seniority,
             compact,
+            titles,
             any_word,
             json,
         } => {
@@ -253,7 +257,13 @@ async fn main() -> anyhow::Result<()> {
                         .iter()
                         .map(|s| serde_json::from_value(serde_json::Value::String(s.clone())))
                         .collect::<Result<_, _>>()?,
-                    view: if compact { View::Compact } else { View::Full },
+                    view: if titles {
+                        View::Titles
+                    } else if compact {
+                        View::Compact
+                    } else {
+                        View::Full
+                    },
                     any_word,
                 })
                 .await?;
@@ -339,11 +349,31 @@ fn print_search(r: &SearchResult) {
                     c.url
                 );
             }
+            Hit::Titles(t) => {
+                let verdict = t
+                    .verdict
+                    .map(|v| format!(" · {}", format!("{v:?}").to_lowercase()))
+                    .unwrap_or_default();
+                println!(
+                    "{}  {} — {}{}{verdict}{}",
+                    t.id,
+                    t.title,
+                    t.company,
+                    level(t.seniority),
+                    partial_mark(t.partial)
+                );
+            }
         }
     }
     match r.next_offset {
-        Some(n) => eprintln!("{} result(s); more with --offset {n}", r.count),
-        None => eprintln!("{} result(s)", r.count),
+        Some(n) => eprintln!(
+            "{} of {} result(s), {} with every word; more with --offset {n}",
+            r.count, r.total, r.full_matches
+        ),
+        None => eprintln!(
+            "{} of {} result(s), {} with every word",
+            r.count, r.total, r.full_matches
+        ),
     }
 }
 

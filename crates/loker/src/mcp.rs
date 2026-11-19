@@ -41,8 +41,12 @@ impl LokerMcp {
     #[tool(
         description = "Search stored jobs. Give `country` (and ideally `tz`) to get an eligibility verdict \
                        per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped. \
-                       `minVerdict: \"yes\"` keeps only jobs the viewer can apply to. To browse cheaply, use \
-                       `view: \"compact\"` (about a third of the size), then `get_jobs` for full details of the picks. \
+                       `minVerdict: \"yes\"` keeps only jobs the viewer can apply to; `seniority: [\"junior\"]` keeps \
+                       only jobs at those levels. To browse cheaply, use `view: \"compact\"` (about a third of the \
+                       size) or `view: \"titles\"` (about 70 characters a job), then `get_jobs` for the picks. \
+                       `total` counts matches across all pages and `fullMatches` those with every query word, so \
+                       `fullMatches: 0` means no job has all the words. To see everything the viewer can apply to, \
+                       search with an empty `q`, `minVerdict` and `view: \"titles\"` (100 per page). \
                        Jobs with every query word come first, then jobs with only some, marked `partial: true`; \
                        if every result is partial, nothing matched all the words. Words also match other forms \
                        (engineer, engineering). Keep `q` to the role and skills (\"backend golang\"): where the viewer \
@@ -105,7 +109,9 @@ impl LokerMcp {
     instructions = "Job search over loker's local store. Pass the viewer's `country` and `tz` to \
                     `search_jobs` so each job carries an eligibility verdict with a reason; \
                     `unknown` means the posting doesn't say, not that the viewer is excluded. \
-                    Browse with `view: \"compact\"` and get full details for the picks with `get_jobs`."
+                    Browse with `view: \"compact\"` or `\"titles\"` and get full details for the picks with \
+                    `get_jobs`. To check whether anything fits, list every job the viewer can apply to \
+                    (empty `q`, `minVerdict`, `view: \"titles\"`) rather than trying many queries."
 )]
 impl ServerHandler for LokerMcp {}
 

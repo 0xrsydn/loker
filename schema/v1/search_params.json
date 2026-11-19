@@ -34,11 +34,20 @@
     },
     "View": {
       "description": "How much of each job a search returns.",
-      "enum": [
-        "full",
-        "compact"
-      ],
-      "type": "string"
+      "oneOf": [
+        {
+          "enum": [
+            "full",
+            "compact"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "titles",
+          "description": "Id, title, company, level and verdict: about 70 characters a job, for\nscanning many.",
+          "type": "string"
+        }
+      ]
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -109,7 +118,7 @@
     "view": {
       "$ref": "#/$defs/View",
       "default": "full",
-      "description": "`full` (default) or `compact`: only what's needed to pick jobs (id,\ntitle, company, link, scope, level, pay text, date, verdict), about a\nthird of the size. Get full details for the picks with `get_jobs`."
+      "description": "`full` (default); `compact`: what's needed to pick jobs (id, title,\ncompany, link, scope, level, pay text, date, verdict), about a third of\nthe size; `titles`: id, title, company, level and verdict only, for\nscanning a long list. Get full details for the picks with `get_jobs`."
     }
   },
   "title": "SearchParams",
