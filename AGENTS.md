@@ -35,6 +35,7 @@ crates/loker/            App facade, CLI (main.rs), MCP (mcp.rs), tests/e2e.rs
 schema/v1/               JSON Schemas generated from the api types
 contrib/systemd/         unattended ingest service + timer
 eval/search/             manual search-ranking eval (Python, LLM-judged); not in CI
+eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); not in CI
 ```
 
 ## Build and check

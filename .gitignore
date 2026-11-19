@@ -5,3 +5,4 @@
 *.db-wal
 /.direnv
 /.loker-dev
+__pycache__/

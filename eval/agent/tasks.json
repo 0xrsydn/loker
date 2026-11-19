@@ -1,0 +1,32 @@
+[
+ {
+  "id": "backend-id",
+  "country": "ID", "tz": 7,
+  "role": "Backend / server-side software engineering roles (full-stack with a backend lean also fits).",
+  "prompt": "I'm a backend software engineer living in Indonesia (UTC+7). Find remote jobs I can actually apply to from here. Give me the 5 best matches: company, title, link, and in one line why I'm eligible. If fewer than 5 qualify, say so instead of padding. Use the tools; don't guess."
+ },
+ {
+  "id": "data-de",
+  "country": "DE", "tz": 1,
+  "role": "Data engineering roles: pipelines, ETL, warehouses, data platforms.",
+  "prompt": "I'm a data engineer based in Berlin, Germany. Find 5 remote data engineering jobs I can apply to from Germany: company, title, link, and in one line why I'm eligible. If fewer than 5 qualify, say so instead of padding. Use the tools; don't guess."
+ },
+ {
+  "id": "ml-in",
+  "country": "IN", "tz": 5.5,
+  "role": "Machine learning engineering roles: building, training or deploying ML models (applied AI/LLM engineering fits too).",
+  "prompt": "I'm a machine learning engineer in Bangalore, India (UTC+5:30). Which remote ML jobs can I apply to from India? Give me the 5 best: company, title, link, and in one line why I'm eligible. If fewer than 5 qualify, say so instead of padding. Use the tools; don't guess."
+ },
+ {
+  "id": "devops-ph",
+  "country": "PH", "tz": 8,
+  "role": "DevOps, SRE, platform or infrastructure engineering roles.",
+  "prompt": "I'm a DevOps / SRE engineer in Manila, Philippines (UTC+8). Find remote infrastructure jobs I'm eligible for from the Philippines. Up to 5: company, title, link, and in one line why I'm eligible. If fewer than 5 qualify, say so instead of padding. Use the tools; don't guess."
+ },
+ {
+  "id": "designer-gb",
+  "country": "GB", "tz": 0,
+  "role": "Product / UX / UI design roles.",
+  "prompt": "I'm a product designer in London. Find me 5 remote design jobs I can apply to from the UK: company, title, link, and in one line why I'm eligible. If fewer than 5 qualify, say so instead of padding. Use the tools; don't guess."
+ }
+]
