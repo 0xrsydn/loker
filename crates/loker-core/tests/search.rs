@@ -99,3 +99,33 @@ async fn offset_pages_cover_every_result_once() {
     }
     assert_eq!((seen.len(), pages), (25, 3));
 }
+
+async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
+    let p = SearchParams {
+        q: q.into(),
+        ..Default::default()
+    };
+    let r = search_jobs(s, p).await.unwrap();
+    r.jobs.iter().map(|h| h.id().to_string()).collect()
+}
+
+/// The ranking rules eval/search measured, one case each.
+#[tokio::test]
+async fn ranking() {
+    let s = store("ranking").await;
+    let mut lead = job(
+        "jobicy",
+        "lead",
+        "Co",
+        "Data Engineering Lead",
+        Scope::Worldwide,
+        0.8,
+    );
+    lead.description_md = Some("Own the pipelines.".into());
+    ingest(&s, "jobicy", &[lead]).await;
+    let lead_id = ranked(&s, "data").await;
+
+    // Stemming: "engineer" and "engineers" find "Engineering".
+    assert_eq!(ranked(&s, "engineer").await, lead_id);
+    assert_eq!(ranked(&s, "engineers").await, lead_id);
+}
