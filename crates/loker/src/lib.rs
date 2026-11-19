@@ -10,8 +10,8 @@ pub mod mcp;
 use std::path::{Path, PathBuf};
 
 use loker_core::api::{
-    self, Error, GetJobsParams, GetJobsResult, IngestAllReport, IngestParams, SearchParams,
-    SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
+    self, Error, GetJobsParams, GetJobsResult, IngestAllReport, IngestParams, RolesResult,
+    SearchParams, SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
 };
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
@@ -41,6 +41,10 @@ impl App {
 
     pub async fn get_jobs(&self, p: GetJobsParams) -> api::Result<GetJobsResult> {
         api::get_jobs(&self.store, p).await
+    }
+
+    pub fn list_roles(&self) -> RolesResult {
+        api::list_roles()
     }
 
     pub async fn stats(&self) -> api::Result<Stats> {
@@ -125,6 +129,7 @@ pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
         ("search_result.json", schema!(SearchResult)),
         ("get_jobs_params.json", schema!(GetJobsParams)),
         ("get_jobs_result.json", schema!(GetJobsResult)),
+        ("list_roles_result.json", schema!(RolesResult)),
         ("stats.json", schema!(Stats)),
         ("sources_eval.json", schema!(SourcesEval)),
         ("ingest_params.json", schema!(IngestParams)),

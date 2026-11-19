@@ -124,6 +124,14 @@ most specific id, a family alone when the evidence says no more, or nothing:
 there is no "other" role. `JobRole` records method, confidence, evidence and
 the vocabulary version (rule 6).
 
+`classify.rs` decides a job's role from the merged job: phrases in the title
+first (multi-word role nouns before single keywords, a matched phrase used
+up), then the source's category when the title names no specific role, then
+a role named early in the description. It is stored with the job
+(`canonical_jobs.role`) along with `classify::STAMP`; when the rules or the
+vocabulary change, `Store::open` classifies stored jobs again, without a
+re-fetch. `eval/role` measures it against labelled jobs.
+
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
 

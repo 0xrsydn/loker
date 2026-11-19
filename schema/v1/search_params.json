@@ -8,6 +8,91 @@
       ],
       "type": "string"
     },
+    "Modifier": {
+      "description": "How a job is done, whatever its role.",
+      "oneOf": [
+        {
+          "const": "forward_deployed",
+          "description": "Works with customers, on site or embedded, building for their problems.",
+          "type": "string"
+        },
+        {
+          "const": "founding",
+          "description": "Among a company's first hires.",
+          "type": "string"
+        }
+      ]
+    },
+    "Role": {
+      "description": "A family (`engineering`) or a role in one (`backend`). The list is open:\nit grows, and clients must accept ids they don't know.",
+      "enum": [
+        "engineering",
+        "ai",
+        "data",
+        "product",
+        "design",
+        "go_to_market",
+        "support",
+        "operations",
+        "ai_training",
+        "education",
+        "healthcare",
+        "software",
+        "backend",
+        "frontend",
+        "fullstack",
+        "product_engineer",
+        "mobile",
+        "infrastructure",
+        "security",
+        "qa",
+        "embedded",
+        "hardware",
+        "technical_writing",
+        "engineering_management",
+        "design_engineer",
+        "devrel",
+        "ai_engineering",
+        "ml_engineering",
+        "ml_infrastructure",
+        "research",
+        "data_engineering",
+        "data_science",
+        "data_analysis",
+        "product_management",
+        "program_management",
+        "product_design",
+        "ux_research",
+        "brand_design",
+        "sales",
+        "marketing",
+        "product_marketing",
+        "sales_engineering",
+        "customer_success",
+        "customer_support",
+        "technical_support",
+        "business_operations",
+        "finance",
+        "legal",
+        "compliance",
+        "people",
+        "recruiting",
+        "it",
+        "admin"
+      ],
+      "type": "string"
+    },
+    "RoleFilter": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Role"
+        },
+        {
+          "$ref": "#/$defs/Modifier"
+        }
+      ],
+      "description": "One entry of a role filter: an id at any level, or a modifier."
+    },
     "Seniority": {
       "description": "Career level, lowest first.",
       "oneOf": [
@@ -98,6 +183,14 @@
       "default": "",
       "description": "Full-text query over title, company and description; words also match\ntheir other forms (\"engineer\" finds \"engineering\"). Jobs with every word\ncome first, then jobs with only some, marked `partial`. Keep it to the\nrole and skills: where the viewer can work from is `country`, not a\nquery word. Empty lists the newest jobs.",
       "type": "string"
+    },
+    "role": {
+      "default": [],
+      "description": "Keep only jobs in any of these roles or with any of these modifiers:\nids from `list_roles`, at any level (`engineering` takes in `backend`\nand `ai_engineering`; `forward_deployed` is a modifier). Jobs with no\nrole are dropped, so leave this out to see everything.",
+      "items": {
+        "$ref": "#/$defs/RoleFilter"
+      },
+      "type": "array"
     },
     "seniority": {
       "default": [],

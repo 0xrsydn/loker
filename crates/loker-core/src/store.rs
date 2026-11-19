@@ -30,6 +30,7 @@ use sqlx::sqlite::{
     SqliteConnectOptions, SqliteConnection, SqliteJournalMode, SqlitePool, SqlitePoolOptions,
 };
 
+use crate::classify;
 use crate::dedup::{self, Linked, Member, Plan};
 use crate::model::{IngestStats, Job, JobSource, NewJob, SourceKind};
 use crate::normalize::{company_key, title_key};
@@ -117,7 +118,33 @@ impl Store {
         sqlx::migrate!("./migrations").run(&pool).await?;
         let store = Self { pool };
         store.rebuild_pending().await?;
+        store.classify_pending().await?;
         Ok(store)
+    }
+
+    /// Classify again every job whose role was computed by other rules or
+    /// another vocabulary (or never), from its stored job JSON.
+    async fn classify_pending(&self) -> anyhow::Result<()> {
+        let pending: Vec<(String, String)> =
+            sqlx::query_as("SELECT id, job FROM canonical_jobs WHERE role_stamp != ?")
+                .bind(classify::STAMP)
+                .fetch_all(&self.pool)
+                .await?;
+        if pending.is_empty() {
+            return Ok(());
+        }
+        let mut tx = self.pool.begin().await?;
+        for (id, job) in pending {
+            let role = role_json(&serde_json::from_str(&job)?)?;
+            sqlx::query("UPDATE canonical_jobs SET role = ?, role_stamp = ? WHERE id = ?")
+                .bind(role)
+                .bind(classify::STAMP)
+                .bind(id)
+                .execute(&mut *tx)
+                .await?;
+        }
+        tx.commit().await?;
+        Ok(())
     }
 
     /// Rebuild every canonical job a migration left with an empty hash (0005
@@ -849,7 +876,8 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     }
     let closed_at = (!active).then(|| closed_at.unwrap_or_else(|| ts.to_string()));
     sqlx::query(
-        "UPDATE canonical_jobs SET job = ?, content_hash = ?, last_seen = ?, status = ?, closed_at = ?
+        "UPDATE canonical_jobs SET job = ?, content_hash = ?, last_seen = ?, status = ?, closed_at = ?,
+           role = ?, role_stamp = ?
          WHERE id = ?",
     )
     .bind(&job)
@@ -857,6 +885,8 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     .bind(ts)
     .bind(status)
     .bind(&closed_at)
+    .bind(role_json(&m)?)
+    .bind(classify::STAMP)
     .bind(cid)
     .execute(&mut *conn)
     .await?;
@@ -872,6 +902,13 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
         .execute(&mut *conn)
         .await?;
     Ok(())
+}
+
+/// A job's role as stored: `JobRole` JSON, or NULL when nothing places it.
+fn role_json(job: &NewJob) -> anyhow::Result<Option<String>> {
+    Ok(classify::classify(job)
+        .map(|r| serde_json::to_string(&r))
+        .transpose()?)
 }
 
 // ---------- rows ----------
@@ -897,6 +934,10 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         posted_at: m.posted_at,
         first_seen: parse_ts(r.get("first_seen"))?,
         status: r.get("status"),
+        role: r
+            .get::<Option<String>, _>("role")
+            .map(|j| serde_json::from_str(&j))
+            .transpose()?,
         sources,
     })
 }

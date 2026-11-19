@@ -174,6 +174,32 @@ async fn ranking() {
     assert_eq!((r.count, r.total, r.full_matches), (1, 2, 1));
     assert!(r.next_offset.is_some());
 
+    // A role filter takes in any level and modifiers; jobs with no role drop.
+    let p = |names: &[&str]| SearchParams {
+        q: "engineer".into(),
+        role: names
+            .iter()
+            .map(|n| serde_json::from_value(serde_json::json!(n)).unwrap())
+            .collect(),
+        ..Default::default()
+    };
+    let count = |r: loker_core::api::SearchResult| r.total;
+    assert_eq!(
+        count(search_jobs(&s, p(&["data_engineering"])).await.unwrap()),
+        1
+    );
+    assert_eq!(count(search_jobs(&s, p(&["data"])).await.unwrap()), 1);
+    // Data engineering also sits in engineering; the Rust Engineer is backend
+    // (its title names Rust), the Platform Engineer infrastructure.
+    assert_eq!(
+        count(search_jobs(&s, p(&["engineering"])).await.unwrap()),
+        3
+    );
+    assert_eq!(
+        count(search_jobs(&s, p(&["design", "founding"])).await.unwrap()),
+        0
+    );
+
     // A level filter keeps only jobs at those levels.
     for (level, want) in [(Seniority::Lead, 1), (Seniority::Senior, 0)] {
         let p = SearchParams {

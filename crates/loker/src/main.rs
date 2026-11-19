@@ -9,6 +9,7 @@ use loker_core::api::{
 };
 use loker_core::home::loker_home;
 use loker_core::model::Seniority;
+use loker_core::role::{Modifier, Role};
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -67,6 +68,10 @@ enum Command {
         /// Keep only jobs whose verdict is at least this good (needs --country).
         #[arg(long, value_parser = ["yes", "maybe"])]
         min_verdict: Option<String>,
+        /// Keep only jobs in these roles or with these modifiers, at any level
+        /// (`engineering`, `backend`, `forward_deployed`); see `loker roles`.
+        #[arg(long, value_delimiter = ',')]
+        role: Vec<String>,
         /// Keep only jobs at these levels; jobs that state none are dropped.
         #[arg(long, value_delimiter = ',', value_parser = ["intern", "junior", "mid", "senior", "lead", "executive"])]
         seniority: Vec<String>,
@@ -104,6 +109,11 @@ enum Command {
     },
     /// Show what is stored.
     Stats {
+        #[arg(long)]
+        json: bool,
+    },
+    /// The role vocabulary: families, roles and modifiers for --role.
+    Roles {
         #[arg(long)]
         json: bool,
     },
@@ -235,6 +245,7 @@ async fn main() -> anyhow::Result<()> {
             limit,
             offset,
             min_verdict,
+            role,
             seniority,
             compact,
             titles,
@@ -253,6 +264,14 @@ async fn main() -> anyhow::Result<()> {
                         "yes" => MinVerdict::Yes,
                         _ => MinVerdict::Maybe,
                     }),
+                    role: role
+                        .iter()
+                        .map(|r| {
+                            serde_json::from_value(serde_json::Value::String(r.clone())).map_err(
+                                |_| anyhow::anyhow!("unknown role `{r}` (see `loker roles`)"),
+                            )
+                        })
+                        .collect::<anyhow::Result<_>>()?,
                     seniority: seniority
                         .iter()
                         .map(|s| serde_json::from_value(serde_json::Value::String(s.clone())))
@@ -284,6 +303,22 @@ async fn main() -> anyhow::Result<()> {
                 print_json(&result)?;
             } else {
                 print_get(&result);
+            }
+        }
+        Command::Roles { json } => {
+            let roles = app.list_roles();
+            if json {
+                print_json(&roles)?;
+            } else {
+                for r in &roles.roles {
+                    let id = id_str(r.id);
+                    let indent = if r.family.is_some() { "  " } else { "" };
+                    println!("{indent}{id:<24} {}", r.definition);
+                }
+                println!();
+                for m in &roles.modifiers {
+                    println!("{:<24} {} (modifier)", id_str(m.id), m.definition);
+                }
             }
         }
         Command::Stats { json } => {
@@ -344,7 +379,7 @@ fn print_search(r: &SearchResult) {
                     c.id,
                     c.title,
                     c.company,
-                    level(c.seniority),
+                    about(c.seniority, &c.roles, &c.modifiers),
                     partial_mark(c.partial),
                     c.url
                 );
@@ -359,7 +394,7 @@ fn print_search(r: &SearchResult) {
                     t.id,
                     t.title,
                     t.company,
-                    level(t.seniority),
+                    about(t.seniority, &t.roles, &t.modifiers),
                     partial_mark(t.partial)
                 );
             }
@@ -389,16 +424,52 @@ fn print_hit(hit: &SearchHit) {
         None => format!("{:?}", job.eligibility.scope).to_lowercase(),
     };
     let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
+    let roles: Vec<Role> = job
+        .role
+        .iter()
+        .flat_map(|r| std::iter::once(r.primary).chain(r.secondary.iter().copied()))
+        .collect();
+    let modifiers = job
+        .role
+        .as_ref()
+        .map(|r| r.modifiers.as_slice())
+        .unwrap_or(&[]);
     println!(
         "{}  {} — {}{}{}\n    {elig} · {pay}\n    {}  (via {})",
         job.id,
         job.title,
         job.company,
-        level(job.seniority),
+        about(job.seniority, &roles, modifiers),
         partial_mark(hit.partial),
         job.url,
         via.join(", ")
     );
+}
+
+/// An enum's serde id ("ai_engineering").
+fn id_str(v: impl Serialize) -> String {
+    serde_json::to_value(v)
+        .ok()
+        .and_then(|v| v.as_str().map(str::to_string))
+        .unwrap_or_default()
+}
+
+fn roles_text(roles: &[Role], modifiers: &[Modifier]) -> String {
+    let ids: Vec<String> = roles
+        .iter()
+        .map(id_str)
+        .chain(modifiers.iter().map(id_str))
+        .collect();
+    if ids.is_empty() {
+        String::new()
+    } else {
+        format!(" [{}]", ids.join(", "))
+    }
+}
+
+/// " · senior [backend, forward_deployed]": level, then roles and modifiers.
+fn about(s: Option<Seniority>, roles: &[Role], modifiers: &[Modifier]) -> String {
+    format!("{}{}", level(s), roles_text(roles, modifiers))
 }
 
 fn level(s: Option<Seniority>) -> String {

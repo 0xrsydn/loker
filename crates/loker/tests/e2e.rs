@@ -442,6 +442,23 @@ fn pipeline_end_to_end() {
     let cli = home.json(&["search", "writer", "office", "--json"]);
     assert_eq!(mcp["structuredContent"], cli, "CLI and MCP differ");
 
+    // Roles: the vocabulary is the same over CLI and MCP, and a job's title
+    // places it (the stub's WWR job is a site reliability engineer).
+    let cli = home.json(&["roles", "--json"]);
+    assert_eq!(
+        home.mcp_call("list_roles", json!({}))["structuredContent"],
+        cli
+    );
+    let r = home.json(&["search", "--role", "infrastructure", "--compact", "--json"]);
+    assert!(
+        r["jobs"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|j| j["title"] == "Site Reliability Engineer" && j["roles"][0] == "infrastructure"),
+        "{r:#}"
+    );
+
     // We Work Remotely: "Company: Role" splits, and its region is who may apply.
     let r = home.json(&["search", "reliability", "--country", "ID", "--json"]);
     let job = &r["jobs"][0];

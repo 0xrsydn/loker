@@ -26,6 +26,7 @@ crates/loker-core/       domain and rules, no network
   src/dedup.rs           which listings are one job; no IO
   src/verdict.rs         can this viewer apply? (country, timezone)
   src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
+  src/classify.rs        which role a job is: title, then category, then description
   src/store.rs           SQLite: ingest, liveness, search, eval
   src/api.rs             the typed v1 contract every interface returns
   src/config.rs          $LOKER_HOME/config.toml
@@ -37,6 +38,7 @@ schema/v1/               JSON Schemas generated from the api types
 contrib/systemd/         unattended ingest service + timer
 eval/search/             manual search-ranking eval (Python, LLM-judged); not in CI
 eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); not in CI
+eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
 ```
 
 ## Build and check

@@ -20,6 +20,12 @@
         "id": {
           "type": "string"
         },
+        "modifiers": {
+          "items": {
+            "$ref": "#/$defs/Modifier"
+          },
+          "type": "array"
+        },
         "partial": {
           "description": "Matches only some of the query words.",
           "type": "boolean"
@@ -37,6 +43,13 @@
             "string",
             "null"
           ]
+        },
+        "roles": {
+          "description": "Role ids, primary first; empty when nothing places the job.",
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "type": "array"
         },
         "scope": {
           "$ref": "#/$defs/Scope",
@@ -147,6 +160,55 @@
       ],
       "description": "A job in a search result: full, or compact."
     },
+    "JobRole": {
+      "description": "A job's role, and why it has it. A job no step could place has no\n`JobRole` at all, rather than an \"other\" role.",
+      "properties": {
+        "confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "evidence": {
+          "description": "What decided it, e.g. \"title: Forward Deployed Infrastructure Engineer\".",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "$ref": "#/$defs/RoleMethod"
+        },
+        "modifiers": {
+          "items": {
+            "$ref": "#/$defs/Modifier"
+          },
+          "type": "array"
+        },
+        "primary": {
+          "$ref": "#/$defs/Role",
+          "description": "The most specific id found: a role, or a family when that is all the\nevidence says."
+        },
+        "secondary": {
+          "description": "Other roles the job also fills, at most [`MAX_ROLES`] - 1\n(\"Backend / Infrastructure Engineer\").",
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "type": "array"
+        },
+        "version": {
+          "description": "The vocabulary [`VERSION`] it was classified with.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "primary",
+        "method",
+        "confidence",
+        "version"
+      ],
+      "type": "object"
+    },
     "JobSource": {
       "properties": {
         "source": {
@@ -169,6 +231,21 @@
         "jev"
       ],
       "type": "string"
+    },
+    "Modifier": {
+      "description": "How a job is done, whatever its role.",
+      "oneOf": [
+        {
+          "const": "forward_deployed",
+          "description": "Works with customers, on site or embedded, building for their problems.",
+          "type": "string"
+        },
+        {
+          "const": "founding",
+          "description": "Among a company's first hires.",
+          "type": "string"
+        }
+      ]
     },
     "Pay": {
       "properties": {
@@ -196,6 +273,90 @@
         "raw"
       ],
       "type": "object"
+    },
+    "Role": {
+      "description": "A family (`engineering`) or a role in one (`backend`). The list is open:\nit grows, and clients must accept ids they don't know.",
+      "enum": [
+        "engineering",
+        "ai",
+        "data",
+        "product",
+        "design",
+        "go_to_market",
+        "support",
+        "operations",
+        "ai_training",
+        "education",
+        "healthcare",
+        "software",
+        "backend",
+        "frontend",
+        "fullstack",
+        "product_engineer",
+        "mobile",
+        "infrastructure",
+        "security",
+        "qa",
+        "embedded",
+        "hardware",
+        "technical_writing",
+        "engineering_management",
+        "design_engineer",
+        "devrel",
+        "ai_engineering",
+        "ml_engineering",
+        "ml_infrastructure",
+        "research",
+        "data_engineering",
+        "data_science",
+        "data_analysis",
+        "product_management",
+        "program_management",
+        "product_design",
+        "ux_research",
+        "brand_design",
+        "sales",
+        "marketing",
+        "product_marketing",
+        "sales_engineering",
+        "customer_success",
+        "customer_support",
+        "technical_support",
+        "business_operations",
+        "finance",
+        "legal",
+        "compliance",
+        "people",
+        "recruiting",
+        "it",
+        "admin"
+      ],
+      "type": "string"
+    },
+    "RoleMethod": {
+      "description": "Where a job's role came from, most trusted first.",
+      "oneOf": [
+        {
+          "const": "title",
+          "description": "A phrase in the title.",
+          "type": "string"
+        },
+        {
+          "const": "category",
+          "description": "The source's own category or department.",
+          "type": "string"
+        },
+        {
+          "const": "description",
+          "description": "A phrase in the description.",
+          "type": "string"
+        },
+        {
+          "const": "model",
+          "description": "A model choosing from this vocabulary.",
+          "type": "string"
+        }
+      ]
     },
     "Scope": {
       "enum": [
@@ -261,6 +422,17 @@
             "string",
             "null"
           ]
+        },
+        "role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/JobRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "What the job is: its role in the vocabulary of `list_roles`, how it\nwas decided, and modifiers (forward deployed, founding). Absent when\nnothing in the title, category or description places it."
         },
         "seniority": {
           "anyOf": [
@@ -342,9 +514,22 @@
         "id": {
           "type": "string"
         },
+        "modifiers": {
+          "items": {
+            "$ref": "#/$defs/Modifier"
+          },
+          "type": "array"
+        },
         "partial": {
           "description": "Matches only some of the query words.",
           "type": "boolean"
+        },
+        "roles": {
+          "description": "Role ids, primary first; empty when nothing places the job.",
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "type": "array"
         },
         "seniority": {
           "anyOf": [

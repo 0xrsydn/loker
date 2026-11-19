@@ -527,6 +527,15 @@ pub enum Modifier {
 
 impl Modifier {
     pub const ALL: &[Modifier] = &[Modifier::ForwardDeployed, Modifier::Founding];
+
+    pub fn definition(self) -> &'static str {
+        match self {
+            Modifier::ForwardDeployed => {
+                "Works with customers, on site or embedded, building for their problems."
+            }
+            Modifier::Founding => "Among a company's first hires.",
+        }
+    }
 }
 
 /// Where a job's role came from, most trusted first.

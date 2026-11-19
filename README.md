@@ -21,6 +21,7 @@ cargo run -- search engineer --country ID --tz 7
 cargo run -- search backend --country ID --tz 7 --min-verdict yes --compact   # only jobs you can take, short
 cargo run -- search golang rust kotlin        # every word first, then partial matches
 cargo run -- search developer --seniority junior,intern   # levels from the title or source
+cargo run -- search --role ai,data --country ID --compact      # by role, any level; `loker roles` lists them
 cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100   # everything you can apply to, one line each
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
@@ -122,8 +123,9 @@ claude mcp add loker -- loker mcp
 ```
 
 Tools: `search_jobs` (query, `anyWord`, `country`, `tz`, `limit`, `offset`,
-`minVerdict`, `seniority`, `view`; each job carries an eligibility verdict with a reason), `get_jobs`,
-`sources_eval`, `verify_sources` and `stats`. Bad input comes back as a tool
+`minVerdict`, `seniority`, `role`, `view`; each job carries an eligibility verdict with a reason
+and its role), `get_jobs`, `list_roles` (the role vocabulary), `sources_eval`, `verify_sources`
+and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
 
 For agents, the cheap flow is a compact search for jobs the viewer can apply

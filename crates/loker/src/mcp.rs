@@ -6,8 +6,8 @@
 use std::sync::Arc;
 
 use loker_core::api::{
-    GetJobsParams, GetJobsResult, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams,
-    VerifyReport,
+    GetJobsParams, GetJobsResult, RolesResult, SearchParams, SearchResult, SourcesEval, Stats,
+    VerifyParams, VerifyReport,
 };
 use rmcp::handler::server::wrapper::{Json, Parameters};
 use rmcp::{ServerHandler, ServiceExt, tool, tool_handler, tool_router};
@@ -42,7 +42,9 @@ impl LokerMcp {
         description = "Search stored jobs. Give `country` (and ideally `tz`) to get an eligibility verdict \
                        per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped. \
                        `minVerdict: \"yes\"` keeps only jobs the viewer can apply to; `seniority: [\"junior\"]` keeps \
-                       only jobs at those levels. To browse cheaply, use `view: \"compact\"` (about a third of the \
+                       only jobs at those levels; `role: [\"backend\", \"ai\"]` keeps only jobs in those roles (ids \
+                       from `list_roles`, any level: `engineering` takes in every engineering role; \
+                       `forward_deployed` and `founding` are modifiers). To browse cheaply, use `view: \"compact\"` (about a third of the \
                        size) or `view: \"titles\"` (about 70 characters a job), then `get_jobs` for the picks. \
                        `total` counts matches across all pages and `fullMatches` those with every query word, so \
                        `fullMatches: 0` means no job has all the words. To see everything the viewer can apply to, \
@@ -62,6 +64,16 @@ impl LokerMcp {
             .await
             .map(Json)
             .map_err(|e| e.to_string())
+    }
+
+    #[tool(
+        description = "The role vocabulary: families (engineering, ai, data, product, design, \
+                       go_to_market, support, operations, ...), the roles in each with a definition, and \
+                       modifiers. Use the ids in `search_jobs`'s `role` filter.",
+        annotations(read_only_hint = true)
+    )]
+    async fn list_roles(&self) -> Json<RolesResult> {
+        Json(self.app.list_roles())
     }
 
     #[tool(
@@ -111,7 +123,8 @@ impl LokerMcp {
                     `unknown` means the posting doesn't say, not that the viewer is excluded. \
                     Browse with `view: \"compact\"` or `\"titles\"` and get full details for the picks with \
                     `get_jobs`. To check whether anything fits, list every job the viewer can apply to \
-                    (empty `q`, `minVerdict`, `view: \"titles\"`) rather than trying many queries."
+                    (empty `q`, `minVerdict`, `view: \"titles\"`) rather than trying many queries. \
+                    Filter by what a job is with `role` (see `list_roles`) rather than by title words."
 )]
 impl ServerHandler for LokerMcp {}
 

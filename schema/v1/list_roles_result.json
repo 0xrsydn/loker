@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "Modifier": {
+      "description": "How a job is done, whatever its role.",
+      "oneOf": [
+        {
+          "const": "forward_deployed",
+          "description": "Works with customers, on site or embedded, building for their problems.",
+          "type": "string"
+        },
+        {
+          "const": "founding",
+          "description": "Among a company's first hires.",
+          "type": "string"
+        }
+      ]
+    },
+    "ModifierEntry": {
+      "properties": {
+        "definition": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/Modifier"
+        }
+      },
+      "required": [
+        "id",
+        "definition"
+      ],
+      "type": "object"
+    },
+    "Role": {
+      "description": "A family (`engineering`) or a role in one (`backend`). The list is open:\nit grows, and clients must accept ids they don't know.",
+      "enum": [
+        "engineering",
+        "ai",
+        "data",
+        "product",
+        "design",
+        "go_to_market",
+        "support",
+        "operations",
+        "ai_training",
+        "education",
+        "healthcare",
+        "software",
+        "backend",
+        "frontend",
+        "fullstack",
+        "product_engineer",
+        "mobile",
+        "infrastructure",
+        "security",
+        "qa",
+        "embedded",
+        "hardware",
+        "technical_writing",
+        "engineering_management",
+        "design_engineer",
+        "devrel",
+        "ai_engineering",
+        "ml_engineering",
+        "ml_infrastructure",
+        "research",
+        "data_engineering",
+        "data_science",
+        "data_analysis",
+        "product_management",
+        "program_management",
+        "product_design",
+        "ux_research",
+        "brand_design",
+        "sales",
+        "marketing",
+        "product_marketing",
+        "sales_engineering",
+        "customer_success",
+        "customer_support",
+        "technical_support",
+        "business_operations",
+        "finance",
+        "legal",
+        "compliance",
+        "people",
+        "recruiting",
+        "it",
+        "admin"
+      ],
+      "type": "string"
+    },
+    "RoleEntry": {
+      "properties": {
+        "alsoIn": {
+          "description": "Other families whose filters also take it in.",
+          "items": {
+            "$ref": "#/$defs/Role"
+          },
+          "type": "array"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "family": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "The family it belongs to; absent for a top-level family."
+        },
+        "id": {
+          "$ref": "#/$defs/Role"
+        },
+        "isFamily": {
+          "description": "True for a family: filtering on it takes in every role inside it.",
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        },
+        "replacedBy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Role"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Set when the id is retired: what to use instead."
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "definition",
+        "isFamily"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "The role vocabulary: what `role` filters and `roles` fields can name.",
+  "properties": {
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "modifiers": {
+      "items": {
+        "$ref": "#/$defs/ModifierEntry"
+      },
+      "type": "array"
+    },
+    "roles": {
+      "description": "Families first, then the roles in them.",
+      "items": {
+        "$ref": "#/$defs/RoleEntry"
+      },
+      "type": "array"
+    },
+    "vocabularyVersion": {
+      "description": "Version of the vocabulary; ids are never renamed or reused, and new\nones may appear.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "vocabularyVersion",
+    "roles",
+    "modifiers"
+  ],
+  "title": "RolesResult",
+  "type": "object"
+}

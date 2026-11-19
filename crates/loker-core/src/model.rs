@@ -201,6 +201,10 @@ pub struct Job {
     pub posted_at: Option<DateTime<Utc>>,
     pub first_seen: DateTime<Utc>,
     pub status: String,
+    /// What the job is: its role in the vocabulary of `list_roles`, how it
+    /// was decided, and modifiers (forward deployed, founding). Absent when
+    /// nothing in the title, category or description places it.
+    pub role: Option<crate::role::JobRole>,
     /// Every source that lists this job, with its page there (for attribution).
     pub sources: Vec<JobSource>,
 }

@@ -13,6 +13,7 @@ use chrono::{DateTime, Utc};
 
 use crate::country;
 use crate::model::{Job, Scope, Seniority};
+use crate::role::{self, Modifier, Role, RoleFilter};
 use crate::store::{Found, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
@@ -82,6 +83,12 @@ pub struct SearchParams {
     /// level (most of them) are dropped, so leave this out to see everything.
     #[serde(default)]
     pub seniority: Vec<Seniority>,
+    /// Keep only jobs in any of these roles or with any of these modifiers:
+    /// ids from `list_roles`, at any level (`engineering` takes in `backend`
+    /// and `ai_engineering`; `forward_deployed` is a modifier). Jobs with no
+    /// role are dropped, so leave this out to see everything.
+    #[serde(default)]
+    pub role: Vec<RoleFilter>,
     /// `full` (default); `compact`: what's needed to pick jobs (id, title,
     /// company, link, scope, level, pay text, date, verdict), about a third of
     /// the size; `titles`: id, title, company, level and verdict only, for
@@ -156,6 +163,11 @@ pub struct TitleHit {
     pub title: String,
     pub company: String,
     pub seniority: Option<Seniority>,
+    /// Role ids, primary first; empty when nothing places the job.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub roles: Vec<Role>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub modifiers: Vec<Modifier>,
     /// The viewer's verdict (reason omitted); absent when no country was given.
     pub verdict: Option<VerdictKind>,
     /// Matches only some of the query words.
@@ -175,6 +187,11 @@ pub struct CompactHit {
     pub scope: Scope,
     /// Career level, when the title or source names one.
     pub seniority: Option<Seniority>,
+    /// Role ids, primary first; empty when nothing places the job.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub roles: Vec<Role>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub modifiers: Vec<Modifier>,
     /// The source's pay text, e.g. "USD 50–100 hourly".
     pub pay: Option<String>,
     pub posted_at: Option<DateTime<Utc>>,
@@ -195,6 +212,16 @@ impl Hit {
     }
 
     fn new(job: Job, eligible: Option<Verdict>, partial: bool, view: View) -> Self {
+        let roles: Vec<Role> = job
+            .role
+            .iter()
+            .flat_map(|r| std::iter::once(r.primary).chain(r.secondary.iter().copied()))
+            .collect();
+        let modifiers = job
+            .role
+            .as_ref()
+            .map(|r| r.modifiers.clone())
+            .unwrap_or_default();
         match view {
             View::Full => Hit::Full(Box::new(SearchHit {
                 job,
@@ -204,6 +231,8 @@ impl Hit {
             View::Compact => Hit::Compact(CompactHit {
                 scope: job.eligibility.scope,
                 seniority: job.seniority,
+                roles,
+                modifiers,
                 pay: job.pay.map(|p| p.raw),
                 id: job.id,
                 title: job.title,
@@ -218,6 +247,8 @@ impl Hit {
                 title: job.title,
                 company: job.company,
                 seniority: job.seniority,
+                roles,
+                modifiers,
                 verdict: eligible.map(|v| v.kind),
                 partial,
             }),
@@ -278,6 +309,9 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             if eligible.as_ref().is_some_and(|v| v.kind > worst) {
                 continue;
             }
+            if !p.role.is_empty() && !job.role.as_ref().is_some_and(|r| r.matches(&p.role)) {
+                continue;
+            }
             if !p.seniority.is_empty() && !job.seniority.is_some_and(|s| p.seniority.contains(&s)) {
                 continue;
             }
@@ -299,6 +333,74 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         next_offset: (total > offset + limit).then_some(offset + limit),
         jobs,
     })
+}
+
+// ---------- list_roles ----------
+
+/// The role vocabulary: what `role` filters and `roles` fields can name.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct RolesResult {
+    pub contract_version: u32,
+    /// Version of the vocabulary; ids are never renamed or reused, and new
+    /// ones may appear.
+    pub vocabulary_version: u32,
+    /// Families first, then the roles in them.
+    pub roles: Vec<RoleEntry>,
+    pub modifiers: Vec<ModifierEntry>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct RoleEntry {
+    pub id: Role,
+    pub label: String,
+    pub definition: String,
+    /// True for a family: filtering on it takes in every role inside it.
+    pub is_family: bool,
+    /// The family it belongs to; absent for a top-level family.
+    pub family: Option<Role>,
+    /// Other families whose filters also take it in.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub also_in: Vec<Role>,
+    /// Set when the id is retired: what to use instead.
+    pub replaced_by: Option<Role>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct ModifierEntry {
+    pub id: Modifier,
+    pub definition: String,
+}
+
+pub fn list_roles() -> RolesResult {
+    RolesResult {
+        contract_version: CONTRACT_VERSION,
+        vocabulary_version: role::VERSION,
+        roles: Role::ALL
+            .iter()
+            .map(|&r| {
+                let i = r.info();
+                RoleEntry {
+                    id: r,
+                    label: i.label.into(),
+                    definition: i.definition.into(),
+                    is_family: r.is_family(),
+                    family: i.home,
+                    also_in: i.also_in.to_vec(),
+                    replaced_by: i.replaced_by,
+                }
+            })
+            .collect(),
+        modifiers: Modifier::ALL
+            .iter()
+            .map(|&m| ModifierEntry {
+                id: m,
+                definition: m.definition().into(),
+            })
+            .collect(),
+    }
 }
 
 // ---------- get_jobs ----------
