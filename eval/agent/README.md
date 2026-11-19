@@ -92,3 +92,19 @@ ml-in 20/389, devops-ph 21/395, data-de 13/372, designer-gb 6/391.
 Every task now has jobs to give, and runs are cheaper than on the original
 snapshot: a task with matches needs 4-7 calls. designer-gb (6 good of 391)
 fails 2 of 3 runs on one off-role pick each.
+
+### Snapshot 2026-11-19 b (1,749 jobs, fetched with source categories)
+
+`eval/role/snapshot.db`. Truth: backend-id 57 good of 427 eligible, devops-ph
+28/451, ml-in 22/444, data-de 16/422, designer-gb 7/442.
+
+| Label | calls | kchars | ktok | $/run | sec | prec | rec@5 | pass |
+|---|---|---|---|---|---|---|---|---|
+| 93c1c9f (before roles) | 5.6 | 51 | 57 | 0.009 | 17 | 100% | 97% | 93% |
+| 1a0922e (roles, `role` filter, list_roles) | 4.5 | 32 | 37 | 0.006 | 15 | 100% | 100% | 100% |
+
+Agents used the `role` filter in 23 of 68 calls (`data_engineering`,
+`backend`, design and AI roles) and list_roles twice. Characters read fell
+38% and tokens 36%; designer-gb, the scarcest task (7 good jobs), went from
+2 of 3 runs passing to 3 of 3.
+

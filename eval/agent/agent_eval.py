@@ -70,6 +70,18 @@ def eligible(binary, home, task):
         offset = r["nextOffset"]
 
 
+def job_text(db, jid):
+    """Title, company and description from either storage layout: columns
+    (before migration 0005) or the merged job JSON."""
+    cols = {r[1] for r in db.execute("PRAGMA table_info(canonical_jobs)")}
+    if "description_md" in cols:
+        sql = "SELECT title, company, description_md FROM canonical_jobs WHERE id = ?"
+    else:
+        sql = ("SELECT json_extract(job, '$.title'), json_extract(job, '$.company'), "
+               "json_extract(job, '$.descriptionMd') FROM canonical_jobs WHERE id = ?")
+    return db.execute(sql, (jid,)).fetchone()
+
+
 def grade(task, ids, labels):
     """Opus grades role fit (0-3) for jobs not yet graded for this task."""
     import eval as search_eval  # eval/search/eval.py: the same judge plumbing
@@ -79,7 +91,7 @@ def grade(task, ids, labels):
         chunk = todo[i:i + 15]
         jobs = []
         for n, jid in enumerate(chunk):
-            t, c, d = db.execute("SELECT title, company, description_md FROM canonical_jobs WHERE id = ?", (jid,)).fetchone()
+            t, c, d = job_text(db, jid)
             jobs.append(f"[{n}] Title: {t}\nCompany: {c}\nDescription (start):\n{(d or '')[:800]}\n")
         prompt = search_eval.BATCH.format(q=task["role"], intent=task["role"], jobs="\n---\n".join(jobs))
         grades, _ = search_eval.ask_opus(prompt, len(chunk))
