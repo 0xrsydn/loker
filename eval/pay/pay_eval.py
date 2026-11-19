@@ -86,6 +86,11 @@ def sample():
     print(f"{len(a)} of {len(mention)} jobs mentioning money, {len(b)} of {len(rest)} others -> {SAMPLE}")
 
 
+def sample_ids_of(name):
+    s = load(name, {})
+    return s.get("mention", []) + s.get("rest", [])
+
+
 def sample_ids():
     s = load(SAMPLE, {})
     return s.get("mention", []) + s.get("rest", [])
@@ -258,6 +263,13 @@ def predicted(binary, ids):
     return {r["id"]: r["pay"] for r in map(json.loads, out.splitlines())}
 
 
+def templates(desc):
+    """The 30 characters before each figure, digits masked: a posting's pay
+    wording, so a job can be matched to others written from the same template."""
+    t = desc.replace("\\$", "$")
+    return {re.sub(r"\d", "9", t[max(0, m.start() - 30):m.start()]) for m in re.finditer(r"[$€£₱]\s?\d", t)}
+
+
 def score():
     binary = os.path.abspath(arg("--bin", BIN))
     judge = os.environ.get("JUDGE", "opus")
@@ -267,9 +279,18 @@ def score():
     gold = {j: labels[f"{PROMPT_VERSION}|{j}"] for j in ids}
     got = predicted(binary, ids)
     texts = descriptions(set(ids))
+    # "novel": jobs whose pay wording appears in no tuning job. The rules were
+    # fitted to the tuning sample, and templates repeat across a company's
+    # postings (one sentence is in 232 jobs), so a holdout job sharing one
+    # measures a format already tuned on. Novel is the number for new boards.
+    tuning = sample_ids_of("sample.json")
+    tk = set().union(*(templates(d["description"]) for d in descriptions(set(tuning)).values()))
+    novel = {j for j in ids if not (templates(texts[j]["description"]) & tk)}
     print(f"{len(ids)} labelled jobs in {SAMPLE} (judge={judge}, {os.path.basename(binary)})")
-    for name in ("mention", "rest", "all"):
-        sel = [j for j in ids if name == "all" or j in strata.get(name, [])]
+    for name in ("mention", "rest", "all", "novel"):
+        if name == "novel" and SAMPLE == "sample.json":
+            continue
+        sel = [j for j in ids if name == "all" or (name == "novel" and j in novel) or j in strata.get(name, [])]
         c = Counter()
         for j in sel:
             r = compare(gold[j], got.get(j))

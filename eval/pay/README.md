@@ -103,6 +103,21 @@ models (148/150 agree on base pay) and scored it once.
 | **`holdout3`** (Opus) | 150 | **99%** (82/83) | **94%** | 92% | 1 | 92% / 69% |
 | **`holdout3`** (DeepSeek) | 150 | **99%** (82/83) | **93%** | 92% | 1 | 92% / 65% |
 
+**Headline: novel formats.** Templates repeat across a company's postings
+(Palantir's "The estimated salary range for this position is estimated to
+be $X - $Y/year" is in 232 snapshot jobs), so a holdout job sharing pay
+wording with a tuning job measures a format already tuned on. `score`
+reports a `novel` group: holdout jobs whose pay wording (the 30 characters
+before each figure, digits masked) is in no tuning job.
+
+| novel formats | jobs (with pay) | base precision | base recall (Opus / DeepSeek) | wrong figure |
+|---|---|---|---|---|
+| rules v1 on `holdout2` | 86 (29) | 96% (27/28) | 67% / 63% | 1 |
+| **rules v2 on `holdout3`** | 88 (35) | **97%** (35/36) | **87% / 85%** | 1 |
+
+So: precision about 97% holds on unseen formats; recall on them is mid
+80s, not the 94% of the whole holdout. The samples are small (36 ranges).
+
 Base pay across the snapshot, replayed through `transform` and `tidy`:
 359 (source fields) → 928 of 1,749 jobs.
 
@@ -115,3 +130,30 @@ Failures to work on next round (then draw `holdout4`):
   though the labelers read it as base); "up to Php 88,000 Philippine
   Peso/month" (words between the figure and its period); "Pay Range
   $68,000—$70,000 USD" in one posting, to look into.
+
+## What was wrong, and what is still unverified
+
+Errors found by the audit, all corrected above:
+1. `holdout.json` leaked: 12 of its jobs had pay lines printed while the
+   rules were written (it was drawn later from the same pool), and it was
+   scored twice around a rule change after its failures were read. Its
+   97% / 87% was reported as the honest number; it was not.
+2. Recall was overstated three times: 87% (leaked holdout), then 82% and
+   94% on holdouts inflated by shared templates. On novel formats: 67%
+   (v1), 87% (v2).
+3. Coverage was computed from merged descriptions, not the ingest path:
+   366 → 930 was reported; replayed through `transform` and `tidy` it was
+   359 → 924 (v1).
+4. Commit messages carry the wrong figures: 388a92a ("41 non-USD",
+   "unchanged on all 321": 40 and 320) and cd8d64a (97% / 87%,
+   366 → 930). They are not rewritten on main; this file supersedes them.
+5. One `holdout2` job (`j_fe252f2d6e`) had its full JSON printed before
+   any pay rule existed; it is out of the novel group.
+
+Still unverified:
+- Every label is from a model (Opus, checked against DeepSeek). Two
+  models agreeing is not ground truth; no label has been checked by hand.
+- Extras are scored by kind only; their figures are not checked.
+- Every set is from one snapshot of one day.
+- The sets over-sample jobs mentioning money; "all" is a sample figure.
+
