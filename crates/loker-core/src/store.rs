@@ -70,6 +70,12 @@ macro_rules! viewer_location {
 /// that stopped being ingested.
 pub const STALE_AFTER_DAYS: i64 = 30;
 
+/// A search result: the job, and whether it matched only some query words.
+pub struct Found {
+    pub job: Job,
+    pub partial: bool,
+}
+
 /// One fetch of one source, ready to store.
 pub struct Batch {
     pub source: SourceMeta,
@@ -329,11 +335,10 @@ impl Store {
         Ok(())
     }
 
-    /// Full-text search over active jobs (every word must match), best match
-    /// first; an empty query lists the newest. With `country`, jobs restricted
-    /// to other countries are skipped in SQL (see [`viewer_location`]).
-    /// `offset` counts rows of this query; ties are broken by id so pages
-    /// never overlap.
+    /// Full-text search over active jobs, best match first; an empty query
+    /// lists the newest. With `country`, jobs restricted to other countries
+    /// are skipped in SQL (see [`viewer_location`]). `offset` counts rows of
+    /// this query; ties are broken by id so pages never overlap.
     pub async fn search(
         &self,
         query: &str,
@@ -341,10 +346,19 @@ impl Store {
         limit: u32,
         offset: u32,
     ) -> anyhow::Result<Vec<Job>> {
-        self.search_with(query, false, country, limit, offset).await
+        let found = self
+            .search_with(query, false, country, limit, offset)
+            .await?;
+        Ok(found.into_iter().map(|f| f.job).collect())
     }
 
-    /// [`Store::search`], matching any word of `query` when `any_word`.
+    /// [`Store::search`], marking which jobs match only some of the words.
+    ///
+    /// A job matches when it has any word of `query`. Jobs with every word
+    /// come first, then the rest (`partial`), each group by score. With
+    /// `any_word`, score alone orders them. eval/search measured both
+    /// orders as equal; all-words-first keeps the strongest matches on top
+    /// and never comes back empty when some word matches.
     pub async fn search_with(
         &self,
         query: &str,
@@ -352,43 +366,60 @@ impl Store {
         country: Option<&str>,
         limit: u32,
         offset: u32,
-    ) -> anyhow::Result<Vec<Job>> {
-        let rows = match fts_query(query, any_word) {
-            Some(q) => {
-                sqlx::query(concat!(
-                    "SELECT c.*, ",
-                    sources_col!(),
-                    " FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
-                     WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
-                    viewer_location!("2"),
-                    // Column weights (job_id, title, company, description): a
-                    // title match counts five times. eval/search: 5 beats 1, and
-                    // 10 is no better.
-                    " ORDER BY bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id LIMIT ?3 OFFSET ?4"
-                ))
-                .bind(q)
-                .bind(country)
-                .bind(limit)
-                .bind(offset)
-                .fetch_all(&self.pool)
-                .await?
-            }
-            None => {
-                sqlx::query(concat!(
-                    "SELECT c.*, ",
-                    sources_col!(),
-                    " FROM canonical_jobs c WHERE c.status = 'active' AND ",
-                    viewer_location!("1"),
-                    " ORDER BY c.posted_at DESC, c.id LIMIT ?2 OFFSET ?3"
-                ))
-                .bind(country)
-                .bind(limit)
-                .bind(offset)
-                .fetch_all(&self.pool)
-                .await?
-            }
+    ) -> anyhow::Result<Vec<Found>> {
+        let (Some(any), Some(all)) = (fts_query(query, true), fts_query(query, false)) else {
+            let rows = sqlx::query(concat!(
+                "SELECT c.*, ",
+                sources_col!(),
+                " FROM canonical_jobs c WHERE c.status = 'active' AND ",
+                viewer_location!("1"),
+                " ORDER BY c.posted_at DESC, c.id LIMIT ?2 OFFSET ?3"
+            ))
+            .bind(country)
+            .bind(limit)
+            .bind(offset)
+            .fetch_all(&self.pool)
+            .await?;
+            return rows
+                .iter()
+                .map(|r| {
+                    Ok(Found {
+                        job: row_to_job(r)?,
+                        partial: false,
+                    })
+                })
+                .collect();
         };
-        rows.iter().map(row_to_job).collect()
+        let rows = sqlx::query(concat!(
+            "SELECT c.*, ",
+            sources_col!(),
+            ", jobs_fts.job_id IN (SELECT job_id FROM jobs_fts WHERE jobs_fts MATCH ?5) AS all_words
+             FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
+             WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
+            viewer_location!("2"),
+            // Column weights (job_id, title, company, description): a title
+            // match counts five times. eval/search: 5 beats 1, and 10 is no
+            // better.
+            " ORDER BY CASE WHEN ?6 THEN 0 ELSE all_words END DESC,
+                       bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id
+              LIMIT ?3 OFFSET ?4"
+        ))
+        .bind(any)
+        .bind(country)
+        .bind(limit)
+        .bind(offset)
+        .bind(all)
+        .bind(any_word)
+        .fetch_all(&self.pool)
+        .await?;
+        rows.iter()
+            .map(|r| {
+                Ok(Found {
+                    job: row_to_job(r)?,
+                    partial: !r.try_get::<bool, _>("all_words")?,
+                })
+            })
+            .collect()
     }
 
     /// Every source that has ever stored a listing.

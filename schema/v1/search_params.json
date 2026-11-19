@@ -22,7 +22,7 @@
   "properties": {
     "anyWord": {
       "default": false,
-      "description": "Match jobs with any word of `q` instead of all, best matches (most\nwords) first. For broad queries like \"api microservices golang\".",
+      "description": "Rank by score alone instead of putting jobs with every word first.",
       "type": "boolean"
     },
     "country": {
@@ -63,7 +63,7 @@
     },
     "q": {
       "default": "",
-      "description": "Full-text query; every word must match (see `anyWord`). Empty lists the newest jobs.",
+      "description": "Full-text query over title, company and description; words also match\ntheir other forms (\"engineer\" finds \"engineering\"). Jobs with every word\ncome first, then jobs with only some, marked `partial`. Keep it to the\nrole and skills: where the viewer can work from is `country`, not a\nquery word. Empty lists the newest jobs.",
       "type": "string"
     },
     "tz": {

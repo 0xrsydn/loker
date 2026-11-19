@@ -20,6 +20,10 @@
         "id": {
           "type": "string"
         },
+        "partial": {
+          "description": "Matches only some of the query words.",
+          "type": "boolean"
+        },
         "pay": {
           "description": "The source's pay text, e.g. \"USD 50–100 hourly\".",
           "type": [
@@ -222,6 +226,10 @@
         },
         "id": {
           "type": "string"
+        },
+        "partial": {
+          "description": "Matches only some of the query words.",
+          "type": "boolean"
         },
         "pay": {
           "anyOf": [

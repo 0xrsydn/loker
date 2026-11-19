@@ -158,6 +158,10 @@
         "id": {
           "type": "string"
         },
+        "partial": {
+          "description": "Matches only some of the query words.",
+          "type": "boolean"
+        },
         "pay": {
           "anyOf": [
             {

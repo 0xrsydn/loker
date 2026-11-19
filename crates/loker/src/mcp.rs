@@ -43,8 +43,10 @@ impl LokerMcp {
                        per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped. \
                        `minVerdict: \"yes\"` keeps only jobs the viewer can apply to. To browse cheaply, use \
                        `view: \"compact\"` (about a third of the size), then `get_jobs` for full details of the picks. \
-                       Every query word must match by default, so prefer short queries (\"backend\"); for several \
-                       alternatives in one call (\"golang rust kotlin\"), set `anyWord: true`: best matches come first.",
+                       Jobs with every query word come first, then jobs with only some, marked `partial: true`; \
+                       if every result is partial, nothing matched all the words. Words also match other forms \
+                       (engineer, engineering). Keep `q` to the role and skills (\"backend golang\"): where the viewer \
+                       can work from is `country`, not a query word.",
         annotations(read_only_hint = true)
     )]
     async fn search_jobs(

@@ -73,6 +73,8 @@ T10 = (10, 2, 1)
 PLAIN, PORTER = "eval_plain", "eval_porter"
 # Names say what a variant does, not which loker version it matches.
 # loker 58be2e1: default search = "plain and", anyWord = "plain or".
+# loker since the stemming/title-weight/partial commits: default search =
+# "porter and->or t5", anyWord = "porter or t5" (checked id for id).
 VARIANTS = {
     # name: fn(db, q) -> ranked job ids
     "plain and": lambda db, q: run(db, PLAIN, q, False, None),

@@ -19,7 +19,7 @@ direnv allow                                  # or `nix develop`: toolchain, sql
 cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwide + ID listed)
 cargo run -- search engineer --country ID --tz 7
 cargo run -- search backend --country ID --tz 7 --min-verdict yes --compact   # only jobs you can take, short
-cargo run -- search golang rust kotlin --any-word   # any of the words, best matches first
+cargo run -- search golang rust kotlin        # every word first, then partial matches
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
 cargo run -- ingest remoteok                   # also: jobicy

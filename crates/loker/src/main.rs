@@ -46,7 +46,7 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
-    /// Search stored jobs (every word must match, or any with --any-word).
+    /// Search stored jobs: every word first, then partial matches.
     Search {
         query: Vec<String>,
         /// Only jobs open to someone based in this country (ISO code or name).
@@ -60,7 +60,7 @@ enum Command {
         /// Skip this many results (the previous page's "next offset").
         #[arg(long)]
         offset: Option<u32>,
-        /// Match jobs with any of the words (best matches first) instead of all.
+        /// Rank by score alone instead of putting jobs with every word first.
         #[arg(long)]
         any_word: bool,
         /// Keep only jobs whose verdict is at least this good (needs --country).
@@ -321,8 +321,12 @@ fn print_search(r: &SearchResult) {
                 };
                 let pay = c.pay.as_deref().unwrap_or("pay n/a");
                 println!(
-                    "{}  {} — {}\n    {elig} · {pay}\n    {}",
-                    c.id, c.title, c.company, c.url
+                    "{}  {} — {}{}\n    {elig} · {pay}\n    {}",
+                    c.id,
+                    c.title,
+                    c.company,
+                    partial_mark(c.partial),
+                    c.url
                 );
             }
         }
@@ -346,13 +350,18 @@ fn print_hit(hit: &SearchHit) {
     };
     let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
     println!(
-        "{}  {} — {}\n    {elig} · {pay}\n    {}  (via {})",
+        "{}  {} — {}{}\n    {elig} · {pay}\n    {}  (via {})",
         job.id,
         job.title,
         job.company,
+        partial_mark(hit.partial),
         job.url,
         via.join(", ")
     );
+}
+
+fn partial_mark(partial: bool) -> &'static str {
+    if partial { "  (partial match)" } else { "" }
 }
 
 fn print_get(r: &GetJobsResult) {

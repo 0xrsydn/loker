@@ -399,25 +399,20 @@ fn pipeline_end_to_end() {
     let r = home.json(&["search", "analyst", "--country", "ID", "--json"]);
     assert_eq!(r["count"], 0, "{r:#}");
 
-    // Every word must match by default; anyWord matches any, best first.
-    let all = home.json(&["search", "writer", "office", "--json"]);
-    assert_eq!(all["count"], 0, "{all:#}");
-    let any = home.mcp_call(
-        "search_jobs",
-        json!({"q": "writer office", "anyWord": true}),
-    );
-    let titles: Vec<&str> = any["structuredContent"]["jobs"]
+    // No job has both words: jobs with either come back, marked partial.
+    let mcp = home.mcp_call("search_jobs", json!({"q": "writer office"}));
+    let found: Vec<(&str, bool)> = mcp["structuredContent"]["jobs"]
         .as_array()
         .unwrap()
         .iter()
-        .map(|j| j["title"].as_str().unwrap())
+        .map(|j| (j["title"].as_str().unwrap(), j["partial"] == true))
         .collect();
     assert!(
-        titles.contains(&"Writer") && titles.contains(&"Office Manager"),
-        "{titles:?}"
+        found.contains(&("Writer", true)) && found.contains(&("Office Manager", true)),
+        "{found:?}"
     );
-    let cli = home.json(&["search", "writer", "office", "--any-word", "--json"]);
-    assert_eq!(any["structuredContent"], cli, "anyWord: CLI and MCP differ");
+    let cli = home.json(&["search", "writer", "office", "--json"]);
+    assert_eq!(mcp["structuredContent"], cli, "CLI and MCP differ");
 
     // Lever: an on-site job takes the posting's country, and a yearly salary
     // becomes USD per month.

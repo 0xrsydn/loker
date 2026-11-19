@@ -100,7 +100,7 @@ async fn offset_pages_cover_every_result_once() {
     assert_eq!((seen.len(), pages), (25, 3));
 }
 
-/// Titles of the jobs a query finds, best first.
+/// Titles of the jobs a query finds, best first; `~` marks a partial match.
 async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
     let p = SearchParams {
         q: q.into(),
@@ -110,6 +110,7 @@ async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
     r.jobs
         .into_iter()
         .map(|h| match h {
+            Hit::Full(h) if h.partial => format!("~{}", h.job.title),
             Hit::Full(h) => h.job.title,
             Hit::Compact(c) => c.title,
         })
@@ -148,5 +149,15 @@ async fn ranking() {
     assert_eq!(
         ranked(&s, "rust").await,
         ["Rust Engineer", "Platform Engineer"]
+    );
+
+    // Jobs with every word first, then jobs with some, marked partial.
+    assert_eq!(
+        ranked(&s, "rust team").await,
+        ["Rust Engineer", "~Platform Engineer"]
+    );
+    assert_eq!(
+        ranked(&s, "pipelines kotlin").await,
+        ["~Data Engineering Lead"]
     );
 }

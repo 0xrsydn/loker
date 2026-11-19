@@ -13,7 +13,7 @@ use chrono::{DateTime, Utc};
 
 use crate::country;
 use crate::model::{Job, Scope};
-use crate::store::Store;
+use crate::store::{Found, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
 /// Bumped only on breaking changes; additive changes keep it.
@@ -55,11 +55,14 @@ pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SearchParams {
-    /// Full-text query; every word must match (see `anyWord`). Empty lists the newest jobs.
+    /// Full-text query over title, company and description; words also match
+    /// their other forms ("engineer" finds "engineering"). Jobs with every word
+    /// come first, then jobs with only some, marked `partial`. Keep it to the
+    /// role and skills: where the viewer can work from is `country`, not a
+    /// query word. Empty lists the newest jobs.
     #[serde(default)]
     pub q: String,
-    /// Match jobs with any word of `q` instead of all, best matches (most
-    /// words) first. For broad queries like "api microservices golang".
+    /// Rank by score alone instead of putting jobs with every word first.
     #[serde(default)]
     pub any_word: bool,
     /// Where the viewer lives: ISO 3166-1 alpha-2 code or English name ("ID", "Indonesia").
@@ -116,6 +119,9 @@ pub struct SearchHit {
     pub job: Job,
     /// Verdict for the viewer in `country`/`tz`; absent when no country was given.
     pub eligible: Option<Verdict>,
+    /// Matches only some of the query words.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub partial: bool,
 }
 
 /// A job in a search result: full, or compact.
@@ -141,6 +147,9 @@ pub struct CompactHit {
     pub posted_at: Option<DateTime<Utc>>,
     /// Verdict for the viewer in `country`/`tz`; absent when no country was given.
     pub eligible: Option<Verdict>,
+    /// Matches only some of the query words.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub partial: bool,
 }
 
 impl Hit {
@@ -151,9 +160,13 @@ impl Hit {
         }
     }
 
-    fn new(job: Job, eligible: Option<Verdict>, view: View) -> Self {
+    fn new(job: Job, eligible: Option<Verdict>, partial: bool, view: View) -> Self {
         match view {
-            View::Full => Hit::Full(Box::new(SearchHit { job, eligible })),
+            View::Full => Hit::Full(Box::new(SearchHit {
+                job,
+                eligible,
+                partial,
+            })),
             View::Compact => Hit::Compact(CompactHit {
                 scope: job.eligibility.scope,
                 pay: job.pay.map(|p| p.raw),
@@ -163,6 +176,7 @@ impl Hit {
                 url: job.url,
                 posted_at: job.posted_at,
                 eligible,
+                partial,
             }),
         }
     }
@@ -216,7 +230,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             .await?;
         let n = rows.len() as u32;
         read += n;
-        for job in rows {
+        for Found { job, partial } in rows {
             let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
             if eligible.as_ref().is_some_and(|v| v.kind > worst) {
                 continue;
@@ -229,7 +243,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
                 more = true;
                 break 'pages;
             }
-            jobs.push(Hit::new(job, eligible, p.view));
+            jobs.push(Hit::new(job, eligible, partial, p.view));
         }
         if n < BATCH {
             break;
@@ -283,7 +297,11 @@ pub async fn get_jobs(store: &Store, p: GetJobsParams) -> Result<GetJobsResult> 
         match found.remove(&id) {
             Some(job) => {
                 let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
-                jobs.push(SearchHit { job, eligible });
+                jobs.push(SearchHit {
+                    job,
+                    eligible,
+                    partial: false,
+                });
             }
             None if !jobs.iter().any(|h: &SearchHit| h.job.id == id) => missing.push(id),
             None => {}

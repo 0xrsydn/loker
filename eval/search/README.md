@@ -26,7 +26,8 @@ python3 eval.py sample 40                # blind sheet for a human spot-check
    kept out of tuning; `expect_none: true` queries should return nothing.
 3. **Variants** (`VARIANTS` in `eval.py`). One ranking each, as SQL in the same
    shape as `store.rs`. The baseline `plain and` is loker's default search as
-   of 58be2e1; `plain or` is its `anyWord`.
+   of 58be2e1. loker now ships `porter and->or t5` as its default and
+   `porter or t5` as `anyWord`.
 4. **Pool.** The union of every variant's top 20 per query. Only pooled pairs
    are graded, so recall means "of the relevant jobs any variant found".
 5. **Judge.** Each (query, job) gets 0–3: 3 exactly the role sought, 2 clearly
@@ -99,3 +100,8 @@ Findings:
   measured list.
 - Weak spots: location words in queries ("remote … asia timezone"), and
   seniority as a keyword ("junior developer" gets worse with stemming).
+
+Shipped: stemming, title weight 5, and every-word-first with `partial`
+marks. `loker search` on this snapshot returns the eval's `porter and->or t5`
+lists exactly (and `--any-word` the `porter or t5` lists) for all 38 queries.
+The MCP description now tells agents to keep location out of `q`.
