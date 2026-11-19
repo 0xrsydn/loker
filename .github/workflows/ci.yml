@@ -20,6 +20,23 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
+          # cache.nixos.org has the toolchain; loker's R2 cache has what only this
+          # repo builds (crane's compiled dependencies, the vendored crates).
+          # Reads are public; every path is signed by loker-ci-1. If the cache is
+          # unreachable, Nix builds instead (fallback).
           extra_nix_config: |
             accept-flake-config = false
+            extra-substituters = https://pub-42e4e68894b74713997b56c450bc9925.r2.dev
+            extra-trusted-public-keys = loker-ci-1:uzoeDmTAwNEvZTMuCmd28RZngImk4Oj5L9zS0WvohX4=
+            fallback = true
       - run: nix flake check -L --show-trace
+      # Only pushes to main write to the cache; pull requests (and forks, which
+      # get no secrets) only read from it.
+      - name: Push build dependencies to the R2 cache
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          NIX_SIGNING_KEY: ${{ secrets.NIX_SIGNING_KEY }}
+        run: .github/push-nix-cache.sh

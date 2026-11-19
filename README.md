@@ -139,7 +139,9 @@ files disagree, so contract changes are always deliberate.
 
 `nix flake check` builds the release binary, runs every test, runs clippy
 with warnings denied and checks formatting with rustfmt; CI runs it on every
-push and pull request.
+push and pull request. CI reads build dependencies from a public, signed Nix
+cache on Cloudflare R2 (alongside cache.nixos.org), and pushes to `main` refill
+it (`.github/push-nix-cache.sh`).
 
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),
