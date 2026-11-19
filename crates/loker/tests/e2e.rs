@@ -399,6 +399,26 @@ fn pipeline_end_to_end() {
     let r = home.json(&["search", "analyst", "--country", "ID", "--json"]);
     assert_eq!(r["count"], 0, "{r:#}");
 
+    // Every word must match by default; anyWord matches any, best first.
+    let all = home.json(&["search", "writer", "office", "--json"]);
+    assert_eq!(all["count"], 0, "{all:#}");
+    let any = home.mcp_call(
+        "search_jobs",
+        json!({"q": "writer office", "anyWord": true}),
+    );
+    let titles: Vec<&str> = any["structuredContent"]["jobs"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|j| j["title"].as_str().unwrap())
+        .collect();
+    assert!(
+        titles.contains(&"Writer") && titles.contains(&"Office Manager"),
+        "{titles:?}"
+    );
+    let cli = home.json(&["search", "writer", "office", "--any-word", "--json"]);
+    assert_eq!(any["structuredContent"], cli, "anyWord: CLI and MCP differ");
+
     // Lever: an on-site job takes the posting's country, and a yearly salary
     // becomes USD per month.
     let r = home.json(&["search", "office", "--json"]);

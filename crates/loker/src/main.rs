@@ -46,7 +46,7 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
-    /// Search stored jobs (every word must match).
+    /// Search stored jobs (every word must match, or any with --any-word).
     Search {
         query: Vec<String>,
         /// Only jobs open to someone based in this country (ISO code or name).
@@ -60,6 +60,9 @@ enum Command {
         /// Skip this many results (the previous page's "next offset").
         #[arg(long)]
         offset: Option<u32>,
+        /// Match jobs with any of the words (best matches first) instead of all.
+        #[arg(long)]
+        any_word: bool,
         /// Keep only jobs whose verdict is at least this good (needs --country).
         #[arg(long, value_parser = ["yes", "maybe"])]
         min_verdict: Option<String>,
@@ -226,6 +229,7 @@ async fn main() -> anyhow::Result<()> {
             offset,
             min_verdict,
             compact,
+            any_word,
             json,
         } => {
             let q = query.join(" ");
@@ -241,6 +245,7 @@ async fn main() -> anyhow::Result<()> {
                         _ => MinVerdict::Maybe,
                     }),
                     view: if compact { View::Compact } else { View::Full },
+                    any_word,
                 })
                 .await?;
             if json {

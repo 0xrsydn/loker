@@ -341,7 +341,19 @@ impl Store {
         limit: u32,
         offset: u32,
     ) -> anyhow::Result<Vec<Job>> {
-        let rows = match fts_query(query) {
+        self.search_with(query, false, country, limit, offset).await
+    }
+
+    /// [`Store::search`], matching any word of `query` when `any_word`.
+    pub async fn search_with(
+        &self,
+        query: &str,
+        any_word: bool,
+        country: Option<&str>,
+        limit: u32,
+        offset: u32,
+    ) -> anyhow::Result<Vec<Job>> {
+        let rows = match fts_query(query, any_word) {
             Some(q) => {
                 sqlx::query(concat!(
                     "SELECT c.*, ",
@@ -843,13 +855,16 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     })
 }
 
-/// Quote every word so user input can never break FTS5 syntax.
-fn fts_query(q: &str) -> Option<String> {
+/// Quote every word so user input can never break FTS5 syntax. All words
+/// must match, or with `any_word` at least one (bm25 then ranks jobs that
+/// match more of them first).
+fn fts_query(q: &str, any_word: bool) -> Option<String> {
     let terms: Vec<String> = q
         .split_whitespace()
         .map(|t| format!("\"{}\"", t.replace('"', "\"\"")))
         .collect();
-    (!terms.is_empty()).then(|| terms.join(" "))
+    let sep = if any_word { " OR " } else { " " };
+    (!terms.is_empty()).then(|| terms.join(sep))
 }
 
 pub fn job_id(seed: &str) -> String {

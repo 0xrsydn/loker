@@ -20,6 +20,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
+    "anyWord": {
+      "default": false,
+      "description": "Match jobs with any word of `q` instead of all, best matches (most\nwords) first. For broad queries like \"api microservices golang\".",
+      "type": "boolean"
+    },
     "country": {
       "description": "Where the viewer lives: ISO 3166-1 alpha-2 code or English name (\"ID\", \"Indonesia\").\nAdds an eligibility verdict to each job and drops jobs whose verdict is `no`.",
       "type": [
@@ -58,7 +63,7 @@
     },
     "q": {
       "default": "",
-      "description": "Full-text query; every word must match. Empty lists the newest jobs.",
+      "description": "Full-text query; every word must match (see `anyWord`). Empty lists the newest jobs.",
       "type": "string"
     },
     "tz": {

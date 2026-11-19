@@ -55,9 +55,13 @@ pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SearchParams {
-    /// Full-text query; every word must match. Empty lists the newest jobs.
+    /// Full-text query; every word must match (see `anyWord`). Empty lists the newest jobs.
     #[serde(default)]
     pub q: String,
+    /// Match jobs with any word of `q` instead of all, best matches (most
+    /// words) first. For broad queries like "api microservices golang".
+    #[serde(default)]
+    pub any_word: bool,
     /// Where the viewer lives: ISO 3166-1 alpha-2 code or English name ("ID", "Indonesia").
     /// Adds an eligibility verdict to each job and drops jobs whose verdict is `no`.
     pub country: Option<String>,
@@ -207,7 +211,9 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
     let country = viewer.as_ref().map(|v| v.country.as_str());
     let (mut to_skip, mut read, mut jobs, mut more) = (offset, 0u32, Vec::new(), false);
     'pages: loop {
-        let rows = store.search(&p.q, country, BATCH, read).await?;
+        let rows = store
+            .search_with(&p.q, p.any_word, country, BATCH, read)
+            .await?;
         let n = rows.len() as u32;
         read += n;
         for job in rows {

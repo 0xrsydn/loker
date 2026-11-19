@@ -19,6 +19,7 @@ direnv allow                                  # or `nix develop`: toolchain, sql
 cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwide + ID listed)
 cargo run -- search engineer --country ID --tz 7
 cargo run -- search backend --country ID --tz 7 --min-verdict yes --compact   # only jobs you can take, short
+cargo run -- search golang rust kotlin --any-word   # any of the words, best matches first
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
 cargo run -- ingest remoteok                   # also: jobicy
@@ -118,8 +119,8 @@ its configured parameters.
 claude mcp add loker -- loker mcp
 ```
 
-Tools: `search_jobs` (query, `country`, `tz`, `limit`, `offset`, `minVerdict`,
-`view`; each job carries an eligibility verdict with a reason), `get_jobs`,
+Tools: `search_jobs` (query, `anyWord`, `country`, `tz`, `limit`, `offset`,
+`minVerdict`, `view`; each job carries an eligibility verdict with a reason), `get_jobs`,
 `sources_eval`, `verify_sources` and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
 
