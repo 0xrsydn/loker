@@ -22,7 +22,8 @@ pub struct Config {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceConfig {
-    /// `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
+    /// `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `greenhouse:<board>`,
+    /// `ashby:<board>`, `lever:<site>`.
     pub id: String,
     pub pages: Option<u32>,
     pub country: Option<String>,
@@ -104,6 +105,9 @@ id = "jobicy"
 
 [[sources]]
 id = "remoteok"
+
+[[sources]]
+id = "weworkremotely"
 
 # A company's own board: greenhouse:<slug>, ashby:<slug> or lever:<site>.
 # [[sources]]

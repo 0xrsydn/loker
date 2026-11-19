@@ -8,8 +8,8 @@ records each job's eligibility (worldwide, listed countries, required or preferr
 time zones), and answers searches from your point of view: "open to someone in
 Indonesia at UTC+7", not just "remote".
 
-> Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, and any
-> company's Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
+> Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, We Work
+> Remotely, and any company's Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
 > come next.
 
 ## Try it
@@ -24,7 +24,7 @@ cargo run -- search developer --seniority junior,intern   # levels from the titl
 cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100   # everything you can apply to, one line each
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
-cargo run -- ingest remoteok                   # also: jobicy
+cargo run -- ingest remoteok                   # also: jobicy, weworkremotely
 cargo run -- search --country ID --offset 20   # next page (each page reports its next offset)
 cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts, closed jobs
 cargo run -- verify                           # live check of every configured source; non-zero exit on failure
@@ -161,7 +161,7 @@ prints exactly what the MCP tool returns as structured content.
 | Crate | Role |
 |---|---|
 | `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), `dedup` (which listings are one job and what that job says, with no IO), the SQLite store that loads rows for those rules and writes their answers, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
-| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby, Lever; `Source` dispatch and `ingest`, the one fetch → transform → store path |
+| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, We Work Remotely, Greenhouse, Ashby, Lever; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
 The v1 contract is committed as JSON Schemas in `schema/v1/` (`loker schema

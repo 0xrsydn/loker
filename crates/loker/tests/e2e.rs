@@ -45,7 +45,11 @@ fn stub() -> Stub {
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
             served.lock().unwrap().push(target.clone());
             let (status, body) = route(&target, flag.load(Ordering::SeqCst));
-            let body = body.to_string();
+            // A string body is sent as is (RSS); anything else as JSON.
+            let body = match body {
+                Value::String(text) => text,
+                other => other.to_string(),
+            };
             let _ = write!(
                 stream,
                 "HTTP/1.1 {status}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
@@ -77,6 +81,8 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         // Paged: the second page is empty only if the adapter asks for one.
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
+        // Only the all-jobs feed: the category feeds 404 and are skipped.
+        "/remote-jobs.rss" => ("200 OK", Value::String(weworkremotely())),
         "/api" => {
             let mut items = vec![json!({ "legal": "API terms: link back to Remote OK." })];
             items.extend(remoteok());
@@ -84,6 +90,27 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         }
         _ => ("404 Not Found", json!({})),
     }
+}
+
+fn weworkremotely() -> String {
+    r#"<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss"><channel>
+<title>We Work Remotely</title>
+<item>
+  <media:content url="https://example.invalid/logo.png" type="image/png"/>
+  <title>Initrode: Site Reliability Engineer</title>
+  <region>Anywhere in the World</region>
+  <category>DevOps and Sysadmin</category>
+  <type>Full-Time</type>
+  <skills>Kubernetes, Terraform, and Go</skills>
+  <description>&lt;p&gt;Keep &lt;b&gt;production&lt;/b&gt; up.&lt;/p&gt;</description>
+  <pubDate>Thu, 19 Nov 2026 16:48:31 +0000</pubDate>
+  <expires_at>Fri, 01 Jan 2100 00:00:00 +0000</expires_at>
+  <guid>https://weworkremotely.com/remote-jobs/initrode-site-reliability-engineer</guid>
+  <link>https://weworkremotely.com/remote-jobs/initrode-site-reliability-engineer</link>
+</item>
+</channel></rss>"#
+        .into()
 }
 
 /// Far in the future, so nothing expires during the test.
@@ -313,13 +340,14 @@ impl Home {
     }
 }
 
-const ORDER: [&str; 6] = [
+const ORDER: [&str; 7] = [
     "himalayas",
     "greenhouse:acme",
     "ashby:globex",
     "lever:initech",
     "jobicy",
     "remoteok",
+    "weworkremotely",
 ];
 
 // ---------- tests ----------
@@ -333,12 +361,12 @@ fn pipeline_end_to_end() {
     let first: Vec<Value> = ORDER.iter().map(|s| home.ingest(s)).collect();
     let new: u64 = first.iter().map(|s| s["new"].as_u64().unwrap()).sum();
     let skipped: u64 = first.iter().map(|s| s["skipped"].as_u64().unwrap()).sum();
-    assert_eq!((new, skipped), (10, 0), "{first:#?}");
+    assert_eq!((new, skipped), (11, 0), "{first:#?}");
     let clusters = home.clusters();
     assert_eq!(
         clusters.len(),
-        7,
-        "10 listings, 3 cross-source merges: {clusters:#?}"
+        8,
+        "11 listings, 3 cross-source merges: {clusters:#?}"
     );
     assert!(
         clusters.iter().any(|c| c.len() == 2
@@ -413,6 +441,19 @@ fn pipeline_end_to_end() {
     );
     let cli = home.json(&["search", "writer", "office", "--json"]);
     assert_eq!(mcp["structuredContent"], cli, "CLI and MCP differ");
+
+    // We Work Remotely: "Company: Role" splits, and its region is who may apply.
+    let r = home.json(&["search", "reliability", "--country", "ID", "--json"]);
+    let job = &r["jobs"][0];
+    assert_eq!(
+        (&job["company"], &job["title"], &job["eligible"]["kind"]),
+        (
+            &json!("Initrode"),
+            &json!("Site Reliability Engineer"),
+            &json!("yes")
+        ),
+        "{r:#}"
+    );
 
     // Lever: an on-site job takes the posting's country, and a yearly salary
     // becomes USD per month.

@@ -9,6 +9,7 @@ rust-version.workspace = true
 anyhow.workspace = true
 chrono.workspace = true
 htmd = "0.6.0"
+roxmltree = "0.20.0"
 loker-core.workspace = true
 reqwest = { version = "0.13.5", default-features = false, features = ["json", "query", "rustls"] }
 serde.workspace = true

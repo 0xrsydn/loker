@@ -12,6 +12,7 @@ pub mod himalayas;
 pub mod jobicy;
 pub mod lever;
 pub mod remoteok;
+pub mod weworkremotely;
 
 use loker_core::api::{
     CONTRACT_VERSION, Check, CheckStatus, Error, IngestAllReport, IngestOutcome, IngestParams,
@@ -30,6 +31,7 @@ pub const SOURCES: &[&str] = &[
     "himalayas",
     "jobicy",
     "remoteok",
+    "weworkremotely",
     "greenhouse:<board>",
     "ashby:<board>",
     "lever:<site>",
@@ -41,6 +43,7 @@ pub enum Source {
     Himalayas,
     Jobicy,
     RemoteOk,
+    WeWorkRemotely,
     Greenhouse(String),
     Ashby(String),
     Lever(String),
@@ -65,6 +68,7 @@ impl Source {
                 "himalayas" => Ok(Source::Himalayas),
                 "jobicy" => Ok(Source::Jobicy),
                 "remoteok" => Ok(Source::RemoteOk),
+                "weworkremotely" => Ok(Source::WeWorkRemotely),
                 _ => Err(bad()),
             },
             Some(("greenhouse", b)) => Ok(Source::Greenhouse(board(b)?)),
@@ -80,6 +84,7 @@ impl Source {
             Source::Himalayas => "himalayas".into(),
             Source::Jobicy => "jobicy".into(),
             Source::RemoteOk => "remoteok".into(),
+            Source::WeWorkRemotely => weworkremotely::SOURCE_ID.into(),
             Source::Greenhouse(b) => format!("greenhouse:{}", b.to_lowercase()),
             Source::Ashby(b) => format!("ashby:{}", b.to_lowercase()),
             Source::Lever(b) => format!("lever:{}", b.to_lowercase()),
@@ -111,6 +116,7 @@ impl Source {
             Source::Himalayas => himalayas::fetch(client, pages, p.country.as_deref()).await,
             Source::Jobicy => jobicy::fetch(client).await,
             Source::RemoteOk => remoteok::fetch(client).await,
+            Source::WeWorkRemotely => weworkremotely::fetch(client).await,
             Source::Greenhouse(b) => greenhouse::fetch(client, b).await,
             Source::Ashby(b) => ashby::fetch(client, b).await,
             Source::Lever(b) => lever::fetch(client, b).await,
@@ -123,6 +129,7 @@ impl Source {
             Source::Himalayas => himalayas::transform(raw),
             Source::Jobicy => jobicy::transform(raw),
             Source::RemoteOk => remoteok::transform(raw),
+            Source::WeWorkRemotely => weworkremotely::transform(raw),
             Source::Greenhouse(b) => greenhouse::transform(&id, b, raw),
             Source::Ashby(b) => ashby::transform(&id, b, raw),
             Source::Lever(b) => lever::transform(&id, b, raw),
@@ -487,15 +494,29 @@ async fn get_json(client: &HttpClient, url: &str) -> anyhow::Result<Value> {
 
 /// `get_json` with its own time limit instead of the client's 30 s, for a
 /// source that is known to be slow.
-///
-/// Transient network failures (timeout, refused or dropped connection, a body
-/// cut off mid-way) are retried twice, after 2 s and 4 s. HTTP errors (a 404
-/// for a missing board, a 5xx) are not: they are answers, not accidents.
 async fn get_json_within(
     client: &HttpClient,
     url: &str,
     timeout: Option<std::time::Duration>,
 ) -> anyhow::Result<Value> {
+    use anyhow::Context;
+    let body = get_text_within(client, url, timeout).await?;
+    serde_json::from_str(&body).with_context(|| format!("GET {url}: not JSON"))
+}
+
+/// The response body as text (RSS, HTML).
+async fn get_text(client: &HttpClient, url: &str) -> anyhow::Result<String> {
+    get_text_within(client, url, None).await
+}
+
+/// Transient network failures (timeout, refused or dropped connection, a body
+/// cut off mid-way) are retried twice, after 2 s and 4 s. HTTP errors (a 404
+/// for a missing board, a 5xx) are not: they are answers, not accidents.
+async fn get_text_within(
+    client: &HttpClient,
+    url: &str,
+    timeout: Option<std::time::Duration>,
+) -> anyhow::Result<String> {
     use anyhow::Context;
     const ATTEMPTS: u32 = 3;
     let mut attempt = 1;
@@ -506,7 +527,7 @@ async fn get_json_within(
         }
         let result = async {
             let resp = req.send().await?.error_for_status()?;
-            resp.json::<Value>().await
+            resp.text().await
         }
         .await;
         match result {
