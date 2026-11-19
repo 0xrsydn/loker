@@ -9,7 +9,7 @@ time zones), and answers searches from your point of view: "open to someone in
 Indonesia at UTC+7", not just "remote".
 
 > Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, and any
-> company's Greenhouse or Ashby board. CLI and MCP (stdio). REST and the web UI
+> company's Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
 > come next.
 
 ## Try it
@@ -18,7 +18,7 @@ Indonesia at UTC+7", not just "remote".
 direnv allow                                  # or `nix develop`: toolchain, sqlite, litestream, secretspec
 cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwide + ID listed)
 cargo run -- search engineer --country ID --tz 7
-cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>
+cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
 cargo run -- ingest remoteok                   # also: jobicy
 cargo run -- search --country ID --offset 20   # next page (each page reports its next offset)
 cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts, closed jobs
@@ -41,7 +41,7 @@ pages = 5
 
 [[sources]]
 id = "ashby:clera"
-company = "Clera"      # display name; Ashby only gives the slug
+company = "Clera"      # display name; Ashby and Lever only give the slug
 
 [[sources]]
 id = "remoteok"
@@ -78,7 +78,7 @@ aggregators that require attribution (Remote OK, Jobicy) get their link.
 ### Jobs close
 
 A listing closes when a complete fetch of its source no longer has it (a
-company's Greenhouse or Ashby board), when the source's own expiry passes
+company's Greenhouse, Ashby or Lever board), when the source's own expiry passes
 (Himalayas), or after 30 days unseen (the backstop for feeds that only return
 their newest jobs). It reopens when seen again. A job stays active while any
 of its listings is live. A fetch that would close more than half of a source's
@@ -128,7 +128,7 @@ prints exactly what the MCP tool returns as structured content.
 | Crate | Role |
 |---|---|
 | `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), `dedup` (which listings are one job and what that job says, with no IO), the SQLite store that loads rows for those rules and writes their answers, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
-| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby; `Source` dispatch and `ingest`, the one fetch → transform → store path |
+| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, Greenhouse, Ashby, Lever; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
 The v1 contract is committed as JSON Schemas in `schema/v1/` (`loker schema

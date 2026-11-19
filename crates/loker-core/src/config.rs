@@ -22,11 +22,11 @@ pub struct Config {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceConfig {
-    /// `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.
+    /// `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
     pub id: String,
     pub pages: Option<u32>,
     pub country: Option<String>,
-    /// Company display name for an employer board (Ashby only gives the slug).
+    /// Company display name for an employer board (Ashby and Lever only give the slug).
     pub company: Option<String>,
     #[serde(default = "enabled_by_default")]
     pub enabled: bool,
@@ -102,9 +102,9 @@ id = "jobicy"
 [[sources]]
 id = "remoteok"
 
-# A company's own board: greenhouse:<slug> or ashby:<slug>.
+# A company's own board: greenhouse:<slug>, ashby:<slug> or lever:<site>.
 # [[sources]]
 # id = "ashby:clera"
-# company = "Clera"    # display name; Ashby only gives the slug
+# company = "Clera"    # display name; Ashby and Lever only give the slug
 # enabled = false      # keep it listed but skip it
 "#;

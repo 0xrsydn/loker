@@ -426,13 +426,13 @@ pub enum CheckStatus {
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
-    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.
+    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
     pub source: String,
     /// Pages to fetch where the source paginates (himalayas), default 3.
     pub pages: Option<u32>,
     /// Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).
     pub country: Option<String>,
-    /// Company display name for an employer board (`greenhouse:`/`ashby:`); Ashby only gives the slug.
+    /// Company display name for an employer board (`greenhouse:`/`ashby:`/`lever:`); Ashby and Lever only give the slug.
     pub company: Option<String>,
 }
 

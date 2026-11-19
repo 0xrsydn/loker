@@ -3,7 +3,7 @@
   "additionalProperties": false,
   "properties": {
     "company": {
-      "description": "Company display name for an employer board (`greenhouse:`/`ashby:`); Ashby only gives the slug.",
+      "description": "Company display name for an employer board (`greenhouse:`/`ashby:`/`lever:`); Ashby and Lever only give the slug.",
       "type": [
         "string",
         "null"
@@ -26,7 +26,7 @@
       ]
     },
     "source": {
-      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`.",
+      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.",
       "type": "string"
     }
   },

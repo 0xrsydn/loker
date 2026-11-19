@@ -74,6 +74,9 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
             ("200 OK", json!({ "apiVersion": "1", "jobs": jobs }))
         }
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
+        // Paged: the second page is empty only if the adapter asks for one.
+        "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
+        "/v0/postings/initech" => ("200 OK", json!([])),
         "/api" => {
             let mut items = vec![json!({ "legal": "API terms: link back to Remote OK." })];
             items.extend(remoteok());
@@ -159,6 +162,30 @@ fn jobicy() -> Vec<Value> {
         "salaryMin": 50000, "salaryMax": 60000, "salaryCurrency": "USD", "salaryPeriod": "yearly",
         "pubDate": "2026-09-24T10:00:00+00:00", "jobDescription": "<p>Words.</p>"
     })]
+}
+
+fn lever() -> Vec<Value> {
+    vec![
+        // The same role as Jobicy's: one job across two sources.
+        json!({
+            "id": "lv-1", "text": "Writer", "workplaceType": "remote", "country": "US",
+            "categories": { "commitment": "Full-time", "location": "Anywhere", "allLocations": ["Anywhere"] },
+            "hostedUrl": "https://jobs.lever.co/initech/lv-1",
+            "applyUrl": "https://jobs.lever.co/initech/lv-1/apply",
+            "createdAt": 1_790_000_000_000_i64, "description": "<p>Words.</p>",
+            "lists": [{ "text": "You have", "content": "<li>A pen</li>" }], "additional": ""
+        }),
+        // On-site, with Lever's ISO country and a yearly salary.
+        json!({
+            "id": "lv-2", "text": "Office Manager", "workplaceType": "onsite", "country": "US",
+            "categories": { "commitment": "Full-time", "location": "New York, NY", "allLocations": ["New York, NY"] },
+            "hostedUrl": "https://jobs.lever.co/initech/lv-2",
+            "applyUrl": "https://jobs.lever.co/initech/lv-2/apply",
+            "createdAt": 1_790_000_100_000_i64, "description": "<p>Run the office.</p>",
+            "lists": [], "additional": "",
+            "salaryRange": { "currency": "USD", "interval": "per-year-salary", "min": 60000, "max": 80000 }
+        }),
+    ]
 }
 
 fn remoteok() -> Vec<Value> {
@@ -285,10 +312,11 @@ impl Home {
     }
 }
 
-const ORDER: [&str; 5] = [
+const ORDER: [&str; 6] = [
     "himalayas",
     "greenhouse:acme",
     "ashby:globex",
+    "lever:initech",
     "jobicy",
     "remoteok",
 ];
@@ -300,16 +328,21 @@ fn pipeline_end_to_end() {
     let stub = stub();
     let home = Home::new("forward", &stub);
 
-    // Every adapter parses its payload; two pairs merge across sources.
+    // Every adapter parses its payload; three pairs merge across sources.
     let first: Vec<Value> = ORDER.iter().map(|s| home.ingest(s)).collect();
     let new: u64 = first.iter().map(|s| s["new"].as_u64().unwrap()).sum();
     let skipped: u64 = first.iter().map(|s| s["skipped"].as_u64().unwrap()).sum();
-    assert_eq!((new, skipped), (8, 0), "{first:#?}");
+    assert_eq!((new, skipped), (10, 0), "{first:#?}");
     let clusters = home.clusters();
     assert_eq!(
         clusters.len(),
-        6,
-        "8 listings, 2 cross-source merges: {clusters:#?}"
+        7,
+        "10 listings, 3 cross-source merges: {clusters:#?}"
+    );
+    assert!(
+        clusters.iter().any(|c| c.len() == 2
+            && c[0].starts_with("jobicy")
+            && c[1].starts_with("lever:initech"))
     );
     assert!(clusters.iter().any(|c| c.len() == 2
         && c[0].starts_with("greenhouse:acme")
@@ -358,6 +391,15 @@ fn pipeline_end_to_end() {
     assert_eq!(job["eligibility"]["scope"], "worldwide");
     assert_eq!(job["eligible"]["kind"], "yes");
 
+    // Lever: an on-site job takes the posting's country, and a yearly salary
+    // becomes USD per month.
+    let r = home.json(&["search", "office", "--json"]);
+    let job = &r["jobs"][0];
+    assert_eq!(job["eligibility"]["scope"], "onsite");
+    assert_eq!(job["eligibility"]["countries"], json!(["US"]));
+    assert_eq!(job["pay"]["usdMonthMin"], 5000);
+    assert_eq!(job["employmentType"], "full_time");
+
     // Every adapter's jobs go through the shared cleanup.
     let r = home.json(&["search", "designer", "--json"]);
     let job = &r["jobs"][0];
@@ -399,7 +441,7 @@ fn pipeline_end_to_end() {
         (Some(1), Some(0)),
         "{st}"
     );
-    assert_eq!(home.clusters().len(), 5);
+    assert_eq!(home.clusters().len(), clusters.len() - 1);
     stub.shrink.store(false, Ordering::SeqCst);
     let st = home.ingest("ashby:globex");
     assert_eq!(st["reopened"].as_u64(), Some(1), "{st}");

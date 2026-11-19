@@ -10,6 +10,7 @@ pub mod ashby;
 pub mod greenhouse;
 pub mod himalayas;
 pub mod jobicy;
+pub mod lever;
 pub mod remoteok;
 
 use loker_core::api::{
@@ -31,6 +32,7 @@ pub const SOURCES: &[&str] = &[
     "remoteok",
     "greenhouse:<board>",
     "ashby:<board>",
+    "lever:<site>",
 ];
 
 /// A source instance: an aggregator, or one company's board on an ATS.
@@ -41,6 +43,7 @@ pub enum Source {
     RemoteOk,
     Greenhouse(String),
     Ashby(String),
+    Lever(String),
 }
 
 impl Source {
@@ -66,6 +69,7 @@ impl Source {
             },
             Some(("greenhouse", b)) => Ok(Source::Greenhouse(board(b)?)),
             Some(("ashby", b)) => Ok(Source::Ashby(board(b)?)),
+            Some(("lever", b)) => Ok(Source::Lever(board(b)?)),
             Some(_) => Err(bad()),
         }
     }
@@ -78,12 +82,13 @@ impl Source {
             Source::RemoteOk => "remoteok".into(),
             Source::Greenhouse(b) => format!("greenhouse:{}", b.to_lowercase()),
             Source::Ashby(b) => format!("ashby:{}", b.to_lowercase()),
+            Source::Lever(b) => format!("lever:{}", b.to_lowercase()),
         }
     }
 
     pub fn kind(&self) -> SourceKind {
         match self {
-            Source::Greenhouse(_) | Source::Ashby(_) => SourceKind::Employer,
+            Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => SourceKind::Employer,
             _ => SourceKind::Aggregator,
         }
     }
@@ -93,7 +98,9 @@ impl Source {
     /// missing items mean nothing.
     pub fn complete_id(&self, raw: &Value) -> Option<Option<String>> {
         match self {
-            Source::Greenhouse(_) | Source::Ashby(_) => Some(raw.get("id").and_then(as_string)),
+            Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => {
+                Some(raw.get("id").and_then(as_string))
+            }
             _ => None,
         }
     }
@@ -106,6 +113,7 @@ impl Source {
             Source::RemoteOk => remoteok::fetch(client).await,
             Source::Greenhouse(b) => greenhouse::fetch(client, b).await,
             Source::Ashby(b) => ashby::fetch(client, b).await,
+            Source::Lever(b) => lever::fetch(client, b).await,
         }
     }
 
@@ -117,6 +125,7 @@ impl Source {
             Source::RemoteOk => remoteok::transform(raw),
             Source::Greenhouse(b) => greenhouse::transform(&id, b, raw),
             Source::Ashby(b) => ashby::transform(&id, b, raw),
+            Source::Lever(b) => lever::transform(&id, b, raw),
         }
     }
 }
