@@ -15,6 +15,11 @@ python3 role_eval.py score [-v]              # classifier vs the Opus labels
 python3 role_eval.py score --bin /path/to/old/loker
 python3 role_eval.py jev                     # Jev's pick per job (needs OPENROUTER_API_KEY)
 python3 role_eval.py score --pred jev        # score Jev; --pred hybrid:0.6 = rules for titles, Jev for the rest
+
+# a holdout of jobs the rules never saw: boards and postings not in snapshot.db
+LOKER_EVAL_DB=snapshot-fresh.db python3 role_eval.py sample 300 --set fresh --new-since snapshot.db
+JUDGE=opus python3 role_eval.py label --set fresh       # and JUDGE=deepseek
+python3 role_eval.py score --set fresh                   # rules; LOKER_EVAL_DB=<enriched copy> for rules + Jev
 ```
 
 ## How it works
@@ -39,7 +44,8 @@ python3 role_eval.py score --pred jev        # score Jev; --pred hybrid:0.6 = ru
 |---|---|
 | covered | Jobs the classifier gives a role |
 | exact | Same primary id as the label |
-| compatible | Same id, one inside the other (`engineering` vs `backend`), or the label's primary among our roles: filters still find the job |
+| findable | A filter on the label's role returns the job (`JobRole::matches`): our primary or a secondary sits inside it. Strict; use this or exact |
+| compatible | Same id, one inside the other in either direction, or the label's primary among our roles. Generous: tagging every job `engineering` scores 36%, so never a headline |
 | same top family | Right family, even if the role differs |
 | missed / false role | No role where the label has one / a role where the label says none |
 | by method | The above for title, category and description decisions |
@@ -98,4 +104,40 @@ The rest are mostly judgment calls: Palantir's "Forward Deployed Software
 Engineer" goes to sales_engineering (Opus: software), "Founding Engineer" at
 AI startups to ai_engineering, and Deployment Strategist scatters (both
 labelers flagged it as a missing role).
+
+### Audit (2026-11-19): a holdout the rules never saw
+
+The numbers above are all on `sample.json`, which the classifier's tables
+were tuned against (its incompatible lists drove the rule changes) and on
+which Jev's 0.6 override threshold was picked. Before rules v2 was
+committed, 1,222 of the snapshot's 1,749 titles had been printed during
+development, so no clean holdout exists inside `snapshot.db`.
+
+`fresh.json` is one: 300 jobs from `snapshot-fresh.db`, fetched after
+rules v2 was frozen from 13 company boards loker had never ingested
+(Stripe, OpenAI, Cloudflare, Ramp, Notion, Reddit, ...) plus the
+aggregators, keeping only postings whose URL is not in `snapshot.db`, at
+most 40 per source. It leans to company boards (few aggregator jobs were
+new), so it has more specific titles than the snapshot. Labelled by Opus
+and DeepSeek (89% same primary); scored once. Rules + Jev is the shipped
+binary on `snapshot-fresh-jev.db`, a copy where only these 300 jobs are
+active, after a real `loker roles enrich` (296 distinct jobs, $0.02).
+
+| `fresh.json`, 300 jobs | exact (Opus / DeepSeek) | findable | same family | tuning sample, exact |
+|---|---|---|---|---|
+| rules only | 71% / 70% | 73% / 72% | 86% / 86% | 68% |
+| rules + Jev, shipped | 83% / 81% | 84% / 82% | 92% / 90% | 79% |
+| Jev alone (its cached answers) | 83% / 81% | | | 80% |
+
+- No sign the tuning numbers were inflated: fresh jobs score as well or
+  better, under either labeler.
+- The override (rules where a title names the role and Jev is under 0.6)
+  decides 26 fresh jobs: rules get 12 right, Jev 11 (Opus) or 12
+  (DeepSeek). Its 1.5-point gain on the tuning sample was an artifact of
+  picking the threshold there; on fresh data it is neutral.
+- Strict findable on the tuning sample: rules 70%, rules + Jev 80% (the
+  "compatible" 73% / 84% counted broader tags as hits).
+- Scorer checks: the labels as predictions score 100%; no roles scores
+  3% (the 17 jobs labelled none); everything `engineering` scores 0%
+  exact and findable, 36% compatible.
 

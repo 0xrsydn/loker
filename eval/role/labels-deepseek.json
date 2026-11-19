@@ -11,10 +11,28 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_0129a4f8a6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_01911257fa": {
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_01a1e1ca54": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_02ef92d8d1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_03277fc15a": {
@@ -53,6 +71,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_04c3f89193": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
   "secondary": []
  },
  "v1|1|j_04d790d4be": {
@@ -99,6 +123,12 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_0676d592aa": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
  "v1|1|j_069c5be345": {
   "missing": "",
   "modifiers": [],
@@ -111,6 +141,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_06e13157d7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_0720ea5032": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
   "secondary": []
  },
  "v1|1|j_07341e6bb0": {
@@ -153,6 +195,12 @@
   "primary": "customer_success",
   "secondary": []
  },
+ "v1|1|j_08e14ae559": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_08ee88b3bd": {
   "missing": "",
   "modifiers": [],
@@ -162,6 +210,12 @@
   ]
  },
  "v1|1|j_08fb419b09": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_096cdb7def": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
@@ -199,16 +253,58 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_0a4195c107": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_0ae6850577": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_0b0a0121f1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_0b3df2cb77": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_0b7c9bd489": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
  "v1|1|j_0b7ceb5670": {
   "missing": "",
   "modifiers": [],
   "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_0bc1f87281": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_0c0c0747dc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
+ "v1|1|j_0c3421c72d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_0c5819cdfc": {
@@ -251,10 +347,34 @@
   "primary": "product_engineer",
   "secondary": []
  },
+ "v1|1|j_0d765f8fdd": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
  "v1|1|j_0eb10b18c6": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_0ebfeeb87d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
+  "secondary": []
+ },
+ "v1|1|j_0f0f775482": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_0f160e805b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
   "secondary": []
  },
  "v1|1|j_0f3575d6aa": {
@@ -263,6 +383,12 @@
    "founding"
   ],
   "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_0f9a485c2e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
   "secondary": []
  },
  "v1|1|j_0fc522c4d2": {
@@ -285,12 +411,30 @@
   "primary": "recruiting",
   "secondary": []
  },
+ "v1|1|j_106da5c96f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_11021076ef": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_12481e6201": {
   "missing": "",
   "modifiers": [
    "founding"
   ],
   "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_1353de7c7e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
   "secondary": []
  },
  "v1|1|j_13d473cbb6": {
@@ -339,16 +483,34 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_16ab568a70": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_16ae49b111": {
   "missing": "",
   "modifiers": [],
   "primary": "frontend",
   "secondary": []
  },
+ "v1|1|j_16dd83af45": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "hardware",
+  "secondary": []
+ },
  "v1|1|j_16f6d9096c": {
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_16fb1efcb5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_engineer",
   "secondary": []
  },
  "v1|1|j_17065ebeaf": {
@@ -377,10 +539,22 @@
   "primary": "mobile",
   "secondary": []
  },
+ "v1|1|j_179e83dc81": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_17f7fb4acc": {
   "missing": "algorithmic_trading",
   "modifiers": [],
   "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_181932aaa5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
   "secondary": []
  },
  "v1|1|j_186c1df2f8": {
@@ -393,6 +567,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_197241eeca": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
   "secondary": []
  },
  "v1|1|j_19db4389c5": {
@@ -427,6 +607,18 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_1ae52c18e8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_1b974fd9e1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
  "v1|1|j_1bc162917a": {
   "missing": "",
   "modifiers": [],
@@ -445,10 +637,22 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_1d17fed6d5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
  "v1|1|j_1db9426d82": {
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_1df59e8640": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
   "secondary": []
  },
  "v1|1|j_1e2529d190": {
@@ -469,10 +673,22 @@
   "primary": "operations",
   "secondary": []
  },
+ "v1|1|j_1e9ed1c011": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_201d14ba08": {
   "missing": "",
   "modifiers": [],
   "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_207436dbf0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
   "secondary": []
  },
  "v1|1|j_20a65cbc7e": {
@@ -525,6 +741,12 @@
   "primary": "mobile",
   "secondary": []
  },
+ "v1|1|j_22268612c0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
+  "secondary": []
+ },
  "v1|1|j_22c7950b32": {
   "missing": "",
   "modifiers": [],
@@ -535,6 +757,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_22fb5fbd29": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
   "secondary": []
  },
  "v1|1|j_22fd905c7a": {
@@ -605,6 +833,30 @@
   "primary": "security",
   "secondary": []
  },
+ "v1|1|j_26d5109d78": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_26f174e67c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_2700aa605c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_2714594826": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_2732f91681": {
   "missing": "",
   "modifiers": [],
@@ -623,10 +875,40 @@
   "primary": "infrastructure",
   "secondary": []
  },
+ "v1|1|j_28077a7125": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
  "v1|1|j_2847a8c88d": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_28603a2870": {
+  "missing": "claims_investigator",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_28d416f4c1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_28f3136a3c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_2912df221e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
   "secondary": []
  },
  "v1|1|j_297cd40725": {
@@ -647,6 +929,24 @@
   "primary": "recruiting",
   "secondary": []
  },
+ "v1|1|j_2b21f044a5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_2b8443d7af": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_2bab2f93e4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
  "v1|1|j_2bade00d56": {
   "missing": "",
   "modifiers": [],
@@ -665,10 +965,30 @@
   "primary": "data_engineering",
   "secondary": []
  },
+ "v1|1|j_2c6858f226": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
+  "secondary": []
+ },
  "v1|1|j_2cac462ba8": {
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_2d0f2a096e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": [
+   "ai_engineering"
+  ]
+ },
+ "v1|1|j_2d1905f64f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_2d584a82e3": {
@@ -679,16 +999,40 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_2d75743fd5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
  "v1|1|j_2d7f93d554": {
   "missing": "",
   "modifiers": [],
   "primary": "recruiting",
   "secondary": []
  },
+ "v1|1|j_2e1f2459d6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_2e849c8398": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_2eb490a816": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_training",
+  "secondary": []
+ },
+ "v1|1|j_2ee1042bd5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
   "secondary": []
  },
  "v1|1|j_2ee6e8ce63": {
@@ -703,16 +1047,40 @@
   "primary": "engineering_management",
   "secondary": []
  },
+ "v1|1|j_2ffab4aa19": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_3117b5827b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_312b6ce30d": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_315dcc7fe5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
  "v1|1|j_31b2643950": {
   "missing": "",
   "modifiers": [],
   "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_31ef77a375": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
   "secondary": []
  },
  "v1|1|j_321252cee1": {
@@ -781,16 +1149,46 @@
    "infrastructure"
   ]
  },
+ "v1|1|j_346f49fb48": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_34a89efe52": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_34ade7d7b8": {
   "missing": "",
   "modifiers": [],
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_34b516bfb3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
  "v1|1|j_3523a5f10a": {
   "missing": "",
   "modifiers": [],
   "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_35594ae403": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_35635b3ac0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
   "secondary": []
  },
  "v1|1|j_356794525a": {
@@ -819,6 +1217,12 @@
   "primary": "embedded",
   "secondary": []
  },
+ "v1|1|j_367e14077f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
  "v1|1|j_3692f8dbd8": {
   "missing": "",
   "modifiers": [],
@@ -826,6 +1230,12 @@
   "secondary": []
  },
  "v1|1|j_36949da3e5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_36ada9ea3d": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
@@ -881,6 +1291,20 @@
   "primary": "infrastructure",
   "secondary": []
  },
+ "v1|1|j_38fee63c3a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_3917aac8c2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": [
+   "fullstack"
+  ]
+ },
  "v1|1|j_394b4389ab": {
   "missing": "",
   "modifiers": [],
@@ -900,6 +1324,30 @@
   ],
   "primary": "software",
   "secondary": []
+ },
+ "v1|1|j_3a56f148d6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": [
+   "compliance"
+  ]
+ },
+ "v1|1|j_3a6a464d0c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": [
+   "legal"
+  ]
+ },
+ "v1|1|j_3a70bdd434": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": [
+   "data_engineering"
+  ]
  },
  "v1|1|j_3a8befd493": {
   "missing": "",
@@ -921,6 +1369,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_3ba8db5ee1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_3c40972874": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
   "secondary": []
  },
  "v1|1|j_3cef89d425": {
@@ -959,10 +1419,22 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_3f33a9f87d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
  "v1|1|j_404a8194b3": {
   "missing": "",
   "modifiers": [],
   "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_40832ffe58": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_410b345530": {
@@ -975,6 +1447,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_41d4d2a477": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_41f05483c8": {
@@ -1031,10 +1509,22 @@
   "primary": "technical_support",
   "secondary": []
  },
+ "v1|1|j_442ce31ed6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
  "v1|1|j_442f1eecd4": {
   "missing": "Estimator",
   "modifiers": [],
   "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_445a2cb287": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
   "secondary": []
  },
  "v1|1|j_447fd32efe": {
@@ -1073,6 +1563,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "customer_support",
+  "secondary": []
+ },
+ "v1|1|j_45d2075b7d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_45ed592e83": {
@@ -1119,16 +1615,34 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_47b829d1bb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
+  "secondary": []
+ },
  "v1|1|j_47fd76a571": {
   "missing": "",
   "modifiers": [],
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_482bf4f893": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_4831111755": {
   "missing": "",
   "modifiers": [],
   "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_48df4638c9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
   "secondary": []
  },
  "v1|1|j_48ed6b74fc": {
@@ -1174,6 +1688,12 @@
    "ai_engineering"
   ]
  },
+ "v1|1|j_4abb41ecda": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
  "v1|1|j_4b0ab24952": {
   "missing": "",
   "modifiers": [],
@@ -1184,6 +1704,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_4b94e7ed6f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_4ba8b4232d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
   "secondary": []
  },
  "v1|1|j_4bedbead8b": {
@@ -1198,10 +1730,22 @@
   "primary": "finance",
   "secondary": []
  },
+ "v1|1|j_4c915116d5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
  "v1|1|j_4ca84d1328": {
   "missing": "",
   "modifiers": [],
   "primary": "education",
+  "secondary": []
+ },
+ "v1|1|j_4ccdf40750": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "devrel",
   "secondary": []
  },
  "v1|1|j_4cced88cad": {
@@ -1300,6 +1844,36 @@
   "primary": "finance",
   "secondary": []
  },
+ "v1|1|j_5223adac02": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_5291c02f80": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_53f0aa4c86": {
+  "missing": "public_policy",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_53ff6e9c8d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_5402548451": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
  "v1|1|j_540c8a47db": {
   "missing": "",
   "modifiers": [],
@@ -1312,10 +1886,28 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_54851803c4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
  "v1|1|j_549851e59b": {
   "missing": "",
   "modifiers": [],
   "primary": "technical_writing",
+  "secondary": []
+ },
+ "v1|1|j_549e8afe70": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_54a5ddf501": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
   "secondary": []
  },
  "v1|1|j_54d8326aeb": {
@@ -1330,6 +1922,12 @@
   "primary": "technical_support",
   "secondary": []
  },
+ "v1|1|j_555a00decb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "design_engineer",
+  "secondary": []
+ },
  "v1|1|j_55aa03800a": {
   "missing": "",
   "modifiers": [],
@@ -1342,10 +1940,42 @@
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_5655c767b1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_5663b4f41d": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_568fb1e412": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_56e4fdac40": {
   "missing": "",
   "modifiers": [],
   "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_57e1dcf3f6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_57ed2e43ab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_57f4338357": {
@@ -1364,6 +1994,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "data_analysis",
+  "secondary": []
+ },
+ "v1|1|j_58ca4054c1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
   "secondary": []
  },
  "v1|1|j_5a3d13fe1c": {
@@ -1387,6 +2023,12 @@
   "secondary": []
  },
  "v1|1|j_5a46cb95b7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_5a5021a494": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
@@ -1418,10 +2060,22 @@
    "mobile"
   ]
  },
+ "v1|1|j_5b0ab1fc5a": {
+  "missing": "proctor quality and learning manager",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
  "v1|1|j_5b57c69524": {
   "missing": "",
   "modifiers": [],
   "primary": "technical_support",
+  "secondary": []
+ },
+ "v1|1|j_5b69815f6e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_5b94147b6e": {
@@ -1476,6 +2130,18 @@
   "primary": "infrastructure",
   "secondary": []
  },
+ "v1|1|j_5de49b8b74": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_5e49233fda": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
  "v1|1|j_5e4e79b4bb": {
   "missing": "",
   "modifiers": [],
@@ -1500,6 +2166,12 @@
   "primary": "customer_success",
   "secondary": []
  },
+ "v1|1|j_5e8091f6e9": {
+  "missing": "language measurement scientist",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
  "v1|1|j_5efbdda2c3": {
   "missing": "",
   "modifiers": [],
@@ -1510,6 +2182,12 @@
   "missing": "process_safety_engineer",
   "modifiers": [],
   "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_5f85eccd5a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
   "secondary": []
  },
  "v1|1|j_5fe53c620b": {
@@ -1524,6 +2202,14 @@
   "primary": "ml_engineering",
   "secondary": []
  },
+ "v1|1|j_6024515e27": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
  "v1|1|j_60253e47a0": {
   "missing": "",
   "modifiers": [],
@@ -1534,6 +2220,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_60c0870fc4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
   "secondary": []
  },
  "v1|1|j_61465132d9": {
@@ -1688,6 +2380,12 @@
   "primary": "security",
   "secondary": []
  },
+ "v1|1|j_67f03b118d": {
+  "missing": "community manager",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
  "v1|1|j_686f0d4114": {
   "missing": "",
   "modifiers": [],
@@ -1706,12 +2404,24 @@
   "primary": "data_analysis",
   "secondary": []
  },
+ "v1|1|j_68ba386958": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
  "v1|1|j_68d92a970f": {
   "missing": "",
   "modifiers": [
    "founding"
   ],
   "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_69941aeee5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "frontend",
   "secondary": []
  },
  "v1|1|j_69e572486f": {
@@ -1728,6 +2438,12 @@
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_6a979f2f23": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
  "v1|1|j_6a9ac9eddd": {
   "missing": "",
   "modifiers": [],
@@ -1738,6 +2454,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_6ab26aad01": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_6bd57629b3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
   "secondary": []
  },
  "v1|1|j_6beba2fe39": {
@@ -1758,10 +2486,34 @@
   "primary": "product_design",
   "secondary": []
  },
+ "v1|1|j_6d85bf293a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_6d96c7bb16": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_6da31baedc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
  "v1|1|j_6de467eaeb": {
   "missing": "",
   "modifiers": [],
   "primary": "embedded",
+  "secondary": []
+ },
+ "v1|1|j_6df3bb934a": {
+  "missing": "music_editor",
+  "modifiers": [],
+  "primary": "none",
   "secondary": []
  },
  "v1|1|j_6e612b8a9c": {
@@ -1788,6 +2540,14 @@
   "primary": "product_management",
   "secondary": []
  },
+ "v1|1|j_6f745885cb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": [
+   "data_analysis"
+  ]
+ },
  "v1|1|j_6f8d756f4f": {
   "missing": "",
   "modifiers": [],
@@ -1806,6 +2566,12 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_71aaf45001": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
  "v1|1|j_71db67eb7a": {
   "missing": "",
   "modifiers": [],
@@ -1822,6 +2588,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_726a285feb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "admin",
   "secondary": []
  },
  "v1|1|j_7270dadd64": {
@@ -1852,6 +2624,20 @@
   "missing": "",
   "modifiers": [],
   "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_755fde1a85": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
+  "secondary": [
+   "security"
+  ]
+ },
+ "v1|1|j_75f69e9fa3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
   "secondary": []
  },
  "v1|1|j_761e5b8482": {
@@ -1888,6 +2674,12 @@
   "primary": "admin",
   "secondary": []
  },
+ "v1|1|j_780613caf9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
  "v1|1|j_780b78a211": {
   "missing": "",
   "modifiers": [],
@@ -1912,10 +2704,28 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_78592c5cf1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_78897551b6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
  "v1|1|j_78d296f496": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_78e20cd15a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
   "secondary": []
  },
  "v1|1|j_7918656ab7": {
@@ -1947,6 +2757,14 @@
   "modifiers": [],
   "primary": "data_engineering",
   "secondary": []
+ },
+ "v1|1|j_7a5fb3678f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": [
+   "security"
+  ]
  },
  "v1|1|j_7ab0d8ddbe": {
   "missing": "",
@@ -1988,6 +2806,12 @@
   "primary": "technical_support",
   "secondary": []
  },
+ "v1|1|j_7c83fe256e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
  "v1|1|j_7d5beeef30": {
   "missing": "",
   "modifiers": [],
@@ -2000,6 +2824,12 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_7da0c98fc6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_7ec6aa15fa": {
   "missing": "",
   "modifiers": [
@@ -2008,10 +2838,22 @@
   "primary": "product_management",
   "secondary": []
  },
+ "v1|1|j_7ed9471107": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
  "v1|1|j_7edb522726": {
   "missing": "",
   "modifiers": [],
   "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_7f9ce9d9e4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
   "secondary": []
  },
  "v1|1|j_7fac510287": {
@@ -2027,6 +2869,30 @@
   "secondary": [
    "sales"
   ]
+ },
+ "v1|1|j_7fece73b7e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_7ffea7bd0d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_802322fb40": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_804dcfdb20": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
  },
  "v1|1|j_808f563342": {
   "missing": "",
@@ -2044,6 +2910,26 @@
   "missing": "",
   "modifiers": [],
   "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_81a8026218": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_81b3d18c45": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_824f85a594": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
   "secondary": []
  },
  "v1|1|j_82705b52a0": {
@@ -2066,10 +2952,34 @@
   "primary": "customer_success",
   "secondary": []
  },
+ "v1|1|j_833335c86b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_83455edd50": {
   "missing": "",
   "modifiers": [],
   "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_83a4298702": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
+  "secondary": []
+ },
+ "v1|1|j_83d22bd023": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_84d9523769": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_8516abead4": {
@@ -2084,10 +2994,28 @@
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_8550701842": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_858fbfe7b8": {
   "missing": "",
   "modifiers": [],
   "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_85b53dcd5d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_85fa669b57": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
   "secondary": []
  },
  "v1|1|j_86507109b4": {
@@ -2100,6 +3028,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "frontend",
+  "secondary": []
+ },
+ "v1|1|j_86dc4d4ffc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
   "secondary": []
  },
  "v1|1|j_86fa4046d2": {
@@ -2164,6 +3098,12 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_8a6375a9a3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_8a701e8829": {
   "missing": "",
   "modifiers": [],
@@ -2171,6 +3111,20 @@
   "secondary": [
    "infrastructure"
   ]
+ },
+ "v1|1|j_8a8ce1da11": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_engineering",
+  "secondary": [
+   "product_engineer"
+  ]
+ },
+ "v1|1|j_8aed0e5f08": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
  },
  "v1|1|j_8b1ed99691": {
   "missing": "",
@@ -2181,6 +3135,18 @@
   "secondary": [
    "software"
   ]
+ },
+ "v1|1|j_8b8e46b28f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_8c1d81f9e0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
  },
  "v1|1|j_8cd7a12023": {
   "missing": "",
@@ -2206,10 +3172,28 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_8ea0341669": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
+  "secondary": []
+ },
  "v1|1|j_8efdfb456e": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_8f779c0d6d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_8f79ee8371": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
   "secondary": []
  },
  "v1|1|j_8fd9ef6c0e": {
@@ -2224,6 +3208,12 @@
    "founding"
   ],
   "primary": "product_engineer",
+  "secondary": []
+ },
+ "v1|1|j_9014173b61": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_9054abae5e": {
@@ -2244,6 +3234,12 @@
   "primary": "recruiting",
   "secondary": []
  },
+ "v1|1|j_914affb47d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
  "v1|1|j_91a8d0c336": {
   "missing": "",
   "modifiers": [],
@@ -2254,6 +3250,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_92139fa8de": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_923018bc06": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
   "secondary": []
  },
  "v1|1|j_92c6dbfc6c": {
@@ -2290,6 +3298,18 @@
   "primary": "go_to_market",
   "secondary": []
  },
+ "v1|1|j_9491c30503": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_94fdc70649": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
  "v1|1|j_953d842975": {
   "missing": "",
   "modifiers": [],
@@ -2324,6 +3344,18 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_969ec55e16": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_9743a05e56": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_97c8b02aaa": {
   "missing": "",
   "modifiers": [],
@@ -2348,7 +3380,19 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_98abbe6177": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
  "v1|1|j_98f3e1b44b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_992c6bad56": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
@@ -2406,12 +3450,30 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_9bc452436b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_9c155d51dc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
  "v1|1|j_9c21b7b5db": {
   "missing": "",
   "modifiers": [
    "founding"
   ],
   "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_9c758547b4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
   "secondary": []
  },
  "v1|1|j_9c96afe767": {
@@ -2456,6 +3518,18 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_9f19ca84cb": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_9f583b009e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
  "v1|1|j_9feead8117": {
   "missing": "",
   "modifiers": [],
@@ -2473,6 +3547,14 @@
   "modifiers": [],
   "primary": "backend",
   "secondary": []
+ },
+ "v1|1|j_a161e85f72": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": [
+   "compliance"
+  ]
  },
  "v1|1|j_a20b97bb90": {
   "missing": "",
@@ -2506,6 +3588,12 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_a3bab205d8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_a3f14b52ac": {
   "missing": "",
   "modifiers": [],
@@ -2522,6 +3610,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_a4a2c54e57": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_a4b3c1dbb7": {
@@ -2552,6 +3646,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_a5c4697540": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
   "secondary": []
  },
  "v1|1|j_a617acf7d9": {
@@ -2622,6 +3722,24 @@
    "infrastructure"
   ]
  },
+ "v1|1|j_a7d3fbe0e3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
+  "secondary": []
+ },
+ "v1|1|j_a7d9a66292": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_a8bfb4da8f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
  "v1|1|j_a8f8842c55": {
   "missing": "",
   "modifiers": [],
@@ -2632,6 +3750,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_a97683a9f9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
   "secondary": []
  },
  "v1|1|j_a989640499": {
@@ -2647,6 +3771,12 @@
   "secondary": [
    "brand_design"
   ]
+ },
+ "v1|1|j_aaa54fdd31": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
  },
  "v1|1|j_ab3979c587": {
   "missing": "",
@@ -2664,6 +3794,18 @@
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_abfec1c5a4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_ac2e05455c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
   "secondary": []
  },
  "v1|1|j_acb5f75e7a": {
@@ -2690,6 +3832,18 @@
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_adca900a2a": {
+  "missing": "public_policy",
+  "modifiers": [],
+  "primary": "operations",
+  "secondary": []
+ },
+ "v1|1|j_ade6fc622f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
  "v1|1|j_adef1583e4": {
   "missing": "",
   "modifiers": [],
@@ -2710,6 +3864,30 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_ae1ccd8113": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_ae3ed6476d": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_ae59e90f27": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_ae68e57ac1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_aec0db69b0": {
   "missing": "",
   "modifiers": [],
@@ -2722,10 +3900,22 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_aeca4efcd2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
  "v1|1|j_aecb362e58": {
   "missing": "",
   "modifiers": [],
   "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_aeea701b04": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "engineering_management",
   "secondary": []
  },
  "v1|1|j_af633214ef": {
@@ -2734,10 +3924,56 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_af88354a2c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_af9ab89e30": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_aff511d742": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_b016064389": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_b09fe5b10f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_b0bae508b4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_b0eecc24fc": {
   "missing": "",
   "modifiers": [],
   "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_b16a9a141e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
   "secondary": []
  },
  "v1|1|j_b1a89afc7e": {
@@ -2772,6 +4008,12 @@
   "primary": "legal",
   "secondary": []
  },
+ "v1|1|j_b308062961": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_b3152203e6": {
   "missing": "",
   "modifiers": [],
@@ -2802,10 +4044,28 @@
   "primary": "devrel",
   "secondary": []
  },
+ "v1|1|j_b4b2d9473e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_b4ce99b4df": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
  "v1|1|j_b5711accbb": {
   "missing": "",
   "modifiers": [],
   "primary": "healthcare",
+  "secondary": []
+ },
+ "v1|1|j_b5e6ef45b5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "people",
   "secondary": []
  },
  "v1|1|j_b625b2fff0": {
@@ -2840,6 +4100,12 @@
   "primary": "fullstack",
   "secondary": []
  },
+ "v1|1|j_b749cca0d2": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
  "v1|1|j_b85e63df9d": {
   "missing": "",
   "modifiers": [],
@@ -2847,6 +4113,12 @@
   "secondary": []
  },
  "v1|1|j_b8ca18d1d5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_b8dd573b6d": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
@@ -2872,6 +4144,24 @@
    "backend"
   ]
  },
+ "v1|1|j_bae1c35d80": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_bb06664d83": {
+  "missing": "clinical data management",
+  "modifiers": [],
+  "primary": "data",
+  "secondary": []
+ },
+ "v1|1|j_bb2bcfe736": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_bb50565f6c": {
   "missing": "",
   "modifiers": [],
@@ -2884,10 +4174,34 @@
   "primary": "brand_design",
   "secondary": []
  },
+ "v1|1|j_bbf06fea15": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_bc4e92e446": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_bc51c543e0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_bcaac3f7fd": {
   "missing": "",
   "modifiers": [],
   "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_bda85aa6ee": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_bdcee64847": {
@@ -2906,6 +4220,12 @@
   "primary": "infrastructure",
   "secondary": []
  },
+ "v1|1|j_bdf3994d09": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_be9e357840": {
   "missing": "",
   "modifiers": [
@@ -2918,6 +4238,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_beecc4f4e1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
   "secondary": []
  },
  "v1|1|j_bf05aeee76": {
@@ -2944,10 +4270,52 @@
   "primary": "infrastructure",
   "secondary": []
  },
+ "v1|1|j_c03956cdf4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_c08f000a51": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
+  "secondary": []
+ },
+ "v1|1|j_c0e4a45623": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_analysis",
+  "secondary": []
+ },
+ "v1|1|j_c13aa6e0e0": {
+  "missing": "consumer_insights",
+  "modifiers": [],
+  "primary": "go_to_market",
+  "secondary": []
+ },
+ "v1|1|j_c18aa127b1": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_c18f23200e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
  "v1|1|j_c1931cb24f": {
   "missing": "",
   "modifiers": [],
   "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_c256aaae84": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
   "secondary": []
  },
  "v1|1|j_c3108df945": {
@@ -2968,10 +4336,34 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_c3bad82c6b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
  "v1|1|j_c3c6044abc": {
   "missing": "",
   "modifiers": [],
   "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_c3c8243265": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "security",
+  "secondary": []
+ },
+ "v1|1|j_c4000e5896": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
+ "v1|1|j_c412095276": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
   "secondary": []
  },
  "v1|1|j_c44a264c51": {
@@ -2998,6 +4390,12 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_c5459ef391": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
  "v1|1|j_c579f890e3": {
   "missing": "",
   "modifiers": [],
@@ -3012,10 +4410,28 @@
    "data_analysis"
   ]
  },
+ "v1|1|j_c5a0bf5850": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "backend",
+  "secondary": []
+ },
+ "v1|1|j_c6004267c0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "legal",
+  "secondary": []
+ },
  "v1|1|j_c625537b6a": {
   "missing": "",
   "modifiers": [],
   "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_c6666e8367": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
   "secondary": []
  },
  "v1|1|j_c691e7f295": {
@@ -3024,11 +4440,25 @@
   "primary": "product_management",
   "secondary": []
  },
+ "v1|1|j_c69cb1d275": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_c71909c5a8": {
   "missing": "",
   "modifiers": [],
   "primary": "ai_engineering",
   "secondary": []
+ },
+ "v1|1|j_c7fa216c19": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": [
+   "mobile"
+  ]
  },
  "v1|1|j_c807b29896": {
   "missing": "",
@@ -3042,16 +4472,40 @@
   "primary": "product_management",
   "secondary": []
  },
+ "v1|1|j_c843d956d6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_c859f76cd3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
  "v1|1|j_c8b88b1b89": {
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_c916c6e032": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_c9318646bc": {
   "missing": "P&ID specialist",
   "modifiers": [],
   "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_c9388d3d45": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_support",
   "secondary": []
  },
  "v1|1|j_c95e186dc9": {
@@ -3076,6 +4530,12 @@
   "primary": "backend",
   "secondary": []
  },
+ "v1|1|j_c99466cea6": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
  "v1|1|j_c9effb313c": {
   "missing": "",
   "modifiers": [],
@@ -3086,6 +4546,12 @@
   "missing": "privacy_engineering",
   "modifiers": [],
   "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_ca38cfd016": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
   "secondary": []
  },
  "v1|1|j_ca527c78f5": {
@@ -3178,10 +4644,28 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_ced789a54a": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
+  "secondary": []
+ },
  "v1|1|j_cf50bd5308": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_cf59a14ec5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
+ "v1|1|j_cfafd0384b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "research",
   "secondary": []
  },
  "v1|1|j_cfbcd74731": {
@@ -3194,6 +4678,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "recruiting",
+  "secondary": []
+ },
+ "v1|1|j_d122f6b822": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
   "secondary": []
  },
  "v1|1|j_d12dbbb19b": {
@@ -3246,6 +4736,12 @@
   "primary": "product_design",
   "secondary": []
  },
+ "v1|1|j_d360dffb2e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_d3a1b9d788": {
   "missing": "transport_planner",
   "modifiers": [],
@@ -3276,10 +4772,28 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_d40387b6bf": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
+  "secondary": []
+ },
  "v1|1|j_d458dff10e": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_d4e3438abc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
+ "v1|1|j_d506253196": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "customer_success",
   "secondary": []
  },
  "v1|1|j_d57f88e44f": {
@@ -3300,6 +4814,32 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_d614ecd815": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
+  "secondary": []
+ },
+ "v1|1|j_d6158eff7c": {
+  "missing": "",
+  "modifiers": [
+   "forward_deployed"
+  ],
+  "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_d62ee80fc0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_d64f45b0fa": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
  "v1|1|j_d6547615a5": {
   "missing": "",
   "modifiers": [],
@@ -3318,16 +4858,34 @@
   "primary": "sales",
   "secondary": []
  },
+ "v1|1|j_d70a4dddd0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_d7db3926a3": {
   "missing": "",
   "modifiers": [],
   "primary": "customer_support",
   "secondary": []
  },
+ "v1|1|j_d8470554d9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_d8ee72ca58": {
   "missing": "",
   "modifiers": [],
   "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_d904503872": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
   "secondary": []
  },
  "v1|1|j_d97c909560": {
@@ -3354,6 +4912,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "customer_success",
+  "secondary": []
+ },
+ "v1|1|j_db3ad62996": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_design",
   "secondary": []
  },
  "v1|1|j_db64d84639": {
@@ -3398,6 +4962,12 @@
   "primary": "frontend",
   "secondary": []
  },
+ "v1|1|j_ddcefbdda3": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
  "v1|1|j_de51c23fbb": {
   "missing": "",
   "modifiers": [],
@@ -3412,6 +4982,12 @@
   "primary": "design_engineer",
   "secondary": []
  },
+ "v1|1|j_deb1929929": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
  "v1|1|j_df0eba789f": {
   "missing": "",
   "modifiers": [],
@@ -3424,12 +5000,24 @@
   "primary": "ai_training",
   "secondary": []
  },
+ "v1|1|j_df9bce36b0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
  "v1|1|j_dfeed28867": {
   "missing": "",
   "modifiers": [
    "forward_deployed"
   ],
   "primary": "software",
+  "secondary": []
+ },
+ "v1|1|j_e0056799e5": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
   "secondary": []
  },
  "v1|1|j_e02322202c": {
@@ -3444,12 +5032,30 @@
   "primary": "software",
   "secondary": []
  },
+ "v1|1|j_e0b4bd4f07": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_e109993e11": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "recruiting",
+  "secondary": []
+ },
  "v1|1|j_e1769b1bb6": {
   "missing": "",
   "modifiers": [
    "founding"
   ],
   "primary": "ai_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e22f5e11ae": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
   "secondary": []
  },
  "v1|1|j_e261313425": {
@@ -3478,6 +5084,24 @@
   "primary": "legal",
   "secondary": []
  },
+ "v1|1|j_e3a719f788": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e40eea07df": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e4160c2fbc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_e50643ea03": {
   "missing": "",
   "modifiers": [],
@@ -3496,6 +5120,24 @@
   "primary": "legal",
   "secondary": []
  },
+ "v1|1|j_e57394c261": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "finance",
+  "secondary": []
+ },
+ "v1|1|j_e5b993e394": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ml_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e5c1c4943c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_e5eb993038": {
   "missing": "",
   "modifiers": [],
@@ -3508,10 +5150,22 @@
   "primary": "ml_infrastructure",
   "secondary": []
  },
+ "v1|1|j_e6123dbd73": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_e64759b65e": {
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_e696980504": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "ai_training",
   "secondary": []
  },
  "v1|1|j_e6f9f86a92": {
@@ -3532,10 +5186,28 @@
   "primary": "ai_engineering",
   "secondary": []
  },
+ "v1|1|j_e715ee4ac4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_e760a84c6b": {
   "missing": "video_editing",
   "modifiers": [],
   "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_e76fa8fba7": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_e7875c7aab": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_marketing",
   "secondary": []
  },
  "v1|1|j_e7ff1ba326": {
@@ -3554,6 +5226,24 @@
   "missing": "",
   "modifiers": [],
   "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_e959d94c37": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
+ "v1|1|j_e9faafe35e": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_ea2064a508": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
   "secondary": []
  },
  "v1|1|j_ea2a58d4f1": {
@@ -3588,6 +5278,48 @@
   "primary": "none",
   "secondary": []
  },
+ "v1|1|j_ebba04db20": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_ec1008af9c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_ec5eec54f9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_eca6cc3b6c": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_eccb511496": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
+ "v1|1|j_ece826f10b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "infrastructure",
+  "secondary": []
+ },
+ "v1|1|j_ecf2d9fecc": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
  "v1|1|j_edd15a47cd": {
   "missing": "",
   "modifiers": [],
@@ -3600,10 +5332,28 @@
   "primary": "none",
   "secondary": []
  },
+ "v1|1|j_edf43ab557": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_ee00fb8c6b": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales_engineering",
+  "secondary": []
+ },
  "v1|1|j_ee3b6dc0e3": {
   "missing": "",
   "modifiers": [],
   "primary": "engineering_management",
+  "secondary": []
+ },
+ "v1|1|j_ee5fded6b0": {
+  "missing": "logistics",
+  "modifiers": [],
+  "primary": "operations",
   "secondary": []
  },
  "v1|1|j_eec7e0c83a": {
@@ -3622,6 +5372,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "data_engineering",
+  "secondary": []
+ },
+ "v1|1|j_f03ad8d67f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
   "secondary": []
  },
  "v1|1|j_f080f54847": {
@@ -3668,6 +5424,12 @@
   "primary": "finance",
   "secondary": []
  },
+ "v1|1|j_f2f3228b13": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "marketing",
+  "secondary": []
+ },
  "v1|1|j_f3c3d42635": {
   "missing": "",
   "modifiers": [],
@@ -3680,16 +5442,46 @@
   "primary": "compliance",
   "secondary": []
  },
+ "v1|1|j_f44d449801": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_f52d54b6d8": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "program_management",
+  "secondary": []
+ },
  "v1|1|j_f559da8c33": {
   "missing": "",
   "modifiers": [],
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_f58a428293": {
+  "missing": "learning_design",
+  "modifiers": [],
+  "primary": "education",
+  "secondary": []
+ },
  "v1|1|j_f5ce870c0a": {
   "missing": "",
   "modifiers": [],
   "primary": "compliance",
+  "secondary": []
+ },
+ "v1|1|j_f616f85429": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "data_science",
+  "secondary": []
+ },
+ "v1|1|j_f6357763a0": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "brand_design",
   "secondary": []
  },
  "v1|1|j_f69d6b4b62": {
@@ -3710,10 +5502,22 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_f87ca86e73": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "technical_support",
+  "secondary": []
+ },
  "v1|1|j_f931bbf889": {
   "missing": "",
   "modifiers": [],
   "primary": "research",
+  "secondary": []
+ },
+ "v1|1|j_f990cd8ed4": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "fullstack",
   "secondary": []
  },
  "v1|1|j_fa401b71fb": {
@@ -3732,6 +5536,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "sales",
+  "secondary": []
+ },
+ "v1|1|j_fb29e8d540": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "mobile",
   "secondary": []
  },
  "v1|1|j_fb68b091ce": {
@@ -3758,6 +5568,18 @@
   "primary": "marketing",
   "secondary": []
  },
+ "v1|1|j_fc228a9cfa": {
+  "missing": "public_affairs",
+  "modifiers": [],
+  "primary": "none",
+  "secondary": []
+ },
+ "v1|1|j_fcb8a847c9": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "product_management",
+  "secondary": []
+ },
  "v1|1|j_fd00bebc9c": {
   "missing": "",
   "modifiers": [],
@@ -3776,6 +5598,12 @@
   "primary": "business_operations",
   "secondary": []
  },
+ "v1|1|j_fd829eb78f": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "sales",
+  "secondary": []
+ },
  "v1|1|j_fdbae3bb77": {
   "missing": "",
   "modifiers": [],
@@ -3786,6 +5614,12 @@
   "missing": "",
   "modifiers": [],
   "primary": "business_operations",
+  "secondary": []
+ },
+ "v1|1|j_fde15a5307": {
+  "missing": "",
+  "modifiers": [],
+  "primary": "software",
   "secondary": []
  },
  "v1|1|j_fe28419662": {

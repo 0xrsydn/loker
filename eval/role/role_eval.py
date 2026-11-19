@@ -2,6 +2,9 @@
 (and DeepSeek as a second labeler). Run by hand; not part of CI. See README.md.
 
   python3 role_eval.py sample [n]          # pick n active jobs (default 600) -> sample.json
+  LOKER_EVAL_DB=snapshot-fresh.db python3 role_eval.py sample 300 --set fresh --new-since snapshot.db
+                                           # a holdout of jobs the rules never saw -> fresh.json
+  (label, score, agree and jev take --set NAME; a set records the database it came from)
   JUDGE=opus|deepseek python3 role_eval.py label   # label unlabelled sample jobs (cached)
   python3 role_eval.py score [--bin PATH] [-v]     # classifier vs labels
   python3 role_eval.py agree               # Opus vs DeepSeek
@@ -17,7 +20,17 @@ from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
-DB = os.environ.get("LOKER_EVAL_DB", os.path.join(HERE, "snapshot.db"))
+SET = sys.argv[sys.argv.index("--set") + 1] if "--set" in sys.argv else "sample"
+SAMPLE = f"{SET}.json"
+
+
+def _set_db():
+    p = os.path.join(HERE, SAMPLE)
+    s = json.load(open(p)) if os.path.exists(p) else None
+    return os.path.join(HERE, s["db"]) if isinstance(s, dict) else os.path.join(HERE, "snapshot.db")
+
+
+DB = os.environ.get("LOKER_EVAL_DB") or _set_db()
 BIN = os.path.join(REPO, "target", "release", "loker")
 PROMPT_VERSION = "v1"
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
@@ -57,10 +70,34 @@ def with_home(binary, fn):
 def sample():
     n = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 600
     db = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
-    ids = [r[0] for r in db.execute("SELECT id FROM canonical_jobs WHERE status = 'active' ORDER BY id")]
-    picked = sorted(random.Random(1).sample(ids, min(n, len(ids))))
-    save("sample.json", picked)
-    print(f"{len(picked)} of {len(ids)} active jobs -> sample.json")
+    rows = db.execute("""SELECT c.id, c.canonical_url,
+                                (SELECT min(s.source_id) FROM source_jobs s WHERE s.canonical_job_id = c.id)
+                         FROM canonical_jobs c WHERE c.status = 'active' ORDER BY c.id""").fetchall()
+    if "--new-since" not in sys.argv:
+        ids = [r[0] for r in rows]
+        picked = sorted(random.Random(1).sample(ids, min(n, len(ids))))
+        save(SAMPLE, picked)
+        print(f"{len(picked)} of {len(ids)} active jobs -> {SAMPLE}")
+        return
+    # A holdout of jobs that did not exist in the database the rules were
+    # written against: none of their text can have shaped the rules. At most
+    # 40 per source, so a few large boards don't make up the set.
+    old = sqlite3.connect(f"file:{os.path.join(HERE, arg('--new-since', ''))}?mode=ro", uri=True)
+    known = {u for (u,) in old.execute("SELECT canonical_url FROM canonical_jobs")}
+    by_source = defaultdict(list)
+    for jid, url, src in rows:
+        if url not in known:
+            by_source[src].append(jid)
+    rng = random.Random(SET)
+    pool = [j for src in sorted(by_source) for j in rng.sample(by_source[src], min(40, len(by_source[src])))]
+    picked = sorted(rng.sample(pool, min(n, len(pool))))
+    save(SAMPLE, {"db": os.path.basename(DB), "newSince": arg("--new-since", ""), "ids": picked})
+    print(f"{len(picked)} of {sum(map(len, by_source.values()))} new jobs from {len(by_source)} sources -> {SAMPLE}")
+
+
+def set_ids():
+    s = load(SAMPLE, [])
+    return s["ids"] if isinstance(s, dict) else s
 
 
 def jobs_text(ids):
@@ -171,7 +208,7 @@ def label():
     roles, mods, ids, mod_ids, version = vocabulary()
     labels = load(f"labels-{judge}.json", {})
     key = lambda jid: f"{PROMPT_VERSION}|{version}|{jid}"
-    todo = [j for j in load("sample.json", []) if key(j) not in labels]
+    todo = [j for j in set_ids() if key(j) not in labels]
     print(f"judge={judge}: {len(todo)} to label ({len(labels)} cached)", flush=True)
     texts = jobs_text(todo)
     sch = schema(ids, mod_ids)
@@ -216,7 +253,7 @@ def jev():
                          "criteria": criteria}}
     preds = load("predictions-jev.json", {})
     key = lambda jid: f"{JEV_MODEL}|{v['vocabularyVersion']}|{jid}"
-    todo = [j for j in load("sample.json", []) if key(j) not in preds]
+    todo = [j for j in set_ids() if key(j) not in preds]
     texts = jobs_text(todo)
     print(f"jev: {len(todo)} to ask ({len(preds)} cached)", flush=True)
 
@@ -297,7 +334,7 @@ def score():
     judge = os.environ.get("JUDGE", "opus")
     parents, version = vocab_tree(binary)
     labels = load(f"labels-{judge}.json", {})
-    ids = load("sample.json", [])
+    ids = set_ids()
     gold = {j: labels.get(f"{PROMPT_VERSION}|{version}|{j}") for j in ids}
     gold = {j: g for j, g in gold.items() if g}
     got = classified(binary, list(gold))
@@ -333,6 +370,11 @@ def score():
         compatible = exact or (mine != "none" and want != "none" and (
             within(parents, mine, want) or within(parents, want, mine) or want in mine_all))
         same_family = mine != "none" and want != "none" and top(parents, mine) == top(parents, want)
+        # What a role filter does (JobRole::matches): a search for the
+        # label's role returns the job only if one of our roles sits inside it.
+        findable = (mine == want == "none") or (want != "none" and any(
+            within(parents, r, want) for r in mine_all if r != "none"))
+        c["findable"] += findable
         c["exact"] += exact
         c["compatible"] += compatible
         c["family"] += same_family or (mine == want == "none")
@@ -358,6 +400,7 @@ def score():
     print(f"  covered (has a role)   {pct(c['covered'])}   gold says none: {c['gold_none']}")
     print(f"  exact primary          {pct(c['exact'])}")
     print(f"  compatible             {pct(c['compatible'])}   (same id, one inside the other, or gold primary among our roles)")
+    print(f"  findable               {pct(c['findable'])}   (a filter on the gold role returns the job; strict)")
     print(f"  same top family        {pct(c['family'])}")
     print(f"  missed (no role, gold has one) {c['missed']}   false role (gold none) {c['false_role']}")
     print("  by method:", "  ".join(f"{m} {v['n']} (exact {pct(v['exact'], v['n'])}, compatible {pct(v['compatible'], v['n'])})"
@@ -378,7 +421,8 @@ def agree():
     _, version = vocab_tree(BIN)
     a, b = load("labels-opus.json", {}), load("labels-deepseek.json", {})
     parents, _ = vocab_tree(BIN)
-    keys = [k for k in a if k in b and k.split("|")[1] == str(version)]
+    ids = set(set_ids())
+    keys = [k for k in a if k in b and k.split("|")[1] == str(version) and k.split("|")[2] in ids]
     exact = sum(a[k]["primary"] == b[k]["primary"] for k in keys)
     fam = sum(top(parents, a[k]["primary"]) == top(parents, b[k]["primary"]) for k in keys)
     print(f"{len(keys)} jobs labelled by both: same primary {exact / len(keys):.0%}, same top family {fam / len(keys):.0%}")
