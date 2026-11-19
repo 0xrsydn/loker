@@ -1,0 +1,163 @@
+[
+ {
+  "q": "backend",
+  "intent": "Backend / server-side software engineering roles."
+ },
+ {
+  "q": "software engineer",
+  "intent": "Software engineering roles of any specialty (not sales, support or non-engineering roles that merely mention software)."
+ },
+ {
+  "q": "golang",
+  "intent": "Engineering roles where Go is a main language."
+ },
+ {
+  "q": "rust",
+  "intent": "Engineering roles where Rust is a main language."
+ },
+ {
+  "q": "python backend",
+  "intent": "Backend engineering roles using Python."
+ },
+ {
+  "q": "frontend react",
+  "intent": "Frontend engineering roles using React."
+ },
+ {
+  "q": "fullstack typescript",
+  "intent": "Full-stack engineering roles using TypeScript."
+ },
+ {
+  "q": "data engineer",
+  "intent": "Data engineering roles: pipelines, ETL, warehouses, data platforms."
+ },
+ {
+  "q": "machine learning engineer",
+  "intent": "Machine learning engineering roles: building, training or deploying ML models."
+ },
+ {
+  "q": "llm ai engineer",
+  "intent": "Engineering roles building products on LLMs / generative AI (not AI-training gigs labelling data)."
+ },
+ {
+  "q": "devops kubernetes",
+  "intent": "DevOps, platform or infrastructure engineering roles working with Kubernetes."
+ },
+ {
+  "q": "sre",
+  "intent": "Site reliability engineering roles."
+ },
+ {
+  "q": "security engineer",
+  "intent": "Security engineering roles (application, cloud, infrastructure security)."
+ },
+ {
+  "q": "mobile android",
+  "intent": "Android app development roles."
+ },
+ {
+  "q": "ios swift",
+  "intent": "iOS app development roles using Swift.",
+  "holdout": true
+ },
+ {
+  "q": "api microservices",
+  "intent": "Backend roles building APIs and microservices."
+ },
+ {
+  "q": "golang rust kotlin",
+  "intent": "Backend engineering roles using any of Go, Rust or Kotlin."
+ },
+ {
+  "q": "postgres database",
+  "intent": "Roles centred on databases, e.g. database engineer/DBA, or backend roles with heavy PostgreSQL work."
+ },
+ {
+  "q": "engineering manager",
+  "intent": "Engineering management roles (managing software engineers)."
+ },
+ {
+  "q": "product designer",
+  "intent": "Product / UX / UI design roles."
+ },
+ {
+  "q": "technical writer",
+  "intent": "Technical writing and developer documentation roles."
+ },
+ {
+  "q": "qa automation",
+  "intent": "QA and test automation engineering roles.",
+  "holdout": true
+ },
+ {
+  "q": "solutions engineer",
+  "intent": "Solutions / sales engineering and pre-sales technical roles."
+ },
+ {
+  "q": "customer support",
+  "intent": "Customer support / customer success roles."
+ },
+ {
+  "q": "blockchain smart contracts",
+  "intent": "Blockchain / web3 engineering roles, e.g. smart contract development."
+ },
+ {
+  "q": "data scientist",
+  "intent": "Data science roles: statistics, analytics modelling, experimentation.",
+  "holdout": true
+ },
+ {
+  "q": "junior developer",
+  "intent": "Entry-level or junior software developer roles."
+ },
+ {
+  "q": "remote backend engineer indonesia",
+  "intent": "Backend engineering roles open to someone working remotely from Indonesia. Judge topical fit (backend engineering); eligibility is checked separately, so don't penalise a job only for not mentioning Indonesia."
+ },
+ {
+  "q": "senior backend engineer go postgres kubernetes remote",
+  "intent": "Backend engineering roles using Go, PostgreSQL or Kubernetes (agent-style long query; location words are not topical)."
+ },
+ {
+  "q": "machine learning engineer python pytorch llm production",
+  "intent": "ML engineering roles building or deploying models in production, ideally with Python/PyTorch/LLMs."
+ },
+ {
+  "q": "remote software engineer asia timezone fully remote",
+  "intent": "Software engineering roles (any specialty). Location and timezone words are not topical; eligibility is checked separately."
+ },
+ {
+  "q": "frontend engineer react typescript nextjs design systems",
+  "intent": "Frontend engineering roles with React/TypeScript/Next.js, design-system work a plus.",
+  "holdout": true
+ },
+ {
+  "q": "k8s",
+  "intent": "Infrastructure/platform/DevOps roles working with Kubernetes."
+ },
+ {
+  "q": "ml engineer",
+  "intent": "Machine learning engineering roles."
+ },
+ {
+  "q": "golang developer",
+  "intent": "Engineering roles where Go is a main language.",
+  "holdout": true
+ },
+ {
+  "q": "cobol mainframe",
+  "intent": "Roles developing or maintaining COBOL / mainframe systems.",
+  "expect_none": true
+ },
+ {
+  "q": "veterinarian",
+  "intent": "Veterinarian roles (animal medicine).",
+  "expect_none": true
+ },
+ {
+  "q": "air traffic controller",
+  "intent": "Air traffic control roles.",
+  "expect_none": true,
+  "holdout": true
+ }
+]

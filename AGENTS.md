@@ -34,6 +34,7 @@ crates/loker-sources/    adapters: fetch + transform per source, fetch_batch, ve
 crates/loker/            App facade, CLI (main.rs), MCP (mcp.rs), tests/e2e.rs
 schema/v1/               JSON Schemas generated from the api types
 contrib/systemd/         unattended ingest service + timer
+eval/search/             manual search-ranking eval (Python, LLM-judged); not in CI
 ```
 
 ## Build and check

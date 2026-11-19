@@ -1,0 +1,5222 @@
+{
+ "01236f47ca5a|j_0a34bb7a74": {
+  "grade": 3,
+  "reason": "K8s networking infrastructure for hundreds of clusters"
+ },
+ "01236f47ca5a|j_16ae49b111": {
+  "grade": 1,
+  "reason": "Frontend role on a Kubernetes management product; the role isn't infra work"
+ },
+ "01236f47ca5a|j_404a8194b3": {
+  "grade": 3,
+  "reason": "Builds and runs Palantir's managed Kubernetes fleet"
+ },
+ "01236f47ca5a|j_42363f301d": {
+  "grade": 3,
+  "reason": "Infrastructure/platform role using EKS, Terraform, Helm"
+ },
+ "01236f47ca5a|j_4cb4efbc11": {
+  "grade": 3,
+  "reason": "Builds and runs Palantir's managed Kubernetes fleet"
+ },
+ "01236f47ca5a|j_5da9038b8e": {
+  "grade": 3,
+  "reason": "Platform role building K8s controllers and runtime"
+ },
+ "01236f47ca5a|j_618edfcb47": {
+  "grade": 3,
+  "reason": "Platform role building K8s controllers and runtime"
+ },
+ "01236f47ca5a|j_6d0eab32c6": {
+  "grade": 3,
+  "reason": "Builds and runs Palantir's managed Kubernetes fleet"
+ },
+ "01236f47ca5a|j_6d3480b71b": {
+  "grade": 3,
+  "reason": "DevOps role running production Kubernetes clusters"
+ },
+ "01236f47ca5a|j_7f3ed202d7": {
+  "grade": 3,
+  "reason": "Kubernetes-based PaaS platform built on K8s controllers"
+ },
+ "01236f47ca5a|j_879efa6518": {
+  "grade": 3,
+  "reason": "Kubernetes networking infrastructure across hundreds of K8s clusters (Cilium, Envoy, controllers)."
+ },
+ "01236f47ca5a|j_a66ba77b5d": {
+  "grade": 2,
+  "reason": "Frontend role at a Kubernetes infrastructure company, but it requires deep production K8s, GitOps and IaC experience."
+ },
+ "01236f47ca5a|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Software engineer on a Kubernetes control plane at Buoyant (Linkerd), which is core K8s infrastructure work."
+ },
+ "01236f47ca5a|j_cd2be5f111": {
+  "grade": 3,
+  "reason": "Kubernetes networking infrastructure across hundreds of K8s clusters (Cilium, Envoy, controllers)."
+ },
+ "01236f47ca5a|j_d2fb38941a": {
+  "grade": 3,
+  "reason": "Builds and operates Palantir's fleet of hundreds of K8s clusters and its managed Kubernetes offering."
+ },
+ "01236f47ca5a|j_dc80a65d67": {
+  "grade": 2,
+  "reason": "QA role that provisions K8s test clusters and tests operators and CRDs. Kubernetes is central, but the job is quality assurance rather than platform work."
+ },
+ "01236f47ca5a|j_df0eba789f": {
+  "grade": 3,
+  "reason": "Kubernetes-based PaaS team that builds APIs on K8s controllers and primitives."
+ },
+ "01236f47ca5a|j_f24c9058dd": {
+  "grade": 3,
+  "reason": "Kubernetes-based PaaS team that builds APIs on K8s controllers and primitives."
+ },
+ "01236f47ca5a|j_f4cbb0a422": {
+  "grade": 3,
+  "reason": "Kubernetes platform engineer working on operators, GitOps, Terraform/Helm and multi-cluster management."
+ },
+ "01236f47ca5a|j_fb373b1071": {
+  "grade": 3,
+  "reason": "Kubernetes platform engineer working on operators, GitOps, IaC and production cluster management."
+ },
+ "03a56a893ae8|j_107dda25ee": {
+  "grade": 2,
+  "reason": "Query engine work on DataFusion/Comet, which are Rust-based. Rust is one of several languages alongside Java, Scala and Python."
+ },
+ "03a56a893ae8|j_17f7fb4acc": {
+  "grade": 1,
+  "reason": "Trading/research role, not engineering. Rust is only listed as a plus."
+ },
+ "03a56a893ae8|j_2a4f242366": {
+  "grade": 3,
+  "reason": "Low-level edge systems engineering where Rust is a primary language."
+ },
+ "03a56a893ae8|j_317a9cfac0": {
+  "grade": 0,
+  "reason": "Generic backend role that doesn't mention Rust."
+ },
+ "03a56a893ae8|j_4b0f849926": {
+  "grade": 1,
+  "reason": "AI training-task contract. Rust is just one option among many languages."
+ },
+ "03a56a893ae8|j_4e89470f37": {
+  "grade": 1,
+  "reason": "Technical support role. Rust is listed only as one possible background."
+ },
+ "03a56a893ae8|j_5fecf811b5": {
+  "grade": 0,
+  "reason": "Fellowship program. 'Rust' appears only as a figure of speech."
+ },
+ "03a56a893ae8|j_672e737e4f": {
+  "grade": 0,
+  "reason": "Infrastructure backend role with no Rust mentioned."
+ },
+ "03a56a893ae8|j_75431b9da2": {
+  "grade": 2,
+  "reason": "Systems engineering role that lists Rust as one of three languages. Rust is not clearly the main one."
+ },
+ "03a56a893ae8|j_75a85003f8": {
+  "grade": 3,
+  "reason": "Core trading systems engineering that requires proficiency in Rust."
+ },
+ "03a56a893ae8|j_7aca6d89a4": {
+  "grade": 2,
+  "reason": "Query engine internship using Rust (DataFusion/Comet), but Rust is one of four languages"
+ },
+ "03a56a893ae8|j_8ddb22bd26": {
+  "grade": 1,
+  "reason": "Technical support role; Rust is only one option in a list of backend languages"
+ },
+ "03a56a893ae8|j_8fe2f73222": {
+  "grade": 2,
+  "reason": "Query engine role using Rust (DataFusion/Comet), but Rust is one of four languages"
+ },
+ "03a56a893ae8|j_a8e8fd9e7a": {
+  "grade": 2,
+  "reason": "Query engine internship using Rust (DataFusion/Comet), but Rust is one of four languages"
+ },
+ "03a56a893ae8|j_bf0af8e5e6": {
+  "grade": 1,
+  "reason": "AI application engineering role; Rust is just one acceptable backend language"
+ },
+ "03a56a893ae8|j_c3108df945": {
+  "grade": 1,
+  "reason": "Tech ops and support role; Rust is only one option in a list of backend languages"
+ },
+ "03a56a893ae8|j_ce585acc52": {
+  "grade": 1,
+  "reason": "Backend infrastructure role; the visible text does not mention Rust"
+ },
+ "03a56a893ae8|j_e1270bb4b2": {
+  "grade": 2,
+  "reason": "QA automation role that uses Rust or Java on trading systems; the role is QA, not core development"
+ },
+ "03a56a893ae8|j_eed67bd68d": {
+  "grade": 2,
+  "reason": "Query engine systems role where Rust is one of three accepted systems languages"
+ },
+ "03a56a893ae8|j_f6ec2b7198": {
+  "grade": 1,
+  "reason": "Generalist backend/full-stack role; Rust is just one optional language"
+ },
+ "07e93d1b2487|j_048ac859ab": {
+  "grade": 0,
+  "reason": "A sales account management role, not engineering management."
+ },
+ "07e93d1b2487|j_0bdae8e8ab": {
+  "grade": 0,
+  "reason": "An HR and people operations IC role with no direct reports."
+ },
+ "07e93d1b2487|j_13d473cbb6": {
+  "grade": 0,
+  "reason": "A clinical trial data management role, unrelated to managing engineers."
+ },
+ "07e93d1b2487|j_16ae49b111": {
+  "grade": 0,
+  "reason": "A hands-on frontend engineer IC role with no management duties."
+ },
+ "07e93d1b2487|j_1864763ae0": {
+  "grade": 1,
+  "reason": "An agile program manager coordinating engineering teams' delivery, but not people management of engineers."
+ },
+ "07e93d1b2487|j_1e0bbd2fd0": {
+  "grade": 0,
+  "reason": "An enterprise sales role."
+ },
+ "07e93d1b2487|j_212a443f36": {
+  "grade": 0,
+  "reason": "A founding software engineer IC role with no management."
+ },
+ "07e93d1b2487|j_2548dad55b": {
+  "grade": 0,
+  "reason": "A sales account management role."
+ },
+ "07e93d1b2487|j_2f48cc1bd4": {
+  "grade": 0,
+  "reason": "A retail category management contract role for AI training."
+ },
+ "07e93d1b2487|j_32960e0b13": {
+  "grade": 1,
+  "reason": "A staff engineer acting as player-coach tech lead for a small team, but primarily a technical IC role, not engineering management."
+ },
+ "07e93d1b2487|j_3cef89d425": {
+  "grade": 0,
+  "reason": "Product marketing role, not engineering management."
+ },
+ "07e93d1b2487|j_408229009c": {
+  "grade": 1,
+  "reason": "Product manager working with ML engineers; not managing engineers."
+ },
+ "07e93d1b2487|j_41f05483c8": {
+  "grade": 1,
+  "reason": "Individual contributor product engineer, no people management."
+ },
+ "07e93d1b2487|j_42363f301d": {
+  "grade": 1,
+  "reason": "IC software engineering role, not management."
+ },
+ "07e93d1b2487|j_444ed2e853": {
+  "grade": 1,
+  "reason": "Product manager collaborating with engineering teams, not managing engineers."
+ },
+ "07e93d1b2487|j_4a2ab3b934": {
+  "grade": 1,
+  "reason": "Product manager leading cross-functional teams; not engineering management."
+ },
+ "07e93d1b2487|j_4cced88cad": {
+  "grade": 0,
+  "reason": "HR business partner role."
+ },
+ "07e93d1b2487|j_4ddf716aee": {
+  "grade": 0,
+  "reason": "Risk management role."
+ },
+ "07e93d1b2487|j_55abc5a7d3": {
+  "grade": 0,
+  "reason": "BI/analytics role, not managing software engineers."
+ },
+ "07e93d1b2487|j_567972d9f9": {
+  "grade": 0,
+  "reason": "Performance marketing role."
+ },
+ "07e93d1b2487|j_5c35457cfc": {
+  "grade": 2,
+  "reason": "Founding engineer who is hands-on first but will hire and manage the engineering team."
+ },
+ "07e93d1b2487|j_621bd04534": {
+  "grade": 3,
+  "reason": "Engineering Manager leading a team of 6\u201310 engineers."
+ },
+ "07e93d1b2487|j_630a55eb7d": {
+  "grade": 3,
+  "reason": "Software Engineering Manager building and leading engineering teams."
+ },
+ "07e93d1b2487|j_635f0582b1": {
+  "grade": 1,
+  "reason": "Product management role; works with engineering but doesn't manage engineers."
+ },
+ "07e93d1b2487|j_637144a34a": {
+  "grade": 1,
+  "reason": "Product manager working with trading engineering teams; not people management of engineers."
+ },
+ "07e93d1b2487|j_676eb15cad": {
+  "grade": 1,
+  "reason": "Technical program manager focused on data programs; not managing software engineers."
+ },
+ "07e93d1b2487|j_6a487264f4": {
+  "grade": 0,
+  "reason": "Customer-facing technical success role."
+ },
+ "07e93d1b2487|j_6cc7ba2026": {
+  "grade": 2,
+  "reason": "Engineering manager role, but leads a network engineering team rather than a software team (infrastructure as code)."
+ },
+ "07e93d1b2487|j_6d3480b71b": {
+  "grade": 0,
+  "reason": "Individual contributor DevOps engineer role."
+ },
+ "07e93d1b2487|j_71db67eb7a": {
+  "grade": 0,
+  "reason": "Business development role, unrelated."
+ },
+ "07e93d1b2487|j_790868fef7": {
+  "grade": 1,
+  "reason": "Individual contributor software engineer role, not management"
+ },
+ "07e93d1b2487|j_799654c93a": {
+  "grade": 1,
+  "reason": "Research program manager; coordinates benchmarks, does not manage engineers"
+ },
+ "07e93d1b2487|j_7db2e21b93": {
+  "grade": 0,
+  "reason": "CRM email marketing role"
+ },
+ "07e93d1b2487|j_7f3ed202d7": {
+  "grade": 1,
+  "reason": "IC software engineer; 'Mission Manager' is a product name"
+ },
+ "07e93d1b2487|j_80b1ea5f26": {
+  "grade": 0,
+  "reason": "Growth marketing role"
+ },
+ "07e93d1b2487|j_82053a7645": {
+  "grade": 0,
+  "reason": "Community management role"
+ },
+ "07e93d1b2487|j_8516abead4": {
+  "grade": 0,
+  "reason": "Marketing operations role"
+ },
+ "07e93d1b2487|j_8a222cdc8b": {
+  "grade": 3,
+  "reason": "Engineering Manager leading a team of 6-10 engineers"
+ },
+ "07e93d1b2487|j_8c6fa9b957": {
+  "grade": 0,
+  "reason": "Internal controls/audit role"
+ },
+ "07e93d1b2487|j_8d837bde51": {
+  "grade": 1,
+  "reason": "IC security engineer, not a management role"
+ },
+ "07e93d1b2487|j_91ec0dfaeb": {
+  "grade": 0,
+  "reason": "Product/growth operations role, not engineering management."
+ },
+ "07e93d1b2487|j_920521b23c": {
+  "grade": 0,
+  "reason": "Field implementation/training role; no engineering management."
+ },
+ "07e93d1b2487|j_99ab807e70": {
+  "grade": 0,
+  "reason": "Accounting manager; manages accountants, not engineers."
+ },
+ "07e93d1b2487|j_9c96afe767": {
+  "grade": 0,
+  "reason": "Customer success role."
+ },
+ "07e93d1b2487|j_9e8047ce13": {
+  "grade": 1,
+  "reason": "Technical architect role working with engineers, but an individual contributor, not a manager."
+ },
+ "07e93d1b2487|j_a2bab14819": {
+  "grade": 0,
+  "reason": "Product management, not engineering management."
+ },
+ "07e93d1b2487|j_a66ba77b5d": {
+  "grade": 1,
+  "reason": "Software engineer IC role; engineering but not management."
+ },
+ "07e93d1b2487|j_acc456f821": {
+  "grade": 0,
+  "reason": "Customer deployment strategist role."
+ },
+ "07e93d1b2487|j_b4f0837ad2": {
+  "grade": 0,
+  "reason": "Card business development/operations manager."
+ },
+ "07e93d1b2487|j_bfaeed351f": {
+  "grade": 0,
+  "reason": "Partner operations role."
+ },
+ "07e93d1b2487|j_c807d7df62": {
+  "grade": 1,
+  "reason": "AI product/project manager who works with engineering teams but doesn't manage engineers."
+ },
+ "07e93d1b2487|j_c81e8eb500": {
+  "grade": 0,
+  "reason": "Regional sales role, unrelated to engineering management."
+ },
+ "07e93d1b2487|j_cef54b506b": {
+  "grade": 1,
+  "reason": "Product manager role; next to engineering but not people management of engineers."
+ },
+ "07e93d1b2487|j_d08eedf9ed": {
+  "grade": 0,
+  "reason": "Product funnel optimisation and localisation role, not engineering management."
+ },
+ "07e93d1b2487|j_d2e83976d0": {
+  "grade": 1,
+  "reason": "Hands-on cloud automation engineer with no engineering management duties."
+ },
+ "07e93d1b2487|j_d35d5ca868": {
+  "grade": 1,
+  "reason": "Individual-contributor senior software engineer, not a management role."
+ },
+ "07e93d1b2487|j_d49b6b07d2": {
+  "grade": 0,
+  "reason": "Federal client account management, unrelated."
+ },
+ "07e93d1b2487|j_dac59c49f5": {
+  "grade": 0,
+  "reason": "Mechanical engineering individual contributor; mentoring only, not managing software engineers."
+ },
+ "07e93d1b2487|j_dd63f35aec": {
+  "grade": 1,
+  "reason": "Customer-facing product/account role that works with engineering but doesn't manage it."
+ },
+ "07e93d1b2487|j_df0eba789f": {
+  "grade": 1,
+  "reason": "Software engineer role; 'Mission Manager' is a product name, not a management role."
+ },
+ "07e93d1b2487|j_e19d8e271b": {
+  "grade": 2,
+  "reason": "Tech lead who also manages 3\u20134 engineers (1:1s, feedback, hiring). Real people management, but half the job is hands-on coding."
+ },
+ "07e93d1b2487|j_e2a5534796": {
+  "grade": 0,
+  "reason": "Customer deployment and implementation role. Does not manage engineers."
+ },
+ "07e93d1b2487|j_e93324f32b": {
+  "grade": 1,
+  "reason": "Product management lead who manages a growth team, not software engineers. Only adjacent to engineering management."
+ },
+ "07e93d1b2487|j_e9c05576a2": {
+  "grade": 0,
+  "reason": "Federal contracts and proposals role. Unrelated to engineering management."
+ },
+ "07e93d1b2487|j_ea3ca6c5fd": {
+  "grade": 1,
+  "reason": "Individual contributor mobile engineer. The posting mentions an Engineering Manager only as the person this role reports to."
+ },
+ "07e93d1b2487|j_eec7e0c83a": {
+  "grade": 1,
+  "reason": "Product management lead who mentors other product managers, not engineers."
+ },
+ "07e93d1b2487|j_ef4b72e080": {
+  "grade": 3,
+  "reason": "Engineering Manager role leading engineering teams that build fraud and compliance systems."
+ },
+ "07e93d1b2487|j_f205ccab1f": {
+  "grade": 0,
+  "reason": "Sales account management role. Not relevant."
+ },
+ "07e93d1b2487|j_f24c9058dd": {
+  "grade": 0,
+  "reason": "Individual contributor software engineer. 'Mission Manager' is the name of a product, not a management role."
+ },
+ "07e93d1b2487|j_f4cbb0a422": {
+  "grade": 0,
+  "reason": "Individual contributor platform engineer with no management duties."
+ },
+ "07e93d1b2487|j_f5797c1f40": {
+  "grade": 1,
+  "reason": "Incident management in TechOps; coordinates engineering teams but does not manage software engineers."
+ },
+ "07e93d1b2487|j_fb373b1071": {
+  "grade": 0,
+  "reason": "Individual contributor platform/Kubernetes engineer role, not management."
+ },
+ "07e93d1b2487|j_fedc084198": {
+  "grade": 0,
+  "reason": "Performance marketing user acquisition role, unrelated to engineering management."
+ },
+ "14f036f11f48|j_0cea1cf975": {
+  "grade": 1,
+  "reason": "Full-stack engineering role; design is only collaboration, Figma nice-to-have"
+ },
+ "14f036f11f48|j_107a81c7a2": {
+  "grade": 1,
+  "reason": "Instructional design, not product/UX design"
+ },
+ "14f036f11f48|j_15a706c15f": {
+  "grade": 2,
+  "reason": "Product engineer with substantial consumer UX/interface design responsibilities"
+ },
+ "14f036f11f48|j_17a0de9618": {
+  "grade": 0,
+  "reason": "AI engineering role"
+ },
+ "14f036f11f48|j_22a6ea3ff6": {
+  "grade": 3,
+  "reason": "Product designer role"
+ },
+ "14f036f11f48|j_2a64d0d65f": {
+  "grade": 3,
+  "reason": "Senior product designer role"
+ },
+ "14f036f11f48|j_2fd88eaf21": {
+  "grade": 3,
+  "reason": "Product designer new grad role"
+ },
+ "14f036f11f48|j_31fb004d4a": {
+  "grade": 3,
+  "reason": "Product design internship"
+ },
+ "14f036f11f48|j_422fabe62e": {
+  "grade": 3,
+  "reason": "Product designer new grad role"
+ },
+ "14f036f11f48|j_4899b6614d": {
+  "grade": 1,
+  "reason": "Product strategy leadership; design is secondary/coaching"
+ },
+ "14f036f11f48|j_59b52e548f": {
+  "grade": 1,
+  "reason": "Marketing graphic/motion design, not product/UX/UI design."
+ },
+ "14f036f11f48|j_5aa5265b67": {
+  "grade": 3,
+  "reason": "This is a product designer role covering interaction, visual design, research and prototyping."
+ },
+ "14f036f11f48|j_5ad73fdb2f": {
+  "grade": 2,
+  "reason": "A design engineer role that owns mobile product design along with implementation. It's a hybrid with heavy coding."
+ },
+ "14f036f11f48|j_6d6b998f04": {
+  "grade": 3,
+  "reason": "Product designer internship with full product design duties."
+ },
+ "14f036f11f48|j_774370d6f8": {
+  "grade": 3,
+  "reason": "Product designer internship with full product design duties."
+ },
+ "14f036f11f48|j_77cb1e8362": {
+  "grade": 0,
+  "reason": "AI engineering role. Not design."
+ },
+ "14f036f11f48|j_88b2466f19": {
+  "grade": 2,
+  "reason": "A design engineer role focused on the design system and frontend UX. It's mostly engineering, with UI design as a secondary skill."
+ },
+ "14f036f11f48|j_8902c9b914": {
+  "grade": 0,
+  "reason": "Agent engineering role. Not design."
+ },
+ "14f036f11f48|j_8d7ea428a4": {
+  "grade": 3,
+  "reason": "Lead product designer role for SaaS products."
+ },
+ "14f036f11f48|j_8ee1354848": {
+  "grade": 3,
+  "reason": "New-grad product designer role with full product design duties."
+ },
+ "14f036f11f48|j_8f71b5a71f": {
+  "grade": 3,
+  "reason": "Product designer role covering UX, UI and research"
+ },
+ "14f036f11f48|j_a303df7a03": {
+  "grade": 3,
+  "reason": "Product designer focused on interaction design"
+ },
+ "14f036f11f48|j_b1e92d0fa8": {
+  "grade": 3,
+  "reason": "Product design internship doing full product design work"
+ },
+ "14f036f11f48|j_bb8c419855": {
+  "grade": 1,
+  "reason": "Graphic/marketing design, not product/UX"
+ },
+ "14f036f11f48|j_c68c08d9ad": {
+  "grade": 3,
+  "reason": "Product designer role"
+ },
+ "14f036f11f48|j_d3200fe756": {
+  "grade": 3,
+  "reason": "Senior UI/UX designer with product design required"
+ },
+ "14f036f11f48|j_d9d5c319f7": {
+  "grade": 3,
+  "reason": "Product design internship"
+ },
+ "14f036f11f48|j_e1c0d75540": {
+  "grade": 3,
+  "reason": "UI designer for app products, matches UX/UI intent"
+ },
+ "14f036f11f48|j_e25bb2658f": {
+  "grade": 3,
+  "reason": "Founding product designer, owns design end to end"
+ },
+ "14f036f11f48|j_ee871fa31b": {
+  "grade": 0,
+  "reason": "ML inference benchmark task design, not product design"
+ },
+ "14f036f11f48|j_ff4800b3b2": {
+  "grade": 3,
+  "reason": "Product Designer role covering interaction, visual design, UX research and prototyping."
+ },
+ "14f036f11f48|j_ff7dafbb36": {
+  "grade": 0,
+  "reason": "Full stack software engineering role, not design."
+ },
+ "16037e3112ed|j_177d6ec985": {
+  "grade": 3,
+  "reason": "Senior Android engineer building a consumer Android app"
+ },
+ "16037e3112ed|j_410b345530": {
+  "grade": 2,
+  "reason": "Flutter/iOS mobile role that mentions Android performance; cross-platform mobile, adjacent"
+ },
+ "16037e3112ed|j_52586a8127": {
+  "grade": 0,
+  "reason": "Customer service management"
+ },
+ "16037e3112ed|j_6247201619": {
+  "grade": 2,
+  "reason": "Android security SDK development; Android skills are central but it's a security specialty"
+ },
+ "16037e3112ed|j_6364847b87": {
+  "grade": 1,
+  "reason": "Full-stack web role; mobile/React Native is only a bonus"
+ },
+ "16037e3112ed|j_68d22175c5": {
+  "grade": 1,
+  "reason": "Engineering leadership; Android listed only as nice-to-have"
+ },
+ "16037e3112ed|j_68eeebff5d": {
+  "grade": 0,
+  "reason": "Web/frontend full-stack identity role, not Android"
+ },
+ "16037e3112ed|j_71db67eb7a": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "16037e3112ed|j_791d28e88b": {
+  "grade": 3,
+  "reason": "Android engineer building app features"
+ },
+ "16037e3112ed|j_808f563342": {
+  "grade": 3,
+  "reason": "Native Android developer in Kotlin"
+ },
+ "16037e3112ed|j_9355e1c275": {
+  "grade": 1,
+  "reason": "Founding engineer, mostly search/data focus; iOS/Android is just one option on a full-stack track"
+ },
+ "16037e3112ed|j_9feead8117": {
+  "grade": 3,
+  "reason": "Native Android engineer using Kotlin"
+ },
+ "16037e3112ed|j_a09565c2f6": {
+  "grade": 2,
+  "reason": "Mostly Flutter, but native Android is also required"
+ },
+ "16037e3112ed|j_b1a89afc7e": {
+  "grade": 3,
+  "reason": "Senior native Android developer for a wallet app"
+ },
+ "16037e3112ed|j_b39b7d629c": {
+  "grade": 0,
+  "reason": "Customer service role"
+ },
+ "16037e3112ed|j_c0e91d8f28": {
+  "grade": 2,
+  "reason": "React Native mobile role that ships to Google Play"
+ },
+ "16037e3112ed|j_cc60e39633": {
+  "grade": 1,
+  "reason": "Flutter/iOS-focused mobile role; Android only mentioned in passing"
+ },
+ "16037e3112ed|j_cd9685acf8": {
+  "grade": 3,
+  "reason": "Android engineer building native apps"
+ },
+ "16037e3112ed|j_ceeb6dc8da": {
+  "grade": 3,
+  "reason": "Android staff engineer on the Fanatics app (Kotlin)"
+ },
+ "16037e3112ed|j_d243d74221": {
+  "grade": 3,
+  "reason": "Native Android developer using Kotlin"
+ },
+ "16037e3112ed|j_db37e380bb": {
+  "grade": 0,
+  "reason": "Marketing role; Android is only mentioned in the product description."
+ },
+ "16037e3112ed|j_e1c0d75540": {
+  "grade": 1,
+  "reason": "UI design role for mobile apps, not Android development."
+ },
+ "16037e3112ed|j_ff9c68b08a": {
+  "grade": 2,
+  "reason": "Mixed reality developer building apps for mobile and embedded devices with Android tools. Android is an adjacent, secondary part of the role."
+ },
+ "18c97257314b|j_00f0f61b3c": {
+  "grade": 2,
+  "reason": "Full stack role with a strong frontend focus (interfaces, state management). Palantir uses React, but the posting doesn't name it."
+ },
+ "18c97257314b|j_0e18117f7a": {
+  "grade": 2,
+  "reason": "Full-stack TypeScript product role. React is listed only as useful familiarity."
+ },
+ "18c97257314b|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack role that requires React/Next.js, but backend and AI work take up much of the job."
+ },
+ "18c97257314b|j_15a706c15f": {
+  "grade": 2,
+  "reason": "Full-stack consumer product role that requires React/Next.js, with heavy frontend and UX work, but it isn't frontend-only."
+ },
+ "18c97257314b|j_22c7950b32": {
+  "grade": 3,
+  "reason": "Dedicated frontend engineer role that requires React experience."
+ },
+ "18c97257314b|j_270b597882": {
+  "grade": 1,
+  "reason": "General software engineering internship. Frontend work is mentioned only as one possible team."
+ },
+ "18c97257314b|j_45676ab7c6": {
+  "grade": 2,
+  "reason": "Founding full-stack/AI role that requires React/Next.js, but the focus is agents and backend work."
+ },
+ "18c97257314b|j_498410eaf3": {
+  "grade": 2,
+  "reason": "Founding full-stack role that requires React on the frontend, but the focus is integrations and infrastructure."
+ },
+ "18c97257314b|j_4ede644580": {
+  "grade": 3,
+  "reason": "Senior frontend engineer role building interfaces. Palantir's frontend stack is React-based."
+ },
+ "18c97257314b|j_4f5a829f4e": {
+  "grade": 2,
+  "reason": "Frontend-focused WordPress/Drupal developer role. React is secondary (Gutenberg blocks, nice-to-have)."
+ },
+ "18c97257314b|j_5997e9d162": {
+  "grade": 3,
+  "reason": "Frontend engineer role building with React/TypeScript."
+ },
+ "18c97257314b|j_5ad5251b5b": {
+  "grade": 1,
+  "reason": "Founding full-stack/AI role focused on a Go backend; React is a small part of the job."
+ },
+ "18c97257314b|j_5d0831482f": {
+  "grade": 3,
+  "reason": "Senior frontend engineer role; Palantir's frontend work typically uses React, though the excerpt doesn't name it."
+ },
+ "18c97257314b|j_6364847b87": {
+  "grade": 2,
+  "reason": "Full-stack role with heavy React frontend work, but backend work is also required."
+ },
+ "18c97257314b|j_68eeebff5d": {
+  "grade": 2,
+  "reason": "Frontend-oriented full-stack web role; React isn't confirmed in the excerpt."
+ },
+ "18c97257314b|j_7b03056e6b": {
+  "grade": 2,
+  "reason": "Full-stack product role that requires strong React skills, but also covers backend and LLM work."
+ },
+ "18c97257314b|j_7bec311211": {
+  "grade": 1,
+  "reason": "General new-grad software engineer role; frontend work is only one possible team placement."
+ },
+ "18c97257314b|j_88b2466f19": {
+  "grade": 3,
+  "reason": "Frontend design engineer role built around React, TypeScript and a design system."
+ },
+ "18c97257314b|j_8d244d0552": {
+  "grade": 1,
+  "reason": "Full-stack role using Vue/Nuxt; React is only an accepted alternative."
+ },
+ "18c97257314b|j_91057cf98d": {
+  "grade": 2,
+  "reason": "Full-stack founding role with React frontend work alongside backend and AI work."
+ },
+ "18c97257314b|j_9c1850d856": {
+  "grade": 2,
+  "reason": "Full-stack role that includes a React frontend; the frontend is only part of the job"
+ },
+ "18c97257314b|j_a66ba77b5d": {
+  "grade": 2,
+  "reason": "Frontend role using React/Next.js, but it also needs a lot of Kubernetes and infrastructure experience"
+ },
+ "18c97257314b|j_b3595107a0": {
+  "grade": 3,
+  "reason": "70-80% frontend work, using React, TypeScript and Next.js"
+ },
+ "18c97257314b|j_b3b4cb3db1": {
+  "grade": 1,
+  "reason": "Product engineer role focused on AI and backend work; React is a minor part"
+ },
+ "18c97257314b|j_bf84cba8e9": {
+  "grade": 2,
+  "reason": "Full-stack product role that uses React, but the main focus is agents and backend"
+ },
+ "18c97257314b|j_c278075119": {
+  "grade": 3,
+  "reason": "Dedicated frontend engineer role building complex React apps"
+ },
+ "18c97257314b|j_c334fc159f": {
+  "grade": 1,
+  "reason": "Infrastructure internship; frontend infrastructure is only one of several possible teams"
+ },
+ "18c97257314b|j_c625537b6a": {
+  "grade": 1,
+  "reason": "Duplicate of job 6: infrastructure internship where frontend is only one option"
+ },
+ "18c97257314b|j_de8e2afda0": {
+  "grade": 3,
+  "reason": "Frontend web engineering with TypeScript, React and Next.js"
+ },
+ "18c97257314b|j_e25bb2658f": {
+  "grade": 2,
+  "reason": "Product design role that also involves shipping React frontend code"
+ },
+ "18c97257314b|j_ef94e402cf": {
+  "grade": 3,
+  "reason": "Senior front-end engineer role that requires React and TypeScript."
+ },
+ "18c97257314b|j_f3186e9a60": {
+  "grade": 1,
+  "reason": "General new-grad software engineer role. Front-end work is mentioned only as one possible team, and React isn't mentioned."
+ },
+ "1ae3999294a4|j_0219f1c891": {
+  "grade": 1,
+  "reason": "Financial data engineering pipelines serving AI; the role is data engineering, not building LLM products."
+ },
+ "1ae3999294a4|j_0321cad9b1": {
+  "grade": 3,
+  "reason": "Founding engineer building production AI agents and LLM features, with fine-tuning and vector stores."
+ },
+ "1ae3999294a4|j_12481e6201": {
+  "grade": 2,
+  "reason": "Full-stack founding engineer at an agentic AI startup; LLM APIs are listed only as a bonus."
+ },
+ "1ae3999294a4|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack product engineer whose work includes integrating LLM services; LLM work is part of the job, not the main focus."
+ },
+ "1ae3999294a4|j_167a65e048": {
+  "grade": 3,
+  "reason": "Applied AI engineer owning LLM agents, evals and model strategy."
+ },
+ "1ae3999294a4|j_17a0de9618": {
+  "grade": 3,
+  "reason": "AI engineer owning production LLM services, RAG and agent orchestration."
+ },
+ "1ae3999294a4|j_1dd366cfd2": {
+  "grade": 1,
+  "reason": "Hourly contract red-teaming LLMs to generate safety data; closer to an AI-training gig than product engineering."
+ },
+ "1ae3999294a4|j_20f59b1bc6": {
+  "grade": 3,
+  "reason": "Founding engineer building LLM conversational agents, orchestration and eval pipelines."
+ },
+ "1ae3999294a4|j_254857348b": {
+  "grade": 3,
+  "reason": "Founding engineer building LLM workflows, retrieval, evals and agent foundations."
+ },
+ "1ae3999294a4|j_26c8fd63a4": {
+  "grade": 3,
+  "reason": "Builds the agent runtime, system prompts and LLM eval harnesses."
+ },
+ "1ae3999294a4|j_26cd4f5074": {
+  "grade": 2,
+  "reason": "Full-stack product engineer on an AI platform; builds agentic systems and MCP servers, but the role is mostly general full-stack work"
+ },
+ "1ae3999294a4|j_2d269291b5": {
+  "grade": 2,
+  "reason": "Builds LLM agents for edge defense systems, but the focus is heavy on model training and edge optimization"
+ },
+ "1ae3999294a4|j_321252cee1": {
+  "grade": 3,
+  "reason": "Builds LLM/RAG systems, multi-agent architectures and production chatbots"
+ },
+ "1ae3999294a4|j_32960e0b13": {
+  "grade": 3,
+  "reason": "Staff engineer owning agentic LLM application architecture and evals"
+ },
+ "1ae3999294a4|j_3606b3739e": {
+  "grade": 3,
+  "reason": "Founding AI engineer owning LLM infrastructure, evals, routing and MCP agents in production"
+ },
+ "1ae3999294a4|j_425123c467": {
+  "grade": 2,
+  "reason": "AI/ML founding engineer focused on recsys and ranking, with LLM-powered features as a secondary part"
+ },
+ "1ae3999294a4|j_4bbc9d8689": {
+  "grade": 3,
+  "reason": "Product engineer building LLM orchestration and agent workflows in production"
+ },
+ "1ae3999294a4|j_5e4e79b4bb": {
+  "grade": 2,
+  "reason": "Research internship on multimodal LLMs; research rather than product engineering"
+ },
+ "1ae3999294a4|j_5f9eeef78e": {
+  "grade": 1,
+  "reason": "Security engineering role for AI systems; LLM building is not the main job"
+ },
+ "1ae3999294a4|j_69b23c93a2": {
+  "grade": 2,
+  "reason": "Full-stack engineer at an AI startup studying how LLMs retrieve content; LLM work is part of the role"
+ },
+ "1ae3999294a4|j_74750bb2de": {
+  "grade": 2,
+  "reason": "An engineering role on LLM post-training and evals. It's model-training work rather than building products, but it isn't a data-labelling gig."
+ },
+ "1ae3999294a4|j_7b03056e6b": {
+  "grade": 3,
+  "reason": "Founding product engineer building production LLM workflows and agents."
+ },
+ "1ae3999294a4|j_88606b513f": {
+  "grade": 3,
+  "reason": "Designs LLM, RAG and agentic systems for legal and compliance tools."
+ },
+ "1ae3999294a4|j_8d837bde51": {
+  "grade": 1,
+  "reason": "Infrastructure security role where LLM use is secondary."
+ },
+ "1ae3999294a4|j_8efdfb456e": {
+  "grade": 2,
+  "reason": "An LLM evaluation algorithm engineer, which is a specialty next to building LLM products."
+ },
+ "1ae3999294a4|j_909deacf8b": {
+  "grade": 0,
+  "reason": "A sales role, not engineering."
+ },
+ "1ae3999294a4|j_915b892e83": {
+  "grade": 3,
+  "reason": "Builds LLM-powered conversational AI agents in production."
+ },
+ "1ae3999294a4|j_953d842975": {
+  "grade": 0,
+  "reason": "A compliance risk specialist who only uses AI tools."
+ },
+ "1ae3999294a4|j_9a973ccfd5": {
+  "grade": 3,
+  "reason": "Builds LLM apps, agents and MCP servers in production."
+ },
+ "1ae3999294a4|j_9d5230010d": {
+  "grade": 1,
+  "reason": "A Java payments security role where LLM use is a minor part."
+ },
+ "1ae3999294a4|j_9e8047ce13": {
+  "grade": 2,
+  "reason": "Data architect role building RAG and LLM data foundations; this is adjacent to LLM engineering, not core to it."
+ },
+ "1ae3999294a4|j_9ff661a4a0": {
+  "grade": 2,
+  "reason": "Research engineering on LLM post-training. It's engineering, but on model training rather than building products."
+ },
+ "1ae3999294a4|j_a072daab05": {
+  "grade": 2,
+  "reason": "Autonomous systems software role that includes building LLM-driven decision systems; LLM work is a secondary part of the job."
+ },
+ "1ae3999294a4|j_a78b30a0de": {
+  "grade": 2,
+  "reason": "Founding engineer on an AI agent platform with LLM-powered workflows; LLM experience is a plus, not the core requirement."
+ },
+ "1ae3999294a4|j_ab6f39a51b": {
+  "grade": 3,
+  "reason": "AI engineer integrating LLMs into EHR products through prompt engineering and fine-tuning."
+ },
+ "1ae3999294a4|j_acb5f75e7a": {
+  "grade": 2,
+  "reason": "LLM applied scientist/engineer covering RAG pipelines and agents, but with a heavy research and model-training focus."
+ },
+ "1ae3999294a4|j_ae6f69e289": {
+  "grade": 1,
+  "reason": "Data engineering role; LLM-based extraction is only a minor part."
+ },
+ "1ae3999294a4|j_b0eecc24fc": {
+  "grade": 1,
+  "reason": "Research-first data scientist role on LLM post-training, not product engineering."
+ },
+ "1ae3999294a4|j_b22c7a06e0": {
+  "grade": 2,
+  "reason": "Duplicate Palantir autonomous systems role; LLM work is secondary."
+ },
+ "1ae3999294a4|j_bd27dd28b7": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "1ae3999294a4|j_bdcee64847": {
+  "grade": 2,
+  "reason": "Platform/backend engineer role that includes building LLM agents and RAG, but the main focus is backend and supply chain integrations."
+ },
+ "1ae3999294a4|j_c5404ad5cd": {
+  "grade": 2,
+  "reason": "LLM post-training and evaluation research role. Closely related, but it is research rather than building products on LLMs."
+ },
+ "1ae3999294a4|j_c691e7f295": {
+  "grade": 1,
+  "reason": "Product manager at an agentic AI company. Not an engineering role."
+ },
+ "1ae3999294a4|j_d2dfe05498": {
+  "grade": 3,
+  "reason": "Engineer building an LLM agent runtime, prompts and evals for production. Exact fit."
+ },
+ "1ae3999294a4|j_d526a1457f": {
+  "grade": 2,
+  "reason": "Full-stack founding engineer at an LLM-focused startup that requires production LLM/agent experience, but the role is general full-stack."
+ },
+ "1ae3999294a4|j_d5a1ea991a": {
+  "grade": 3,
+  "reason": "Builds production LLM pipelines and agents with evals and inference work. Strong fit despite the data scientist title."
+ },
+ "1ae3999294a4|j_d6680e0705": {
+  "grade": 3,
+  "reason": "AI agent engineer building a conversational LLM agent platform with tool calling and memory. Exact fit."
+ },
+ "1ae3999294a4|j_d7d8990b46": {
+  "grade": 0,
+  "reason": "Customer-facing pricing consulting role, not engineering."
+ },
+ "1ae3999294a4|j_d8e95e7608": {
+  "grade": 3,
+  "reason": "Builds LLM agents, voice AI, LLM pipelines and evals for an insurtech product. Exact fit."
+ },
+ "1ae3999294a4|j_e1769b1bb6": {
+  "grade": 3,
+  "reason": "Founding AI engineer applying LLMs and multimodal models to production systems. Strong fit."
+ },
+ "1ae3999294a4|j_e770aa487c": {
+  "grade": 3,
+  "reason": "Technical co-founder role building an LLM agent product: designing the architecture, tool use, orchestration and evals. Exactly the kind of role sought."
+ },
+ "1ae3999294a4|j_ee871fa31b": {
+  "grade": 1,
+  "reason": "A task-based gig designing benchmark tasks to test AI agents, not building LLM products. It is closer to AI-training/eval contract work, even though it requires ML inference skills."
+ },
+ "1ae3999294a4|j_f0a8d9bf16": {
+  "grade": 2,
+  "reason": "Founding product engineer who builds LLM agents for document compliance. LLM work is a core duty, but the role is mainly full-stack product engineering and LLM experience is only listed as a plus."
+ },
+ "1ae3999294a4|j_f11357479f": {
+  "grade": 3,
+  "reason": "Applied role building production LLM pipelines, agentic systems, evals and inference optimization. A strong match for LLM engineering despite the data scientist title."
+ },
+ "1f69b0034827|j_177d6ec985": {
+  "grade": 1,
+  "reason": "Android mobile role using Kotlin, not backend; Go only in the stack."
+ },
+ "1f69b0034827|j_2266b76f67": {
+  "grade": 3,
+  "reason": "Backend-heavy product engineer role where Go is a must-have."
+ },
+ "1f69b0034827|j_38add08947": {
+  "grade": 3,
+  "reason": "Staff backend engineer role in Kotlin."
+ },
+ "1f69b0034827|j_452a57ef2b": {
+  "grade": 3,
+  "reason": "Senior backend real-time systems role using Java or Kotlin."
+ },
+ "1f69b0034827|j_4b0f849926": {
+  "grade": 1,
+  "reason": "AI training task contract. Go and Rust are only some of the accepted languages, and it isn't a backend engineering job."
+ },
+ "1f69b0034827|j_4bdd92d00f": {
+  "grade": 1,
+  "reason": "React full-stack talent pool. Golang only shows up in a list of other stacks."
+ },
+ "1f69b0034827|j_5ad5251b5b": {
+  "grade": 2,
+  "reason": "Full-stack/AI founding role that requires Go backend work, but it's broader than backend."
+ },
+ "1f69b0034827|j_5ad73fdb2f": {
+  "grade": 0,
+  "reason": "Mobile design engineer. Kotlin is only an optional mobile skill."
+ },
+ "1f69b0034827|j_6247201619": {
+  "grade": 1,
+  "reason": "Android client-side security SDK role. Kotlin is used, but it's not backend."
+ },
+ "1f69b0034827|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue frontend talent pool with none of the requested languages."
+ },
+ "1f69b0034827|j_6aefda2b08": {
+  "grade": 2,
+  "reason": "Full stack role where Go is used for the backend, alongside Python and Angular, so Go is not the only focus."
+ },
+ "1f69b0034827|j_6d3480b71b": {
+  "grade": 1,
+  "reason": "DevOps and infrastructure role. Golang is only used for automating tasks."
+ },
+ "1f69b0034827|j_720f45f74f": {
+  "grade": 1,
+  "reason": "DevOps and SRE role where Golang is one of several possible scripting languages."
+ },
+ "1f69b0034827|j_9feead8117": {
+  "grade": 1,
+  "reason": "Android mobile role using Kotlin. It isn't backend work."
+ },
+ "1f69b0034827|j_b1a89afc7e": {
+  "grade": 1,
+  "reason": "Android client role using Kotlin. It isn't backend work."
+ },
+ "1f69b0034827|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Senior Go software engineer building a Kubernetes control plane, which is backend and systems work."
+ },
+ "1f69b0034827|j_c976d06823": {
+  "grade": 3,
+  "reason": "Golang backend engineer for a recommendation engine."
+ },
+ "1f69b0034827|j_ceeb6dc8da": {
+  "grade": 1,
+  "reason": "Mobile and Android staff role using Kotlin. It isn't backend work."
+ },
+ "1f69b0034827|j_d0e4ebd669": {
+  "grade": 2,
+  "reason": "Backend software engineer role with Go in the backend stack. Go is listed alongside TypeScript, Java and PHP."
+ },
+ "1f69b0034827|j_d243d74221": {
+  "grade": 1,
+  "reason": "Android mobile role using Kotlin. It isn't backend work."
+ },
+ "1f69b0034827|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX design role, not backend engineering."
+ },
+ "1f69b0034827|j_e1270bb4b2": {
+  "grade": 1,
+  "reason": "QA automation role using Rust/Java; testing, not backend engineering."
+ },
+ "1f69b0034827|j_e19d8e271b": {
+  "grade": 2,
+  "reason": "Backend tech lead on the JVM; Kotlin is only a plus."
+ },
+ "1f69b0034827|j_f0a8d9bf16": {
+  "grade": 2,
+  "reason": "Full-stack product engineer with a Kotlin/Spring Boot backend; broader than pure backend."
+ },
+ "27cb5c3838ea|j_0219f1c891": {
+  "grade": 1,
+  "reason": "Data engineering for stock/financial data at a crypto exchange; not blockchain engineering."
+ },
+ "27cb5c3838ea|j_06e419e727": {
+  "grade": 1,
+  "reason": "Marketing data analyst at a crypto company; not a blockchain engineering role."
+ },
+ "27cb5c3838ea|j_2a1bd8b08d": {
+  "grade": 1,
+  "reason": "Fraud/AML investigation at a crypto exchange; not engineering."
+ },
+ "27cb5c3838ea|j_373cae5f16": {
+  "grade": 1,
+  "reason": "Business development at a Web3 security firm; smart contracts are only a nice-to-have interest."
+ },
+ "27cb5c3838ea|j_389ab97ec4": {
+  "grade": 2,
+  "reason": "Technical on-chain wallet and protocol integration role; blockchain-relevant but not smart contract development."
+ },
+ "27cb5c3838ea|j_3f31785bb9": {
+  "grade": 0,
+  "reason": "HR/recruiting role at an AI procurement startup; nothing to do with blockchain."
+ },
+ "27cb5c3838ea|j_444ed2e853": {
+  "grade": 1,
+  "reason": "Product manager for trading systems at a crypto exchange; not blockchain engineering."
+ },
+ "27cb5c3838ea|j_461e7af24b": {
+  "grade": 1,
+  "reason": "CRM operations internship at a crypto company; not engineering."
+ },
+ "27cb5c3838ea|j_4896b76d92": {
+  "grade": 1,
+  "reason": "Legal investigations role at a crypto exchange; not engineering."
+ },
+ "27cb5c3838ea|j_53a32e7cb3": {
+  "grade": 1,
+  "reason": "IT audit internship at a crypto exchange; not blockchain development."
+ },
+ "27cb5c3838ea|j_5c21850467": {
+  "grade": 1,
+  "reason": "On-chain DeFi operations role; needs basic smart contract understanding but it isn't engineering"
+ },
+ "27cb5c3838ea|j_5ed1ce101b": {
+  "grade": 0,
+  "reason": "Legal commercial contracts, nothing to do with blockchain"
+ },
+ "27cb5c3838ea|j_637144a34a": {
+  "grade": 1,
+  "reason": "Product manager for trading systems at a crypto exchange, not blockchain engineering"
+ },
+ "27cb5c3838ea|j_6a3a5c435b": {
+  "grade": 0,
+  "reason": "P&ID diagram annotation, not relevant"
+ },
+ "27cb5c3838ea|j_77538ecf84": {
+  "grade": 1,
+  "reason": "Legal counsel for tokenized securities; blockchain-adjacent but not engineering"
+ },
+ "27cb5c3838ea|j_77f3479080": {
+  "grade": 0,
+  "reason": "Legal admin role at a crypto company; the role has nothing to do with blockchain"
+ },
+ "27cb5c3838ea|j_7b5ce83030": {
+  "grade": 0,
+  "reason": "Hospitality onboarding support, not relevant"
+ },
+ "27cb5c3838ea|j_8846e497e3": {
+  "grade": 0,
+  "reason": "Finance analyst at a crypto company; the role isn't blockchain-related"
+ },
+ "27cb5c3838ea|j_8c6fa9b957": {
+  "grade": 0,
+  "reason": "Internal controls/audit role; crypto background is only a plus"
+ },
+ "27cb5c3838ea|j_8e439fbcc3": {
+  "grade": 0,
+  "reason": "Generic full stack internship with no blockchain work"
+ },
+ "27cb5c3838ea|j_91086b0005": {
+  "grade": 1,
+  "reason": "Growth marketing internship at a crypto company; not an engineering role"
+ },
+ "27cb5c3838ea|j_97530e0ee4": {
+  "grade": 0,
+  "reason": "Recruiting operations role; blockchain only appears in the company boilerplate"
+ },
+ "27cb5c3838ea|j_9d5230010d": {
+  "grade": 1,
+  "reason": "Backend engineering at a crypto exchange, but the work is fiat payment integrations, not blockchain or smart contracts"
+ },
+ "27cb5c3838ea|j_b2f65a8d03": {
+  "grade": 0,
+  "reason": "Legal contracts role, not smart contracts"
+ },
+ "27cb5c3838ea|j_b6e1888f8d": {
+  "grade": 0,
+  "reason": "Government relations role"
+ },
+ "27cb5c3838ea|j_b87ec59e9a": {
+  "grade": 0,
+  "reason": "Solutions engineer for military planning software"
+ },
+ "27cb5c3838ea|j_cc3f319678": {
+  "grade": 1,
+  "reason": "Data engineering for stock market data at a crypto company; not blockchain work"
+ },
+ "27cb5c3838ea|j_d22202efbc": {
+  "grade": 0,
+  "reason": "Generic junior developer role with no blockchain work"
+ },
+ "27cb5c3838ea|j_d49b6b07d2": {
+  "grade": 0,
+  "reason": "Federal account management"
+ },
+ "27cb5c3838ea|j_d71e7e285b": {
+  "grade": 0,
+  "reason": "AML compliance remediation role"
+ },
+ "27cb5c3838ea|j_e2c7f20097": {
+  "grade": 0,
+  "reason": "A product management and IT operations role in benefits billing, with no blockchain work."
+ },
+ "27cb5c3838ea|j_e9c05576a2": {
+  "grade": 0,
+  "reason": "A federal contracts manager role. 'Contracts' here means legal contracts, not smart contracts."
+ },
+ "27cb5c3838ea|j_ec39c5f348": {
+  "grade": 3,
+  "reason": "An engineering role focused on the security of blockchain projects on BNB Smart Chain and other chains, which is core web3 engineering."
+ },
+ "27cb5c3838ea|j_f0d04008e9": {
+  "grade": 0,
+  "reason": "A healthcare API engineering role. 'SMART' and 'API contracts' are unrelated to blockchain."
+ },
+ "27cb5c3838ea|j_f3c3d42635": {
+  "grade": 3,
+  "reason": "A blockchain engineer building Web3 wallet and on-chain systems, with smart contract integration experience required."
+ },
+ "34d13def2f40|j_002b20ae4a": {
+  "grade": 0,
+  "reason": "Data engineering role, not pre-sales or solutions engineering."
+ },
+ "34d13def2f40|j_0446cd44d4": {
+  "grade": 0,
+  "reason": "Internal Atlassian admin role, not pre-sales."
+ },
+ "34d13def2f40|j_0853800add": {
+  "grade": 3,
+  "reason": "Solutions engineer role with pre-sales discovery, demos and technical sales."
+ },
+ "34d13def2f40|j_1717f88628": {
+  "grade": 1,
+  "reason": "Forward deployed engineering internship. It is customer-facing but not a sales engineering role."
+ },
+ "34d13def2f40|j_260d21b873": {
+  "grade": 1,
+  "reason": "Post-sale implementation engineer, which is near solutions engineering but is not pre-sales."
+ },
+ "34d13def2f40|j_2ecf40bf8e": {
+  "grade": 2,
+  "reason": "Forward deployed engineer, a customer-facing technical role close to solutions engineering."
+ },
+ "34d13def2f40|j_322357772d": {
+  "grade": 1,
+  "reason": "Forward deployed engineering internship. It is customer-facing but not a sales engineering role."
+ },
+ "34d13def2f40|j_35edad8992": {
+  "grade": 1,
+  "reason": "Forward deployed engineering internship. It is customer-facing but not a sales engineering role."
+ },
+ "34d13def2f40|j_3732e17a9b": {
+  "grade": 1,
+  "reason": "Inside sales rep with some technical solution design, but the role is mainly sales rather than sales engineering."
+ },
+ "34d13def2f40|j_389ab97ec4": {
+  "grade": 2,
+  "reason": "Technical integration and solutions partner role that writes partner proposals, close to solutions engineering."
+ },
+ "34d13def2f40|j_4b0f849926": {
+  "grade": 0,
+  "reason": "Contract role writing AI training coding tasks; nothing pre-sales about it"
+ },
+ "34d13def2f40|j_54d08d7638": {
+  "grade": 0,
+  "reason": "Internal analytics/data engineering role"
+ },
+ "34d13def2f40|j_585dbb5c73": {
+  "grade": 1,
+  "reason": "Account Executive sales role that sells solutions, but it isn't a technical pre-sales role"
+ },
+ "34d13def2f40|j_5b94147b6e": {
+  "grade": 2,
+  "reason": "Supports institutional client pitches and solutioning alongside BD, which is pre-sales-adjacent, but the role is mostly product ops"
+ },
+ "34d13def2f40|j_62a7f7fe6a": {
+  "grade": 2,
+  "reason": "Customer-facing solution design, demos and deployment; close to solutions consulting but less technical"
+ },
+ "34d13def2f40|j_6364847b87": {
+  "grade": 0,
+  "reason": "Standard full-stack developer role"
+ },
+ "34d13def2f40|j_79a8993e92": {
+  "grade": 2,
+  "reason": "Forward deployed engineer embedded with customers designing solutions; adjacent to solutions engineering, and it's an internship"
+ },
+ "34d13def2f40|j_83ec2a4a36": {
+  "grade": 2,
+  "reason": "Forward deployed AI engineer working with customers on implementation; adjacent to solutions engineering"
+ },
+ "34d13def2f40|j_843c696a7c": {
+  "grade": 1,
+  "reason": "Software engineering internship that includes a forward deployed option; mostly general SWE"
+ },
+ "34d13def2f40|j_8d837bde51": {
+  "grade": 0,
+  "reason": "Infrastructure security engineering role"
+ },
+ "34d13def2f40|j_900d0062cc": {
+  "grade": 0,
+  "reason": "Full-stack product engineer; talking to customers doesn't make it a pre-sales role."
+ },
+ "34d13def2f40|j_9632181061": {
+  "grade": 3,
+  "reason": "Enterprise Solution Engineer who owns the technical pre-sales cycle: demos, RFPs and prototypes."
+ },
+ "34d13def2f40|j_965d0d20f3": {
+  "grade": 2,
+  "reason": "Forward deployed engineer is a customer-facing technical role next to solutions engineering, but it's post-sales and engineering-heavy."
+ },
+ "34d13def2f40|j_9c1850d856": {
+  "grade": 0,
+  "reason": "Founding full-stack AI engineer building the product."
+ },
+ "34d13def2f40|j_a3c572257e": {
+  "grade": 2,
+  "reason": "Solution Architect at a security vendor is likely customer-facing and technical, but the excerpt doesn't confirm pre-sales duties."
+ },
+ "34d13def2f40|j_a4e1b2adc9": {
+  "grade": 0,
+  "reason": "Agentic AI engineer building the product."
+ },
+ "34d13def2f40|j_a5691f7270": {
+  "grade": 0,
+  "reason": "Internal finance systems engineering role."
+ },
+ "34d13def2f40|j_ab6f39a51b": {
+  "grade": 0,
+  "reason": "AI and prompt engineering role building the product."
+ },
+ "34d13def2f40|j_b85e63df9d": {
+  "grade": 2,
+  "reason": "Applied AI engineer embedded with enterprise customers; customer-facing solutions work, but not pre-sales."
+ },
+ "34d13def2f40|j_b87ec59e9a": {
+  "grade": 3,
+  "reason": "Solutions Engineer who runs technical discovery with Sales and does solution design; also deployment-heavy."
+ },
+ "34d13def2f40|j_b98de9a423": {
+  "grade": 0,
+  "reason": "Internal application security architect; not a pre-sales role."
+ },
+ "34d13def2f40|j_c3108df945": {
+  "grade": 1,
+  "reason": "Technical support/ops role. It lists solutions engineering only as acceptable background experience."
+ },
+ "34d13def2f40|j_c3214afa11": {
+  "grade": 2,
+  "reason": "Builds demo infrastructure for the solutions architecture team and works with SAs and AEs to support the sales field. Adjacent to pre-sales."
+ },
+ "34d13def2f40|j_c95e186dc9": {
+  "grade": 2,
+  "reason": "Customer-facing forward deployed engineer. Adjacent to solutions engineering, but post-sales delivery focused."
+ },
+ "34d13def2f40|j_cbc701b73d": {
+  "grade": 2,
+  "reason": "Cloud solutions architect who spends about 25% of the time on pre-sales discovery and solution design; mainly delivery."
+ },
+ "34d13def2f40|j_d2881685ad": {
+  "grade": 2,
+  "reason": "Embeds with enterprise customers to design technical solutions. Forward-deployed role adjacent to solutions engineering."
+ },
+ "34d13def2f40|j_dbbe0b3299": {
+  "grade": 1,
+  "reason": "Account executive sales role, not a technical pre-sales role."
+ },
+ "34d13def2f40|j_dd63f35aec": {
+  "grade": 1,
+  "reason": "Customer-facing product and account role. It lists solutions engineering only as acceptable prior experience."
+ },
+ "34d13def2f40|j_e19d8e271b": {
+  "grade": 0,
+  "reason": "Backend engineering tech lead; not relevant."
+ },
+ "34d13def2f40|j_e4d027b7f8": {
+  "grade": 2,
+  "reason": "Forward deployed engineer at an AI company. Customer-facing technical role adjacent to solutions engineering."
+ },
+ "34d13def2f40|j_f4cbb0a422": {
+  "grade": 0,
+  "reason": "Platform/infrastructure engineering role with no pre-sales or customer-facing solutions work."
+ },
+ "34d13def2f40|j_ff7dafbb36": {
+  "grade": 1,
+  "reason": "Full stack SWE role; GTM collaboration and translating customer needs into solutions is tangential, not a sales engineering role."
+ },
+ "49828e07b048|j_0406f19731": {
+  "grade": 1,
+  "reason": "Software developer role, but senior and requires 4-5 years of experience, so it isn't entry-level."
+ },
+ "49828e07b048|j_1717f88628": {
+  "grade": 3,
+  "reason": "Year-long software engineering internship aimed at undergrads, which is an entry-level dev role."
+ },
+ "49828e07b048|j_177d6ec985": {
+  "grade": 1,
+  "reason": "Senior Android engineer who mentors juniors; not a junior role."
+ },
+ "49828e07b048|j_199698114b": {
+  "grade": 0,
+  "reason": "Junior role, but it's crypto market analysis, not software development."
+ },
+ "49828e07b048|j_26dc2d8f18": {
+  "grade": 1,
+  "reason": "Senior full-stack engineer with 5+ years of experience; not entry-level."
+ },
+ "49828e07b048|j_2a64d0d65f": {
+  "grade": 0,
+  "reason": "Senior product designer role, not development."
+ },
+ "49828e07b048|j_2e63d2db48": {
+  "grade": 1,
+  "reason": "Contract for experienced Unreal developers to help train AI; not a junior dev role."
+ },
+ "49828e07b048|j_322357772d": {
+  "grade": 3,
+  "reason": "Year-long software engineering internship aimed at undergrads, which is an entry-level dev role."
+ },
+ "49828e07b048|j_33910dc29e": {
+  "grade": 0,
+  "reason": "Accounting lead role, not relevant."
+ },
+ "49828e07b048|j_35edad8992": {
+  "grade": 3,
+  "reason": "Year-long software engineering internship aimed at undergrads, which is an entry-level dev role."
+ },
+ "49828e07b048|j_3a50cd4834": {
+  "grade": 1,
+  "reason": "Junior-level, but this is a GTM/outbound automation role. Coding is only a minor plus."
+ },
+ "49828e07b048|j_4e98a66856": {
+  "grade": 1,
+  "reason": "Entry-level marketing internship at a developer tools company. It is not a development role."
+ },
+ "49828e07b048|j_4f5a829f4e": {
+  "grade": 1,
+  "reason": "A developer role, but it requires 5+ years of experience, so it is not junior."
+ },
+ "49828e07b048|j_5c0ffb99da": {
+  "grade": 1,
+  "reason": "Backend developer role that requires 5+ years of experience. Not entry-level."
+ },
+ "49828e07b048|j_5e0a1b548b": {
+  "grade": 0,
+  "reason": "Junior social media job. Not software development."
+ },
+ "49828e07b048|j_67cfc00ad0": {
+  "grade": 0,
+  "reason": "IT support role. Not software development."
+ },
+ "49828e07b048|j_79a8993e92": {
+  "grade": 2,
+  "reason": "Entry-level engineering internship for undergraduates. The forward-deployed track is customer-facing, so it is a step away from a standard developer role."
+ },
+ "49828e07b048|j_7fac510287": {
+  "grade": 1,
+  "reason": "Senior developer role. Not junior."
+ },
+ "49828e07b048|j_839ad8cbcf": {
+  "grade": 1,
+  "reason": "Senior test engineering role. Not junior."
+ },
+ "49828e07b048|j_843c696a7c": {
+  "grade": 3,
+  "reason": "Entry-level software engineering internship for undergraduates."
+ },
+ "49828e07b048|j_86bcdf41d5": {
+  "grade": 2,
+  "reason": "Web developer role, but a part-time contract that asks for strong experience rather than being clearly junior"
+ },
+ "49828e07b048|j_8c5c34e53d": {
+  "grade": 1,
+  "reason": "Developer-facing go-to-market and community role, not a software developer job"
+ },
+ "49828e07b048|j_8e439fbcc3": {
+  "grade": 3,
+  "reason": "Full stack developer internship, an entry-level software development role"
+ },
+ "49828e07b048|j_8fd9ef6c0e": {
+  "grade": 2,
+  "reason": "Front-end developer role, but it asks for an experienced hire rather than a junior one"
+ },
+ "49828e07b048|j_905ced9b44": {
+  "grade": 1,
+  "reason": "Software developer role, but senior (5+ years), which conflicts with the junior intent"
+ },
+ "49828e07b048|j_909deacf8b": {
+  "grade": 0,
+  "reason": "Sales and business development role"
+ },
+ "49828e07b048|j_91086b0005": {
+  "grade": 0,
+  "reason": "Marketing internship, not software development"
+ },
+ "49828e07b048|j_915b892e83": {
+  "grade": 1,
+  "reason": "Senior ML developer needing 6+ years, which conflicts with the junior intent"
+ },
+ "49828e07b048|j_a303df7a03": {
+  "grade": 0,
+  "reason": "Product design role"
+ },
+ "49828e07b048|j_a4a29f14e9": {
+  "grade": 0,
+  "reason": "Client relationship management role"
+ },
+ "49828e07b048|j_accc6a0f56": {
+  "grade": 1,
+  "reason": "Software developer role, but it requires 4+ years of experience and isn't junior. It only mentions mentoring junior team members."
+ },
+ "49828e07b048|j_b470bf9292": {
+  "grade": 1,
+  "reason": "Developer relations role that involves coding, but it isn't an entry-level developer position."
+ },
+ "49828e07b048|j_bb50565f6c": {
+  "grade": 0,
+  "reason": "IT support role, not software development."
+ },
+ "49828e07b048|j_c0cab2c452": {
+  "grade": 0,
+  "reason": "Advertising account management role."
+ },
+ "49828e07b048|j_ca527c78f5": {
+  "grade": 0,
+  "reason": "Sales team lead role."
+ },
+ "49828e07b048|j_d22202efbc": {
+  "grade": 3,
+  "reason": "Junior or associate software developer role."
+ },
+ "49828e07b048|j_dac59c49f5": {
+  "grade": 0,
+  "reason": "Senior mechanical engineering role."
+ },
+ "49828e07b048|j_ef2874dc13": {
+  "grade": 1,
+  "reason": "Mid-level backend developer role requiring 4+ years of experience, so it isn't junior."
+ },
+ "49828e07b048|j_f7cfd57f2f": {
+  "grade": 1,
+  "reason": "Senior developer role requiring 5+ years of experience, so it isn't entry-level."
+ },
+ "49828e07b048|j_fe252f2d6e": {
+  "grade": 3,
+  "reason": "Junior UI developer role aimed at early-career developers."
+ },
+ "49828e07b048|j_ff5efbf2d6": {
+  "grade": 1,
+  "reason": "Developer Experience Engineer is a software/devrel-adjacent role with no entry-level signal; at an elite AI company it is likely not junior."
+ },
+ "4ae45f82d543|j_017e047ae3": {
+  "grade": 3,
+  "reason": "Backend engineer role; Python or TypeScript production experience."
+ },
+ "4ae45f82d543|j_0321cad9b1": {
+  "grade": 2,
+  "reason": "Full-stack founding role that includes Python backend development."
+ },
+ "4ae45f82d543|j_118b1d6699": {
+  "grade": 2,
+  "reason": "Full-stack role that requires Python and backend services/APIs."
+ },
+ "4ae45f82d543|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack role; backend can be Python or Node."
+ },
+ "4ae45f82d543|j_1a63025e7e": {
+  "grade": 1,
+  "reason": "Forward-deployed role; backend uses Java, Python is only for data processing."
+ },
+ "4ae45f82d543|j_214dad69b2": {
+  "grade": 2,
+  "reason": "Full-stack product role with backend services; Python is preferred."
+ },
+ "4ae45f82d543|j_26dc2d8f18": {
+  "grade": 2,
+  "reason": "Full-stack AI role on a Python stack."
+ },
+ "4ae45f82d543|j_309c3d7db9": {
+  "grade": 1,
+  "reason": "Forward-deployed role; backend uses Java."
+ },
+ "4ae45f82d543|j_317a9cfac0": {
+  "grade": 2,
+  "reason": "Backend engineering role, but Palantir's backend is mainly Java, so Python isn't central."
+ },
+ "4ae45f82d543|j_3a8c609341": {
+  "grade": 3,
+  "reason": "Backend/AI engineer role needing strong Python skills."
+ },
+ "4ae45f82d543|j_452a57ef2b": {
+  "grade": 2,
+  "reason": "A backend role, but the main languages are Java/Kotlin. Python is only listed as useful."
+ },
+ "4ae45f82d543|j_482cf9217c": {
+  "grade": 3,
+  "reason": "A backend role built on Python and FastAPI: APIs, Postgres, Celery and AWS."
+ },
+ "4ae45f82d543|j_6aefda2b08": {
+  "grade": 2,
+  "reason": "A full-stack role where Python is the main backend language, alongside Go and Angular."
+ },
+ "4ae45f82d543|j_6ea455db30": {
+  "grade": 2,
+  "reason": "A backend engineering role, but the listing doesn't say it uses Python."
+ },
+ "4ae45f82d543|j_8b2f774554": {
+  "grade": 2,
+  "reason": "A backend-heavy workflow role, but the visible text doesn't say it uses Python."
+ },
+ "4ae45f82d543|j_8e439fbcc3": {
+  "grade": 1,
+  "reason": "A full-stack intern role. Python is one of several optional backend languages."
+ },
+ "4ae45f82d543|j_905ced9b44": {
+  "grade": 2,
+  "reason": "A full-stack role with a backend focus, but the backend is mainly Node/TypeScript. Python is only used for scripting."
+ },
+ "4ae45f82d543|j_91057cf98d": {
+  "grade": 1,
+  "reason": "A full-stack founding role with a Node backend. Python is listed but secondary."
+ },
+ "4ae45f82d543|j_976e5e9732": {
+  "grade": 2,
+  "reason": "A role building data integration pipelines and backend data systems, with strong Python required. It's an adjacent specialty."
+ },
+ "4ae45f82d543|j_adef1583e4": {
+  "grade": 1,
+  "reason": "An applied AI role building agents. Python is only implied by LangGraph, and this isn't core backend work."
+ },
+ "4ae45f82d543|j_b3b4cb3db1": {
+  "grade": 2,
+  "reason": "Full-stack product engineer; Python/FastAPI is one backend option alongside TypeScript/React"
+ },
+ "4ae45f82d543|j_bdcee64847": {
+  "grade": 2,
+  "reason": "Backend platform role, but the core stack is Next.js/TypeScript; Python is secondary"
+ },
+ "4ae45f82d543|j_c292036c10": {
+  "grade": 2,
+  "reason": "Backend SWE role, but Python isn't mentioned (Palantir backend is typically Java)"
+ },
+ "4ae45f82d543|j_c819369ac7": {
+  "grade": 2,
+  "reason": "Backend SWE role, but Python isn't mentioned (Palantir backend is typically Java)"
+ },
+ "4ae45f82d543|j_d0b50457ef": {
+  "grade": 1,
+  "reason": "Forward-deployed customer-facing engineer; backend is Java/Groovy and Python is used only for data processing"
+ },
+ "4ae45f82d543|j_d1468a6682": {
+  "grade": 3,
+  "reason": "Backend engineer building distributed systems with Python/FastAPI"
+ },
+ "4ae45f82d543|j_d620dccf86": {
+  "grade": 2,
+  "reason": "Founding full-stack role that includes backend services and Python"
+ },
+ "4ae45f82d543|j_dbb7fcfd3a": {
+  "grade": 2,
+  "reason": "Backend SWE role, but no Python stack is indicated"
+ },
+ "4ae45f82d543|j_de51c23fbb": {
+  "grade": 2,
+  "reason": "Backend-leaning product engineer; Python is only a nice-to-have"
+ },
+ "4ae45f82d543|j_ea3ca6c5fd": {
+  "grade": 0,
+  "reason": "React Native mobile role, not backend or Python"
+ },
+ "4ae45f82d543|j_ec24cdb53f": {
+  "grade": 2,
+  "reason": "Python full-stack software engineer building data pipeline/validator; Python central but full-stack rather than pure backend."
+ },
+ "4ae45f82d543|j_ec39c5f348": {
+  "grade": 1,
+  "reason": "Blockchain security full-stack role with back-end work, but no Python mentioned; security focus."
+ },
+ "4ae45f82d543|j_f6ec2b7198": {
+  "grade": 2,
+  "reason": "Primarily backend generalist role; Python is one of several acceptable languages, plus frontend duties."
+ },
+ "4ae45f82d543|j_fabc92ff08": {
+  "grade": 3,
+  "reason": "Backend engineer role building services and async workflows with Python/FastAPI and PostgreSQL."
+ },
+ "4f57267d1399|j_004f83fcfe": {
+  "grade": 3,
+  "reason": "ML engineer role that designs, trains and deploys models to production, using Python and PyTorch. It's in the CAE/simulation domain, not LLMs."
+ },
+ "4f57267d1399|j_0c97fa4ff4": {
+  "grade": 1,
+  "reason": "Customer-facing application engineering role for AI accelerators. PyTorch and vLLM are mentioned, but the job isn't building ML models."
+ },
+ "4f57267d1399|j_0de1479640": {
+  "grade": 2,
+  "reason": "Senior engineer deploying LLMs, RAG pipelines and agentic systems in production with Python. The role leans toward backend and distributed systems."
+ },
+ "4f57267d1399|j_167a65e048": {
+  "grade": 2,
+  "reason": "Applied AI engineer shipping LLM agents and evaluation systems in production. Strongly LLM-focused, but splits time with TypeScript product work and SEO/GEO."
+ },
+ "4f57267d1399|j_19762de5d6": {
+  "grade": 3,
+  "reason": "Production ML engineer owning the full lifecycle with Python and PyTorch. A close match, though LLMs aren't specifically mentioned."
+ },
+ "4f57267d1399|j_273dd060a8": {
+  "grade": 2,
+  "reason": "GPU infrastructure role covering training and LLM serving. Adjacent ML infrastructure work rather than model engineering."
+ },
+ "4f57267d1399|j_28a17b817b": {
+  "grade": 2,
+  "reason": "Entry-level robot learning role using Python and PyTorch. It's research-leaning and focused on robotics rather than production LLMs."
+ },
+ "4f57267d1399|j_2d269291b5": {
+  "grade": 3,
+  "reason": "Trains, fine-tunes and deploys LLM agents to edge hardware in production. Strong ML engineering fit."
+ },
+ "4f57267d1399|j_321252cee1": {
+  "grade": 3,
+  "reason": "Owns the LLM pipeline end to end, through to production deployment with vLLM, RAG and fine-tuning."
+ },
+ "4f57267d1399|j_339116e22c": {
+  "grade": 1,
+  "reason": "Founding engineer focused on geometry and CAD for a BIM tool. LLM agents and PyTorch come up, but the core of the role isn't ML engineering."
+ },
+ "4f57267d1399|j_425123c467": {
+  "grade": 3,
+  "reason": "Founding AI/ML engineer: you'd build production recommendation and LLM matching systems, with PyTorch and Python listed."
+ },
+ "4f57267d1399|j_48be4ecd18": {
+  "grade": 1,
+  "reason": "Customer-facing pre-sales and deployment role. It mentions LLMs, but it isn't ML engineering."
+ },
+ "4f57267d1399|j_498410eaf3": {
+  "grade": 1,
+  "reason": "Full-stack TypeScript/Node role. The LLM workflows are a secondary part of the job."
+ },
+ "4f57267d1399|j_578825ccc2": {
+  "grade": 2,
+  "reason": "Computer vision data scientist who builds and deploys deep learning models to production. Close to ML engineering, but the title is data scientist and the focus is vision rather than LLMs."
+ },
+ "4f57267d1399|j_59bb665dec": {
+  "grade": 3,
+  "reason": "Closest match: production ML engineering covering training, evaluation and serving, with LLMs, Python and PyTorch."
+ },
+ "4f57267d1399|j_5f9eeef78e": {
+  "grade": 1,
+  "reason": "Security engineering role focused on AI systems. It isn't ML engineering."
+ },
+ "4f57267d1399|j_604472daf3": {
+  "grade": 2,
+  "reason": "Founding ML engineer shipping production models, but the work is tabular forecasting with scikit-learn and gradient boosting rather than PyTorch or LLMs."
+ },
+ "4f57267d1399|j_74750bb2de": {
+  "grade": 2,
+  "reason": "Research engineer on LLM post-training and evaluation. Strongly LLM-related, but it leans toward research rather than production deployment."
+ },
+ "4f57267d1399|j_7ae847b4f7": {
+  "grade": 2,
+  "reason": "Applied research role using PyTorch and taking models to production. It's vision and deepfake work, and research-leaning."
+ },
+ "4f57267d1399|j_83ec2a4a36": {
+  "grade": 2,
+  "reason": "Forward-deployed AI engineer building production LLM workflows with Python. It's customer-facing and about putting LLMs to use rather than core ML engineering."
+ },
+ "4f57267d1399|j_8efdfb456e": {
+  "grade": 2,
+  "reason": "LLM evaluation algorithm engineer; adjacent to ML engineering, focused on evaluation rather than building or deploying models"
+ },
+ "4f57267d1399|j_915b892e83": {
+  "grade": 3,
+  "reason": "ML/LLM engineer shipping models to production with Python, training and deployment"
+ },
+ "4f57267d1399|j_9729c01050": {
+  "grade": 3,
+  "reason": "ML engineer training and deploying PyTorch/Python models; computer vision rather than LLM, but still core ML engineering"
+ },
+ "4f57267d1399|j_9e8047ce13": {
+  "grade": 1,
+  "reason": "Data architect role supporting AI; not ML engineering itself"
+ },
+ "4f57267d1399|j_9ff661a4a0": {
+  "grade": 2,
+  "reason": "Research engineer intern on LLM post-training; research-leaning, adjacent to production ML engineering"
+ },
+ "4f57267d1399|j_a84dbb726e": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production ML systems with LLMs"
+ },
+ "4f57267d1399|j_ab6f39a51b": {
+  "grade": 2,
+  "reason": "AI engineer focused on prompt engineering for LLMs, with some fine-tuning and deployment"
+ },
+ "4f57267d1399|j_acb5f75e7a": {
+  "grade": 2,
+  "reason": "LLM applied scientist/engineer working on fine-tuning, RAG pipelines and agents; science-leaning but relevant"
+ },
+ "4f57267d1399|j_b0eecc24fc": {
+  "grade": 2,
+  "reason": "Research-first LLM data scientist; adjacent, research rather than production engineering"
+ },
+ "4f57267d1399|j_c5404ad5cd": {
+  "grade": 2,
+  "reason": "LLM post-training researcher; research role adjacent to ML engineering"
+ },
+ "4f57267d1399|j_d526a1457f": {
+  "grade": 2,
+  "reason": "Full-stack founding engineer role at an AI startup. It requires Python and LLMs in production, but the job is general engineering, not ML engineering."
+ },
+ "4f57267d1399|j_d89ad1cd96": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production ML systems for LLM evaluation and training data. This is applied ML engineering under real production constraints."
+ },
+ "4f57267d1399|j_e926fea423": {
+  "grade": 2,
+  "reason": "ML-based search and recommendation engineering with PyTorch. Clearly relevant, but it's an adjacent specialty with no LLM focus."
+ },
+ "4f57267d1399|j_ee871fa31b": {
+  "grade": 1,
+  "reason": "Contract work designing benchmark tasks. It requires ML inference, PyTorch and vLLM expertise, but the job itself is writing tasks, not engineering production ML."
+ },
+ "4f57267d1399|j_fc4c84de99": {
+  "grade": 2,
+  "reason": "Research role on LLM distillation using PyTorch, with work moving into production. Closely related, but the focus is research rather than engineering."
+ },
+ "569443dffa95|j_00f0f61b3c": {
+  "grade": 2,
+  "reason": "A full-stack application development role building interfaces and APIs. The visible text never names the language, so TypeScript is likely but not confirmed."
+ },
+ "569443dffa95|j_0321cad9b1": {
+  "grade": 3,
+  "reason": "Founding full-stack role asking for Node.js, TypeScript and React, plus Python."
+ },
+ "569443dffa95|j_0cea1cf975": {
+  "grade": 3,
+  "reason": "Full-stack product engineer using TypeScript and React on the front end with a Go back end."
+ },
+ "569443dffa95|j_118b1d6699": {
+  "grade": 3,
+  "reason": "Full-stack engineer role with Python and a modern web stack that includes React and TypeScript."
+ },
+ "569443dffa95|j_14aa2d5d38": {
+  "grade": 3,
+  "reason": "Full-stack product engineer asking for production experience with TypeScript and React or Next.js."
+ },
+ "569443dffa95|j_15a706c15f": {
+  "grade": 3,
+  "reason": "Full-stack consumer product engineer working in TypeScript, React, Next.js and Node.js."
+ },
+ "569443dffa95|j_254857348b": {
+  "grade": 3,
+  "reason": "Full-stack founding engineer working in TypeScript, Next.js and React, with Python."
+ },
+ "569443dffa95|j_26dc2d8f18": {
+  "grade": 2,
+  "reason": "A full-stack role, but the stack is Python and React and TypeScript is never mentioned."
+ },
+ "569443dffa95|j_46f01e515b": {
+  "grade": 3,
+  "reason": "Fullstack engineer role on a TypeScript and React stack."
+ },
+ "569443dffa95|j_498410eaf3": {
+  "grade": 3,
+  "reason": "Full-stack founding engineer working in TypeScript, React and Node.js."
+ },
+ "569443dffa95|j_4bbc9d8689": {
+  "grade": 3,
+  "reason": "Full-stack product engineer role requiring Node.js and TypeScript with React."
+ },
+ "569443dffa95|j_4bdd92d00f": {
+  "grade": 2,
+  "reason": "Full-stack React/Node roles with TypeScript required in one track, but it's a generic talent-marketplace listing and one track is React/Python."
+ },
+ "569443dffa95|j_5ad5251b5b": {
+  "grade": 2,
+  "reason": "Full-stack role, but the backend is Go; TypeScript is used only on the frontend."
+ },
+ "569443dffa95|j_6364847b87": {
+  "grade": 2,
+  "reason": "Full-stack React/Node role, but TypeScript is only a nice-to-have bonus."
+ },
+ "569443dffa95|j_68d92a970f": {
+  "grade": 3,
+  "reason": "Full-stack intern role on a production React/TypeScript stack."
+ },
+ "569443dffa95|j_693aa22426": {
+  "grade": 1,
+  "reason": "Vue frontend-focused marketplace listing; TypeScript is required in some tracks, but full-stack TypeScript isn't the focus."
+ },
+ "569443dffa95|j_69b23c93a2": {
+  "grade": 2,
+  "reason": "Fullstack engineer role using Next.js/TypeScript or Go, with a focus on AI experiments."
+ },
+ "569443dffa95|j_69e572486f": {
+  "grade": 3,
+  "reason": "Founding full-stack role requiring TypeScript, React and Node.js."
+ },
+ "569443dffa95|j_8d244d0552": {
+  "grade": 3,
+  "reason": "Full-stack role with a Node.js/TypeScript backend and a Vue/Nuxt frontend."
+ },
+ "569443dffa95|j_905ced9b44": {
+  "grade": 2,
+  "reason": "Backend-focused full-stack role with Node.js/TypeScript; frontend work is only occasional."
+ },
+ "569443dffa95|j_9c1850d856": {
+  "grade": 3,
+  "reason": "Full-stack role with TypeScript backend and React frontend."
+ },
+ "569443dffa95|j_ad2b3eafc6": {
+  "grade": 2,
+  "reason": "Fullstack product engineer with a React frontend; the excerpt doesn't name TypeScript, though it's likely used."
+ },
+ "569443dffa95|j_b3b4cb3db1": {
+  "grade": 2,
+  "reason": "Frontend and backend product engineering with TypeScript and React; Python is also a main language and there's a voice-AI focus."
+ },
+ "569443dffa95|j_bc7af874cc": {
+  "grade": 2,
+  "reason": "Full-stack role, but the backend appears to be Java and TypeScript isn't mentioned."
+ },
+ "569443dffa95|j_c95e186dc9": {
+  "grade": 3,
+  "reason": "Builds full-stack tools in TypeScript and Node.js, though the role is customer-facing as a forward deployed engineer."
+ },
+ "569443dffa95|j_ccdeebffa0": {
+  "grade": 2,
+  "reason": "Requires TypeScript and full-stack experience, but the work leans toward agents and infrastructure."
+ },
+ "569443dffa95|j_d3200fe756": {
+  "grade": 0,
+  "reason": "Design role with no engineering work."
+ },
+ "569443dffa95|j_e25bb2658f": {
+  "grade": 1,
+  "reason": "Designer role that includes React and TypeScript frontend code, but it isn't full-stack engineering."
+ },
+ "569443dffa95|j_e4da213371": {
+  "grade": 3,
+  "reason": "Full-stack product engineer using TypeScript and React."
+ },
+ "569443dffa95|j_ee2c341c30": {
+  "grade": 2,
+  "reason": "Full-stack role using Node.js and React, but the backend is Java or Go and TypeScript isn't stated."
+ },
+ "569443dffa95|j_f6ec2b7198": {
+  "grade": 2,
+  "reason": "A generalist full-stack role that asks for React and TypeScript experience owning features from API to UI. However, the work is mainly backend and cloud infrastructure, and TypeScript is only one of several accepted backend languages."
+ },
+ "5c667837b43e|j_2266b76f67": {
+  "grade": 3,
+  "reason": "Product engineering role that requires Go as a must-have for backend work"
+ },
+ "5c667837b43e|j_404a8194b3": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role where Go is likely central, but it is listed as 'golang, C/C++ or equivalent'"
+ },
+ "5c667837b43e|j_4bdd92d00f": {
+  "grade": 1,
+  "reason": "React/Python/Node role; Golang only appears in a list of other stacks"
+ },
+ "5c667837b43e|j_4cb4efbc11": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role where Go is likely central, but it is listed as 'golang, C/C++ or equivalent'"
+ },
+ "5c667837b43e|j_5ad5251b5b": {
+  "grade": 3,
+  "reason": "Founding engineer role that requires production Go backend experience as a dealbreaker"
+ },
+ "5c667837b43e|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue developer role with no Go focus"
+ },
+ "5c667837b43e|j_6aefda2b08": {
+  "grade": 2,
+  "reason": "Full-stack role where Go is one of several main languages, alongside Python and Angular"
+ },
+ "5c667837b43e|j_6c441381b1": {
+  "grade": 1,
+  "reason": "Platform software engineering role; Go is not mentioned in the visible text"
+ },
+ "5c667837b43e|j_6d0eab32c6": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role where Go is likely central, but it is listed as 'golang, C/C++ or equivalent'"
+ },
+ "5c667837b43e|j_6d3480b71b": {
+  "grade": 1,
+  "reason": "DevOps role where Go is used only for automation, a secondary skill"
+ },
+ "5c667837b43e|j_720f45f74f": {
+  "grade": 1,
+  "reason": "DevOps role. Go is listed only as one option alongside Python and Bash, so it isn't a main language."
+ },
+ "5c667837b43e|j_b533fdc062": {
+  "grade": 1,
+  "reason": "Platform/infra software engineering. Go isn't mentioned in the excerpt, though Apollo is likely Go-heavy."
+ },
+ "5c667837b43e|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Kubernetes control plane engineering, explicitly Go/Golang."
+ },
+ "5c667837b43e|j_c976d06823": {
+  "grade": 3,
+  "reason": "Backend engineer with Golang as the core tech stack."
+ },
+ "5c667837b43e|j_ceeb6dc8da": {
+  "grade": 0,
+  "reason": "Android/Kotlin mobile role, no Go."
+ },
+ "5c667837b43e|j_d0e4ebd669": {
+  "grade": 2,
+  "reason": "Agent/backend engineering with Go as the first of several backend languages. Likely relevant, but not explicitly the main language."
+ },
+ "5c667837b43e|j_d2fb38941a": {
+  "grade": 2,
+  "reason": "K8s infrastructure systems role. Golang proficiency is valued, but alongside C/C++."
+ },
+ "5c667837b43e|j_d3200fe756": {
+  "grade": 0,
+  "reason": "Design role."
+ },
+ "5c667837b43e|j_dff8a1bb32": {
+  "grade": 0,
+  "reason": "Technical account manager, not engineering in Go."
+ },
+ "5c667837b43e|j_ee2c341c30": {
+  "grade": 1,
+  "reason": "Fullstack role where Go is one backend option alongside Java, with a Node/React focus."
+ },
+ "6143de06c107|j_017e047ae3": {
+  "grade": 3,
+  "reason": "Founding backend engineer focused on distributed systems, messaging pipelines, Postgres."
+ },
+ "6143de06c107|j_06078af562": {
+  "grade": 3,
+  "reason": "Backend developer building APIs and services for a neobank."
+ },
+ "6143de06c107|j_0cea1cf975": {
+  "grade": 2,
+  "reason": "Full-stack product engineer with Go/Postgres backend work, but the role covers the whole stack."
+ },
+ "6143de06c107|j_118b1d6699": {
+  "grade": 2,
+  "reason": "Full-stack role that includes substantial backend services and APIs work."
+ },
+ "6143de06c107|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack product engineer with significant backend responsibilities."
+ },
+ "6143de06c107|j_16ae49b111": {
+  "grade": 1,
+  "reason": "Frontend role that only consumes backend APIs."
+ },
+ "6143de06c107|j_26dc2d8f18": {
+  "grade": 2,
+  "reason": "Full-stack AI engineer, so backend is one part of a broader role."
+ },
+ "6143de06c107|j_37c3bdc941": {
+  "grade": 2,
+  "reason": "Full-stack engineer whose work includes backend APIs."
+ },
+ "6143de06c107|j_38add08947": {
+  "grade": 3,
+  "reason": "Staff backend engineer working in Kotlin."
+ },
+ "6143de06c107|j_3a8c609341": {
+  "grade": 3,
+  "reason": "Founding AI/backend engineer building backend services, APIs and data models."
+ },
+ "6143de06c107|j_42363f301d": {
+  "grade": 2,
+  "reason": "Infrastructure/platform role that includes some backend service work; adjacent specialty"
+ },
+ "6143de06c107|j_452a57ef2b": {
+  "grade": 3,
+  "reason": "Backend engineer building real-time event-driven services"
+ },
+ "6143de06c107|j_482cf9217c": {
+  "grade": 3,
+  "reason": "Backend systems role using Python/FastAPI, APIs and services"
+ },
+ "6143de06c107|j_4dd2f18323": {
+  "grade": 3,
+  "reason": "Founding engineer who owns backend banking systems"
+ },
+ "6143de06c107|j_5c0ffb99da": {
+  "grade": 3,
+  "reason": "Java backend engineer working on distributed services"
+ },
+ "6143de06c107|j_60253e47a0": {
+  "grade": 3,
+  "reason": "Java backend engineer building services and APIs"
+ },
+ "6143de06c107|j_61deaeb530": {
+  "grade": 3,
+  "reason": "Java backend engineer building services and APIs"
+ },
+ "6143de06c107|j_6b8ec8d303": {
+  "grade": 1,
+  "reason": "Product manager for backend payment systems, not an engineering role"
+ },
+ "6143de06c107|j_8e439fbcc3": {
+  "grade": 2,
+  "reason": "Full-stack intern role that includes API and server work"
+ },
+ "6143de06c107|j_905ced9b44": {
+  "grade": 2,
+  "reason": "Full-stack role with a backend focus"
+ },
+ "6143de06c107|j_93085d500d": {
+  "grade": 3,
+  "reason": "Java backend engineer building payment services."
+ },
+ "6143de06c107|j_a101ef351b": {
+  "grade": 3,
+  "reason": "Senior Backend Engineer role."
+ },
+ "6143de06c107|j_accc6a0f56": {
+  "grade": 3,
+  "reason": "Java/Spring backend engineer working on distributed systems."
+ },
+ "6143de06c107|j_adef1583e4": {
+  "grade": 2,
+  "reason": "Applied AI agent engineering that includes backend integration and deployment, but the main focus is AI agents."
+ },
+ "6143de06c107|j_b68856957c": {
+  "grade": 3,
+  "reason": "Senior Backend Engineer role building AI agents."
+ },
+ "6143de06c107|j_c976d06823": {
+  "grade": 3,
+  "reason": "Golang backend engineer for recommendation services."
+ },
+ "6143de06c107|j_cf462c885c": {
+  "grade": 3,
+  "reason": "Java backend engineer working on distributed systems."
+ },
+ "6143de06c107|j_d1468a6682": {
+  "grade": 3,
+  "reason": "Backend engineer for voice AI, working on distributed systems with Python/FastAPI."
+ },
+ "6143de06c107|j_d22202efbc": {
+  "grade": 1,
+  "reason": "Generic junior developer role mixing front-end and .NET work, with backend only one possible option."
+ },
+ "6143de06c107|j_de51c23fbb": {
+  "grade": 3,
+  "reason": "Backend-leaning product engineer who owns APIs and backend systems."
+ },
+ "6143de06c107|j_e19d8e271b": {
+  "grade": 3,
+  "reason": "Backend tech lead role with hands-on backend JVM work"
+ },
+ "6143de06c107|j_e817cd2676": {
+  "grade": 3,
+  "reason": "Backend engineer building backend services"
+ },
+ "6143de06c107|j_ea3ca6c5fd": {
+  "grade": 0,
+  "reason": "Mobile React Native role"
+ },
+ "6143de06c107|j_ec39c5f348": {
+  "grade": 2,
+  "reason": "Full-stack security engineering with significant back-end system work"
+ },
+ "6143de06c107|j_ef2874dc13": {
+  "grade": 3,
+  "reason": "Java backend engineer, distributed systems"
+ },
+ "6143de06c107|j_f0a8d9bf16": {
+  "grade": 2,
+  "reason": "Full-stack product engineer with substantial backend work"
+ },
+ "6143de06c107|j_f1938987b3": {
+  "grade": 2,
+  "reason": "Full-stack, leaning backend"
+ },
+ "6143de06c107|j_f6ec2b7198": {
+  "grade": 3,
+  "reason": "Primarily backend/cloud infrastructure generalist role"
+ },
+ "6143de06c107|j_f986b6b5fa": {
+  "grade": 1,
+  "reason": "Frontend-heavy full-stack role; backend is secondary"
+ },
+ "6143de06c107|j_fabc92ff08": {
+  "grade": 3,
+  "reason": "Backend/systems engineer building backend services"
+ },
+ "6b423edceede|j_0e18117f7a": {
+  "grade": 2,
+  "reason": "Full-stack TypeScript product engineer role that includes UI work. React/Next.js are only listed as nice-to-haves, and the focus is on AI and backend work."
+ },
+ "6b423edceede|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack role using TypeScript with React or Next.js. Frontend is only part of it, alongside backend, AI and DevOps work."
+ },
+ "6b423edceede|j_15a706c15f": {
+  "grade": 2,
+  "reason": "Full-stack consumer product role on TypeScript/React/Next.js with real interface design work. Still full-stack rather than purely frontend."
+ },
+ "6b423edceede|j_254857348b": {
+  "grade": 1,
+  "reason": "Founding full-stack role focused mainly on LLM workflows and data pipelines. Next.js and React are part of the stack, but frontend is not the main job."
+ },
+ "6b423edceede|j_45676ab7c6": {
+  "grade": 2,
+  "reason": "Full-stack founding role that requires React/Next.js/TypeScript. The main focus is AI agents and voice systems."
+ },
+ "6b423edceede|j_498410eaf3": {
+  "grade": 1,
+  "reason": "Integrations-platform role that is mostly backend and infrastructure. React/TypeScript frontend is only one part of the work."
+ },
+ "6b423edceede|j_4bdd92d00f": {
+  "grade": 2,
+  "reason": "React full-stack contract roles, with one track requiring Next.js and TypeScript. These are generic full-stack placements through a staffing marketplace."
+ },
+ "6b423edceede|j_4ede644580": {
+  "grade": 3,
+  "reason": "Senior frontend engineering role building complex UI for data-heavy apps. It is a dedicated frontend role, though the stack isn't stated in the excerpt."
+ },
+ "6b423edceede|j_5997e9d162": {
+  "grade": 3,
+  "reason": "Dedicated frontend role building features in React and TypeScript."
+ },
+ "6b423edceede|j_5ad5251b5b": {
+  "grade": 1,
+  "reason": "Founding role focused on Go backend and AI agents. The React/TypeScript frontend is secondary."
+ },
+ "6b423edceede|j_5d0831482f": {
+  "grade": 3,
+  "reason": "Senior frontend engineer role building complex UIs. Palantir uses React/TypeScript, though the stack isn't stated."
+ },
+ "6b423edceede|j_6364847b87": {
+  "grade": 2,
+  "reason": "Full-stack role with React and TypeScript, but split between frontend and backend."
+ },
+ "6b423edceede|j_7b03056e6b": {
+  "grade": 2,
+  "reason": "Founding product engineer with strong TypeScript/React, but the work is full-stack and LLM-pipeline heavy."
+ },
+ "6b423edceede|j_88b2466f19": {
+  "grade": 3,
+  "reason": "Design engineer who owns the design system and component library in React/strict TypeScript. Exact fit."
+ },
+ "6b423edceede|j_8d244d0552": {
+  "grade": 1,
+  "reason": "Full-stack role with a Vue/Nuxt frontend. React/Next.js is only an alternative, and the role is backend/AI heavy."
+ },
+ "6b423edceede|j_8ef2a6a490": {
+  "grade": 2,
+  "reason": "Product engineer using TypeScript/React/Next.js, but full-stack with a backend and agents focus."
+ },
+ "6b423edceede|j_91057cf98d": {
+  "grade": 2,
+  "reason": "Full-stack founding engineer with React/TypeScript, but split with Python/backend and AI work."
+ },
+ "6b423edceede|j_9c1850d856": {
+  "grade": 1,
+  "reason": "Full-stack AI tax tooling role. React is mentioned only loosely, and the focus is backend/AI."
+ },
+ "6b423edceede|j_a66ba77b5d": {
+  "grade": 2,
+  "reason": "Frontend role with Next.js/React/shadcn, but it requires heavy Kubernetes/Go infrastructure skills."
+ },
+ "6b423edceede|j_ad2b3eafc6": {
+  "grade": 2,
+  "reason": "Full-stack product engineer who owns a React frontend plus backend services."
+ },
+ "6b423edceede|j_b3595107a0": {
+  "grade": 3,
+  "reason": "Frontend-focused role with TypeScript/React/Next.js, reusable components and design systems."
+ },
+ "6b423edceede|j_b3b4cb3db1": {
+  "grade": 1,
+  "reason": "Full-stack/backend role on voice AI. React is only secondary."
+ },
+ "6b423edceede|j_b6a0c95347": {
+  "grade": 1,
+  "reason": "Agentic full-stack role with a heavy backend focus. The Next.js/React stack is one part among many."
+ },
+ "6b423edceede|j_bf84cba8e9": {
+  "grade": 1,
+  "reason": "Full-stack agent product engineer. React is only part of the stack."
+ },
+ "6b423edceede|j_c278075119": {
+  "grade": 3,
+  "reason": "Dedicated frontend engineer role with React/TypeScript, building reusable components."
+ },
+ "6b423edceede|j_c95e186dc9": {
+  "grade": 0,
+  "reason": "Customer-facing backend/full-stack role. React is only a nice-to-have."
+ },
+ "6b423edceede|j_d3200fe756": {
+  "grade": 0,
+  "reason": "Design role (UI/UX/graphic), not engineering."
+ },
+ "6b423edceede|j_d5225ac57b": {
+  "grade": 0,
+  "reason": "Truncated description doesn't show a frontend focus."
+ },
+ "6b423edceede|j_de8e2afda0": {
+  "grade": 3,
+  "reason": "Frontend role with TypeScript/React/Next.js that owns the design system."
+ },
+ "6b423edceede|j_e25bb2658f": {
+  "grade": 2,
+  "reason": "Product designer who also ships React/TypeScript and builds design systems. The adjacent specialty is design."
+ },
+ "6b423edceede|j_ec24cdb53f": {
+  "grade": 1,
+  "reason": "Python full-stack data pipeline role; frontend/React not central."
+ },
+ "6b423edceede|j_ef94e402cf": {
+  "grade": 3,
+  "reason": "Senior front-end engineer, React and TypeScript core; no Next.js/design systems mentioned but squarely the role type."
+ },
+ "6b423edceede|j_f2d0bb5475": {
+  "grade": 1,
+  "reason": "Customer-facing forward deployed role, backend/integration focus; React/Next.js only a nice-to-have."
+ },
+ "6b423edceede|j_fd00bebc9c": {
+  "grade": 2,
+  "reason": "Full-stack agents engineer with Next.js/React/TypeScript frontend stack, but frontend is one part of a broad role."
+ },
+ "6d69543d6e25|j_000d258743": {
+  "grade": 3,
+  "reason": "Software Engineer role at an infrastructure software company."
+ },
+ "6d69543d6e25|j_0b7ceb5670": {
+  "grade": 2,
+  "reason": "Engineering role, but the work is mostly ML evaluation and model training, which is an adjacent specialty."
+ },
+ "6d69543d6e25|j_12481e6201": {
+  "grade": 3,
+  "reason": "Founding engineer building production software in TypeScript and React."
+ },
+ "6d69543d6e25|j_160108c290": {
+  "grade": 3,
+  "reason": "Founding engineer building production software in TypeScript and React."
+ },
+ "6d69543d6e25|j_1717f88628": {
+  "grade": 3,
+  "reason": "Forward Deployed Software Engineer internship focused on building software."
+ },
+ "6d69543d6e25|j_177d6ec985": {
+  "grade": 3,
+  "reason": "Senior Android software engineering role."
+ },
+ "6d69543d6e25|j_194d7bb85f": {
+  "grade": 3,
+  "reason": "Founding engineer building production software in TypeScript and React."
+ },
+ "6d69543d6e25|j_212a443f36": {
+  "grade": 3,
+  "reason": "Founding backend or full-stack software engineer role."
+ },
+ "6d69543d6e25|j_2266b76f67": {
+  "grade": 3,
+  "reason": "Product engineer building backend features in Go."
+ },
+ "6d69543d6e25|j_25e9ca345f": {
+  "grade": 3,
+  "reason": "Full-stack software engineering internship."
+ },
+ "6d69543d6e25|j_260d21b873": {
+  "grade": 1,
+  "reason": "Implementation engineer who installs and configures enterprise software for clients. The work is deployment and support, not software development."
+ },
+ "6d69543d6e25|j_270b597882": {
+  "grade": 3,
+  "reason": "Software engineer internship writing production code for Palantir products."
+ },
+ "6d69543d6e25|j_28c9759fe2": {
+  "grade": 3,
+  "reason": "Founding software engineer role building with TypeScript and React."
+ },
+ "6d69543d6e25|j_2a4f242366": {
+  "grade": 3,
+  "reason": "Software engineer role doing low-level systems programming in Rust and C/C++."
+ },
+ "6d69543d6e25|j_2c389aa6df": {
+  "grade": 3,
+  "reason": "Founding software engineer role building with TypeScript and React."
+ },
+ "6d69543d6e25|j_2ecf40bf8e": {
+  "grade": 3,
+  "reason": "Forward deployed software engineer role, which is still an engineering role."
+ },
+ "6d69543d6e25|j_322357772d": {
+  "grade": 3,
+  "reason": "Forward deployed software engineer internship that involves building software."
+ },
+ "6d69543d6e25|j_35edad8992": {
+  "grade": 3,
+  "reason": "Forward deployed software engineer internship that involves building software."
+ },
+ "6d69543d6e25|j_3a8c609341": {
+  "grade": 3,
+  "reason": "Backend and AI software engineering role using Python and APIs."
+ },
+ "6d69543d6e25|j_3c393917eb": {
+  "grade": 2,
+  "reason": "Paid contract talent pool building reinforcement learning environments in Python. It involves real engineering, but it is mixed with evaluation and data tasks."
+ },
+ "6d69543d6e25|j_41f05483c8": {
+  "grade": 2,
+  "reason": "Customer-facing product engineer: it requires software engineering experience and shipping features, but much of the job is customer work."
+ },
+ "6d69543d6e25|j_42363f301d": {
+  "grade": 3,
+  "reason": "Senior software engineer for infrastructure and platform work, including writing production code."
+ },
+ "6d69543d6e25|j_46e8b7d6ed": {
+  "grade": 3,
+  "reason": "Product software engineer building backend features."
+ },
+ "6d69543d6e25|j_482cf9217c": {
+  "grade": 3,
+  "reason": "Founding staff software engineer building Python/FastAPI backends."
+ },
+ "6d69543d6e25|j_498410eaf3": {
+  "grade": 3,
+  "reason": "Founding full-stack software engineer."
+ },
+ "6d69543d6e25|j_4dd2f18323": {
+  "grade": 3,
+  "reason": "Founding backend software engineer for banking systems."
+ },
+ "6d69543d6e25|j_5ad5251b5b": {
+  "grade": 3,
+  "reason": "Founding full-stack and AI engineer working in Go, React and TypeScript."
+ },
+ "6d69543d6e25|j_5ccbb3558f": {
+  "grade": 1,
+  "reason": "Operations associate who builds internal automations with AI tools. This is not a software engineering role."
+ },
+ "6d69543d6e25|j_6364847b87": {
+  "grade": 3,
+  "reason": "Full-stack software engineer working in React and Node.js."
+ },
+ "6d69543d6e25|j_65bce8e738": {
+  "grade": 3,
+  "reason": "Founding software engineer working in TypeScript and React."
+ },
+ "6d69543d6e25|j_69b23c93a2": {
+  "grade": 3,
+  "reason": "Fullstack software engineering role building production systems"
+ },
+ "6d69543d6e25|j_6c441381b1": {
+  "grade": 3,
+  "reason": "Software Engineer role on a deployment platform"
+ },
+ "6d69543d6e25|j_720f45f74f": {
+  "grade": 2,
+  "reason": "DevOps/SRE role is close to software engineering, but it's an adjacent specialty"
+ },
+ "6d69543d6e25|j_7276f982d5": {
+  "grade": 3,
+  "reason": "Robotics software engineer writing production C++"
+ },
+ "6d69543d6e25|j_74b94874a1": {
+  "grade": 3,
+  "reason": "Founding software engineer working in TypeScript and React"
+ },
+ "6d69543d6e25|j_77821f4001": {
+  "grade": 3,
+  "reason": "Software engineer internship"
+ },
+ "6d69543d6e25|j_79a8993e92": {
+  "grade": 3,
+  "reason": "Forward deployed software engineer internship; an engineering role that builds software"
+ },
+ "6d69543d6e25|j_7f38e89af5": {
+  "grade": 3,
+  "reason": "Founding software engineer role (duplicate of job 4)"
+ },
+ "6d69543d6e25|j_843c696a7c": {
+  "grade": 3,
+  "reason": "Software engineer internship"
+ },
+ "6d69543d6e25|j_890657f634": {
+  "grade": 3,
+  "reason": "Software Engineer at an AI company; the description is short, but the title is a direct match"
+ },
+ "6d69543d6e25|j_900d0062cc": {
+  "grade": 3,
+  "reason": "Full-stack product engineer role building software end to end"
+ },
+ "6d69543d6e25|j_965d0d20f3": {
+  "grade": 3,
+  "reason": "Forward Deployed Software Engineer is an engineering role, though it faces customers"
+ },
+ "6d69543d6e25|j_9fdfd78d8d": {
+  "grade": 3,
+  "reason": "Founding software engineer building AI product in TypeScript/React"
+ },
+ "6d69543d6e25|j_b533fdc062": {
+  "grade": 3,
+  "reason": "Software Engineer on Palantir's Apollo deployment platform"
+ },
+ "6d69543d6e25|j_bed44d6ee2": {
+  "grade": 3,
+  "reason": "Senior Software Engineer role"
+ },
+ "6d69543d6e25|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Senior Software Engineer working on the Kubernetes control plane in Go"
+ },
+ "6d69543d6e25|j_c0e91d8f28": {
+  "grade": 3,
+  "reason": "Mobile software engineering role using React Native"
+ },
+ "6d69543d6e25|j_ccdeebffa0": {
+  "grade": 3,
+  "reason": "Full-stack/backend software engineer building AI agents and infrastructure"
+ },
+ "6d69543d6e25|j_cf4dedc344": {
+  "grade": 3,
+  "reason": "Founding software engineer role (same posting as job 2)"
+ },
+ "6d69543d6e25|j_d1468a6682": {
+  "grade": 3,
+  "reason": "Backend software engineer building voice AI systems"
+ },
+ "6d69543d6e25|j_d1c9332c49": {
+  "grade": 3,
+  "reason": "Founding software engineer role building product in TypeScript/React"
+ },
+ "6d69543d6e25|j_d43eeb6cc6": {
+  "grade": 3,
+  "reason": "Founding software engineer role building product in TypeScript/React"
+ },
+ "6d69543d6e25|j_d7f1982503": {
+  "grade": 3,
+  "reason": "Founding software engineer role building product in TypeScript/React"
+ },
+ "6d69543d6e25|j_e02322202c": {
+  "grade": 3,
+  "reason": "Software Engineer building distributed deployment platform"
+ },
+ "6d69543d6e25|j_e4d027b7f8": {
+  "grade": 3,
+  "reason": "Forward deployed software engineer role, which is still engineering"
+ },
+ "6d69543d6e25|j_e4da213371": {
+  "grade": 3,
+  "reason": "Full-stack product engineer building production software"
+ },
+ "6d69543d6e25|j_f3bd58cb3e": {
+  "grade": 1,
+  "reason": "M&A dealmaker role that works with engineers but is not engineering"
+ },
+ "6d69543d6e25|j_f5ec0fc48e": {
+  "grade": 3,
+  "reason": "Founding full-stack software engineer"
+ },
+ "6d69543d6e25|j_f986b6b5fa": {
+  "grade": 3,
+  "reason": "Full-stack software engineer role"
+ },
+ "6dad1b463af8|j_0a34bb7a74": {
+  "grade": 3,
+  "reason": "Infrastructure engineering role centered on Kubernetes networking across hundreds of clusters."
+ },
+ "6dad1b463af8|j_14aa2d5d38": {
+  "grade": 0,
+  "reason": "Full-stack product engineer; DevOps is a minor mention and Kubernetes isn't mentioned."
+ },
+ "6dad1b463af8|j_22575f0bf0": {
+  "grade": 3,
+  "reason": "SRE/DevOps role running Wikimedia infrastructure with Kubernetes and Puppet."
+ },
+ "6dad1b463af8|j_34377d3395": {
+  "grade": 2,
+  "reason": "Security-focused infrastructure role on a DevOps/SRE team; AWS ECS, not Kubernetes."
+ },
+ "6dad1b463af8|j_404a8194b3": {
+  "grade": 3,
+  "reason": "Platform role that builds and operates Palantir's managed Kubernetes fleet."
+ },
+ "6dad1b463af8|j_4cb4efbc11": {
+  "grade": 3,
+  "reason": "Same posting as job 4: Kubernetes platform infrastructure engineering."
+ },
+ "6dad1b463af8|j_4e89470f37": {
+  "grade": 1,
+  "reason": "Technical support role; DevOps and Kubernetes are only one optional background."
+ },
+ "6dad1b463af8|j_53a32e7cb3": {
+  "grade": 0,
+  "reason": "Internal audit internship; reviewing DevOps practices isn't infrastructure engineering."
+ },
+ "6dad1b463af8|j_5da9038b8e": {
+  "grade": 3,
+  "reason": "Platform engineering role building a runtime on Kubernetes controllers and APIs."
+ },
+ "6dad1b463af8|j_62696cf88f": {
+  "grade": 2,
+  "reason": "Infrastructure/platform engineering role, but the excerpt never mentions Kubernetes."
+ },
+ "6dad1b463af8|j_6aefda2b08": {
+  "grade": 0,
+  "reason": "Full stack developer role; mentions DevOps only as a collaborator, no Kubernetes."
+ },
+ "6dad1b463af8|j_6cc7ba2026": {
+  "grade": 1,
+  "reason": "Network engineering manager working on infrastructure as code; adjacent to infra but no Kubernetes focus."
+ },
+ "6dad1b463af8|j_6d0eab32c6": {
+  "grade": 3,
+  "reason": "Builds and operates hundreds of Kubernetes clusters as core infrastructure; exactly a platform/infra K8s role."
+ },
+ "6dad1b463af8|j_6d3480b71b": {
+  "grade": 3,
+  "reason": "DevOps engineer running production Kubernetes, Karpenter, Terraform and CI/CD."
+ },
+ "6dad1b463af8|j_720f45f74f": {
+  "grade": 3,
+  "reason": "Senior DevOps/SRE/platform roles that require Kubernetes experience."
+ },
+ "6dad1b463af8|j_7f3ed202d7": {
+  "grade": 2,
+  "reason": "Software engineering on a Kubernetes-based PaaS with K8s controllers; platform-adjacent but leans toward product/API development."
+ },
+ "6dad1b463af8|j_879efa6518": {
+  "grade": 2,
+  "reason": "Infrastructure software engineering on Kubernetes networking (Cilium, Envoy); a closely related infra specialty."
+ },
+ "6dad1b463af8|j_8ddb22bd26": {
+  "grade": 1,
+  "reason": "Technical support role; DevOps and Kubernetes are listed only as possible background."
+ },
+ "6dad1b463af8|j_a66ba77b5d": {
+  "grade": 1,
+  "reason": "Frontend engineer role, even though it requires Kubernetes knowledge for an infrastructure product."
+ },
+ "6dad1b463af8|j_af59bf1718": {
+  "grade": 1,
+  "reason": "QA automation for ERP and Salesforce with CI/CD integration; DevOps appears in the title only, with no Kubernetes."
+ },
+ "6dad1b463af8|j_c035bd43e0": {
+  "grade": 2,
+  "reason": "Software engineering on a Kubernetes control plane/service mesh product. Strongly K8s-centric infrastructure work, but it's product development rather than DevOps/platform operations."
+ },
+ "6dad1b463af8|j_c3108df945": {
+  "grade": 1,
+  "reason": "Technical support/ops role at a crypto exchange. DevOps/K8s is listed only as one possible background."
+ },
+ "6dad1b463af8|j_c7127302cf": {
+  "grade": 1,
+  "reason": "Founding backend engineer. DevOps experience is secondary and Kubernetes isn't mentioned."
+ },
+ "6dad1b463af8|j_cd2be5f111": {
+  "grade": 3,
+  "reason": "Infrastructure engineering that owns Kubernetes networking across hundreds of clusters (Cilium, Envoy, controllers)."
+ },
+ "6dad1b463af8|j_d2e83976d0": {
+  "grade": 3,
+  "reason": "Cloud/platform automation role: CI/CD pipelines, Terraform, Helm, GitOps, environment provisioning."
+ },
+ "6dad1b463af8|j_d2fb38941a": {
+  "grade": 3,
+  "reason": "Core infrastructure team that builds and runs Palantir's fleet of hundreds of K8s clusters. Exactly the platform/K8s role being sought."
+ },
+ "6dad1b463af8|j_dc80a65d67": {
+  "grade": 1,
+  "reason": "QA/test engineer. Kubernetes is used for testing, but the role is QA, not DevOps/platform."
+ },
+ "6dad1b463af8|j_de51c23fbb": {
+  "grade": 0,
+  "reason": "Backend product engineer that explicitly excludes pure DevOps/SRE profiles."
+ },
+ "6dad1b463af8|j_df0eba789f": {
+  "grade": 2,
+  "reason": "Software engineer on a Kubernetes-based PaaS, building K8s controllers and APIs. Platform-adjacent, but focused on product and APIs."
+ },
+ "6dad1b463af8|j_f24c9058dd": {
+  "grade": 2,
+  "reason": "Duplicate of the Mission Manager posting (#8): K8s-based PaaS engineering, platform-adjacent and product/API focused."
+ },
+ "6dad1b463af8|j_f4cbb0a422": {
+  "grade": 3,
+  "reason": "Platform engineering role centered on Kubernetes: operators, GitOps with ArgoCD, Terraform/Helm, multi-cluster management."
+ },
+ "6dad1b463af8|j_fb373b1071": {
+  "grade": 3,
+  "reason": "Platform engineering role running production Kubernetes clusters, with operators, ArgoCD, Terraform/Helm and observability work."
+ },
+ "7e444d9b729b|j_03da95a13c": {
+  "grade": 3,
+  "reason": "Identity security infrastructure engineering inside the InfoSec org, which counts as infrastructure/cloud security engineering."
+ },
+ "7e444d9b729b|j_07f08a58ed": {
+  "grade": 1,
+  "reason": "A TPM role in security. It's program management, not engineering."
+ },
+ "7e444d9b729b|j_12481e6201": {
+  "grade": 0,
+  "reason": "Full-stack AI recruiting startup engineer with no security focus."
+ },
+ "7e444d9b729b|j_160108c290": {
+  "grade": 0,
+  "reason": "Full-stack AI recruiting startup engineer with no security focus."
+ },
+ "7e444d9b729b|j_1717f88628": {
+  "grade": 0,
+  "reason": "Forward deployed SWE internship, not security."
+ },
+ "7e444d9b729b|j_194d7bb85f": {
+  "grade": 0,
+  "reason": "Full-stack AI recruiting startup engineer with no security focus."
+ },
+ "7e444d9b729b|j_1dd366cfd2": {
+  "grade": 3,
+  "reason": "AI security engineer doing LLM red teaming that requires an AppSec or pentest background."
+ },
+ "7e444d9b729b|j_2128303f46": {
+  "grade": 0,
+  "reason": "Hardware engineering. Security clearance is the only security mention."
+ },
+ "7e444d9b729b|j_2454a04669": {
+  "grade": 0,
+  "reason": "Forward deployed engineer, not security."
+ },
+ "7e444d9b729b|j_254857348b": {
+  "grade": 0,
+  "reason": "Full-stack AI engineer. Security is mentioned only in passing."
+ },
+ "7e444d9b729b|j_260d21b873": {
+  "grade": 0,
+  "reason": "Implementation engineer installing enterprise software; nothing to do with security."
+ },
+ "7e444d9b729b|j_28c9759fe2": {
+  "grade": 0,
+  "reason": "Founding full-stack/AI software engineer; no security focus."
+ },
+ "7e444d9b729b|j_2c389aa6df": {
+  "grade": 0,
+  "reason": "Duplicate founding full-stack/AI engineer role; no security focus."
+ },
+ "7e444d9b729b|j_322357772d": {
+  "grade": 0,
+  "reason": "Forward deployed software engineer internship; not a security role."
+ },
+ "7e444d9b729b|j_34377d3395": {
+  "grade": 3,
+  "reason": "Security-focused infrastructure engineer: runs the security program, IAM, secrets, incident response, AWS hardening."
+ },
+ "7e444d9b729b|j_35edad8992": {
+  "grade": 0,
+  "reason": "Duplicate forward deployed SWE internship; not security."
+ },
+ "7e444d9b729b|j_36eef10c29": {
+  "grade": 3,
+  "reason": "Infrastructure security engineer covering endpoints, identity, cloud and detection."
+ },
+ "7e444d9b729b|j_38414abbff": {
+  "grade": 0,
+  "reason": "Customer-facing forward deployed engineer; no security work."
+ },
+ "7e444d9b729b|j_3bd5ba0769": {
+  "grade": 1,
+  "reason": "Program management for security teams, not hands-on security engineering."
+ },
+ "7e444d9b729b|j_3d398c51f2": {
+  "grade": 1,
+  "reason": "Physical security systems engineer; the listing says it is not a cyber or information security role."
+ },
+ "7e444d9b729b|j_3e7f35e75c": {
+  "grade": 3,
+  "reason": "Information security engineer internship, a security engineering role"
+ },
+ "7e444d9b729b|j_4dc59d623a": {
+  "grade": 2,
+  "reason": "Identity infrastructure platform engineering inside the InfoSec org; security is central but the role is platform engineering"
+ },
+ "7e444d9b729b|j_57f4338357": {
+  "grade": 3,
+  "reason": "Infrastructure security engineer role"
+ },
+ "7e444d9b729b|j_5ad5251b5b": {
+  "grade": 0,
+  "reason": "Generalist full-stack/AI founding engineer"
+ },
+ "7e444d9b729b|j_5c35457cfc": {
+  "grade": 1,
+  "reason": "NLP infrastructure founding engineer; security only mentioned in passing"
+ },
+ "7e444d9b729b|j_5f9eeef78e": {
+  "grade": 3,
+  "reason": "AI/application security engineer on InfoSec team"
+ },
+ "7e444d9b729b|j_6247201619": {
+  "grade": 3,
+  "reason": "Mobile security engineering: anti-tampering, reverse engineering, code hardening"
+ },
+ "7e444d9b729b|j_65bce8e738": {
+  "grade": 0,
+  "reason": "Generalist full-stack founding engineer for recruiting AI"
+ },
+ "7e444d9b729b|j_68eeebff5d": {
+  "grade": 2,
+  "reason": "Full-stack engineer building authentication and account security features; adjacent to security engineering"
+ },
+ "7e444d9b729b|j_69b23c93a2": {
+  "grade": 0,
+  "reason": "Full-stack AI engineer, unrelated to security"
+ },
+ "7e444d9b729b|j_6d3480b71b": {
+  "grade": 1,
+  "reason": "DevOps role; security is mentioned only in passing."
+ },
+ "7e444d9b729b|j_720f45f74f": {
+  "grade": 0,
+  "reason": "Generic DevOps contracting listing with no security focus."
+ },
+ "7e444d9b729b|j_79a8993e92": {
+  "grade": 0,
+  "reason": "Forward deployed software engineering internship, not a security role."
+ },
+ "7e444d9b729b|j_82705b52a0": {
+  "grade": 3,
+  "reason": "Identity security engineer working on IAM threat modeling and access control."
+ },
+ "7e444d9b729b|j_843c696a7c": {
+  "grade": 0,
+  "reason": "General software engineering internship."
+ },
+ "7e444d9b729b|j_8b14c8bb2a": {
+  "grade": 1,
+  "reason": "Privacy and governance software engineering, which touches on security only partly."
+ },
+ "7e444d9b729b|j_8d837bde51": {
+  "grade": 3,
+  "reason": "Infrastructure security / DevSecOps engineer role."
+ },
+ "7e444d9b729b|j_8e8363fa0b": {
+  "grade": 2,
+  "reason": "Platform engineering for secure identity infrastructure, inside the InfoSec org."
+ },
+ "7e444d9b729b|j_8f25d64361": {
+  "grade": 3,
+  "reason": "Infrastructure security engineer role."
+ },
+ "7e444d9b729b|j_942c8b3d77": {
+  "grade": 3,
+  "reason": "Security engineer covering application, cloud and infrastructure security."
+ },
+ "7e444d9b729b|j_9632181061": {
+  "grade": 0,
+  "reason": "Presales solution engineer for BI; security only in RFP responses."
+ },
+ "7e444d9b729b|j_9d5230010d": {
+  "grade": 2,
+  "reason": "Java engineer building fund and account security controls; the work is security-focused but centered on financial flows."
+ },
+ "7e444d9b729b|j_a4e1b2adc9": {
+  "grade": 0,
+  "reason": "Agentic AI engineering role; 'secure' is incidental."
+ },
+ "7e444d9b729b|j_a66ba77b5d": {
+  "grade": 0,
+  "reason": "Frontend engineer; security is only a nice-to-have."
+ },
+ "7e444d9b729b|j_b3480d160d": {
+  "grade": 1,
+  "reason": "Physical security systems engineer, explicitly not a cyber/infosec role."
+ },
+ "7e444d9b729b|j_b78f4c5ac5": {
+  "grade": 0,
+  "reason": "Forward deployed research engineer; not security."
+ },
+ "7e444d9b729b|j_bd204cd1f3": {
+  "grade": 1,
+  "reason": "Physical security systems engineer, explicitly not a cyber/infosec role."
+ },
+ "7e444d9b729b|j_c6657ef835": {
+  "grade": 3,
+  "reason": "Identity security engineer in an InfoSec org; core security engineering."
+ },
+ "7e444d9b729b|j_c7127302cf": {
+  "grade": 0,
+  "reason": "Backend founding engineer; security only mentioned in passing."
+ },
+ "7e444d9b729b|j_cbc701b73d": {
+  "grade": 0,
+  "reason": "Cloud solutions architect for migrations; security is just one possible domain."
+ },
+ "7e444d9b729b|j_dd70717382": {
+  "grade": 1,
+  "reason": "Lead AI/full-stack engineer; security is only one of many responsibilities."
+ },
+ "7e444d9b729b|j_e9d220a0df": {
+  "grade": 3,
+  "reason": "Application security engineer role focused on finding and preventing vulnerabilities."
+ },
+ "7e444d9b729b|j_ec24cdb53f": {
+  "grade": 0,
+  "reason": "General Python full-stack software engineer with no security focus."
+ },
+ "7e444d9b729b|j_ec39c5f348": {
+  "grade": 2,
+  "reason": "Security-team engineering role for blockchain, but the duties are mostly general full-stack and backend work."
+ },
+ "7e444d9b729b|j_f080f54847": {
+  "grade": 2,
+  "reason": "Platform and integration engineering for security telemetry, an adjacent security specialty."
+ },
+ "7e444d9b729b|j_f3838ea9cb": {
+  "grade": 3,
+  "reason": "Identity security engineer covering IAM architecture, threat modeling and security posture."
+ },
+ "7e444d9b729b|j_f4cbb0a422": {
+  "grade": 0,
+  "reason": "Kubernetes platform engineer; network security is only a minor mention."
+ },
+ "7e444d9b729b|j_f6ec2b7198": {
+  "grade": 1,
+  "reason": "Founding backend engineer; covers some auth and security controls, but the role is general engineering."
+ },
+ "8f8c89226ad1|j_000d258743": {
+  "grade": 1,
+  "reason": "General software engineering role at an AI infrastructure company. The description doesn't say the role builds or trains ML models."
+ },
+ "8f8c89226ad1|j_0170758b85": {
+  "grade": 2,
+  "reason": "Research engineering focused on benchmarks and evaluating AI models. Closely related to ML engineering, but the focus is evaluation rather than building models."
+ },
+ "8f8c89226ad1|j_0c97fa4ff4": {
+  "grade": 1,
+  "reason": "Customer-facing application engineering for inference hardware. ML is the context, not the work itself."
+ },
+ "8f8c89226ad1|j_0de1479640": {
+  "grade": 2,
+  "reason": "Backend-heavy role that includes deploying LLMs and vision models in production and building RAG pipelines."
+ },
+ "8f8c89226ad1|j_118b1d6699": {
+  "grade": 1,
+  "reason": "Full-stack tooling for reinforcement learning data workflows. ML is the context, not the core work."
+ },
+ "8f8c89226ad1|j_167a65e048": {
+  "grade": 2,
+  "reason": "Applied AI engineering on LLM agents, evaluations and model strategy. A close but not exact fit for ML engineering."
+ },
+ "8f8c89226ad1|j_19762de5d6": {
+  "grade": 3,
+  "reason": "Core ML engineering role: designing, training, deploying and monitoring production models."
+ },
+ "8f8c89226ad1|j_214dad69b2": {
+  "grade": 1,
+  "reason": "Product engineering role in which time-series forecasting is a minor part."
+ },
+ "8f8c89226ad1|j_28a17b817b": {
+  "grade": 3,
+  "reason": "Robot learning role that involves training and deploying ML models for perception and control."
+ },
+ "8f8c89226ad1|j_3e0a2e503b": {
+  "grade": 3,
+  "reason": "Develops, trains and deploys multimodal detection models in production."
+ },
+ "8f8c89226ad1|j_46b3b970a8": {
+  "grade": 2,
+  "reason": "Hands-on ML engineering work, but it's a contract to create tasks for training AI rather than a regular ML engineering job"
+ },
+ "8f8c89226ad1|j_46e8b7d6ed": {
+  "grade": 0,
+  "reason": "Backend product engineering for fintech; no ML"
+ },
+ "8f8c89226ad1|j_4eae2873bc": {
+  "grade": 0,
+  "reason": "Engineering and construction expert writing tasks; not ML engineering"
+ },
+ "8f8c89226ad1|j_578825ccc2": {
+  "grade": 3,
+  "reason": "Builds, trains and deploys computer vision and deep learning models with end-to-end ML pipelines"
+ },
+ "8f8c89226ad1|j_604472daf3": {
+  "grade": 3,
+  "reason": "Founding ML engineer shipping production forecasting models"
+ },
+ "8f8c89226ad1|j_66910ab46c": {
+  "grade": 2,
+  "reason": "Synthetic data pipelines and evaluation for model training; an adjacent ML specialty"
+ },
+ "8f8c89226ad1|j_6fd71657dc": {
+  "grade": 2,
+  "reason": "Same ML engineering contract to create AI training tasks as job 0"
+ },
+ "8f8c89226ad1|j_83017b7a89": {
+  "grade": 2,
+  "reason": "Research role that trains and fine-tunes robot-learning policies; adjacent to ML engineering"
+ },
+ "8f8c89226ad1|j_856c2db72e": {
+  "grade": 0,
+  "reason": "BI analyst expert writing tasks; not ML engineering"
+ },
+ "8f8c89226ad1|j_900d0062cc": {
+  "grade": 1,
+  "reason": "Full-stack product role; AI/ML experience is only listed as a plus"
+ },
+ "8f8c89226ad1|j_915b892e83": {
+  "grade": 3,
+  "reason": "Senior ML developer who trains, evaluates and deploys models in production"
+ },
+ "8f8c89226ad1|j_9729c01050": {
+  "grade": 3,
+  "reason": "ML engineer who researches, trains and deploys computer vision models"
+ },
+ "8f8c89226ad1|j_9b7490bd20": {
+  "grade": 0,
+  "reason": "Go-to-market sales role that only sells to ML engineers"
+ },
+ "8f8c89226ad1|j_a84dbb726e": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production ML systems"
+ },
+ "8f8c89226ad1|j_ab6f39a51b": {
+  "grade": 2,
+  "reason": "AI engineer focused mainly on prompt engineering, with some fine-tuning and ML deployment"
+ },
+ "8f8c89226ad1|j_bda6d240dc": {
+  "grade": 2,
+  "reason": "Engineering lead who needs hands-on ML training and deployment, but leadership and architecture are a large part of the job"
+ },
+ "8f8c89226ad1|j_d89ad1cd96": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production ML systems (same posting as #3)"
+ },
+ "8f8c89226ad1|j_dfe3b55224": {
+  "grade": 2,
+  "reason": "Director-level ML leadership role with some hands-on modeling work"
+ },
+ "8f8c89226ad1|j_e21269d363": {
+  "grade": 2,
+  "reason": "Contract work writing and checking ML engineering tasks for AI training, not building production systems"
+ },
+ "8f8c89226ad1|j_e50643ea03": {
+  "grade": 1,
+  "reason": "Data engineering role building ML feature pipelines, not building or training models"
+ },
+ "8f8c89226ad1|j_e926fea423": {
+  "grade": 3,
+  "reason": "Algorithm engineer building ML-based search/recommendation models with PyTorch/TensorFlow \u2014 core ML engineering role."
+ },
+ "9255ea05afca|j_08340afc40": {
+  "grade": 0,
+  "reason": "Product marketing role, not technical writing."
+ },
+ "9255ea05afca|j_0853800add": {
+  "grade": 0,
+  "reason": "Solutions engineering role; there's no documentation focus."
+ },
+ "9255ea05afca|j_08ec2ca947": {
+  "grade": 3,
+  "reason": "Dedicated technical writer role creating and editing product documentation."
+ },
+ "9255ea05afca|j_0de1479640": {
+  "grade": 0,
+  "reason": "Backend/ML engineering role."
+ },
+ "9255ea05afca|j_2e63d2db48": {
+  "grade": 1,
+  "reason": "Game developer role. It mentions documenting technical decisions, but only in passing."
+ },
+ "9255ea05afca|j_334593a87c": {
+  "grade": 0,
+  "reason": "Full-stack engineering role."
+ },
+ "9255ea05afca|j_3692f8dbd8": {
+  "grade": 0,
+  "reason": "Counterintelligence subject-matter expert for AI evaluation, unrelated to technical writing."
+ },
+ "9255ea05afca|j_3cef89d425": {
+  "grade": 2,
+  "reason": "Technical product marketing role with substantial technical content work: product guides, knowledge base, onboarding docs and technical blogs."
+ },
+ "9255ea05afca|j_413fc856e3": {
+  "grade": 0,
+  "reason": "Customer-facing technical strategy and partnerships role."
+ },
+ "9255ea05afca|j_48be4ecd18": {
+  "grade": 0,
+  "reason": "Forward deployed engineering role."
+ },
+ "9255ea05afca|j_521d6ddd57": {
+  "grade": 0,
+  "reason": "ML/detection engineering role; documenting failure modes is incidental."
+ },
+ "9255ea05afca|j_549851e59b": {
+  "grade": 3,
+  "reason": "Technical writer creating product documentation."
+ },
+ "9255ea05afca|j_5e0a1b548b": {
+  "grade": 0,
+  "reason": "Social media content role, not technical writing."
+ },
+ "9255ea05afca|j_676eb15cad": {
+  "grade": 0,
+  "reason": "Technical program management; documentation is a minor duty."
+ },
+ "9255ea05afca|j_6a487264f4": {
+  "grade": 0,
+  "reason": "Customer success role in cybersecurity."
+ },
+ "9255ea05afca|j_75431b9da2": {
+  "grade": 0,
+  "reason": "Systems engineering role."
+ },
+ "9255ea05afca|j_8daa145b01": {
+  "grade": 0,
+  "reason": "Growth/marketing role; SEO content is not technical writing."
+ },
+ "9255ea05afca|j_9104734f2e": {
+  "grade": 0,
+  "reason": "AI agent evaluation engineering role."
+ },
+ "9255ea05afca|j_abb57f0741": {
+  "grade": 0,
+  "reason": "Technical product management role."
+ },
+ "9255ea05afca|j_b69dd1f9fd": {
+  "grade": 0,
+  "reason": "Marketing manager running social and campaigns."
+ },
+ "9255ea05afca|j_b78f4c5ac5": {
+  "grade": 0,
+  "reason": "Research engineering role; documentation is only a minor duty."
+ },
+ "9255ea05afca|j_cbc701b73d": {
+  "grade": 0,
+  "reason": "Cloud architecture role; whitepapers are only a minor duty."
+ },
+ "9255ea05afca|j_d0bf62ff0d": {
+  "grade": 3,
+  "reason": "A dedicated technical writer role focused on product documentation."
+ },
+ "9255ea05afca|j_d5225ac57b": {
+  "grade": 0,
+  "reason": "Software engineering role at a document management company."
+ },
+ "9255ea05afca|j_d7fbd67540": {
+  "grade": 0,
+  "reason": "Technical account management role."
+ },
+ "9255ea05afca|j_d8e95e7608": {
+  "grade": 0,
+  "reason": "AI software engineering role."
+ },
+ "9255ea05afca|j_dff8a1bb32": {
+  "grade": 0,
+  "reason": "Technical account management leadership role."
+ },
+ "9255ea05afca|j_e19d8e271b": {
+  "grade": 0,
+  "reason": "Backend engineering lead role."
+ },
+ "9255ea05afca|j_e2a5534796": {
+  "grade": 0,
+  "reason": "Deployment management role; playbooks are a minor part of the job."
+ },
+ "9255ea05afca|j_e770aa487c": {
+  "grade": 0,
+  "reason": "Technical co-founder engineering role."
+ },
+ "9255ea05afca|j_fa5849c432": {
+  "grade": 0,
+  "reason": "Technical product management role; no technical writing or documentation focus."
+ },
+ "9255ea05afca|j_fdb6e40a47": {
+  "grade": 1,
+  "reason": "AI evaluation/benchmark design; involves writing rubrics and test questions but isn't a technical writing or documentation role."
+ },
+ "935a8ee6878f|j_1e0bbd2fd0": {
+  "grade": 0,
+  "reason": "Enterprise sales role"
+ },
+ "935a8ee6878f|j_2e25de5358": {
+  "grade": 0,
+  "reason": "Reservations/sales coordinator"
+ },
+ "935a8ee6878f|j_373cae5f16": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "935a8ee6878f|j_413fc856e3": {
+  "grade": 1,
+  "reason": "Customer-facing technical strategist; engineering-adjacent but not a software engineering role"
+ },
+ "935a8ee6878f|j_4385c69b49": {
+  "grade": 0,
+  "reason": "Key account sales role"
+ },
+ "935a8ee6878f|j_52586a8127": {
+  "grade": 0,
+  "reason": "Customer service manager"
+ },
+ "935a8ee6878f|j_5df59bf131": {
+  "grade": 3,
+  "reason": "Senior software engineer, observability"
+ },
+ "935a8ee6878f|j_71db67eb7a": {
+  "grade": 0,
+  "reason": "Business development manager"
+ },
+ "935a8ee6878f|j_808f563342": {
+  "grade": 3,
+  "reason": "Android developer, software engineering"
+ },
+ "935a8ee6878f|j_9feead8117": {
+  "grade": 3,
+  "reason": "Android software engineer"
+ },
+ "935a8ee6878f|j_abb57f0741": {
+  "grade": 1,
+  "reason": "Technical product manager role, not hands-on software engineering, though it involves shaping technical design with engineers."
+ },
+ "935a8ee6878f|j_b39b7d629c": {
+  "grade": 0,
+  "reason": "Customer service role, not software engineering."
+ },
+ "935a8ee6878f|j_c58531d5e9": {
+  "grade": 2,
+  "reason": "Engineering role that writes Python and builds data pipelines, but it leans toward data analysis and business intelligence."
+ },
+ "935a8ee6878f|j_c95e186dc9": {
+  "grade": 3,
+  "reason": "Forward deployed engineer building full-stack production software in TypeScript and Node.js."
+ },
+ "935a8ee6878f|j_d243d74221": {
+  "grade": 3,
+  "reason": "Android mobile developer role writing Kotlin, which is software engineering."
+ },
+ "935a8ee6878f|j_d620dccf86": {
+  "grade": 3,
+  "reason": "Founding engineer building backend services, dashboards and cloud infrastructure."
+ },
+ "935a8ee6878f|j_db37e380bb": {
+  "grade": 0,
+  "reason": "Marketing role, not software engineering."
+ },
+ "935a8ee6878f|j_dec1e21169": {
+  "grade": 0,
+  "reason": "Marketing internship, not software engineering."
+ },
+ "935a8ee6878f|j_e9d220a0df": {
+  "grade": 2,
+  "reason": "Application security engineering is an adjacent specialty that involves code, CI/CD pipelines and internal tooling."
+ },
+ "935a8ee6878f|j_eb4bee007d": {
+  "grade": 0,
+  "reason": "Patent translation role, not software engineering."
+ },
+ "935a8ee6878f|j_fa5849c432": {
+  "grade": 1,
+  "reason": "Technical product lead role; works closely with engineering on technical design but is product management, not software engineering."
+ },
+ "935a8ee6878f|j_fa61f89d2f": {
+  "grade": 0,
+  "reason": "Risk operations/fraud review role, not software engineering."
+ },
+ "9d1e004266c6|j_002b20ae4a": {
+  "grade": 1,
+  "reason": "Data engineering role with some analytics work; not data science."
+ },
+ "9d1e004266c6|j_0219f1c891": {
+  "grade": 1,
+  "reason": "Financial data engineering, pipelines and ingestion; not statistics or modelling."
+ },
+ "9d1e004266c6|j_08fdb5a702": {
+  "grade": 1,
+  "reason": "Computer vision ML research scientist; not statistics or analytics data science."
+ },
+ "9d1e004266c6|j_1162c3c5d7": {
+  "grade": 0,
+  "reason": "Infrastructure software engineering."
+ },
+ "9d1e004266c6|j_23e730bd67": {
+  "grade": 1,
+  "reason": "Data platform engineering; not data science."
+ },
+ "9d1e004266c6|j_2a26c44881": {
+  "grade": 2,
+  "reason": "Designing benchmarks and evaluation datasets involves measurement and analysis; adjacent to data science."
+ },
+ "9d1e004266c6|j_321252cee1": {
+  "grade": 2,
+  "reason": "Titled data scientist, but the work is mainly LLM/RAG engineering, with evaluation pipelines as a secondary part."
+ },
+ "9d1e004266c6|j_578825ccc2": {
+  "grade": 2,
+  "reason": "Data scientist title, but focused on computer vision deep learning rather than statistics or experimentation."
+ },
+ "9d1e004266c6|j_673fe82fd4": {
+  "grade": 2,
+  "reason": "Research internship with controlled experiments and evaluation methods; adjacent ML research."
+ },
+ "9d1e004266c6|j_7b2a4eeabe": {
+  "grade": 2,
+  "reason": "Post-training research that involves rigorous experiments; adjacent ML research rather than core data science."
+ },
+ "9d1e004266c6|j_8920e395a1": {
+  "grade": 3,
+  "reason": "Applied scientist role focused on ML and statistical modelling and rigorous experimentation, which is core data science work."
+ },
+ "9d1e004266c6|j_8b151a8a60": {
+  "grade": 1,
+  "reason": "A growth product manager role. It involves data analysis and experiments, but the job itself is product and campaign ownership."
+ },
+ "9d1e004266c6|j_976e5e9732": {
+  "grade": 0,
+  "reason": "Data integration and pipeline engineering, not data science."
+ },
+ "9d1e004266c6|j_9e8047ce13": {
+  "grade": 1,
+  "reason": "A data architecture and infrastructure role that supports analytics and AI. It is adjacent, but it isn't data science."
+ },
+ "9d1e004266c6|j_ab6f39a51b": {
+  "grade": 1,
+  "reason": "Prompt engineering and LLM application work. It only mentions working with data scientists."
+ },
+ "9d1e004266c6|j_acb5f75e7a": {
+  "grade": 2,
+  "reason": "Titled data scientist, but the work is LLM research and engineering (RAG, SFT, RL). Data science is the broad field, but there's little statistics or analytics."
+ },
+ "9d1e004266c6|j_b0eecc24fc": {
+  "grade": 2,
+  "reason": "Research data scientist doing LLM/agent research. It includes rigorous experiments with statistically sound conclusions, but the focus is generative AI."
+ },
+ "9d1e004266c6|j_c31a8e0b44": {
+  "grade": 0,
+  "reason": "A scientific sales and account management role."
+ },
+ "9d1e004266c6|j_cc3f319678": {
+  "grade": 0,
+  "reason": "Financial data engineering pipelines, not data science."
+ },
+ "9d1e004266c6|j_d5a1ea991a": {
+  "grade": 2,
+  "reason": "Titled data scientist, but mostly LLM agent engineering and evaluation. It's an adjacent specialty with little statistics or analytics."
+ },
+ "9d1e004266c6|j_d7df089c70": {
+  "grade": 1,
+  "reason": "Protein design ML plus wet-lab work; data analysis is a minor part, not a data science role."
+ },
+ "9d1e004266c6|j_dfe3b55224": {
+  "grade": 2,
+  "reason": "Leads data scientists and does hands-on modelling, but it's an ML leadership role rather than a core DS/statistics role."
+ },
+ "9d1e004266c6|j_e33fefe07b": {
+  "grade": 0,
+  "reason": "Software infrastructure internship, not data science."
+ },
+ "9d1e004266c6|j_f11357479f": {
+  "grade": 2,
+  "reason": "Data scientist title, but the work is LLM/agent engineering, with only some evaluation; little statistics or experimentation."
+ },
+ "9d1e004266c6|j_f4401c937d": {
+  "grade": 1,
+  "reason": "Risk strategy role that uses data analysis and works with data scientists, but it isn't itself a data science role."
+ },
+ "9d1e004266c6|j_fdc5e4c504": {
+  "grade": 1,
+  "reason": "Research operations for AI training data; only touches on data science."
+ },
+ "a0f0ae1c7117|j_017e047ae3": {
+  "grade": 3,
+  "reason": "Backend engineer role with deep Postgres work; language is TS/Python, not Go, but core backend fit"
+ },
+ "a0f0ae1c7117|j_0a34bb7a74": {
+  "grade": 2,
+  "reason": "K8s networking infra with Go; infra/platform rather than classic backend"
+ },
+ "a0f0ae1c7117|j_0b2899cd45": {
+  "grade": 2,
+  "reason": "Platform/infrastructure engineering role; stack not specified but backend-adjacent"
+ },
+ "a0f0ae1c7117|j_0cea1cf975": {
+  "grade": 2,
+  "reason": "Full-stack product role using Go and PostgreSQL on backend"
+ },
+ "a0f0ae1c7117|j_118b1d6699": {
+  "grade": 1,
+  "reason": "Full-stack RL tooling, Python; Kubernetes only nice-to-have"
+ },
+ "a0f0ae1c7117|j_12764c182d": {
+  "grade": 1,
+  "reason": "Full-stack AI product role; Postgres only a plus"
+ },
+ "a0f0ae1c7117|j_16ae49b111": {
+  "grade": 1,
+  "reason": "Frontend role for a Kubernetes product"
+ },
+ "a0f0ae1c7117|j_20f59b1bc6": {
+  "grade": 1,
+  "reason": "Full-stack LLM agent role in Python/React"
+ },
+ "a0f0ae1c7117|j_26dc2d8f18": {
+  "grade": 1,
+  "reason": "Full-stack AI/ML role; Postgres in stack but not backend focus"
+ },
+ "a0f0ae1c7117|j_404a8194b3": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure with Go; infra-focused rather than backend"
+ },
+ "a0f0ae1c7117|j_42363f301d": {
+  "grade": 2,
+  "reason": "Infrastructure/platform role built around Kubernetes/EKS that includes some backend service work. An adjacent specialty."
+ },
+ "a0f0ae1c7117|j_4cb4efbc11": {
+  "grade": 2,
+  "reason": "Infrastructure software engineering in Go on Kubernetes clusters. It's platform work rather than backend services."
+ },
+ "a0f0ae1c7117|j_5ad5251b5b": {
+  "grade": 2,
+  "reason": "Requires Go backend experience, with Postgres and Kubernetes as pluses. But it's a full-stack/AI founding role."
+ },
+ "a0f0ae1c7117|j_5da9038b8e": {
+  "grade": 3,
+  "reason": "Building backend APIs and distributed systems on Kubernetes controllers. A strong fit for backend work using Kubernetes."
+ },
+ "a0f0ae1c7117|j_618edfcb47": {
+  "grade": 3,
+  "reason": "Same role as [3]: backend APIs powered by Kubernetes controllers."
+ },
+ "a0f0ae1c7117|j_62696cf88f": {
+  "grade": 2,
+  "reason": "Backend infrastructure software role. The excerpt doesn't name Go, Postgres or Kubernetes."
+ },
+ "a0f0ae1c7117|j_6d0eab32c6": {
+  "grade": 2,
+  "reason": "Same as [1]: Go and Kubernetes infrastructure engineering, adjacent to backend."
+ },
+ "a0f0ae1c7117|j_720f45f74f": {
+  "grade": 1,
+  "reason": "DevOps/SRE staffing ad that mentions Kubernetes and Go, but the role isn't backend engineering."
+ },
+ "a0f0ae1c7117|j_73602ebf6b": {
+  "grade": 2,
+  "reason": "Backend infrastructure role (databases, distributed systems). The excerpt doesn't name Go, Postgres or Kubernetes."
+ },
+ "a0f0ae1c7117|j_7f3ed202d7": {
+  "grade": 3,
+  "reason": "Building backend APIs with Kubernetes controllers for a Kubernetes-based platform."
+ },
+ "a0f0ae1c7117|j_7fac510287": {
+  "grade": 2,
+  "reason": "Backend microservices role with Kubernetes and database tuning, but Java rather than Go"
+ },
+ "a0f0ae1c7117|j_879efa6518": {
+  "grade": 2,
+  "reason": "Go/K8s infrastructure engineering role, networking-focused rather than core backend"
+ },
+ "a0f0ae1c7117|j_8d837bde51": {
+  "grade": 1,
+  "reason": "Infrastructure security/DevSecOps role; containers mentioned but not backend engineering"
+ },
+ "a0f0ae1c7117|j_a5690da070": {
+  "grade": 1,
+  "reason": "AI tooling role at a Postgres company; not a Postgres backend role itself"
+ },
+ "a0f0ae1c7117|j_a66ba77b5d": {
+  "grade": 1,
+  "reason": "Frontend role, though it requires Kubernetes and Go"
+ },
+ "a0f0ae1c7117|j_babee2c08d": {
+  "grade": 2,
+  "reason": "Backend infrastructure engineering with databases/distributed systems; Go/Postgres/K8s not explicit"
+ },
+ "a0f0ae1c7117|j_bdcee64847": {
+  "grade": 2,
+  "reason": "Backend platform role owning a PostgreSQL data layer, but in a TypeScript/Node stack"
+ },
+ "a0f0ae1c7117|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Senior Go engineer on Kubernetes control plane"
+ },
+ "a0f0ae1c7117|j_cd2be5f111": {
+  "grade": 2,
+  "reason": "Go/K8s infrastructure engineering role, networking-focused rather than core backend"
+ },
+ "a0f0ae1c7117|j_d2fb38941a": {
+  "grade": 2,
+  "reason": "Kubernetes platform/infrastructure engineering in Go; more infra than backend"
+ },
+ "a0f0ae1c7117|j_dbb7fcfd3a": {
+  "grade": 2,
+  "reason": "Senior backend engineering role, but no Go/Postgres/Kubernetes stack is stated."
+ },
+ "a0f0ae1c7117|j_dc80a65d67": {
+  "grade": 1,
+  "reason": "QA role. It uses Go and Kubernetes, but it isn't backend engineering."
+ },
+ "a0f0ae1c7117|j_df0eba789f": {
+  "grade": 2,
+  "reason": "Backend/platform work building APIs on Kubernetes controllers. Strong overlap, but closer to platform than general backend."
+ },
+ "a0f0ae1c7117|j_f24c9058dd": {
+  "grade": 2,
+  "reason": "Duplicate of [2]: backend/platform work building APIs on Kubernetes controllers."
+ },
+ "a0f0ae1c7117|j_f4cbb0a422": {
+  "grade": 2,
+  "reason": "Platform engineering in Go and Kubernetes. Adjacent to backend: more infrastructure than backend."
+ },
+ "a0f0ae1c7117|j_f7a3655708": {
+  "grade": 2,
+  "reason": "Duplicate of [0]: senior backend role with no stated Go/Postgres/Kubernetes stack."
+ },
+ "a0f0ae1c7117|j_f7cfd57f2f": {
+  "grade": 3,
+  "reason": "Senior Go backend role that uses PostgreSQL and Kubernetes."
+ },
+ "a0f0ae1c7117|j_fb373b1071": {
+  "grade": 2,
+  "reason": "Platform engineering in Go and Kubernetes, adjacent to backend."
+ },
+ "a0f0ae1c7117|j_ff7dafbb36": {
+  "grade": 2,
+  "reason": "Full-stack role that is mostly backend with PostgreSQL, but the language is Python, not Go."
+ },
+ "a24d63bb639b|j_000d258743": {
+  "grade": 1,
+  "reason": "Generic software engineer at an AI infrastructure company; only mentions data-intensive apps"
+ },
+ "a24d63bb639b|j_002b20ae4a": {
+  "grade": 3,
+  "reason": "Data Engineer role: pipelines, Snowflake, dbt, data warehouse modernization"
+ },
+ "a24d63bb639b|j_004f83fcfe": {
+  "grade": 1,
+  "reason": "AI/ML engineering for simulation; only touches data pipelines incidentally"
+ },
+ "a24d63bb639b|j_05efc454b0": {
+  "grade": 1,
+  "reason": "AI engineer building data APIs; related to data, but not clearly data engineering"
+ },
+ "a24d63bb639b|j_0c97fa4ff4": {
+  "grade": 0,
+  "reason": "Customer-facing application engineer for AI hardware"
+ },
+ "a24d63bb639b|j_0f3575d6aa": {
+  "grade": 1,
+  "reason": "Backend/infra founding engineer; data pipelines are only a nice-to-have"
+ },
+ "a24d63bb639b|j_12481e6201": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/React founding engineer"
+ },
+ "a24d63bb639b|j_14aa2d5d38": {
+  "grade": 0,
+  "reason": "Full-stack product engineer"
+ },
+ "a24d63bb639b|j_160108c290": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/React founding engineer (duplicate)"
+ },
+ "a24d63bb639b|j_1717f88628": {
+  "grade": 1,
+  "reason": "Forward deployed SWE internship on data platforms; not a data engineering role"
+ },
+ "a24d63bb639b|j_194d7bb85f": {
+  "grade": 0,
+  "reason": "Founding full-stack/AI engineer role (TypeScript/React); not data engineering."
+ },
+ "a24d63bb639b|j_1dd366cfd2": {
+  "grade": 0,
+  "reason": "LLM red-teaming security contract; not data engineering."
+ },
+ "a24d63bb639b|j_1ef3e31c94": {
+  "grade": 3,
+  "reason": "Data engineer role that builds pipelines and ETL and sets data architecture."
+ },
+ "a24d63bb639b|j_212a443f36": {
+  "grade": 1,
+  "reason": "Backend/full-stack founding role; data models are mentioned, but this isn't data engineering."
+ },
+ "a24d63bb639b|j_2266b76f67": {
+  "grade": 1,
+  "reason": "Product engineer who uses data pipelines and SQL, but the role itself is product development."
+ },
+ "a24d63bb639b|j_23e730bd67": {
+  "grade": 3,
+  "reason": "Data platform role covering ingestion, orchestration, data modeling and ERP integrations."
+ },
+ "a24d63bb639b|j_2454a04669": {
+  "grade": 0,
+  "reason": "Forward deployed customer-facing engineer; no data engineering focus."
+ },
+ "a24d63bb639b|j_260d21b873": {
+  "grade": 0,
+  "reason": "Enterprise software implementation role; not data engineering."
+ },
+ "a24d63bb639b|j_26768a5818": {
+  "grade": 0,
+  "reason": "Hardware/PCB engineering role."
+ },
+ "a24d63bb639b|j_28c9759fe2": {
+  "grade": 0,
+  "reason": "Founding full-stack/AI engineer role (TypeScript/React); not data engineering."
+ },
+ "a24d63bb639b|j_2c389aa6df": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/React AI product engineer; no data engineering focus."
+ },
+ "a24d63bb639b|j_322357772d": {
+  "grade": 1,
+  "reason": "FDSE internship works with customer data on Palantir platforms, but the role is general software and customer-facing engineering, not data engineering."
+ },
+ "a24d63bb639b|j_35edad8992": {
+  "grade": 1,
+  "reason": "Duplicate of [1]: the FDSE internship touches data integration, but the role isn't primarily data engineering."
+ },
+ "a24d63bb639b|j_38414abbff": {
+  "grade": 0,
+  "reason": "Customer success/solutions role configuring AI agents; not data engineering."
+ },
+ "a24d63bb639b|j_3a8c609341": {
+  "grade": 0,
+  "reason": "AI/backend engineer building an LLM coaching engine; data models are incidental."
+ },
+ "a24d63bb639b|j_3ac7191f22": {
+  "grade": 2,
+  "reason": "Data infrastructure engineering on Spark, Iceberg and query engines that power pipelines. Closely related to data engineering but builds the engines rather than the pipelines."
+ },
+ "a24d63bb639b|j_452a57ef2b": {
+  "grade": 1,
+  "reason": "Real-time streaming backend for market data; touches streaming data but is backend engineering, not pipelines or warehouses."
+ },
+ "a24d63bb639b|j_46e8b7d6ed": {
+  "grade": 0,
+  "reason": "Product/backend engineer; SQL and Kafka are incidental."
+ },
+ "a24d63bb639b|j_482cf9217c": {
+  "grade": 1,
+  "reason": "Backend staff engineer whose scope includes data workflows and large datasets, but the role is mainly APIs and infrastructure."
+ },
+ "a24d63bb639b|j_48be4ecd18": {
+  "grade": 1,
+  "reason": "Customer-facing FDE that requires knowledge of warehouses and ETL, but the role is pre-sales and solutions work, not building pipelines."
+ },
+ "a24d63bb639b|j_4dd2f18323": {
+  "grade": 1,
+  "reason": "Backend banking infrastructure engineer; data modeling mentioned but not a data engineering role."
+ },
+ "a24d63bb639b|j_5446e8c036": {
+  "grade": 2,
+  "reason": "Builds data-validation pipelines and data quality automation for training data; adjacent to data engineering."
+ },
+ "a24d63bb639b|j_59bb665dec": {
+  "grade": 1,
+  "reason": "ML engineer; data pipelines are a minor part of an ML-focused role."
+ },
+ "a24d63bb639b|j_5ad5251b5b": {
+  "grade": 0,
+  "reason": "Full-stack/AI product engineer; CI/CD pipelines only, no data engineering."
+ },
+ "a24d63bb639b|j_5ad73fdb2f": {
+  "grade": 0,
+  "reason": "Mobile design engineer; not relevant."
+ },
+ "a24d63bb639b|j_5c35457cfc": {
+  "grade": 2,
+  "reason": "Heavy data/NLP pipeline work: ingestion, dedup, entity resolution, orchestrated pipelines; data-intensive infrastructure."
+ },
+ "a24d63bb639b|j_5f2a2e7d85": {
+  "grade": 2,
+  "reason": "Data movement, connectors, data transformation, ETL/data migration experience; integration-focused product engineering."
+ },
+ "a24d63bb639b|j_604472daf3": {
+  "grade": 1,
+  "reason": "ML forecasting role; data integration and pipelines are secondary."
+ },
+ "a24d63bb639b|j_65bce8e738": {
+  "grade": 0,
+  "reason": "TypeScript/React full-stack AI product engineer; not data engineering."
+ },
+ "a24d63bb639b|j_66910ab46c": {
+  "grade": 1,
+  "reason": "Synthetic data generation pipelines for AI training; ML research rather than data engineering."
+ },
+ "a24d63bb639b|j_67098a342e": {
+  "grade": 0,
+  "reason": "Generic principal engineer role at an AI whistleblower nonprofit; nothing about data engineering."
+ },
+ "a24d63bb639b|j_69b23c93a2": {
+  "grade": 1,
+  "reason": "Fullstack AI role; telemetry and routing pipelines are only a side part of the work."
+ },
+ "a24d63bb639b|j_6d3480b71b": {
+  "grade": 1,
+  "reason": "DevOps and cloud infrastructure role; running Kafka is the only overlap with data engineering."
+ },
+ "a24d63bb639b|j_6f8d756f4f": {
+  "grade": 3,
+  "reason": "Core data engineering: ingestion, orchestration with Airflow or Dagster, dbt layers, data contracts and PostgreSQL."
+ },
+ "a24d63bb639b|j_720f45f74f": {
+  "grade": 0,
+  "reason": "DevOps and SRE contract roles; mentioning SQL doesn't make it data engineering."
+ },
+ "a24d63bb639b|j_74b94874a1": {
+  "grade": 0,
+  "reason": "TypeScript and React product engineering for an AI recruiting startup."
+ },
+ "a24d63bb639b|j_79a8993e92": {
+  "grade": 1,
+  "reason": "Forward-deployed software engineering internship that involves customer data, but the role isn't data engineering."
+ },
+ "a24d63bb639b|j_7b03056e6b": {
+  "grade": 1,
+  "reason": "Full-stack product engineer; data, LLM pipelines and ClickHouse are only part of a broad role."
+ },
+ "a24d63bb639b|j_7f38e89af5": {
+  "grade": 0,
+  "reason": "TypeScript and React product engineering for an AI recruiting startup."
+ },
+ "a24d63bb639b|j_843c696a7c": {
+  "grade": 1,
+  "reason": "General software engineering internship on data platforms; not focused on data engineering."
+ },
+ "a24d63bb639b|j_890657f634": {
+  "grade": 0,
+  "reason": "Generic software engineer at an AI medicine company; nothing about data engineering"
+ },
+ "a24d63bb639b|j_900d0062cc": {
+  "grade": 0,
+  "reason": "Full-stack product engineer; no data pipeline focus"
+ },
+ "a24d63bb639b|j_91057cf98d": {
+  "grade": 0,
+  "reason": "Full-stack founding engineer; using PostgreSQL for data modeling is incidental"
+ },
+ "a24d63bb639b|j_9355e1c275": {
+  "grade": 2,
+  "reason": "Has a Data/AI engineer track covering data pipelines, Snowflake and large-scale data, but the role is broad and mixed"
+ },
+ "a24d63bb639b|j_96f330abf1": {
+  "grade": 2,
+  "reason": "Builds production data pipelines for anonymization; adjacent specialty that is privacy/ML-focused"
+ },
+ "a24d63bb639b|j_976e5e9732": {
+  "grade": 3,
+  "reason": "Data integration engineer: ingestion pipelines, ETL/ELT, data modeling, data quality"
+ },
+ "a24d63bb639b|j_9c1850d856": {
+  "grade": 1,
+  "reason": "Full-stack AI role; mentions data infrastructure only as a secondary item"
+ },
+ "a24d63bb639b|j_9c21b7b5db": {
+  "grade": 1,
+  "reason": "Agent infrastructure with scraping and a knowledge graph; tangential to data engineering"
+ },
+ "a24d63bb639b|j_9e8047ce13": {
+  "grade": 2,
+  "reason": "Data architect designing pipelines, data models and AWS data infrastructure; closely adjacent architect role with an AI slant"
+ },
+ "a24d63bb639b|j_9fdfd78d8d": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/AI founding engineer; not data engineering"
+ },
+ "a24d63bb639b|j_a101ef351b": {
+  "grade": 0,
+  "reason": "Generic backend engineering role with no data engineering focus mentioned."
+ },
+ "a24d63bb639b|j_a1759899b3": {
+  "grade": 1,
+  "reason": "AI content-generation engineering. Mentions pipelines and performance data, but it is not a data engineering role."
+ },
+ "a24d63bb639b|j_a4e1b2adc9": {
+  "grade": 1,
+  "reason": "Agentic AI engineering for an analytics platform. Data-adjacent, but not pipelines, ETL or warehouses."
+ },
+ "a24d63bb639b|j_a5691f7270": {
+  "grade": 2,
+  "reason": "Finance automation role that includes data pipelines, data architecture and data models. Data engineering is a meaningful but secondary part of the job."
+ },
+ "a24d63bb639b|j_a5f4291078": {
+  "grade": 3,
+  "reason": "Founding data engineer building pipelines, connectors, a data model, a warehouse (BigQuery) and dbt."
+ },
+ "a24d63bb639b|j_ae6f69e289": {
+  "grade": 3,
+  "reason": "Senior data engineer owning a data platform with ingestion, orchestration (Airflow), dbt and pipelines."
+ },
+ "a24d63bb639b|j_b68856957c": {
+  "grade": 0,
+  "reason": "Backend role building AI sales agents. Not data engineering."
+ },
+ "a24d63bb639b|j_bed44d6ee2": {
+  "grade": 0,
+  "reason": "Generic software engineering role with no data engineering focus."
+ },
+ "a24d63bb639b|j_c035bd43e0": {
+  "grade": 0,
+  "reason": "Kubernetes control plane engineering in Go. Not relevant."
+ },
+ "a24d63bb639b|j_c0e91d8f28": {
+  "grade": 0,
+  "reason": "Mobile React Native engineering. Not relevant."
+ },
+ "a24d63bb639b|j_c29851e465": {
+  "grade": 2,
+  "reason": "Forward deployed role with substantial data engineering: warehouse schemas, SQL, dbt; mixed with applied AI/customer success."
+ },
+ "a24d63bb639b|j_c7127302cf": {
+  "grade": 2,
+  "reason": "Backend founding engineer building ETL pipelines with validation and reconciliation; data engineering is a significant but secondary part."
+ },
+ "a24d63bb639b|j_c976d06823": {
+  "grade": 1,
+  "reason": "Backend Golang recommendation engineer; data pipelines/ingestion mentioned but role is backend/recsys."
+ },
+ "a24d63bb639b|j_ccdeebffa0": {
+  "grade": 0,
+  "reason": "AI agents and integrations infrastructure; not data engineering."
+ },
+ "a24d63bb639b|j_cf4dedc344": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/AI agent founding engineer; no data engineering."
+ },
+ "a24d63bb639b|j_d1c9332c49": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/AI agent founding engineer; no data engineering."
+ },
+ "a24d63bb639b|j_d43eeb6cc6": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/AI agent founding engineer; no data engineering."
+ },
+ "a24d63bb639b|j_d7f1982503": {
+  "grade": 0,
+  "reason": "Full-stack TypeScript/AI agent founding engineer; no data engineering."
+ },
+ "a24d63bb639b|j_dd70717382": {
+  "grade": 0,
+  "reason": "Lead AI/full-stack engineer; data integrations are minor."
+ },
+ "a24d63bb639b|j_de51c23fbb": {
+  "grade": 1,
+  "reason": "Backend product engineer; mentions automation pipelines and data models but explicitly excludes data-only profiles."
+ },
+ "a24d63bb639b|j_dfe3b55224": {
+  "grade": 1,
+  "reason": "ML leadership role; data warehousing mentioned only as partner work"
+ },
+ "a24d63bb639b|j_e4da213371": {
+  "grade": 0,
+  "reason": "Full-stack product engineer"
+ },
+ "a24d63bb639b|j_e50643ea03": {
+  "grade": 3,
+  "reason": "Senior data engineer building pipelines, ETL, feature platforms"
+ },
+ "a24d63bb639b|j_ec24cdb53f": {
+  "grade": 2,
+  "reason": "Software engineer building data layer/pipeline for structured scientific data; data-engineering adjacent"
+ },
+ "a24d63bb639b|j_eed67bd68d": {
+  "grade": 2,
+  "reason": "Data infrastructure query engine internals; adjacent to data platforms"
+ },
+ "a24d63bb639b|j_ef94e402cf": {
+  "grade": 0,
+  "reason": "Front-end engineer"
+ },
+ "a24d63bb639b|j_f080f54847": {
+  "grade": 1,
+  "reason": "Security telemetry platform/integration; little detail, possibly data integration adjacent"
+ },
+ "a24d63bb639b|j_f0d04008e9": {
+  "grade": 1,
+  "reason": "API/CDS platform principal engineer; data pipelines secondary"
+ },
+ "a24d63bb639b|j_f89990f315": {
+  "grade": 0,
+  "reason": "Full-stack founding engineer"
+ },
+ "ac57833b7722|j_004f83fcfe": {
+  "grade": 3,
+  "reason": "AI/ML Engineer designing, training, and deploying models"
+ },
+ "ac57833b7722|j_08fdb5a702": {
+  "grade": 2,
+  "reason": "ML research scientist; adjacent to ML engineering"
+ },
+ "ac57833b7722|j_19762de5d6": {
+  "grade": 3,
+  "reason": "Machine learning engineer building production ML systems"
+ },
+ "ac57833b7722|j_1ef3e31c94": {
+  "grade": 1,
+  "reason": "Data engineering role; ML only tangential"
+ },
+ "ac57833b7722|j_26dc2d8f18": {
+  "grade": 2,
+  "reason": "Full stack engineer with substantial AI/ML system work"
+ },
+ "ac57833b7722|j_28a17b817b": {
+  "grade": 3,
+  "reason": "Robot learning engineer applying ML models; ML engineering specialty"
+ },
+ "ac57833b7722|j_3e0a2e503b": {
+  "grade": 3,
+  "reason": "AI researcher/engineer building and deploying ML detection models"
+ },
+ "ac57833b7722|j_425123c467": {
+  "grade": 3,
+  "reason": "Founding AI/ML engineer owning recommendation and ranking ML systems"
+ },
+ "ac57833b7722|j_46b3b970a8": {
+  "grade": 2,
+  "reason": "Contract AI-training task work on ML engineering problems, not a true ML engineer role"
+ },
+ "ac57833b7722|j_578825ccc2": {
+  "grade": 2,
+  "reason": "Data scientist building and deploying CV models; adjacent to ML engineering"
+ },
+ "ac57833b7722|j_59bb665dec": {
+  "grade": 3,
+  "reason": "Core ML engineering role: training pipelines, evaluation, inference serving."
+ },
+ "ac57833b7722|j_5f9eeef78e": {
+  "grade": 1,
+  "reason": "Security engineering role focused on AI systems. ML is context, not the core job."
+ },
+ "ac57833b7722|j_604472daf3": {
+  "grade": 3,
+  "reason": "Founding ML engineer building and shipping production forecasting models."
+ },
+ "ac57833b7722|j_6fd71657dc": {
+  "grade": 2,
+  "reason": "ML engineering tasks, but done as contract work for an AI training-data project rather than as a regular ML engineering role."
+ },
+ "ac57833b7722|j_804366d6ae": {
+  "grade": 2,
+  "reason": "Research engineer building ML-based PII detection pipelines. A privacy specialty that sits next to ML engineering."
+ },
+ "ac57833b7722|j_8920e395a1": {
+  "grade": 2,
+  "reason": "Applied scientist intern doing ML research and modeling. Adjacent to ML engineering."
+ },
+ "ac57833b7722|j_8c5c34e53d": {
+  "grade": 0,
+  "reason": "Go-to-market and developer-relations role at an MLOps company, not engineering."
+ },
+ "ac57833b7722|j_9104734f2e": {
+  "grade": 2,
+  "reason": "AI agent evaluation work that needs an ML background. Close to ML engineering but leans toward agents and evaluation."
+ },
+ "ac57833b7722|j_91057cf98d": {
+  "grade": 1,
+  "reason": "Full-stack role that only calls AI provider APIs. No ML engineering."
+ },
+ "ac57833b7722|j_915b892e83": {
+  "grade": 3,
+  "reason": "ML engineering in practice: training, deploying and evaluating models and LLM systems."
+ },
+ "ac57833b7722|j_96f330abf1": {
+  "grade": 2,
+  "reason": "Research engineer building ML/LLM-based PII detection and production data/ML pipelines; ML is significant but the focus is privacy and data engineering."
+ },
+ "ac57833b7722|j_9729c01050": {
+  "grade": 3,
+  "reason": "AI/ML engineer who trains and deploys computer vision models in PyTorch."
+ },
+ "ac57833b7722|j_9b7490bd20": {
+  "grade": 0,
+  "reason": "Go-to-market sales and outbound role; ML only shows up as the target audience."
+ },
+ "ac57833b7722|j_a84dbb726e": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production applied ML systems."
+ },
+ "ac57833b7722|j_bda6d240dc": {
+  "grade": 2,
+  "reason": "Founding engineering lead with hands-on ML training and deployment, but mixed with leadership and general architecture."
+ },
+ "ac57833b7722|j_bdcee64847": {
+  "grade": 1,
+  "reason": "Backend platform engineering role; LLM agents and ML pipelines are a secondary part."
+ },
+ "ac57833b7722|j_cf53312e51": {
+  "grade": 2,
+  "reason": "ML evaluation and MLOps research role for medical imaging; adjacent to ML engineering, with a customer-facing focus."
+ },
+ "ac57833b7722|j_d89ad1cd96": {
+  "grade": 3,
+  "reason": "Senior ML engineer building production applied ML systems."
+ },
+ "ac57833b7722|j_dfe3b55224": {
+  "grade": 2,
+  "reason": "Director-level AI/ML leadership role with some hands-on modeling work; management-focused."
+ },
+ "ac57833b7722|j_e21269d363": {
+  "grade": 2,
+  "reason": "Contract work creating and reviewing ML engineering tasks for AI training data; ML engineering skills are used, but the role isn't a true ML engineering position."
+ },
+ "ac57833b7722|j_e6fe578ba6": {
+  "grade": 3,
+  "reason": "Applied ML/CV engineering role: model training, pipelines, inference, and production deployment."
+ },
+ "ac57833b7722|j_e926fea423": {
+  "grade": 3,
+  "reason": "ML engineering for search and recommendation models, using PyTorch/TensorFlow."
+ },
+ "ac57833b7722|j_ee871fa31b": {
+  "grade": 2,
+  "reason": "Needs ML inference expertise, but the job is designing benchmark tasks under a per-task contract, not doing ML engineering."
+ },
+ "ac57833b7722|j_f6ec2b7198": {
+  "grade": 1,
+  "reason": "General backend engineering role; ML infrastructure experience is only listed as a plus."
+ },
+ "ac57833b7722|j_fc4c84de99": {
+  "grade": 2,
+  "reason": "ML research role on model distillation, focused on publishing papers. Closely related to ML engineering but a research position."
+ },
+ "b1825de8096b|j_03da95a13c": {
+  "grade": 1,
+  "reason": "Identity/security platform engineering; operates infrastructure but reliability isn't the focus"
+ },
+ "b1825de8096b|j_0d64e28925": {
+  "grade": 3,
+  "reason": "Site Reliability Engineer role"
+ },
+ "b1825de8096b|j_22575f0bf0": {
+  "grade": 3,
+  "reason": "Senior SRE role"
+ },
+ "b1825de8096b|j_2d3dd7fe80": {
+  "grade": 0,
+  "reason": "Sales role that only sells to SRE buyers"
+ },
+ "b1825de8096b|j_34377d3395": {
+  "grade": 2,
+  "reason": "Security-focused infrastructure role on a systems team that includes SRE, with some reliability incident work"
+ },
+ "b1825de8096b|j_404a8194b3": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure engineering with a heavy operations and reliability focus; adjacent to SRE"
+ },
+ "b1825de8096b|j_4bdd92d00f": {
+  "grade": 0,
+  "reason": "Full-stack React developer; SRE only listed among other placements"
+ },
+ "b1825de8096b|j_4cb4efbc11": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure engineering with a heavy operations and reliability focus; adjacent to SRE"
+ },
+ "b1825de8096b|j_4d1de5da13": {
+  "grade": 3,
+  "reason": "Forward Deployed SRE role"
+ },
+ "b1825de8096b|j_4dc59d623a": {
+  "grade": 1,
+  "reason": "Identity/security platform engineering; operates infrastructure but reliability isn't the focus"
+ },
+ "b1825de8096b|j_693aa22426": {
+  "grade": 0,
+  "reason": "Frontend Vue developer role, unrelated to SRE."
+ },
+ "b1825de8096b|j_6d0eab32c6": {
+  "grade": 2,
+  "reason": "Infrastructure and Kubernetes platform engineering with a strong focus on operations and reliability. SRE background is valued, but the job is a software engineering role."
+ },
+ "b1825de8096b|j_6d3480b71b": {
+  "grade": 2,
+  "reason": "DevOps infrastructure role with a lot of reliability work: on-call, incident response, observability. Closely related to SRE but titled DevOps."
+ },
+ "b1825de8096b|j_6db3955f0d": {
+  "grade": 1,
+  "reason": "Despite the 'Site Reliability' title, this is a project/operations management role, not SRE engineering."
+ },
+ "b1825de8096b|j_720f45f74f": {
+  "grade": 2,
+  "reason": "DevOps role that explicitly includes DevOps/Site Reliability Engineer tracks. Adjacent and partly an SRE role."
+ },
+ "b1825de8096b|j_8e8363fa0b": {
+  "grade": 1,
+  "reason": "Identity and security platform engineering. Some infrastructure operations, but the focus is security and identity, not SRE."
+ },
+ "b1825de8096b|j_95828c365e": {
+  "grade": 1,
+  "reason": "Despite the 'Site Reliability' title, this is a project/operations management role, not SRE engineering."
+ },
+ "b1825de8096b|j_a2be7dc8ba": {
+  "grade": 1,
+  "reason": "Despite the 'Site Reliability' title, this is a project/operations management role, not SRE engineering."
+ },
+ "b1825de8096b|j_b87ec59e9a": {
+  "grade": 1,
+  "reason": "Customer-facing solutions engineering that works with SRE teams, but the role itself is not SRE."
+ },
+ "b1825de8096b|j_d2fb38941a": {
+  "grade": 2,
+  "reason": "Infrastructure and Kubernetes platform engineering with a strong focus on operations and reliability. SRE background is valued, but the job is a software engineering role."
+ },
+ "b1825de8096b|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX design role; 'reliability' is used only as a soft trait, unrelated to SRE."
+ },
+ "b1825de8096b|j_de51c23fbb": {
+  "grade": 1,
+  "reason": "Backend product engineering role with some production debugging; it explicitly excludes pure DevOps/SRE profiles."
+ },
+ "b92a2691bfe4|j_0406f19731": {
+  "grade": 1,
+  "reason": "BIM plugin developer working with Autodesk APIs and ASP.NET internal tools; not a backend API/microservices role."
+ },
+ "b92a2691bfe4|j_0f3575d6aa": {
+  "grade": 2,
+  "reason": "Backend-heavy founding role building APIs that handle millions of requests; microservices only a nice-to-have, with an AI/scraping focus."
+ },
+ "b92a2691bfe4|j_27d35de722": {
+  "grade": 2,
+  "reason": "Developer productivity role that includes building tooling for service APIs and RPC between microservices; mostly build/CI work."
+ },
+ "b92a2691bfe4|j_317a9cfac0": {
+  "grade": 3,
+  "reason": "Backend software engineer designing robust APIs and scalable systems."
+ },
+ "b92a2691bfe4|j_389ab97ec4": {
+  "grade": 1,
+  "reason": "Wallet operations and partner integration specialist; mentions APIs but it isn't a backend engineering role."
+ },
+ "b92a2691bfe4|j_5ad5251b5b": {
+  "grade": 2,
+  "reason": "Full-stack/AI founding engineer with a Go backend; REST/gRPC microservices experience is required, but the role is broader."
+ },
+ "b92a2691bfe4|j_5da9038b8e": {
+  "grade": 2,
+  "reason": "Platform/K8s role building APIs for a microservices runtime; it's infrastructure-focused."
+ },
+ "b92a2691bfe4|j_618edfcb47": {
+  "grade": 2,
+  "reason": "Platform/K8s role building APIs for a microservices runtime; it's infrastructure-focused."
+ },
+ "b92a2691bfe4|j_61deaeb530": {
+  "grade": 3,
+  "reason": "Java backend engineer building services and REST APIs with Spring Boot and microservices architecture."
+ },
+ "b92a2691bfe4|j_672e737e4f": {
+  "grade": 2,
+  "reason": "Backend infrastructure engineer designing APIs and primitives; the focus is on low-level infrastructure."
+ },
+ "b92a2691bfe4|j_6ea455db30": {
+  "grade": 2,
+  "reason": "General backend SWE role; APIs/microservices not explicitly central"
+ },
+ "b92a2691bfe4|j_7f3ed202d7": {
+  "grade": 3,
+  "reason": "Builds APIs over Kubernetes for running microservices; backend platform role"
+ },
+ "b92a2691bfe4|j_7fac510287": {
+  "grade": 3,
+  "reason": "Java microservices and API design/development are the core of the role"
+ },
+ "b92a2691bfe4|j_8a701e8829": {
+  "grade": 2,
+  "reason": "Backend infrastructure role mentioning robust API design; distributed systems focus"
+ },
+ "b92a2691bfe4|j_8d7ea428a4": {
+  "grade": 0,
+  "reason": "Product design role; microservices only appear in the company description"
+ },
+ "b92a2691bfe4|j_909deacf8b": {
+  "grade": 0,
+  "reason": "Sales/BDR role for an API product"
+ },
+ "b92a2691bfe4|j_93085d500d": {
+  "grade": 2,
+  "reason": "Backend Java/Spring Boot payment services with API integrations"
+ },
+ "b92a2691bfe4|j_a50137b833": {
+  "grade": 2,
+  "reason": "Backend application development role designing APIs; microservices not explicit"
+ },
+ "b92a2691bfe4|j_a78b30a0de": {
+  "grade": 3,
+  "reason": "Builds APIs and microservices; requires hands-on microservices experience"
+ },
+ "b92a2691bfe4|j_babee2c08d": {
+  "grade": 2,
+  "reason": "Senior backend infrastructure role mentioning API design"
+ },
+ "b92a2691bfe4|j_c14aa97f30": {
+  "grade": 2,
+  "reason": "Backend infrastructure role that includes designing APIs, but the focus is search, indexing and distributed infrastructure rather than microservices"
+ },
+ "b92a2691bfe4|j_c292036c10": {
+  "grade": 2,
+  "reason": "General backend engineering role on a defense product; API or microservice work is implied but not the stated focus"
+ },
+ "b92a2691bfe4|j_c819369ac7": {
+  "grade": 2,
+  "reason": "General backend engineering role on a defense product; API or microservice work is implied but not the stated focus"
+ },
+ "b92a2691bfe4|j_ce585acc52": {
+  "grade": 2,
+  "reason": "Backend infrastructure role that includes designing APIs, but the focus is search, indexing and distributed infrastructure rather than microservices"
+ },
+ "b92a2691bfe4|j_d5225ac57b": {
+  "grade": 1,
+  "reason": "Staff software engineer posting whose visible text doesn't say what the role involves; no clear API or microservices backend focus"
+ },
+ "b92a2691bfe4|j_dbb7fcfd3a": {
+  "grade": 2,
+  "reason": "Backend application development role that mentions designing robust APIs; relevant, though API work isn't the main focus"
+ },
+ "b92a2691bfe4|j_df0eba789f": {
+  "grade": 3,
+  "reason": "Builds APIs on Kubernetes controllers for a platform that runs hundreds of microservices; core backend API work"
+ },
+ "b92a2691bfe4|j_f0d04008e9": {
+  "grade": 3,
+  "reason": "Principal engineer who owns the design of REST and event-driven APIs, API contracts and API security; core backend API role"
+ },
+ "b92a2691bfe4|j_f24c9058dd": {
+  "grade": 3,
+  "reason": "Builds APIs on Kubernetes controllers for a platform that runs hundreds of microservices; core backend API work"
+ },
+ "b92a2691bfe4|j_f6ec2b7198": {
+  "grade": 2,
+  "reason": "Mostly backend role that builds serverless APIs and containerized services, but it's a generalist job that also covers infrastructure and frontend"
+ },
+ "b92a2691bfe4|j_f7a3655708": {
+  "grade": 3,
+  "reason": "This is a core backend engineering role building scalable systems and designing robust APIs, which is the kind of role the user wants. Microservices aren't named, but the work is the same backend service development."
+ },
+ "cbd41f2c246b|j_0a34bb7a74": {
+  "grade": 0,
+  "reason": "Kubernetes network software engineering, not air traffic control."
+ },
+ "cbd41f2c246b|j_0d64e28925": {
+  "grade": 0,
+  "reason": "Site reliability engineering role; 'air-gapped' has nothing to do with aviation."
+ },
+ "cbd41f2c246b|j_273dd060a8": {
+  "grade": 0,
+  "reason": "GPU infrastructure engineering role."
+ },
+ "cbd41f2c246b|j_2cac462ba8": {
+  "grade": 0,
+  "reason": "Content and marketing role."
+ },
+ "cbd41f2c246b|j_33910dc29e": {
+  "grade": 0,
+  "reason": "M&A accounting role."
+ },
+ "cbd41f2c246b|j_3b6380453f": {
+  "grade": 0,
+  "reason": "Paid ads and marketing role."
+ },
+ "cbd41f2c246b|j_48be4ecd18": {
+  "grade": 0,
+  "reason": "Forward deployed engineering role for AI products."
+ },
+ "cbd41f2c246b|j_4cb4efbc11": {
+  "grade": 0,
+  "reason": "Kubernetes infrastructure engineering role."
+ },
+ "cbd41f2c246b|j_4d1de5da13": {
+  "grade": 0,
+  "reason": "Site reliability engineering role; 'air-gapped' isn't about aviation."
+ },
+ "cbd41f2c246b|j_6357445eb4": {
+  "grade": 1,
+  "reason": "Recruiting/SDR role that only uses 'air traffic controller' as a metaphor."
+ },
+ "cbd41f2c246b|j_6ab1751cfc": {
+  "grade": 0,
+  "reason": "Crypto product manager; nothing to do with air traffic control."
+ },
+ "cbd41f2c246b|j_7edb522726": {
+  "grade": 0,
+  "reason": "AI software engineering role; not relevant."
+ },
+ "cbd41f2c246b|j_81ce29250e": {
+  "grade": 0,
+  "reason": "SIP/telephony expert at an AI voice company; not relevant."
+ },
+ "cbd41f2c246b|j_879efa6518": {
+  "grade": 0,
+  "reason": "Kubernetes network infrastructure engineering. 'Traffic' here means network traffic, not air traffic."
+ },
+ "cbd41f2c246b|j_8c038c4d8c": {
+  "grade": 0,
+  "reason": "Business development partnerships role; not relevant."
+ },
+ "cbd41f2c246b|j_8ca1140d33": {
+  "grade": 0,
+  "reason": "Edge infrastructure engineer. 'Air-gapped' refers to network isolation, not aviation."
+ },
+ "cbd41f2c246b|j_8d837bde51": {
+  "grade": 0,
+  "reason": "Infrastructure security engineer; not relevant."
+ },
+ "cbd41f2c246b|j_b533fdc062": {
+  "grade": 0,
+  "reason": "Software deployment platform engineer; not relevant."
+ },
+ "cbd41f2c246b|j_bc7af874cc": {
+  "grade": 0,
+  "reason": "Fullstack engineer for a content platform; not relevant."
+ },
+ "cbd41f2c246b|j_cd2be5f111": {
+  "grade": 0,
+  "reason": "Duplicate network infrastructure engineering role; not air traffic control."
+ },
+ "cbd41f2c246b|j_de7625e92f": {
+  "grade": 0,
+  "reason": "SDR sales role; 'traffic' refers to web traffic loss, not air traffic."
+ },
+ "cbd41f2c246b|j_de8e2afda0": {
+  "grade": 0,
+  "reason": "Web design engineering; unrelated to air traffic control."
+ },
+ "cbd41f2c246b|j_e4d027b7f8": {
+  "grade": 0,
+  "reason": "Software forward deployed engineer; unrelated."
+ },
+ "cbd41f2c246b|j_edd15a47cd": {
+  "grade": 0,
+  "reason": "Lead generation marketing; web traffic, not air traffic."
+ },
+ "cbd41f2c246b|j_ef636c6810": {
+  "grade": 0,
+  "reason": "Cybersecurity threat detection monitoring network traffic; not air traffic control."
+ },
+ "cbd41f2c246b|j_fd47b687ce": {
+  "grade": 0,
+  "reason": "Social media marketing; unrelated."
+ },
+ "d11f8d1efe39|j_0088e23956": {
+  "grade": 3,
+  "reason": "Native iOS engineering role."
+ },
+ "d11f8d1efe39|j_410b345530": {
+  "grade": 2,
+  "reason": "Flutter-first mobile role, but native iOS is also required."
+ },
+ "d11f8d1efe39|j_4bdd92d00f": {
+  "grade": 0,
+  "reason": "React full-stack role; iOS only shows up in a list of other stacks."
+ },
+ "d11f8d1efe39|j_4e89470f37": {
+  "grade": 0,
+  "reason": "Technical support role; iOS is just one optional background."
+ },
+ "d11f8d1efe39|j_5ad73fdb2f": {
+  "grade": 2,
+  "reason": "Mobile design-engineer role; Swift is one of several options."
+ },
+ "d11f8d1efe39|j_6364847b87": {
+  "grade": 1,
+  "reason": "React/Node full-stack role that mentions iOS apps, but uses React Native."
+ },
+ "d11f8d1efe39|j_68d22175c5": {
+  "grade": 1,
+  "reason": "Engineering leadership role; Swift/iOS skills are only part of a broad stack."
+ },
+ "d11f8d1efe39|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue web developer role."
+ },
+ "d11f8d1efe39|j_720f45f74f": {
+  "grade": 0,
+  "reason": "DevOps role."
+ },
+ "d11f8d1efe39|j_790868fef7": {
+  "grade": 0,
+  "reason": "Growth engineering role on a Rails stack; no iOS focus."
+ },
+ "d11f8d1efe39|j_83d791daaf": {
+  "grade": 0,
+  "reason": "Full stack Go/Java/React role, no iOS/Swift focus"
+ },
+ "d11f8d1efe39|j_88eace9909": {
+  "grade": 0,
+  "reason": "Payroll role"
+ },
+ "d11f8d1efe39|j_8ddb22bd26": {
+  "grade": 1,
+  "reason": "Technical support role; iOS listed only as one optional background"
+ },
+ "d11f8d1efe39|j_9355e1c275": {
+  "grade": 1,
+  "reason": "Founding engineer with React Native/iOS among many tools; not iOS Swift role"
+ },
+ "d11f8d1efe39|j_9d5230010d": {
+  "grade": 0,
+  "reason": "Backend Java role"
+ },
+ "d11f8d1efe39|j_9f71e289b5": {
+  "grade": 0,
+  "reason": "Product engineering lead; no iOS Swift evident"
+ },
+ "d11f8d1efe39|j_b1a89afc7e": {
+  "grade": 1,
+  "reason": "Android Kotlin role; iOS only mentioned for collaboration"
+ },
+ "d11f8d1efe39|j_c3108df945": {
+  "grade": 1,
+  "reason": "Techops support role; iOS listed only as one optional background"
+ },
+ "d11f8d1efe39|j_cc60e39633": {
+  "grade": 2,
+  "reason": "Mobile role requiring Flutter plus native iOS; iOS relevant but Flutter primary"
+ },
+ "d11f8d1efe39|j_ceeb6dc8da": {
+  "grade": 1,
+  "reason": "Android/Kotlin mobile staff role; adjacent mobile but not iOS"
+ },
+ "d11f8d1efe39|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX/graphic design role, no iOS development."
+ },
+ "d11f8d1efe39|j_d35d5ca868": {
+  "grade": 0,
+  "reason": "Growth engineering at a Rails shop; nothing indicates iOS/Swift work."
+ },
+ "d11f8d1efe39|j_e1c0d75540": {
+  "grade": 1,
+  "reason": "Mobile UI design role, not iOS Swift development."
+ },
+ "d11f8d1efe39|j_ee4fc20219": {
+  "grade": 3,
+  "reason": "Senior iOS engineer; Swift and UIKit are must-haves."
+ },
+ "da4ea0377569|j_0ac7830ddb": {
+  "grade": 1,
+  "reason": "Linguistic/media QC rating work, not software QA automation."
+ },
+ "da4ea0377569|j_312b6ce30d": {
+  "grade": 1,
+  "reason": "Data annotation QA and operations, not software test automation."
+ },
+ "da4ea0377569|j_3c393917eb": {
+  "grade": 2,
+  "reason": "Builds RL environments and verifies agent actions. Asks for QA automation background and tools like pytest, Playwright and Selenium, but the role is not mainly QA."
+ },
+ "da4ea0377569|j_47fd76a571": {
+  "grade": 0,
+  "reason": "Insurance payment integrity director. QA here means claims quality, not software."
+ },
+ "da4ea0377569|j_4bdd92d00f": {
+  "grade": 0,
+  "reason": "Full-stack developer role with no QA focus."
+ },
+ "da4ea0377569|j_52cf99a9b2": {
+  "grade": 0,
+  "reason": "Customer experience and shopping QA for AI training, not test automation."
+ },
+ "da4ea0377569|j_5446e8c036": {
+  "grade": 2,
+  "reason": "Builds automated QA/QC pipelines, but for training data rather than software testing. An adjacent specialty."
+ },
+ "da4ea0377569|j_676eb15cad": {
+  "grade": 0,
+  "reason": "Technical program manager for data programs."
+ },
+ "da4ea0377569|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue developer role with no QA focus."
+ },
+ "da4ea0377569|j_720f45f74f": {
+  "grade": 0,
+  "reason": "DevOps engineer role with no QA focus."
+ },
+ "da4ea0377569|j_839ad8cbcf": {
+  "grade": 3,
+  "reason": "Senior SDET who owns the test automation frameworks. This is a core QA automation role."
+ },
+ "da4ea0377569|j_a62d607485": {
+  "grade": 0,
+  "reason": "Program management role. QA is only mentioned as a partner team."
+ },
+ "da4ea0377569|j_adf4f711ae": {
+  "grade": 1,
+  "reason": "Building RL environments and evaluations for AI agents. It uses test harness skills, but the role isn't QA."
+ },
+ "da4ea0377569|j_af59bf1718": {
+  "grade": 3,
+  "reason": "Main duties are QA automation: building Tosca test suites for ERP and Salesforce and running them in CI/CD."
+ },
+ "da4ea0377569|j_afe7da72a0": {
+  "grade": 2,
+  "reason": "Entry-level QA tester role, relevant to QA but not specifically about automation. It's also a vague staffing post."
+ },
+ "da4ea0377569|j_b1a89afc7e": {
+  "grade": 1,
+  "reason": "Android developer role. Writing tests is only a minor duty."
+ },
+ "da4ea0377569|j_b2f95e8dc2": {
+  "grade": 0,
+  "reason": "GTM operations and Salesforce leadership role. Not related to QA."
+ },
+ "da4ea0377569|j_b54cf36a11": {
+  "grade": 3,
+  "reason": "Quality Engineer focused on test automation with tools like Playwright, Selenium and Cypress, plus CI/CD."
+ },
+ "da4ea0377569|j_d2e83976d0": {
+  "grade": 1,
+  "reason": "Cloud and DevOps infrastructure automation role, not test automation."
+ },
+ "da4ea0377569|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX designer role. Not related to QA."
+ },
+ "da4ea0377569|j_dc80a65d67": {
+  "grade": 3,
+  "reason": "QA engineer role building test automation (Go integration, E2E, CI gating)."
+ },
+ "da4ea0377569|j_dcdd8c1806": {
+  "grade": 0,
+  "reason": "Compliance training role; QA mention is unrelated."
+ },
+ "da4ea0377569|j_e1270bb4b2": {
+  "grade": 3,
+  "reason": "Explicitly a QA Automation Engineer building automated testing frameworks."
+ },
+ "da4ea0377569|j_ee2c341c30": {
+  "grade": 1,
+  "reason": "Fullstack dev role; writing automated tests is a secondary duty."
+ },
+ "da4ea0377569|j_f069098a09": {
+  "grade": 0,
+  "reason": "Business process modernization lead; not QA or test automation."
+ },
+ "da4ea0377569|j_f5797c1f40": {
+  "grade": 0,
+  "reason": "Incident management role; not QA."
+ },
+ "db10d4e64ceb|j_06078af562": {
+  "grade": 3,
+  "reason": "Backend engineer role building APIs and services for a neobank."
+ },
+ "db10d4e64ceb|j_0ac7830ddb": {
+  "grade": 0,
+  "reason": "Indonesian-language QA for video and audio, not engineering."
+ },
+ "db10d4e64ceb|j_0cea1cf975": {
+  "grade": 2,
+  "reason": "Full-stack product engineer with substantial Go and PostgreSQL backend work."
+ },
+ "db10d4e64ceb|j_14aa2d5d38": {
+  "grade": 2,
+  "reason": "Full-stack role that includes backend services, APIs and data models."
+ },
+ "db10d4e64ceb|j_16ae49b111": {
+  "grade": 1,
+  "reason": "Frontend role; backend is only nice-to-have or something it works alongside."
+ },
+ "db10d4e64ceb|j_22575f0bf0": {
+  "grade": 1,
+  "reason": "SRE/infrastructure ops role, next to backend but not backend development."
+ },
+ "db10d4e64ceb|j_26dc2d8f18": {
+  "grade": 2,
+  "reason": "Full-stack AI engineer whose work includes Python backend."
+ },
+ "db10d4e64ceb|j_2eb490a816": {
+  "grade": 0,
+  "reason": "Indonesian-language rater role, not engineering."
+ },
+ "db10d4e64ceb|j_37c3bdc941": {
+  "grade": 2,
+  "reason": "Full-stack role that includes backend APIs and systems."
+ },
+ "db10d4e64ceb|j_3a8c609341": {
+  "grade": 3,
+  "reason": "AI/backend engineer building backend services, APIs and data models."
+ },
+ "db10d4e64ceb|j_4385c69b49": {
+  "grade": 0,
+  "reason": "Key account sales role, not engineering."
+ },
+ "db10d4e64ceb|j_452a57ef2b": {
+  "grade": 3,
+  "reason": "Senior backend engineer building real-time services."
+ },
+ "db10d4e64ceb|j_482cf9217c": {
+  "grade": 3,
+  "reason": "Staff engineer role that is mainly backend Python/FastAPI work."
+ },
+ "db10d4e64ceb|j_4bdd92d00f": {
+  "grade": 2,
+  "reason": "Full-stack role with React plus a Python/Node backend; backend is part of the job."
+ },
+ "db10d4e64ceb|j_52a9c7d4ba": {
+  "grade": 1,
+  "reason": "SAP consulting; ABAP is mentioned, but it's not backend engineering."
+ },
+ "db10d4e64ceb|j_6364847b87": {
+  "grade": 2,
+  "reason": "Full-stack role that includes Node.js/API backend work."
+ },
+ "db10d4e64ceb|j_693aa22426": {
+  "grade": 2,
+  "reason": "Frontend-led Vue role paired with a PHP/Node/.NET/Python backend."
+ },
+ "db10d4e64ceb|j_6a487264f4": {
+  "grade": 0,
+  "reason": "Customer success role, not engineering."
+ },
+ "db10d4e64ceb|j_6b8ec8d303": {
+  "grade": 1,
+  "reason": "Product manager for backend payment systems, not an engineering role."
+ },
+ "db10d4e64ceb|j_720f45f74f": {
+  "grade": 1,
+  "reason": "DevOps/SRE role, close to backend but a different discipline."
+ },
+ "db10d4e64ceb|j_8e439fbcc3": {
+  "grade": 2,
+  "reason": "Full stack intern role that includes API and server work, so backend is only part of the job."
+ },
+ "db10d4e64ceb|j_905ced9b44": {
+  "grade": 3,
+  "reason": "Full-stack role with a backend focus, mainly building backend services and APIs."
+ },
+ "db10d4e64ceb|j_a101ef351b": {
+  "grade": 3,
+  "reason": "Senior Backend Engineer role."
+ },
+ "db10d4e64ceb|j_adef1583e4": {
+  "grade": 2,
+  "reason": "Applied AI engineering role building agents and integrating with APIs. It's next to backend work, not a pure backend role."
+ },
+ "db10d4e64ceb|j_b68856957c": {
+  "grade": 3,
+  "reason": "Senior Backend Engineer role building AI agents."
+ },
+ "db10d4e64ceb|j_d22202efbc": {
+  "grade": 2,
+  "reason": "General junior developer role that includes some backend and SQL work."
+ },
+ "db10d4e64ceb|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX design role, not engineering."
+ },
+ "db10d4e64ceb|j_de51c23fbb": {
+  "grade": 3,
+  "reason": "Backend-leaning product engineer who owns APIs and backend systems."
+ },
+ "db10d4e64ceb|j_e817cd2676": {
+  "grade": 3,
+  "reason": "Backend Engineer role."
+ },
+ "db10d4e64ceb|j_ea3ca6c5fd": {
+  "grade": 1,
+  "reason": "Mobile React Native role that only works alongside backend engineers."
+ },
+ "db10d4e64ceb|j_ec39c5f348": {
+  "grade": 2,
+  "reason": "Full-stack blockchain security engineering role with a lot of backend work (back-end systems, APIs, performance, infrastructure). Backend fits, but security and full-stack are the main focus."
+ },
+ "db10d4e64ceb|j_f986b6b5fa": {
+  "grade": 1,
+  "reason": "Full-stack product role that puts strong frontend experience first. Backend is only a minor part of the job."
+ },
+ "db10d4e64ceb|j_fabc92ff08": {
+  "grade": 3,
+  "reason": "Core backend engineering role: backend services, APIs, async workflows, PostgreSQL and queues."
+ },
+ "db118704d3eb|j_2266b76f67": {
+  "grade": 3,
+  "reason": "Backend product engineering role where Go on GCP is a must-have."
+ },
+ "db118704d3eb|j_27d35de722": {
+  "grade": 1,
+  "reason": "Developer productivity role; the listed stack is Java and Go isn't named in the visible text."
+ },
+ "db118704d3eb|j_2e63d2db48": {
+  "grade": 0,
+  "reason": "Unreal Engine C++ game development, unrelated to Go."
+ },
+ "db118704d3eb|j_404a8194b3": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role that lists Go as a primary option alongside C/C++, so Go is likely central but not exclusive."
+ },
+ "db118704d3eb|j_4bdd92d00f": {
+  "grade": 1,
+  "reason": "React/Python/Node posting; Golang only appears in a list of other stacks."
+ },
+ "db118704d3eb|j_4cb4efbc11": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role that lists Go as a primary option alongside C/C++, so Go is likely central but not exclusive."
+ },
+ "db118704d3eb|j_4e98a66856": {
+  "grade": 0,
+  "reason": "Marketing internship, not engineering."
+ },
+ "db118704d3eb|j_4f5a829f4e": {
+  "grade": 0,
+  "reason": "WordPress/PHP frontend role with no Go."
+ },
+ "db118704d3eb|j_5ad5251b5b": {
+  "grade": 3,
+  "reason": "Production Go backend experience is a dealbreaker requirement; full-stack with a Go backend."
+ },
+ "db118704d3eb|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue developer roles with no Go mentioned."
+ },
+ "db118704d3eb|j_6aefda2b08": {
+  "grade": 2,
+  "reason": "Full-stack role where Go is one of several main languages, alongside Python and Angular."
+ },
+ "db118704d3eb|j_6c441381b1": {
+  "grade": 1,
+  "reason": "Deployment platform engineering role. The visible text never mentions Go; any Go use is only inferred."
+ },
+ "db118704d3eb|j_6d0eab32c6": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role that lists Golang as a key skill and involves CNCF contributions, which are typically Go. Go is still listed next to C/C++ and Java."
+ },
+ "db118704d3eb|j_6d3480b71b": {
+  "grade": 1,
+  "reason": "DevOps role where Go is used only for automation scripts. The core job is operations."
+ },
+ "db118704d3eb|j_6d3b42b154": {
+  "grade": 2,
+  "reason": "Kubernetes and OCI distribution systems work, which strongly suggests Go, but the visible text never names it."
+ },
+ "db118704d3eb|j_720f45f74f": {
+  "grade": 1,
+  "reason": "DevOps contracting listing where Go is one optional scripting language among several."
+ },
+ "db118704d3eb|j_78b06d517e": {
+  "grade": 0,
+  "reason": "Go-to-market sales leadership role, not engineering."
+ },
+ "db118704d3eb|j_8c5c34e53d": {
+  "grade": 0,
+  "reason": "Developer relations and go-to-market role, with no Go."
+ },
+ "db118704d3eb|j_905ced9b44": {
+  "grade": 0,
+  "reason": "Full-stack role using Node, TypeScript and Python, with no Go."
+ },
+ "db118704d3eb|j_909deacf8b": {
+  "grade": 0,
+  "reason": "Sales role (business development rep)."
+ },
+ "db118704d3eb|j_915b892e83": {
+  "grade": 0,
+  "reason": "ML role built on Python; Go isn't mentioned."
+ },
+ "db118704d3eb|j_9b7490bd20": {
+  "grade": 0,
+  "reason": "Go-to-market sales and engineering role, not Go development."
+ },
+ "db118704d3eb|j_a66ba77b5d": {
+  "grade": 2,
+  "reason": "Mainly a frontend role (React/Next.js), but it requires strong Go skills for controllers and system tooling."
+ },
+ "db118704d3eb|j_ac283a065b": {
+  "grade": 2,
+  "reason": "Kubernetes, OCI distribution and distributed-systems infrastructure work that is likely in Go, but the posting doesn't name the language."
+ },
+ "db118704d3eb|j_b1a89afc7e": {
+  "grade": 0,
+  "reason": "Android role using Kotlin and Java."
+ },
+ "db118704d3eb|j_b470bf9292": {
+  "grade": 0,
+  "reason": "Developer relations role using TypeScript and Python."
+ },
+ "db118704d3eb|j_b533fdc062": {
+  "grade": 1,
+  "reason": "General distributed-systems and deployment platform role; Go isn't mentioned."
+ },
+ "db118704d3eb|j_c035bd43e0": {
+  "grade": 3,
+  "reason": "Kubernetes control plane engineer role that names Go/Golang as the language."
+ },
+ "db118704d3eb|j_c976d06823": {
+  "grade": 3,
+  "reason": "Backend engineer role with Golang as the core stack."
+ },
+ "db118704d3eb|j_ceeb6dc8da": {
+  "grade": 0,
+  "reason": "Mobile role using Kotlin."
+ },
+ "db118704d3eb|j_d0e4ebd669": {
+  "grade": 2,
+  "reason": "Go is listed first among the backend languages and the agent work probably uses it, but the stack is mixed."
+ },
+ "db118704d3eb|j_d2fb38941a": {
+  "grade": 2,
+  "reason": "Kubernetes infrastructure role where Go is named as a key language, though C/C++ is accepted as an equivalent."
+ },
+ "db118704d3eb|j_d3200fe756": {
+  "grade": 0,
+  "reason": "UI/UX design role, not engineering."
+ },
+ "db118704d3eb|j_d35d5ca868": {
+  "grade": 0,
+  "reason": "Rails-based growth engineering role. 'Fleetio Go' is a product name, not the Go language."
+ },
+ "db118704d3eb|j_dff8a1bb32": {
+  "grade": 0,
+  "reason": "Technical account management role, not engineering."
+ },
+ "db118704d3eb|j_e02322202c": {
+  "grade": 1,
+  "reason": "Infrastructure software engineering role with no Go mentioned in the visible text."
+ },
+ "db118704d3eb|j_ee2c341c30": {
+  "grade": 2,
+  "reason": "Fullstack role where Golang is one of two accepted backend languages, alongside Node and React."
+ },
+ "db118704d3eb|j_f4cbb0a422": {
+  "grade": 3,
+  "reason": "Platform engineer building Kubernetes operators in Go, and Go proficiency is required."
+ },
+ "db118704d3eb|j_f7cfd57f2f": {
+  "grade": 3,
+  "reason": "Senior Go developer role requiring 5+ years of production Go."
+ },
+ "db118704d3eb|j_fe252f2d6e": {
+  "grade": 0,
+  "reason": "Frontend UI developer role using HTML, CSS and JavaScript."
+ },
+ "db118704d3eb|j_ff5efbf2d6": {
+  "grade": 0,
+  "reason": "Developer experience role at ElevenLabs; Go isn't mentioned anywhere in the visible text."
+ },
+ "db118704d3eb|j_ff9c68b08a": {
+  "grade": 1,
+  "reason": "Mixed reality role built on Unity and C#. Go is just one item in a long list of technologies, and it isn't among the required languages."
+ },
+ "f33553e89f8d|j_017e047ae3": {
+  "grade": 2,
+  "reason": "Backend role with substantial Postgres schema design, migrations, and performance tuning, but focus is distributed messaging systems."
+ },
+ "f33553e89f8d|j_0b2899cd45": {
+  "grade": 0,
+  "reason": "Agent platform infrastructure role; no database focus evident."
+ },
+ "f33553e89f8d|j_0cea1cf975": {
+  "grade": 1,
+  "reason": "Full-stack product role; PostgreSQL is listed as part of the stack but not central."
+ },
+ "f33553e89f8d|j_0e18117f7a": {
+  "grade": 1,
+  "reason": "Product engineer with database foundations; Postgres only mentioned as nice-to-have."
+ },
+ "f33553e89f8d|j_12764c182d": {
+  "grade": 1,
+  "reason": "Full-stack AI founding engineer; Postgres listed as a plus only."
+ },
+ "f33553e89f8d|j_14eaf37392": {
+  "grade": 3,
+  "reason": "Dedicated database operations role running a production database fleet; core database engineering/DBA work."
+ },
+ "f33553e89f8d|j_177d6ec985": {
+  "grade": 0,
+  "reason": "Android mobile role; not database-centred."
+ },
+ "f33553e89f8d|j_17a0de9618": {
+  "grade": 1,
+  "reason": "AI engineer; vector/relational databases are secondary."
+ },
+ "f33553e89f8d|j_2266b76f67": {
+  "grade": 1,
+  "reason": "Product backend role requiring PostgreSQL/MySQL modeling and query optimization, but databases are secondary."
+ },
+ "f33553e89f8d|j_334593a87c": {
+  "grade": 0,
+  "reason": "Full-stack automation platform role; database only mentioned in passing."
+ },
+ "f33553e89f8d|j_34377d3395": {
+  "grade": 1,
+  "reason": "Security/infra role; RDS is mentioned only in passing."
+ },
+ "f33553e89f8d|j_48ed6b74fc": {
+  "grade": 1,
+  "reason": "AI product engineer role; Postgres is one item in the stack."
+ },
+ "f33553e89f8d|j_5ad5251b5b": {
+  "grade": 1,
+  "reason": "Go/AI full-stack role; Postgres is only a plus."
+ },
+ "f33553e89f8d|j_5c0ffb99da": {
+  "grade": 1,
+  "reason": "Java backend role that uses MySQL; database work is secondary and it isn't Postgres."
+ },
+ "f33553e89f8d|j_5c35457cfc": {
+  "grade": 1,
+  "reason": "NLP infrastructure lead; PostgreSQL is one listed skill."
+ },
+ "f33553e89f8d|j_5d0275c71f": {
+  "grade": 1,
+  "reason": "Data analyst role that uses SQL; not database engineering."
+ },
+ "f33553e89f8d|j_62696cf88f": {
+  "grade": 2,
+  "reason": "Infrastructure hiring includes a Storage and Databases team, so it's adjacent and could lead to a database role."
+ },
+ "f33553e89f8d|j_655819ce01": {
+  "grade": 2,
+  "reason": "Data engineer with substantial PostgreSQL schema design and query optimization work."
+ },
+ "f33553e89f8d|j_6f8d756f4f": {
+  "grade": 2,
+  "reason": "Data engineer with substantial PostgreSQL modeling and optimization work."
+ },
+ "f33553e89f8d|j_75431b9da2": {
+  "grade": 1,
+  "reason": "Involves building custom databases, but it's a general systems role with no Postgres."
+ },
+ "f33553e89f8d|j_77cb1e8362": {
+  "grade": 1,
+  "reason": "AI engineer role; only a passing mention of relational/vector databases."
+ },
+ "f33553e89f8d|j_790868fef7": {
+  "grade": 0,
+  "reason": "Growth engineering product role; the description doesn't mention databases."
+ },
+ "f33553e89f8d|j_7fac510287": {
+  "grade": 2,
+  "reason": "Backend Java role with real database work: migrating shared databases, query tuning, indexing and connection pooling. Postgres isn't named."
+ },
+ "f33553e89f8d|j_8ca1140d33": {
+  "grade": 0,
+  "reason": "Bare-metal and network infrastructure role; not about databases."
+ },
+ "f33553e89f8d|j_8d244d0552": {
+  "grade": 2,
+  "reason": "Full-stack role that requires strong PostgreSQL skills and designing database schemas, but databases aren't the main focus."
+ },
+ "f33553e89f8d|j_8e439fbcc3": {
+  "grade": 1,
+  "reason": "Full-stack intern role; general database knowledge is listed only as a qualification."
+ },
+ "f33553e89f8d|j_91057cf98d": {
+  "grade": 1,
+  "reason": "Full-stack AI role that uses PostgreSQL and Supabase for data modeling, but only as one secondary duty."
+ },
+ "f33553e89f8d|j_9e8047ce13": {
+  "grade": 2,
+  "reason": "Data architecture role covering data models and storage, which is next to database work. It leans toward analytics and AI pipelines, and Postgres isn't mentioned."
+ },
+ "f33553e89f8d|j_a5690da070": {
+  "grade": 1,
+  "reason": "AI tooling role at a Postgres platform company; the work itself is agents and evals, not databases."
+ },
+ "f33553e89f8d|j_a84dbb726e": {
+  "grade": 0,
+  "reason": "Machine learning engineering role; not about databases."
+ },
+ "f33553e89f8d|j_b2f41a87c3": {
+  "grade": 0,
+  "reason": "Staff engineer on a Rails consent product with an AI tooling focus; no database focus."
+ },
+ "f33553e89f8d|j_b3b4cb3db1": {
+  "grade": 1,
+  "reason": "Product engineer on voice AI; PostgreSQL only appears in the list of data stores."
+ },
+ "f33553e89f8d|j_bdcee64847": {
+  "grade": 2,
+  "reason": "Backend platform role that owns the Supabase/PostgreSQL data layer: schemas, migrations, complex queries and ACID guarantees."
+ },
+ "f33553e89f8d|j_c0855c2866": {
+  "grade": 0,
+  "reason": "Clinical drug-safety role; 'database' here means a pharmacovigilance safety database."
+ },
+ "f33553e89f8d|j_c334fc159f": {
+  "grade": 1,
+  "reason": "Infrastructure internship; database systems work is one of four possible team areas."
+ },
+ "f33553e89f8d|j_c527b5cda6": {
+  "grade": 1,
+  "reason": "Full-stack AI founding engineer; PostgreSQL, SQL and data modeling are secondary."
+ },
+ "f33553e89f8d|j_cbc701b73d": {
+  "grade": 1,
+  "reason": "Cloud migration architect; database migration experience (incl. PostgreSQL) is required but the role is broader."
+ },
+ "f33553e89f8d|j_d0e4ebd669": {
+  "grade": 1,
+  "reason": "Go/TypeScript backend role; PostgreSQL only appears in the tech stack list."
+ },
+ "f33553e89f8d|j_d22202efbc": {
+  "grade": 1,
+  "reason": "Junior general developer; SQL and database management are minor pluses."
+ },
+ "f33553e89f8d|j_d35d5ca868": {
+  "grade": 0,
+  "reason": "Growth and product engineering role; no database focus."
+ },
+ "f33553e89f8d|j_dd70717382": {
+  "grade": 1,
+  "reason": "AI/full-stack lead role; database fundamentals mentioned only in passing."
+ },
+ "f33553e89f8d|j_dff8a1bb32": {
+  "grade": 0,
+  "reason": "Technical account management for payments; not a database role."
+ },
+ "f33553e89f8d|j_ec24cdb53f": {
+  "grade": 1,
+  "reason": "Python full-stack role building a data layer; the visible text doesn't mention significant database work."
+ },
+ "f33553e89f8d|j_eed67bd68d": {
+  "grade": 2,
+  "reason": "Database/query engine internals role, an adjacent specialty; not Postgres or DBA-focused."
+ },
+ "f33553e89f8d|j_f0a8d9bf16": {
+  "grade": 1,
+  "reason": "Product engineer role; PostgreSQL and relational design are listed but secondary."
+ },
+ "f33553e89f8d|j_f6ec2b7198": {
+  "grade": 2,
+  "reason": "Backend role with real relational database ownership (indexing, migrations, backups, recovery), but it's a broad generalist role."
+ },
+ "f33553e89f8d|j_fabc92ff08": {
+  "grade": 2,
+  "reason": "Backend role requiring PostgreSQL data modeling and transactions, but the focus is agent infrastructure."
+ },
+ "f33553e89f8d|j_ff7dafbb36": {
+  "grade": 2,
+  "reason": "Backend-heavy role with PostgreSQL schema design and query optimization as a core duty and requirement."
+ },
+ "f72587cd260b|j_00a8cb86fd": {
+  "grade": 0,
+  "reason": "KYB/AML compliance analyst role, not customer support."
+ },
+ "f72587cd260b|j_0853800add": {
+  "grade": 1,
+  "reason": "Pre-sales solutions engineering; works with Customer Success but is not a support role."
+ },
+ "f72587cd260b|j_0c8285103d": {
+  "grade": 3,
+  "reason": "Customer service specialist handling live chat, tickets and complaints."
+ },
+ "f72587cd260b|j_0c97fa4ff4": {
+  "grade": 2,
+  "reason": "Technical customer support and escalation handling for hardware; an adjacent specialty."
+ },
+ "f72587cd260b|j_0dcef5a33a": {
+  "grade": 1,
+  "reason": "Sales account executive role that partners with CSMs; the role itself is sales."
+ },
+ "f72587cd260b|j_19c3d3cca8": {
+  "grade": 3,
+  "reason": "Customer support representative handling chat, tickets and complaints."
+ },
+ "f72587cd260b|j_263a8a542b": {
+  "grade": 3,
+  "reason": "Client support role that helps customers by email, phone and messaging, plus booking coordination."
+ },
+ "f72587cd260b|j_2c02827e6c": {
+  "grade": 1,
+  "reason": "Go-to-market and customer discovery role; not support or success."
+ },
+ "f72587cd260b|j_38414abbff": {
+  "grade": 2,
+  "reason": "Owns customer onboarding and success, but it is a technical engineering role."
+ },
+ "f72587cd260b|j_3d556b33b8": {
+  "grade": 3,
+  "reason": "Customer service representative handling chat, tickets and email support."
+ },
+ "f72587cd260b|j_41f05483c8": {
+  "grade": 1,
+  "reason": "Engineering role with customer onboarding and feedback duties; support is secondary."
+ },
+ "f72587cd260b|j_429cc5f193": {
+  "grade": 3,
+  "reason": "Customer service rep handling live chat and tickets."
+ },
+ "f72587cd260b|j_48be4ecd18": {
+  "grade": 1,
+  "reason": "Forward deployed engineer, a customer-facing technical delivery and pre-sales role."
+ },
+ "f72587cd260b|j_4d5e6d1b8f": {
+  "grade": 0,
+  "reason": "Product management role, not support."
+ },
+ "f72587cd260b|j_506bd946dd": {
+  "grade": 2,
+  "reason": "Account management focused on expansion sales; adjacent to customer success."
+ },
+ "f72587cd260b|j_51d497cf6b": {
+  "grade": 0,
+  "reason": "Product marketing; only enables the CS team."
+ },
+ "f72587cd260b|j_52586a8127": {
+  "grade": 3,
+  "reason": "Customer service manager leading the support operation."
+ },
+ "f72587cd260b|j_52b3f47f6e": {
+  "grade": 3,
+  "reason": "Customer service rep handling live chat and tickets."
+ },
+ "f72587cd260b|j_52cf99a9b2": {
+  "grade": 1,
+  "reason": "AI training contract that simulates CX scenarios, not actual support work."
+ },
+ "f72587cd260b|j_5e2716921b": {
+  "grade": 0,
+  "reason": "Sales/GTM role."
+ },
+ "f72587cd260b|j_6a487264f4": {
+  "grade": 3,
+  "reason": "Technical customer success manager role focused on adoption and retention"
+ },
+ "f72587cd260b|j_730ec37d2a": {
+  "grade": 2,
+  "reason": "Client support role mixed with travel booking coordination; may be MLM-style"
+ },
+ "f72587cd260b|j_75673adb49": {
+  "grade": 2,
+  "reason": "Technical support engineering within customer success team; engineering-heavy"
+ },
+ "f72587cd260b|j_82e25d0f37": {
+  "grade": 3,
+  "reason": "Customer success associate owning customer onboarding"
+ },
+ "f72587cd260b|j_920521b23c": {
+  "grade": 2,
+  "reason": "Implementation/onboarding role, adjacent to customer success"
+ },
+ "f72587cd260b|j_940746278f": {
+  "grade": 3,
+  "reason": "Customer success director leading CS team and accounts"
+ },
+ "f72587cd260b|j_9c96afe767": {
+  "grade": 3,
+  "reason": "Customer success manager handling support, onboarding, renewals"
+ },
+ "f72587cd260b|j_a23d31c42d": {
+  "grade": 1,
+  "reason": "GTM/engineering role; customer focus is secondary"
+ },
+ "f72587cd260b|j_acc456f821": {
+  "grade": 2,
+  "reason": "Customer deployment/adoption role, adjacent to customer success"
+ },
+ "f72587cd260b|j_b39b7d629c": {
+  "grade": 3,
+  "reason": "Frontline customer service/support role"
+ },
+ "f72587cd260b|j_b3b4cb3db1": {
+  "grade": 1,
+  "reason": "Software engineering role at a customer service AI company; the role itself isn't support."
+ },
+ "f72587cd260b|j_c29851e465": {
+  "grade": 1,
+  "reason": "Technical forward-deployed engineering role. It touches customer success, but the work is data engineering and AI."
+ },
+ "f72587cd260b|j_c81e8eb500": {
+  "grade": 1,
+  "reason": "Sales role that mentions customer success, but the main job is closing new business."
+ },
+ "f72587cd260b|j_d2ae267a2e": {
+  "grade": 3,
+  "reason": "Customer service representative handling live chat, tickets and complaints."
+ },
+ "f72587cd260b|j_d7d8990b46": {
+  "grade": 1,
+  "reason": "Pricing consulting role that faces customers; it is not support or success work."
+ },
+ "f72587cd260b|j_dd63f35aec": {
+  "grade": 2,
+  "reason": "Mainly account management: onboarding, quarterly business reviews and retention. This is close to customer success, with a product side."
+ },
+ "f72587cd260b|j_e47cfe0112": {
+  "grade": 2,
+  "reason": "Owns customer onboarding, engagement and satisfaction across the customer lifecycle. This is adjacent to customer success."
+ },
+ "f72587cd260b|j_e7c184fd9d": {
+  "grade": 3,
+  "reason": "Entry-level remote customer support role answering travel booking questions."
+ },
+ "f72587cd260b|j_f5f3237298": {
+  "grade": 3,
+  "reason": "Customer service representative handling live chat, tickets and complaints."
+ },
+ "f72587cd260b|j_fd153de64a": {
+  "grade": 2,
+  "reason": "Support specialist role at a fintech, likely support or operations work, but the truncated description doesn't give details."
+ }
+}
