@@ -22,11 +22,12 @@ jobs:
         with:
           # cache.nixos.org has the toolchain; loker's R2 cache has what only this
           # repo builds (crane's compiled dependencies, the vendored crates).
-          # Reads are public; every path is signed by loker-ci-1. If the cache is
+          # Reads are public, through the cache.rasyidanaf.com gateway (a Worker in
+          # personal-clan-nix); every path is signed by loker-ci-1. If the cache is
           # unreachable, Nix builds instead (fallback).
           extra_nix_config: |
             accept-flake-config = false
-            extra-substituters = https://pub-42e4e68894b74713997b56c450bc9925.r2.dev
+            extra-substituters = https://cache.rasyidanaf.com/loker-nix-cache
             extra-trusted-public-keys = loker-ci-1:uzoeDmTAwNEvZTMuCmd28RZngImk4Oj5L9zS0WvohX4=
             fallback = true
       - run: nix flake check -L --show-trace
