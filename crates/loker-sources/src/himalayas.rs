@@ -5,7 +5,7 @@ use anyhow::Context;
 use chrono::DateTime;
 use loker_core::country;
 use loker_core::model::{Eligibility, Method, NewJob, Pay, Scope, TzStrength, TzWindow};
-use loker_core::normalize::{self, clean_url};
+use loker_core::normalize;
 use serde::Deserialize;
 use serde_json::Value;
 
@@ -93,15 +93,15 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     let item: Item = serde_json::from_value(raw.clone())?;
     let eligibility = eligibility(&item);
     let pay = pay(&item);
-    let description_md = item.description.as_deref().map(htmd::convert).transpose()?;
+    let description_md = crate::html_to_md(item.description.as_deref())?;
     Ok(NewJob {
         source_id: SOURCE_ID.into(),
         source_job_id: item.guid.clone(),
         source_url: item.guid.clone(),
         canonical_url: item.guid.clone(),
-        apply_url: item.application_link.as_deref().map(clean_url),
-        title: item.title.trim().to_string(),
-        company: item.company_name.trim().to_string(),
+        apply_url: item.application_link,
+        title: item.title,
+        company: item.company_name,
         seniority: item.seniority.first().map(|s| s.to_lowercase()),
         employment_type: item
             .employment_type

@@ -6,7 +6,7 @@
 //! field; the board slug is used.
 use chrono::DateTime;
 use loker_core::model::{Eligibility, NewJob, Scope};
-use loker_core::normalize::{clean_url, eligibility_from_text, employment_type, pay_from_text};
+use loker_core::normalize::{eligibility_from_text, employment_type, pay_from_text};
 use serde::Deserialize;
 use serde_json::Value;
 
@@ -77,14 +77,14 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
         },
         _ => eligibility_from_text(&text, item.is_remote),
     };
-    let canonical = clean_url(&item.job_url);
+    let canonical = item.job_url;
     Ok(NewJob {
         source_id: source_id.into(),
         source_job_id: item.id,
         source_url: canonical.clone(),
         canonical_url: canonical,
-        apply_url: item.apply_url.as_deref().map(clean_url),
-        title: item.title.trim().to_string(),
+        apply_url: item.apply_url,
+        title: item.title,
         company: board.to_string(),
         seniority: None,
         employment_type: item.employment_type.as_deref().map(employment_type),

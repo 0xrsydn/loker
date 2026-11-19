@@ -17,6 +17,7 @@ use loker_core::api::{
     Result, SourceCheck, VerifyReport,
 };
 use loker_core::model::{IngestStats, NewJob, SourceKind};
+use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
 use serde_json::Value;
 use std::collections::BTreeSet;
@@ -181,6 +182,7 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
                 if let Some(name) = &p.company {
                     job.company = name.clone();
                 }
+                normalize::tidy(&mut job);
                 jobs.push(job)
             }
             Err(e) => errors.push(format!("{e:#}")),
@@ -471,16 +473,6 @@ async fn get_json(client: &HttpClient, url: &str) -> anyhow::Result<Value> {
 
 /// Decode the HTML entities job feeds actually use. `&amp;` goes last so
 /// `&amp;lt;` stays `&lt;`.
-fn decode_entities(s: &str) -> String {
-    s.replace("&lt;", "<")
-        .replace("&gt;", ">")
-        .replace("&quot;", "\"")
-        .replace("&#39;", "'")
-        .replace("&#039;", "'")
-        .replace("&nbsp;", " ")
-        .replace("&amp;", "&")
-}
-
 /// HTML → Markdown; `None` for empty input.
 fn html_to_md(html: Option<&str>) -> anyhow::Result<Option<String>> {
     match html.map(str::trim).filter(|h| !h.is_empty()) {

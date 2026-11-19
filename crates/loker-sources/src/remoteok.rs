@@ -6,10 +6,10 @@
 //! pay sanity bounds).
 use chrono::DateTime;
 use loker_core::model::NewJob;
-use loker_core::normalize::{clean_url, eligibility_from_text, pay};
+use loker_core::normalize::{decode_entities, eligibility_from_text, pay};
 use serde_json::Value;
 
-use crate::{HttpClient, as_f64, as_string, decode_entities, get_json, html_to_md};
+use crate::{HttpClient, as_f64, as_string, get_json, html_to_md};
 
 pub const SOURCE_ID: &str = "remoteok";
 
@@ -29,7 +29,7 @@ pub async fn fetch(client: &HttpClient) -> anyhow::Result<Vec<Value>> {
 pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     let s = |k: &str| raw.get(k).and_then(as_string);
     let id = s("id").ok_or_else(|| anyhow::anyhow!("missing id"))?;
-    let url = clean_url(&s("url").ok_or_else(|| anyhow::anyhow!("missing url"))?);
+    let url = s("url").ok_or_else(|| anyhow::anyhow!("missing url"))?;
     let title = s("position").ok_or_else(|| anyhow::anyhow!("missing position"))?;
     let company = s("company").ok_or_else(|| anyhow::anyhow!("missing company"))?;
     let tags = raw
@@ -47,9 +47,9 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         source_job_id: id,
         source_url: url.clone(),
         canonical_url: url.clone(),
-        apply_url: s("apply_url").map(|u| clean_url(&u)).or(Some(url)),
-        title: decode_entities(title.trim()),
-        company: decode_entities(company.trim()),
+        apply_url: s("apply_url").or(Some(url)),
+        title,
+        company,
         seniority: None,
         employment_type: None,
         eligibility: eligibility_from_text(

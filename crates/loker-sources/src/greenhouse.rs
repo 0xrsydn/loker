@@ -6,11 +6,11 @@
 //! doesn't say remote or on-site.
 use chrono::DateTime;
 use loker_core::model::NewJob;
-use loker_core::normalize::{clean_url, eligibility_from_text};
+use loker_core::normalize::{decode_entities, eligibility_from_text};
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::{HttpClient, decode_entities, get_json, html_to_md};
+use crate::{HttpClient, get_json, html_to_md};
 
 pub async fn fetch(client: &HttpClient, board: &str) -> anyhow::Result<Vec<Value>> {
     let url = crate::url(
@@ -49,19 +49,19 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
     let canonical = format!("https://job-boards.greenhouse.io/{board}/jobs/{}", item.id);
     let location = item.location.and_then(|l| l.name).unwrap_or_default();
     let posted = item.first_published.or(item.updated_at);
+    // Greenhouse sends the description as escaped HTML (`&lt;p&gt;`).
     let content = item.content.as_deref().map(decode_entities);
     Ok(NewJob {
         source_id: source_id.into(),
         source_job_id: item.id.to_string(),
         source_url: item
             .absolute_url
-            .as_deref()
-            .map(clean_url)
+            .clone()
             .unwrap_or_else(|| canonical.clone()),
         canonical_url: canonical,
-        apply_url: item.absolute_url.as_deref().map(clean_url),
-        title: decode_entities(item.title.trim()),
-        company: item.company_name.unwrap_or(board).trim().to_string(),
+        apply_url: item.absolute_url,
+        title: item.title,
+        company: item.company_name.unwrap_or(board),
         seniority: None,
         employment_type: None,
         eligibility: eligibility_from_text(&location, None),

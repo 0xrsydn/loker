@@ -50,7 +50,10 @@ exception (see below).
 **3. Adapters map fields; the core normalizes.**
 An adapter turns its source's format into `NewJob` and passes source-specific
 hints (Ashby's `workplaceType`, Himalayas' country list) to the shared rules in
-`normalize`. *Why:* fixing a rule once fixes every source, and a new source is
+`normalize`. Cleanups every job needs (HTML entities and whitespace in titles,
+`clean_url` on every URL, empty text to `None`) run once, in `normalize::tidy`,
+which `fetch_batch` applies after every `transform`; adapters don't repeat
+them. *Why:* fixing a rule once fixes every source, and a new source is
 mostly field mapping. *Enforced by:* `loker verify` and the e2e stub.
 
 **4. One typed contract, checked three ways.**
@@ -133,9 +136,6 @@ If it needs a test, test the function directly with a table of cases (see
   expired-or-stale, reopening. They should move into a pure module like `dedup`.
 - **`rebuild_canonical` lists the hashed fields by hand.** A field left off the
   list can change without the job being rewritten.
-- **General cleanups are repeated per adapter, and have drifted:** Himalayas
-  doesn't run `clean_url` on its URL, only Jobicy decodes HTML entities in
-  titles, and Himalayas converts HTML without the shared `html_to_md`.
 - **Matching is an exact key.** Near-miss titles ("Sr. Backend Eng" vs
   "Senior Backend Engineer") don't merge.
 
@@ -146,7 +146,6 @@ Nothing here is needed now; each change waits for its trigger.
 | Change | Trigger |
 |---|---|
 | Store the merged job as JSON in `canonical_jobs`, with generated columns only for filtered fields, and hash that JSON | Before the first new job field (YOE, role) |
-| A shared cleanup step after `transform` in `fetch_batch` (trim, decode entities, `clean_url`, drop empty descriptions) | Before the next adapter |
 | An `Adapter` trait and shared fetch methods (JSON-LD, RSS) | About 10 adapters, or the first HTML source |
 | Concurrent `ingest --all` with per-host rate limits | Hundreds of company boards |
 | More signals inside `dedup::cluster` (location, apply-URL domain) to tell apart listings that share a key | `sources eval` shows blocked keys hiding real separate jobs |

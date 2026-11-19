@@ -2,7 +2,46 @@
 //! type, and free-text locations → `Eligibility`. Kept deliberately simple;
 //! `loker sources eval` measures what these rules miss before new rules are added.
 use crate::country;
-use crate::model::{Eligibility, Method, Pay, Scope};
+use crate::model::{Eligibility, Method, NewJob, Pay, Scope};
+
+// ---------- every job ----------
+
+/// The cleanups every job gets after its adapter's `transform`, whatever the
+/// source: so an adapter only maps fields, and no source can forget one.
+///
+/// * title and company: HTML entities decoded, whitespace collapsed;
+/// * every URL through [`clean_url`];
+/// * empty optional text (apply URL, seniority, employment type,
+///   description) becomes `None`.
+pub fn tidy(job: &mut NewJob) {
+    job.title = one_line(&decode_entities(&job.title));
+    job.company = one_line(&decode_entities(&job.company));
+    job.source_url = clean_url(&job.source_url);
+    job.canonical_url = clean_url(&job.canonical_url);
+    job.apply_url = non_empty(job.apply_url.take()).map(|u| clean_url(&u));
+    job.seniority = non_empty(job.seniority.take());
+    job.employment_type = non_empty(job.employment_type.take());
+    job.description_md = non_empty(job.description_md.take());
+}
+
+/// Decode the HTML entities job feeds put in plain-text fields.
+pub fn decode_entities(s: &str) -> String {
+    s.replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", "\"")
+        .replace("&#39;", "'")
+        .replace("&#039;", "'")
+        .replace("&nbsp;", " ")
+        .replace("&amp;", "&")
+}
+
+fn one_line(s: &str) -> String {
+    s.split_whitespace().collect::<Vec<_>>().join(" ")
+}
+
+fn non_empty(s: Option<String>) -> Option<String> {
+    s.map(|s| s.trim().to_string()).filter(|s| !s.is_empty())
+}
 
 // ---------- match keys ----------
 

@@ -100,8 +100,9 @@ fn himalayas() -> Vec<Value> {
         }),
         json!({
             "guid": "https://himalayas.app/companies/other/jobs/designer",
-            "title": "Designer", "companyName": "Other",
-            "applicationLink": "https://himalayas.app/companies/other/jobs/designer",
+            // Messy on purpose: the shared cleanup (normalize::tidy) must fix it.
+            "title": "  Designer &amp;\n Illustrator ", "companyName": "Other ",
+            "applicationLink": "https://HIMALAYAS.app/companies/other/jobs/designer?utm_source=api&ref=feed",
             "locationRestrictions": ["Indonesia", "Vietnam"], "timezoneRestrictions": [7, 8],
             "seniority": [], "employmentType": "Contractor",
             "pubDate": 1_790_000_100, "expiryDate": LATER,
@@ -356,6 +357,16 @@ fn pipeline_end_to_end() {
     );
     assert_eq!(job["eligibility"]["scope"], "worldwide");
     assert_eq!(job["eligible"]["kind"], "yes");
+
+    // Every adapter's jobs go through the shared cleanup.
+    let r = home.json(&["search", "designer", "--json"]);
+    let job = &r["jobs"][0];
+    assert_eq!(job["title"], "Designer & Illustrator");
+    assert_eq!(job["company"], "Other");
+    assert_eq!(
+        job["url"],
+        "https://himalayas.app/companies/other/jobs/designer"
+    );
 
     // CLI and MCP return the same thing.
     let args = [
