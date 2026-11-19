@@ -135,7 +135,7 @@ impl Store {
         }
         let mut tx = self.pool.begin().await?;
         for (id, job) in pending {
-            let role = role_json(&serde_json::from_str(&job)?)?;
+            let role = role_json(&mut tx, &serde_json::from_str(&job)?).await?;
             sqlx::query("UPDATE canonical_jobs SET role = ?, role_stamp = ? WHERE id = ?")
                 .bind(role)
                 .bind(classify::STAMP)
@@ -480,6 +480,79 @@ impl Store {
                 })
             })
             .collect()
+    }
+
+    /// Active jobs with no cached role answer from `model`, one per distinct
+    /// content (cache key, what the model should see), at most `limit`.
+    pub async fn role_questions(
+        &self,
+        model: &str,
+        limit: usize,
+    ) -> anyhow::Result<Vec<(String, serde_json::Value)>> {
+        let rows: Vec<String> = sqlx::query_scalar(
+            "SELECT job FROM canonical_jobs WHERE status = 'active' ORDER BY first_seen DESC, id",
+        )
+        .fetch_all(&self.pool)
+        .await?;
+        let answered: BTreeSet<String> =
+            sqlx::query_scalar("SELECT key FROM role_answers WHERE model = ?")
+                .bind(model)
+                .fetch_all(&self.pool)
+                .await?
+                .into_iter()
+                .collect();
+        let mut seen = BTreeSet::new();
+        let mut out = Vec::new();
+        for job in rows {
+            let job: NewJob = serde_json::from_str(&job)?;
+            let key = classify::answer_key(&job);
+            if !answered.contains(&key) && seen.insert(key.clone()) {
+                out.push((key, classify::model_state(&job)));
+                if out.len() == limit {
+                    break;
+                }
+            }
+        }
+        Ok(out)
+    }
+
+    /// Store model answers, then classify every active job again (a few
+    /// thousand take milliseconds). Returns how many jobs' role changed.
+    pub async fn put_role_answers(
+        &self,
+        answers: &[(String, classify::RoleAnswer)],
+    ) -> anyhow::Result<u32> {
+        let mut tx = self.pool.begin().await?;
+        let ts = now();
+        for (key, a) in answers {
+            sqlx::query(
+                "INSERT OR REPLACE INTO role_answers (key, model, answer, created_at) VALUES (?, ?, ?, ?)",
+            )
+            .bind(key)
+            .bind(&a.model)
+            .bind(serde_json::to_string(a)?)
+            .bind(&ts)
+            .execute(&mut *tx)
+            .await?;
+        }
+        let jobs: Vec<(String, String, Option<String>)> =
+            sqlx::query_as("SELECT id, job, role FROM canonical_jobs WHERE status = 'active'")
+                .fetch_all(&mut *tx)
+                .await?;
+        let mut changed = 0;
+        for (id, job, old) in jobs {
+            let role = role_json(&mut tx, &serde_json::from_str(&job)?).await?;
+            if role != old {
+                sqlx::query("UPDATE canonical_jobs SET role = ? WHERE id = ?")
+                    .bind(&role)
+                    .bind(&id)
+                    .execute(&mut *tx)
+                    .await?;
+                changed += 1;
+            }
+        }
+        tx.commit().await?;
+        Ok(changed)
     }
 
     /// Every source that has ever stored a listing.
@@ -885,7 +958,7 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     .bind(ts)
     .bind(status)
     .bind(&closed_at)
-    .bind(role_json(&m)?)
+    .bind(role_json(&mut *conn, &m).await?)
     .bind(classify::STAMP)
     .bind(cid)
     .execute(&mut *conn)
@@ -905,8 +978,16 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
 }
 
 /// A job's role as stored: `JobRole` JSON, or NULL when nothing places it.
-fn role_json(job: &NewJob) -> anyhow::Result<Option<String>> {
-    Ok(classify::classify(job)
+/// Uses the model's cached answer for this job's content, if any.
+async fn role_json(conn: &mut SqliteConnection, job: &NewJob) -> anyhow::Result<Option<String>> {
+    let answer: Option<String> =
+        sqlx::query_scalar("SELECT answer FROM role_answers WHERE key = ?")
+            .bind(classify::answer_key(job))
+            .fetch_optional(&mut *conn)
+            .await?;
+    let answer: Option<classify::RoleAnswer> =
+        answer.map(|a| serde_json::from_str(&a)).transpose()?;
+    Ok(classify::classify_with(job, answer.as_ref())
         .map(|r| serde_json::to_string(&r))
         .transpose()?)
 }

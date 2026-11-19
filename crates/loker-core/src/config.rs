@@ -16,6 +16,34 @@ pub struct Config {
     pub version: u32,
     #[serde(default)]
     pub sources: Vec<SourceConfig>,
+    /// Optional third-party services. None is needed: without them loker
+    /// works fully offline.
+    #[serde(default)]
+    pub providers: Providers,
+}
+
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Providers {
+    /// Jev (TypeSafe) through OpenRouter's Decisions API classifies job
+    /// roles; the key comes from `OPENROUTER_API_KEY`, never this file.
+    pub jev: Option<JevConfig>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct JevConfig {
+    /// A dated model id: aliases move between releases.
+    #[serde(default = "default_jev_model")]
+    pub model: String,
+    #[serde(default = "enabled_by_default")]
+    pub enabled: bool,
+}
+
+pub const DEFAULT_JEV_MODEL: &str = "typesafe/jev-1.14-20261014";
+
+fn default_jev_model() -> String {
+    DEFAULT_JEV_MODEL.into()
 }
 
 /// One source instance. Field meanings match `IngestParams`.
@@ -119,4 +147,11 @@ id = "weworkremotely"
 # [[sources]]
 # id = "greenhouse:binance"
 # remote = true        # every job is remote; its locations are where you can work from
+
+# Optional: Jev (TypeSafe, through OpenRouter) classifies job roles the
+# title rules can't place, about $0.0001 a job and cached per job. `loker
+# ingest --all` runs it after the sources; `loker roles enrich` runs it
+# alone. Needs OPENROUTER_API_KEY in the environment.
+# [providers.jev]
+# model = "typesafe/jev-1.14-20261014"
 "#;

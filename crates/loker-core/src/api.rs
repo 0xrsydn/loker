@@ -766,6 +766,28 @@ pub struct IngestAllReport {
     /// Every source ingested without error.
     pub ok: bool,
     pub sources: Vec<IngestOutcome>,
+    /// Role classification by a model, when `[providers.jev]` is configured.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub roles: Option<RoleEnrichReport>,
+}
+
+/// One run of role classification by a model (`loker roles enrich`).
+#[derive(Debug, Clone, Default, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct RoleEnrichReport {
+    pub contract_version: u32,
+    pub model: String,
+    /// Jobs with no cached answer that were asked.
+    pub asked: u32,
+    pub answered: u32,
+    pub failed: u32,
+    /// The first few failures.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub errors: Vec<String>,
+    /// What the provider reported charging, in USD.
+    pub cost_usd: f64,
+    /// Active jobs whose role changed.
+    pub reclassified: u32,
 }
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]

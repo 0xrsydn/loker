@@ -10,8 +10,9 @@ pub mod mcp;
 use std::path::{Path, PathBuf};
 
 use loker_core::api::{
-    self, Error, GetJobsParams, GetJobsResult, IngestAllReport, IngestParams, RolesResult,
-    SearchParams, SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
+    self, CONTRACT_VERSION, Error, GetJobsParams, GetJobsResult, IngestAllReport, IngestParams,
+    RoleEnrichReport, RolesResult, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams,
+    VerifyReport,
 };
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
@@ -68,7 +69,48 @@ impl App {
             ))
         })?;
         let sources = config.enabled().map(|s| s.params()).collect();
-        loker_sources::ingest_all(&self.store, &self.http, sources).await
+        let mut report = loker_sources::ingest_all(&self.store, &self.http, sources).await?;
+        // Roles by a model after the sources, so ingest never waits on it;
+        // a failure here is reported, not fatal.
+        if let Some(jev) = config.providers.jev.as_ref().filter(|j| j.enabled) {
+            report.roles = Some(match self.enrich_with(&jev.model, usize::MAX).await {
+                Ok(r) => r,
+                Err(e) => RoleEnrichReport {
+                    contract_version: CONTRACT_VERSION,
+                    model: jev.model.clone(),
+                    errors: vec![e.to_string()],
+                    ..Default::default()
+                },
+            });
+        }
+        Ok(report)
+    }
+
+    /// Classify job roles with the model in `[providers.jev]`: jobs with no
+    /// cached answer, at most `limit`.
+    pub async fn enrich_roles(&self, limit: Option<usize>) -> api::Result<RoleEnrichReport> {
+        let jev = self
+            .config()?
+            .and_then(|c| c.providers.jev)
+            .filter(|j| j.enabled)
+            .ok_or_else(|| {
+                Error::Invalid(format!(
+                    "no [providers.jev] in {} (see `loker config init`)",
+                    config::path(&self.home).display()
+                ))
+            })?;
+        self.enrich_with(&jev.model, limit.unwrap_or(usize::MAX))
+            .await
+    }
+
+    async fn enrich_with(&self, model: &str, limit: usize) -> api::Result<RoleEnrichReport> {
+        let key = std::env::var("OPENROUTER_API_KEY")
+            .ok()
+            .filter(|k| !k.is_empty())
+            .ok_or_else(|| Error::Invalid("OPENROUTER_API_KEY is not set".into()))?;
+        loker_sources::jev::enrich_roles(&self.store, &self.http, model, &key, limit)
+            .await
+            .map_err(Error::Internal)
     }
 
     /// Named sources use their config.toml parameters when listed there; with
@@ -130,6 +172,7 @@ pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
         ("get_jobs_params.json", schema!(GetJobsParams)),
         ("get_jobs_result.json", schema!(GetJobsResult)),
         ("list_roles_result.json", schema!(RolesResult)),
+        ("role_enrich_report.json", schema!(RoleEnrichReport)),
         ("stats.json", schema!(Stats)),
         ("sources_eval.json", schema!(SourcesEval)),
         ("ingest_params.json", schema!(IngestParams)),

@@ -204,3 +204,63 @@ fn records_how_it_decided() {
     assert_eq!(r.evidence.as_deref(), Some("category: DevOps and Sysadmin"));
     assert_eq!(r.version, loker_core::role::VERSION);
 }
+
+#[test]
+fn a_model_answer_wins_unless_a_title_names_the_role_and_it_is_unsure() {
+    use loker_core::classify::{RoleAnswer, classify_with};
+    let answer = |choice: &str, confidence: f64| RoleAnswer {
+        model: "test".into(),
+        choice: choice.into(),
+        confidence,
+        top: vec![],
+    };
+    let with = |title: &str, category: Option<&str>, a: RoleAnswer| {
+        let mut j = job("wwr", "x", "Co", title, Scope::Worldwide, 0.9);
+        j.category = category.map(str::to_string);
+        classify_with(&j, Some(&a)).map(|r| (r.primary, r.method, r.modifiers))
+    };
+    use Modifier::*;
+    let cases = [
+        // A vague title: the model decides, whatever its confidence.
+        (
+            with(
+                "Senior Software Engineer",
+                None,
+                answer("infrastructure", 0.4),
+            ),
+            Some((Infrastructure, RoleMethod::Model, vec![])),
+        ),
+        // A category guess gives way to the model.
+        (
+            with(
+                "Founding GTM Lead",
+                Some("Engineering"),
+                answer("sales", 0.8),
+            ),
+            Some((Sales, RoleMethod::Model, vec![Founding])),
+        ),
+        // A title that names the role wins when the model is unsure...
+        (
+            with(
+                "Senior Backend Engineer",
+                None,
+                answer("infrastructure", 0.5),
+            ),
+            Some((Backend, RoleMethod::Title, vec![])),
+        ),
+        // ...and loses when it is sure.
+        (
+            with(
+                "Deployment Strategist",
+                None,
+                answer("business_operations", 0.8),
+            ),
+            Some((BusinessOperations, RoleMethod::Model, vec![ForwardDeployed])),
+        ),
+        // "none" means no role.
+        (with("Line Cook", None, answer("none", 0.9)), None),
+    ];
+    for (got, want) in cases {
+        assert_eq!(got, want);
+    }
+}

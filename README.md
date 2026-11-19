@@ -22,6 +22,7 @@ cargo run -- search backend --country ID --tz 7 --min-verdict yes --compact   # 
 cargo run -- search golang rust kotlin        # every word first, then partial matches
 cargo run -- search developer --seniority junior,intern   # levels from the title or source
 cargo run -- search --role ai,data --country ID --compact      # by role, any level; `loker roles` lists them
+cargo run -- roles enrich                      # optional: Jev classifies roles (needs [providers.jev] and OPENROUTER_API_KEY)
 cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100   # everything you can apply to, one line each
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>

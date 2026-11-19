@@ -5,7 +5,8 @@ use clap::{Parser, Subcommand};
 use loker::App;
 use loker_core::api::{
     CheckStatus, GetJobsParams, GetJobsResult, Hit, IngestAllReport, IngestParams, MinVerdict,
-    SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport, View,
+    RoleEnrichReport, SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams,
+    VerifyReport, View,
 };
 use loker_core::home::loker_home;
 use loker_core::model::Seniority;
@@ -116,6 +117,8 @@ enum Command {
     Roles {
         #[arg(long)]
         json: bool,
+        #[command(subcommand)]
+        command: Option<RolesCommand>,
     },
     /// Fetch sources live (storing nothing) and check adapter invariants.
     /// Exits non-zero if any source fails.
@@ -140,6 +143,19 @@ enum ConfigCommand {
     Init,
     /// Parse config.toml and list the sources it enables.
     Check,
+}
+
+#[derive(Subcommand)]
+enum RolesCommand {
+    /// Classify roles with the model in [providers.jev] (needs
+    /// OPENROUTER_API_KEY): jobs with no cached answer, then every job again.
+    Enrich {
+        /// Ask about at most this many jobs.
+        #[arg(long)]
+        limit: Option<usize>,
+        #[arg(long)]
+        json: bool,
+    },
 }
 
 #[derive(Subcommand)]
@@ -305,7 +321,21 @@ async fn main() -> anyhow::Result<()> {
                 print_get(&result);
             }
         }
-        Command::Roles { json } => {
+        Command::Roles {
+            command: Some(RolesCommand::Enrich { limit, json }),
+            ..
+        } => {
+            let report = app.enrich_roles(limit).await?;
+            if json {
+                print_json(&report)?;
+            } else {
+                print_enrich(&report);
+            }
+            if report.failed > 0 {
+                std::process::exit(1);
+            }
+        }
+        Command::Roles { json, .. } => {
             let roles = app.list_roles();
             if json {
                 print_json(&roles)?;
@@ -357,6 +387,16 @@ async fn main() -> anyhow::Result<()> {
         Command::Mcp => loker::mcp::serve_stdio(Arc::new(app)).await?,
     }
     Ok(())
+}
+
+fn print_enrich(r: &RoleEnrichReport) {
+    println!(
+        "{}: asked {}, answered {}, failed {}, ${:.4}; {} job(s) changed role",
+        r.model, r.asked, r.answered, r.failed, r.cost_usd, r.reclassified
+    );
+    for e in &r.errors {
+        eprintln!("  {e}");
+    }
 }
 
 fn print_json(v: &impl Serialize) -> anyhow::Result<()> {
@@ -631,5 +671,9 @@ fn print_ingest_all(r: &IngestAllReport) {
             (None, Some(e)) => println!("{}: FAILED: {e}", o.source),
             (None, None) => {}
         }
+    }
+    if let Some(roles) = &r.roles {
+        print!("roles: ");
+        print_enrich(roles);
     }
 }

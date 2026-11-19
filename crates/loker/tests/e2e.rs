@@ -41,7 +41,18 @@ fn stub() -> Stub {
             while !head.ends_with(b"\r\n\r\n") && stream.read(&mut byte).unwrap_or(0) == 1 {
                 head.push(byte[0]);
             }
-            let line = String::from_utf8_lossy(&head);
+            let line = String::from_utf8_lossy(&head).to_string();
+            // Read a POST body to its end, so the reply doesn't reset the connection.
+            let length = line
+                .lines()
+                .find_map(|l| {
+                    let (k, v) = l.split_once(':')?;
+                    k.eq_ignore_ascii_case("content-length")
+                        .then(|| v.trim().parse::<usize>().ok())?
+                })
+                .unwrap_or(0);
+            let mut body = vec![0u8; length];
+            let _ = stream.read_exact(&mut body);
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
             served.lock().unwrap().push(target.clone());
             let (status, body) = route(&target, flag.load(Ordering::SeqCst));
@@ -81,6 +92,18 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         // Paged: the second page is empty only if the adapter asks for one.
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
+        // Jev through OpenRouter: every job is a data engineer, 90% sure.
+        "/api/alpha/decisions" => (
+            "200 OK",
+            json!({
+                "model": "test/jev",
+                "answers": { "role": {
+                    "type": "choice", "choice": "data_engineering", "confidence": 0.9,
+                    "probabilities": { "data_engineering": 0.9, "backend": 0.1 }
+                }},
+                "usage": { "cost": 0.0001 }
+            }),
+        ),
         // Only the all-jobs feed: the category feeds 404 and are skipped.
         "/remote-jobs.rss" => ("200 OK", Value::String(weworkremotely())),
         "/api" => {
@@ -249,6 +272,7 @@ impl Home {
         c.args(args)
             .env("LOKER_HOME", &self.dir)
             .env("LOKER_FETCH_BASE", &self.base)
+            .env("OPENROUTER_API_KEY", "test-key")
             .env("RUST_LOG", "error");
         c
     }
@@ -745,4 +769,41 @@ enabled = false
         !served.iter().any(|t| t.starts_with("/jobs/api?")),
         "{served:?}"
     );
+}
+
+#[test]
+fn a_model_classifies_roles_once_per_job() {
+    let stub = stub();
+    let home = Home::new("jev", &stub);
+    for s in ORDER {
+        home.ingest(s);
+    }
+    let without = home.run(&["roles", "enrich", "--json"]);
+    assert!(!without.status.success(), "no [providers.jev] is an error");
+
+    std::fs::write(
+        home.dir.join("config.toml"),
+        "version = 1\n[providers.jev]\nmodel = \"test/jev\"\n",
+    )
+    .unwrap();
+    let jobs = home.json(&["stats", "--json"])["total"].as_u64().unwrap();
+    let r = home.json(&["roles", "enrich", "--json"]);
+    assert_eq!(
+        (
+            r["asked"].as_u64(),
+            r["answered"].as_u64(),
+            r["failed"].as_u64()
+        ),
+        (Some(jobs), Some(jobs), Some(0)),
+        "{r:#}"
+    );
+
+    // The stub's answer (data_engineering, 0.9) wins over every title.
+    let found = home.json(&["search", "--role", "data_engineering", "--json"]);
+    assert_eq!(found["total"].as_u64(), Some(jobs), "{found:#}");
+    assert_eq!(found["jobs"][0]["role"]["method"], "model");
+
+    // Answers are cached per job content: nothing is asked again.
+    let again = home.json(&["roles", "enrich", "--json"]);
+    assert_eq!(again["asked"].as_u64(), Some(0), "{again:#}");
 }

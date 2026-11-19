@@ -100,6 +100,63 @@
         "skipped"
       ],
       "type": "object"
+    },
+    "RoleEnrichReport": {
+      "description": "One run of role classification by a model (`loker roles enrich`).",
+      "properties": {
+        "answered": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "asked": {
+          "description": "Jobs with no cached answer that were asked.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "contractVersion": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "costUsd": {
+          "description": "What the provider reported charging, in USD.",
+          "format": "double",
+          "type": "number"
+        },
+        "errors": {
+          "description": "The first few failures.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "failed": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "model": {
+          "type": "string"
+        },
+        "reclassified": {
+          "description": "Active jobs whose role changed.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "contractVersion",
+        "model",
+        "asked",
+        "answered",
+        "failed",
+        "costUsd",
+        "reclassified"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -113,6 +170,17 @@
     "ok": {
       "description": "Every source ingested without error.",
       "type": "boolean"
+    },
+    "roles": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RoleEnrichReport"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Role classification by a model, when `[providers.jev]` is configured."
     },
     "sources": {
       "items": {

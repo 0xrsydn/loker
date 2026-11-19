@@ -12,11 +12,95 @@
 //!
 //! Change a table, bump [`RULES`]: stored jobs are classified again when the
 //! store opens (see `Store::open`).
+//!
+//! A model may also have answered (Jev's choice over the vocabulary, cached
+//! per job content; see [`RoleAnswer`]). [`classify_with`] then prefers the
+//! model, except where a title names a role and the model is unsure: on 600
+//! labelled jobs that mix was 81.5% exact against 68% for the rules alone
+//! (eval/role). Modifiers always come from the rules.
+use serde::{Deserialize, Serialize};
+
 use crate::model::NewJob;
 use crate::role::{self, JobRole, MAX_ROLES, Modifier, Role, RoleMethod};
 
 /// Version of these rules, bumped on any change to them.
-pub const RULES: u32 = 1;
+pub const RULES: u32 = 2;
+
+/// Version of the question put to a model ([`question`] and
+/// [`model_state`]), part of every answer's cache key.
+pub const QUESTION: u32 = 1;
+
+/// Below this, a model's choice gives way to a role the title names.
+pub const MODEL_THRESHOLD: f64 = 0.6;
+
+/// A model's answer for one job: the id it chose (`"none"` when no role
+/// fits) and how sure it was.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct RoleAnswer {
+    pub model: String,
+    pub choice: String,
+    pub confidence: f64,
+    /// The few most likely ids with their probabilities, for the record.
+    #[serde(default)]
+    pub top: Vec<(String, f64)>,
+}
+
+/// What a model sees of a job. Changing it changes every cache key.
+pub fn model_state(job: &NewJob) -> serde_json::Value {
+    let description: String = job
+        .description_md
+        .as_deref()
+        .unwrap_or("")
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .chars()
+        .take(800)
+        .collect();
+    serde_json::json!({
+        "title": job.title,
+        "company": job.company,
+        "category": job.category.as_deref().unwrap_or(""),
+        "description": description,
+    })
+}
+
+/// The cache key of a job's answer: vocabulary, question and what the model
+/// sees. Not the model id, so a cached answer survives a model change until
+/// the job is asked again.
+pub fn answer_key(job: &NewJob) -> String {
+    let state = model_state(job).to_string();
+    let seed = format!("{}|{QUESTION}|{state}", role::VERSION);
+    blake3::hash(seed.as_bytes()).to_hex()[..32].to_string()
+}
+
+/// The question put to a model: a choice over every id, plus "none".
+pub fn question() -> serde_json::Value {
+    let mut criteria = serde_json::Map::new();
+    for r in Role::ALL {
+        let i = r.info();
+        criteria.insert(
+            serde_json::to_value(r)
+                .expect("role id")
+                .as_str()
+                .expect("string")
+                .into(),
+            format!("{}: {}", i.label, i.definition).into(),
+        );
+    }
+    criteria.insert(
+        "none".into(),
+        "None of these: the job is outside this vocabulary (e.g. cooking, driving, retail).".into(),
+    );
+    serde_json::json!({
+        "role": {
+            "type": "choice",
+            "instructions": "What does the person in this job do? Pick the most specific option; \
+                             a family only when the posting doesn't make the role clear.",
+            "criteria": criteria,
+        }
+    })
+}
 
 /// The rules and vocabulary versions in one number, stored with each job's
 /// role so the store knows which jobs to classify again.
@@ -749,8 +833,51 @@ const MODIFIERS: &[(Modifier, &[&str])] = &[
     (Modifier::Founding, &["founding"]),
 ];
 
-/// The job's role, or `None` when nothing places it.
+/// The job's role from the rules alone, or `None` when nothing places it.
 pub fn classify(job: &NewJob) -> Option<JobRole> {
+    classify_with(job, None)
+}
+
+/// The job's role from the rules and, when there is one, a model's answer:
+/// the model wins unless the title names a role and the model is under
+/// [`MODEL_THRESHOLD`]. Modifiers come from the rules either way.
+pub fn classify_with(job: &NewJob, answer: Option<&RoleAnswer>) -> Option<JobRole> {
+    let rules = rules(job);
+    let Some(a) = answer else {
+        return rules;
+    };
+    let title_names_it = rules
+        .as_ref()
+        .is_some_and(|r| r.method == RoleMethod::Title && r.confidence >= 0.9);
+    if title_names_it && a.confidence < MODEL_THRESHOLD {
+        return rules;
+    }
+    let modifiers = rules
+        .as_ref()
+        .map(|r| r.modifiers.clone())
+        .unwrap_or_default();
+    let chosen: Option<Role> = serde_json::from_value(serde_json::json!(a.choice)).ok();
+    let Some(primary) = chosen else {
+        // "none", or an id this build doesn't know: no role.
+        return None;
+    };
+    // Keep the rules' secondary roles when they agree on the primary.
+    let found: Vec<(Role, &str)> = match &rules {
+        Some(r) if r.primary == primary => r.secondary.iter().map(|&s| (s, "from rules")).collect(),
+        _ => Vec::new(),
+    };
+    Some(build(
+        primary,
+        &found,
+        modifiers,
+        RoleMethod::Model,
+        a.confidence,
+        format!("model: {} ({:.2})", a.model, a.confidence),
+    ))
+}
+
+/// The rules: title, then category, then description.
+fn rules(job: &NewJob) -> Option<JobRole> {
     let title = words(&job.title);
     let modifiers: Vec<Modifier> = MODIFIERS
         .iter()

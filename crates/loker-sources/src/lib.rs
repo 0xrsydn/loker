@@ -9,6 +9,7 @@
 pub mod ashby;
 pub mod greenhouse;
 pub mod himalayas;
+pub mod jev;
 pub mod jobicy;
 pub mod lever;
 pub mod remoteok;
@@ -338,6 +339,7 @@ pub async fn ingest_all(
         contract_version: CONTRACT_VERSION,
         ok: outcomes.iter().all(|o| o.error.is_none()),
         sources: outcomes,
+        roles: None,
     })
 }
 

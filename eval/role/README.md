@@ -82,3 +82,20 @@ Findings:
 - The judges found these roles missing: deployment strategist (7),
   community management, product operations, GTM engineering, workforce
   management, video editing (2 each).
+
+### Shipped: Jev in loker (rules v2, `loker roles enrich`)
+
+`snapshot-jev.db` is `snapshot.db` after `loker roles enrich` with the real
+API: 1,588 distinct jobs asked, none failed, $0.12, 2m42s. Scored with the
+binary as shipped (Jev unless a title names the role and Jev is under 0.6):
+
+| | covered | exact | compatible | same family |
+|---|---|---|---|---|
+| rules only (`snapshot.db`) | 97% | 68% | 73% | 83% |
+| rules + Jev (`snapshot-jev.db`) | 99% | 79% | 84% | 90% |
+
+The rest are mostly judgment calls: Palantir's "Forward Deployed Software
+Engineer" goes to sales_engineering (Opus: software), "Founding Engineer" at
+AI startups to ai_engineering, and Deployment Strategist scatters (both
+labelers flagged it as a missing role).
+

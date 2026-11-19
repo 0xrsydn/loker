@@ -132,6 +132,15 @@ a role named early in the description. It is stored with the job
 vocabulary change, `Store::open` classifies stored jobs again, without a
 re-fetch. `eval/role` measures it against labelled jobs.
 
+**Providers.** Third-party services are optional and never on the search
+path. `[providers.jev]` in config.toml (key from `OPENROUTER_API_KEY`) adds
+Jev's choice over the vocabulary: `loker roles enrich`, or the end of
+`ingest --all`, asks about active jobs with no cached answer and stores each
+in `role_answers`, keyed by vocabulary, question and what the model saw, so
+an unchanged job is never asked twice. `classify::classify_with` prefers the
+model unless a title names the role and the model is under 0.6; modifiers
+stay with the rules. Without the provider, roles come from the rules alone.
+
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
 
