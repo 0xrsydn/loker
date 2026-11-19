@@ -50,9 +50,30 @@ async fn every_json_path_the_sql_reads_resolves() {
     }
     assert_eq!(src["locationUnmapped"], 1, "{src:#}");
 
-    // The generated `remote_scope` column ('$.scope') and '$.countries' in search.
+    // canonical_jobs columns generated from the merged job JSON:
+    // `remote_scope` ('$.eligibility.scope') and '$.eligibility.countries'.
     let stats = api::stats(&s).await.unwrap();
     assert_eq!(stats.by_scope[0].scope, "countries");
     assert_eq!(s.search("", Some("ID"), 10, 0).await.unwrap().len(), 1);
     assert_eq!(s.search("", Some("US"), 10, 0).await.unwrap().len(), 0);
+
+    // `posted_at` ('$.postedAt') orders an empty query newest first.
+    let mut newer = job(
+        "himalayas",
+        "h2",
+        "Initech",
+        "Data Engineer",
+        Scope::Worldwide,
+        0.9,
+    );
+    newer.posted_at = Some(days(-1));
+    ingest(&s, "himalayas", &[newer]).await;
+    let titles: Vec<String> = s
+        .search("", None, 10, 0)
+        .await
+        .unwrap()
+        .into_iter()
+        .map(|j| j.title)
+        .collect();
+    assert_eq!(titles, ["Data Engineer", "Backend Engineer"]);
 }

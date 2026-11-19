@@ -96,6 +96,12 @@ job's id. The merged job takes identity and text from employer boards first,
 then by source id; eligibility from the most confident source; pay from a
 source with a USD figure.
 
+**Storage.** A canonical job is a row holding its merged job as JSON
+(`canonical_jobs.job`, a `NewJob`), hashed as a whole together with its
+status, so an unchanged rebuild writes nothing. SQL reads only generated
+columns (`canonical_url`, `remote_scope`, `posted_at`, `title`, `company`) and
+JSON paths (`tests/storage.rs` pins each one).
+
 **Liveness.** A listing goes `gone` when a complete fetch of its source no
 longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
 seen it for 30 days (`stale`), and goes `live` again when seen. A job is active
@@ -116,8 +122,7 @@ resolves them, like regions. Role is function only: seniority, domain (game,
 web3), company stage and employment type are other fields. A job stores its
 most specific id, a family alone when the evidence says no more, or nothing:
 there is no "other" role. `JobRole` records method, confidence, evidence and
-the vocabulary version (rule 6). Jobs don't carry a role yet: it waits on the
-merged job stored as JSON (see the triggers below).
+the vocabulary version (rule 6).
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
@@ -138,8 +143,8 @@ not code.
 1. Optional on `NewJob`, omitted when empty (rule 5).
 2. Each adapter fills it or sets `None`; the compiler lists every one.
 3. A precedence rule in `dedup::merge`.
-4. Storage: today a `canonical_jobs` column and a migration, plus an entry in
-   the hand-listed hash in `rebuild_canonical`. Read the triggers below first.
+4. Storage: nothing. The merged job is stored and hashed as JSON; add a
+   generated column (a migration) only if SQL must filter or sort on it.
 5. The `Job` output type, then regenerate `schema/v1` (an optional field is an
    additive change within v1).
 
@@ -164,8 +169,6 @@ If it needs a test, test the function directly with a table of cases (see
 
 - **Liveness decisions live inside `Store::ingest`:** the truncation guard,
   expired-or-stale, reopening. They should move into a pure module like `dedup`.
-- **`rebuild_canonical` lists the hashed fields by hand.** A field left off the
-  list can change without the job being rewritten.
 - **Matching is an exact key.** Near-miss titles ("Sr. Backend Eng" vs
   "Senior Backend Engineer") don't merge.
 
@@ -175,7 +178,6 @@ Nothing here is needed now; each change waits for its trigger.
 
 | Change | Trigger |
 |---|---|
-| Store the merged job as JSON in `canonical_jobs`, with generated columns only for filtered fields, and hash that JSON | Before the first new job field (YOE, role) |
 | An `Adapter` trait and shared fetch methods (JSON-LD, RSS) | About 10 adapters, or the first HTML source |
 | Concurrent `ingest --all` with per-host rate limits | Hundreds of company boards |
 | More signals inside `dedup::cluster` (location, apply-URL domain) to tell apart listings that share a key | `sources eval` shows blocked keys hiding real separate jobs |

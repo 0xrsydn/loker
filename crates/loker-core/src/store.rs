@@ -58,7 +58,7 @@ macro_rules! viewer_location {
             "(?",
             $n,
             " IS NULL OR c.remote_scope <> 'countries' OR EXISTS ",
-            "(SELECT 1 FROM json_each(c.eligibility, '$.countries') WHERE value = ?",
+            "(SELECT 1 FROM json_each(c.job, '$.eligibility.countries') WHERE value = ?",
             $n,
             "))"
         )
@@ -115,7 +115,40 @@ impl Store {
             .connect_with(opts)
             .await?;
         sqlx::migrate!("./migrations").run(&pool).await?;
-        Ok(Self { pool })
+        let store = Self { pool };
+        store.rebuild_pending().await?;
+        Ok(store)
+    }
+
+    /// Rebuild every canonical job a migration left with an empty hash (0005
+    /// assembles its JSON from the old columns), keeping its `last_seen`.
+    async fn rebuild_pending(&self) -> anyhow::Result<()> {
+        let pending: Vec<(String, String)> =
+            sqlx::query_as("SELECT id, last_seen FROM canonical_jobs WHERE content_hash = ''")
+                .fetch_all(&self.pool)
+                .await?;
+        if pending.is_empty() {
+            return Ok(());
+        }
+        let mut tx = self.pool.begin().await?;
+        for (id, last_seen) in &pending {
+            rebuild_canonical(&mut tx, id, last_seen).await?;
+        }
+        // A job with no usable listing JSON (pre-0002 rows) keeps the assembled
+        // JSON; hash it so it isn't revisited on every open.
+        let left: Vec<(String, String, String)> =
+            sqlx::query_as("SELECT id, status, job FROM canonical_jobs WHERE content_hash = ''")
+                .fetch_all(&mut *tx)
+                .await?;
+        for (id, status, job) in left {
+            sqlx::query("UPDATE canonical_jobs SET content_hash = ? WHERE id = ?")
+                .bind(content_hash(&[&status, &job]))
+                .bind(id)
+                .execute(&mut *tx)
+                .await?;
+        }
+        tx.commit().await?;
+        Ok(())
     }
 
     /// Store one source's batch in a single transaction. Re-ingesting identical
@@ -749,14 +782,11 @@ async fn new_canonical(
         id = job_id(&format!("{seed}\n{n}"));
     }
     sqlx::query(
-        "INSERT INTO canonical_jobs (id, canonical_url, title, company, eligibility, content_hash, first_seen, last_seen)
-         VALUES (?, ?, ?, ?, ?, '', ?, ?)",
+        "INSERT INTO canonical_jobs (id, job, content_hash, first_seen, last_seen)
+         VALUES (?, ?, '', ?, ?)",
     )
     .bind(&id)
-    .bind(&job.canonical_url)
-    .bind(&job.title)
-    .bind(&job.company)
-    .bind(serde_json::to_string(&job.eligibility)?)
+    .bind(serde_json::to_string(job)?)
     .bind(ts)
     .bind(ts)
     .execute(&mut *conn)
@@ -805,25 +835,10 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     };
     let status = if active { "active" } else { "closed" };
 
-    let eligibility = serde_json::to_string(&m.eligibility)?;
-    let pay = m.pay.as_ref().map(serde_json::to_string).transpose()?;
-    let tags = serde_json::to_string(&m.tech_tags)?;
-    let posted = m.posted_at.map(|t| t.to_rfc3339());
-    // Status is part of the hash: a job that only opens or closes must still be written.
-    let hash = content_hash(&[
-        status,
-        &m.canonical_url,
-        m.apply_url.as_deref().unwrap_or(""),
-        &m.title,
-        &m.company,
-        m.seniority.as_deref().unwrap_or(""),
-        m.employment_type.as_deref().unwrap_or(""),
-        &eligibility,
-        pay.as_deref().unwrap_or(""),
-        &tags,
-        m.description_md.as_deref().unwrap_or(""),
-        posted.as_deref().unwrap_or(""),
-    ]);
+    // The whole merged job is the stored record, so every field is in the
+    // hash; status too, so a job that only opens or closes is still written.
+    let job = serde_json::to_string(&m)?;
+    let hash = content_hash(&[status, &job]);
     let (current, closed_at): (String, Option<String>) =
         sqlx::query_as("SELECT content_hash, closed_at FROM canonical_jobs WHERE id = ?")
             .bind(cid)
@@ -834,14 +849,15 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     }
     let closed_at = (!active).then(|| closed_at.unwrap_or_else(|| ts.to_string()));
     sqlx::query(
-        "UPDATE canonical_jobs SET canonical_url = ?, apply_url = ?, title = ?, company = ?, seniority = ?,
-           employment_type = ?, eligibility = ?, pay = ?, tech_tags = ?, description_md = ?, content_hash = ?,
-           posted_at = ?, last_seen = ?, status = ?, closed_at = ?
+        "UPDATE canonical_jobs SET job = ?, content_hash = ?, last_seen = ?, status = ?, closed_at = ?
          WHERE id = ?",
     )
-    .bind(&m.canonical_url).bind(&m.apply_url).bind(&m.title).bind(&m.company).bind(&m.seniority)
-    .bind(&m.employment_type).bind(&eligibility).bind(&pay).bind(&tags).bind(&m.description_md)
-    .bind(&hash).bind(&posted).bind(ts).bind(status).bind(&closed_at).bind(cid)
+    .bind(&job)
+    .bind(&hash)
+    .bind(ts)
+    .bind(status)
+    .bind(&closed_at)
+    .bind(cid)
     .execute(&mut *conn)
     .await?;
     sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
@@ -861,33 +877,25 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
 // ---------- rows ----------
 
 fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
-    let parse_ts = |s: Option<String>| -> anyhow::Result<Option<DateTime<Utc>>> {
-        s.map(|s| Ok(DateTime::parse_from_rfc3339(&s)?.with_timezone(&Utc)))
-            .transpose()
+    let parse_ts = |s: String| -> anyhow::Result<DateTime<Utc>> {
+        Ok(DateTime::parse_from_rfc3339(&s)?.with_timezone(&Utc))
     };
     let mut sources: Vec<JobSource> = serde_json::from_str(&r.get::<String, _>("sources"))?;
     sources.sort_by(|a, b| a.source.cmp(&b.source));
+    let m: NewJob = serde_json::from_str(&r.get::<String, _>("job"))?;
     Ok(Job {
         id: r.get("id"),
-        title: r.get("title"),
-        company: r.get("company"),
         // Derived when read, so old rows get it without a re-fetch.
-        seniority: crate::normalize::seniority(
-            r.get::<Option<String>, _>("seniority").as_deref(),
-            r.get("title"),
-        ),
-        employment_type: r.get("employment_type"),
-        eligibility: serde_json::from_str(&r.get::<String, _>("eligibility"))?,
-        pay: r
-            .get::<Option<String>, _>("pay")
-            .map(|p| serde_json::from_str(&p))
-            .transpose()?,
-        tech_tags: serde_json::from_str(&r.get::<String, _>("tech_tags"))?,
-        url: r
-            .get::<Option<String>, _>("apply_url")
-            .unwrap_or_else(|| r.get("canonical_url")),
-        posted_at: parse_ts(r.get("posted_at"))?,
-        first_seen: parse_ts(Some(r.get("first_seen")))?.expect("first_seen is NOT NULL"),
+        seniority: crate::normalize::seniority(m.seniority.as_deref(), &m.title),
+        title: m.title,
+        company: m.company,
+        employment_type: m.employment_type,
+        eligibility: m.eligibility,
+        pay: m.pay,
+        tech_tags: m.tech_tags,
+        url: m.apply_url.unwrap_or(m.canonical_url),
+        posted_at: m.posted_at,
+        first_seen: parse_ts(r.get("first_seen"))?,
         status: r.get("status"),
         sources,
     })
