@@ -9,7 +9,7 @@ first.
 cargo build --release -p loker-core --example pay_text
 cd eval/pay
 python3 pay_eval.py sample 300                  # once: tuning set -> sample.json
-python3 pay_eval.py sample 150 --set holdout3   # a fresh holdout (unseen jobs only) -> holdout3.json
+python3 pay_eval.py sample 150 --set holdout4   # a fresh holdout (unseen jobs only) -> holdout4.json
 JUDGE=opus python3 pay_eval.py label            # label unlabelled jobs (cached); --set NAME for another set
 JUDGE=deepseek python3 pay_eval.py label        # second labeler (needs DEEPSEEK_API_KEY)
 python3 pay_eval.py agree                       # how far the two labelers agree
@@ -82,16 +82,36 @@ Across the snapshot, replaying every live listing through `transform` and
 no pay fields. Greenhouse descriptions rarely carry pay; its pay is in a
 separate field the board API returns per job.
 
-Failures to work on next round (then draw `holdout3`):
-- Wrong figures: "$" alone reads as USD in Canadian postings ("Ontario
-  based: $80,000 - $100,000", "$20.00/hour"); "$1500 USD annually for
-  professional development" is read as base ("development" isn't a
-  benefit word); an OTE stated in a paragraph four lines above its figure
-  is read as base (the OTE heading check looks two lines up).
-- Missed: state-by-state "Min: $18.53, Max: $24.35" lists; "Rate: USD
-  8.93 /hour" and "Monthly Rate: Php80,000 - Php100,000" ("rate" alone
-  isn't a pay word); "Earn $100-$200 per hour"; "₱" and MYR; "100k€"
-  (currency after a k figure); "$60,000,00" (a comma for decimals);
-  "$185K–$215K base" (no pay word, no period); two ranges per line
-  ("Metro 2: $130,000 - 150,000 Metro 3: ..."); and figures with no period
-  ("Compensation: $3,000", "€1500 plus commission"), left out by design.
+Failures that round 2 worked on (`holdout2` is burned since):
+- Wrong figures: "$" alone reads as USD in Canadian postings; "$1500 USD
+  annually for professional development" read as base; an OTE stated
+  four lines above its figure read as base.
+- Missed: state-by-state "Min: $18.53, Max: $24.35" lists; "Rate:" and
+  "Monthly Rate:"; "₱" and MYR; "100k€"; "$60,000,00"; "$185K–$215K base";
+  two ranges per line; figures with no period (left out by design).
+
+### Rules v2 (`720571a`)
+
+Round 2 fixed those from the burned sets only, then drew `holdout3` (150
+jobs, in no other set and not in `seen.json`), labelled it with both
+models (148/150 agree on base pay) and scored it once.
+
+| | jobs | base precision | base recall | jobs exact | wrong figure | extras P / R |
+|---|---|---|---|---|---|---|
+| tuning sample (Opus) | 300 | 100% | 96% | 94% | 0 | |
+| `holdout2`, now burned (Opus) | 150 | 99% | 86% | 92% | 1 | |
+| **`holdout3`** (Opus) | 150 | **99%** (82/83) | **94%** | 92% | 1 | 92% / 69% |
+| **`holdout3`** (DeepSeek) | 150 | **99%** (82/83) | **93%** | 92% | 1 | 92% / 65% |
+
+Base pay across the snapshot, replayed through `transform` and `tidy`:
+359 (source fields) → 928 of 1,749 jobs.
+
+Failures to work on next round (then draw `holdout4`):
+- Wrong: "$300 certification bonus once you complete 200 productive
+  hours" read as an hourly base rate ("bonus" after the figure should make
+  it an extra; "hours" there is not a period).
+- Missed: thousands separated by spaces ("1 520 000 - 1 900 000 CZK");
+  "Total compensation: 12,000,000 - 23,000,000 HUF" (skipped as a total,
+  though the labelers read it as base); "up to Php 88,000 Philippine
+  Peso/month" (words between the figure and its period); "Pay Range
+  $68,000—$70,000 USD" in one posting, to look into.
