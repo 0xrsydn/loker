@@ -129,3 +129,113 @@ fn ranges_by_level_and_extras() {
         .is_none()
     );
 }
+
+#[test]
+fn pay_read_from_descriptions() {
+    use loker_core::pay_text::pay_from_text;
+    let base = |text: &str| {
+        pay_from_text(text).map(|p| {
+            p.base
+                .iter()
+                .map(|m| (m.currency.clone(), m.period, m.min, m.max, m.label.clone()))
+                .collect::<Vec<_>>()
+        })
+    };
+    let year = |c: &str, min, max| (c.to_string(), Some(Period::Year), min, max, None);
+    let cases = [
+        // A stated range and period; markdown escapes are read through.
+        (
+            "The estimated salary range is \\$125,000- \\$200,000/year.",
+            Some(vec![year("USD", Some(125e3), Some(200e3))]),
+        ),
+        // Pay words on the heading above; a salary this large is a year.
+        (
+            "Pay Range\n\n$196,000—$230,000 USD",
+            Some(vec![year("USD", Some(196e3), Some(230e3))]),
+        ),
+        // A code after the figure names the dollar; "min" is one end.
+        (
+            "an annual salary of min 80,000 EUR gross",
+            Some(vec![year("EUR", Some(80e3), None)]),
+        ),
+        (
+            "Pay: $15-18 per hour plus bonuses",
+            Some(vec![(
+                "USD".into(),
+                Some(Period::Hour),
+                Some(15.0),
+                Some(18.0),
+                None,
+            )]),
+        ),
+        // A restatement is not a second range.
+        (
+            "Salary: $30,000 USD a year (about $2,500 a month), as a contractor",
+            Some(vec![year("USD", Some(30e3), Some(30e3))]),
+        ),
+        // Several ranges, each named by the line above.
+        (
+            "Canada Base Pay Range\n$156,500—$215,000 CAD\nUS General\n$165,000—$225,000 USD",
+            Some(vec![
+                (
+                    "CAD".into(),
+                    Some(Period::Year),
+                    Some(156_500.0),
+                    Some(215e3),
+                    Some("Canada Base Pay Range".into()),
+                ),
+                (
+                    "USD".into(),
+                    Some(Period::Year),
+                    Some(165e3),
+                    Some(225e3),
+                    Some("US General".into()),
+                ),
+            ]),
+        ),
+        // Not pay: benefits, funding, sales numbers, totals, savings.
+        ("*   $200 monthly wellness reimbursement", None),
+        ("*   Up to $15K relocation bonus", None),
+        (
+            "We just raised a $3M pre-seed. Salary is competitive.",
+            None,
+        ),
+        ("Experience closing $5M-$10M+ ACV deals", None),
+        (
+            "Members set aside an average of more than $1,800 annually.",
+            None,
+        ),
+        (
+            "The total cash compensation range for this position is $230,800 to $461,600.",
+            None,
+        ),
+        // No period and too small to be a year: left out, not guessed.
+        ("Competitive base salary of €1500 plus commission", None),
+        ("Salary: 25,000 ZAR to 30,000 ZAR", None),
+    ];
+    for (text, want) in cases {
+        assert_eq!(base(text), want, "{text}");
+    }
+
+    // Base and OTE in one sentence; extras named next to base pay.
+    let p = pay_from_text(
+        "Base salary is $200,000 to $250,000 annually, with commission and OTE up to $500,000.",
+    )
+    .unwrap();
+    assert_eq!(p.base.len(), 1);
+    let kinds: Vec<_> = p
+        .extras
+        .iter()
+        .map(|e| (e.kind, e.amount.as_ref().and_then(|m| m.max)))
+        .collect();
+    assert_eq!(
+        kinds,
+        [
+            (PayExtraKind::Commission, None),
+            (PayExtraKind::Ote, Some(500e3))
+        ]
+    );
+    assert_eq!(p.method, loker_core::model::PayMethod::Text);
+    // Equity a hire administers is not equity a hire gets.
+    assert!(pay_from_text("You will administer equity compensation plans.").is_none());
+}

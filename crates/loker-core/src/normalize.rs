@@ -15,7 +15,9 @@ use crate::model::{
 /// * title, company and category: HTML entities decoded, whitespace collapsed;
 /// * every URL through [`clean_url`];
 /// * empty optional text (apply URL, seniority, employment type, category,
-///   description) becomes `None`.
+///   description) becomes `None`;
+/// * no pay from the source: pay stated in the description, if any
+///   ([`crate::pay_text`]).
 pub fn tidy(job: &mut NewJob) {
     job.title = one_line(&decode_entities(&job.title));
     job.company = one_line(&decode_entities(&job.company));
@@ -26,6 +28,12 @@ pub fn tidy(job: &mut NewJob) {
     job.employment_type = non_empty(job.employment_type.take());
     job.category = non_empty(job.category.take()).map(|c| one_line(&decode_entities(&c)));
     job.description_md = non_empty(job.description_md.take());
+    if job.pay.is_none() {
+        job.pay = job
+            .description_md
+            .as_deref()
+            .and_then(crate::pay_text::pay_from_text);
+    }
 }
 
 /// Decode the HTML entities job feeds put in plain-text fields. `&amp;` goes
@@ -152,9 +160,9 @@ pub fn pay(
     pay_from(vec![money(min, max, currency, Some(period))?], vec![], None)
 }
 
-/// Pay from base ranges and extras. Base ranges without a period, and USD
-/// ranges outside 100..=100k a month (a source's typo or a placeholder), are
-/// dropped; extras are kept one per kind, the one with figures first. `None`
+/// Pay from base ranges and extras. Base ranges without a period, and
+/// dollar-like ranges outside 100..=100k a month (a source's typo or a
+/// placeholder), are dropped; extras are kept one per kind, the one with figures first. `None`
 /// when nothing is left. `raw` is the source's own summary, if it has one.
 pub fn pay_from(base: Vec<Money>, mut extras: Vec<PayExtra>, raw: Option<&str>) -> Option<Pay> {
     let base: Vec<Money> = base
@@ -258,15 +266,21 @@ pub fn pay_period(s: &str) -> Option<Period> {
     found
 }
 
-/// USD figures must be 100..=100k a month; other currencies can't be checked
-/// until there are exchange rates.
+/// Currencies worth roughly a dollar (0.6 to 1.3 USD), so USD's bounds hold
+/// for them too. Others can't be checked until there are exchange rates.
+const NEAR_USD: &[&str] = &["USD", "EUR", "GBP", "CHF", "CAD", "AUD", "NZD", "SGD"];
+
+/// Base pay in a dollar-like currency must be 100..=100k a month: below is a
+/// benefit or a typo ("800 EUR a year"), above a placeholder or a grant.
 fn plausible(m: &Money) -> bool {
-    usd_month(m).is_none_or(|(lo, hi)| {
-        [lo, hi]
+    let Some(f) = m.period.map(Period::per_month) else {
+        return true;
+    };
+    !NEAR_USD.contains(&m.currency.as_str())
+        || [m.min, m.max]
             .into_iter()
             .flatten()
-            .all(|v| (100.0..=100_000.0).contains(&v))
-    })
+            .all(|v| (100.0..=100_000.0).contains(&(v * f)))
 }
 
 /// A USD amount per month, `None` for other currencies or no period.

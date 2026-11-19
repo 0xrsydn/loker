@@ -22,6 +22,7 @@ from where), and searched over a CLI and an MCP server.
 crates/loker-core/       domain and rules, no network
   src/model.rs           NewJob (one listing), Job (search result), Eligibility, Pay
   src/normalize.rs       shared rules: match keys, URLs, pay, eligibility from text
+  src/pay_text.rs        pay read from a description, for sources with no pay fields
   src/country.rs         country names as boards write them -> ISO codes
   src/dedup.rs           which listings are one job; no IO
   src/verdict.rs         can this viewer apply? (country, timezone)
@@ -39,6 +40,7 @@ contrib/systemd/         unattended ingest service + timer
 eval/search/             manual search-ranking eval (Python, LLM-judged); not in CI
 eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); not in CI
 eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
+eval/pay/                manual eval of pay read from descriptions, with a holdout; not in CI
 ```
 
 ## Build and check

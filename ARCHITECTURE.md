@@ -116,10 +116,13 @@ the source states (`normalize::seniority`). About 40% of jobs name a level.
 several), `extras` (equity, bonus, commission, OTE, sign-on; figures when
 stated), and `usdMonthMin/Max` for comparing, from USD amounts only.
 `normalize::money` drops a figure rather than keep it wrong: no currency
-code, no period for base pay, `min > max`, a top over 10× the bottom, or USD
-outside 100..=100k a month. "Competitive" is no pay; "competitive salary +
-equity" is pay with only an extra. `method` says whether it came from the
-source's fields or (later) the description.
+code, no period for base pay, `min > max`, a top over 10× the bottom, or a
+dollar-like currency (USD, EUR, GBP, ...) outside 100..=100k a month.
+"Competitive" is no pay; "competitive salary + equity" is pay with only an
+extra. A source with no pay fields gets pay from its description in `tidy`
+(`pay_text.rs`, `method: text`): a figure counts only with a currency, pay
+words around it and a period, and never next to benefit, funding or sales
+words. `eval/pay` measures it.
 
 **Roles.** `role.rs` is the vocabulary for what a job does: families
 (`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,
