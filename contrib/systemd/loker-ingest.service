@@ -18,6 +18,9 @@ Type=oneshot
 #Environment=LOKER_HOME=%h/.loker
 Environment=RUST_LOG=warn
 # /usr/bin/env finds loker on the service PATH; use an absolute path if it doesn't.
+# With [providers.jev], loker needs OPENROUTER_API_KEY in its environment, e.g.
+#ExecStart=/usr/bin/env secretspec run --file /path/to/secretspec.toml -- loker ingest --all
+# or EnvironmentFile= / LoadCredential= from your secrets manager.
 ExecStart=/usr/bin/env loker ingest --all
 ExecStart=/usr/bin/env loker verify
 Nice=10

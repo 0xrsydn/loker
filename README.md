@@ -66,6 +66,19 @@ doesn't stop the others, and the exit status is non-zero if any failed.
 that runs it every 6 hours; the service file says how to install it as a user
 unit.
 
+**Secrets.** None is required: without them loker runs fully offline.
+Optional providers read their key from the environment, never from
+config.toml, and `secretspec.toml` declares them, so any secretspec
+provider (keyring, 1Password, a file, ...) can supply them:
+
+```toml
+[providers.jev]   # in config.toml: Jev classifies job roles; needs OPENROUTER_API_KEY
+```
+
+```sh
+secretspec run -- loker ingest --all   # in the repo; elsewhere add --file /path/to/secretspec.toml
+```
+
 ```
 j_6b78581675  Senior Engineer, Service Delivery — dell
     yes: ID listed, inside UTC+7..+9 · pay n/a
