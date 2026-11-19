@@ -383,6 +383,22 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
             }
         }
         None if raw.is_empty() => base(Scope::Unknown, 0.2, Some("no location given".into())),
+        // Remote or on-site isn't stated, but the places are: whichever it is,
+        // the job is tied to them. Scope stays unknown; the verdict uses them.
+        None if !countries.is_empty() || !regions.is_empty() => {
+            let places = [regions.as_slice(), countries.as_slice()]
+                .concat()
+                .join(", ");
+            Eligibility {
+                regions,
+                countries,
+                ..base(
+                    Scope::Unknown,
+                    0.5,
+                    Some(format!("lists {places}; doesn't say remote or on-site")),
+                )
+            }
+        }
         None => base(
             Scope::Unknown,
             0.3,

@@ -124,9 +124,10 @@ fn greenhouse() -> Vec<Value> {
             "content": "&lt;p&gt;Build APIs at Acme.&lt;/p&gt;"
         }),
         json!({
+            // Greenhouse doesn't say remote or on-site; this lists countries only.
             "id": 102, "title": "Data Analyst", "company_name": "Acme, Inc.",
             "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/102",
-            "location": { "name": "Berlin" },
+            "location": { "name": "Germany; Netherlands" },
             "first_published": "2026-09-21T10:00:00-04:00",
             "content": "&lt;p&gt;Numbers.&lt;/p&gt;"
         }),
@@ -390,6 +391,13 @@ fn pipeline_end_to_end() {
     );
     assert_eq!(job["eligibility"]["scope"], "worldwide");
     assert_eq!(job["eligible"]["kind"], "yes");
+
+    // Remote or on-site unstated, but tied to its countries: maybe inside
+    // them, and dropped (no) for a viewer elsewhere.
+    let r = home.json(&["search", "analyst", "--country", "DE", "--json"]);
+    assert_eq!(r["jobs"][0]["eligible"]["kind"], "maybe", "{r:#}");
+    let r = home.json(&["search", "analyst", "--country", "ID", "--json"]);
+    assert_eq!(r["count"], 0, "{r:#}");
 
     // Lever: an on-site job takes the posting's country, and a yearly salary
     // becomes USD per month.
