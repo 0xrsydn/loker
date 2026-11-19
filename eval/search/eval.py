@@ -62,8 +62,15 @@ def run(db, table, q, any_word, w, k=K, build=fts):
     return [r[0] for r in db.execute(sql, (build(q, any_word), k))]
 
 
-def and_then_or(db, table, q, w, k=K, build=fts):
+def and_then_or(db, table, q, w, k=K, build=fts, fill_below=None):
+    """Every-word matches, then any-word matches. With `fill_below`, the
+    any-word matches are added only when fewer than that many jobs have
+    every word (counted over all of them, not just this page)."""
     first = run(db, table, q, False, w, k, build)
+    if fill_below is not None:
+        total = len(run(db, table, q, False, w, 10_000, build))
+        if total >= fill_below:
+            return first
     rest = [j for j in run(db, table, q, True, w, k, build) if j not in first]
     return (first + rest)[:k]
 
@@ -86,6 +93,9 @@ VARIANTS = {
     "porter or": lambda db, q: run(db, PORTER, q, True, None),
     "porter or t5": lambda db, q: run(db, PORTER, q, True, T5),
     "porter and->or t5": lambda db, q: and_then_or(db, PORTER, q, T5),
+    "porter and->or<1 t5": lambda db, q: and_then_or(db, PORTER, q, T5, fill_below=1),
+    "porter and->or<5 t5": lambda db, q: and_then_or(db, PORTER, q, T5, fill_below=5),
+    "porter and->or<10 t5": lambda db, q: and_then_or(db, PORTER, q, T5, fill_below=10),
     "syn plain and->or t5": lambda db, q: and_then_or(db, PLAIN, q, T5, build=fts_syn),
     "syn porter and->or t5": lambda db, q: and_then_or(db, PORTER, q, T5, build=fts_syn),
 }
@@ -332,7 +342,8 @@ def score():
                 per[v].append({"ndcg10": ndcg(ranked, grades),
                                "p10": sum(1 for x in ranked[:10] if x in rel) / 10,
                                "r20": (len(rel & set(ranked[:20])) / len(rel)) if rel else 1.0,
-                               "empty": 1 if not ranked else 0, "n": len(ranked), "rel": len(rel), "unj": unj})
+                               "empty": 1 if not ranked else 0, "n": len(ranked), "rel": len(rel), "unj": unj,
+                               "junk": sum(1 for x in ranked[:K] if x not in rel)})
         return per
 
     def table(title, qs, base_name=BASELINE):
@@ -346,13 +357,14 @@ def score():
             return mean(d), ms[int(0.025 * iters)], ms[int(0.975 * iters)]
 
         print(f"\n## {title} ({len(qs)} queries; judge={j}; relevant = grade>=2; K={K})")
-        print(f"{'variant':24} {'nDCG@10':>8} {'P@10':>6} {'R@20':>6} {'empty':>6} {'unjudged':>9}   ΔnDCG vs baseline [95% CI]")
+        print(f"{'variant':24} {'nDCG@10':>8} {'P@10':>6} {'R@20':>6} {'empty':>6} {'unjudged':>9} {'results':>8} {'junk':>5}   ΔnDCG vs baseline [95% CI]")
         for v in pooled:
             r = per[v]
             d, lo, hi = boot(v, "ndcg10")
             delta = "" if v == base_name else f"{d:+.3f} [{lo:+.3f}, {hi:+.3f}]"
             print(f"{v:24} {mean([x['ndcg10'] for x in r]):8.3f} {mean([x['p10'] for x in r]):6.2f} "
-                  f"{mean([x['r20'] for x in r]):6.2f} {sum(x['empty'] for x in r):6d} {sum(x['unj'] for x in r):9d}   {delta}")
+                  f"{mean([x['r20'] for x in r]):6.2f} {sum(x['empty'] for x in r):6d} {sum(x['unj'] for x in r):9d} "
+                  f"{mean([x['n'] for x in r]):8.1f} {mean([x['junk'] for x in r]):5.1f}   {delta}")
         return per
 
     tune = [q for q in allq if not q.get("holdout") and not q.get("expect_none")]

@@ -47,6 +47,7 @@ Relevant means grade ≥ 2.
 | P@10 | What share of the top 10 is relevant? |
 | R@20 | What share of the pool's relevant jobs is in the top 20? |
 | empty | Queries with no results. |
+| results, junk | Results returned per query, and how many of the top 20 aren't relevant: what an agent reads for nothing. |
 | unjudged | Results with no grade; should be 0. |
 | should-match-nothing | Results returned / judged relevant for `expect_none` queries; ideal `0/0`. |
 
@@ -105,3 +106,13 @@ Shipped: stemming, title weight 5, and every-word-first with `partial`
 marks. `loker search` on this snapshot returns the eval's `porter and->or t5`
 lists exactly (and `--any-word` the `porter or t5` lists) for all 38 queries.
 The MCP description now tells agents to keep location out of `q`.
+
+Tried and not shipped: adding partial matches only when few jobs have every
+word. Partial matches are often relevant (a good job without "remote"), so
+cutting them costs more than it saves:
+
+| Variant | nDCG@10 tuning | holdout | R@20 | results | irrelevant |
+|---|---|---|---|---|---|
+| porter and->or t5 (shipped) | 0.681 | 0.709 | 0.71 | 19.5 | 6.7 |
+| porter and->or<5 t5 | 0.669 | 0.677 | 0.67 | 17.6 | 5.3 |
+| porter and->or<1 t5 | 0.652 | 0.677 | 0.63 | 16.0 | 4.8 |
