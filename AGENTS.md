@@ -25,6 +25,7 @@ crates/loker-core/       domain and rules, no network
   src/country.rs         country names as boards write them -> ISO codes
   src/dedup.rs           which listings are one job; no IO
   src/verdict.rs         can this viewer apply? (country, timezone)
+  src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
   src/store.rs           SQLite: ingest, liveness, search, eval
   src/api.rs             the typed v1 contract every interface returns
   src/config.rs          $LOKER_HOME/config.toml

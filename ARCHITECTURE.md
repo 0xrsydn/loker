@@ -105,6 +105,14 @@ exactly while one of its listings is live.
 job has it without a re-fetch: level words in the title first, else the level
 the source states (`normalize::seniority`). About 40% of jobs name a level.
 
+**Roles.** `role.rs` is the vocabulary for what a job is: a two-level
+hierarchy of functions (`engineering` > `backend`, ...) and modifiers that cut
+across it (`forward_deployed`, `founding`). A job stores its most specific
+role; filters name any level and `Role::within` resolves them, like regions.
+`JobRole` records method, confidence and evidence (rule 6). Jobs don't carry
+a role yet: it is classified at ingest and stored, which first needs the
+merged job stored as JSON (see the triggers below).
+
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
 
