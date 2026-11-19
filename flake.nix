@@ -39,6 +39,7 @@
             inherit cargoArtifacts;
             cargoClippyExtraArgs = "--all-targets -- --deny warnings";
           });
+          fmt = craneLib.cargoFmt { inherit src; pname = "loker"; };
         };
     in
     {
@@ -47,10 +48,11 @@
           default = b.package;
         });
 
-      # `nix flake check`: the build (which runs the tests) plus clippy with warnings denied.
+      # `nix flake check`: the build (which runs the tests), clippy with warnings
+      # denied, and rustfmt.
       checks = forAll (pkgs:
         let b = build pkgs; in {
-          inherit (b) package clippy;
+          inherit (b) package clippy fmt;
         });
 
       devShells = forAll (pkgs: {

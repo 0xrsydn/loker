@@ -1,6 +1,7 @@
 # Every push and pull request: `nix flake check` builds the release binary,
 # runs all tests (offline: store rules, search, lifecycle, e2e against a local
-# stub, contract schema drift) and runs clippy with warnings denied.
+# stub, contract schema drift), runs clippy with warnings denied and checks
+# formatting with rustfmt.
 name: ci
 
 on:

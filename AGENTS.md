@@ -44,7 +44,8 @@ The system `rustc` may not work; run cargo inside the shell.
 ```sh
 cargo test                       # all tests, offline, a few seconds
 cargo clippy --all-targets -- -D warnings
-nix flake check                  # what CI runs: release build, tests, clippy
+cargo fmt                        # CI fails on unformatted code
+nix flake check                  # what CI runs: release build, tests, clippy, rustfmt
 cargo run -- <command>           # ingest, search, verify, sources eval, stats, schema, mcp
 ```
 

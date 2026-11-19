@@ -137,8 +137,9 @@ files disagree, so contract changes are always deliberate.
 
 ## Tests
 
-`nix flake check` builds the release binary, runs every test and runs clippy
-with warnings denied; CI runs it on every push and pull request.
+`nix flake check` builds the release binary, runs every test, runs clippy
+with warnings denied and checks formatting with rustfmt; CI runs it on every
+push and pull request.
 
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),
