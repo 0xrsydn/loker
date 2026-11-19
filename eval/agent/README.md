@@ -102,9 +102,16 @@ fails 2 of 3 runs on one off-role pick each.
 |---|---|---|---|---|---|---|---|---|
 | 93c1c9f (before roles) | 5.6 | 51 | 57 | 0.009 | 17 | 100% | 97% | 93% |
 | 1a0922e (roles, `role` filter, list_roles) | 4.5 | 32 | 37 | 0.006 | 15 | 100% | 100% | 100% |
+| 163403f + Jev answers (`eval/role/snapshot-jev.db`) | 4.7 | 30 | 36 | 0.006 | 14 | 100% | 99% | 93% |
 
 Agents used the `role` filter in 23 of 68 calls (`data_engineering`,
 `backend`, design and AI roles) and list_roles twice. Characters read fell
 38% and tokens 36%; designer-gb, the scarcest task (7 good jobs), went from
 2 of 3 runs passing to 3 of 3.
+
+With Jev's roles (79% exact against 68%) the agent numbers stay the same:
+these tasks' good jobs have titles that name the role, which the rules
+already get right. The one failure is a design run that stopped at 4 of 7
+good jobs after searching only `minVerdict: yes`; all 7 carry a design role.
+Jev's gain shows on jobs with vague titles, which these tasks rarely need.
 
