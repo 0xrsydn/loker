@@ -93,8 +93,8 @@ The design chooses one kind of error over another. Each choice is deliberate.
 the store. Under one key, live listings merge when each source has at most one;
 if any source has two, all stay separate. A merge keeps the oldest canonical
 job's id. The merged job takes identity and text from employer boards first,
-then by source id; eligibility from the most confident source; pay from a
-source with a USD figure.
+then by source id; eligibility from the most confident source; pay from the
+first source that states base pay.
 
 **Storage.** A canonical job is a row holding its merged job as JSON
 (`canonical_jobs.job`, a `NewJob`), hashed as a whole together with its
@@ -110,6 +110,16 @@ exactly while one of its listings is live.
 **Seniority.** Derived when a job is read, like a verdict, so every stored
 job has it without a re-fetch: level words in the title first, else the level
 the source states (`normalize::seniority`). About 40% of jobs name a level.
+
+**Pay.** Optional, and only what the posting states, in its own currency:
+`base` ranges (salary or wage, one per level or location when there are
+several), `extras` (equity, bonus, commission, OTE, sign-on; figures when
+stated), and `usdMonthMin/Max` for comparing, from USD amounts only.
+`normalize::money` drops a figure rather than keep it wrong: no currency
+code, no period for base pay, `min > max`, a top over 10× the bottom, or USD
+outside 100..=100k a month. "Competitive" is no pay; "competitive salary +
+equity" is pay with only an extra. `method` says whether it came from the
+source's fields or (later) the description.
 
 **Roles.** `role.rs` is the vocabulary for what a job does: families
 (`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,

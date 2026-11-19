@@ -115,7 +115,7 @@ pub fn resolve(linked: Vec<Linked>) -> Option<Resolved> {
 
 /// Merge jobs (in precedence order) into one. The first job supplies identity
 /// and text; eligibility comes from whichever source is most confident; pay
-/// prefers a normalized USD figure.
+/// prefers a source that states base pay.
 fn merge(jobs: &[NewJob]) -> NewJob {
     let primary = &jobs[0];
     let first = |f: fn(&NewJob) -> Option<String>| jobs.iter().find_map(f);
@@ -133,7 +133,7 @@ fn merge(jobs: &[NewJob]) -> NewJob {
     let pay = jobs
         .iter()
         .filter_map(|j| j.pay.as_ref())
-        .find(|p| p.usd_month_max.is_some() || p.usd_month_min.is_some())
+        .find(|p| !p.base.is_empty())
         .or_else(|| jobs.iter().find_map(|j| j.pay.as_ref()))
         .cloned();
     let mut tech_tags: Vec<String> = jobs

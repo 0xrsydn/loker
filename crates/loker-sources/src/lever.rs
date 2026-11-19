@@ -154,38 +154,13 @@ pub fn transform(source_id: &str, site: &str, raw: Value) -> anyhow::Result<NewJ
         ),
         employment_type: item.categories.commitment.as_deref().map(employment_type),
         eligibility,
-        pay: item.salary_range.and_then(|s| {
-            pay(
-                s.min,
-                s.max,
-                s.currency.as_deref(),
-                s.interval.as_deref().map(period),
-            )
-        }),
+        pay: item
+            .salary_range
+            .and_then(|s| pay(s.min, s.max, s.currency.as_deref(), s.interval.as_deref())),
         tech_tags: Vec::new(),
         description_md: html_to_md(Some(&html))?,
         posted_at: item.created_at.and_then(DateTime::from_timestamp_millis),
         expires_at: None,
         raw,
     })
-}
-
-/// Lever's `interval` (`per-year-salary`, `per-hour-wage`, ...) as the period
-/// words `normalize::pay` knows. Anything else passes through unchanged, so it
-/// is kept as text and never converted to USD.
-fn period(interval: &str) -> &str {
-    let i = interval.to_lowercase();
-    if i.contains("year") {
-        "annual"
-    } else if i.contains("month") {
-        "monthly"
-    } else if i.contains("week") {
-        "weekly"
-    } else if i.contains("day") {
-        "daily"
-    } else if i.contains("hour") {
-        "hourly"
-    } else {
-        interval
-    }
 }

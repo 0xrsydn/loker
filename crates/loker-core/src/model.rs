@@ -123,12 +123,120 @@ pub struct Eligibility {
     pub raw: Option<String>,
 }
 
+/// Pay as the posting states it. Absent when the posting says nothing usable;
+/// "competitive" or "DOE" is not pay. Nothing is guessed: a figure is kept
+/// only with its currency (and, for base pay, its period), and a figure that
+/// fails a check is dropped, not kept wrong (see `normalize::money`).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Pay {
+    /// Base pay: salary or wage, as stated, in its own currency. Usually one
+    /// range; one per level or location when the posting gives several.
+    /// Empty when only extras are stated ("competitive salary + equity").
+    #[serde(default)]
+    pub base: Vec<Money>,
+    /// Equity, bonus, commission and the like, one per kind, with figures
+    /// when stated.
+    #[serde(default)]
+    pub extras: Vec<PayExtra>,
+    /// Base pay in USD per month, for comparing jobs: the lowest and highest
+    /// figures across `base`. Only from USD amounts for now.
     pub usd_month_min: Option<u32>,
     pub usd_month_max: Option<u32>,
+    #[serde(default)]
+    pub method: PayMethod,
+    /// Pay as text: the source's own summary, or one written from its fields.
     pub raw: String,
+}
+
+/// An amount of money: one figure (`min == max`), a range, or one end of it
+/// ("up to" fills only `max`, "from" only `min`). At least one end is set,
+/// both are positive, and `min <= max`.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct Money {
+    pub min: Option<f64>,
+    pub max: Option<f64>,
+    /// ISO 4217 code, e.g. "USD", "EUR".
+    pub currency: String,
+    /// What the amount is paid per. Always set for base pay; absent for a
+    /// one-off sum (a sign-on bonus, an equity grant).
+    pub period: Option<Period>,
+    /// What this range is for when a posting gives several: a level
+    /// ("Senior Strategic Project Lead") or a location ("UK").
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Period {
+    Hour,
+    Day,
+    Week,
+    Month,
+    Year,
+}
+
+impl Period {
+    /// How many of this period make a month, by the usual convention
+    /// (160 working hours, 21 working days).
+    pub fn per_month(self) -> f64 {
+        match self {
+            Period::Hour => 160.0,
+            Period::Day => 21.0,
+            Period::Week => 52.0 / 12.0,
+            Period::Month => 1.0,
+            Period::Year => 1.0 / 12.0,
+        }
+    }
+}
+
+/// Pay on top of the base.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct PayExtra {
+    pub kind: PayExtraKind,
+    /// When stated as money ("$1M in equity", "$20K sign-on").
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub amount: Option<Money>,
+    /// When stated as a percentage: of the company for equity ("0.25%–1%"),
+    /// of base pay for a bonus ("10–15%").
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub percent: Option<Percent>,
+}
+
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "snake_case")]
+pub enum PayExtraKind {
+    /// Shares, options, RSUs or tokens.
+    Equity,
+    Bonus,
+    Commission,
+    /// On-target earnings: base plus commission at target, as sales roles
+    /// state it.
+    Ote,
+    SignOn,
+}
+
+/// A percentage or a range of them, under the same rules as [`Money`].
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct Percent {
+    pub min: Option<f64>,
+    pub max: Option<f64>,
+}
+
+/// Where pay came from.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum PayMethod {
+    /// The source's own pay fields.
+    #[default]
+    Source,
+    /// Read from the description; `raw` is the text it came from.
+    Text,
 }
 
 /// Employer boards (Greenhouse, Ashby, …) are the primary record of a job;

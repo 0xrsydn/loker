@@ -2,7 +2,10 @@
 //! type, seniority, and free-text locations → `Eligibility`. Kept deliberately simple;
 //! `loker sources eval` measures what these rules miss before new rules are added.
 use crate::country;
-use crate::model::{Eligibility, Method, NewJob, Pay, Scope, Seniority};
+use crate::model::{
+    Eligibility, Method, Money, NewJob, Pay, PayExtra, PayExtraKind, PayMethod, Percent, Period,
+    Scope, Seniority,
+};
 
 // ---------- every job ----------
 
@@ -138,95 +141,215 @@ pub fn clean_url(url: &str) -> String {
 
 // ---------- pay ----------
 
-/// Build `Pay` from a source's numbers. USD amounts are converted to USD per
-/// month; anything implausible (outside 100..=100k USD/month) keeps only the
-/// raw text, so a bad source value never reaches pay sorting.
+/// Pay from one range in a source's own fields, the common case.
 pub fn pay(
     min: Option<f64>,
     max: Option<f64>,
     currency: Option<&str>,
     period: Option<&str>,
 ) -> Option<Pay> {
-    let nonzero = |v: Option<f64>| v.filter(|v| *v > 0.0);
-    let (min, max) = (nonzero(min), nonzero(max));
-    if min.is_none() && max.is_none() {
+    let period = pay_period(period?)?;
+    pay_from(vec![money(min, max, currency, Some(period))?], vec![], None)
+}
+
+/// Pay from base ranges and extras. Base ranges without a period, and USD
+/// ranges outside 100..=100k a month (a source's typo or a placeholder), are
+/// dropped; extras are kept one per kind, the one with figures first. `None`
+/// when nothing is left. `raw` is the source's own summary, if it has one.
+pub fn pay_from(base: Vec<Money>, mut extras: Vec<PayExtra>, raw: Option<&str>) -> Option<Pay> {
+    let base: Vec<Money> = base
+        .into_iter()
+        .filter(|m| m.period.is_some() && plausible(m))
+        .collect();
+    extras.sort_by_key(|e| (e.kind, e.amount.is_none() && e.percent.is_none()));
+    extras.dedup_by_key(|e| e.kind);
+    if base.is_empty() && extras.is_empty() {
         return None;
     }
-    let currency = currency.unwrap_or("").trim().to_uppercase();
-    let period = period.unwrap_or("annual").trim().to_lowercase();
-    let per_month = match period.as_str() {
-        "annual" | "annually" | "yearly" | "year" | "yr" => Some(1.0 / 12.0),
-        "monthly" | "month" | "mo" => Some(1.0),
-        "weekly" | "week" | "wk" => Some(52.0 / 12.0),
-        "daily" | "day" => Some(21.0),
-        "hourly" | "hour" | "hr" => Some(160.0),
-        _ => None,
+    let usd: Vec<(Option<f64>, Option<f64>)> = base.iter().filter_map(usd_month).collect();
+    let round = |v: f64| v.round() as u32;
+    let usd_month_min = usd.iter().filter_map(|u| u.0).reduce(f64::min).map(round);
+    let usd_month_max = usd.iter().filter_map(|u| u.1).reduce(f64::max).map(round);
+    let raw = match raw.map(str::trim) {
+        Some(r) if !r.is_empty() => r.to_string(),
+        _ => pay_text(&base, &extras),
     };
-    let usd = |v: Option<f64>| match (currency.as_str(), per_month, v) {
-        ("USD", Some(f), Some(v)) => {
-            let m = (v * f).round();
-            (100.0..=100_000.0).contains(&m).then_some(m as u32)
-        }
-        _ => None,
-    };
-    let fmt = |v: Option<f64>| v.map(|v| format!("{v}")).unwrap_or_else(|| "?".into());
     Some(Pay {
-        usd_month_min: usd(min),
-        usd_month_max: usd(max),
-        raw: format!("{currency} {}–{} {period}", fmt(min), fmt(max))
-            .trim()
-            .to_string(),
+        base,
+        extras,
+        usd_month_min,
+        usd_month_max,
+        method: PayMethod::Source,
+        raw,
     })
 }
 
-/// Parse a display range like "$130K – $225K" or "$40 – $60 / hr". Dollar
-/// amounts only; anything else is kept as raw text with no USD figures.
-pub fn pay_from_text(text: &str) -> Option<Pay> {
-    let t = text.trim();
-    if t.is_empty() {
+/// A checked amount: ends that are finite and positive, `min <= max`, a top
+/// at most 10× the bottom (wider is a typo in any currency: "65,000–6,000,000"),
+/// and an ISO 4217 code. `None` when any check fails: a wrong figure is worse
+/// than none. A zero end counts as not stated (sources use 0 for "none").
+pub fn money(
+    min: Option<f64>,
+    max: Option<f64>,
+    currency: Option<&str>,
+    period: Option<Period>,
+) -> Option<Money> {
+    let (min, max) = ends(min, max)?;
+    if let (Some(a), Some(b)) = (min, max)
+        && b > 10.0 * a
+    {
         return None;
     }
-    let lower = t.to_lowercase();
-    let period = if lower.contains("/hr") || lower.contains("hour") {
-        "hourly"
-    } else if lower.contains("month") {
-        "monthly"
-    } else {
-        "annual"
-    };
-    let amounts: Vec<f64> = t
-        .split(['–', '-', '—'])
-        .filter_map(|part| {
-            let p = part.trim();
-            let digits = p.strip_prefix('$')?;
-            let num: String = digits
-                .chars()
-                .take_while(|c| c.is_ascii_digit() || *c == '.' || *c == ',')
-                .filter(|c| *c != ',')
-                .collect();
-            let v: f64 = num.parse().ok()?;
-            let suffix = digits[num.len()..]
-                .chars()
-                .next()
-                .map(|c| c.to_ascii_uppercase());
-            Some(match suffix {
-                Some('K') => v * 1e3,
-                Some('M') => v * 1e6,
-                _ => v,
-            })
+    let currency = currency?.trim().to_ascii_uppercase();
+    if currency.len() != 3 || !currency.bytes().all(|b| b.is_ascii_uppercase()) {
+        return None;
+    }
+    Some(Money {
+        min,
+        max,
+        currency,
+        period,
+        label: None,
+    })
+}
+
+/// A checked percentage, as [`money`], at most 100.
+pub fn percent(min: Option<f64>, max: Option<f64>) -> Option<Percent> {
+    let (min, max) = ends(min, max)?;
+    [min, max]
+        .into_iter()
+        .flatten()
+        .all(|v| v <= 100.0)
+        .then_some(Percent { min, max })
+}
+
+fn ends(min: Option<f64>, max: Option<f64>) -> Option<(Option<f64>, Option<f64>)> {
+    let ok = |v: Option<f64>| v.filter(|v| v.is_finite() && *v > 0.0);
+    match (ok(min), ok(max)) {
+        (None, None) => None,
+        (Some(a), Some(b)) if a > b => None,
+        ends => Some(ends),
+    }
+}
+
+/// A period as sources write it: "annual", "yearly", "per-year-salary",
+/// "1 YEAR", "hr". `None` for anything else ("NONE", "2 WEEK", "biweekly"),
+/// so an unknown period is never read as a known one.
+pub fn pay_period(s: &str) -> Option<Period> {
+    let mut found = None;
+    for w in s
+        .to_lowercase()
+        .split(|c: char| !c.is_ascii_alphanumeric())
+        .filter(|w| !w.is_empty())
+    {
+        let p = match w {
+            "hour" | "hourly" | "hr" => Period::Hour,
+            "day" | "daily" => Period::Day,
+            "week" | "weekly" | "wk" => Period::Week,
+            "month" | "monthly" | "mo" => Period::Month,
+            "year" | "yearly" | "annual" | "annually" | "yr" => Period::Year,
+            "1" | "per" | "a" | "salary" | "wage" => continue,
+            _ => return None,
+        };
+        if found.replace(p).is_some_and(|q| q != p) {
+            return None;
+        }
+    }
+    found
+}
+
+/// USD figures must be 100..=100k a month; other currencies can't be checked
+/// until there are exchange rates.
+fn plausible(m: &Money) -> bool {
+    usd_month(m).is_none_or(|(lo, hi)| {
+        [lo, hi]
+            .into_iter()
+            .flatten()
+            .all(|v| (100.0..=100_000.0).contains(&v))
+    })
+}
+
+/// A USD amount per month, `None` for other currencies or no period.
+fn usd_month(m: &Money) -> Option<(Option<f64>, Option<f64>)> {
+    let f = m.period?.per_month();
+    (m.currency == "USD").then(|| (m.min.map(|v| v * f), m.max.map(|v| v * f)))
+}
+
+/// "USD 120,000–150,000 a year + equity, bonus"
+fn pay_text(base: &[Money], extras: &[PayExtra]) -> String {
+    let base = base.iter().map(money_text).collect::<Vec<_>>().join("; ");
+    let extras = extras
+        .iter()
+        .map(|e| {
+            let kind = match e.kind {
+                PayExtraKind::Equity => "equity",
+                PayExtraKind::Bonus => "bonus",
+                PayExtraKind::Commission => "commission",
+                PayExtraKind::Ote => "OTE",
+                PayExtraKind::SignOn => "sign-on bonus",
+            };
+            match (&e.amount, &e.percent) {
+                (Some(m), _) => format!("{kind} {}", money_text(m)),
+                (None, Some(p)) => format!("{kind} {}%", span(p.min, p.max)),
+                (None, None) => kind.to_string(),
+            }
         })
-        .collect();
-    let mut p = match amounts.as_slice() {
-        [a, b, ..] => pay(Some(*a), Some(*b), Some("USD"), Some(period)),
-        [a] => pay(Some(*a), Some(*a), Some("USD"), Some(period)),
-        [] => Some(Pay {
-            usd_month_min: None,
-            usd_month_max: None,
-            raw: String::new(),
-        }),
-    }?;
-    p.raw = t.to_string();
-    Some(p)
+        .collect::<Vec<_>>()
+        .join(", ");
+    match (base.is_empty(), extras.is_empty()) {
+        (false, false) => format!("{base} + {extras}"),
+        (false, true) => base,
+        _ => extras,
+    }
+}
+
+fn money_text(m: &Money) -> String {
+    let label = m
+        .label
+        .as_ref()
+        .map(|l| format!("{l}: "))
+        .unwrap_or_default();
+    let per = match m.period {
+        Some(Period::Hour) => " an hour",
+        Some(Period::Day) => " a day",
+        Some(Period::Week) => " a week",
+        Some(Period::Month) => " a month",
+        Some(Period::Year) => " a year",
+        None => "",
+    };
+    let amount = match (m.min, m.max) {
+        (None, Some(_)) => format!("up to {} {}", m.currency, span(m.min, m.max)),
+        (Some(_), None) => format!("from {} {}", m.currency, span(m.min, m.max)),
+        _ => format!("{} {}", m.currency, span(m.min, m.max)),
+    };
+    format!("{label}{amount}{per}")
+}
+
+/// "120,000–150,000", "120,000", or one end.
+fn span(min: Option<f64>, max: Option<f64>) -> String {
+    match (min, max) {
+        (Some(a), Some(b)) if a == b => number(a),
+        (Some(a), Some(b)) => format!("{}–{}", number(a), number(b)),
+        (Some(v), None) | (None, Some(v)) => number(v),
+        (None, None) => String::new(),
+    }
+}
+
+/// 120000 → "120,000"; 18.5 → "18.50".
+fn number(v: f64) -> String {
+    let cents = (v * 100.0).round() as u64;
+    let digits = (cents / 100).to_string();
+    let mut out = String::new();
+    for (i, c) in digits.chars().enumerate() {
+        if i > 0 && (digits.len() - i).is_multiple_of(3) {
+            out.push(',');
+        }
+        out.push(c);
+    }
+    if !cents.is_multiple_of(100) {
+        out.push_str(&format!(".{:02}", cents % 100));
+    }
+    out
 }
 
 // ---------- seniority ----------

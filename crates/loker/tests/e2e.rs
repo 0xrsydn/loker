@@ -193,7 +193,15 @@ fn ashby() -> Vec<Value> {
             "applyUrl": "https://jobs.ashbyhq.com/globex/a-1/application",
             "publishedAt": "2026-09-22T10:00:00.000+00:00", "employmentType": "FullTime",
             "descriptionHtml": "<p>React.</p>",
-            "compensation": { "compensationTierSummary": "$100K – $130K" }
+            "compensation": {
+                "compensationTierSummary": "$100K – $130K • Offers Equity",
+                "compensationTiers": [{ "title": null, "components": [
+                    { "compensationType": "Salary", "currencyCode": "USD", "interval": "1 YEAR",
+                      "minValue": 100000, "maxValue": 130000 },
+                    { "compensationType": "EquityPercentage", "currencyCode": null, "interval": "NONE",
+                      "minValue": null, "maxValue": null }
+                ]}]
+            }
         }),
         json!({
             "id": "a-2", "title": "Support Lead", "location": "Berlin",
@@ -503,6 +511,19 @@ fn pipeline_end_to_end() {
     assert_eq!(job["eligibility"]["scope"], "onsite");
     assert_eq!(job["eligibility"]["countries"], json!(["US"]));
     assert_eq!(job["pay"]["usdMonthMin"], 5000);
+
+    // Ashby: pay from its components; the employer's wins over Remote OK's.
+    let r = home.json(&["search", "frontend", "--json"]);
+    let pay = &r["jobs"][0]["pay"];
+    assert_eq!(
+        (&pay["base"], &pay["extras"], &pay["raw"]),
+        (
+            &json!([{ "min": 100000.0, "max": 130000.0, "currency": "USD", "period": "year" }]),
+            &json!([{ "kind": "equity" }]),
+            &json!("$100K – $130K • Offers Equity")
+        ),
+        "{r:#}"
+    );
     assert_eq!(job["employmentType"], "full_time");
 
     // Every adapter's jobs go through the shared cleanup.

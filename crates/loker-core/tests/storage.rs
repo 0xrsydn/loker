@@ -5,7 +5,8 @@ mod common;
 
 use common::{days, ingest, job, store};
 use loker_core::api;
-use loker_core::model::{Pay, Scope, TzStrength, TzWindow};
+use loker_core::model::{Scope, TzStrength, TzWindow};
+use loker_core::normalize;
 
 #[tokio::test]
 async fn every_json_path_the_sql_reads_resolves() {
@@ -24,11 +25,7 @@ async fn every_json_path_the_sql_reads_resolves() {
         to: 9.0,
         strength: TzStrength::Required,
     });
-    j.pay = Some(Pay {
-        usd_month_min: Some(4000),
-        usd_month_max: Some(6000),
-        raw: "$4k-6k/mo".into(),
-    });
+    j.pay = normalize::pay(Some(4000.0), Some(6000.0), Some("USD"), Some("monthly"));
     j.posted_at = Some(days(-3));
     j.description_md = Some("Build things.".into());
     let s = store("json-paths").await;

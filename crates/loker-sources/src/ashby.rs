@@ -5,8 +5,8 @@
 //! on-site jobs are recognized with high confidence. It has no company-name
 //! field; the board slug is used.
 use chrono::DateTime;
-use loker_core::model::{Eligibility, NewJob, Scope};
-use loker_core::normalize::{eligibility_from_text, employment_type, pay_from_text};
+use loker_core::model::{Eligibility, NewJob, Pay, PayExtra, PayExtraKind, Scope};
+use loker_core::normalize::{self, eligibility_from_text, employment_type};
 use serde::Deserialize;
 use serde_json::Value;
 
@@ -55,10 +55,68 @@ struct Secondary {
     location: Option<String>,
 }
 
+/// Ashby's pay: one tier per level (or one in all), each a list of
+/// components: `Salary`, `EquityPercentage`, `EquityCashValue`, `Bonus`,
+/// `Commission`, with `interval` like `1 YEAR` or `NONE`.
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Compensation {
     compensation_tier_summary: Option<String>,
+    #[serde(default)]
+    compensation_tiers: Vec<Tier>,
+}
+
+#[derive(Deserialize)]
+struct Tier {
+    title: Option<String>,
+    #[serde(default)]
+    components: Vec<Component>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct Component {
+    compensation_type: String,
+    currency_code: Option<String>,
+    interval: Option<String>,
+    min_value: Option<f64>,
+    max_value: Option<f64>,
+}
+
+fn pay(c: Compensation) -> Option<Pay> {
+    let several = c.compensation_tiers.len() > 1;
+    let (mut base, mut extras) = (Vec::new(), Vec::new());
+    for tier in &c.compensation_tiers {
+        for x in &tier.components {
+            let period = x.interval.as_deref().and_then(normalize::pay_period);
+            let money =
+                || normalize::money(x.min_value, x.max_value, x.currency_code.as_deref(), period);
+            let (kind, amount, percent) = match x.compensation_type.as_str() {
+                "Salary" => {
+                    if let Some(mut m) = money() {
+                        m.label = tier.title.clone().filter(|_| several);
+                        base.push(m);
+                    }
+                    continue;
+                }
+                "EquityPercentage" => (
+                    PayExtraKind::Equity,
+                    None,
+                    normalize::percent(x.min_value, x.max_value),
+                ),
+                "EquityCashValue" => (PayExtraKind::Equity, money(), None),
+                "Bonus" => (PayExtraKind::Bonus, money(), None),
+                "Commission" => (PayExtraKind::Commission, money(), None),
+                _ => continue,
+            };
+            extras.push(PayExtra {
+                kind,
+                amount,
+                percent,
+            });
+        }
+    }
+    normalize::pay_from(base, extras, c.compensation_tier_summary.as_deref())
 }
 
 pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<NewJob> {
@@ -96,11 +154,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
         ),
         employment_type: item.employment_type.as_deref().map(employment_type),
         eligibility,
-        pay: item
-            .compensation
-            .and_then(|c| c.compensation_tier_summary)
-            .as_deref()
-            .and_then(pay_from_text),
+        pay: item.compensation.and_then(pay),
         tech_tags: Vec::new(),
         description_md: html_to_md(item.description_html.as_deref())?,
         posted_at: item

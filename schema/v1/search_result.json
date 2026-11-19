@@ -247,9 +247,76 @@
         }
       ]
     },
-    "Pay": {
+    "Money": {
+      "description": "An amount of money: one figure (`min == max`), a range, or one end of it\n(\"up to\" fills only `max`, \"from\" only `min`). At least one end is set,\nboth are positive, and `min <= max`.",
       "properties": {
+        "currency": {
+          "description": "ISO 4217 code, e.g. \"USD\", \"EUR\".",
+          "type": "string"
+        },
+        "label": {
+          "description": "What this range is for when a posting gives several: a level\n(\"Senior Strategic Project Lead\") or a location (\"UK\").",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "max": {
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min": {
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "What the amount is paid per. Always set for base pay; absent for a\none-off sum (a sign-on bonus, an equity grant)."
+        }
+      },
+      "required": [
+        "currency"
+      ],
+      "type": "object"
+    },
+    "Pay": {
+      "description": "Pay as the posting states it. Absent when the posting says nothing usable;\n\"competitive\" or \"DOE\" is not pay. Nothing is guessed: a figure is kept\nonly with its currency (and, for base pay, its period), and a figure that\nfails a check is dropped, not kept wrong (see `normalize::money`).",
+      "properties": {
+        "base": {
+          "default": [],
+          "description": "Base pay: salary or wage, as stated, in its own currency. Usually one\nrange; one per level or location when the posting gives several.\nEmpty when only extras are stated (\"competitive salary + equity\").",
+          "items": {
+            "$ref": "#/$defs/Money"
+          },
+          "type": "array"
+        },
+        "extras": {
+          "default": [],
+          "description": "Equity, bonus, commission and the like, one per kind, with figures\nwhen stated.",
+          "items": {
+            "$ref": "#/$defs/PayExtra"
+          },
+          "type": "array"
+        },
+        "method": {
+          "$ref": "#/$defs/PayMethod",
+          "default": "source"
+        },
         "raw": {
+          "description": "Pay as text: the source's own summary, or one written from its fields.",
           "type": "string"
         },
         "usdMonthMax": {
@@ -261,6 +328,7 @@
           ]
         },
         "usdMonthMin": {
+          "description": "Base pay in USD per month, for comparing jobs: the lowest and highest\nfigures across `base`. Only from USD amounts for now.",
           "format": "uint32",
           "minimum": 0,
           "type": [
@@ -273,6 +341,107 @@
         "raw"
       ],
       "type": "object"
+    },
+    "PayExtra": {
+      "description": "Pay on top of the base.",
+      "properties": {
+        "amount": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "When stated as money (\"$1M in equity\", \"$20K sign-on\")."
+        },
+        "kind": {
+          "$ref": "#/$defs/PayExtraKind"
+        },
+        "percent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Percent"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "When stated as a percentage: of the company for equity (\"0.25%–1%\"),\nof base pay for a bonus (\"10–15%\")."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "PayExtraKind": {
+      "oneOf": [
+        {
+          "enum": [
+            "bonus",
+            "commission",
+            "sign_on"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "equity",
+          "description": "Shares, options, RSUs or tokens.",
+          "type": "string"
+        },
+        {
+          "const": "ote",
+          "description": "On-target earnings: base plus commission at target, as sales roles\nstate it.",
+          "type": "string"
+        }
+      ]
+    },
+    "PayMethod": {
+      "description": "Where pay came from.",
+      "oneOf": [
+        {
+          "const": "source",
+          "description": "The source's own pay fields.",
+          "type": "string"
+        },
+        {
+          "const": "text",
+          "description": "Read from the description; `raw` is the text it came from.",
+          "type": "string"
+        }
+      ]
+    },
+    "Percent": {
+      "description": "A percentage or a range of them, under the same rules as [`Money`].",
+      "properties": {
+        "max": {
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min": {
+          "format": "double",
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "Period": {
+      "enum": [
+        "hour",
+        "day",
+        "week",
+        "month",
+        "year"
+      ],
+      "type": "string"
     },
     "Role": {
       "description": "A family (`engineering`) or a role in one (`backend`). The list is open:\nit grows, and clients must accept ids they don't know.",
