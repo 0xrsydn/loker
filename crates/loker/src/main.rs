@@ -29,7 +29,7 @@ enum Command {
         #[arg(required_unless_present = "all")]
         source: Option<String>,
         /// Every enabled source in config.toml; exits non-zero if any fails.
-        #[arg(long, conflicts_with_all = ["source", "pages", "country", "company"])]
+        #[arg(long, conflicts_with_all = ["source", "pages", "country", "company", "remote"])]
         all: bool,
         /// Pages to fetch (himalayas: 20 jobs each).
         #[arg(long)]
@@ -40,6 +40,9 @@ enum Command {
         /// Company display name for an employer board (Ashby and Lever only give the slug).
         #[arg(long)]
         company: Option<String>,
+        /// Every job on this employer board is remote; its locations are where you can be based.
+        #[arg(long)]
+        remote: bool,
         #[arg(long)]
         json: bool,
     },
@@ -162,6 +165,7 @@ async fn main() -> anyhow::Result<()> {
             pages,
             country,
             company,
+            remote,
             json,
             ..
         } => {
@@ -172,6 +176,7 @@ async fn main() -> anyhow::Result<()> {
                     pages,
                     country,
                     company,
+                    remote: remote.then_some(true),
                 })
                 .await?;
             if json {

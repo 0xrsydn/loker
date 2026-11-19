@@ -579,6 +579,11 @@ pub struct IngestParams {
     pub country: Option<String>,
     /// Company display name for an employer board (`greenhouse:`/`ashby:`/`lever:`); Ashby and Lever only give the slug.
     pub company: Option<String>,
+    /// What an employer board's postings don't say: `true` when every job on
+    /// it is remote (a remote-first company whose locations are where you can
+    /// be based), `false` when every job is on-site. Only fills in jobs whose
+    /// posting doesn't state it; an explicit remote/on-site/hybrid wins.
+    pub remote: Option<bool>,
 }
 
 // ---------- ingest_all ----------

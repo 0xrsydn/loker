@@ -579,6 +579,7 @@ pages = 1
 
 [[sources]]
 id = "greenhouse:acme"
+remote = true
 
 [[sources]]
 id = "ashby:globex"
@@ -628,6 +629,11 @@ enabled = false
         .collect();
     assert_eq!(failed.len(), 1);
     assert_eq!(failed[0]["source"], "greenhouse:broken");
+
+    // A remote board: its postings' countries are where you can work from.
+    let r = home.json(&["search", "analyst", "--country", "DE", "--json"]);
+    assert_eq!(r["jobs"][0]["eligibility"]["scope"], "countries", "{r:#}");
+    assert_eq!(r["jobs"][0]["eligible"]["kind"], "yes", "{r:#}");
 
     // The board's display name from config replaces Ashby's slug.
     let r = home.json(&["search", "support", "--json"]);

@@ -25,6 +25,13 @@
         "null"
       ]
     },
+    "remote": {
+      "description": "What an employer board's postings don't say: `true` when every job on\nit is remote (a remote-first company whose locations are where you can\nbe based), `false` when every job is on-site. Only fills in jobs whose\nposting doesn't state it; an explicit remote/on-site/hybrid wins.",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
     "source": {
       "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.",
       "type": "string"

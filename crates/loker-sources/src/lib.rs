@@ -17,7 +17,7 @@ use loker_core::api::{
     CONTRACT_VERSION, Check, CheckStatus, Error, IngestAllReport, IngestOutcome, IngestParams,
     Result, SourceCheck, VerifyReport,
 };
-use loker_core::model::{IngestStats, NewJob, SourceKind};
+use loker_core::model::{IngestStats, NewJob, Scope, SourceKind};
 use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
 use serde_json::Value;
@@ -168,11 +168,16 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
             source.id()
         )));
     }
-    if p.company.is_some() && source.kind() != SourceKind::Employer {
-        return Err(Error::Invalid(format!(
-            "`company` only applies to employer boards, not {}",
-            source.id()
-        )));
+    for (set, field) in [
+        (p.company.is_some(), "company"),
+        (p.remote.is_some(), "remote"),
+    ] {
+        if set && source.kind() != SourceKind::Employer {
+            return Err(Error::Invalid(format!(
+                "`{field}` only applies to employer boards, not {}",
+                source.id()
+            )));
+        }
     }
     let raw = source.fetch(client, p).await?;
     // Ids come from the raw items, so an item that fails to transform is still
@@ -190,6 +195,14 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
             Ok(mut job) => {
                 if let Some(name) = &p.company {
                     job.company = name.clone();
+                }
+                // The board says what its postings don't: re-read their
+                // location with that fact. Explicit on-site/hybrid/remote stays.
+                if let Some(remote) = p.remote
+                    && job.eligibility.scope == Scope::Unknown
+                {
+                    let raw = job.eligibility.raw.clone().unwrap_or_default();
+                    job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
                 }
                 normalize::tidy(&mut job);
                 jobs.push(job)

@@ -28,6 +28,8 @@ pub struct SourceConfig {
     pub country: Option<String>,
     /// Company display name for an employer board (Ashby and Lever only give the slug).
     pub company: Option<String>,
+    /// `true` when every job on an employer board is remote (see `IngestParams::remote`).
+    pub remote: Option<bool>,
     #[serde(default = "enabled_by_default")]
     pub enabled: bool,
 }
@@ -43,6 +45,7 @@ impl SourceConfig {
             pages: self.pages,
             country: self.country.clone(),
             company: self.company.clone(),
+            remote: self.remote,
         }
     }
 }
@@ -107,4 +110,9 @@ id = "remoteok"
 # id = "ashby:clera"
 # company = "Clera"    # display name; Ashby and Lever only give the slug
 # enabled = false      # keep it listed but skip it
+#
+# A remote-first company whose postings list where you can be based:
+# [[sources]]
+# id = "greenhouse:binance"
+# remote = true        # every job is remote; its locations are where you can work from
 "#;

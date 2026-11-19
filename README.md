@@ -46,6 +46,10 @@ id = "ashby:clera"
 company = "Clera"      # display name; Ashby and Lever only give the slug
 
 [[sources]]
+id = "greenhouse:binance"
+remote = true          # remote-first: listed countries are where you can work from
+
+[[sources]]
 id = "remoteok"
 enabled = false        # listed but skipped
 ```
@@ -76,6 +80,18 @@ The outcome depends only on what is stored, never on ingest order. A merged job
 takes its link and text from the employer board, its eligibility from the most
 confident source, and lists every source it came from (`sources`) so
 aggregators that require attribution (Remote OK, Jobicy) get their link.
+
+### Who can apply
+
+Each job records where it is open (worldwide, countries, regions such as APAC
+or EMEA, or on-site), and every search with `--country` turns that into a
+verdict for you: `yes`, `maybe`, `unknown`, or `no` (dropped). Regions resolve
+to their countries when you search, so "APAC" is a yes from Indonesia and a no
+from Brazil. A posting that lists places but not whether it is remote (most
+Greenhouse boards) is still tied to them: `no` from elsewhere, `maybe` from
+inside, since it may be on-site. For a remote-first company whose locations
+are where you can be based, `remote = true` on its board in config.toml makes
+those countries a plain list: `yes` from inside.
 
 ### Jobs close
 
