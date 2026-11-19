@@ -361,7 +361,10 @@ impl Store {
                     " FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
                      WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
                     viewer_location!("2"),
-                    " ORDER BY bm25(jobs_fts), c.id LIMIT ?3 OFFSET ?4"
+                    // Column weights (job_id, title, company, description): a
+                    // title match counts five times. eval/search: 5 beats 1, and
+                    // 10 is no better.
+                    " ORDER BY bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id LIMIT ?3 OFFSET ?4"
                 ))
                 .bind(q)
                 .bind(country)

@@ -5,7 +5,7 @@ mod common;
 use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
-use loker_core::api::{SearchParams, search_jobs};
+use loker_core::api::{Hit, SearchParams, search_jobs};
 use loker_core::model::Scope;
 
 fn params(limit: u32, offset: Option<u32>) -> SearchParams {
@@ -100,32 +100,53 @@ async fn offset_pages_cover_every_result_once() {
     assert_eq!((seen.len(), pages), (25, 3));
 }
 
+/// Titles of the jobs a query finds, best first.
 async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
     let p = SearchParams {
         q: q.into(),
         ..Default::default()
     };
     let r = search_jobs(s, p).await.unwrap();
-    r.jobs.iter().map(|h| h.id().to_string()).collect()
+    r.jobs
+        .into_iter()
+        .map(|h| match h {
+            Hit::Full(h) => h.job.title,
+            Hit::Compact(c) => c.title,
+        })
+        .collect()
 }
 
 /// The ranking rules eval/search measured, one case each.
 #[tokio::test]
 async fn ranking() {
     let s = store("ranking").await;
-    let mut lead = job(
-        "jobicy",
-        "lead",
-        "Co",
-        "Data Engineering Lead",
-        Scope::Worldwide,
-        0.8,
-    );
-    lead.description_md = Some("Own the pipelines.".into());
-    ingest(&s, "jobicy", &[lead]).await;
-    let lead_id = ranked(&s, "data").await;
+    let with = |id: &str, title: &str, text: &str| {
+        let mut j = job("jobicy", id, "Co", title, Scope::Worldwide, 0.8);
+        j.description_md = Some(text.into());
+        j
+    };
+    let jobs = [
+        with("lead", "Data Engineering Lead", "Own the pipelines."),
+        with(
+            "rust",
+            "Rust Engineer",
+            "Build backend services in a small team.",
+        ),
+        with(
+            "platform",
+            "Platform Engineer",
+            "Rust services. Rust tooling. Some Rust.",
+        ),
+    ];
+    ingest(&s, "jobicy", &jobs).await;
 
-    // Stemming: "engineer" and "engineers" find "Engineering".
-    assert_eq!(ranked(&s, "engineer").await, lead_id);
-    assert_eq!(ranked(&s, "engineers").await, lead_id);
+    // Stemming: "engineer" and "pipeline" find "Engineering" and "pipelines".
+    assert_eq!(ranked(&s, "pipeline").await, ["Data Engineering Lead"]);
+    assert_eq!(ranked(&s, "engineer").await.len(), 3);
+
+    // A title match outranks the same word repeated in a description.
+    assert_eq!(
+        ranked(&s, "rust").await,
+        ["Rust Engineer", "Platform Engineer"]
+    );
 }
