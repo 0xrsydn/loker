@@ -6,7 +6,7 @@ use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
 use loker_core::api::{Hit, SearchParams, search_jobs};
-use loker_core::model::Scope;
+use loker_core::model::{Scope, Seniority};
 
 fn params(limit: u32, offset: Option<u32>) -> SearchParams {
     SearchParams {
@@ -160,4 +160,14 @@ async fn ranking() {
         ranked(&s, "pipelines kotlin").await,
         ["~Data Engineering Lead"]
     );
+
+    // A level filter keeps only jobs at those levels.
+    for (level, want) in [(Seniority::Lead, 1), (Seniority::Senior, 0)] {
+        let p = SearchParams {
+            q: "engineer".into(),
+            seniority: vec![level],
+            ..Default::default()
+        };
+        assert_eq!(search_jobs(&s, p).await.unwrap().count, want, "{level:?}");
+    }
 }

@@ -871,7 +871,11 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         id: r.get("id"),
         title: r.get("title"),
         company: r.get("company"),
-        seniority: r.get("seniority"),
+        // Derived when read, so old rows get it without a re-fetch.
+        seniority: crate::normalize::seniority(
+            r.get::<Option<String>, _>("seniority").as_deref(),
+            r.get("title"),
+        ),
         employment_type: r.get("employment_type"),
         eligibility: serde_json::from_str(&r.get::<String, _>("eligibility"))?,
         pay: r

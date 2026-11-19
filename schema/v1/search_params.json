@@ -8,6 +8,30 @@
       ],
       "type": "string"
     },
+    "Seniority": {
+      "description": "Career level, lowest first.",
+      "oneOf": [
+        {
+          "enum": [
+            "intern",
+            "junior",
+            "mid",
+            "senior"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "lead",
+          "description": "Lead, staff or principal.",
+          "type": "string"
+        },
+        {
+          "const": "executive",
+          "description": "Head of, director, VP, C-level.",
+          "type": "string"
+        }
+      ]
+    },
     "View": {
       "description": "How much of each job a search returns.",
       "enum": [
@@ -66,6 +90,14 @@
       "description": "Full-text query over title, company and description; words also match\ntheir other forms (\"engineer\" finds \"engineering\"). Jobs with every word\ncome first, then jobs with only some, marked `partial`. Keep it to the\nrole and skills: where the viewer can work from is `country`, not a\nquery word. Empty lists the newest jobs.",
       "type": "string"
     },
+    "seniority": {
+      "default": [],
+      "description": "Keep only jobs at these levels (`intern`, `junior`, `mid`, `senior`,\n`lead`, `executive`), from the title or the source. Jobs that state no\nlevel (most of them) are dropped, so leave this out to see everything.",
+      "items": {
+        "$ref": "#/$defs/Seniority"
+      },
+      "type": "array"
+    },
     "tz": {
       "description": "Viewer's UTC offset in hours (7, -5, 5.5). Used with `country`.",
       "format": "double",
@@ -77,7 +109,7 @@
     "view": {
       "$ref": "#/$defs/View",
       "default": "full",
-      "description": "`full` (default) or `compact`: only what's needed to pick jobs (id,\ntitle, company, link, scope, pay text, date, verdict), about a third of\nthe size. Get full details for the picks with `get_jobs`."
+      "description": "`full` (default) or `compact`: only what's needed to pick jobs (id,\ntitle, company, link, scope, level, pay text, date, verdict), about a\nthird of the size. Get full details for the picks with `get_jobs`."
     }
   },
   "title": "SearchParams",

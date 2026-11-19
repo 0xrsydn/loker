@@ -1,8 +1,8 @@
 //! Normalization shared by every adapter: match keys, URLs, pay, employment
-//! type, and free-text locations → `Eligibility`. Kept deliberately simple;
+//! type, seniority, and free-text locations → `Eligibility`. Kept deliberately simple;
 //! `loker sources eval` measures what these rules miss before new rules are added.
 use crate::country;
-use crate::model::{Eligibility, Method, NewJob, Pay, Scope};
+use crate::model::{Eligibility, Method, NewJob, Pay, Scope, Seniority};
 
 // ---------- every job ----------
 
@@ -226,6 +226,91 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
     }?;
     p.raw = t.to_string();
     Some(p)
+}
+
+// ---------- seniority ----------
+
+/// Level words as word sequences, lowest level first.
+const LEVEL_WORDS: &[(Seniority, &[&str])] = &[
+    (
+        Seniority::Intern,
+        &[
+            "intern",
+            "internship",
+            "trainee",
+            "apprentice",
+            "working student",
+        ],
+    ),
+    (
+        Seniority::Junior,
+        &["junior", "jr", "entry level", "graduate", "new grad"],
+    ),
+    (Seniority::Mid, &["mid level", "intermediate"]),
+    (Seniority::Senior, &["senior", "sr"]),
+    (
+        Seniority::Lead,
+        &["lead", "staff", "principal", "distinguished"],
+    ),
+    (
+        Seniority::Executive,
+        &[
+            "head of",
+            "director",
+            "vp",
+            "vice president",
+            "chief",
+            "cto",
+            "ceo",
+        ],
+    ),
+];
+
+/// Phrases with a level word that don't name a level.
+const NOT_LEVELS: &[&str] = &[
+    "member of technical staff",
+    "staff accountant",
+    "lead generation",
+    "lead gen",
+];
+
+/// A job's level: from the title when it names one (the employer's own
+/// words, and more precise than a source's "senior" for "Staff Engineer"),
+/// else from the level the source states. The highest level named wins:
+/// "Senior Staff Engineer" is lead. A source's "executive" counts; a title's
+/// doesn't ("Account Executive").
+pub fn seniority(stated: Option<&str>, title: &str) -> Option<Seniority> {
+    level_in(title).or_else(|| {
+        let stated = stated?;
+        level_in(stated).or_else(|| {
+            words(stated)
+                .contains(" executive ")
+                .then_some(Seniority::Executive)
+        })
+    })
+}
+
+fn level_in(text: &str) -> Option<Seniority> {
+    let mut t = words(text);
+    for p in NOT_LEVELS {
+        t = t.replace(&format!(" {p} "), " ");
+    }
+    LEVEL_WORDS
+        .iter()
+        .rev()
+        .find(|(_, ws)| ws.iter().any(|w| t.contains(&format!(" {w} "))))
+        .map(|(level, _)| *level)
+}
+
+/// Lowercase alphanumeric words joined by single spaces, padded with a space
+/// on each side so phrases match whole words.
+fn words(text: &str) -> String {
+    let lower = text.to_lowercase();
+    let ws: Vec<&str> = lower
+        .split(|c: char| !c.is_alphanumeric())
+        .filter(|w| !w.is_empty())
+        .collect();
+    format!(" {} ", ws.join(" "))
 }
 
 // ---------- employment type ----------

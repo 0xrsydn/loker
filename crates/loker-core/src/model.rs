@@ -2,6 +2,22 @@ use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+/// Career level, lowest first.
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "snake_case")]
+pub enum Seniority {
+    Intern,
+    Junior,
+    Mid,
+    Senior,
+    /// Lead, staff or principal.
+    Lead,
+    /// Head of, director, VP, C-level.
+    Executive,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Scope {
@@ -169,7 +185,9 @@ pub struct Job {
     pub id: String,
     pub title: String,
     pub company: String,
-    pub seniority: Option<String>,
+    /// From the title when it names a level, else as the source states it;
+    /// absent when neither does.
+    pub seniority: Option<Seniority>,
     pub employment_type: Option<String>,
     pub eligibility: Eligibility,
     pub pay: Option<Pay>,

@@ -101,6 +101,10 @@ longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
 seen it for 30 days (`stale`), and goes `live` again when seen. A job is active
 exactly while one of its listings is live.
 
+**Seniority.** Derived when a job is read, like a verdict, so every stored
+job has it without a re-fetch: level words in the title first, else the level
+the source states (`normalize::seniority`). About 40% of jobs name a level.
+
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
 

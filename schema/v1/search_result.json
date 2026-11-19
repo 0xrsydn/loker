@@ -42,6 +42,17 @@
           "$ref": "#/$defs/Scope",
           "description": "Eligibility scope: worldwide, regions, countries, hybrid, onsite, unknown."
         },
+        "seniority": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Seniority"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Career level, when the title or source names one."
+        },
         "title": {
           "type": "string"
         },
@@ -249,10 +260,15 @@
           ]
         },
         "seniority": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Seniority"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "From the title when it names a level, else as the source states it;\nabsent when neither does."
         },
         "sources": {
           "description": "Every source that lists this job, with its page there (for attribution).",
@@ -289,6 +305,30 @@
         "sources"
       ],
       "type": "object"
+    },
+    "Seniority": {
+      "description": "Career level, lowest first.",
+      "oneOf": [
+        {
+          "enum": [
+            "intern",
+            "junior",
+            "mid",
+            "senior"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "lead",
+          "description": "Lead, staff or principal.",
+          "type": "string"
+        },
+        {
+          "const": "executive",
+          "description": "Head of, director, VP, C-level.",
+          "type": "string"
+        }
+      ]
     },
     "TzStrength": {
       "enum": [

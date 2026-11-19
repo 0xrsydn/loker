@@ -180,10 +180,15 @@
           ]
         },
         "seniority": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Seniority"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "From the title when it names a level, else as the source states it;\nabsent when neither does."
         },
         "sources": {
           "description": "Every source that lists this job, with its page there (for attribution).",
@@ -220,6 +225,30 @@
         "sources"
       ],
       "type": "object"
+    },
+    "Seniority": {
+      "description": "Career level, lowest first.",
+      "oneOf": [
+        {
+          "enum": [
+            "intern",
+            "junior",
+            "mid",
+            "senior"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "lead",
+          "description": "Lead, staff or principal.",
+          "type": "string"
+        },
+        {
+          "const": "executive",
+          "description": "Head of, director, VP, C-level.",
+          "type": "string"
+        }
+      ]
     },
     "TzStrength": {
       "enum": [

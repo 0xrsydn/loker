@@ -50,9 +50,11 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         apply_url: Some(url),
         title,
         company,
+        // "Director" is set on account executives and BDRs as often as on
+        // directors, so it says nothing; the title decides instead.
         seniority: s("jobLevel")
             .map(|l| l.to_lowercase())
-            .filter(|l| l != "any"),
+            .filter(|l| l != "any" && l != "director"),
         employment_type: job_type.as_deref().map(employment_type),
         eligibility: eligibility_from_text(
             &decode_entities(&s("jobGeo").unwrap_or_default()),

@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 
 use crate::country;
-use crate::model::{Job, Scope};
+use crate::model::{Job, Scope, Seniority};
 use crate::store::{Found, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
@@ -77,9 +77,14 @@ pub struct SearchParams {
     /// Keep only jobs whose verdict is at least this good: `yes`, or `maybe`
     /// (yes and maybe). Needs `country`. Without it, `unknown` jobs are kept too.
     pub min_verdict: Option<MinVerdict>,
+    /// Keep only jobs at these levels (`intern`, `junior`, `mid`, `senior`,
+    /// `lead`, `executive`), from the title or the source. Jobs that state no
+    /// level (most of them) are dropped, so leave this out to see everything.
+    #[serde(default)]
+    pub seniority: Vec<Seniority>,
     /// `full` (default) or `compact`: only what's needed to pick jobs (id,
-    /// title, company, link, scope, pay text, date, verdict), about a third of
-    /// the size. Get full details for the picks with `get_jobs`.
+    /// title, company, link, scope, level, pay text, date, verdict), about a
+    /// third of the size. Get full details for the picks with `get_jobs`.
     #[serde(default)]
     pub view: View,
 }
@@ -142,6 +147,8 @@ pub struct CompactHit {
     pub url: String,
     /// Eligibility scope: worldwide, regions, countries, hybrid, onsite, unknown.
     pub scope: Scope,
+    /// Career level, when the title or source names one.
+    pub seniority: Option<Seniority>,
     /// The source's pay text, e.g. "USD 50–100 hourly".
     pub pay: Option<String>,
     pub posted_at: Option<DateTime<Utc>>,
@@ -169,6 +176,7 @@ impl Hit {
             })),
             View::Compact => Hit::Compact(CompactHit {
                 scope: job.eligibility.scope,
+                seniority: job.seniority,
                 pay: job.pay.map(|p| p.raw),
                 id: job.id,
                 title: job.title,
@@ -233,6 +241,9 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         for Found { job, partial } in rows {
             let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
             if eligible.as_ref().is_some_and(|v| v.kind > worst) {
+                continue;
+            }
+            if !p.seniority.is_empty() && !job.seniority.is_some_and(|s| p.seniority.contains(&s)) {
                 continue;
             }
             if to_skip > 0 {

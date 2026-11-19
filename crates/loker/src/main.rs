@@ -8,6 +8,7 @@ use loker_core::api::{
     SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport, View,
 };
 use loker_core::home::loker_home;
+use loker_core::model::Seniority;
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -66,7 +67,10 @@ enum Command {
         /// Keep only jobs whose verdict is at least this good (needs --country).
         #[arg(long, value_parser = ["yes", "maybe"])]
         min_verdict: Option<String>,
-        /// Return only id, title, company, link, scope, pay, date and verdict.
+        /// Keep only jobs at these levels; jobs that state none are dropped.
+        #[arg(long, value_delimiter = ',', value_parser = ["intern", "junior", "mid", "senior", "lead", "executive"])]
+        seniority: Vec<String>,
+        /// Return only id, title, company, link, scope, level, pay, date and verdict.
         #[arg(long)]
         compact: bool,
         /// Print the contract JSON (identical to MCP structured content).
@@ -228,6 +232,7 @@ async fn main() -> anyhow::Result<()> {
             limit,
             offset,
             min_verdict,
+            seniority,
             compact,
             any_word,
             json,
@@ -244,6 +249,10 @@ async fn main() -> anyhow::Result<()> {
                         "yes" => MinVerdict::Yes,
                         _ => MinVerdict::Maybe,
                     }),
+                    seniority: seniority
+                        .iter()
+                        .map(|s| serde_json::from_value(serde_json::Value::String(s.clone())))
+                        .collect::<Result<_, _>>()?,
                     view: if compact { View::Compact } else { View::Full },
                     any_word,
                 })
@@ -321,10 +330,11 @@ fn print_search(r: &SearchResult) {
                 };
                 let pay = c.pay.as_deref().unwrap_or("pay n/a");
                 println!(
-                    "{}  {} — {}{}\n    {elig} · {pay}\n    {}",
+                    "{}  {} — {}{}{}\n    {elig} · {pay}\n    {}",
                     c.id,
                     c.title,
                     c.company,
+                    level(c.seniority),
                     partial_mark(c.partial),
                     c.url
                 );
@@ -350,14 +360,25 @@ fn print_hit(hit: &SearchHit) {
     };
     let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
     println!(
-        "{}  {} — {}{}\n    {elig} · {pay}\n    {}  (via {})",
+        "{}  {} — {}{}{}\n    {elig} · {pay}\n    {}  (via {})",
         job.id,
         job.title,
         job.company,
+        level(job.seniority),
         partial_mark(hit.partial),
         job.url,
         via.join(", ")
     );
+}
+
+fn level(s: Option<Seniority>) -> String {
+    s.map(|s| {
+        format!(
+            " · {}",
+            serde_json::to_value(s).unwrap().as_str().unwrap_or("")
+        )
+    })
+    .unwrap_or_default()
 }
 
 fn partial_mark(partial: bool) -> &'static str {
