@@ -1,5 +1,59 @@
 {
   "$defs": {
+    "CompactHit": {
+      "description": "Just enough of a job to choose it.",
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "eligible": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Verdict"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Verdict for the viewer in `country`/`tz`; absent when no country was given."
+        },
+        "id": {
+          "type": "string"
+        },
+        "pay": {
+          "description": "The source's pay text, e.g. \"USD 50–100 hourly\".",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postedAt": {
+          "format": "date-time",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope",
+          "description": "Eligibility scope: worldwide, regions, countries, hybrid, onsite, unknown."
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "company",
+        "url",
+        "scope"
+      ],
+      "type": "object"
+    },
     "Eligibility": {
       "properties": {
         "confidence": {
@@ -63,6 +117,17 @@
         "method"
       ],
       "type": "object"
+    },
+    "Hit": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SearchHit"
+        },
+        {
+          "$ref": "#/$defs/CompactHit"
+        }
+      ],
+      "description": "A job in a search result: full, or compact."
     },
     "JobSource": {
       "properties": {
@@ -284,8 +349,9 @@
       "type": "integer"
     },
     "jobs": {
+      "description": "Each job as a `SearchHit`, or a `CompactHit` with `view: compact`.",
       "items": {
-        "$ref": "#/$defs/SearchHit"
+        "$ref": "#/$defs/Hit"
       },
       "type": "array"
     },

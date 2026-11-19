@@ -9,8 +9,10 @@ use std::fmt;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+use chrono::{DateTime, Utc};
+
 use crate::country;
-use crate::model::Job;
+use crate::model::{Job, Scope};
 use crate::store::Store;
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
@@ -65,6 +67,31 @@ pub struct SearchParams {
     pub limit: Option<u32>,
     /// Skip this many results (for the next page, pass the previous `nextOffset`).
     pub offset: Option<u32>,
+    /// Keep only jobs whose verdict is at least this good: `yes`, or `maybe`
+    /// (yes and maybe). Needs `country`. Without it, `unknown` jobs are kept too.
+    pub min_verdict: Option<MinVerdict>,
+    /// `full` (default) or `compact`: only what's needed to pick jobs (id,
+    /// title, company, link, scope, pay text, date, verdict), about a third of
+    /// the size. Get full details for the picks with `get_jobs`.
+    #[serde(default)]
+    pub view: View,
+}
+
+/// The weakest verdict a search keeps.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum MinVerdict {
+    Yes,
+    Maybe,
+}
+
+/// How much of each job a search returns.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum View {
+    #[default]
+    Full,
+    Compact,
 }
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -72,7 +99,8 @@ pub struct SearchParams {
 pub struct SearchResult {
     pub contract_version: u32,
     pub count: usize,
-    pub jobs: Vec<SearchHit>,
+    /// Each job as a `SearchHit`, or a `CompactHit` with `view: compact`.
+    pub jobs: Vec<Hit>,
     /// Pass as `offset` to get the next page; absent when this page is the last.
     pub next_offset: Option<u32>,
 }
@@ -86,26 +114,90 @@ pub struct SearchHit {
     pub eligible: Option<Verdict>,
 }
 
-pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult> {
-    let limit = p.limit.unwrap_or(DEFAULT_LIMIT).clamp(1, MAX_LIMIT);
-    let viewer = p
-        .country
-        .as_deref()
-        .map(|c| {
-            country::to_alpha2(c)
-                .map(|code| Viewer {
-                    country: code.to_string(),
-                    tz: p.tz,
-                    accept_onsite_in: Vec::new(),
-                })
-                .ok_or_else(|| Error::Invalid(format!("unknown country `{c}`")))
-        })
-        .transpose()?;
-    if let Some(tz) = p.tz
+/// A job in a search result: full, or compact.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(untagged)]
+pub enum Hit {
+    Full(Box<SearchHit>),
+    Compact(CompactHit),
+}
+
+/// Just enough of a job to choose it.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct CompactHit {
+    pub id: String,
+    pub title: String,
+    pub company: String,
+    pub url: String,
+    /// Eligibility scope: worldwide, regions, countries, hybrid, onsite, unknown.
+    pub scope: Scope,
+    /// The source's pay text, e.g. "USD 50–100 hourly".
+    pub pay: Option<String>,
+    pub posted_at: Option<DateTime<Utc>>,
+    /// Verdict for the viewer in `country`/`tz`; absent when no country was given.
+    pub eligible: Option<Verdict>,
+}
+
+impl Hit {
+    pub fn id(&self) -> &str {
+        match self {
+            Hit::Full(h) => &h.job.id,
+            Hit::Compact(c) => &c.id,
+        }
+    }
+
+    fn new(job: Job, eligible: Option<Verdict>, view: View) -> Self {
+        match view {
+            View::Full => Hit::Full(Box::new(SearchHit { job, eligible })),
+            View::Compact => Hit::Compact(CompactHit {
+                scope: job.eligibility.scope,
+                pay: job.pay.map(|p| p.raw),
+                id: job.id,
+                title: job.title,
+                company: job.company,
+                url: job.url,
+                posted_at: job.posted_at,
+                eligible,
+            }),
+        }
+    }
+}
+
+/// The viewer described by `country` and `tz`, if a country was given.
+fn viewer(country: Option<&str>, tz: Option<f64>) -> Result<Option<Viewer>> {
+    if let Some(tz) = tz
         && !(-12.0..=14.0).contains(&tz)
     {
         return Err(Error::Invalid(format!("tz {tz} is outside -12..=14")));
     }
+    country
+        .map(|c| {
+            country::to_alpha2(c)
+                .map(|code| Viewer {
+                    country: code.to_string(),
+                    tz,
+                    accept_onsite_in: Vec::new(),
+                })
+                .ok_or_else(|| Error::Invalid(format!("unknown country `{c}`")))
+        })
+        .transpose()
+}
+
+pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult> {
+    let limit = p.limit.unwrap_or(DEFAULT_LIMIT).clamp(1, MAX_LIMIT);
+    let viewer = viewer(p.country.as_deref(), p.tz)?;
+    if p.min_verdict.is_some() && viewer.is_none() {
+        return Err(Error::Invalid(
+            "`minVerdict` needs `country`: a verdict is about a viewer".into(),
+        ));
+    }
+    // Verdicts sort best first (yes, maybe, unknown, no); keep up to this one.
+    let worst = match p.min_verdict {
+        Some(MinVerdict::Yes) => VerdictKind::Yes,
+        Some(MinVerdict::Maybe) => VerdictKind::Maybe,
+        None => VerdictKind::Unknown,
+    };
 
     // Page through the store until the page fills: the verdict can drop jobs
     // the SQL predicate keeps (time zones, on-site), so one fixed-size read
@@ -120,7 +212,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         read += n;
         for job in rows {
             let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
-            if eligible.as_ref().is_some_and(|v| v.kind == VerdictKind::No) {
+            if eligible.as_ref().is_some_and(|v| v.kind > worst) {
                 continue;
             }
             if to_skip > 0 {
@@ -131,7 +223,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
                 more = true;
                 break 'pages;
             }
-            jobs.push(SearchHit { job, eligible });
+            jobs.push(Hit::new(job, eligible, p.view));
         }
         if n < BATCH {
             break;
@@ -142,6 +234,59 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         count: jobs.len(),
         next_offset: more.then_some(offset + limit),
         jobs,
+    })
+}
+
+// ---------- get_jobs ----------
+
+#[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct GetJobsParams {
+    /// Job ids from a search, at most 100.
+    pub ids: Vec<String>,
+    /// Viewer's country, as in `search_jobs`, to include each job's verdict.
+    pub country: Option<String>,
+    /// Viewer's UTC offset in hours. Used with `country`.
+    pub tz: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct GetJobsResult {
+    pub contract_version: u32,
+    /// The jobs found, in the order asked for, closed ones included (see `status`).
+    pub jobs: Vec<SearchHit>,
+    /// Ids that match no job.
+    pub missing: Vec<String>,
+}
+
+/// Full details for jobs picked from a (compact) search.
+pub async fn get_jobs(store: &Store, p: GetJobsParams) -> Result<GetJobsResult> {
+    if p.ids.len() > MAX_LIMIT as usize {
+        return Err(Error::Invalid(format!("at most {MAX_LIMIT} ids per call")));
+    }
+    let viewer = viewer(p.country.as_deref(), p.tz)?;
+    let mut found: std::collections::HashMap<String, Job> = store
+        .get(&p.ids)
+        .await?
+        .into_iter()
+        .map(|j| (j.id.clone(), j))
+        .collect();
+    let (mut jobs, mut missing) = (Vec::new(), Vec::new());
+    for id in p.ids {
+        match found.remove(&id) {
+            Some(job) => {
+                let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
+                jobs.push(SearchHit { job, eligible });
+            }
+            None if !jobs.iter().any(|h: &SearchHit| h.job.id == id) => missing.push(id),
+            None => {}
+        }
+    }
+    Ok(GetJobsResult {
+        contract_version: CONTRACT_VERSION,
+        jobs,
+        missing,
     })
 }
 

@@ -5,7 +5,10 @@
 //! read the message ("unknown country `Narnia`") and retry.
 use std::sync::Arc;
 
-use loker_core::api::{SearchParams, SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport};
+use loker_core::api::{
+    GetJobsParams, GetJobsResult, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams,
+    VerifyReport,
+};
 use rmcp::handler::server::wrapper::{Json, Parameters};
 use rmcp::{ServerHandler, ServiceExt, tool, tool_handler, tool_router};
 
@@ -19,8 +22,28 @@ pub struct LokerMcp {
 #[tool_router]
 impl LokerMcp {
     #[tool(
+        description = "Full details (eligibility evidence, pay, tags, every source) for job ids from \
+                       `search_jobs`, with the viewer's verdict when `country` is given. Closed jobs are \
+                       included with `status: closed`; unknown ids come back in `missing`.",
+        annotations(read_only_hint = true)
+    )]
+    async fn get_jobs(
+        &self,
+        Parameters(p): Parameters<GetJobsParams>,
+    ) -> Result<Json<GetJobsResult>, String> {
+        self.app
+            .get_jobs(p)
+            .await
+            .map(Json)
+            .map_err(|e| e.to_string())
+    }
+
+    #[tool(
         description = "Search stored jobs. Give `country` (and ideally `tz`) to get an eligibility verdict \
-                       per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped.",
+                       per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped. \
+                       `minVerdict: \"yes\"` keeps only jobs the viewer can apply to. To browse cheaply, use \
+                       `view: \"compact\"` (about a third of the size), then `get_jobs` for full details of the picks. \
+                       Every query word must match, so prefer short queries (\"backend\", not \"backend engineer python\").",
         annotations(read_only_hint = true)
     )]
     async fn search_jobs(
@@ -78,7 +101,8 @@ impl LokerMcp {
     name = "loker",
     instructions = "Job search over loker's local store. Pass the viewer's `country` and `tz` to \
                     `search_jobs` so each job carries an eligibility verdict with a reason; \
-                    `unknown` means the posting doesn't say, not that the viewer is excluded."
+                    `unknown` means the posting doesn't say, not that the viewer is excluded. \
+                    Browse with `view: \"compact\"` and get full details for the picks with `get_jobs`."
 )]
 impl ServerHandler for LokerMcp {}
 

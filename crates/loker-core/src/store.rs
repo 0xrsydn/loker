@@ -377,6 +377,20 @@ impl Store {
     }
 
     /// Every source that has ever stored a listing.
+    /// Jobs by id, active or closed, in no particular order; unknown ids are
+    /// simply absent.
+    pub async fn get(&self, ids: &[String]) -> anyhow::Result<Vec<Job>> {
+        let rows = sqlx::query(concat!(
+            "SELECT c.*, ",
+            sources_col!(),
+            " FROM canonical_jobs c WHERE c.id IN (SELECT value FROM json_each(?1))"
+        ))
+        .bind(serde_json::to_string(ids)?)
+        .fetch_all(&self.pool)
+        .await?;
+        rows.iter().map(row_to_job).collect()
+    }
+
     pub async fn source_ids(&self) -> anyhow::Result<Vec<String>> {
         Ok(
             sqlx::query_scalar("SELECT DISTINCT source_id FROM source_jobs ORDER BY source_id")

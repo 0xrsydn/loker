@@ -1,4 +1,22 @@
 {
+  "$defs": {
+    "MinVerdict": {
+      "description": "The weakest verdict a search keeps.",
+      "enum": [
+        "yes",
+        "maybe"
+      ],
+      "type": "string"
+    },
+    "View": {
+      "description": "How much of each job a search returns.",
+      "enum": [
+        "full",
+        "compact"
+      ],
+      "type": "string"
+    }
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
@@ -17,6 +35,17 @@
         "integer",
         "null"
       ]
+    },
+    "minVerdict": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/MinVerdict"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Keep only jobs whose verdict is at least this good: `yes`, or `maybe`\n(yes and maybe). Needs `country`. Without it, `unknown` jobs are kept too."
     },
     "offset": {
       "description": "Skip this many results (for the next page, pass the previous `nextOffset`).",
@@ -39,6 +68,11 @@
         "number",
         "null"
       ]
+    },
+    "view": {
+      "$ref": "#/$defs/View",
+      "default": "full",
+      "description": "`full` (default) or `compact`: only what's needed to pick jobs (id,\ntitle, company, link, scope, pay text, date, verdict), about a third of\nthe size. Get full details for the picks with `get_jobs`."
     }
   },
   "title": "SearchParams",

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "country": {
+      "description": "Viewer's country, as in `search_jobs`, to include each job's verdict.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ids": {
+      "description": "Job ids from a search, at most 100.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "tz": {
+      "description": "Viewer's UTC offset in hours. Used with `country`.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ids"
+  ],
+  "title": "GetJobsParams",
+  "type": "object"
+}

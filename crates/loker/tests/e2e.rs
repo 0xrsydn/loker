@@ -433,6 +433,70 @@ fn pipeline_end_to_end() {
     let bad = home.mcp_call("search_jobs", json!({"country": "Narnia"}));
     assert_eq!(bad["isError"], true);
 
+    // An agent's flow: browse compact, eligible only; then full details for the picks.
+    let browse = json!({"country": "ID", "tz": 7, "minVerdict": "yes", "view": "compact"});
+    let compact = home.mcp_call("search_jobs", browse.clone())["structuredContent"].clone();
+    let cli = home.json(&[
+        "search",
+        "--country",
+        "ID",
+        "--tz",
+        "7",
+        "--min-verdict",
+        "yes",
+        "--compact",
+        "--json",
+    ]);
+    assert_eq!(compact, cli, "compact search: CLI and MCP differ");
+    let hits = compact["jobs"].as_array().unwrap();
+    assert!(!hits.is_empty());
+    assert!(
+        hits.iter().all(|h| h["eligible"]["kind"] == "yes"),
+        "{compact:#}"
+    );
+    assert!(
+        hits.iter()
+            .all(|h| h.get("techTags").is_none() && h.get("sources").is_none())
+    );
+    let full = home.json(&[
+        "search",
+        "--country",
+        "ID",
+        "--tz",
+        "7",
+        "--min-verdict",
+        "yes",
+        "--json",
+    ]);
+    let (c, f) = (compact.to_string().len(), full.to_string().len());
+    assert!(
+        c * 2 < f,
+        "compact ({c} bytes) should be well under half of full ({f})"
+    );
+
+    let ids: Vec<Value> = hits.iter().map(|h| h["id"].clone()).collect();
+    let mut ask = ids.clone();
+    ask.push(json!("j_nope"));
+    let got = home.mcp_call("get_jobs", json!({"ids": ask, "country": "ID", "tz": 7}))["structuredContent"].clone();
+    let got_ids: Vec<Value> = got["jobs"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|j| j["id"].clone())
+        .collect();
+    assert_eq!(got_ids, ids, "get_jobs returns the picks in order");
+    assert_eq!(got["missing"], json!(["j_nope"]));
+    assert!(got["jobs"][0]["eligibility"]["confidence"].is_number());
+    let mut args = vec!["get".to_string()];
+    args.extend(ids.iter().map(|i| i.as_str().unwrap().to_string()));
+    args.extend(["j_nope", "--country", "ID", "--tz", "7", "--json"].map(String::from));
+    let args: Vec<&str> = args.iter().map(String::as_str).collect();
+    assert_eq!(home.json(&args), got, "get_jobs: CLI and MCP differ");
+
+    // A verdict filter needs a viewer.
+    let bad = home.mcp_call("search_jobs", json!({"minVerdict": "yes"}));
+    assert_eq!(bad["isError"], true);
+
     // A complete board that stops listing a job closes it; listing it again reopens it.
     stub.shrink.store(true, Ordering::SeqCst);
     let st = home.ingest("ashby:globex");

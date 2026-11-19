@@ -15,6 +15,7 @@ fn params(limit: u32, offset: Option<u32>) -> SearchParams {
         tz: Some(7.0),
         limit: Some(limit),
         offset,
+        ..Default::default()
     }
 }
 
@@ -89,7 +90,7 @@ async fn offset_pages_cover_every_result_once() {
         let r = search_jobs(&s, params(10, offset)).await.unwrap();
         pages += 1;
         for hit in &r.jobs {
-            assert!(seen.insert(hit.job.id.clone()), "{} repeated", hit.job.id);
+            assert!(seen.insert(hit.id().to_string()), "{} repeated", hit.id());
         }
         match r.next_offset {
             Some(n) => offset = Some(n),

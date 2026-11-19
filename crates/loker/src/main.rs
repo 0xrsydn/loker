@@ -4,8 +4,8 @@ use std::sync::Arc;
 use clap::{Parser, Subcommand};
 use loker::App;
 use loker_core::api::{
-    CheckStatus, IngestAllReport, IngestParams, SearchParams, SearchResult, SourcesEval,
-    VerifyParams, VerifyReport,
+    CheckStatus, GetJobsParams, GetJobsResult, Hit, IngestAllReport, IngestParams, MinVerdict,
+    SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport, View,
 };
 use loker_core::home::loker_home;
 use serde::Serialize;
@@ -57,7 +57,25 @@ enum Command {
         /// Skip this many results (the previous page's "next offset").
         #[arg(long)]
         offset: Option<u32>,
+        /// Keep only jobs whose verdict is at least this good (needs --country).
+        #[arg(long, value_parser = ["yes", "maybe"])]
+        min_verdict: Option<String>,
+        /// Return only id, title, company, link, scope, pay, date and verdict.
+        #[arg(long)]
+        compact: bool,
         /// Print the contract JSON (identical to MCP structured content).
+        #[arg(long)]
+        json: bool,
+    },
+    /// Show full details for job ids from a search.
+    Get {
+        ids: Vec<String>,
+        /// Include the verdict for someone based in this country.
+        #[arg(long)]
+        country: Option<String>,
+        /// Your UTC offset in hours.
+        #[arg(long, allow_hyphen_values = true)]
+        tz: Option<f64>,
         #[arg(long)]
         json: bool,
     },
@@ -201,6 +219,8 @@ async fn main() -> anyhow::Result<()> {
             tz,
             limit,
             offset,
+            min_verdict,
+            compact,
             json,
         } => {
             let q = query.join(" ");
@@ -211,12 +231,30 @@ async fn main() -> anyhow::Result<()> {
                     tz,
                     limit,
                     offset,
+                    min_verdict: min_verdict.map(|v| match v.as_str() {
+                        "yes" => MinVerdict::Yes,
+                        _ => MinVerdict::Maybe,
+                    }),
+                    view: if compact { View::Compact } else { View::Full },
                 })
                 .await?;
             if json {
                 print_json(&result)?;
             } else {
                 print_search(&result);
+            }
+        }
+        Command::Get {
+            ids,
+            country,
+            tz,
+            json,
+        } => {
+            let result = app.get_jobs(GetJobsParams { ids, country, tz }).await?;
+            if json {
+                print_json(&result)?;
+            } else {
+                print_get(&result);
             }
         }
         Command::Stats { json } => {
@@ -264,29 +302,58 @@ fn print_json(v: &impl Serialize) -> anyhow::Result<()> {
 
 fn print_search(r: &SearchResult) {
     for hit in &r.jobs {
-        let job = &hit.job;
-        let pay = job
-            .pay
-            .as_ref()
-            .map(|p| p.raw.as_str())
-            .unwrap_or("pay n/a");
-        let elig = match &hit.eligible {
-            Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
-            None => format!("{:?}", job.eligibility.scope).to_lowercase(),
-        };
-        let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
-        println!(
-            "{}  {} — {}\n    {elig} · {pay}\n    {}  (via {})",
-            job.id,
-            job.title,
-            job.company,
-            job.url,
-            via.join(", ")
-        );
+        match hit {
+            Hit::Full(hit) => print_hit(hit),
+            Hit::Compact(c) => {
+                let elig = match &c.eligible {
+                    Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
+                    None => format!("{:?}", c.scope).to_lowercase(),
+                };
+                let pay = c.pay.as_deref().unwrap_or("pay n/a");
+                println!(
+                    "{}  {} — {}\n    {elig} · {pay}\n    {}",
+                    c.id, c.title, c.company, c.url
+                );
+            }
+        }
     }
     match r.next_offset {
         Some(n) => eprintln!("{} result(s); more with --offset {n}", r.count),
         None => eprintln!("{} result(s)", r.count),
+    }
+}
+
+fn print_hit(hit: &SearchHit) {
+    let job = &hit.job;
+    let pay = job
+        .pay
+        .as_ref()
+        .map(|p| p.raw.as_str())
+        .unwrap_or("pay n/a");
+    let elig = match &hit.eligible {
+        Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
+        None => format!("{:?}", job.eligibility.scope).to_lowercase(),
+    };
+    let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
+    println!(
+        "{}  {} — {}\n    {elig} · {pay}\n    {}  (via {})",
+        job.id,
+        job.title,
+        job.company,
+        job.url,
+        via.join(", ")
+    );
+}
+
+fn print_get(r: &GetJobsResult) {
+    for hit in &r.jobs {
+        print_hit(hit);
+        if hit.job.status != "active" {
+            println!("    status: {}", hit.job.status);
+        }
+    }
+    for id in &r.missing {
+        eprintln!("{id}: no such job");
     }
 }
 
