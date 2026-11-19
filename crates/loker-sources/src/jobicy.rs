@@ -55,6 +55,12 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         seniority: s("jobLevel")
             .map(|l| l.to_lowercase())
             .filter(|l| l != "any" && l != "director"),
+        // jobIndustry is a list, like jobType.
+        category: match raw.get("jobIndustry") {
+            Some(Value::Array(a)) => crate::categories(a.iter().filter_map(as_string)),
+            Some(v) => as_string(v),
+            None => None,
+        },
         employment_type: job_type.as_deref().map(employment_type),
         eligibility: eligibility_from_text(
             &decode_entities(&s("jobGeo").unwrap_or_default()),

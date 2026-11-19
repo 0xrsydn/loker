@@ -548,6 +548,23 @@ fn transient(e: &reqwest::Error) -> bool {
     !e.is_status() && (e.is_timeout() || e.is_connect() || e.is_request() || e.is_body())
 }
 
+/// A source's category parts (department, team, ...) as one string: trimmed,
+/// empty and repeated parts dropped, joined with "; ". `None` when nothing is left.
+fn categories<I, S>(parts: I) -> Option<String>
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
+    let mut out: Vec<String> = Vec::new();
+    for p in parts {
+        let p = p.as_ref().trim();
+        if !p.is_empty() && !out.iter().any(|o| o == p) {
+            out.push(p.to_string());
+        }
+    }
+    (!out.is_empty()).then(|| out.join("; "))
+}
+
 /// HTML → Markdown; `None` for empty input.
 fn html_to_md(html: Option<&str>) -> anyhow::Result<Option<String>> {
     match html.map(str::trim).filter(|h| !h.is_empty()) {

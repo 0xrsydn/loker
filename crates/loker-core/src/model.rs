@@ -166,6 +166,11 @@ pub struct NewJob {
     pub company: String,
     pub seniority: Option<String>,
     pub employment_type: Option<String>,
+    /// The source's own category, department or team, as it says it
+    /// ("DevOps and Sysadmin", "Engineering; Core Engineering"). Raw input for
+    /// the role classifier, which knows which phrases mean something.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub category: Option<String>,
     pub eligibility: Eligibility,
     pub pay: Option<Pay>,
     pub tech_tags: Vec<String>,

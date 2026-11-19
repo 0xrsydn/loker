@@ -80,6 +80,8 @@ struct Categories {
     #[serde(default)]
     all_locations: Vec<String>,
     commitment: Option<String>,
+    department: Option<String>,
+    team: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -142,6 +144,14 @@ pub fn transform(source_id: &str, site: &str, raw: Value) -> anyhow::Result<NewJ
         title: item.text,
         company: site.to_string(),
         seniority: None,
+        category: crate::categories(
+            [
+                item.categories.department.as_deref(),
+                item.categories.team.as_deref(),
+            ]
+            .into_iter()
+            .flatten(),
+        ),
         employment_type: item.categories.commitment.as_deref().map(employment_type),
         eligibility,
         pay: item.salary_range.and_then(|s| {

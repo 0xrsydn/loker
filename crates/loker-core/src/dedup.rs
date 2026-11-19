@@ -155,6 +155,18 @@ fn merge(jobs: &[NewJob]) -> NewJob {
         company: primary.company.clone(),
         seniority: first(|j| j.seniority.clone()),
         employment_type: first(|j| j.employment_type.clone()),
+        // Every listing's category: each is evidence of what the job is.
+        category: {
+            let mut parts: Vec<&str> = Vec::new();
+            for c in jobs.iter().filter_map(|j| j.category.as_deref()) {
+                for p in c.split("; ") {
+                    if !parts.contains(&p) {
+                        parts.push(p);
+                    }
+                }
+            }
+            (!parts.is_empty()).then(|| parts.join("; "))
+        },
         eligibility,
         pay,
         tech_tags,

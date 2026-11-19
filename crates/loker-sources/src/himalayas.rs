@@ -83,6 +83,8 @@ struct Item {
     salary_period: Option<String>,
     #[serde(default)]
     seniority: Vec<String>,
+    #[serde(default)]
+    parent_categories: Vec<String>,
     employment_type: Option<String>,
     pub_date: Option<i64>,
     expiry_date: Option<i64>,
@@ -103,6 +105,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         title: item.title,
         company: item.company_name,
         seniority: item.seniority.first().map(|s| s.to_lowercase()),
+        category: crate::categories(&item.parent_categories),
         employment_type: item
             .employment_type
             .as_deref()

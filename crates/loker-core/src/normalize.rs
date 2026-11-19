@@ -9,9 +9,9 @@ use crate::model::{Eligibility, Method, NewJob, Pay, Scope, Seniority};
 /// The cleanups every job gets after its adapter's `transform`, whatever the
 /// source: so an adapter only maps fields, and no source can forget one.
 ///
-/// * title and company: HTML entities decoded, whitespace collapsed;
+/// * title, company and category: HTML entities decoded, whitespace collapsed;
 /// * every URL through [`clean_url`];
-/// * empty optional text (apply URL, seniority, employment type,
+/// * empty optional text (apply URL, seniority, employment type, category,
 ///   description) becomes `None`.
 pub fn tidy(job: &mut NewJob) {
     job.title = one_line(&decode_entities(&job.title));
@@ -21,6 +21,7 @@ pub fn tidy(job: &mut NewJob) {
     job.apply_url = non_empty(job.apply_url.take()).map(|u| clean_url(&u));
     job.seniority = non_empty(job.seniority.take());
     job.employment_type = non_empty(job.employment_type.take());
+    job.category = non_empty(job.category.take()).map(|c| one_line(&decode_entities(&c)));
     job.description_md = non_empty(job.description_md.take());
 }
 

@@ -89,6 +89,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         title: title.to_string(),
         company: company.to_string(),
         seniority: None,
+        category: s("category"),
         employment_type: s("type").as_deref().map(employment_type),
         eligibility: eligibility_from_text(region.trim_end_matches(" Only"), Some(true)),
         pay: None,

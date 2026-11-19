@@ -35,8 +35,11 @@ struct Item {
     first_published: Option<String>,
     updated_at: Option<String>,
     content: Option<String>,
+    #[serde(default)]
+    departments: Vec<Location>,
 }
 
+/// Anything with an optional `name` (a location, a department).
 #[derive(Deserialize)]
 struct Location {
     name: Option<String>,
@@ -63,6 +66,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
         title: item.title,
         company: item.company_name.unwrap_or(board),
         seniority: None,
+        category: crate::categories(item.departments.iter().filter_map(|d| d.name.as_deref())),
         employment_type: None,
         eligibility: eligibility_from_text(&location, None),
         pay: None,

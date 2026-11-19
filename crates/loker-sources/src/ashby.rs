@@ -46,6 +46,8 @@ struct Item {
     description_html: Option<String>,
     employment_type: Option<String>,
     compensation: Option<Compensation>,
+    department: Option<String>,
+    team: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -87,6 +89,11 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
         title: item.title,
         company: board.to_string(),
         seniority: None,
+        category: crate::categories(
+            [item.department.as_deref(), item.team.as_deref()]
+                .into_iter()
+                .flatten(),
+        ),
         employment_type: item.employment_type.as_deref().map(employment_type),
         eligibility,
         pay: item

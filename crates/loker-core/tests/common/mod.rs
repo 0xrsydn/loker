@@ -42,6 +42,7 @@ pub fn job(
         title: title.into(),
         company: company.into(),
         seniority: None,
+        category: None,
         employment_type: None,
         eligibility: Eligibility {
             scope,

@@ -51,6 +51,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         title,
         company,
         seniority: None,
+        category: None,
         employment_type: None,
         eligibility: eligibility_from_text(
             &decode_entities(&s("location").unwrap_or_default()),
