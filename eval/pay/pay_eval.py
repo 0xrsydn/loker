@@ -3,11 +3,15 @@ labelled by Opus (and DeepSeek as a second labeler). Run by hand; not part of
 CI. See README.md.
 
   python3 pay_eval.py sample [n]                    # pick jobs from snapshot.db -> sample.json
-  python3 pay_eval.py sample 150 --holdout          # more jobs, never tuned on -> holdout.json
+  python3 pay_eval.py sample 150 --set holdout2     # a fresh holdout -> holdout2.json
   JUDGE=opus|deepseek python3 pay_eval.py label     # label unlabelled sample jobs (cached)
   python3 pay_eval.py agree                         # Opus vs DeepSeek
   python3 pay_eval.py score [--bin PATH] [-v]       # the rules vs the labels
-  (label and score take --holdout to use holdout.json instead)
+  (label and score take --set NAME to use NAME.json; --holdout is --set holdout)
+
+A new set never includes a job in another set or in seen.json, the jobs whose
+text was looked at while writing the rules. Add to seen.json whenever you read
+a job's description to change the rules, so a later holdout stays unseen.
 
 The rules run through `examples/pay_text.rs` (build it with
 `cargo build --release -p loker-core --example pay_text`), which reads each
@@ -60,21 +64,22 @@ def descriptions(ids=None):
 
 # ---------- sample ----------
 
-SAMPLE = "holdout.json" if "--holdout" in sys.argv else "sample.json"
+SET = arg("--set", "holdout" if "--holdout" in sys.argv else "sample")
+SAMPLE = f"{SET}.json"
 
 
 def sample():
-    """Jobs whose description mentions money, and a random share of the rest.
-    The holdout draws from jobs in neither file."""
+    """Jobs whose description mentions money, and a random share of the rest,
+    from jobs in no other set and not in seen.json."""
     n = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 300
-    taken = set()
-    for name in ("sample.json", "holdout.json"):
-        if name != SAMPLE:
+    taken = set(load("seen.json", []))
+    for name in os.listdir(HERE):
+        if name.startswith(("sample", "holdout")) and name.endswith(".json") and name != SAMPLE:
             taken |= {j for ids in load(name, {}).values() for j in ids}
     jobs = {j: d for j, d in descriptions().items() if j not in taken}
     mention = sorted(j for j, d in jobs.items() if MENTION.search(d["description"].replace("\\$", "$")))
     rest = sorted(set(jobs) - set(mention))
-    rng = random.Random(1 if SAMPLE == "sample.json" else 2)
+    rng = random.Random({"sample": 1, "holdout": 2}.get(SET, SET))
     a = rng.sample(mention, min(n * 2 // 3, len(mention)))
     b = rng.sample(rest, min(n - len(a), len(rest)))
     save(SAMPLE, {"mention": sorted(a), "rest": sorted(b)})
