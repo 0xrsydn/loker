@@ -21,10 +21,9 @@ use crate::model::{Money, Pay, PayExtra, PayExtraKind, PayMethod, Period};
 use crate::normalize::{self, money, percent};
 
 /// A currency before a figure. Dollar prefixes name their country.
-const CUR: &str = r"(?:Php|Rp|US\$|CA\$|C\$|AU\$|A\$|NZ\$|S\$|SG\$|HK\$|R\$|\$|€|£|₹|\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|CHF|JPY|BRL|MXN|PLN|SEK|NOK|DKK|ZAR)\b)";
-/// A currency code after a figure ("59,000 EUR").
-const CODE: &str =
-    r"\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|CHF|JPY|BRL|MXN|PLN|SEK|NOK|DKK|ZAR)\b";
+const CUR: &str = r"(?:Php|Rp|US\$|CA\$|C\$|AU\$|A\$|NZ\$|S\$|SG\$|HK\$|R\$|\$|€|£|₹|₱|\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|MYR|THB|VND|KRW|TWD|CNY|AED|SAR|ILS|TRY|CHF|JPY|BRL|MXN|ARS|CLP|COP|PEN|PLN|CZK|HUF|RON|SEK|NOK|DKK|ZAR|NGN|KES|EGP|PKR|BDT)\b)";
+/// A currency code or sign after a figure ("59,000 EUR", "100k€").
+const CODE: &str = r"(?:\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|MYR|THB|VND|KRW|TWD|CNY|AED|SAR|ILS|TRY|CHF|JPY|BRL|MXN|ARS|CLP|COP|PEN|PLN|CZK|HUF|RON|SEK|NOK|DKK|ZAR|NGN|KES|EGP|PKR|BDT)\b|€|£)";
 /// A figure: "120,000", "15,00,000", "2.800" (thousands), "24.50".
 const NUM: &str = r"\d{1,3}(?:\.\d{3})+\b|\d[\d,]*(?:\.\d+)?";
 const SUFFIX: &str = r"(?:[kK]\b|MM?\b|\s?million\b)";
@@ -43,13 +42,13 @@ static EQUITY_PERCENT: LazyLock<Regex> = LazyLock::new(|| {
 
 /// Words that make a sentence about this job's pay.
 static PAY_WORDS: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\b(?:salary|salaries|compensation|remuneration|wages?|pay|pays|comp|hourly rate|day rate|rate of|ote|on[- ]target|per hour|an hour|/\s?hr|/\s?hour)\b").unwrap()
+    Regex::new(r"(?i)\b(?:salary|salaries|compensation|remuneration|wages?|pay|pays|comp|hourly rate|day rate|rate of|(?:monthly|weekly|daily|annual) rate|gehalt|salaire|sueldo|salario|gaji|ote|on[- ]target|per hour|an hour|/\s?hr|/\s?hour)\b|\brate\s*:").unwrap()
 });
 
 /// Words that make a figure something other than pay, near it.
 static NOT_PAY: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
-        r"(?i)\b(?:rais(?:e|ed|ing)|funding|funded|series [a-f]|seed|pre-seed|valuation|valued|revenue|arr|acv|gmv|deals?|invest(?:ed|ors?|ment)?|backed|budgets?|grants?|reimburse\w*|allowance|stipend|wellness|laundry|meals?|lunch|relocation|401\(?k?\)?|hsa|fsa|retirement|pension|match(?:ing)?|home office|workstation|set ?up|equipment|learning|education|training|conference|gym|fitness|health|medical|dental|vision|childcare|vacation|bike|commut\w*|mobility|perks?|vouchers?|subscriptions?|membership|saved|set aside|members|internet|phone|coworking|referral|customers|users|clients|quota|prize|award|fund|fees?|price|pricing|cost|spend|savings|insurance|cpa|cpc|aum|assets|portfolio|transactions|loans?|billion|draw|per (?:referred|active|candidate|lead|sale|task|word|video))\b",
+        r"(?i)\b(?:rais(?:e|ed|ing)|funding|funded|series [a-f]|seed|pre-seed|valuation|valued|revenue|arr|acv|gmv|deals?|invest(?:ed|ors?|ment)?|backed|budgets?|grants?|reimburse\w*|allowance|stipend|wellness|laundry|meals?|lunch|relocation|401\(?k?\)?|hsa|fsa|retirement|pension|match(?:ing)?|home office|workstation|set ?up|equipment|learning|education|training|(?:professional|career|personal) development|conference|gym|fitness|health|medical|dental|vision|childcare|vacation|bike|commut\w*|mobility|perks?|vouchers?|subscriptions?|membership|saved|set aside|members|internet|phone|coworking|referral|customers|users|clients|quota|prize|award|fund|fees?|price|pricing|cost|spend|savings|insurance|cpa|cpc|aum|assets|portfolio|transactions|loans?|billion|draw|per (?:referred|active|candidate|lead|sale|task|word|video))\b",
     )
     .unwrap()
 });
@@ -78,7 +77,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
     for (i, line) in lines.iter().enumerate() {
         // Pay words may sit around the figure: "Annual Salary" or "Base Pay
         // Range" above it, "Average base salary range." below.
-        let above = lines[i.saturating_sub(2)..i].join(" ");
         // A period above counts only from a heading, not from a paragraph.
         let heading: String = lines[i.saturating_sub(2)..i]
             .iter()
@@ -86,7 +84,10 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
             .copied()
             .collect::<Vec<_>>()
             .join(" ");
-        let around = lines[i.saturating_sub(2)..(i + 2).min(lines.len())].join(" ");
+        let around = lines[i.saturating_sub(2)..(i + 4).min(lines.len())].join(" ");
+        // An OTE named in the paragraph introducing the figures ("On-Target
+        // Earnings (OTE) for this role are listed below").
+        let intro = lines[i.saturating_sub(5)..i].join(" ");
         // Ranges listed one after another under one pay heading share it.
         let pay_context =
             PAY_WORDS.is_match(&around) || base_lines.last().is_some_and(|b: &usize| i - b <= 3);
@@ -99,7 +100,7 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
         for sentence in sentences(line) {
             let mut used = false;
             for m in RANGE.captures_iter(sentence) {
-                let Some(found) = figure(sentence, &above, &heading, pay_context, &m) else {
+                let Some(found) = figure(sentence, &intro, &heading, pay_context, &m) else {
                     continue;
                 };
                 match found {
@@ -108,9 +109,18 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
                         if line_has_base && RESTATED.is_match(&sentence[..at.start()]) {
                             continue;
                         }
+                        // "Metro 2: $130,000 - 150,000" names its range first.
+                        let prefix = sentence[..at.start()].trim();
+                        let prefix = prefix
+                            .strip_suffix(':')
+                            .filter(|p| {
+                                p.chars().count() <= 40 && !has_money(p) && !PAY_WORDS.is_match(p)
+                            })
+                            .map(|p| p.trim().to_string());
                         money.label = LABEL
                             .captures(&sentence[at.end()..])
                             .map(|c| c["l"].trim().to_string())
+                            .or(prefix)
                             .or_else(|| label.map(str::to_string));
                         if !base.contains(&money) {
                             base.push(money);
@@ -170,7 +180,10 @@ fn figure(
     m: &regex::Captures,
 ) -> Option<Found> {
     let all = m.get(0)?;
-    let currency = currency(m)?;
+    let mut currency = currency(m)?;
+    if bare_dollar(m) {
+        currency = dollar_country(&format!("{sentence} {heading}"))?.to_string();
+    }
     let before = &sentence[..all.start()];
     let after = &sentence[all.end()..];
     let near = format!("{} {}", tail(before, 40), head(after, 40));
@@ -180,6 +193,12 @@ fn figure(
     // With no pay words around, only a range with its period counts:
     // "$10,000–$25,000 USD annually", not "an average of $1,800 annually".
     let stated = period_after(after);
+    // "$185K–$215K base": the word after the figure says what it is.
+    let pay_context = pay_context
+        || head(after, 8)
+            .trim_start()
+            .to_lowercase()
+            .starts_with("base");
     if !pay_context && (stated.is_none() || m.name("n2").is_none()) {
         return None;
     }
@@ -229,15 +248,55 @@ static OFFER: LazyLock<Regex> = LazyLock::new(|| {
 /// "total compensation of up to €120,000": not base pay.
 static TOTAL: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
-        r"total (?:cash |target |annual )?(?:compensation|comp|cash|package|rewards?)\b[^$€£\d]*$",
+        r"total (?:cash |target |annual )?(?:compensation|comp|cash|package|rewards?|potential|earnings)\b[^$€£\d]*$",
     )
     .unwrap()
 });
-static UP_TO: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?:^|\s)up to\s*$").unwrap());
+static UP_TO: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(?:^|\s)(?:up to|bis|hingga|sampai)\s*$").unwrap());
 static FROM: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?:^|\s)(?:starting at|starts at|from|at least|minimum(?: of)?|min\.?)\s*$")
         .unwrap()
 });
+
+/// A bare "$" (no country prefix, no code after).
+fn bare_dollar(m: &regex::Captures) -> bool {
+    m.name("c3").is_none()
+        && m.name("cm").is_none()
+        && m.name("c1")
+            .or_else(|| m.name("c2"))
+            .is_some_and(|c| c.as_str().trim() == "$")
+}
+
+/// "$" is the US dollar unless the text names another dollar country
+/// ("Ontario based: $80,000" is CAD); `None` when it names both, since the
+/// figure could be either.
+fn dollar_country(text: &str) -> Option<&'static str> {
+    static OTHERS: LazyLock<Vec<(&str, Regex)>> = LazyLock::new(|| {
+        [
+            ("CAD", r"(?i)\b(?:cad|canada|canadian|ontario|toronto|vancouver|montr[eé]al|qu[eé]bec|british columbia|alberta|calgary|ottawa|edmonton|winnipeg)\b"),
+            ("AUD", r"(?i)\b(?:aud|australia|australian|sydney|melbourne|brisbane|perth|adelaide)\b"),
+            ("NZD", r"(?i)\b(?:nzd|new zealand|auckland|wellington)\b"),
+            ("SGD", r"(?i)\b(?:sgd|singapore)\b"),
+        ]
+        .into_iter()
+        .map(|(c, r)| (c, Regex::new(r).unwrap()))
+        .collect()
+    });
+    static US: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(r"\b(?:US|U\.S\.|USA|United States)\b|(?i:\b(?:american|california|new york|san francisco|seattle|texas|boston|chicago|austin|denver)\b)").unwrap()
+    });
+    let named: Vec<&str> = OTHERS
+        .iter()
+        .filter(|(_, r)| r.is_match(text))
+        .map(|(c, _)| *c)
+        .collect();
+    match (named.as_slice(), US.is_match(text)) {
+        ([], _) => Some("USD"),
+        ([c], false) => Some(c),
+        _ => None,
+    }
+}
 
 fn has_money(text: &str) -> bool {
     RANGE.captures_iter(text).any(|m| currency(&m).is_some())
@@ -245,10 +304,13 @@ fn has_money(text: &str) -> bool {
 
 fn currency(m: &regex::Captures) -> Option<String> {
     // A code after the figure names the dollar: "$175,000 - $235,000 CAD".
-    if let Some(c) = m.name("c3").or_else(|| m.name("cm")) {
-        return Some(c.as_str().to_string());
-    }
-    let c = m.name("c1").or_else(|| m.name("c2"))?.as_str().trim();
+    let c = m
+        .name("c3")
+        .or_else(|| m.name("cm"))
+        .or_else(|| m.name("c1"))
+        .or_else(|| m.name("c2"))?
+        .as_str()
+        .trim();
     Some(
         match c {
             "$" | "US$" => "USD",
@@ -261,6 +323,7 @@ fn currency(m: &regex::Captures) -> Option<String> {
             "€" => "EUR",
             "£" => "GBP",
             "₹" => "INR",
+            "₱" => "PHP",
             "Php" => "PHP",
             "Rp" => "IDR",
             code => code,
@@ -272,6 +335,11 @@ fn currency(m: &regex::Captures) -> Option<String> {
 /// A figure with its suffix ("120k", "1.2M"); `other` is the range's other
 /// suffix, for "$130-225K".
 fn number(n: &str, suffix: Option<regex::Match>, other: Option<regex::Match>) -> Option<f64> {
+    // "60,000,00": a comma before two final digits is a decimal comma.
+    let n = &match n.rsplit_once(',') {
+        Some((head, cents)) if cents.len() == 2 && !n.contains('.') => format!("{head}.{cents}"),
+        _ => n.to_string(),
+    };
     let digits = if n.matches('.').count() >= 1
         && n.split('.').skip(1).all(|g| g.len() == 3)
         && !n.contains(',')
@@ -414,16 +482,30 @@ fn period_word(text: &str) -> Option<Period> {
     })
 }
 
-/// Markdown escapes and emphasis out, so "\$120,000" and "**Salary:**" read plainly.
+/// Markdown escapes and emphasis out, so "\$120,000" and "**Salary:**" read
+/// plainly; "Min: $18.53, Max: $24.35" as the range it is.
 fn clean(text: &str) -> String {
-    text.replace("\\n", "\n")
+    static MIN_MAX: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(
+            r"(?i)\bmin(?:imum)?\s*:?\s*(?P<a>[$€£]\s?\d[\d.,]*\d)\s*[,;/]?\s*max(?:imum)?\s*:?\s*",
+        )
+        .unwrap()
+    });
+    // UTF-8 dashes and dots a feed decoded as Latin-1: "$185Kâ\u{80}\u{93}$215K".
+    let text = text
+        .replace("â\u{80}\u{93}", "–")
+        .replace("â\u{80}\u{94}", "—")
+        .replace("Â·", "·")
+        .replace("Â ", " ")
+        .replace("\\n", "\n")
         .replace("\\$", "$")
         .replace("\\-", "-")
         .replace("\\.", ".")
         .replace("\\+", "+")
         .replace("**", "")
         .replace("__", "")
-        .replace(['\u{a0}', '\u{2009}', '\u{202f}'], " ")
+        .replace(['\u{a0}', '\u{2009}', '\u{202f}'], " ");
+    MIN_MAX.replace_all(&text, "${a} - ").into_owned()
 }
 
 /// Sentences of a line, split after ". ", "! ", "? " and "; " but not inside

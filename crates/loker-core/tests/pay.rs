@@ -193,6 +193,31 @@ fn pay_read_from_descriptions() {
                 ),
             ]),
         ),
+        // Another dollar, named by place or code; both named is either.
+        (
+            "Expected salary range, Ontario based: $80,000 - $100,000",
+            Some(vec![year("CAD", Some(80e3), Some(100e3))]),
+        ),
+        ("Salary: $80,000 - $100,000 in the US or Canada", None),
+        // A sign after a k figure; "bis" is up to.
+        (
+            "Gehalt bis 100k€ + Bonus",
+            Some(vec![year("EUR", None, Some(100e3))]),
+        ),
+        // A decimal comma; a broken (mojibake) dash still makes a range.
+        (
+            "Compensation Range: $60,000,00 - $65,000.00 + commission CAD",
+            Some(vec![year("CAD", Some(60e3), Some(65e3))]),
+        ),
+        (
+            "Hybrid in Palo Alto · $185Kâ\u{80}\u{93}$215K base + equity",
+            Some(vec![year("USD", Some(185e3), Some(215e3))]),
+        ),
+        // A benefit after base pay is not a second range.
+        (
+            "Salary $90,000. Grow with $1500 USD annually for professional development.",
+            Some(vec![year("USD", Some(90e3), Some(90e3))]),
+        ),
         // Not pay: benefits, funding, sales numbers, totals, savings.
         ("*   $200 monthly wellness reimbursement", None),
         ("*   Up to $15K relocation bonus", None),
