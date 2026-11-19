@@ -1,0 +1,4203 @@
+{
+ "v1|j_004f83fcfe": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 250000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: $150,000 – $250,000 USD annually",
+  "extras": []
+ },
+ "v1|j_0088e23956": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": 15000,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_02b5a45c4c": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": 15000,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_0321cad9b1": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_03cbb4e176": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 75000,
+    "min": 55000,
+    "period": "year"
+   }
+  ],
+  "evidence": "$55,000 - $75,000 a year Average base salary range.",
+  "extras": []
+ },
+ "v1|j_042162e8fc": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_06078af562": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_06486940e7": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_067f79ab9f": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_069c5be345": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_07a6b3aa11": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_08340afc40": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_085bc64ad7": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 65000,
+    "min": 55000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $55,000 to $65,000 annually.",
+  "extras": []
+ },
+ "v1|j_08a27af13d": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_08decfb4de": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 70000,
+    "min": 60000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The base wage or salary range for this position is $60,000 - $70,000.",
+  "extras": []
+ },
+ "v1|j_08ee88b3bd": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 120,
+    "min": 60,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Pay: $60–$120/hour",
+  "extras": []
+ },
+ "v1|j_08fb419b09": {
+  "base": [],
+  "evidence": "Annual OTE Salary \\$152,000—\\$190,000 USD",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 190000,
+     "min": 152000,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_0a1506b255": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to \\$15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null
+    },
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_0bef14a306": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_0c6babf894": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_0c899f38d4": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 100000,
+    "min": 50000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation \\$50,000 to \\$100,000 per year (plus commission)",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_0f3575d6aa": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 220000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: \\$150,000 – \\$220,000 USD annually, depending on experience. Equity participation as a founding team member.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_0fc522c4d2": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_1146ecf4be": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_15ae21edde": {
+  "base": [
+   {
+    "currency": "PHP",
+    "label": null,
+    "max": 100000,
+    "min": 80000,
+    "period": "month"
+   }
+  ],
+  "evidence": "Salary: Php 80,000 to Php 100,000/month",
+  "extras": []
+ },
+ "v1|j_16ae49b111": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: \\$150,000 – \\$200,000 USD annually",
+  "extras": []
+ },
+ "v1|j_186c1df2f8": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_18fd652d4a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 180000,
+    "min": 100000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation \\& Benefits Base salary range: \\$100,000 to \\$180,000 USD annually.",
+  "extras": []
+ },
+ "v1|j_1a63025e7e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000- $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_1ad5484f14": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 6000,
+    "min": 2800,
+    "period": "month"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be €2,800 - €6,000/month. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_1bc162917a": {
+  "base": [],
+  "evidence": "Competitive compensation packages with meaningful ownership",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_1c272f9bf5": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_1e2529d190": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 90,
+    "min": 90,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation: approximately US\\$90 per hour.",
+  "extras": []
+ },
+ "v1|j_1e48c81d27": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_212a443f36": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 300000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation \\& Benefits Base salary range: \\$150,000 to \\$300,000 annually.",
+  "extras": []
+ },
+ "v1|j_220f8c4de5": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_2266b76f67": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 120000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: $120,000 – $200,000 USD annually, depending on experience.",
+  "extras": []
+ },
+ "v1|j_22fd905c7a": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 100000,
+    "min": 75000,
+    "period": "year"
+   }
+  ],
+  "evidence": "€75–100k salary, depending on location and experience, plus company stock options",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_24cc7f9f7a": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_2bc5bfb3ac": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 230000,
+    "min": 196000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Pay Range $196,000—$230,000 USD. This role may also be eligible for bonus, equity, benefits, and Employee Travel Credits.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_2bd1787a8b": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_2c02827e6c": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_2d3dd7fe80": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 175000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $150,000 to $175,000 annually. OTE (on-target earnings, base plus variable): $300,000 to $350,000.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 350000,
+     "min": 300000,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_2d7f93d554": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_2d8350ecc4": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_2eb490a816": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 4,
+    "min": 4,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Rate: USD 4.00/hour",
+  "extras": []
+ },
+ "v1|j_313129d002": {
+  "base": [],
+  "evidence": "Benefits include, but are not limited to: * Health Benefits * Paid Time Off and Paid Holidays * Parental Leave * Equity * Monthly Wellness Reimbursement * Monthly Lunch on Legion",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_322357772d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 5900,
+    "period": "month"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $5,900 - $10,500/month.",
+  "extras": []
+ },
+ "v1|j_325dfc2f34": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_33ed244d5e": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_34ade7d7b8": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_35edad8992": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 5900,
+    "period": "month"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $5,900 - $10,500/month.",
+  "extras": []
+ },
+ "v1|j_36eef10c29": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $145,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3860b2ee8f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 220000,
+    "min": 215000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Target Annual Compensation: $215-220k salary + $215-220k commission = $430-440k OTE + Equity",
+  "extras": [
+   {
+    "amount": {
+     "max": 220000,
+     "min": 215000
+    },
+    "kind": "commission",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 440000,
+     "min": 430000
+    },
+    "kind": "ote",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3868ecf684": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_3a15af79ae": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": null,
+    "min": 24000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: Starting from €40,000 OTE per annum gross (60% base / 40% bonus), subject to location, skills and experience.",
+  "extras": [
+   {
+    "amount": {
+     "max": null,
+     "min": 16000
+    },
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": null,
+     "min": 40000
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3a8c609341": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 180000,
+    "min": 180000,
+    "period": "year"
+   }
+  ],
+  "evidence": "$180,000 annual base salary, plus meaningful equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3bea01b991": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_3c393917eb": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 70,
+    "min": 35,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation is $35 to $70 per hour, depending on the project, field, and experience level. Pay is based on hours worked.",
+  "extras": []
+ },
+ "v1|j_3cef89d425": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_3d01d2ffab": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 160000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The annual US salary range for this role is $160,000 - $200,000 plus equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3d398c51f2": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 142000,
+    "min": 95000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $95,000 - $142,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3d556b33b8": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_3dcb594b42": {
+  "base": [
+   {
+    "currency": "CAD",
+    "label": "Canada",
+    "max": 215000,
+    "min": 156500,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "US SF Bay Area (Metro Zone 3)",
+    "max": 255000,
+    "min": 185000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "US Metro Zone 2",
+    "max": 245000,
+    "min": 175000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "US General",
+    "max": 225000,
+    "min": 165000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Canada Base Pay Range $156,500—$215,000 CAD Expected salary range for San Francisco and the surrounding area. US SF Bay Area (Metro Zone 3) $185,000—$255,000 USD Expected salary range for specific metro areas including Boston, Washington DC, Denver, Los Angeles, New York, Portland, San Diego, and Seattle. These metro areas may change periodically. US Metro Zone 2 $175,000—$245,000 USD Expected pay range for all other US locations not falling into Metro Zone 3 or Metro Zone 2. US General $165,000—$225,000 USD",
+  "extras": []
+ },
+ "v1|j_3dd3776e74": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 75000,
+    "min": 65000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation: $65,000–$75,000 base salary, based on job-related experience, plus commission",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_3e45b3a526": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 2400,
+    "min": 2400,
+    "period": "month"
+   }
+  ],
+  "evidence": "Compensation is €2,400 per month, equivalent to approximately €28,800 annually.",
+  "extras": []
+ },
+ "v1|j_40dd6aeab0": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_410b345530": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_41f05483c8": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 72000,
+    "min": 72000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is €6,000 gross per month, equivalent to €72,000 annually. Revenue share is also offered, with total compensation of up to €120,000 annually.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "EUR",
+     "max": 120000,
+     "min": null,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_425edb98f6": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_4385c69b49": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_44f9e13d8d": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_45c04cc283": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_46c6e7247f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $145,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_46e9a80cb0": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_47d22151df": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 110000,
+    "min": 85000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base Pay Range $85,000—$110,000 USD. The total compensation package for this position may also include performance bonus, benefits and/or other applicable incentive compensation plans.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_4c4568ffee": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 90,
+    "min": 90,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation is US$90 per hour.",
+  "extras": []
+ },
+ "v1|j_4d571f32bd": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 130000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $130,000 to $200,000 annually.",
+  "extras": []
+ },
+ "v1|j_4e42c64d8c": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "30-day trial",
+    "max": 2000,
+    "min": 2000,
+    "period": "month"
+   },
+   {
+    "currency": "USD",
+    "label": "long-term",
+    "max": 3000,
+    "min": 2000,
+    "period": "month"
+   }
+  ],
+  "evidence": "The role begins with a fully paid 30-day working trial at USD $2,000. If the fit is strong, it becomes a long-term full-time position expected to pay USD $2,000 to $3,000 per month, based on demonstrated level, with additional performance upside available for an exceptional long-term operator.",
+  "extras": []
+ },
+ "v1|j_4fb2b182a8": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 300000,
+    "min": 200000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: $200,000 – $300,000 USD annually * Equity and additional benefits commensurate with a founding-team role",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_51d497cf6b": {
+  "base": [],
+  "evidence": "The pay range is inclusive of base salary plus any applicable bonuses or commissions. Total compensation pay range (annual salary): $115,000—$140,000 USD",
+  "extras": [
+   {
+    "amount": {
+     "max": 140000,
+     "min": 115000
+    },
+    "currency": "USD",
+    "kind": "ote",
+    "percent": null,
+    "period": "year"
+   }
+  ]
+ },
+ "v1|j_52cd07ec02": {
+  "base": [
+   {
+    "currency": "ZAR",
+    "label": null,
+    "max": 30000,
+    "min": 25000,
+    "period": "month"
+   }
+  ],
+  "evidence": "Salary: 25,000 ZAR to 30,000 ZAR",
+  "extras": []
+ },
+ "v1|j_5378688528": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_540603227f": {
+  "base": [],
+  "evidence": "Early enough that you’ll get meaningful ownership.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_55c8899111": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 112000,
+    "min": 75000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $75,000 - $112,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_55df4bba30": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 6000,
+    "min": 4500,
+    "period": "month"
+   }
+  ],
+  "evidence": "The salary range for this role is $4,500 - $6,000 per month (Gross in USD)",
+  "extras": []
+ },
+ "v1|j_55f3a1f640": {
+  "base": [],
+  "evidence": "Compensation is output-based; experts are paid per recorded video that meets the project specifications.",
+  "extras": []
+ },
+ "v1|j_575235c5c7": {
+  "base": [],
+  "evidence": "Competitive base salary plus uncapped commission tied directly to qualified meetings and pipeline generation.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_5859394465": {
+  "base": [],
+  "evidence": "Competitive salary and company benefits",
+  "extras": []
+ },
+ "v1|j_58b74797f4": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 278000,
+    "min": 220000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The annual base salary range for this position is $220,000—$278,000 USD. This position is also eligible for a discretionary year-end bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_58c52c8c15": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 154000,
+    "min": 130900,
+    "period": "year"
+   }
+  ],
+  "evidence": "Total compensation may also include equity and bonus eligibility. Annual base salary range (excluding equity and bonus): $130,900—$154,000 USD",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_590ae63177": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 145000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $145,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_596874ce3d": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_5a3d13fe1c": {
+  "base": [],
+  "evidence": "Competitive pay and growth opportunities",
+  "extras": []
+ },
+ "v1|j_5a6f6aecca": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 30000,
+    "min": 30000,
+    "period": "year"
+   }
+  ],
+  "evidence": "**$30,000 USD a year** (about $2,500 a month), full-time, as an independent contractor",
+  "extras": []
+ },
+ "v1|j_5b57c69524": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 140000,
+    "min": 96000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $96,000 - $140,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_5e2716921b": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 120000,
+    "min": 80000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $80,000 to $120,000 annually. Equity is available.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_5e6ebf5e20": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 90,
+    "min": 80,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation $80/hour (regular rate) and $90/hour (premium rate)",
+  "extras": []
+ },
+ "v1|j_5f2b64ee37": {
+  "base": [],
+  "evidence": "Ownership in Our Future — Equity that gives you a stake in the impact and value we’re building together.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_5fb7ebee96": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 144600,
+    "min": 96400,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base Compensation Range: $96,400 - $144,600/yr * 30% variable * Company equity in the form of RSUs",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": {
+     "max": 0.3,
+     "min": 0.3
+    }
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_5fecf811b5": {
+  "base": [],
+  "evidence": "This program provides valuable training to participants and is unpaid.",
+  "extras": []
+ },
+ "v1|j_6000c2203e": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_606b8e5ec6": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_60c7bf345d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 100,
+    "min": 50,
+    "period": "hour"
+   }
+  ],
+  "evidence": "$50–$100 per hour equivalent, paid per accepted task",
+  "extras": []
+ },
+ "v1|j_618edfcb47": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_61b70bb2d0": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to $15K relocation bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_61deaeb530": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_62611c4ab4": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 1000,
+    "min": 500,
+    "period": null
+   }
+  ],
+  "evidence": "We use a project-based billing system, with compensation for each report ranging from $500 to $1,000.",
+  "extras": []
+ },
+ "v1|j_635782abfc": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 323120,
+    "min": 161560,
+    "period": "year"
+   }
+  ],
+  "evidence": "The total cash compensation range for this position is $230,800 to $461,600 with 30% of this being comprised of an annual incentive target.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 138480,
+     "min": 69240
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_63dab1ed71": {
+  "base": [],
+  "evidence": "Compensation: €30,000 – €40,000 per year (total compensation, including base salary and variable pay), depending on experience and location.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "EUR",
+     "max": 40000,
+     "min": 30000
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_63f03505a5": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 144000,
+    "min": 128000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary range: $128,000-$144,000 plus variable pay and RSUs.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_6548a6109e": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_66c3c026ea": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to $15K relocation bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 15000,
+     "min": null
+    },
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_66c7bb1b18": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": null,
+    "min": 3.8,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Pay rate starts at $3.80/hour and vary by experience and location. Night Shift Bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_66cbe694e0": {
+  "base": [],
+  "evidence": "Comprehensive benefits package including healthcare, dental, vision, PTO, Sick Leave, Personal Choice Holidays, Life/Accident Insurance, 401(k) match, and Company Bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_681735a429": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 120000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base cash comp from $120K-$200k. The upside — performance incentives, career trajectory, and meaningful equity — reflects that.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_687dd79730": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_68d22175c5": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 220000,
+    "min": 180000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $180,000 – $220,000 USD annually; Meaningful equity package",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_693aa22426": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_6997ee9458": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 140000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $140,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_6a1346611f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 80,
+    "min": 70,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Pay Rate: $70 – $80 per hour (1099 independent contractor).",
+  "extras": []
+ },
+ "v1|j_6c27207104": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 70000,
+    "min": 50000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary of €50,000 to €70,000 annually, plus 12.5% commission on monthly recurring revenue.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": 0.125
+   }
+  ]
+ },
+ "v1|j_6d62106272": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 20,
+    "min": 20,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Hourly Pay Range $20—$20 USD",
+  "extras": []
+ },
+ "v1|j_6d6b998f04": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 8500,
+    "min": 8500,
+    "period": "month"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $8,500/month.",
+  "extras": []
+ },
+ "v1|j_6e7eee8df7": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 100000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The base salary range (per year) for this position in the posted work location(s) is $100,000—$200,000 USD. This position may also be eligible for additional compensation, such as an annual bonus, commission, or other incentive compensation, subject to the terms of the applicable plan or program.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_6e9c5812e0": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_6f8d756f4f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 120000,
+    "min": 80000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $80,000 to $120,000 annually.",
+  "extras": []
+ },
+ "v1|j_700edbb6e7": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_719bf59da5": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to $15K relocation bonus. $10K housing bonus (if you live within 0.5 miles of our office).",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 10000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_71d924deee": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 120000,
+    "min": 90000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $90,000 - $120,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7218212f9c": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_74ea6858f5": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 130000,
+    "min": 90000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is €90,000 to €130,000 annually. Equity participation is offered.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_75431b9da2": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 400000,
+    "min": 200000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Cash compensation: $200,000 – $400,000 USD annually Variable equity on top of cash",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_76741dd35b": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_780b78a211": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_7814b5d6c1": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_783bb6b485": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 225000,
+    "min": 130000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $130,000 to $225,000 annually.",
+  "extras": []
+ },
+ "v1|j_78b06d517e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 250000,
+    "min": 200000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $200,000 to $250,000 annually, with commission-heavy variable compensation and OTE up to $500,000. Co-founder-level equity is negotiable based on experience.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 500000,
+     "min": null
+    },
+    "kind": "ote",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_793d7bf30a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 217096,
+    "min": 105533,
+    "period": "year"
+   }
+  ],
+  "evidence": "The pay range for this position is $105,533 - $217,096 annually with a target incentive of 10-15% of the base salary.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": {
+     "max": 0.15,
+     "min": 0.1
+    }
+   }
+  ]
+ },
+ "v1|j_79a8993e92": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 5900,
+    "period": "month"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $5,900 - $10,500/month.",
+  "extras": []
+ },
+ "v1|j_79fcb249a8": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_7a8d14d2ba": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_7ae847b4f7": {
+  "base": [],
+  "evidence": "Base salary is flexible based on experience and candidacy. The package includes a performance bonus and 0.25% to 1% equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": {
+     "max": 1,
+     "min": 0.25
+    }
+   }
+  ]
+ },
+ "v1|j_7af72754e0": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "California",
+    "max": 202125,
+    "min": 130950,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Washington",
+    "max": 183750,
+    "min": 147000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Colorado",
+    "max": 163688,
+    "min": 148210,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "New York City",
+    "max": 183750,
+    "min": 147000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Illinois",
+    "max": 163688,
+    "min": 148210,
+    "period": "year"
+   }
+  ],
+  "evidence": "California Pay Range $130,950—$202,125 USD Washington Pay Range $147,000—$183,750 USD Colorado Pay Range $148,210—$163,688 USD New York City Pay Range $147,000—$183,750 USD Illinois Pay Range $148,210—$163,688 USD Base salary is just one part of our total rewards package at Flexport, which also includes bonus, equity, and comprehensive benefit offerings such as medical, dental, and flexible time off.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7b5a8ddb3c": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 120000,
+    "min": 100000,
+    "period": "year"
+   }
+  ],
+  "evidence": "€100,000 to €120,000 annually, with virtual stock options.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7b62665265": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_7bed12de56": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 85000,
+    "min": 65000,
+    "period": "year"
+   }
+  ],
+  "evidence": "• Salary range: $65,000 - $85,000 based on experience.",
+  "extras": []
+ },
+ "v1|j_7c0c33f371": {
+  "base": [],
+  "evidence": "Target Annual Compensation: $168k- $190k OTE (base+ 10% bonus) + equity + benefits",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 190000,
+     "min": 168000,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": {
+     "max": 0.1,
+     "min": 0.1
+    }
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7c23c13c46": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 70000,
+    "min": 60000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $60,000 to $70,000 annually, with target on-target earnings (base plus variable) of $85,000 to $105,000 and uncapped commission.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 105000,
+     "min": 85000,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7c3e59460c": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 25000,
+    "min": 10000,
+    "period": "year"
+   }
+  ],
+  "evidence": "$10,000–$25,000 USD annually, depending on experience",
+  "extras": []
+ },
+ "v1|j_7c6444a90e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 35,
+    "min": 35,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Salary $35 per hour. This is a part-time job that you can do on the weekends. You will need to work 4–6 hours a day, and those who perform well will receive an additional bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7cdd823d49": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "Zone 1",
+    "max": 240000,
+    "min": 204000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Zone 2",
+    "max": 220000,
+    "min": 187000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Zone 3",
+    "max": 200000,
+    "min": 170000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Starting salary for this role is $170k–$200k USD (or equivalent in local currency) depending on experience and subject to market rate adjustment. Zone 1: $204k–$240k USD Zone 2: $187k–$220k USD Zone 3: $170k–$200k USD",
+  "extras": []
+ },
+ "v1|j_7d24c0bb2c": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "Undergraduate course",
+    "max": 250,
+    "min": 250,
+    "period": "course"
+   },
+   {
+    "currency": "USD",
+    "label": "Graduate course",
+    "max": 300,
+    "min": 300,
+    "period": "course"
+   }
+  ],
+  "evidence": "The University will provide compensation to Adjunct Instructors at a rate of USD 250 per undergraduate course and USD 300 per graduate course, in recognition of their valuable contributions and commitment to advancing the University’s mission.",
+  "extras": []
+ },
+ "v1|j_7d61749e33": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 90000,
+    "min": 75000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base Salary Range $75,000—$90,000 USD In addition to base salary, for sales and some sales-adjacent roles, employees are eligible to earn incentive compensation (commission).",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7f38e89af5": {
+  "base": [],
+  "evidence": "Compensation: Competitive salary + significant equity",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_7f4b40f62b": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary range: $150,000 - $200,000 An employee’s total compensation consists of base salary + variable comp where appropriate + benefits + equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_8138b2bd33": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_824a9bb902": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_8288b68fa9": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_84b20176d2": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 145000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $145,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_84f0e7cfdf": {
+  "base": [],
+  "evidence": "The annual OTE for this position is $270,000 – $330,000 USD.",
+  "extras": [
+   {
+    "amount": {
+     "max": 330000,
+     "min": 270000
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_852621bcce": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 90,
+    "min": 40,
+    "period": "hour"
+   }
+  ],
+  "evidence": "$40 to $90 per hour, depending on project, field, and experience. Pay is for hours worked.",
+  "extras": []
+ },
+ "v1|j_85266795cc": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 65,
+    "min": 65,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Rate: $65/hour",
+  "extras": []
+ },
+ "v1|j_88af0f2655": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 151000,
+    "min": 90000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $90,000 - $151,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_8a1c9cb4eb": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "State of New York",
+    "max": 300000,
+    "min": 195000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The base salary range for this role is between $195,000 - $300,000 in the State of New York. This range is not inclusive of our discretionary bonus or equity package.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_8a222cdc8b": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": 15000,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_8a4316f0c7": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_8b151a8a60": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_8e439fbcc3": {
+  "base": [
+   {
+    "currency": "PHP",
+    "label": null,
+    "max": 25000,
+    "min": 20000,
+    "period": "month"
+   }
+  ],
+  "evidence": "Applicants can expect a salary of PHP 20,000 - PHP 25,000 per month. Bonuses",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_905ced9b44": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_9080bb53d0": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 150000,
+    "min": 90000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $90,000 - $150,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9104734f2e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 300000,
+    "min": 200000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $200,000 to $300,000 annually.",
+  "extras": []
+ },
+ "v1|j_92c6dbfc6c": {
+  "base": [
+   {
+    "currency": "PHP",
+    "label": null,
+    "max": 70000,
+    "min": 65000,
+    "period": "month"
+   }
+  ],
+  "evidence": "Salary : PHP. 65,000 - 70,000",
+  "extras": []
+ },
+ "v1|j_9315c8a8ae": {
+  "base": [],
+  "evidence": "Equity is approximately 28% as an equal co-founder. Cash compensation is discussed based on circumstances and fit.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": {
+     "max": 0.28,
+     "min": 0.28
+    }
+   }
+  ]
+ },
+ "v1|j_9609260c44": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 155000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $145,000 - $155,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9656a033bd": {
+  "base": [],
+  "evidence": "Early enough that you’ll get meaningful ownership.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_976e5e9732": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 180000,
+    "min": 140000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $140,000 to $180,000 annually, with equity and a cash bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_97c8b02aaa": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 18.32,
+    "min": 15,
+    "period": "hour"
+   }
+  ],
+  "evidence": "The estimated base pay range per hour for this role is: $15—$18.32 USD",
+  "extras": []
+ },
+ "v1|j_99720e6adc": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 220000,
+    "min": 180000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $180,000 to $220,000 annually.",
+  "extras": []
+ },
+ "v1|j_9b8b59dfb6": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 4500,
+    "min": 2500,
+    "period": "month"
+   }
+  ],
+  "evidence": "Compensation: USD $2,500-$4,500 per month ($30,000-$54,000 annually), depending on relevant experience",
+  "extras": []
+ },
+ "v1|j_9c27258d53": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 160160,
+    "min": 109200,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base Salary Range: $109,200.00 - $160,160.00. Other compensation may include a bonus program or commission plan, and stock options if approved by 6sense’s board.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9cdc659028": {
+  "base": [],
+  "evidence": "Competitive Compensation — A strong base salary and variable compensation where applicable. Ownership in Our Future — Equity that gives you a stake in the impact and value we’re building together.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9da59ed173": {
+  "base": [],
+  "evidence": "Annual bonus scheme to recognise great work",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9db3d44824": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_9dfb77c5fc": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null,
+     "period": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_9feead8117": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a01daa974f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "California",
+    "max": 172000,
+    "min": 130000,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Washington",
+    "max": 144000,
+    "min": 115200,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Colorado",
+    "max": 132000,
+    "min": 105600,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "New York City",
+    "max": 144000,
+    "min": 115200,
+    "period": "year"
+   },
+   {
+    "currency": "USD",
+    "label": "Illinois",
+    "max": 132000,
+    "min": 105600,
+    "period": "year"
+   }
+  ],
+  "evidence": "California Pay Range $130,000—$172,000 USD Washington Pay Range $115,200—$144,000 USD Colorado Pay Range $105,600—$132,000 USD New York City Pay Range $115,200—$144,000 USD Illinois Pay Range $105,600—$132,000 USD Base salary is just one part of our total rewards package at Flexport, which also includes bonus, equity, and comprehensive benefit offerings such as medical, dental, and flexible time off.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_a1759899b3": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a22bfcd119": {
+  "base": [],
+  "evidence": "Payment: $25 per approved task",
+  "extras": []
+ },
+ "v1|j_a3f14b52ac": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a51f0c5f8b": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a537c83da7": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a617acf7d9": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a68d3b62e6": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_a69b0c223a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_a794d96b60": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 190000,
+    "min": 120000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation: $120,000 to $190,000 annually, depending on experience, plus annual bonus opportunity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_a84dbb726e": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years; Up to $15K relocation bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 15000,
+     "min": null
+    },
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_a8e8fd9e7a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 10500,
+    "period": "month"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $10,500/month.",
+  "extras": []
+ },
+ "v1|j_ab9df110e0": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_ac923c6344": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10000,
+    "min": 10000,
+    "period": "month"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $10,000/month.",
+  "extras": []
+ },
+ "v1|j_acb5f75e7a": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_acc456f821": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 90000,
+    "min": 60000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: €60,000 to €90,000 annually. Equity may be available.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_adc9c6c53a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 35,
+    "min": 15,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation is $15 to $35 per hour, depending on project, field, and experience.",
+  "extras": []
+ },
+ "v1|j_ae16e50b99": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 170,
+    "min": 90,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Earn $90-$170/hr with over 500 companies—from trailblazing startups like Sightful, D-ID, and Apprentice to enterprise innovators like Lyft, Google X, and HCA.",
+  "extras": []
+ },
+ "v1|j_aecb362e58": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 145000,
+    "min": 115000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated annual salary for this role is between $115,000-$145,000, plus a competitive equity package.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_b121de1969": {
+  "base": [],
+  "evidence": "Competitive salary and equity. 10-year exercise window for stock options.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_b3480d160d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 142000,
+    "min": 95000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $95,000 - $142,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_b470bf9292": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 180000,
+    "min": 130000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $130,000 to $180,000 annually.",
+  "extras": []
+ },
+ "v1|j_b4fdaa76c7": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 269500,
+    "min": 171500,
+    "period": "year"
+   }
+  ],
+  "evidence": "Below is the US base salary for this position. Additional compensation such as Bonus, Commission, Equity and other benefits may also apply. $171,500—$269,500 USD",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_b68856957c": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_b6ca3a7178": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 170000,
+    "min": 110000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $110,000 - $170,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_b93bb96010": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years ... Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_baf5d5220f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 140000,
+    "min": 100000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $100,000 to $140,000 annually, with a performance bonus of up to 20%.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": {
+     "max": 0.2,
+     "min": null
+    }
+   }
+  ]
+ },
+ "v1|j_bb63b2a170": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 147000,
+    "min": 110000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $110,000 - $147,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_bc838fce09": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_bcd48e1f87": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 170000,
+    "min": 110000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $110,000 - $170,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_bd9ee4f522": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 140000,
+    "min": 125000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The total compensation package includes an anticipated base salary range of $125,000–$140,000, along with comprehensive benefits.",
+  "extras": []
+ },
+ "v1|j_bdac298db2": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_be3a1cf5c7": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_be8baf00ea": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "Zone 1 (National Average)",
+    "max": 145000,
+    "min": 127000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Zone 1 (National Average) $127,000—$145,000 USD",
+  "extras": []
+ },
+ "v1|j_bee35a9803": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 120000,
+    "min": 90000,
+    "period": "year"
+   }
+  ],
+  "evidence": "$90,000 - $120,000 a year. Full-time employment positions will also be eligible to receive pre-IPO equity and annual bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_bf0af8e5e6": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 220000,
+    "min": 130000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $130,000 to $220,000 annually. Equity: 0.20% to 1.20%.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": {
+     "max": 1.2,
+     "min": 0.2
+    }
+   }
+  ]
+ },
+ "v1|j_bf662a0ca6": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 140000,
+    "min": 85000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $85,000 - $140,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_c035bd43e0": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_c39a116b01": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_c3e2709833": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 25,
+    "min": 20,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Pay Range: $20–25/hr",
+  "extras": []
+ },
+ "v1|j_c419dd06ad": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_c490e038de": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_c4ed2791eb": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 1500,
+    "min": 1500,
+    "period": "month"
+   }
+  ],
+  "evidence": "Competitive base salary of €1500 plus commission",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_c532350bab": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 10500,
+    "period": "month"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $10,500/month.",
+  "extras": []
+ },
+ "v1|j_c5d15dd0f3": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 225000,
+    "min": 130000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $130,000 to $225,000 annually for San Francisco and other major US cities.",
+  "extras": []
+ },
+ "v1|j_c673e84c6a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "State of New York",
+    "max": 180000,
+    "min": 126000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The compensation & benefits package for this role includes: A discretionary annual bonus; Long-term incentive in the form of a new hire equity grant. Salary Range: The base salary range for this role is between $126,000 - $180,000 in the State of New York.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_c691e7f295": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_c7127302cf": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 80000,
+    "min": 45000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $45,000 to $80,000 annually.",
+  "extras": []
+ },
+ "v1|j_c793523bf3": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_c86c272fa7": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_c93095133e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 140000,
+    "min": 85000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $85,000 - $140,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_cae2260da2": {
+  "base": [],
+  "evidence": "Company stock options",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_cc0b313b11": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to $15K relocation bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_cc984af034": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_ccbf10d051": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_ccc93197da": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_cd2be5f111": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. This estimate excludes the value of any potential sign-on bonus; the value of any benefits offered; and the potential future value of any long-term incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_cf50bd5308": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 160000,
+    "min": 120000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: $120,000 to $160,000 annually. OTE (on-target earnings, base plus variable): $170,000 to $230,000.",
+  "extras": [
+   {
+    "amount": {
+     "max": 230000,
+     "min": 170000
+    },
+    "currency": "USD",
+    "kind": "ote",
+    "percent": null,
+    "period": "year"
+   }
+  ]
+ },
+ "v1|j_cfc2df0fc2": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_d01a1427bf": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d093daf0dd": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_d1468a6682": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 160000,
+    "min": 85000,
+    "period": "year"
+   }
+  ],
+  "evidence": "€85,000 to €160,000 annually, plus equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d28c29f39a": {
+  "base": [],
+  "evidence": "Payment per word",
+  "extras": []
+ },
+ "v1|j_d2fb38941a": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $145,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d3a1b9d788": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_d43eeb6cc6": {
+  "base": [],
+  "evidence": "Compensation: Competitive salary + significant equity",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d490aaffbd": {
+  "base": [
+   {
+    "currency": "AUD",
+    "label": null,
+    "max": 130500,
+    "min": 130500,
+    "period": "year"
+   }
+  ],
+  "evidence": "Compensation Range: $130,500 AUD base with an on target earnings at $217,500, plus equity",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": 217500,
+    "currency": "AUD",
+    "kind": "ote",
+    "percent": null,
+    "period": "year"
+   }
+  ]
+ },
+ "v1|j_d526a1457f": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 250000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Salary: $150,000 – $250,000 USD annually (depending on experience) Early-stage equity",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d5ff7f303d": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_d73fee1096": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 155000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $145,000 - $155,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d795bd7dc9": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 75000,
+    "min": 60000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The base salary range for this position is $60,000 - $75,000. Individual compensation will depend on various factors, including qualifications, skills, experience, location, and applicable laws. In addition to base salary, this role is eligible to participate in our equity incentive and competitive benefits plans.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d7d6370adc": {
+  "base": [],
+  "evidence": "OTE is $180,000 to $200,000.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 200000,
+     "min": 180000,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d8e95e7608": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 250000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $150,000 to $250,000 annually, depending on experience, plus meaningful founding team equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_d96b7641a3": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_d99a8fd711": {
+  "base": [],
+  "evidence": "Early enough that you’ll get meaningful ownership.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_db37e380bb": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_de831defc5": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_e068d697e6": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 10500,
+    "min": 10500,
+    "period": "month"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $10,500/month.",
+  "extras": []
+ },
+ "v1|j_e08defb347": {
+  "base": [],
+  "evidence": "RSU stock grants*",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e1ba0a491c": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_e31138930d": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years Up to $15K relocation bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e3f2474bc0": {
+  "base": [
+   {
+    "currency": "GBP",
+    "label": null,
+    "max": 85000,
+    "min": 76500,
+    "period": "year"
+   }
+  ],
+  "evidence": "Annual base salary range (excluding equity and bonus): £76,500—£85,000 GBP Total compensation may also include equity and bonus eligibility and benefits (including medical, dental, and vision).",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e571a4187e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 372400,
+    "min": 266000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The base salary range for this position is: $266,000—$372,400 USD In addition to base salary, this job is eligible to receive equity in the form of restricted stock units, and depending on the position offered, it may also be eligible to receive a commission.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e5eb993038": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 189189,
+    "min": 151351,
+    "period": "year"
+   }
+  ],
+  "evidence": "Pay Range $151,351—$189,189 USD OTE (On Target Earning) $302,702—$378,378 USD. Please note that the compensation listed below does not include commission (uncapped 50/50 split) or RSU value.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 378378,
+     "min": 302702,
+     "period": "year"
+    },
+    "kind": "ote",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "commission",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e7c184fd9d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 65000,
+    "min": 35000,
+    "period": "year"
+   }
+  ],
+  "evidence": "$35,000 - $65,000 a year",
+  "extras": []
+ },
+ "v1|j_e7ff1ba326": {
+  "base": [],
+  "evidence": "Company stock options",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_e817cd2676": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": 120000,
+    "min": 80000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary: €80,000 to €120,000 annually.",
+  "extras": []
+ },
+ "v1|j_e8f84c5e7e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 150000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $150,000 to $200,000 annually.",
+  "extras": []
+ },
+ "v1|j_e98967e22b": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": null,
+    "min": 100,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Competitive hourly compensation of ~$100+/hour depending on experience.",
+  "extras": []
+ },
+ "v1|j_e9d220a0df": {
+  "base": [],
+  "evidence": "Annual Performance Bonus; Anniversary Bonus",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_ea9a60dcff": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_eb20d4ca7c": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_eb30fe0e61": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 135000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The estimated salary range for this position is estimated to be $135,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_eb6cf59a6e": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_ec4d75303d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": "US",
+    "max": 135000,
+    "min": 110000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Depending on your skills and experience, you can expect your annual compensation to be between $110,000 and $135,000 USD. (The salary is only for US-based candidates).",
+  "extras": []
+ },
+ "v1|j_ec5550f26a": {
+  "base": [
+   {
+    "currency": "EUR",
+    "label": null,
+    "max": null,
+    "min": 80000,
+    "period": "year"
+   }
+  ],
+  "evidence": "We offer an annual full-time salary (38.5 hr week) of min 80,000 EUR gross, with a possible overpayment depending on qualifications and experience.",
+  "extras": []
+ },
+ "v1|j_eda3bfbc31": {
+  "base": [
+   {
+    "currency": "CAD",
+    "label": "Canada",
+    "max": 76000,
+    "min": 68000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The expected base compensation for this role is 68,000–76,000 CAD annually, dependent on experience and competency. This role is also eligible for target variable incentives of 5,000-10,000 CAD, with actual earnings dependent on experience, skills, and performance.",
+  "extras": [
+   {
+    "amount": {
+     "currency": "CAD",
+     "max": 10000,
+     "min": 5000
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_edee811e5b": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_eec7e0c83a": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_efcfaae732": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_f0ac351b71": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 1000,
+    "min": 1000,
+    "period": "month"
+   }
+  ],
+  "evidence": "Remote, contractor, 1,000 USD per month, start immediately.",
+  "extras": []
+ },
+ "v1|j_f0c07d73c7": {
+  "base": [],
+  "evidence": "Generous equity grant vested over 4 years. Up to $15K relocation bonus.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": {
+     "currency": "USD",
+     "max": 15000,
+     "min": null
+    },
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_f205ccab1f": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_f4019cd316": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 200000,
+    "min": 145000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The salary range for this position is estimated to be $145,000 - $200,000/year. Total compensation for this position may also include Restricted Stock units, sign-on bonus and other potential future incentives.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   },
+   {
+    "amount": null,
+    "kind": "sign_on",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_f5ec0fc48e": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 150000,
+    "min": 120000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Base salary is $120,000 to $150,000 annually, depending on experience, plus equity.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "equity",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_f5f3237298": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_f6ef333366": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 14,
+    "min": 14,
+    "period": "hour"
+   }
+  ],
+  "evidence": "The rate of pay is 0.2333 USD per task, with an estimated earning potential of 14 USD per hour.",
+  "extras": []
+ },
+ "v1|j_fa401b71fb": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 130000,
+    "min": 100000,
+    "period": "year"
+   }
+  ],
+  "evidence": "For this role, the base salary range is $100,000 - $130,000 plus bonus depending on experience",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_fd47b687ce": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_fda6ebe3fb": {
+  "base": [
+   {
+    "currency": "INR",
+    "label": null,
+    "max": 2200000,
+    "min": 1500000,
+    "period": "year"
+   }
+  ],
+  "evidence": "Annual Compensation: ₹15,00,000-₹22,00,000 (15-22 LPA), based on experience and technical expertise.",
+  "extras": []
+ },
+ "v1|j_fdb6e40a47": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 175,
+    "min": 75,
+    "period": "hour"
+   }
+  ],
+  "evidence": "Compensation is $75 to $175 per hour, depending on project, field, and experience level.",
+  "extras": []
+ },
+ "v1|j_fdf52c93a5": {
+  "base": [],
+  "evidence": "",
+  "extras": []
+ },
+ "v1|j_ff3fecc180": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 150000,
+    "min": 110000,
+    "period": "year"
+   }
+  ],
+  "evidence": "The total compensation package includes an anticipated base salary range of $110,000–$150,000, performance bonus, and comprehensive benefits.",
+  "extras": [
+   {
+    "amount": null,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ },
+ "v1|j_fffac0239d": {
+  "base": [
+   {
+    "currency": "USD",
+    "label": null,
+    "max": 1500,
+    "min": 1500,
+    "period": "month"
+   }
+  ],
+  "evidence": "$10K housing bonus if you live within 0.5 miles of our office during your internship; $1.5K monthly stipend for meals/rideshare",
+  "extras": [
+   {
+    "amount": 10000,
+    "kind": "bonus",
+    "percent": null
+   }
+  ]
+ }
+}
