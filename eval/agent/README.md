@@ -15,6 +15,7 @@ cd eval/agent
 python3 agent_eval.py run                      # 5 tasks x 3 trials on target/release/loker
 python3 agent_eval.py run --bin /path/to/old/loker --label before
 python3 agent_eval.py report                   # every label in runs/
+LOKER_EVAL_DB=$PWD/snapshot-wwr.db python3 agent_eval.py run --label X+wwr   # another snapshot
 ```
 
 ## How it works
@@ -60,6 +61,7 @@ Philippines: coverage, not search, limits those tasks.
 |---|---|---|---|---|---|---|---|---|
 | 05354ce (stemming, title weight, partial) | 13.1 | 119 | 210 | 0.018 | 29 | 82% | 85% | 73% |
 | 63a4376 (+ seniority) | 12.6 | 120 | 215 | 0.018 | 29 | 100% | 100% | 100% |
+| 61b0dc6 (+ totals, titles view, list-everything guidance) | 9.9 | 88 | 143 | 0.014 | 24 | 92% | 92% | 87% |
 
 No run in either label used the `seniority` filter, so the pass gap is not
 from that change: 2 of 3 earlier data-de runs recommended jobs with an
@@ -70,3 +72,23 @@ What the runs show:
 - Scarce tasks cost the most: confirming that nothing qualifies took 15-18
   calls and 140-175K characters, against 7-8 calls and 55-60K when matches
   exist. A way to see how many eligible jobs exist for a role would cut that.
+
+After totals and the titles view (61b0dc6): a third fewer tokens (215K to
+143K a run) and a quarter less cost, mostly on the scarce tasks (data-de 18
+to 13 calls, devops-ph 15 to 9). Agents used `view: "titles"` in 52 of 149
+calls. The two wrong picks were eligible jobs Opus judged off-role, not
+eligibility errors.
+
+### Snapshot 2026-11-19 + We Work Remotely (1,224 + 455 listings)
+
+The search eval's snapshot with `loker ingest weworkremotely` added
+(`snapshot-wwr.db`, local only). Truth: backend-id 51 good of 412 eligible,
+ml-in 20/389, devops-ph 21/395, data-de 13/372, designer-gb 6/391.
+
+| Label | calls | kchars | ktok | $/run | sec | prec | rec@5 | pass |
+|---|---|---|---|---|---|---|---|---|
+| 61b0dc6 | 6.3 | 54 | 67 | 0.009 | 19 | 97% | 97% | 87% |
+
+Every task now has jobs to give, and runs are cheaper than on the original
+snapshot: a task with matches needs 4-7 calls. designer-gb (6 good of 391)
+fails 2 of 3 runs on one off-role pick each.

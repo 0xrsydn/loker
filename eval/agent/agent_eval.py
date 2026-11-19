@@ -14,7 +14,7 @@ output, tokens, cost and time are recorded.
 
 Needs DEEPSEEK_API_KEY in the environment (Pi) and the `claude` CLI (judge).
 """
-import argparse, glob, json, os, re, shutil, sqlite3, subprocess, sys, tempfile, time
+import argparse, glob, json, os, re, shutil, signal, sqlite3, subprocess, sys, tempfile, time
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -122,11 +122,18 @@ def run_one(binary, task, trial, out_dir, gt):
                "--provider", MODEL[0], "--model", MODEL[1], "--session-dir", sessions,
                task["prompt"] + PICKS_LINE]
         t0 = time.time()
+        # stdin from /dev/null: `pi -p` reads a non-terminal stdin to its end,
+        # and an inherited socket never ends. Its own process group, so a
+        # timeout kills pi itself and not only its secretspec launcher.
+        p = subprocess.Popen(cmd, cwd=work, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL, start_new_session=True,
+                             env={**os.environ, "SECRETSPEC_REASON": "loker agent eval"})
         try:
-            p = subprocess.run(cmd, cwd=work, capture_output=True, text=True, timeout=TIMEOUT,
-                               env={**os.environ, "SECRETSPEC_REASON": "loker agent eval"})
-            status = "ok" if p.returncode == 0 else f"exit {p.returncode}"
+            code = p.wait(timeout=TIMEOUT)
+            status = "ok" if code == 0 else f"exit {code}"
         except subprocess.TimeoutExpired:
+            os.killpg(p.pid, signal.SIGKILL)
+            p.wait()
             status = "timeout"
         rec = {"task": task["id"], "trial": trial, "status": status, "seconds": round(time.time() - t0, 1)}
         files = sorted(glob.glob(os.path.join(sessions, "*.jsonl")))

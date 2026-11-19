@@ -1,15 +1,55 @@
 {
+ "backend-id|j_00356f79a4": {
+  "grade": 0,
+  "reason": "YouTube content creator"
+ },
+ "backend-id|j_018382a8f2": {
+  "grade": 0,
+  "reason": "Animator"
+ },
  "backend-id|j_01911257fa": {
   "grade": 0,
   "reason": "Travel ambassador role, not engineering."
+ },
+ "backend-id|j_03277fc15a": {
+  "grade": 0,
+  "reason": "Electrical sales"
+ },
+ "backend-id|j_03a98fe055": {
+  "grade": 1,
+  "reason": "Engineering manager role leading security software engineers; it's management, not a backend IC role"
  },
  "backend-id|j_0446cd44d4": {
   "grade": 1,
   "reason": "Atlassian admin role. It's technical but not backend development."
  },
+ "backend-id|j_04afff1742": {
+  "grade": 2,
+  "reason": "Database reliability engineering is adjacent to backend work"
+ },
+ "backend-id|j_04edcc2aee": {
+  "grade": 0,
+  "reason": "Customer service admin"
+ },
+ "backend-id|j_05561072ab": {
+  "grade": 0,
+  "reason": "Graphic design"
+ },
  "backend-id|j_06078af562": {
   "grade": 3,
   "reason": "Backend developer role."
+ },
+ "backend-id|j_063ec4a7c7": {
+  "grade": 0,
+  "reason": "English teaching"
+ },
+ "backend-id|j_06486940e7": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_064f7e5a99": {
+  "grade": 0,
+  "reason": "Community moderation"
  },
  "backend-id|j_069c5be345": {
   "grade": 0,
@@ -19,17 +59,45 @@
   "grade": 0,
   "reason": "Supply chain SME annotation work."
  },
+ "backend-id|j_0864f69d6d": {
+  "grade": 0,
+  "reason": "Content marketing"
+ },
  "backend-id|j_08a27af13d": {
   "grade": 0,
   "reason": "Sales SME annotation work."
+ },
+ "backend-id|j_08d5f5517a": {
+  "grade": 1,
+  "reason": "Performance testing touches backend systems but is a QA role"
  },
  "backend-id|j_08ee88b3bd": {
   "grade": 0,
   "reason": "Hardware engineering AI training work."
  },
+ "backend-id|j_08fb419b09": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_0a40723564": {
+  "grade": 1,
+  "reason": "Capacity planning is infrastructure work, not software engineering"
+ },
  "backend-id|j_0ac7830ddb": {
   "grade": 0,
   "reason": "Language QA work."
+ },
+ "backend-id|j_0b1041d9b0": {
+  "grade": 1,
+  "reason": "Customer-facing data consulting architect"
+ },
+ "backend-id|j_0b3df2cb77": {
+  "grade": 1,
+  "reason": "Benchmark task design for ML inference; tangential to backend engineering"
+ },
+ "backend-id|j_0c6babf894": {
+  "grade": 2,
+  "reason": "DevOps for an edge proxy platform; adjacent to backend infrastructure"
  },
  "backend-id|j_0c8285103d": {
   "grade": 0,
@@ -39,29 +107,125 @@
   "grade": 1,
   "reason": "AI training writing work that includes some coding tasks."
  },
+ "backend-id|j_0f0b3b6f0e": {
+  "grade": 0,
+  "reason": "Product management role"
+ },
+ "backend-id|j_10e3a6ff6a": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "backend-id|j_1146ecf4be": {
+  "grade": 2,
+  "reason": "DevOps/cloud engineering; adjacent to backend"
+ },
+ "backend-id|j_1315be3b43": {
+  "grade": 2,
+  "reason": "SRE/DevOps software engineer; adjacent to backend"
+ },
+ "backend-id|j_13c8f2f55c": {
+  "grade": 0,
+  "reason": "UX design role"
+ },
  "backend-id|j_146102a6de": {
   "grade": 0,
   "reason": "Legal annotation work."
+ },
+ "backend-id|j_14dfffcb83": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "backend-id|j_154d6632c2": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_1564ba68ee": {
+  "grade": 0,
+  "reason": "Design role"
+ },
+ "backend-id|j_15ae21edde": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "backend-id|j_1683857016": {
+  "grade": 0,
+  "reason": "Category management role"
+ },
+ "backend-id|j_16d098d166": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_17754caff4": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "backend-id|j_182fef53a9": {
+  "grade": 0,
+  "reason": "Customer support role"
  },
  "backend-id|j_1864763ae0": {
   "grade": 0,
   "reason": "Program management role."
  },
+ "backend-id|j_1883ab1107": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_19db4389c5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_19f5cb47ec": {
+  "grade": 0,
+  "reason": "Tutoring"
+ },
  "backend-id|j_1ac4ebea3f": {
   "grade": 0,
   "reason": "HR SME annotation work."
+ },
+ "backend-id|j_1b64105da0": {
+  "grade": 0,
+  "reason": "Customer support"
  },
  "backend-id|j_1cc892959f": {
   "grade": 0,
   "reason": "Legal SME annotation work."
  },
+ "backend-id|j_1cdf337fe9": {
+  "grade": 0,
+  "reason": "Quality/compliance management"
+ },
  "backend-id|j_1dd366cfd2": {
   "grade": 1,
   "reason": "Security red-teaming role that needs coding, but it isn't backend engineering."
  },
+ "backend-id|j_1e35a1d5a9": {
+  "grade": 0,
+  "reason": "Customer onboarding"
+ },
  "backend-id|j_1e6a9a8092": {
   "grade": 0,
   "reason": "Education SME task creator for AI data, not engineering"
+ },
+ "backend-id|j_1fc58daf65": {
+  "grade": 0,
+  "reason": "People operations"
+ },
+ "backend-id|j_201d14ba08": {
+  "grade": 0,
+  "reason": "AI operations management, not engineering"
+ },
+ "backend-id|j_20238a568d": {
+  "grade": 0,
+  "reason": "Customer experience"
+ },
+ "backend-id|j_20b74857db": {
+  "grade": 2,
+  "reason": "Software engineering on CRM customization/automation, partly backend-adjacent"
+ },
+ "backend-id|j_2200d30c8b": {
+  "grade": 0,
+  "reason": "Account management"
  },
  "backend-id|j_220f8c4de5": {
   "grade": 1,
@@ -75,13 +239,57 @@
   "grade": 0,
   "reason": "Commission-based marketing referral role"
  },
+ "backend-id|j_24c9e3d78e": {
+  "grade": 0,
+  "reason": "Legal"
+ },
+ "backend-id|j_24cc7f9f7a": {
+  "grade": 0,
+  "reason": "SEO"
+ },
+ "backend-id|j_251aae03a7": {
+  "grade": 2,
+  "reason": "DevSecOps developer, adjacent to backend engineering"
+ },
+ "backend-id|j_2541f1d8a9": {
+  "grade": 0,
+  "reason": "Risk/AI management"
+ },
+ "backend-id|j_262b2ebed3": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "backend-id|j_297cd40725": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_2bb8c095dd": {
+  "grade": 0,
+  "reason": "Product management"
+ },
+ "backend-id|j_2d238fb4c9": {
+  "grade": 0,
+  "reason": "Sales"
+ },
  "backend-id|j_2d8350ecc4": {
   "grade": 0,
   "reason": "KYC analyst, compliance/customer service"
  },
+ "backend-id|j_2e0c62b0b5": {
+  "grade": 0,
+  "reason": "Legal"
+ },
+ "backend-id|j_2e0f94a977": {
+  "grade": 0,
+  "reason": "CRM admin"
+ },
  "backend-id|j_2e25de5358": {
   "grade": 0,
   "reason": "Reservation and sales coordination"
+ },
+ "backend-id|j_2e3156bac5": {
+  "grade": 0,
+  "reason": "Customer service"
  },
  "backend-id|j_2e63d2db48": {
   "grade": 1,
@@ -91,13 +299,69 @@
   "grade": 0,
   "reason": "Media rater/linguistic evaluation"
  },
+ "backend-id|j_2f10cd1478": {
+  "grade": 2,
+  "reason": "ML platform engineering, backend-adjacent infrastructure"
+ },
  "backend-id|j_2f48cc1bd4": {
   "grade": 0,
   "reason": "Category manager AI evaluation"
  },
+ "backend-id|j_2f8efba89c": {
+  "grade": 2,
+  "reason": "Engineering manager over backend marketing platforms; management role"
+ },
+ "backend-id|j_2fa3b8ad40": {
+  "grade": 0,
+  "reason": "Data entry"
+ },
+ "backend-id|j_2fd780d206": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "backend-id|j_30ff05e838": {
+  "grade": 2,
+  "reason": "D365 developer with C#/.NET/SQL; ERP-platform specialty"
+ },
  "backend-id|j_312b6ce30d": {
   "grade": 1,
   "reason": "Data operations for AI datasets, mostly non-backend"
+ },
+ "backend-id|j_313129d002": {
+  "grade": 2,
+  "reason": "Integration engineering, backend-adjacent"
+ },
+ "backend-id|j_313839a788": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "backend-id|j_32b88ba008": {
+  "grade": 0,
+  "reason": "Marketing automation"
+ },
+ "backend-id|j_32f807f988": {
+  "grade": 1,
+  "reason": "IT systems engineering, not software development"
+ },
+ "backend-id|j_32fb162365": {
+  "grade": 0,
+  "reason": "Operations management"
+ },
+ "backend-id|j_3446819ba0": {
+  "grade": 0,
+  "reason": "Competitive intelligence"
+ },
+ "backend-id|j_3541ad5e4c": {
+  "grade": 0,
+  "reason": "RevOps"
+ },
+ "backend-id|j_356794525a": {
+  "grade": 1,
+  "reason": "Cryptography task design for AI benchmarks, not backend engineering"
+ },
+ "backend-id|j_357ce2fdb8": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "backend-id|j_366ccb2b2d": {
   "grade": 0,
@@ -107,6 +371,10 @@
   "grade": 0,
   "reason": "Counterintelligence SME AI evaluation"
  },
+ "backend-id|j_36949da3e5": {
+  "grade": 0,
+  "reason": "Sales"
+ },
  "backend-id|j_372a56e0c7": {
   "grade": 0,
   "reason": "Performance marketing lead"
@@ -115,17 +383,77 @@
   "grade": 2,
   "reason": "Full stack software engineer; backend lean not stated"
  },
+ "backend-id|j_3868ecf684": {
+  "grade": 3,
+  "reason": "Fullstack with strong backend focus: Node.js, microservices, databases"
+ },
+ "backend-id|j_3895e5ddba": {
+  "grade": 0,
+  "reason": "Customer success"
+ },
+ "backend-id|j_38974a759c": {
+  "grade": 0,
+  "reason": "Support supervisor"
+ },
+ "backend-id|j_3ad29bcc39": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_3aeb89062d": {
+  "grade": 0,
+  "reason": "Recruiting"
+ },
  "backend-id|j_3c393917eb": {
   "grade": 2,
   "reason": "Builds RL environments with Python, Docker, REST APIs; engineering work but AI-training contract"
+ },
+ "backend-id|j_3ce5a384f3": {
+  "grade": 1,
+  "reason": "Developer experience/advocacy role, partly engineering but not backend"
+ },
+ "backend-id|j_3dcb594b42": {
+  "grade": 3,
+  "reason": "Senior software engineer on the Query team, likely backend"
+ },
+ "backend-id|j_3dd1eb6b4a": {
+  "grade": 3,
+  "reason": "Java microservices and streaming backend services"
+ },
+ "backend-id|j_4020d72fd1": {
+  "grade": 0,
+  "reason": "Ad sales role"
  },
  "backend-id|j_420845d314": {
   "grade": 0,
   "reason": "Aerodynamics/CFD AI training task work, not backend engineering."
  },
+ "backend-id|j_4343de41ab": {
+  "grade": 0,
+  "reason": "Security operations/infrastructure, not software engineering"
+ },
+ "backend-id|j_437d8fd29c": {
+  "grade": 0,
+  "reason": "CRM marketing role"
+ },
  "backend-id|j_4385c69b49": {
   "grade": 0,
   "reason": "Sales key account role."
+ },
+ "backend-id|j_439efd13af": {
+  "grade": 1,
+  "reason": "Shopify freelance dev, mostly storefront/theme work, not backend-focused"
+ },
+ "backend-id|j_442f1eecd4": {
+  "grade": 0,
+  "reason": "Joinery estimator"
+ },
+ "backend-id|j_453ce88a0d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_45c04cc283": {
+  "grade": 0,
+  "reason": "Appointment setter"
  },
  "backend-id|j_46b3b970a8": {
   "grade": 1,
@@ -135,6 +463,26 @@
   "grade": 0,
   "reason": "Legal role."
  },
+ "backend-id|j_46c4c46320": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_47d22151df": {
+  "grade": 0,
+  "reason": "HR role"
+ },
+ "backend-id|j_4831111755": {
+  "grade": 0,
+  "reason": "Collections coordinator"
+ },
+ "backend-id|j_494d0e016f": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_498f406306": {
+  "grade": 0,
+  "reason": "Joinery estimator"
+ },
  "backend-id|j_4999adbc75": {
   "grade": 0,
   "reason": "Legal role."
@@ -143,9 +491,17 @@
   "grade": 0,
   "reason": "Product management, not engineering."
  },
+ "backend-id|j_4aa2150834": {
+  "grade": 0,
+  "reason": "Fraud operations"
+ },
  "backend-id|j_4aecafafa6": {
   "grade": 0,
   "reason": "Data annotation operations."
+ },
+ "backend-id|j_4b0ab24952": {
+  "grade": 0,
+  "reason": "Marketing role"
  },
  "backend-id|j_4b0f849926": {
   "grade": 1,
@@ -155,9 +511,33 @@
   "grade": 2,
   "reason": "Full-stack developer role, React-led so frontend lean, but includes backend work."
  },
+ "backend-id|j_4db091910e": {
+  "grade": 1,
+  "reason": "DevOps/CI-CD infrastructure, adjacent to backend but not backend software engineering"
+ },
+ "backend-id|j_4dc0f95049": {
+  "grade": 0,
+  "reason": "People operations role, not engineering."
+ },
+ "backend-id|j_4de6a00d1e": {
+  "grade": 0,
+  "reason": "Marketing design role."
+ },
+ "backend-id|j_4e42c64d8c": {
+  "grade": 0,
+  "reason": "Marketing creative role."
+ },
+ "backend-id|j_4e44126058": {
+  "grade": 0,
+  "reason": "Recruiting role."
+ },
  "backend-id|j_4eae2873bc": {
   "grade": 0,
   "reason": "Construction SME task creation."
+ },
+ "backend-id|j_51ecc2b466": {
+  "grade": 0,
+  "reason": "Accounting role."
  },
  "backend-id|j_52078af5ea": {
   "grade": 0,
@@ -175,13 +555,53 @@
   "grade": 0,
   "reason": "Customer experience role."
  },
+ "backend-id|j_54155bbc84": {
+  "grade": 0,
+  "reason": "Sales account management."
+ },
+ "backend-id|j_5503bc89f9": {
+  "grade": 0,
+  "reason": "Recruitment supervision."
+ },
+ "backend-id|j_55195306c8": {
+  "grade": 3,
+  "reason": "Backend engineer role, an exact match."
+ },
  "backend-id|j_558cb9202f": {
   "grade": 0,
   "reason": "Commission-based referral sales."
  },
+ "backend-id|j_55df8cbf81": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
  "backend-id|j_55f3a1f640": {
   "grade": 0,
   "reason": "Data entry/video capture, not engineering"
+ },
+ "backend-id|j_5673da59f4": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "backend-id|j_575235c5c7": {
+  "grade": 0,
+  "reason": "Business development sales role."
+ },
+ "backend-id|j_58c52c8c15": {
+  "grade": 0,
+  "reason": "Broker-dealer operations role."
+ },
+ "backend-id|j_5932f5584e": {
+  "grade": 0,
+  "reason": "Communications leadership role."
+ },
+ "backend-id|j_596874ce3d": {
+  "grade": 0,
+  "reason": "Enterprise sales role."
+ },
+ "backend-id|j_5b96540f05": {
+  "grade": 2,
+  "reason": "Full-stack software engineer on a workflows product. Relevant, but the snippet doesn't show whether it leans backend."
  },
  "backend-id|j_5e0a1b548b": {
   "grade": 0,
@@ -195,21 +615,81 @@
   "grade": 0,
   "reason": "Video recording gig"
  },
+ "backend-id|j_5e740713de": {
+  "grade": 1,
+  "reason": "CRM consulting/implementation, not backend engineering"
+ },
+ "backend-id|j_5e807e48b6": {
+  "grade": 0,
+  "reason": "Account support role"
+ },
+ "backend-id|j_5efbdda2c3": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "backend-id|j_6000c2203e": {
+  "grade": 1,
+  "reason": "ML engineering, adjacent but not backend"
+ },
  "backend-id|j_607cf99871": {
   "grade": 0,
   "reason": "Sales/business development"
+ },
+ "backend-id|j_60c7bf345d": {
+  "grade": 2,
+  "reason": "Full-stack evaluation of AI-generated code, part-time contract work rather than building systems"
+ },
+ "backend-id|j_61925adcfc": {
+  "grade": 0,
+  "reason": "Paid ads"
+ },
+ "backend-id|j_62611c4ab4": {
+  "grade": 0,
+  "reason": "Risk consulting"
+ },
+ "backend-id|j_62d5f94de8": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_62f518b2c7": {
+  "grade": 1,
+  "reason": "CRM solutions architect consulting, not hands-on backend"
  },
  "backend-id|j_6364847b87": {
   "grade": 2,
   "reason": "Full-stack React/Node with real backend work, but it puts weight on frontend rather than leaning backend"
  },
+ "backend-id|j_65a3ec8461": {
+  "grade": 0,
+  "reason": "Community management"
+ },
+ "backend-id|j_65b58ea973": {
+  "grade": 0,
+  "reason": "3D design"
+ },
+ "backend-id|j_675dcd48ab": {
+  "grade": 0,
+  "reason": "Threat intelligence analyst"
+ },
+ "backend-id|j_6785a57150": {
+  "grade": 0,
+  "reason": "Professional services management"
+ },
  "backend-id|j_686f0d4114": {
   "grade": 0,
   "reason": "Community management"
  },
+ "backend-id|j_687dd79730": {
+  "grade": 3,
+  "reason": "Software engineer on a CRM platform, likely heavy on backend"
+ },
  "backend-id|j_691e215f9e": {
   "grade": 0,
   "reason": "AI safety red teaming, not backend engineering"
+ },
+ "backend-id|j_693aa22426": {
+  "grade": 1,
+  "reason": "Frontend Vue developer"
  },
  "backend-id|j_6a487264f4": {
   "grade": 0,
@@ -219,21 +699,89 @@
   "grade": 0,
   "reason": "AI feedback rating"
  },
+ "backend-id|j_6d62106272": {
+  "grade": 0,
+  "reason": "Developer engagement rep, not engineering"
+ },
  "backend-id|j_6e59b15a43": {
   "grade": 0,
   "reason": "HR coordinator"
+ },
+ "backend-id|j_6e612b8a9c": {
+  "grade": 0,
+  "reason": "Workforce analyst"
+ },
+ "backend-id|j_6e736b1791": {
+  "grade": 0,
+  "reason": "Data entry"
+ },
+ "backend-id|j_6e7eee8df7": {
+  "grade": 1,
+  "reason": "Customer-facing technical role, not backend dev"
+ },
+ "backend-id|j_6ea77c5096": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_6ef0b90f4f": {
+  "grade": 0,
+  "reason": "Product marketing/management"
+ },
+ "backend-id|j_6fb41c1f9b": {
+  "grade": 0,
+  "reason": "Renewals sales"
  },
  "backend-id|j_6fd71657dc": {
   "grade": 1,
   "reason": "ML engineering tasks, adjacent software but not backend"
  },
+ "backend-id|j_7014075ffc": {
+  "grade": 0,
+  "reason": "Channel sales"
+ },
  "backend-id|j_71db67eb7a": {
   "grade": 0,
   "reason": "Business development"
  },
+ "backend-id|j_71fd0d6146": {
+  "grade": 1,
+  "reason": "QA automation, adjacent engineering but not backend"
+ },
+ "backend-id|j_727e14c903": {
+  "grade": 0,
+  "reason": "Video editor"
+ },
+ "backend-id|j_74990eb5d9": {
+  "grade": 1,
+  "reason": "DevOps/infra, adjacent but not backend dev"
+ },
+ "backend-id|j_7530667469": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "backend-id|j_761e5b8482": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "backend-id|j_780c4812a2": {
+  "grade": 3,
+  "reason": "Backend software engineer"
+ },
  "backend-id|j_7814b5d6c1": {
   "grade": 0,
   "reason": "Community/events"
+ },
+ "backend-id|j_7842a402cc": {
+  "grade": 1,
+  "reason": "IT engineering/automation, not backend software"
+ },
+ "backend-id|j_78d296f496": {
+  "grade": 0,
+  "reason": "Business development role, not engineering"
+ },
+ "backend-id|j_78f903d57a": {
+  "grade": 0,
+  "reason": "IT endpoint consulting, not backend dev"
  },
  "backend-id|j_7918656ab7": {
   "grade": 0,
@@ -243,17 +791,97 @@
   "grade": 0,
   "reason": "Partnerships coordinator"
  },
+ "backend-id|j_79f2ca2f78": {
+  "grade": 1,
+  "reason": "Solutions architect is pre-sales/customer-facing technical work, not hands-on backend engineering"
+ },
+ "backend-id|j_79f8be3217": {
+  "grade": 1,
+  "reason": "Analytics/dbt engineering is a data role, close to backend but not server-side software"
+ },
+ "backend-id|j_7af72754e0": {
+  "grade": 1,
+  "reason": "Product security engineering touches backend code, but the role is security"
+ },
+ "backend-id|j_7b0e84d2ee": {
+  "grade": 0,
+  "reason": "WAF configuration and security operations, not software engineering"
+ },
+ "backend-id|j_7bba233fa8": {
+  "grade": 0,
+  "reason": "Data annotation work"
+ },
+ "backend-id|j_7c38f3e5f9": {
+  "grade": 1,
+  "reason": "Support engineering with some tooling work, not a backend engineering role"
+ },
+ "backend-id|j_7c3e59460c": {
+  "grade": 0,
+  "reason": "Marketing/SEO role"
+ },
+ "backend-id|j_7c6444a90e": {
+  "grade": 0,
+  "reason": "Recruiting scheduling role"
+ },
+ "backend-id|j_7d4ae8d6ed": {
+  "grade": 0,
+  "reason": "Compliance internship"
+ },
+ "backend-id|j_7d61749e33": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
  "backend-id|j_7db2e21b93": {
   "grade": 0,
   "reason": "CRM marketing"
+ },
+ "backend-id|j_7e8a65c012": {
+  "grade": 1,
+  "reason": "Low-code CRM configuration and development, not real backend engineering"
+ },
+ "backend-id|j_7f4b40f62b": {
+  "grade": 0,
+  "reason": "Video editing"
+ },
+ "backend-id|j_7f7b24817a": {
+  "grade": 0,
+  "reason": "Product management"
+ },
+ "backend-id|j_8068844c98": {
+  "grade": 0,
+  "reason": "Data science role, not backend engineering"
  },
  "backend-id|j_80b1ea5f26": {
   "grade": 0,
   "reason": "Growth marketing"
  },
+ "backend-id|j_80f3e82570": {
+  "grade": 0,
+  "reason": "Mechanical commissioning for data centers"
+ },
+ "backend-id|j_81d589edaf": {
+  "grade": 0,
+  "reason": "Content marketing role"
+ },
  "backend-id|j_839ad8cbcf": {
   "grade": 1,
   "reason": "SDET, test engineering adjacent to backend"
+ },
+ "backend-id|j_83d0710305": {
+  "grade": 2,
+  "reason": "Software engineer at a SaaS company; whether it leans backend isn't stated"
+ },
+ "backend-id|j_84f0e7cfdf": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_851f6a996d": {
+  "grade": 0,
+  "reason": "Paid ads marketing"
+ },
+ "backend-id|j_85266795cc": {
+  "grade": 0,
+  "reason": "Content editing"
  },
  "backend-id|j_856c2db72e": {
   "grade": 0,
@@ -267,21 +895,85 @@
   "grade": 0,
   "reason": "Travel ops"
  },
+ "backend-id|j_895be090da": {
+  "grade": 0,
+  "reason": "Call center role"
+ },
+ "backend-id|j_8a53d8ea33": {
+  "grade": 0,
+  "reason": "E-commerce brand management"
+ },
+ "backend-id|j_8ac0503409": {
+  "grade": 3,
+  "reason": "Senior SWE driving design and development of core backend services"
+ },
+ "backend-id|j_8ac68ea74e": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "backend-id|j_8b1b63dbf3": {
+  "grade": 0,
+  "reason": "Product management"
+ },
  "backend-id|j_8c4aa0f0a6": {
   "grade": 0,
   "reason": "Annotation"
+ },
+ "backend-id|j_8caf616380": {
+  "grade": 2,
+  "reason": "Staff SWE owning the web app, CLI, SDK and API. Leans toward interfaces/frontend but includes API work"
+ },
+ "backend-id|j_8cd7a12023": {
+  "grade": 1,
+  "reason": "Pre-sales solution engineering on API architecture, not a software engineering role"
+ },
+ "backend-id|j_8cdf3686d8": {
+  "grade": 0,
+  "reason": "Data science role"
+ },
+ "backend-id|j_8d081ea981": {
+  "grade": 3,
+  "reason": "Backend product software engineer"
+ },
+ "backend-id|j_8d96bfc7e8": {
+  "grade": 0,
+  "reason": "Creative director"
  },
  "backend-id|j_8daa145b01": {
   "grade": 0,
   "reason": "Growth lead"
  },
+ "backend-id|j_8e0c1c4367": {
+  "grade": 0,
+  "reason": "Sales"
+ },
  "backend-id|j_8e439fbcc3": {
   "grade": 2,
   "reason": "Full stack intern building APIs and server infrastructure"
  },
+ "backend-id|j_8ebe8d2abd": {
+  "grade": 2,
+  "reason": "Generic software engineer role, backend focus unclear"
+ },
+ "backend-id|j_8fd9ef6c0e": {
+  "grade": 1,
+  "reason": "Frontend developer"
+ },
+ "backend-id|j_90449725cb": {
+  "grade": 1,
+  "reason": "ServiceNow platform dev, not general backend"
+ },
  "backend-id|j_9207e7c871": {
   "grade": 0,
   "reason": "Supply chain task design"
+ },
+ "backend-id|j_92143a33b7": {
+  "grade": 1,
+  "reason": "DevOps, adjacent infra"
+ },
+ "backend-id|j_92c6dbfc6c": {
+  "grade": 0,
+  "reason": "Marketing"
  },
  "backend-id|j_936f971f7a": {
   "grade": 0,
@@ -295,6 +987,14 @@
   "grade": 1,
   "reason": "Security engineering on PHP/AWS stack, not backend dev"
  },
+ "backend-id|j_9448822031": {
+  "grade": 0,
+  "reason": "Revenue enablement"
+ },
+ "backend-id|j_95b9088bf2": {
+  "grade": 1,
+  "reason": "Salesforce platform developer"
+ },
  "backend-id|j_96e352fd8a": {
   "grade": 0,
   "reason": "Attorney"
@@ -302,6 +1002,30 @@
  "backend-id|j_9a7f3e981c": {
   "grade": 0,
   "reason": "Legal expert for AI training"
+ },
+ "backend-id|j_9afc9cd9aa": {
+  "grade": 0,
+  "reason": "Product owner"
+ },
+ "backend-id|j_9b7028553d": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_9b8b59dfb6": {
+  "grade": 0,
+  "reason": "Supply chain"
+ },
+ "backend-id|j_9ca310232e": {
+  "grade": 0,
+  "reason": "NOC operations"
+ },
+ "backend-id|j_9db3d44824": {
+  "grade": 0,
+  "reason": "Business analyst"
+ },
+ "backend-id|j_9de6ec0ed8": {
+  "grade": 0,
+  "reason": "Business GM role"
  },
  "backend-id|j_9e8047ce13": {
   "grade": 1,
@@ -315,6 +1039,14 @@
   "grade": 0,
   "reason": "Mechanical engineering AI training"
  },
+ "backend-id|j_9f4883a3f5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_9ff77dfd10": {
+  "grade": 0,
+  "reason": "Renewals sales role"
+ },
  "backend-id|j_a09565c2f6": {
   "grade": 1,
   "reason": "Mobile Flutter/Android role, not backend"
@@ -322,6 +1054,10 @@
  "backend-id|j_a1759899b3": {
   "grade": 2,
   "reason": "Python engineer leading a system built on API integrations; some backend work, but the role is creative/AI-focused"
+ },
+ "backend-id|j_a1798af89a": {
+  "grade": 0,
+  "reason": "Language reviewer"
  },
  "backend-id|j_a1fbec0fb3": {
   "grade": 0,
@@ -331,9 +1067,77 @@
   "grade": 0,
   "reason": "Shopping expert"
  },
+ "backend-id|j_a2b1ad29c5": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "backend-id|j_a309c2c156": {
+  "grade": 0,
+  "reason": "Law enforcement liaison"
+ },
+ "backend-id|j_a33f48882c": {
+  "grade": 0,
+  "reason": "Risk/BCM role"
+ },
+ "backend-id|j_a456720016": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_a4b3c1dbb7": {
+  "grade": 1,
+  "reason": "Conducts engineering interviews; not a software engineering role"
+ },
+ "backend-id|j_a60733eace": {
+  "grade": 0,
+  "reason": "IT help desk"
+ },
+ "backend-id|j_a636c601e9": {
+  "grade": 1,
+  "reason": "Generic talent pool, not a specific backend role"
+ },
+ "backend-id|j_a65920719d": {
+  "grade": 0,
+  "reason": "Manufacturing/procurement"
+ },
  "backend-id|j_a68d3b62e6": {
   "grade": 0,
   "reason": "Mechanical engineering AI training"
+ },
+ "backend-id|j_a7278fe0e8": {
+  "grade": 0,
+  "reason": "Operations role"
+ },
+ "backend-id|j_a7411b7bb3": {
+  "grade": 2,
+  "reason": "Cloud/systems architecture for SaaS platform; adjacent to backend engineering"
+ },
+ "backend-id|j_a742af0ff9": {
+  "grade": 0,
+  "reason": "Interior design"
+ },
+ "backend-id|j_a75c6606ea": {
+  "grade": 1,
+  "reason": "Sales solutions engineer, pre-sales rather than backend development."
+ },
+ "backend-id|j_a794d96b60": {
+  "grade": 3,
+  "reason": "Backend/platform developer working on Java services, Temporal, Kafka and Kubernetes."
+ },
+ "backend-id|j_a8ca244cd6": {
+  "grade": 0,
+  "reason": "Affiliate marketing director."
+ },
+ "backend-id|j_a9b218e167": {
+  "grade": 0,
+  "reason": "Design systems designer."
+ },
+ "backend-id|j_aa25696103": {
+  "grade": 0,
+  "reason": "Creative and web designer."
+ },
+ "backend-id|j_ab3979c587": {
+  "grade": 0,
+  "reason": "Training lead."
  },
  "backend-id|j_ab6f39a51b": {
   "grade": 1,
@@ -343,25 +1147,101 @@
   "grade": 0,
   "reason": "AI safety testing"
  },
+ "backend-id|j_abe594ff2f": {
+  "grade": 0,
+  "reason": "Head of design."
+ },
+ "backend-id|j_ac57eed7e2": {
+  "grade": 0,
+  "reason": "Marketing assistant."
+ },
+ "backend-id|j_acdbc5372c": {
+  "grade": 0,
+  "reason": "Channel sales role."
+ },
+ "backend-id|j_acded89dc3": {
+  "grade": 0,
+  "reason": "Paid marketing role."
+ },
  "backend-id|j_adc9c6c53a": {
   "grade": 0,
   "reason": "Data annotation"
+ },
+ "backend-id|j_ae16e50b99": {
+  "grade": 2,
+  "reason": "General software developer role that could include backend work, but no backend focus is specified."
+ },
+ "backend-id|j_aec0db69b0": {
+  "grade": 0,
+  "reason": "Sales account executive."
+ },
+ "backend-id|j_af59bf1718": {
+  "grade": 1,
+  "reason": "QA/DevOps engineer doing ERP test automation, not backend development."
+ },
+ "backend-id|j_af7b16bbca": {
+  "grade": 0,
+  "reason": "Game tester."
  },
  "backend-id|j_b030f1fd2c": {
   "grade": 0,
   "reason": "Paid media marketing"
  },
+ "backend-id|j_b0318283d6": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "backend-id|j_b0d5ca9300": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "backend-id|j_b222a09830": {
+  "grade": 1,
+  "reason": "Engineering management, not hands-on backend"
+ },
+ "backend-id|j_b34d21f8e6": {
+  "grade": 0,
+  "reason": "Call center support"
+ },
  "backend-id|j_b39b7d629c": {
   "grade": 0,
   "reason": "Customer service"
+ },
+ "backend-id|j_b42ae13d15": {
+  "grade": 0,
+  "reason": "Content/editorial"
+ },
+ "backend-id|j_b4fdaa76c7": {
+  "grade": 2,
+  "reason": "Data engineering, adjacent to backend"
  },
  "backend-id|j_b6e1d5f353": {
   "grade": 0,
   "reason": "STEM expert for AI training"
  },
+ "backend-id|j_b8f04812cd": {
+  "grade": 0,
+  "reason": "Support role"
+ },
  "backend-id|j_b93fb15aa2": {
   "grade": 1,
   "reason": "AI training contributor pool; some code writing, but not a backend role"
+ },
+ "backend-id|j_bd9ee4f522": {
+  "grade": 0,
+  "reason": "Website management/marketing"
+ },
+ "backend-id|j_bdc41ba16c": {
+  "grade": 0,
+  "reason": "Accounting"
+ },
+ "backend-id|j_bedf622a68": {
+  "grade": 3,
+  "reason": "Magento is PHP backend-heavy development"
+ },
+ "backend-id|j_c020057ebf": {
+  "grade": 0,
+  "reason": "CAD scripting benchmark tasks"
  },
  "backend-id|j_c14e307e95": {
   "grade": 1,
@@ -371,21 +1251,97 @@
   "grade": 1,
   "reason": "AI training STEM expert with Python, not backend engineering"
  },
+ "backend-id|j_c201d72e59": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "backend-id|j_c2d27068a0": {
+  "grade": 3,
+  "reason": "Server-side query planner software engineering"
+ },
+ "backend-id|j_c39a116b01": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_c39d6842ba": {
+  "grade": 0,
+  "reason": "Partnerships"
+ },
+ "backend-id|j_c3c6044abc": {
+  "grade": 0,
+  "reason": "Coordination"
+ },
  "backend-id|j_c3eb1737e5": {
   "grade": 0,
   "reason": "Legal advisor role"
+ },
+ "backend-id|j_c44a264c51": {
+  "grade": 1,
+  "reason": "Support engineering, not backend development"
+ },
+ "backend-id|j_c490e038de": {
+  "grade": 0,
+  "reason": "Podcast growth role"
+ },
+ "backend-id|j_c61dae077c": {
+  "grade": 1,
+  "reason": "IT consultant/system analyst, not backend engineering"
  },
  "backend-id|j_c65608f773": {
   "grade": 0,
   "reason": "Hardware/RTL expert for AI training"
  },
+ "backend-id|j_c673e84c6a": {
+  "grade": 2,
+  "reason": "Data engineering is adjacent to backend"
+ },
+ "backend-id|j_c71909c5a8": {
+  "grade": 2,
+  "reason": "AI engineering on production systems, adjacent to backend"
+ },
  "backend-id|j_c76ecce7c8": {
   "grade": 0,
   "reason": "AI output rater, not engineering"
  },
+ "backend-id|j_c8b88b1b89": {
+  "grade": 0,
+  "reason": "Social media role"
+ },
+ "backend-id|j_c8f4e2a8fc": {
+  "grade": 0,
+  "reason": "Growth director"
+ },
+ "backend-id|j_c90dd9eac6": {
+  "grade": 0,
+  "reason": "Product growth marketing"
+ },
+ "backend-id|j_c9effb313c": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_cbbd6810be": {
+  "grade": 0,
+  "reason": "Tax"
+ },
+ "backend-id|j_cc57ff2e1d": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_cd35df7ef9": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
  "backend-id|j_cd9685acf8": {
   "grade": 1,
   "reason": "Android mobile engineer, not backend"
+ },
+ "backend-id|j_cfc2df0fc2": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_d064a5f353": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "backend-id|j_d22202efbc": {
   "grade": 2,
@@ -395,6 +1351,50 @@
   "grade": 0,
   "reason": "UI/UX design role"
  },
+ "backend-id|j_d3b330485d": {
+  "grade": 2,
+  "reason": "Senior software engineer, backend focus not specified"
+ },
+ "backend-id|j_d3b8a38b09": {
+  "grade": 0,
+  "reason": "UX research"
+ },
+ "backend-id|j_d42235dd43": {
+  "grade": 0,
+  "reason": "Executive assistant"
+ },
+ "backend-id|j_d458dff10e": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "backend-id|j_d59ec6a865": {
+  "grade": 0,
+  "reason": "Lending manager"
+ },
+ "backend-id|j_d5ff7f303d": {
+  "grade": 3,
+  "reason": "Full-stack with backend focus on APIs and services"
+ },
+ "backend-id|j_d68bc5bd3d": {
+  "grade": 1,
+  "reason": "Solutions engineer at database company, customer-facing"
+ },
+ "backend-id|j_d6b5a7f901": {
+  "grade": 0,
+  "reason": "Lead generation"
+ },
+ "backend-id|j_d795bd7dc9": {
+  "grade": 0,
+  "reason": "SaaS systems admin"
+ },
+ "backend-id|j_d8efce35ba": {
+  "grade": 1,
+  "reason": "Security engineering, not backend dev"
+ },
+ "backend-id|j_da40487bc4": {
+  "grade": 1,
+  "reason": "Customer success engineer"
+ },
  "backend-id|j_db37e380bb": {
   "grade": 0,
   "reason": "Marketing role"
@@ -403,21 +1403,97 @@
   "grade": 0,
   "reason": "Legal expert role"
  },
+ "backend-id|j_dbdb5db04f": {
+  "grade": 2,
+  "reason": "Product engineer at CI/CD company, likely full-stack"
+ },
+ "backend-id|j_dbfcee6386": {
+  "grade": 0,
+  "reason": "Salesforce admin"
+ },
  "backend-id|j_dcb235b629": {
   "grade": 0,
   "reason": "Affiliate operations internship"
+ },
+ "backend-id|j_dcfcdb213c": {
+  "grade": 1,
+  "reason": "Frontend engineering"
+ },
+ "backend-id|j_df0d5501af": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "backend-id|j_df2d222fb8": {
+  "grade": 0,
+  "reason": "Resource management"
+ },
+ "backend-id|j_e1b10744df": {
+  "grade": 1,
+  "reason": "Customer-facing technical role, not backend engineering"
  },
  "backend-id|j_e21269d363": {
   "grade": 1,
   "reason": "ML engineering tasks for AI training, not backend"
  },
+ "backend-id|j_e32c4ef54b": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "backend-id|j_e3f2474bc0": {
+  "grade": 0,
+  "reason": "Internal audit"
+ },
+ "backend-id|j_e45e131f56": {
+  "grade": 3,
+  "reason": "Backend-focused software engineer with NestJS/Node.js"
+ },
+ "backend-id|j_e515e3a56b": {
+  "grade": 0,
+  "reason": "Partnerships coordinator"
+ },
+ "backend-id|j_e571a4187e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "backend-id|j_e5eb993038": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
  "backend-id|j_e64759b65e": {
   "grade": 0,
   "reason": "Outbound calling sales role"
  },
+ "backend-id|j_e6f9f86a92": {
+  "grade": 0,
+  "reason": "Customer-facing consultant"
+ },
+ "backend-id|j_e760a84c6b": {
+  "grade": 0,
+  "reason": "Video editor"
+ },
+ "backend-id|j_e7a7646f30": {
+  "grade": 0,
+  "reason": "Customer success management"
+ },
+ "backend-id|j_e7ff1ba326": {
+  "grade": 0,
+  "reason": "Sales enablement"
+ },
+ "backend-id|j_e90203fce9": {
+  "grade": 1,
+  "reason": "Customer-facing technical role, not engineering"
+ },
+ "backend-id|j_e97a4caade": {
+  "grade": 0,
+  "reason": "Graphic design intern"
+ },
  "backend-id|j_e9d220a0df": {
   "grade": 1,
   "reason": "Application security engineering, adjacent but not backend development"
+ },
+ "backend-id|j_eb20d4ca7c": {
+  "grade": 0,
+  "reason": "AI data quality review"
  },
  "backend-id|j_eb3621145f": {
   "grade": 0,
@@ -427,25 +1503,121 @@
   "grade": 0,
   "reason": "Translation/linguist role."
  },
+ "backend-id|j_ec5550f26a": {
+  "grade": 0,
+  "reason": "Customer success management"
+ },
+ "backend-id|j_ec7e2f3139": {
+  "grade": 1,
+  "reason": "Engineering manager role; people management rather than hands-on backend engineering."
+ },
+ "backend-id|j_ec92a81f1f": {
+  "grade": 2,
+  "reason": "Applied AI engineer owning document processing pipelines; has backend aspects but is centred on AI/ML."
+ },
+ "backend-id|j_ed3edaf00f": {
+  "grade": 0,
+  "reason": "Actuarial role; not engineering."
+ },
+ "backend-id|j_ed662701a1": {
+  "grade": 1,
+  "reason": "Power BI/BI developer; data analytics work, not backend engineering."
+ },
  "backend-id|j_edd15a47cd": {
   "grade": 0,
   "reason": "Marketing role."
+ },
+ "backend-id|j_ee3b6dc0e3": {
+  "grade": 1,
+  "reason": "Head of Technology leadership role; engineering leadership rather than a backend engineering role."
  },
  "backend-id|j_ee871fa31b": {
   "grade": 1,
   "reason": "Task design for benchmarks around ML inference serving; involves serving systems, but it isn't a backend engineering job."
  },
+ "backend-id|j_ef13e6eb42": {
+  "grade": 0,
+  "reason": "Audio transcription work; not relevant."
+ },
+ "backend-id|j_efcfaae732": {
+  "grade": 1,
+  "reason": "Data analytics engineering; adjacent to backend but not backend software engineering."
+ },
  "backend-id|j_f0ac351b71": {
   "grade": 0,
   "reason": "Cold email lead generation."
+ },
+ "backend-id|j_f0ddd7585e": {
+  "grade": 0,
+  "reason": "Digital marketing; not relevant."
+ },
+ "backend-id|j_f128e585ea": {
+  "grade": 0,
+  "reason": "Recruitment and social media; not relevant."
  },
  "backend-id|j_f1938987b3": {
   "grade": 3,
   "reason": "Full-stack engineer with a backend lean, an exact fit."
  },
+ "backend-id|j_f20eb8effd": {
+  "grade": 3,
+  "reason": "Software engineer building the control plane for managed Postgres; core backend/server-side work."
+ },
+ "backend-id|j_f230635d1b": {
+  "grade": 2,
+  "reason": "Cloud engineer; infrastructure work adjacent to backend."
+ },
+ "backend-id|j_f24233f2e0": {
+  "grade": 0,
+  "reason": "Sales role; not relevant."
+ },
+ "backend-id|j_f310119d05": {
+  "grade": 1,
+  "reason": "Data platform architecture; data/ETL focus rather than backend software engineering."
+ },
+ "backend-id|j_f3aa34e23b": {
+  "grade": 0,
+  "reason": "Sales development; not relevant."
+ },
+ "backend-id|j_f628e53e42": {
+  "grade": 1,
+  "reason": "Data engineering focused on ETL and warehouses; adjacent but not backend software engineering."
+ },
+ "backend-id|j_f68a3597ad": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "backend-id|j_f6b5f69e7f": {
+  "grade": 2,
+  "reason": "Data engineering, adjacent to backend"
+ },
+ "backend-id|j_f6ef333366": {
+  "grade": 0,
+  "reason": "Content review"
+ },
  "backend-id|j_f7cfd57f2f": {
   "grade": 3,
   "reason": "Senior Go backend developer working on ledger and blockchain systems."
+ },
+ "backend-id|j_f8716052c6": {
+  "grade": 0,
+  "reason": "Recruiter"
+ },
+ "backend-id|j_fa401b71fb": {
+  "grade": 0,
+  "reason": "People ops"
+ },
+ "backend-id|j_fa8932c65f": {
+  "grade": 0,
+  "reason": "Game design"
+ },
+ "backend-id|j_faba38b48d": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "backend-id|j_faf3850192": {
+  "grade": 0,
+  "reason": "Business development"
  },
  "backend-id|j_fc4c84de99": {
   "grade": 1,
@@ -455,37 +1627,213 @@
   "grade": 0,
   "reason": "Social media marketing role."
  },
+ "backend-id|j_fda6ebe3fb": {
+  "grade": 2,
+  "reason": "Production AI/LLM engineering, adjacent to backend systems"
+ },
+ "backend-id|j_fe0a19cf83": {
+  "grade": 0,
+  "reason": "Category management"
+ },
+ "backend-id|j_fe3f9272a1": {
+  "grade": 0,
+  "reason": "Marketing strategy"
+ },
+ "backend-id|j_feb3cc8851": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "backend-id|j_ff3fecc180": {
+  "grade": 1,
+  "reason": "Technical program management, not engineering"
+ },
+ "data-de|j_00356f79a4": {
+  "grade": 0,
+  "reason": "YouTube content creator"
+ },
+ "data-de|j_018382a8f2": {
+  "grade": 0,
+  "reason": "Animator intern"
+ },
  "data-de|j_01911257fa": {
   "grade": 0,
   "reason": "Travel ambassador"
+ },
+ "data-de|j_03a98fe055": {
+  "grade": 0,
+  "reason": "Security engineering management"
  },
  "data-de|j_0446cd44d4": {
   "grade": 0,
   "reason": "Atlassian admin"
  },
+ "data-de|j_04afff1742": {
+  "grade": 1,
+  "reason": "Database reliability is adjacent to data platforms but not data engineering"
+ },
+ "data-de|j_05561072ab": {
+  "grade": 0,
+  "reason": "Graphic design"
+ },
+ "data-de|j_063ec4a7c7": {
+  "grade": 0,
+  "reason": "English teaching"
+ },
+ "data-de|j_06486940e7": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_064f7e5a99": {
+  "grade": 0,
+  "reason": "Community moderation"
+ },
  "data-de|j_069c5be345": {
   "grade": 0,
   "reason": "Legal annotation"
+ },
+ "data-de|j_0864f69d6d": {
+  "grade": 0,
+  "reason": "Content marketing"
+ },
+ "data-de|j_0877d7ec70": {
+  "grade": 0,
+  "reason": "CRM marketing"
+ },
+ "data-de|j_08d5f5517a": {
+  "grade": 0,
+  "reason": "Performance testing"
  },
  "data-de|j_08ee88b3bd": {
   "grade": 0,
   "reason": "Hardware engineering"
  },
+ "data-de|j_08fb419b09": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_0a40723564": {
+  "grade": 0,
+  "reason": "Capacity planning, not data engineering"
+ },
+ "data-de|j_0b1041d9b0": {
+  "grade": 2,
+  "reason": "Consulting architect for a lakehouse/warehouse data platform; customer-facing but closely related"
+ },
+ "data-de|j_0b3df2cb77": {
+  "grade": 0,
+  "reason": "ML inference task design"
+ },
+ "data-de|j_0c6babf894": {
+  "grade": 0,
+  "reason": "DevOps role focused on the edge proxy, not data engineering"
+ },
  "data-de|j_0eb10b18c6": {
   "grade": 0,
   "reason": "AI writing"
+ },
+ "data-de|j_0f0b3b6f0e": {
+  "grade": 0,
+  "reason": "Product management role"
  },
  "data-de|j_107a81c7a2": {
   "grade": 0,
   "reason": "Instructional design"
  },
+ "data-de|j_10e3a6ff6a": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "data-de|j_1146ecf4be": {
+  "grade": 1,
+  "reason": "DevOps role whose pipelines are CI/CD, not data pipelines"
+ },
+ "data-de|j_1315be3b43": {
+  "grade": 1,
+  "reason": "DevOps/SRE infrastructure role, only next to data engineering"
+ },
+ "data-de|j_13c8f2f55c": {
+  "grade": 0,
+  "reason": "UX design role"
+ },
  "data-de|j_146102a6de": {
   "grade": 0,
   "reason": "Legal annotation"
  },
+ "data-de|j_154d6632c2": {
+  "grade": 0,
+  "reason": "Ad sales role"
+ },
+ "data-de|j_15518b5547": {
+  "grade": 3,
+  "reason": "A data engineer role, which is exactly what was asked for"
+ },
+ "data-de|j_1564ba68ee": {
+  "grade": 0,
+  "reason": "Brand design role"
+ },
+ "data-de|j_1683857016": {
+  "grade": 0,
+  "reason": "Category management role"
+ },
+ "data-de|j_16d098d166": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_17754caff4": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "data-de|j_182fef53a9": {
+  "grade": 0,
+  "reason": "Customer support role"
+ },
  "data-de|j_1864763ae0": {
   "grade": 0,
   "reason": "Program management"
+ },
+ "data-de|j_1883ab1107": {
+  "grade": 0,
+  "reason": "Sales role about data protection, not data engineering"
+ },
+ "data-de|j_19db4389c5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_19f5cb47ec": {
+  "grade": 0,
+  "reason": "English tutoring"
+ },
+ "data-de|j_1b64105da0": {
+  "grade": 0,
+  "reason": "Tech support"
+ },
+ "data-de|j_1cdf337fe9": {
+  "grade": 0,
+  "reason": "Lending quality oversight"
+ },
+ "data-de|j_1e35a1d5a9": {
+  "grade": 0,
+  "reason": "Customer onboarding"
+ },
+ "data-de|j_1fc58daf65": {
+  "grade": 0,
+  "reason": "People operations"
+ },
+ "data-de|j_201d14ba08": {
+  "grade": 0,
+  "reason": "AI operations management, not data engineering"
+ },
+ "data-de|j_20238a568d": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "data-de|j_20274b6389": {
+  "grade": 0,
+  "reason": "Translation"
+ },
+ "data-de|j_20b74857db": {
+  "grade": 1,
+  "reason": "CRM software engineering; may involve integrations but not data engineering"
  },
  "data-de|j_220f8c4de5": {
   "grade": 1,
@@ -495,37 +1843,197 @@
   "grade": 1,
   "reason": "SRE infrastructure, adjacent but not data engineering"
  },
+ "data-de|j_22fd905c7a": {
+  "grade": 0,
+  "reason": "Product management"
+ },
  "data-de|j_2452b91c2f": {
   "grade": 0,
   "reason": "Referral marketing"
+ },
+ "data-de|j_24c9e3d78e": {
+  "grade": 0,
+  "reason": "Legal"
+ },
+ "data-de|j_24cc7f9f7a": {
+  "grade": 0,
+  "reason": "SEO"
+ },
+ "data-de|j_251aae03a7": {
+  "grade": 0,
+  "reason": "DevSecOps, not data engineering"
+ },
+ "data-de|j_2541f1d8a9": {
+  "grade": 0,
+  "reason": "Risk/AI management"
+ },
+ "data-de|j_262b2ebed3": {
+  "grade": 0,
+  "reason": "Customer support"
  },
  "data-de|j_27971a162b": {
   "grade": 0,
   "reason": "Account management"
  },
+ "data-de|j_297cd40725": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_2bb8c095dd": {
+  "grade": 0,
+  "reason": "Product management for app platform"
+ },
+ "data-de|j_2d238fb4c9": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "data-de|j_2e0c62b0b5": {
+  "grade": 0,
+  "reason": "Legal"
+ },
+ "data-de|j_2e0f94a977": {
+  "grade": 0,
+  "reason": "CRM admin"
+ },
  "data-de|j_2e63d2db48": {
   "grade": 0,
   "reason": "Game dev"
+ },
+ "data-de|j_2f10cd1478": {
+  "grade": 1,
+  "reason": "ML platform engineering, adjacent to data platforms"
  },
  "data-de|j_2f48cc1bd4": {
   "grade": 0,
   "reason": "Category management"
  },
+ "data-de|j_2f8efba89c": {
+  "grade": 1,
+  "reason": "Eng manager for martech infrastructure, possibly data-related but not DE"
+ },
+ "data-de|j_2fd780d206": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "data-de|j_2fe8f6172b": {
+  "grade": 0,
+  "reason": "General software engineering"
+ },
+ "data-de|j_30ff05e838": {
+  "grade": 0,
+  "reason": "D365 developer"
+ },
  "data-de|j_312b6ce30d": {
   "grade": 1,
   "reason": "Data ops for AI datasets with some pipeline design, but mostly sourcing and annotation"
+ },
+ "data-de|j_313129d002": {
+  "grade": 1,
+  "reason": "Integration engineering, somewhat adjacent to data pipelines"
+ },
+ "data-de|j_313839a788": {
+  "grade": 0,
+  "reason": "Support"
+ },
+ "data-de|j_32f807f988": {
+  "grade": 0,
+  "reason": "IT systems"
+ },
+ "data-de|j_3446819ba0": {
+  "grade": 0,
+  "reason": "Competitive intelligence"
+ },
+ "data-de|j_3541ad5e4c": {
+  "grade": 0,
+  "reason": "RevOps"
+ },
+ "data-de|j_356794525a": {
+  "grade": 0,
+  "reason": "Cryptography task creation for AI benchmarks, not data engineering."
+ },
+ "data-de|j_357ce2fdb8": {
+  "grade": 0,
+  "reason": "Business development sales role."
  },
  "data-de|j_3692f8dbd8": {
   "grade": 0,
   "reason": "Counterintelligence SME for AI evaluation; not data engineering."
  },
+ "data-de|j_36949da3e5": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
+ "data-de|j_3868ecf684": {
+  "grade": 0,
+  "reason": "Fullstack React/Node development. Using SQL alone doesn't make it data engineering."
+ },
+ "data-de|j_3895e5ddba": {
+  "grade": 0,
+  "reason": "Customer success onboarding role."
+ },
+ "data-de|j_38974a759c": {
+  "grade": 0,
+  "reason": "Client support supervisor."
+ },
+ "data-de|j_3a15af79ae": {
+  "grade": 0,
+  "reason": "Account executive sales role."
+ },
+ "data-de|j_3ad29bcc39": {
+  "grade": 0,
+  "reason": "Account executive sales role."
+ },
+ "data-de|j_3aeb89062d": {
+  "grade": 0,
+  "reason": "Technical recruiter."
+ },
  "data-de|j_3c393917eb": {
   "grade": 1,
   "reason": "RL environment building with Python/Docker; software work, not data pipelines."
  },
+ "data-de|j_3ce5a384f3": {
+  "grade": 1,
+  "reason": "Developer experience and devrel role at a database company. It touches data infrastructure but is not data engineering."
+ },
+ "data-de|j_3dcb594b42": {
+  "grade": 1,
+  "reason": "Backend engineering on a query team for a CI/CD platform. Possibly data-adjacent, and 'pipelines' here means CI pipelines, not data pipelines."
+ },
+ "data-de|j_3dd1eb6b4a": {
+  "grade": 1,
+  "reason": "Backend microservices role that mentions streaming pipelines, but the focus is product services."
+ },
+ "data-de|j_4020d72fd1": {
+  "grade": 0,
+  "reason": "Ad sales role."
+ },
  "data-de|j_420845d314": {
   "grade": 0,
   "reason": "Aerodynamics/CFD expert; not relevant."
+ },
+ "data-de|j_4343de41ab": {
+  "grade": 0,
+  "reason": "Security operations engineering."
+ },
+ "data-de|j_437d8fd29c": {
+  "grade": 0,
+  "reason": "CRM marketing manager."
+ },
+ "data-de|j_439cd34532": {
+  "grade": 0,
+  "reason": "3D texture artist"
+ },
+ "data-de|j_439efd13af": {
+  "grade": 0,
+  "reason": "Shopify dev"
+ },
+ "data-de|j_453ce88a0d": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "data-de|j_45c04cc283": {
+  "grade": 0,
+  "reason": "Appointment setter"
  },
  "data-de|j_46b3b970a8": {
   "grade": 1,
@@ -535,13 +2043,37 @@
   "grade": 0,
   "reason": "Legal counsel; not relevant."
  },
+ "data-de|j_46c4c46320": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "data-de|j_47d22151df": {
+  "grade": 0,
+  "reason": "HR"
+ },
+ "data-de|j_4831111755": {
+  "grade": 0,
+  "reason": "Collections"
+ },
+ "data-de|j_494d0e016f": {
+  "grade": 1,
+  "reason": "Sales role at data platform company"
+ },
  "data-de|j_4999adbc75": {
   "grade": 0,
   "reason": "Estate planning legal expert; not relevant."
  },
+ "data-de|j_4aa2150834": {
+  "grade": 0,
+  "reason": "Fraud ops"
+ },
  "data-de|j_4aecafafa6": {
   "grade": 1,
   "reason": "Dataset sourcing and annotation QA; data ops, not pipeline/ETL engineering."
+ },
+ "data-de|j_4b0ab24952": {
+  "grade": 0,
+  "reason": "Marketing"
  },
  "data-de|j_4b0f849926": {
   "grade": 1,
@@ -550,6 +2082,26 @@
  "data-de|j_4bdd92d00f": {
   "grade": 0,
   "reason": "React full-stack developer; not data engineering."
+ },
+ "data-de|j_4db091910e": {
+  "grade": 2,
+  "reason": "DevOps supporting a data platform, works with data engineering"
+ },
+ "data-de|j_4dc0f95049": {
+  "grade": 0,
+  "reason": "HR ops"
+ },
+ "data-de|j_4de6a00d1e": {
+  "grade": 0,
+  "reason": "Design"
+ },
+ "data-de|j_4e42c64d8c": {
+  "grade": 0,
+  "reason": "Marketing creative"
+ },
+ "data-de|j_4e44126058": {
+  "grade": 0,
+  "reason": "Recruiting"
  },
  "data-de|j_52078af5ea": {
   "grade": 0,
@@ -563,21 +2115,113 @@
   "grade": 0,
   "reason": "CX specialist; not relevant."
  },
+ "data-de|j_54155bbc84": {
+  "grade": 0,
+  "reason": "Sales account management at a data governance company, not engineering."
+ },
+ "data-de|j_55195306c8": {
+  "grade": 1,
+  "reason": "Backend knowledge graph engineering; adjacent to data but not data engineering."
+ },
  "data-de|j_558cb9202f": {
   "grade": 0,
   "reason": "Commission-based referral partner; not relevant."
+ },
+ "data-de|j_55df4bba30": {
+  "grade": 3,
+  "reason": "Senior Data Engineer role."
+ },
+ "data-de|j_55df8cbf81": {
+  "grade": 0,
+  "reason": "Sales development role."
  },
  "data-de|j_55f3a1f640": {
   "grade": 0,
   "reason": "Video/motion data capture; not data engineering."
  },
+ "data-de|j_5673da59f4": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "data-de|j_575235c5c7": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "data-de|j_58c52c8c15": {
+  "grade": 0,
+  "reason": "Broker dealer operations."
+ },
+ "data-de|j_5932f5584e": {
+  "grade": 0,
+  "reason": "Communications leadership."
+ },
+ "data-de|j_596874ce3d": {
+  "grade": 0,
+  "reason": "Enterprise sales."
+ },
+ "data-de|j_5b96540f05": {
+  "grade": 0,
+  "reason": "Fullstack workflow product engineering, not data engineering."
+ },
  "data-de|j_5e6420b16d": {
   "grade": 0,
   "reason": "At-home video recording; not relevant."
  },
+ "data-de|j_5e740713de": {
+  "grade": 0,
+  "reason": "CRM consulting."
+ },
+ "data-de|j_5efbdda2c3": {
+  "grade": 0,
+  "reason": "Field marketing."
+ },
+ "data-de|j_6000c2203e": {
+  "grade": 1,
+  "reason": "ML engineering role; data warehouses are only a minor familiarity requirement."
+ },
  "data-de|j_607cf99871": {
   "grade": 0,
   "reason": "Business development sales role"
+ },
+ "data-de|j_60c7bf345d": {
+  "grade": 0,
+  "reason": "Full-stack AI code evaluation."
+ },
+ "data-de|j_61925adcfc": {
+  "grade": 0,
+  "reason": "Paid ads role."
+ },
+ "data-de|j_62611c4ab4": {
+  "grade": 0,
+  "reason": "Risk consulting, not data engineering"
+ },
+ "data-de|j_62d5f94de8": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_62f518b2c7": {
+  "grade": 0,
+  "reason": "CRM solutions architect, not data engineering"
+ },
+ "data-de|j_63dab1ed71": {
+  "grade": 0,
+  "reason": "Sales/solutions consulting"
+ },
+ "data-de|j_65a3ec8461": {
+  "grade": 0,
+  "reason": "Community management"
+ },
+ "data-de|j_65b58ea973": {
+  "grade": 0,
+  "reason": "3D design"
+ },
+ "data-de|j_675dcd48ab": {
+  "grade": 0,
+  "reason": "Threat intelligence analyst"
+ },
+ "data-de|j_6785a57150": {
+  "grade": 1,
+  "reason": "Professional services manager at a data governance company; not data engineering itself"
  },
  "data-de|j_6785b24381": {
   "grade": 0,
@@ -587,9 +2231,17 @@
   "grade": 0,
   "reason": "Community management"
  },
+ "data-de|j_687dd79730": {
+  "grade": 0,
+  "reason": "General software engineering on CRM"
+ },
  "data-de|j_691e215f9e": {
   "grade": 0,
   "reason": "AI safety red teaming"
+ },
+ "data-de|j_693aa22426": {
+  "grade": 0,
+  "reason": "Frontend Vue developer"
  },
  "data-de|j_6bac92ed55": {
   "grade": 0,
@@ -599,17 +2251,85 @@
   "grade": 1,
   "reason": "DevOps infrastructure, adjacent but not data engineering"
  },
+ "data-de|j_6d62106272": {
+  "grade": 0,
+  "reason": "Developer engagement rep"
+ },
  "data-de|j_6e59b15a43": {
   "grade": 0,
   "reason": "HR coordination"
+ },
+ "data-de|j_6e612b8a9c": {
+  "grade": 0,
+  "reason": "Workforce planning analyst"
+ },
+ "data-de|j_6e736b1791": {
+  "grade": 0,
+  "reason": "Data entry clerk, not engineering"
+ },
+ "data-de|j_6e7eee8df7": {
+  "grade": 0,
+  "reason": "Customer success engineer for dev tools"
+ },
+ "data-de|j_6e9c5812e0": {
+  "grade": 0,
+  "reason": "Render farm management"
+ },
+ "data-de|j_6ea77c5096": {
+  "grade": 0,
+  "reason": "Recruitment sales role"
+ },
+ "data-de|j_6ef0b90f4f": {
+  "grade": 1,
+  "reason": "Product role at a data warehouse company, not engineering"
+ },
+ "data-de|j_6fb41c1f9b": {
+  "grade": 0,
+  "reason": "Renewals sales"
  },
  "data-de|j_6fd71657dc": {
   "grade": 1,
   "reason": "ML engineering tasks, tangential to data pipelines"
  },
+ "data-de|j_7014075ffc": {
+  "grade": 0,
+  "reason": "Channel sales"
+ },
  "data-de|j_71db67eb7a": {
   "grade": 0,
   "reason": "Business development"
+ },
+ "data-de|j_71fd0d6146": {
+  "grade": 0,
+  "reason": "QA automation; CI/CD pipelines aren't data pipelines"
+ },
+ "data-de|j_74990eb5d9": {
+  "grade": 0,
+  "reason": "DevOps infrastructure, not data engineering"
+ },
+ "data-de|j_7530667469": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "data-de|j_761e5b8482": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "data-de|j_780c4812a2": {
+  "grade": 0,
+  "reason": "Backend product engineering, not data engineering"
+ },
+ "data-de|j_7842a402cc": {
+  "grade": 0,
+  "reason": "IT engineering"
+ },
+ "data-de|j_78d296f496": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "data-de|j_78f903d57a": {
+  "grade": 0,
+  "reason": "Endpoint management consulting"
  },
  "data-de|j_7918656ab7": {
   "grade": 0,
@@ -619,21 +2339,101 @@
   "grade": 0,
   "reason": "Partnerships coordination"
  },
+ "data-de|j_79f2ca2f78": {
+  "grade": 1,
+  "reason": "Solutions architect at a company that calls itself a data platform; the role isn't data engineering"
+ },
+ "data-de|j_79f8be3217": {
+  "grade": 3,
+  "reason": "dbt analytics engineering on a cloud data warehouse, with modeling and pipelines"
+ },
+ "data-de|j_7af72754e0": {
+  "grade": 0,
+  "reason": "Security engineering"
+ },
+ "data-de|j_7b0e84d2ee": {
+  "grade": 0,
+  "reason": "Web app security/WAF role, not data engineering."
+ },
+ "data-de|j_7bba233fa8": {
+  "grade": 0,
+  "reason": "Data annotation work, not data engineering."
+ },
+ "data-de|j_7c38f3e5f9": {
+  "grade": 0,
+  "reason": "Customer support engineering."
+ },
+ "data-de|j_7c3e59460c": {
+  "grade": 0,
+  "reason": "Marketing/SEO role."
+ },
+ "data-de|j_7c6444a90e": {
+  "grade": 0,
+  "reason": "Recruiting scheduling role."
+ },
+ "data-de|j_7d4ae8d6ed": {
+  "grade": 0,
+  "reason": "Compliance internship."
+ },
+ "data-de|j_7d61749e33": {
+  "grade": 0,
+  "reason": "Sales role at a telemetry data company; the role itself is sales."
+ },
  "data-de|j_7db2e21b93": {
   "grade": 0,
   "reason": "CRM email marketing"
+ },
+ "data-de|j_7e8a65c012": {
+  "grade": 0,
+  "reason": "Zoho CRM development and administration; integrations are not data engineering."
+ },
+ "data-de|j_7f4b40f62b": {
+  "grade": 0,
+  "reason": "Video editor."
+ },
+ "data-de|j_7f7b24817a": {
+  "grade": 0,
+  "reason": "Edtech product management."
+ },
+ "data-de|j_8068844c98": {
+  "grade": 1,
+  "reason": "Data science/analytics role; works next to data engineering but focuses on analysis, not pipelines."
  },
  "data-de|j_80b1ea5f26": {
   "grade": 0,
   "reason": "Growth marketing"
  },
+ "data-de|j_80f3e82570": {
+  "grade": 0,
+  "reason": "Commissioning mechanical systems in data centers; not data engineering."
+ },
  "data-de|j_81ce29250e": {
   "grade": 0,
   "reason": "SIP telephony expert"
  },
+ "data-de|j_81d589edaf": {
+  "grade": 0,
+  "reason": "Content marketing role."
+ },
  "data-de|j_839ad8cbcf": {
   "grade": 0,
   "reason": "Test engineering, not data engineering"
+ },
+ "data-de|j_83d0710305": {
+  "grade": 0,
+  "reason": "General software engineering; the snippet doesn't mention data pipelines."
+ },
+ "data-de|j_84f0e7cfdf": {
+  "grade": 0,
+  "reason": "Sales account executive."
+ },
+ "data-de|j_851f6a996d": {
+  "grade": 0,
+  "reason": "Paid ads marketing role"
+ },
+ "data-de|j_85266795cc": {
+  "grade": 0,
+  "reason": "Content editing role"
  },
  "data-de|j_86bcdf41d5": {
   "grade": 0,
@@ -643,21 +2443,73 @@
   "grade": 0,
   "reason": "Travel operations for AI training."
  },
+ "data-de|j_895be090da": {
+  "grade": 0,
+  "reason": "Call center insurance verification"
+ },
+ "data-de|j_8a53d8ea33": {
+  "grade": 0,
+  "reason": "Amazon brand management"
+ },
+ "data-de|j_8ac0503409": {
+  "grade": 1,
+  "reason": "Backend software engineering, not data engineering focused"
+ },
+ "data-de|j_8ac68ea74e": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "data-de|j_8b1b63dbf3": {
+  "grade": 1,
+  "reason": "Product management at telemetry data pipeline company; not engineering role"
+ },
  "data-de|j_8c4aa0f0a6": {
   "grade": 0,
   "reason": "Data annotation, not data engineering."
+ },
+ "data-de|j_8caf616380": {
+  "grade": 0,
+  "reason": "Frontend/interfaces engineering"
+ },
+ "data-de|j_8cd7a12023": {
+  "grade": 1,
+  "reason": "Pre-sales solution engineering for API/data graph; not data engineering"
+ },
+ "data-de|j_8cdf3686d8": {
+  "grade": 2,
+  "reason": "Data science with SQL, big data tools; adjacent to data engineering"
+ },
+ "data-de|j_8d081ea981": {
+  "grade": 1,
+  "reason": "Backend product engineering, not data pipelines"
+ },
+ "data-de|j_8d96bfc7e8": {
+  "grade": 0,
+  "reason": "Creative director role"
  },
  "data-de|j_8daa145b01": {
   "grade": 0,
   "reason": "Growth/acquisition role."
  },
+ "data-de|j_8e0c1c4367": {
+  "grade": 0,
+  "reason": "Sales account manager"
+ },
  "data-de|j_8e439fbcc3": {
   "grade": 0,
   "reason": "Full stack internship, not data engineering."
  },
+ "data-de|j_8fd9ef6c0e": {
+  "grade": 0,
+  "reason": "Front-end development"
+ },
  "data-de|j_9207e7c871": {
   "grade": 1,
   "reason": "Supply chain task design involving data exports and Python; not data engineering."
+ },
+ "data-de|j_92143a33b7": {
+  "grade": 1,
+  "reason": "DevOps infrastructure, adjacent but not data engineering"
  },
  "data-de|j_936f971f7a": {
   "grade": 0,
@@ -667,6 +2519,14 @@
   "grade": 0,
   "reason": "Customer success leadership."
  },
+ "data-de|j_9448822031": {
+  "grade": 0,
+  "reason": "Sales enablement role; 'pipeline' here means sales pipeline."
+ },
+ "data-de|j_95b9088bf2": {
+  "grade": 0,
+  "reason": "Salesforce developer role, not data engineering."
+ },
  "data-de|j_96e352fd8a": {
   "grade": 0,
   "reason": "Legal AI training."
@@ -674,6 +2534,22 @@
  "data-de|j_9a7f3e981c": {
   "grade": 0,
   "reason": "Legal expert AI training."
+ },
+ "data-de|j_9afc9cd9aa": {
+  "grade": 0,
+  "reason": "Product owner role."
+ },
+ "data-de|j_9b7028553d": {
+  "grade": 0,
+  "reason": "Security sales role."
+ },
+ "data-de|j_9b8b59dfb6": {
+  "grade": 0,
+  "reason": "Supply chain operations role."
+ },
+ "data-de|j_9de6ec0ed8": {
+  "grade": 0,
+  "reason": "Category general manager role."
  },
  "data-de|j_9ea8b434a2": {
   "grade": 0,
@@ -683,9 +2559,21 @@
   "grade": 0,
   "reason": "Mechanical engineering AI training."
  },
+ "data-de|j_9f4883a3f5": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
+ "data-de|j_9ff77dfd10": {
+  "grade": 0,
+  "reason": "Renewals sales role."
+ },
  "data-de|j_a1759899b3": {
   "grade": 0,
   "reason": "AI creative/social media engineering, not data pipelines."
+ },
+ "data-de|j_a1798af89a": {
+  "grade": 0,
+  "reason": "Language review role."
  },
  "data-de|j_a1fbec0fb3": {
   "grade": 0,
@@ -695,9 +2583,81 @@
   "grade": 0,
   "reason": "Professional shopper."
  },
+ "data-de|j_a2b1ad29c5": {
+  "grade": 0,
+  "reason": "Account management role."
+ },
+ "data-de|j_a309c2c156": {
+  "grade": 0,
+  "reason": "Law enforcement liaison role."
+ },
+ "data-de|j_a33f48882c": {
+  "grade": 0,
+  "reason": "Business continuity risk role."
+ },
+ "data-de|j_a456720016": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "data-de|j_a4b3c1dbb7": {
+  "grade": 0,
+  "reason": "Technical interviewing contract role, not data engineering."
+ },
+ "data-de|j_a60733eace": {
+  "grade": 0,
+  "reason": "IT help desk role."
+ },
+ "data-de|j_a636c601e9": {
+  "grade": 0,
+  "reason": "Generic talent community signup, not a data engineering role."
+ },
+ "data-de|j_a65920719d": {
+  "grade": 0,
+  "reason": "Manufacturing and procurement leadership role."
+ },
  "data-de|j_a68d3b62e6": {
   "grade": 0,
   "reason": "Mechanical engineering AI training contract, not data engineering"
+ },
+ "data-de|j_a7278fe0e8": {
+  "grade": 0,
+  "reason": "Broker dealer operations role."
+ },
+ "data-de|j_a7411b7bb3": {
+  "grade": 1,
+  "reason": "Cloud and AI enterprise architecture role; data platforms are not its focus."
+ },
+ "data-de|j_a742af0ff9": {
+  "grade": 0,
+  "reason": "Interior design role."
+ },
+ "data-de|j_a75c6606ea": {
+  "grade": 0,
+  "reason": "Sales solutions engineer; 'pipeline' here means the sales pipeline."
+ },
+ "data-de|j_a794d96b60": {
+  "grade": 1,
+  "reason": "Backend/platform engineering with Kafka streaming and workflow orchestration; close to data engineering but not a data engineering role."
+ },
+ "data-de|j_a8ca244cd6": {
+  "grade": 0,
+  "reason": "Affiliate marketing role."
+ },
+ "data-de|j_a989640499": {
+  "grade": 0,
+  "reason": "Concept art role."
+ },
+ "data-de|j_a9b218e167": {
+  "grade": 0,
+  "reason": "UX/visual design systems role."
+ },
+ "data-de|j_aa25696103": {
+  "grade": 0,
+  "reason": "Creative and web design role."
+ },
+ "data-de|j_ab3979c587": {
+  "grade": 0,
+  "reason": "Training lead role."
  },
  "data-de|j_abb57f0741": {
   "grade": 0,
@@ -707,61 +2667,253 @@
   "grade": 0,
   "reason": "AI safety testing role"
  },
+ "data-de|j_abe594ff2f": {
+  "grade": 0,
+  "reason": "Head of design role."
+ },
+ "data-de|j_ac57eed7e2": {
+  "grade": 0,
+  "reason": "Marketing assistant role."
+ },
+ "data-de|j_acdbc5372c": {
+  "grade": 0,
+  "reason": "Channel sales role."
+ },
+ "data-de|j_acded89dc3": {
+  "grade": 0,
+  "reason": "Paid marketing role"
+ },
  "data-de|j_adc9c6c53a": {
   "grade": 0,
   "reason": "Data annotation and labeling, not pipeline or warehouse engineering"
+ },
+ "data-de|j_ae16e50b99": {
+  "grade": 1,
+  "reason": "Generic freelance software dev, not data engineering specific"
+ },
+ "data-de|j_aec0db69b0": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_af59bf1718": {
+  "grade": 1,
+  "reason": "QA/DevOps for ERP; CI/CD pipelines, not data pipelines"
  },
  "data-de|j_b030f1fd2c": {
   "grade": 0,
   "reason": "Paid media marketing role"
  },
+ "data-de|j_b0318283d6": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_b0d5ca9300": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_b222a09830": {
+  "grade": 1,
+  "reason": "Engineering manager for search/AI optimization, not data engineering"
+ },
+ "data-de|j_b34d21f8e6": {
+  "grade": 0,
+  "reason": "Customer service agent"
+ },
  "data-de|j_b39b7d629c": {
   "grade": 0,
   "reason": "Customer service role"
+ },
+ "data-de|j_b42ae13d15": {
+  "grade": 0,
+  "reason": "Content/editorial role"
+ },
+ "data-de|j_b4fdaa76c7": {
+  "grade": 3,
+  "reason": "Principal Data Engineer on enterprise data platform"
  },
  "data-de|j_b6e1d5f353": {
   "grade": 0,
   "reason": "STEM/biology AI training expert"
  },
+ "data-de|j_b8f04812cd": {
+  "grade": 0,
+  "reason": "Technical support"
+ },
  "data-de|j_b93fb15aa2": {
   "grade": 0,
   "reason": "AI training content generation role"
+ },
+ "data-de|j_bd9ee4f522": {
+  "grade": 0,
+  "reason": "Website manager"
+ },
+ "data-de|j_bedf622a68": {
+  "grade": 0,
+  "reason": "Magento developer"
+ },
+ "data-de|j_c020057ebf": {
+  "grade": 0,
+  "reason": "CAD scripting"
  },
  "data-de|j_c153f3294f": {
   "grade": 0,
   "reason": "STEM problem-solving for AI training, not data engineering"
  },
+ "data-de|j_c201d72e59": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "data-de|j_c2d27068a0": {
+  "grade": 2,
+  "reason": "Query planner engineering for a lakehouse/data platform; adjacent to data engineering"
+ },
  "data-de|j_c3214afa11": {
   "grade": 0,
   "reason": "DevSecOps demo architect, not data engineering"
+ },
+ "data-de|j_c39a116b01": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_c39d6842ba": {
+  "grade": 0,
+  "reason": "Alliances role"
  },
  "data-de|j_c3eb1737e5": {
   "grade": 0,
   "reason": "Legal advisor for AI training"
  },
+ "data-de|j_c44a264c51": {
+  "grade": 0,
+  "reason": "Support engineering"
+ },
+ "data-de|j_c490e038de": {
+  "grade": 0,
+  "reason": "Podcast growth role"
+ },
+ "data-de|j_c61dae077c": {
+  "grade": 0,
+  "reason": "CRM system analyst"
+ },
  "data-de|j_c65608f773": {
   "grade": 0,
   "reason": "Hardware/RTL expert role"
+ },
+ "data-de|j_c673e84c6a": {
+  "grade": 3,
+  "reason": "Senior Data Engineer"
  },
  "data-de|j_c691e7f295": {
   "grade": 0,
   "reason": "Product manager for creative workflows, not data pipeline engineering"
  },
+ "data-de|j_c71909c5a8": {
+  "grade": 1,
+  "reason": "AI engineering, which may touch on data pipelines"
+ },
  "data-de|j_c76ecce7c8": {
   "grade": 0,
   "reason": "AI rater/reviewer role"
+ },
+ "data-de|j_c8b88b1b89": {
+  "grade": 0,
+  "reason": "Social media role"
+ },
+ "data-de|j_c8f4e2a8fc": {
+  "grade": 0,
+  "reason": "Growth director"
+ },
+ "data-de|j_c90dd9eac6": {
+  "grade": 0,
+  "reason": "Product growth role"
+ },
+ "data-de|j_c9effb313c": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_cbbd6810be": {
+  "grade": 0,
+  "reason": "Tax role"
+ },
+ "data-de|j_cc57ff2e1d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_ccbf10d051": {
+  "grade": 0,
+  "reason": "Recruiting role"
+ },
+ "data-de|j_cd35df7ef9": {
+  "grade": 0,
+  "reason": "Digital marketing role"
  },
  "data-de|j_cec6eabdd3": {
   "grade": 0,
   "reason": "Alliances and channels sales leadership"
  },
+ "data-de|j_cf8f1e0350": {
+  "grade": 0,
+  "reason": "Generic software engineering, no data engineering focus shown"
+ },
+ "data-de|j_cfc2df0fc2": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_d064a5f353": {
+  "grade": 0,
+  "reason": "Sales at a data intelligence company; not engineering"
+ },
  "data-de|j_d22202efbc": {
   "grade": 0,
   "reason": "Junior general software developer, no data engineering"
  },
+ "data-de|j_d28c29f39a": {
+  "grade": 0,
+  "reason": "Editing role"
+ },
  "data-de|j_d3200fe756": {
   "grade": 0,
   "reason": "UI/UX design"
+ },
+ "data-de|j_d3b330485d": {
+  "grade": 0,
+  "reason": "Generic software engineering"
+ },
+ "data-de|j_d42235dd43": {
+  "grade": 0,
+  "reason": "Executive assistant/PM"
+ },
+ "data-de|j_d458dff10e": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_d59ec6a865": {
+  "grade": 0,
+  "reason": "Lending role"
+ },
+ "data-de|j_d5ff7f303d": {
+  "grade": 0,
+  "reason": "Full-stack web dev, not data engineering"
+ },
+ "data-de|j_d68bc5bd3d": {
+  "grade": 1,
+  "reason": "Database solutions engineer; adjacent to data platforms but customer-facing presales"
+ },
+ "data-de|j_d6b5a7f901": {
+  "grade": 0,
+  "reason": "Lead generation"
+ },
+ "data-de|j_d795bd7dc9": {
+  "grade": 0,
+  "reason": "SaaS/cloud admin"
+ },
+ "data-de|j_d8efce35ba": {
+  "grade": 0,
+  "reason": "Security engineering"
+ },
+ "data-de|j_da40487bc4": {
+  "grade": 1,
+  "reason": "Customer success at telemetry pipeline company; tangential"
  },
  "data-de|j_db37e380bb": {
   "grade": 0,
@@ -771,6 +2923,34 @@
   "grade": 0,
   "reason": "Legal expert"
  },
+ "data-de|j_dbdb5db04f": {
+  "grade": 0,
+  "reason": "Product engineer for a CI/CD product, not data engineering"
+ },
+ "data-de|j_dbfcee6386": {
+  "grade": 0,
+  "reason": "Salesforce admin role"
+ },
+ "data-de|j_dcfcdb213c": {
+  "grade": 0,
+  "reason": "Frontend engineering role"
+ },
+ "data-de|j_de14587505": {
+  "grade": 0,
+  "reason": "Audio transcription adjudicator; 'annotation pipeline' isn't data engineering"
+ },
+ "data-de|j_df2d222fb8": {
+  "grade": 0,
+  "reason": "Resource management operations role"
+ },
+ "data-de|j_df33580bec": {
+  "grade": 0,
+  "reason": "Audio transcription rater"
+ },
+ "data-de|j_e1b10744df": {
+  "grade": 0,
+  "reason": "Customer success engineer for developer tools"
+ },
  "data-de|j_e1c0d75540": {
   "grade": 0,
   "reason": "UI design"
@@ -779,25 +2959,153 @@
   "grade": 1,
   "reason": "ML engineering; touches workflows but not data engineering"
  },
+ "data-de|j_e32c4ef54b": {
+  "grade": 0,
+  "reason": "Legal role at a data company"
+ },
+ "data-de|j_e3f2474bc0": {
+  "grade": 0,
+  "reason": "Internal audit role"
+ },
+ "data-de|j_e45e131f56": {
+  "grade": 1,
+  "reason": "Backend/database software engineering, only loosely related to data engineering"
+ },
+ "data-de|j_e571a4187e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "data-de|j_e5eb993038": {
+  "grade": 1,
+  "reason": "Sales role at a data pipeline/warehouse company, not an engineering role"
+ },
+ "data-de|j_e6cc6d4fe6": {
+  "grade": 0,
+  "reason": "LLM infrastructure deployment, not data pipelines"
+ },
+ "data-de|j_e6f9f86a92": {
+  "grade": 0,
+  "reason": "Identity/fraud consultant"
+ },
+ "data-de|j_e7a7646f30": {
+  "grade": 0,
+  "reason": "Customer success manager"
+ },
+ "data-de|j_e7ff1ba326": {
+  "grade": 0,
+  "reason": "Sales enablement role"
+ },
+ "data-de|j_e90203fce9": {
+  "grade": 1,
+  "reason": "Customer success at a telemetry data pipeline company; the role isn't data engineering"
+ },
+ "data-de|j_eb20d4ca7c": {
+  "grade": 0,
+  "reason": "AI data annotation and QA work"
+ },
+ "data-de|j_ec5550f26a": {
+  "grade": 0,
+  "reason": "Customer success role"
+ },
+ "data-de|j_ec7e2f3139": {
+  "grade": 0,
+  "reason": "General engineering management role"
+ },
+ "data-de|j_ec92a81f1f": {
+  "grade": 1,
+  "reason": "AI document-processing pipelines; it's ML/applied AI work, not data engineering"
+ },
+ "data-de|j_ed3edaf00f": {
+  "grade": 0,
+  "reason": "Actuarial role"
+ },
+ "data-de|j_ed662701a1": {
+  "grade": 2,
+  "reason": "BI developer using SQL Server BI stack; adjacent to data engineering"
+ },
  "data-de|j_edd15a47cd": {
   "grade": 0,
   "reason": "Marketing lead gen; 'pipeline' is a sales term"
+ },
+ "data-de|j_ee3b6dc0e3": {
+  "grade": 0,
+  "reason": "General technology leadership role"
  },
  "data-de|j_ee871fa31b": {
   "grade": 0,
   "reason": "ML inference task design, not data engineering"
  },
+ "data-de|j_efcfaae732": {
+  "grade": 3,
+  "reason": "Senior data engineer building data platforms"
+ },
  "data-de|j_f0ac351b71": {
   "grade": 0,
   "reason": "Cold email lead generation"
+ },
+ "data-de|j_f128e585ea": {
+  "grade": 0,
+  "reason": "Recruitment and social media role"
  },
  "data-de|j_f1938987b3": {
   "grade": 1,
   "reason": "Backend-leaning full-stack; adjacent at most"
  },
+ "data-de|j_f20eb8effd": {
+  "grade": 1,
+  "reason": "Database infrastructure engineering; adjacent but not data engineering"
+ },
+ "data-de|j_f230635d1b": {
+  "grade": 0,
+  "reason": "Cloud infrastructure engineering role"
+ },
+ "data-de|j_f24233f2e0": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "data-de|j_f3aa34e23b": {
+  "grade": 0,
+  "reason": "Sales development role"
+ },
+ "data-de|j_f628e53e42": {
+  "grade": 3,
+  "reason": "Senior Data Engineer with ETL, warehouses, Spark"
+ },
+ "data-de|j_f68a3597ad": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "data-de|j_f6b5f69e7f": {
+  "grade": 3,
+  "reason": "Data engineer building data pipelines"
+ },
+ "data-de|j_f6ef333366": {
+  "grade": 0,
+  "reason": "Content review"
+ },
  "data-de|j_f7cfd57f2f": {
   "grade": 1,
   "reason": "Backend Go ledger/blockchain work, not data engineering"
+ },
+ "data-de|j_f8716052c6": {
+  "grade": 0,
+  "reason": "Recruiter"
+ },
+ "data-de|j_fa401b71fb": {
+  "grade": 0,
+  "reason": "People operations"
+ },
+ "data-de|j_fa8932c65f": {
+  "grade": 0,
+  "reason": "Game design"
+ },
+ "data-de|j_faba38b48d": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "data-de|j_faf3850192": {
+  "grade": 0,
+  "reason": "Business development"
  },
  "data-de|j_fc4c84de99": {
   "grade": 0,
@@ -807,53 +3115,225 @@
   "grade": 0,
   "reason": "Social media marketing"
  },
+ "data-de|j_fe0a19cf83": {
+  "grade": 0,
+  "reason": "Category management"
+ },
+ "data-de|j_fe3f9272a1": {
+  "grade": 0,
+  "reason": "Marketing strategy"
+ },
+ "data-de|j_feb3cc8851": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "data-de|j_ff3fecc180": {
+  "grade": 0,
+  "reason": "Technical program management for customer onboarding, not data engineering"
+ },
  "data-de|j_ff5efbf2d6": {
   "grade": 0,
   "reason": "Developer experience engineering"
+ },
+ "designer-gb|j_00356f79a4": {
+  "grade": 0,
+  "reason": "YouTube content creation, not design"
+ },
+ "designer-gb|j_018382a8f2": {
+  "grade": 1,
+  "reason": "Animation is a creative role next to design, but it isn't product/UX/UI"
  },
  "designer-gb|j_01911257fa": {
   "grade": 0,
   "reason": "Travel ambassador, not design"
  },
+ "designer-gb|j_03a98fe055": {
+  "grade": 0,
+  "reason": "Engineering management role"
+ },
  "designer-gb|j_0446cd44d4": {
   "grade": 0,
   "reason": "Atlassian admin"
+ },
+ "designer-gb|j_04afff1742": {
+  "grade": 0,
+  "reason": "Database engineering role"
+ },
+ "designer-gb|j_05561072ab": {
+  "grade": 1,
+  "reason": "Graphic design for e-commerce visuals, not product/UX/UI design"
+ },
+ "designer-gb|j_063ec4a7c7": {
+  "grade": 0,
+  "reason": "Teaching role"
+ },
+ "designer-gb|j_06486940e7": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_064f7e5a99": {
+  "grade": 0,
+  "reason": "Community moderation role"
  },
  "designer-gb|j_069c5be345": {
   "grade": 0,
   "reason": "Legal annotation"
  },
+ "designer-gb|j_0864f69d6d": {
+  "grade": 0,
+  "reason": "Content marketing role"
+ },
+ "designer-gb|j_0877d7ec70": {
+  "grade": 0,
+  "reason": "CRM marketing role"
+ },
+ "designer-gb|j_08d5f5517a": {
+  "grade": 0,
+  "reason": "Performance testing role"
+ },
  "designer-gb|j_08ee88b3bd": {
   "grade": 0,
   "reason": "Hardware engineering"
+ },
+ "designer-gb|j_08fb419b09": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_0a40723564": {
+  "grade": 0,
+  "reason": "Capacity planning role"
+ },
+ "designer-gb|j_0b1041d9b0": {
+  "grade": 0,
+  "reason": "Data consulting role"
+ },
+ "designer-gb|j_0b3df2cb77": {
+  "grade": 0,
+  "reason": "ML engineering role; 'designer' here means designing tasks"
+ },
+ "designer-gb|j_0c6babf894": {
+  "grade": 0,
+  "reason": "DevOps role"
  },
  "designer-gb|j_0eb10b18c6": {
   "grade": 0,
   "reason": "AI writing work"
  },
+ "designer-gb|j_0f0b3b6f0e": {
+  "grade": 1,
+  "reason": "Product management, adjacent to product design but not a design role"
+ },
  "designer-gb|j_107a81c7a2": {
   "grade": 1,
   "reason": "Instructional design is a different discipline from product/UX design"
+ },
+ "designer-gb|j_10e3a6ff6a": {
+  "grade": 0,
+  "reason": "Business development at design agency"
+ },
+ "designer-gb|j_1146ecf4be": {
+  "grade": 0,
+  "reason": "DevOps role"
  },
  "designer-gb|j_11e0a344a2": {
   "grade": 0,
   "reason": "Legal counsel"
  },
+ "designer-gb|j_1315be3b43": {
+  "grade": 0,
+  "reason": "DevOps/SRE role"
+ },
  "designer-gb|j_132ada8994": {
   "grade": 1,
   "reason": "Product strategy is next to design work, but this is not a design role"
+ },
+ "designer-gb|j_13c8f2f55c": {
+  "grade": 3,
+  "reason": "Senior UX Designer"
  },
  "designer-gb|j_146102a6de": {
   "grade": 0,
   "reason": "Legal annotation"
  },
+ "designer-gb|j_154d6632c2": {
+  "grade": 0,
+  "reason": "Ad sales"
+ },
+ "designer-gb|j_15518b5547": {
+  "grade": 0,
+  "reason": "Data engineering"
+ },
+ "designer-gb|j_1564ba68ee": {
+  "grade": 2,
+  "reason": "Brand designer, adjacent design specialty"
+ },
+ "designer-gb|j_1683857016": {
+  "grade": 0,
+  "reason": "Category management"
+ },
+ "designer-gb|j_16d098d166": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_17754caff4": {
+  "grade": 0,
+  "reason": "SEO/marketing"
+ },
+ "designer-gb|j_182fef53a9": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
  "designer-gb|j_1864763ae0": {
   "grade": 0,
   "reason": "Program management"
  },
+ "designer-gb|j_1883ab1107": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_19db4389c5": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_19f5cb47ec": {
+  "grade": 0,
+  "reason": "English tutoring role"
+ },
+ "designer-gb|j_1b64105da0": {
+  "grade": 0,
+  "reason": "Technical support role"
+ },
+ "designer-gb|j_1cdf337fe9": {
+  "grade": 0,
+  "reason": "Regulatory quality oversight, not design"
+ },
  "designer-gb|j_1dd3adf8c5": {
   "grade": 0,
   "reason": "Sales"
+ },
+ "designer-gb|j_1e35a1d5a9": {
+  "grade": 0,
+  "reason": "Customer onboarding role"
+ },
+ "designer-gb|j_1fc58daf65": {
+  "grade": 0,
+  "reason": "People operations leadership"
+ },
+ "designer-gb|j_201d14ba08": {
+  "grade": 0,
+  "reason": "AI operations leadership"
+ },
+ "designer-gb|j_20238a568d": {
+  "grade": 0,
+  "reason": "Customer support role"
+ },
+ "designer-gb|j_20274b6389": {
+  "grade": 0,
+  "reason": "Translation role"
+ },
+ "designer-gb|j_20b74857db": {
+  "grade": 0,
+  "reason": "CRM software engineering"
  },
  "designer-gb|j_220f8c4de5": {
   "grade": 0,
@@ -863,9 +3343,33 @@
   "grade": 0,
   "reason": "SRE"
  },
+ "designer-gb|j_22fd905c7a": {
+  "grade": 1,
+  "reason": "Product management role that works with a designer; adjacent to design, but not a design role"
+ },
  "designer-gb|j_2452b91c2f": {
   "grade": 0,
   "reason": "Marketing referral"
+ },
+ "designer-gb|j_24c9e3d78e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "designer-gb|j_24cc7f9f7a": {
+  "grade": 0,
+  "reason": "SEO marketing role"
+ },
+ "designer-gb|j_251aae03a7": {
+  "grade": 0,
+  "reason": "DevSecOps engineering"
+ },
+ "designer-gb|j_2541f1d8a9": {
+  "grade": 0,
+  "reason": "Risk/AI management"
+ },
+ "designer-gb|j_262b2ebed3": {
+  "grade": 0,
+  "reason": "Customer support role"
  },
  "designer-gb|j_27971a162b": {
   "grade": 0,
@@ -875,37 +3379,173 @@
   "grade": 0,
   "reason": "Sales role"
  },
+ "designer-gb|j_297cd40725": {
+  "grade": 0,
+  "reason": "Channel sales role"
+ },
  "designer-gb|j_2b899b2fd0": {
   "grade": 0,
   "reason": "Legal role; 'product' refers to legal support for products, not design"
+ },
+ "designer-gb|j_2bb8c095dd": {
+  "grade": 1,
+  "reason": "Product management is adjacent to product design but isn't a design role"
+ },
+ "designer-gb|j_2d238fb4c9": {
+  "grade": 0,
+  "reason": "Sales agent"
+ },
+ "designer-gb|j_2e0c62b0b5": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "designer-gb|j_2e0f94a977": {
+  "grade": 0,
+  "reason": "CRM admin"
  },
  "designer-gb|j_2e63d2db48": {
   "grade": 0,
   "reason": "Game development engineering role"
  },
+ "designer-gb|j_2f10cd1478": {
+  "grade": 0,
+  "reason": "ML engineering"
+ },
  "designer-gb|j_2f48cc1bd4": {
   "grade": 0,
   "reason": "Category management role"
+ },
+ "designer-gb|j_2f8efba89c": {
+  "grade": 0,
+  "reason": "Engineering management"
+ },
+ "designer-gb|j_2fd780d206": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "designer-gb|j_2fe8f6172b": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_30ff05e838": {
+  "grade": 0,
+  "reason": "Dynamics developer"
  },
  "designer-gb|j_312b6ce30d": {
   "grade": 0,
   "reason": "Data operations role"
  },
+ "designer-gb|j_313129d002": {
+  "grade": 0,
+  "reason": "Integration engineering"
+ },
+ "designer-gb|j_313839a788": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "designer-gb|j_32f807f988": {
+  "grade": 0,
+  "reason": "IT systems"
+ },
+ "designer-gb|j_3446819ba0": {
+  "grade": 0,
+  "reason": "Competitive intelligence"
+ },
+ "designer-gb|j_3541ad5e4c": {
+  "grade": 0,
+  "reason": "RevOps"
+ },
+ "designer-gb|j_356794525a": {
+  "grade": 0,
+  "reason": "Cryptography task creation, not design"
+ },
+ "designer-gb|j_357ce2fdb8": {
+  "grade": 0,
+  "reason": "Business development sales role"
+ },
  "designer-gb|j_3692f8dbd8": {
   "grade": 0,
   "reason": "Counterintelligence subject-matter expert role"
+ },
+ "designer-gb|j_36949da3e5": {
+  "grade": 0,
+  "reason": "Sales development role"
  },
  "designer-gb|j_3732e17a9b": {
   "grade": 0,
   "reason": "Inside sales role"
  },
+ "designer-gb|j_3868ecf684": {
+  "grade": 0,
+  "reason": "Fullstack engineering, not design"
+ },
+ "designer-gb|j_3895e5ddba": {
+  "grade": 0,
+  "reason": "Customer success role"
+ },
+ "designer-gb|j_38974a759c": {
+  "grade": 0,
+  "reason": "Support supervisor"
+ },
+ "designer-gb|j_3a15af79ae": {
+  "grade": 0,
+  "reason": "Sales account executive"
+ },
+ "designer-gb|j_3ad29bcc39": {
+  "grade": 0,
+  "reason": "Sales account executive"
+ },
+ "designer-gb|j_3aeb89062d": {
+  "grade": 0,
+  "reason": "Recruiting role"
+ },
  "designer-gb|j_3c393917eb": {
   "grade": 0,
   "reason": "Reinforcement learning engineering role"
  },
+ "designer-gb|j_3ce5a384f3": {
+  "grade": 0,
+  "reason": "Developer experience engineering/advocacy, not UX design"
+ },
+ "designer-gb|j_3dcb594b42": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_3dd1eb6b4a": {
+  "grade": 0,
+  "reason": "Backend software engineering"
+ },
+ "designer-gb|j_4020d72fd1": {
+  "grade": 0,
+  "reason": "Ad sales"
+ },
  "designer-gb|j_420845d314": {
   "grade": 0,
   "reason": "Aerodynamics engineering role"
+ },
+ "designer-gb|j_4343de41ab": {
+  "grade": 0,
+  "reason": "Security operations"
+ },
+ "designer-gb|j_437d8fd29c": {
+  "grade": 0,
+  "reason": "CRM marketing role"
+ },
+ "designer-gb|j_439cd34532": {
+  "grade": 0,
+  "reason": "3D texture artist for animation, not product/UX design"
+ },
+ "designer-gb|j_439efd13af": {
+  "grade": 0,
+  "reason": "Shopify developer"
+ },
+ "designer-gb|j_453ce88a0d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_45c04cc283": {
+  "grade": 0,
+  "reason": "Appointment setter"
  },
  "designer-gb|j_46b3b970a8": {
   "grade": 0,
@@ -915,17 +3555,41 @@
   "grade": 0,
   "reason": "Legal role"
  },
+ "designer-gb|j_46c4c46320": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_47d22151df": {
+  "grade": 0,
+  "reason": "HR role"
+ },
+ "designer-gb|j_4831111755": {
+  "grade": 0,
+  "reason": "Collections role"
+ },
  "designer-gb|j_4896b76d92": {
   "grade": 0,
   "reason": "Legal role"
+ },
+ "designer-gb|j_494d0e016f": {
+  "grade": 0,
+  "reason": "Sales role"
  },
  "designer-gb|j_4999adbc75": {
   "grade": 0,
   "reason": "Legal role"
  },
+ "designer-gb|j_4aa2150834": {
+  "grade": 0,
+  "reason": "Fraud operations"
+ },
  "designer-gb|j_4aecafafa6": {
   "grade": 0,
   "reason": "Data operations role"
+ },
+ "designer-gb|j_4b0ab24952": {
+  "grade": 0,
+  "reason": "Paid media marketing"
  },
  "designer-gb|j_4b0f849926": {
   "grade": 0,
@@ -934,6 +3598,26 @@
  "designer-gb|j_4bdd92d00f": {
   "grade": 1,
   "reason": "Frontend/full-stack engineering, not design"
+ },
+ "designer-gb|j_4db091910e": {
+  "grade": 0,
+  "reason": "DevOps engineering"
+ },
+ "designer-gb|j_4dc0f95049": {
+  "grade": 0,
+  "reason": "People operations"
+ },
+ "designer-gb|j_4de6a00d1e": {
+  "grade": 1,
+  "reason": "Marketing/graphic designer including landing pages; a design job, but not product/UX/UI"
+ },
+ "designer-gb|j_4e42c64d8c": {
+  "grade": 1,
+  "reason": "Ad creative production, explicitly not a conventional design role"
+ },
+ "designer-gb|j_4e44126058": {
+  "grade": 0,
+  "reason": "Recruiting role"
  },
  "designer-gb|j_52078af5ea": {
   "grade": 0,
@@ -947,13 +3631,53 @@
   "grade": 1,
   "reason": "CX evaluation of shopping experiences, related to UX but not a design role"
  },
+ "designer-gb|j_54155bbc84": {
+  "grade": 0,
+  "reason": "Sales account management"
+ },
+ "designer-gb|j_55195306c8": {
+  "grade": 0,
+  "reason": "Backend engineering"
+ },
  "designer-gb|j_558cb9202f": {
   "grade": 0,
   "reason": "Referral sales"
  },
+ "designer-gb|j_55df4bba30": {
+  "grade": 0,
+  "reason": "Data engineering"
+ },
+ "designer-gb|j_55df8cbf81": {
+  "grade": 0,
+  "reason": "Sales development"
+ },
  "designer-gb|j_55f3a1f640": {
   "grade": 0,
   "reason": "Data entry"
+ },
+ "designer-gb|j_5673da59f4": {
+  "grade": 1,
+  "reason": "Marketing role that includes creating brand and web assets, but it isn't a design role"
+ },
+ "designer-gb|j_575235c5c7": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "designer-gb|j_58c52c8c15": {
+  "grade": 0,
+  "reason": "Finance operations"
+ },
+ "designer-gb|j_5932f5584e": {
+  "grade": 0,
+  "reason": "Communications leadership"
+ },
+ "designer-gb|j_596874ce3d": {
+  "grade": 0,
+  "reason": "Enterprise sales"
+ },
+ "designer-gb|j_5b96540f05": {
+  "grade": 0,
+  "reason": "Full-stack software engineering"
  },
  "designer-gb|j_5e4e79b4bb": {
   "grade": 0,
@@ -963,13 +3687,65 @@
   "grade": 0,
   "reason": "Video recording gig"
  },
+ "designer-gb|j_5e740713de": {
+  "grade": 0,
+  "reason": "CRM consulting"
+ },
+ "designer-gb|j_5efbdda2c3": {
+  "grade": 0,
+  "reason": "Field marketing"
+ },
+ "designer-gb|j_6000c2203e": {
+  "grade": 0,
+  "reason": "Machine learning engineering"
+ },
  "designer-gb|j_607cf99871": {
   "grade": 0,
   "reason": "Business development"
  },
+ "designer-gb|j_60c7bf345d": {
+  "grade": 0,
+  "reason": "Engineering role evaluating AI-generated code"
+ },
+ "designer-gb|j_61925adcfc": {
+  "grade": 0,
+  "reason": "Paid advertising"
+ },
+ "designer-gb|j_62611c4ab4": {
+  "grade": 0,
+  "reason": "Risk consulting"
+ },
+ "designer-gb|j_62d5f94de8": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_62f518b2c7": {
+  "grade": 0,
+  "reason": "IT solutions architect"
+ },
+ "designer-gb|j_63dab1ed71": {
+  "grade": 0,
+  "reason": "Solutions consultant/sales"
+ },
+ "designer-gb|j_65a3ec8461": {
+  "grade": 0,
+  "reason": "Community management"
+ },
+ "designer-gb|j_65b58ea973": {
+  "grade": 1,
+  "reason": "3D design, not product/UX/UI design"
+ },
  "designer-gb|j_66897f2a33": {
   "grade": 0,
   "reason": "Regulatory compliance"
+ },
+ "designer-gb|j_675dcd48ab": {
+  "grade": 0,
+  "reason": "Threat intelligence"
+ },
+ "designer-gb|j_6785a57150": {
+  "grade": 0,
+  "reason": "Professional services management"
  },
  "designer-gb|j_6785b24381": {
   "grade": 0,
@@ -979,9 +3755,17 @@
   "grade": 0,
   "reason": "Community management"
  },
+ "designer-gb|j_687dd79730": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
  "designer-gb|j_691e215f9e": {
   "grade": 0,
   "reason": "AI safety testing"
+ },
+ "designer-gb|j_693aa22426": {
+  "grade": 0,
+  "reason": "Frontend developer, not design"
  },
  "designer-gb|j_6bac92ed55": {
   "grade": 0,
@@ -991,21 +3775,89 @@
   "grade": 0,
   "reason": "DevOps"
  },
+ "designer-gb|j_6d62106272": {
+  "grade": 0,
+  "reason": "Developer relations"
+ },
  "designer-gb|j_6e59b15a43": {
   "grade": 0,
   "reason": "HR coordination, not design"
+ },
+ "designer-gb|j_6e612b8a9c": {
+  "grade": 0,
+  "reason": "Workforce analyst"
+ },
+ "designer-gb|j_6e736b1791": {
+  "grade": 0,
+  "reason": "Data entry"
+ },
+ "designer-gb|j_6e7eee8df7": {
+  "grade": 0,
+  "reason": "Customer success engineering"
+ },
+ "designer-gb|j_6e9c5812e0": {
+  "grade": 0,
+  "reason": "Render farm operations"
+ },
+ "designer-gb|j_6ea77c5096": {
+  "grade": 0,
+  "reason": "Recruitment sales role, not design"
+ },
+ "designer-gb|j_6ef0b90f4f": {
+  "grade": 1,
+  "reason": "Product management role; next to design but not a design role"
+ },
+ "designer-gb|j_6fb41c1f9b": {
+  "grade": 0,
+  "reason": "Renewals sales role"
  },
  "designer-gb|j_6fd71657dc": {
   "grade": 0,
   "reason": "ML engineering"
  },
+ "designer-gb|j_7014075ffc": {
+  "grade": 0,
+  "reason": "Channel sales role"
+ },
  "designer-gb|j_71db67eb7a": {
   "grade": 0,
   "reason": "Business development"
  },
+ "designer-gb|j_71fd0d6146": {
+  "grade": 0,
+  "reason": "QA engineering role"
+ },
+ "designer-gb|j_74990eb5d9": {
+  "grade": 0,
+  "reason": "DevOps engineering role"
+ },
+ "designer-gb|j_7530667469": {
+  "grade": 0,
+  "reason": "Marketing lead role"
+ },
+ "designer-gb|j_761e5b8482": {
+  "grade": 0,
+  "reason": "Product marketing role, not design"
+ },
  "designer-gb|j_77f3479080": {
   "grade": 0,
   "reason": "Legal admin"
+ },
+ "designer-gb|j_780c4812a2": {
+  "grade": 0,
+  "reason": "Backend engineering role; mentions user experience only in passing"
+ },
+ "designer-gb|j_7842a402cc": {
+  "grade": 0,
+  "reason": "IT engineering role"
+ },
+ "designer-gb|j_78d296f496": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "designer-gb|j_78f903d57a": {
+  "grade": 0,
+  "reason": "IT consulting role"
  },
  "designer-gb|j_7918656ab7": {
   "grade": 0,
@@ -1015,25 +3867,105 @@
   "grade": 0,
   "reason": "Partnerships"
  },
+ "designer-gb|j_79f2ca2f78": {
+  "grade": 0,
+  "reason": "Solutions architecture role"
+ },
+ "designer-gb|j_79f8be3217": {
+  "grade": 0,
+  "reason": "Analytics engineering role"
+ },
+ "designer-gb|j_7af72754e0": {
+  "grade": 0,
+  "reason": "Security engineering role"
+ },
+ "designer-gb|j_7b0e84d2ee": {
+  "grade": 0,
+  "reason": "Security engineering, not design"
+ },
+ "designer-gb|j_7bba233fa8": {
+  "grade": 0,
+  "reason": "Data annotation"
+ },
+ "designer-gb|j_7c38f3e5f9": {
+  "grade": 0,
+  "reason": "Customer support engineering"
+ },
+ "designer-gb|j_7c3e59460c": {
+  "grade": 1,
+  "reason": "Marketing/ecommerce role that involves building a storefront website; design is not the focus"
+ },
+ "designer-gb|j_7c6444a90e": {
+  "grade": 0,
+  "reason": "Recruiting scheduling"
+ },
+ "designer-gb|j_7d4ae8d6ed": {
+  "grade": 0,
+  "reason": "Compliance internship"
+ },
+ "designer-gb|j_7d61749e33": {
+  "grade": 0,
+  "reason": "Sales"
+ },
  "designer-gb|j_7db2e21b93": {
   "grade": 0,
   "reason": "CRM email marketing"
+ },
+ "designer-gb|j_7e8a65c012": {
+  "grade": 0,
+  "reason": "CRM development"
+ },
+ "designer-gb|j_7f4b40f62b": {
+  "grade": 0,
+  "reason": "Video editing, not product/UX design"
+ },
+ "designer-gb|j_7f7b24817a": {
+  "grade": 1,
+  "reason": "Product management, which works next to product design but is not a design role"
  },
  "designer-gb|j_8060dc68f6": {
   "grade": 0,
   "reason": "Affiliate BD internship"
  },
+ "designer-gb|j_8068844c98": {
+  "grade": 0,
+  "reason": "Data science"
+ },
  "designer-gb|j_80b1ea5f26": {
   "grade": 0,
   "reason": "Growth marketing"
+ },
+ "designer-gb|j_80f3e82570": {
+  "grade": 0,
+  "reason": "Mechanical commissioning"
  },
  "designer-gb|j_81ce29250e": {
   "grade": 0,
   "reason": "SIP telephony engineering"
  },
+ "designer-gb|j_81d589edaf": {
+  "grade": 0,
+  "reason": "Content marketing"
+ },
  "designer-gb|j_839ad8cbcf": {
   "grade": 0,
   "reason": "QA/test engineering"
+ },
+ "designer-gb|j_83d0710305": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_84f0e7cfdf": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_851f6a996d": {
+  "grade": 0,
+  "reason": "Paid ads marketing role"
+ },
+ "designer-gb|j_85266795cc": {
+  "grade": 0,
+  "reason": "Content editing role"
  },
  "designer-gb|j_86bcdf41d5": {
   "grade": 1,
@@ -1043,21 +3975,69 @@
   "grade": 0,
   "reason": "Travel operations"
  },
+ "designer-gb|j_895be090da": {
+  "grade": 0,
+  "reason": "Call center insurance verification"
+ },
  "designer-gb|j_89fab7c276": {
   "grade": 0,
   "reason": "Compliance risk"
+ },
+ "designer-gb|j_8a53d8ea33": {
+  "grade": 0,
+  "reason": "Amazon e-commerce brand management, not design"
+ },
+ "designer-gb|j_8ac0503409": {
+  "grade": 0,
+  "reason": "Backend software engineering"
+ },
+ "designer-gb|j_8ac68ea74e": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "designer-gb|j_8b1b63dbf3": {
+  "grade": 1,
+  "reason": "Product management, works alongside design but not a design role"
  },
  "designer-gb|j_8c4aa0f0a6": {
   "grade": 0,
   "reason": "Data annotation"
  },
+ "designer-gb|j_8caf616380": {
+  "grade": 1,
+  "reason": "Frontend/interfaces engineering touching product experience, not design"
+ },
+ "designer-gb|j_8cd7a12023": {
+  "grade": 0,
+  "reason": "Pre-sales solution engineering"
+ },
+ "designer-gb|j_8cdf3686d8": {
+  "grade": 0,
+  "reason": "Data science"
+ },
+ "designer-gb|j_8d081ea981": {
+  "grade": 0,
+  "reason": "Backend engineering"
+ },
+ "designer-gb|j_8d96bfc7e8": {
+  "grade": 1,
+  "reason": "Brand creative direction, a different design discipline from product/UX/UI"
+ },
  "designer-gb|j_8daa145b01": {
   "grade": 1,
   "reason": "Growth role at a design-tool company; it includes some landing page building but isn't a design role"
  },
+ "designer-gb|j_8e0c1c4367": {
+  "grade": 0,
+  "reason": "Sales account management"
+ },
  "designer-gb|j_8e439fbcc3": {
   "grade": 1,
   "reason": "Development internship that implements an existing UI; it isn't a design role"
+ },
+ "designer-gb|j_8fd9ef6c0e": {
+  "grade": 1,
+  "reason": "Front-end development, next to UI work but an engineering role"
  },
  "designer-gb|j_8ff2998e44": {
   "grade": 0,
@@ -1067,6 +4047,10 @@
   "grade": 0,
   "reason": "Writing supply chain tasks for AI benchmarks"
  },
+ "designer-gb|j_92143a33b7": {
+  "grade": 0,
+  "reason": "DevOps"
+ },
  "designer-gb|j_936f971f7a": {
   "grade": 0,
   "reason": "Commission-based sales referral partner"
@@ -1074,6 +4058,14 @@
  "designer-gb|j_940746278f": {
   "grade": 0,
   "reason": "Customer success leadership role"
+ },
+ "designer-gb|j_9448822031": {
+  "grade": 0,
+  "reason": "Sales enablement role"
+ },
+ "designer-gb|j_95b9088bf2": {
+  "grade": 0,
+  "reason": "Salesforce development"
  },
  "designer-gb|j_96e352fd8a": {
   "grade": 0,
@@ -1083,9 +4075,25 @@
   "grade": 0,
   "reason": "Legal expert role"
  },
+ "designer-gb|j_9afc9cd9aa": {
+  "grade": 1,
+  "reason": "Product owner role; it shapes product experiences but isn't a design role"
+ },
+ "designer-gb|j_9b7028553d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_9b8b59dfb6": {
+  "grade": 0,
+  "reason": "Supply chain operations"
+ },
  "designer-gb|j_9dcbff38a8": {
   "grade": 0,
   "reason": "Commercial and operations role"
+ },
+ "designer-gb|j_9de6ec0ed8": {
+  "grade": 0,
+  "reason": "Category general manager"
  },
  "designer-gb|j_9ea8b434a2": {
   "grade": 0,
@@ -1095,9 +4103,21 @@
   "grade": 0,
   "reason": "Mechanical engineering role"
  },
+ "designer-gb|j_9f4883a3f5": {
+  "grade": 0,
+  "reason": "Sales development"
+ },
+ "designer-gb|j_9ff77dfd10": {
+  "grade": 0,
+  "reason": "Renewals role"
+ },
  "designer-gb|j_a1759899b3": {
   "grade": 1,
   "reason": "Creative engineering for social media marketing; it's an engineering role, not product or UX design"
+ },
+ "designer-gb|j_a1798af89a": {
+  "grade": 0,
+  "reason": "Language review"
  },
  "designer-gb|j_a1fbec0fb3": {
   "grade": 0,
@@ -1107,77 +4127,341 @@
   "grade": 0,
   "reason": "Professional shopper"
  },
+ "designer-gb|j_a2b1ad29c5": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "designer-gb|j_a309c2c156": {
+  "grade": 0,
+  "reason": "Law enforcement liaison"
+ },
+ "designer-gb|j_a33f48882c": {
+  "grade": 0,
+  "reason": "Business continuity"
+ },
+ "designer-gb|j_a456720016": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_a4b3c1dbb7": {
+  "grade": 0,
+  "reason": "Engineering interviewer"
+ },
+ "designer-gb|j_a60733eace": {
+  "grade": 0,
+  "reason": "Help desk"
+ },
+ "designer-gb|j_a636c601e9": {
+  "grade": 0,
+  "reason": "Generic talent community, no design role"
+ },
+ "designer-gb|j_a65920719d": {
+  "grade": 0,
+  "reason": "Manufacturing/procurement"
+ },
  "designer-gb|j_a68d3b62e6": {
   "grade": 0,
   "reason": "Mechanical engineering role"
+ },
+ "designer-gb|j_a7278fe0e8": {
+  "grade": 0,
+  "reason": "Broker dealer operations"
+ },
+ "designer-gb|j_a7411b7bb3": {
+  "grade": 0,
+  "reason": "Enterprise architecture"
+ },
+ "designer-gb|j_a742af0ff9": {
+  "grade": 1,
+  "reason": "Interior design, not product/UX/UI"
+ },
+ "designer-gb|j_a75c6606ea": {
+  "grade": 0,
+  "reason": "Sales engineering"
+ },
+ "designer-gb|j_a794d96b60": {
+  "grade": 0,
+  "reason": "Backend engineering"
+ },
+ "designer-gb|j_a8ca244cd6": {
+  "grade": 0,
+  "reason": "Affiliate marketing"
+ },
+ "designer-gb|j_a989640499": {
+  "grade": 1,
+  "reason": "Concept art for animation, not product/UX design"
+ },
+ "designer-gb|j_a9b218e167": {
+  "grade": 3,
+  "reason": "Principal experience designer, design systems"
+ },
+ "designer-gb|j_aa25696103": {
+  "grade": 2,
+  "reason": "Creative & web designer, adjacent to UI design"
+ },
+ "designer-gb|j_ab3979c587": {
+  "grade": 0,
+  "reason": "Training lead"
  },
  "designer-gb|j_abdc39d3d8": {
   "grade": 0,
   "reason": "AI safety testing, not design"
  },
+ "designer-gb|j_abe594ff2f": {
+  "grade": 3,
+  "reason": "Head of product design for a maps platform"
+ },
+ "designer-gb|j_ac57eed7e2": {
+  "grade": 0,
+  "reason": "Marketing assistant"
+ },
+ "designer-gb|j_acdbc5372c": {
+  "grade": 0,
+  "reason": "Channel account management"
+ },
+ "designer-gb|j_acded89dc3": {
+  "grade": 0,
+  "reason": "Paid marketing role, not design"
+ },
  "designer-gb|j_adc9c6c53a": {
   "grade": 0,
   "reason": "Data annotation"
+ },
+ "designer-gb|j_ae16e50b99": {
+  "grade": 0,
+  "reason": "Software developer role"
+ },
+ "designer-gb|j_aec0db69b0": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_af59bf1718": {
+  "grade": 0,
+  "reason": "QA/DevOps engineering"
  },
  "designer-gb|j_b030f1fd2c": {
   "grade": 0,
   "reason": "Paid media marketing"
  },
+ "designer-gb|j_b0318283d6": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_b0d5ca9300": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_b222a09830": {
+  "grade": 0,
+  "reason": "Engineering management"
+ },
+ "designer-gb|j_b34d21f8e6": {
+  "grade": 0,
+  "reason": "Customer support agent"
+ },
  "designer-gb|j_b39b7d629c": {
   "grade": 0,
   "reason": "Customer service"
+ },
+ "designer-gb|j_b42ae13d15": {
+  "grade": 0,
+  "reason": "Content/editorial leadership"
+ },
+ "designer-gb|j_b4fdaa76c7": {
+  "grade": 0,
+  "reason": "Data engineering"
  },
  "designer-gb|j_b6e1d5f353": {
   "grade": 0,
   "reason": "STEM AI training"
  },
+ "designer-gb|j_b8f04812cd": {
+  "grade": 0,
+  "reason": "Technical support"
+ },
  "designer-gb|j_b93fb15aa2": {
   "grade": 0,
   "reason": "AI training writing"
+ },
+ "designer-gb|j_bd9ee4f522": {
+  "grade": 1,
+  "reason": "Website management may touch web UX but is not a design role"
+ },
+ "designer-gb|j_bedf622a68": {
+  "grade": 0,
+  "reason": "Magento developer"
+ },
+ "designer-gb|j_c020057ebf": {
+  "grade": 0,
+  "reason": "Mechanical CAD automation, not product/UX design"
  },
  "designer-gb|j_c153f3294f": {
   "grade": 0,
   "reason": "STEM AI training"
  },
+ "designer-gb|j_c201d72e59": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "designer-gb|j_c2d27068a0": {
+  "grade": 0,
+  "reason": "Backend software engineering, not design"
+ },
  "designer-gb|j_c3214afa11": {
   "grade": 0,
   "reason": "Sales engineering demo role"
+ },
+ "designer-gb|j_c39a116b01": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_c39d6842ba": {
+  "grade": 0,
+  "reason": "Partnerships/alliances role"
  },
  "designer-gb|j_c3eb1737e5": {
   "grade": 0,
   "reason": "Legal AI training"
  },
+ "designer-gb|j_c44a264c51": {
+  "grade": 0,
+  "reason": "Support engineering"
+ },
+ "designer-gb|j_c490e038de": {
+  "grade": 0,
+  "reason": "Podcast distribution/growth, not product design"
+ },
+ "designer-gb|j_c61dae077c": {
+  "grade": 0,
+  "reason": "IT consulting/system analyst"
+ },
  "designer-gb|j_c65608f773": {
   "grade": 0,
   "reason": "Hardware AI training"
+ },
+ "designer-gb|j_c673e84c6a": {
+  "grade": 0,
+  "reason": "Data engineering"
  },
  "designer-gb|j_c691e7f295": {
   "grade": 1,
   "reason": "Product management, adjacent to product design but not a design role"
  },
+ "designer-gb|j_c71909c5a8": {
+  "grade": 0,
+  "reason": "AI engineering"
+ },
  "designer-gb|j_c76ecce7c8": {
   "grade": 0,
   "reason": "AI rating"
+ },
+ "designer-gb|j_c8b88b1b89": {
+  "grade": 0,
+  "reason": "Social media management"
+ },
+ "designer-gb|j_c8f4e2a8fc": {
+  "grade": 1,
+  "reason": "Product-led growth leadership; product-adjacent but not design"
+ },
+ "designer-gb|j_c90dd9eac6": {
+  "grade": 1,
+  "reason": "Product growth/funnels; touches product but not a design role"
+ },
+ "designer-gb|j_c9effb313c": {
+  "grade": 0,
+  "reason": "Sales account executive"
  },
  "designer-gb|j_ca2e329092": {
   "grade": 0,
   "reason": "Clinical trials"
  },
+ "designer-gb|j_cbbd6810be": {
+  "grade": 0,
+  "reason": "Tax role"
+ },
+ "designer-gb|j_cc57ff2e1d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_ccbf10d051": {
+  "grade": 0,
+  "reason": "Recruiting role"
+ },
+ "designer-gb|j_cd35df7ef9": {
+  "grade": 0,
+  "reason": "Digital marketing role"
+ },
  "designer-gb|j_cec6eabdd3": {
   "grade": 0,
   "reason": "Partnerships leadership"
+ },
+ "designer-gb|j_cf8f1e0350": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_cfc2df0fc2": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_d064a5f353": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "designer-gb|j_d22202efbc": {
   "grade": 0,
   "reason": "Software developer"
  },
+ "designer-gb|j_d28c29f39a": {
+  "grade": 0,
+  "reason": "Editing/translation"
+ },
  "designer-gb|j_d3200fe756": {
   "grade": 3,
   "reason": "Senior UI & UX Designer role"
  },
+ "designer-gb|j_d3b330485d": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_d42235dd43": {
+  "grade": 0,
+  "reason": "Executive assistant; document design is only a minor plus"
+ },
+ "designer-gb|j_d458dff10e": {
+  "grade": 0,
+  "reason": "Sales"
+ },
  "designer-gb|j_d533ab8d40": {
   "grade": 0,
   "reason": "Legal counsel"
+ },
+ "designer-gb|j_d59ec6a865": {
+  "grade": 0,
+  "reason": "Lending management"
+ },
+ "designer-gb|j_d5ff7f303d": {
+  "grade": 0,
+  "reason": "Backend-focused development"
+ },
+ "designer-gb|j_d68bc5bd3d": {
+  "grade": 0,
+  "reason": "Solutions engineering"
+ },
+ "designer-gb|j_d6b5a7f901": {
+  "grade": 0,
+  "reason": "Lead generation"
+ },
+ "designer-gb|j_d795bd7dc9": {
+  "grade": 0,
+  "reason": "Systems administration"
+ },
+ "designer-gb|j_d8efce35ba": {
+  "grade": 0,
+  "reason": "Security engineering"
+ },
+ "designer-gb|j_da40487bc4": {
+  "grade": 0,
+  "reason": "Customer success engineering"
  },
  "designer-gb|j_db37e380bb": {
   "grade": 0,
@@ -1187,9 +4471,37 @@
   "grade": 0,
   "reason": "Legal expert"
  },
+ "designer-gb|j_dbdb5db04f": {
+  "grade": 1,
+  "reason": "Product engineer is an engineering role that may touch product thinking, but it isn't a design role"
+ },
  "designer-gb|j_dbe9556aac": {
   "grade": 0,
   "reason": "Account management"
+ },
+ "designer-gb|j_dbfcee6386": {
+  "grade": 0,
+  "reason": "Salesforce admin role"
+ },
+ "designer-gb|j_dcfcdb213c": {
+  "grade": 1,
+  "reason": "Frontend engineering role that works close to UI, but it isn't design"
+ },
+ "designer-gb|j_de14587505": {
+  "grade": 0,
+  "reason": "Transcription role"
+ },
+ "designer-gb|j_df2d222fb8": {
+  "grade": 0,
+  "reason": "Resource management role"
+ },
+ "designer-gb|j_df33580bec": {
+  "grade": 0,
+  "reason": "Transcription role"
+ },
+ "designer-gb|j_e1b10744df": {
+  "grade": 0,
+  "reason": "Customer success role"
  },
  "designer-gb|j_e21269d363": {
   "grade": 0,
@@ -1199,29 +4511,137 @@
   "grade": 0,
   "reason": "Sales internship"
  },
+ "designer-gb|j_e32c4ef54b": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "designer-gb|j_e3f2474bc0": {
+  "grade": 0,
+  "reason": "Audit role"
+ },
+ "designer-gb|j_e45e131f56": {
+  "grade": 0,
+  "reason": "Backend software engineering role"
+ },
+ "designer-gb|j_e571a4187e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
  "designer-gb|j_e5ca96dbd9": {
   "grade": 0,
   "reason": "Sales"
+ },
+ "designer-gb|j_e5eb993038": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "designer-gb|j_e6cc6d4fe6": {
+  "grade": 0,
+  "reason": "Infrastructure engineering role"
+ },
+ "designer-gb|j_e6f9f86a92": {
+  "grade": 0,
+  "reason": "Consulting role"
+ },
+ "designer-gb|j_e7a7646f30": {
+  "grade": 0,
+  "reason": "Customer success role"
+ },
+ "designer-gb|j_e7ff1ba326": {
+  "grade": 0,
+  "reason": "Sales enablement, not design"
+ },
+ "designer-gb|j_e90203fce9": {
+  "grade": 0,
+  "reason": "Customer success engineering"
  },
  "designer-gb|j_ead5fc17d4": {
   "grade": 0,
   "reason": "Security operations"
  },
+ "designer-gb|j_eb20d4ca7c": {
+  "grade": 0,
+  "reason": "AI data quality review"
+ },
+ "designer-gb|j_ec5550f26a": {
+  "grade": 0,
+  "reason": "Customer success"
+ },
+ "designer-gb|j_ec7e2f3139": {
+  "grade": 0,
+  "reason": "Engineering management"
+ },
+ "designer-gb|j_ec92a81f1f": {
+  "grade": 0,
+  "reason": "AI engineering"
+ },
+ "designer-gb|j_ed3edaf00f": {
+  "grade": 0,
+  "reason": "Actuarial"
+ },
+ "designer-gb|j_ed662701a1": {
+  "grade": 0,
+  "reason": "BI development"
+ },
  "designer-gb|j_edd15a47cd": {
   "grade": 0,
   "reason": "Growth marketing"
+ },
+ "designer-gb|j_ee3b6dc0e3": {
+  "grade": 0,
+  "reason": "Engineering leadership at creative studio, not design"
  },
  "designer-gb|j_ee871fa31b": {
   "grade": 0,
   "reason": "ML benchmark task design, not product design"
  },
+ "designer-gb|j_efcfaae732": {
+  "grade": 0,
+  "reason": "Data engineering"
+ },
  "designer-gb|j_f0ac351b71": {
   "grade": 0,
   "reason": "Lead generation"
  },
+ "designer-gb|j_f128e585ea": {
+  "grade": 0,
+  "reason": "Recruitment/social media"
+ },
  "designer-gb|j_f1938987b3": {
   "grade": 0,
   "reason": "Software engineering"
+ },
+ "designer-gb|j_f20eb8effd": {
+  "grade": 0,
+  "reason": "Software engineering"
+ },
+ "designer-gb|j_f230635d1b": {
+  "grade": 0,
+  "reason": "Cloud engineering"
+ },
+ "designer-gb|j_f24233f2e0": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "designer-gb|j_f3aa34e23b": {
+  "grade": 0,
+  "reason": "Sales development"
+ },
+ "designer-gb|j_f628e53e42": {
+  "grade": 0,
+  "reason": "Data engineering role, not design."
+ },
+ "designer-gb|j_f68a3597ad": {
+  "grade": 0,
+  "reason": "Account management role."
+ },
+ "designer-gb|j_f6b5f69e7f": {
+  "grade": 0,
+  "reason": "Data engineering role."
+ },
+ "designer-gb|j_f6ef333366": {
+  "grade": 0,
+  "reason": "Content review role."
  },
  "designer-gb|j_f76efb4a4d": {
   "grade": 0,
@@ -1231,6 +4651,26 @@
   "grade": 0,
   "reason": "Go developer"
  },
+ "designer-gb|j_f8716052c6": {
+  "grade": 0,
+  "reason": "Recruiting role."
+ },
+ "designer-gb|j_fa401b71fb": {
+  "grade": 0,
+  "reason": "People operations role."
+ },
+ "designer-gb|j_fa8932c65f": {
+  "grade": 1,
+  "reason": "Game design is a different design discipline from product/UX/UI design."
+ },
+ "designer-gb|j_faba38b48d": {
+  "grade": 0,
+  "reason": "Customer service role."
+ },
+ "designer-gb|j_faf3850192": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
  "designer-gb|j_fc4c84de99": {
   "grade": 0,
   "reason": "AI research role on model distillation, not design."
@@ -1239,25 +4679,109 @@
   "grade": 0,
   "reason": "Social media marketing role; creates content but isn't product/UX/UI design."
  },
+ "designer-gb|j_fe0a19cf83": {
+  "grade": 0,
+  "reason": "Category management role."
+ },
+ "designer-gb|j_fe3f9272a1": {
+  "grade": 0,
+  "reason": "SEO/GEO strategy role."
+ },
+ "designer-gb|j_feb3cc8851": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "designer-gb|j_ff3fecc180": {
+  "grade": 0,
+  "reason": "Technical program management role."
+ },
  "designer-gb|j_ff5efbf2d6": {
   "grade": 0,
   "reason": "Developer experience engineering role, not a product or UX design role."
+ },
+ "devops-ph|j_00356f79a4": {
+  "grade": 0,
+  "reason": "YouTube content creator"
+ },
+ "devops-ph|j_018382a8f2": {
+  "grade": 0,
+  "reason": "Animation intern"
  },
  "devops-ph|j_01911257fa": {
   "grade": 0,
   "reason": "Travel ambassador"
  },
+ "devops-ph|j_03277fc15a": {
+  "grade": 0,
+  "reason": "Electrical equipment sales"
+ },
+ "devops-ph|j_03a98fe055": {
+  "grade": 2,
+  "reason": "Manages a team that secures internal infrastructure, so it's next to platform work, but it's a security management role"
+ },
  "devops-ph|j_0446cd44d4": {
   "grade": 1,
   "reason": "Tooling admin, adjacent to IT ops but not DevOps/SRE"
+ },
+ "devops-ph|j_04afff1742": {
+  "grade": 3,
+  "reason": "Database reliability engineering is a form of SRE"
+ },
+ "devops-ph|j_04edcc2aee": {
+  "grade": 0,
+  "reason": "Customer service admin"
+ },
+ "devops-ph|j_05561072ab": {
+  "grade": 0,
+  "reason": "Graphic design"
+ },
+ "devops-ph|j_063ec4a7c7": {
+  "grade": 0,
+  "reason": "English teaching"
+ },
+ "devops-ph|j_06486940e7": {
+  "grade": 0,
+  "reason": "Sales development"
+ },
+ "devops-ph|j_064f7e5a99": {
+  "grade": 0,
+  "reason": "Community moderation"
  },
  "devops-ph|j_069c5be345": {
   "grade": 0,
   "reason": "Legal"
  },
+ "devops-ph|j_0864f69d6d": {
+  "grade": 0,
+  "reason": "Content marketing"
+ },
+ "devops-ph|j_08d5f5517a": {
+  "grade": 1,
+  "reason": "Performance testing is QA work that touches infrastructure"
+ },
  "devops-ph|j_08ee88b3bd": {
   "grade": 0,
   "reason": "Hardware AI training"
+ },
+ "devops-ph|j_08fb419b09": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_0a40723564": {
+  "grade": 2,
+  "reason": "Capacity planning is close to infrastructure and SRE work, but it may lean toward planning and analysis"
+ },
+ "devops-ph|j_0b1041d9b0": {
+  "grade": 1,
+  "reason": "Customer-facing data platform consulting, only loosely tied to infrastructure"
+ },
+ "devops-ph|j_0b3df2cb77": {
+  "grade": 1,
+  "reason": "Task designer for an ML inference benchmark; it touches serving infrastructure but isn't an infra role."
+ },
+ "devops-ph|j_0c6babf894": {
+  "grade": 3,
+  "reason": "DevOps engineer running the edge proxy platform."
  },
  "devops-ph|j_0c8285103d": {
   "grade": 0,
@@ -1267,13 +4791,109 @@
   "grade": 0,
   "reason": "AI training writing"
  },
+ "devops-ph|j_0f0b3b6f0e": {
+  "grade": 0,
+  "reason": "Product management role."
+ },
+ "devops-ph|j_10e3a6ff6a": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "devops-ph|j_1146ecf4be": {
+  "grade": 3,
+  "reason": "Senior DevOps engineer working on cloud, Kubernetes and CI/CD."
+ },
+ "devops-ph|j_1315be3b43": {
+  "grade": 3,
+  "reason": "DevOps/SRE role building the company's cloud platform."
+ },
+ "devops-ph|j_13c8f2f55c": {
+  "grade": 0,
+  "reason": "UX design role."
+ },
  "devops-ph|j_146102a6de": {
   "grade": 0,
   "reason": "Legal"
  },
+ "devops-ph|j_14dfffcb83": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "devops-ph|j_154d6632c2": {
+  "grade": 0,
+  "reason": "Ad sales role."
+ },
+ "devops-ph|j_1564ba68ee": {
+  "grade": 0,
+  "reason": "Brand design role."
+ },
+ "devops-ph|j_15ae21edde": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "devops-ph|j_1683857016": {
+  "grade": 0,
+  "reason": "Category management role."
+ },
+ "devops-ph|j_16d098d166": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "devops-ph|j_17754caff4": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "devops-ph|j_182fef53a9": {
+  "grade": 0,
+  "reason": "Customer support role."
+ },
  "devops-ph|j_1864763ae0": {
   "grade": 0,
   "reason": "Program management"
+ },
+ "devops-ph|j_1883ab1107": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_19db4389c5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_19f5cb47ec": {
+  "grade": 0,
+  "reason": "Tutoring"
+ },
+ "devops-ph|j_1b64105da0": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "devops-ph|j_1cdf337fe9": {
+  "grade": 0,
+  "reason": "Lending quality oversight"
+ },
+ "devops-ph|j_1e35a1d5a9": {
+  "grade": 0,
+  "reason": "Customer onboarding"
+ },
+ "devops-ph|j_1fc58daf65": {
+  "grade": 0,
+  "reason": "HR operations"
+ },
+ "devops-ph|j_201d14ba08": {
+  "grade": 1,
+  "reason": "AI operations management, not infra engineering"
+ },
+ "devops-ph|j_20238a568d": {
+  "grade": 0,
+  "reason": "Customer experience"
+ },
+ "devops-ph|j_20b74857db": {
+  "grade": 0,
+  "reason": "CRM software engineering"
+ },
+ "devops-ph|j_2200d30c8b": {
+  "grade": 0,
+  "reason": "Account management"
  },
  "devops-ph|j_220f8c4de5": {
   "grade": 0,
@@ -1283,41 +4903,205 @@
   "grade": 0,
   "reason": "Marketing referral"
  },
+ "devops-ph|j_24c9e3d78e": {
+  "grade": 0,
+  "reason": "Legal"
+ },
+ "devops-ph|j_24cc7f9f7a": {
+  "grade": 0,
+  "reason": "SEO"
+ },
+ "devops-ph|j_251aae03a7": {
+  "grade": 3,
+  "reason": "DevSecOps engineering role"
+ },
+ "devops-ph|j_2541f1d8a9": {
+  "grade": 0,
+  "reason": "Risk/AI management"
+ },
+ "devops-ph|j_262b2ebed3": {
+  "grade": 0,
+  "reason": "Customer experience role"
+ },
+ "devops-ph|j_297cd40725": {
+  "grade": 0,
+  "reason": "Sales/channel role"
+ },
+ "devops-ph|j_2bb8c095dd": {
+  "grade": 1,
+  "reason": "PM for a cloud platform used by DevOps; not an engineering role"
+ },
  "devops-ph|j_2cac462ba8": {
   "grade": 0,
   "reason": "Marketing"
+ },
+ "devops-ph|j_2d238fb4c9": {
+  "grade": 0,
+  "reason": "Sales agent"
  },
  "devops-ph|j_2d8350ecc4": {
   "grade": 0,
   "reason": "KYC analyst"
  },
+ "devops-ph|j_2e0c62b0b5": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "devops-ph|j_2e0f94a977": {
+  "grade": 0,
+  "reason": "CRM admin"
+ },
  "devops-ph|j_2e25de5358": {
   "grade": 0,
   "reason": "Sales coordination"
+ },
+ "devops-ph|j_2e3156bac5": {
+  "grade": 0,
+  "reason": "Customer service"
  },
  "devops-ph|j_2e63d2db48": {
   "grade": 0,
   "reason": "Game dev"
  },
+ "devops-ph|j_2f10cd1478": {
+  "grade": 2,
+  "reason": "ML platform engineering, an adjacent platform/infra specialty"
+ },
  "devops-ph|j_2f48cc1bd4": {
   "grade": 0,
   "reason": "Category management"
+ },
+ "devops-ph|j_2f8efba89c": {
+  "grade": 1,
+  "reason": "Eng manager for martech platforms; infra mentioned but the role isn't DevOps/SRE"
+ },
+ "devops-ph|j_2fa3b8ad40": {
+  "grade": 0,
+  "reason": "Data entry"
+ },
+ "devops-ph|j_2fd780d206": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_30ff05e838": {
+  "grade": 0,
+  "reason": "D365 developer"
  },
  "devops-ph|j_312b6ce30d": {
   "grade": 0,
   "reason": "Data operations for AI datasets, not infra"
  },
+ "devops-ph|j_313129d002": {
+  "grade": 1,
+  "reason": "Integration engineer with cloud and on-call; adjacent at best"
+ },
+ "devops-ph|j_313839a788": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "devops-ph|j_32b88ba008": {
+  "grade": 0,
+  "reason": "Marketing automation"
+ },
+ "devops-ph|j_32f807f988": {
+  "grade": 2,
+  "reason": "IT systems engineering is next to infrastructure work, but it's probably corporate IT rather than DevOps or SRE."
+ },
+ "devops-ph|j_32fb162365": {
+  "grade": 0,
+  "reason": "Vehicle import operations role, not engineering."
+ },
+ "devops-ph|j_3446819ba0": {
+  "grade": 0,
+  "reason": "Competitive intelligence strategy role."
+ },
+ "devops-ph|j_3541ad5e4c": {
+  "grade": 0,
+  "reason": "Revenue operations role, not DevOps."
+ },
+ "devops-ph|j_356794525a": {
+  "grade": 0,
+  "reason": "Cryptography task-writing role for AI benchmarks."
+ },
+ "devops-ph|j_357ce2fdb8": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
  "devops-ph|j_3692f8dbd8": {
   "grade": 0,
   "reason": "Counterintelligence SME"
+ },
+ "devops-ph|j_36949da3e5": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
+ "devops-ph|j_3868ecf684": {
+  "grade": 0,
+  "reason": "Fullstack application development role."
+ },
+ "devops-ph|j_3895e5ddba": {
+  "grade": 0,
+  "reason": "Customer success role."
+ },
+ "devops-ph|j_38974a759c": {
+  "grade": 0,
+  "reason": "Client support supervisor role."
+ },
+ "devops-ph|j_3ad29bcc39": {
+  "grade": 0,
+  "reason": "Sales account executive role."
+ },
+ "devops-ph|j_3aeb89062d": {
+  "grade": 0,
+  "reason": "Recruiting role."
  },
  "devops-ph|j_3c393917eb": {
   "grade": 1,
   "reason": "RL environments with Docker; tangential"
  },
+ "devops-ph|j_3ce5a384f3": {
+  "grade": 1,
+  "reason": "Developer experience and advocacy work at a database infrastructure company. It isn't an infrastructure or SRE role itself."
+ },
+ "devops-ph|j_3dcb594b42": {
+  "grade": 1,
+  "reason": "Software engineering at a CI/CD company, but the role is product query engineering rather than DevOps or platform work."
+ },
+ "devops-ph|j_3dd1eb6b4a": {
+  "grade": 0,
+  "reason": "Backend product software engineering role."
+ },
+ "devops-ph|j_4020d72fd1": {
+  "grade": 0,
+  "reason": "Ad sales"
+ },
  "devops-ph|j_420845d314": {
   "grade": 0,
   "reason": "Aerodynamics"
+ },
+ "devops-ph|j_4343de41ab": {
+  "grade": 2,
+  "reason": "Infrastructure & security operations; adjacent security-focused infra role"
+ },
+ "devops-ph|j_437d8fd29c": {
+  "grade": 0,
+  "reason": "CRM marketing"
+ },
+ "devops-ph|j_439efd13af": {
+  "grade": 0,
+  "reason": "Shopify web dev"
+ },
+ "devops-ph|j_442f1eecd4": {
+  "grade": 0,
+  "reason": "Joinery estimator"
+ },
+ "devops-ph|j_453ce88a0d": {
+  "grade": 0,
+  "reason": "Sales role at infra company"
+ },
+ "devops-ph|j_45c04cc283": {
+  "grade": 0,
+  "reason": "Appointment setter"
  },
  "devops-ph|j_46b3b970a8": {
   "grade": 1,
@@ -1327,6 +5111,26 @@
   "grade": 0,
   "reason": "Legal"
  },
+ "devops-ph|j_46c4c46320": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_47d22151df": {
+  "grade": 0,
+  "reason": "HR"
+ },
+ "devops-ph|j_4831111755": {
+  "grade": 0,
+  "reason": "Collections"
+ },
+ "devops-ph|j_494d0e016f": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_498f406306": {
+  "grade": 0,
+  "reason": "Estimator"
+ },
  "devops-ph|j_4999adbc75": {
   "grade": 0,
   "reason": "Legal"
@@ -1335,9 +5139,17 @@
   "grade": 0,
   "reason": "Product manager"
  },
+ "devops-ph|j_4aa2150834": {
+  "grade": 0,
+  "reason": "Fraud ops"
+ },
  "devops-ph|j_4aecafafa6": {
   "grade": 0,
   "reason": "Data operations annotation"
+ },
+ "devops-ph|j_4b0ab24952": {
+  "grade": 0,
+  "reason": "Marketing"
  },
  "devops-ph|j_4b0f849926": {
   "grade": 1,
@@ -1346,6 +5158,30 @@
  "devops-ph|j_4bdd92d00f": {
   "grade": 0,
   "reason": "Full-stack React developer"
+ },
+ "devops-ph|j_4db091910e": {
+  "grade": 3,
+  "reason": "Senior DevOps Engineer"
+ },
+ "devops-ph|j_4dc0f95049": {
+  "grade": 0,
+  "reason": "People operations / HR coordinator role"
+ },
+ "devops-ph|j_4de6a00d1e": {
+  "grade": 0,
+  "reason": "Marketing design role"
+ },
+ "devops-ph|j_4e42c64d8c": {
+  "grade": 0,
+  "reason": "Creative and marketing role"
+ },
+ "devops-ph|j_4e44126058": {
+  "grade": 0,
+  "reason": "Recruiting role"
+ },
+ "devops-ph|j_51ecc2b466": {
+  "grade": 0,
+  "reason": "Accounting role"
  },
  "devops-ph|j_52078af5ea": {
   "grade": 0,
@@ -1359,9 +5195,25 @@
   "grade": 0,
   "reason": "CX specialist"
  },
+ "devops-ph|j_54155bbc84": {
+  "grade": 0,
+  "reason": "Sales account management role"
+ },
+ "devops-ph|j_5503bc89f9": {
+  "grade": 0,
+  "reason": "Recruitment supervisor role"
+ },
+ "devops-ph|j_55195306c8": {
+  "grade": 1,
+  "reason": "Backend engineering at a DevSecOps company, but the job itself is not DevOps, SRE or infrastructure"
+ },
  "devops-ph|j_558cb9202f": {
   "grade": 0,
   "reason": "Referral partner"
+ },
+ "devops-ph|j_55df8cbf81": {
+  "grade": 0,
+  "reason": "Sales development role"
  },
  "devops-ph|j_55f3a1f640": {
   "grade": 0,
@@ -1371,6 +5223,30 @@
   "grade": 0,
   "reason": "Video editing role"
  },
+ "devops-ph|j_5673da59f4": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "devops-ph|j_575235c5c7": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "devops-ph|j_58c52c8c15": {
+  "grade": 0,
+  "reason": "Financial operations role"
+ },
+ "devops-ph|j_5932f5584e": {
+  "grade": 0,
+  "reason": "Communications role at an infrastructure company"
+ },
+ "devops-ph|j_596874ce3d": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_5b96540f05": {
+  "grade": 0,
+  "reason": "Fullstack product engineering, not infrastructure"
+ },
  "devops-ph|j_5e4e79b4bb": {
   "grade": 0,
   "reason": "Multimodal LLM research internship, not DevOps/SRE"
@@ -1379,41 +5255,169 @@
   "grade": 0,
   "reason": "Recording videos at home"
  },
+ "devops-ph|j_5e740713de": {
+  "grade": 0,
+  "reason": "Dynamics CRM consulting"
+ },
+ "devops-ph|j_5e807e48b6": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "devops-ph|j_5efbdda2c3": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_6000c2203e": {
+  "grade": 1,
+  "reason": "ML engineering, not infra"
+ },
  "devops-ph|j_607cf99871": {
   "grade": 0,
   "reason": "Sales and business development"
+ },
+ "devops-ph|j_60c7bf345d": {
+  "grade": 1,
+  "reason": "Full-stack code evaluation"
+ },
+ "devops-ph|j_61925adcfc": {
+  "grade": 0,
+  "reason": "Paid ads"
+ },
+ "devops-ph|j_62611c4ab4": {
+  "grade": 0,
+  "reason": "Risk consulting"
+ },
+ "devops-ph|j_62d5f94de8": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_62f518b2c7": {
+  "grade": 1,
+  "reason": "Cloud CRM solutions architect, not infra"
+ },
+ "devops-ph|j_65a3ec8461": {
+  "grade": 0,
+  "reason": "Community management"
+ },
+ "devops-ph|j_65b58ea973": {
+  "grade": 0,
+  "reason": "3D design"
+ },
+ "devops-ph|j_675dcd48ab": {
+  "grade": 0,
+  "reason": "Threat intelligence analyst"
+ },
+ "devops-ph|j_6785a57150": {
+  "grade": 0,
+  "reason": "Professional services management"
  },
  "devops-ph|j_686f0d4114": {
   "grade": 0,
   "reason": "Community management"
  },
+ "devops-ph|j_687dd79730": {
+  "grade": 1,
+  "reason": "Software engineering on a CRM product"
+ },
  "devops-ph|j_691e215f9e": {
   "grade": 0,
   "reason": "AI safety red teaming, not infrastructure"
+ },
+ "devops-ph|j_693aa22426": {
+  "grade": 1,
+  "reason": "Frontend development"
  },
  "devops-ph|j_6bac92ed55": {
   "grade": 0,
   "reason": "AI feedback and rating work"
  },
+ "devops-ph|j_6d62106272": {
+  "grade": 0,
+  "reason": "Developer engagement/community role"
+ },
  "devops-ph|j_6e59b15a43": {
   "grade": 0,
   "reason": "HR operations"
+ },
+ "devops-ph|j_6e612b8a9c": {
+  "grade": 0,
+  "reason": "Workforce planning analyst"
+ },
+ "devops-ph|j_6e736b1791": {
+  "grade": 0,
+  "reason": "Data entry"
+ },
+ "devops-ph|j_6e7eee8df7": {
+  "grade": 1,
+  "reason": "Customer-facing technical role, not infra engineering"
+ },
+ "devops-ph|j_6ea77c5096": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_6ef0b90f4f": {
+  "grade": 0,
+  "reason": "Product management/marketing for cloud database"
+ },
+ "devops-ph|j_6fb41c1f9b": {
+  "grade": 0,
+  "reason": "Renewals sales at DevOps company"
  },
  "devops-ph|j_6fd71657dc": {
   "grade": 1,
   "reason": "ML engineering with some systems and performance work, but not DevOps/SRE"
  },
+ "devops-ph|j_7014075ffc": {
+  "grade": 0,
+  "reason": "Channel sales"
+ },
  "devops-ph|j_71db67eb7a": {
   "grade": 0,
   "reason": "Business development"
+ },
+ "devops-ph|j_71fd0d6146": {
+  "grade": 1,
+  "reason": "QA automation with CI/CD integration; adjacent but not DevOps"
+ },
+ "devops-ph|j_727e14c903": {
+  "grade": 0,
+  "reason": "Video editing"
  },
  "devops-ph|j_72ed1a1640": {
   "grade": 0,
   "reason": "Marketing campaigns"
  },
+ "devops-ph|j_74990eb5d9": {
+  "grade": 3,
+  "reason": "Senior Azure DevOps Engineer"
+ },
+ "devops-ph|j_7530667469": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_761e5b8482": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_780c4812a2": {
+  "grade": 1,
+  "reason": "Backend product engineering, not infra"
+ },
  "devops-ph|j_7814b5d6c1": {
   "grade": 0,
   "reason": "Community and events"
+ },
+ "devops-ph|j_7842a402cc": {
+  "grade": 2,
+  "reason": "IT engineering/automation, adjacent to infrastructure"
+ },
+ "devops-ph|j_78d296f496": {
+  "grade": 0,
+  "reason": "Business development role"
+ },
+ "devops-ph|j_78f903d57a": {
+  "grade": 1,
+  "reason": "Endpoint management IT consulting, adjacent to infrastructure but not DevOps/SRE"
  },
  "devops-ph|j_7918656ab7": {
   "grade": 0,
@@ -1423,17 +5427,97 @@
   "grade": 0,
   "reason": "Partnerships coordination"
  },
+ "devops-ph|j_79f2ca2f78": {
+  "grade": 1,
+  "reason": "Customer-facing solutions architect, not infra engineering"
+ },
+ "devops-ph|j_79f8be3217": {
+  "grade": 1,
+  "reason": "Analytics engineering with CI mention; not DevOps"
+ },
+ "devops-ph|j_7af72754e0": {
+  "grade": 1,
+  "reason": "Product security engineering, adjacent"
+ },
+ "devops-ph|j_7b0e84d2ee": {
+  "grade": 1,
+  "reason": "WAF/security ops, tangential to infrastructure"
+ },
+ "devops-ph|j_7bba233fa8": {
+  "grade": 0,
+  "reason": "Data annotation"
+ },
+ "devops-ph|j_7c38f3e5f9": {
+  "grade": 1,
+  "reason": "Support engineering at infra company"
+ },
+ "devops-ph|j_7c3e59460c": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "devops-ph|j_7c6444a90e": {
+  "grade": 0,
+  "reason": "Recruiting scheduling"
+ },
+ "devops-ph|j_7d4ae8d6ed": {
+  "grade": 0,
+  "reason": "Compliance intern"
+ },
+ "devops-ph|j_7d61749e33": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
  "devops-ph|j_7db2e21b93": {
   "grade": 0,
   "reason": "CRM email marketing role"
+ },
+ "devops-ph|j_7e8a65c012": {
+  "grade": 0,
+  "reason": "CRM developer"
+ },
+ "devops-ph|j_7f4b40f62b": {
+  "grade": 0,
+  "reason": "Video editor"
+ },
+ "devops-ph|j_7f7b24817a": {
+  "grade": 0,
+  "reason": "Product manager"
+ },
+ "devops-ph|j_8068844c98": {
+  "grade": 0,
+  "reason": "Data science role"
  },
  "devops-ph|j_80b1ea5f26": {
   "grade": 0,
   "reason": "Growth marketing role"
  },
+ "devops-ph|j_80f3e82570": {
+  "grade": 1,
+  "reason": "Data center mechanical commissioning; physical infrastructure, not software infra engineering"
+ },
+ "devops-ph|j_81d589edaf": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
  "devops-ph|j_839ad8cbcf": {
   "grade": 1,
   "reason": "SDET role. It sits next to DevOps work through CI and test infrastructure but isn't an infrastructure role."
+ },
+ "devops-ph|j_83d0710305": {
+  "grade": 1,
+  "reason": "General software engineer; infra not evident"
+ },
+ "devops-ph|j_84f0e7cfdf": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_851f6a996d": {
+  "grade": 0,
+  "reason": "Paid ads marketing"
+ },
+ "devops-ph|j_85266795cc": {
+  "grade": 0,
+  "reason": "Content editor"
  },
  "devops-ph|j_86bcdf41d5": {
   "grade": 0,
@@ -1443,21 +5527,85 @@
   "grade": 0,
   "reason": "Travel operations role"
  },
+ "devops-ph|j_895be090da": {
+  "grade": 0,
+  "reason": "Call center role"
+ },
+ "devops-ph|j_8a53d8ea33": {
+  "grade": 0,
+  "reason": "E-commerce brand manager"
+ },
+ "devops-ph|j_8ac0503409": {
+  "grade": 1,
+  "reason": "Backend software engineer, not DevOps/SRE specifically"
+ },
+ "devops-ph|j_8ac68ea74e": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "devops-ph|j_8b1b63dbf3": {
+  "grade": 0,
+  "reason": "Product management role at an infra company"
+ },
  "devops-ph|j_8c4aa0f0a6": {
   "grade": 0,
   "reason": "Data annotation role"
+ },
+ "devops-ph|j_8caf616380": {
+  "grade": 1,
+  "reason": "Product interface engineering on a platform company, not infra"
+ },
+ "devops-ph|j_8cd7a12023": {
+  "grade": 0,
+  "reason": "Pre-sales solution engineering"
+ },
+ "devops-ph|j_8cdf3686d8": {
+  "grade": 0,
+  "reason": "Data science role"
+ },
+ "devops-ph|j_8d081ea981": {
+  "grade": 1,
+  "reason": "Backend product engineering, not infra-focused"
+ },
+ "devops-ph|j_8d96bfc7e8": {
+  "grade": 0,
+  "reason": "Creative role"
  },
  "devops-ph|j_8daa145b01": {
   "grade": 0,
   "reason": "Growth marketing lead"
  },
+ "devops-ph|j_8e0c1c4367": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
  "devops-ph|j_8e439fbcc3": {
   "grade": 1,
   "reason": "Full stack intern role. It mentions setting up server infrastructure, but that's a minor part of the job."
  },
+ "devops-ph|j_8ebe8d2abd": {
+  "grade": 1,
+  "reason": "Generic software engineer"
+ },
+ "devops-ph|j_8fd9ef6c0e": {
+  "grade": 0,
+  "reason": "Front-end dev"
+ },
+ "devops-ph|j_90449725cb": {
+  "grade": 0,
+  "reason": "ServiceNow SPM development"
+ },
  "devops-ph|j_9207e7c871": {
   "grade": 0,
   "reason": "Supply chain AI task design"
+ },
+ "devops-ph|j_92143a33b7": {
+  "grade": 3,
+  "reason": "Staff DevOps Engineer"
+ },
+ "devops-ph|j_92c6dbfc6c": {
+  "grade": 0,
+  "reason": "Marketing"
  },
  "devops-ph|j_936f971f7a": {
   "grade": 0,
@@ -1467,6 +5615,14 @@
   "grade": 0,
   "reason": "Customer success director"
  },
+ "devops-ph|j_9448822031": {
+  "grade": 0,
+  "reason": "Sales enablement"
+ },
+ "devops-ph|j_95b9088bf2": {
+  "grade": 0,
+  "reason": "Salesforce developer"
+ },
  "devops-ph|j_96e352fd8a": {
   "grade": 0,
   "reason": "Attorney"
@@ -1474,6 +5630,30 @@
  "devops-ph|j_9a7f3e981c": {
   "grade": 0,
   "reason": "Legal expert"
+ },
+ "devops-ph|j_9afc9cd9aa": {
+  "grade": 0,
+  "reason": "Product owner"
+ },
+ "devops-ph|j_9b7028553d": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_9b8b59dfb6": {
+  "grade": 0,
+  "reason": "Supply chain"
+ },
+ "devops-ph|j_9ca310232e": {
+  "grade": 2,
+  "reason": "NOC engineer: network operations, adjacent to infra/SRE"
+ },
+ "devops-ph|j_9db3d44824": {
+  "grade": 0,
+  "reason": "Business analyst"
+ },
+ "devops-ph|j_9de6ec0ed8": {
+  "grade": 0,
+  "reason": "Category general manager role"
  },
  "devops-ph|j_9ea8b434a2": {
   "grade": 0,
@@ -1483,6 +5663,14 @@
   "grade": 0,
   "reason": "Mechanical engineering AI training"
  },
+ "devops-ph|j_9f4883a3f5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_9ff77dfd10": {
+  "grade": 0,
+  "reason": "Renewals sales role"
+ },
  "devops-ph|j_a09565c2f6": {
   "grade": 0,
   "reason": "Mobile Flutter development, not infra/DevOps"
@@ -1490,6 +5678,10 @@
  "devops-ph|j_a1759899b3": {
   "grade": 0,
   "reason": "AI creative/social media engineering"
+ },
+ "devops-ph|j_a1798af89a": {
+  "grade": 0,
+  "reason": "Language review"
  },
  "devops-ph|j_a1fbec0fb3": {
   "grade": 0,
@@ -1499,29 +5691,157 @@
   "grade": 0,
   "reason": "Shopping AI data work"
  },
+ "devops-ph|j_a2b1ad29c5": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "devops-ph|j_a309c2c156": {
+  "grade": 0,
+  "reason": "Law enforcement liaison"
+ },
+ "devops-ph|j_a33f48882c": {
+  "grade": 1,
+  "reason": "Business continuity/resilience is risk-focused, only tangentially related to infra reliability"
+ },
+ "devops-ph|j_a456720016": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_a4b3c1dbb7": {
+  "grade": 0,
+  "reason": "Contract interviewer role, not infra engineering"
+ },
+ "devops-ph|j_a60733eace": {
+  "grade": 1,
+  "reason": "IT help desk support, adjacent to infrastructure but not engineering"
+ },
+ "devops-ph|j_a636c601e9": {
+  "grade": 0,
+  "reason": "Generic talent community, no specific role"
+ },
+ "devops-ph|j_a65920719d": {
+  "grade": 0,
+  "reason": "Manufacturing procurement"
+ },
  "devops-ph|j_a68d3b62e6": {
   "grade": 0,
   "reason": "Mechanical engineering AI training"
+ },
+ "devops-ph|j_a7278fe0e8": {
+  "grade": 0,
+  "reason": "Finance operations"
+ },
+ "devops-ph|j_a7411b7bb3": {
+  "grade": 2,
+  "reason": "Cloud/AWS enterprise architect, adjacent to platform engineering"
+ },
+ "devops-ph|j_a742af0ff9": {
+  "grade": 0,
+  "reason": "Interior design"
+ },
+ "devops-ph|j_a75c6606ea": {
+  "grade": 0,
+  "reason": "Sales solutions engineering"
+ },
+ "devops-ph|j_a794d96b60": {
+  "grade": 3,
+  "reason": "Kubernetes-native platform engineering on AWS"
+ },
+ "devops-ph|j_a8ca244cd6": {
+  "grade": 0,
+  "reason": "Affiliate marketing"
+ },
+ "devops-ph|j_a9b218e167": {
+  "grade": 0,
+  "reason": "Design systems, not infra"
+ },
+ "devops-ph|j_aa25696103": {
+  "grade": 0,
+  "reason": "Web design"
+ },
+ "devops-ph|j_ab3979c587": {
+  "grade": 0,
+  "reason": "Training"
  },
  "devops-ph|j_abdc39d3d8": {
   "grade": 0,
   "reason": "AI safety testing"
  },
+ "devops-ph|j_abe594ff2f": {
+  "grade": 0,
+  "reason": "Design leadership"
+ },
+ "devops-ph|j_ac57eed7e2": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_acdbc5372c": {
+  "grade": 0,
+  "reason": "Channel sales"
+ },
+ "devops-ph|j_acded89dc3": {
+  "grade": 0,
+  "reason": "Paid marketing"
+ },
  "devops-ph|j_adc9c6c53a": {
   "grade": 0,
   "reason": "Data annotation"
+ },
+ "devops-ph|j_ae16e50b99": {
+  "grade": 1,
+  "reason": "Generic software dev freelance, not infra-specific"
+ },
+ "devops-ph|j_aec0db69b0": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_af59bf1718": {
+  "grade": 2,
+  "reason": "Mostly QA automation with some CI/CD/DevOps work"
+ },
+ "devops-ph|j_af7b16bbca": {
+  "grade": 0,
+  "reason": "Game testing"
  },
  "devops-ph|j_b030f1fd2c": {
   "grade": 0,
   "reason": "Paid media marketing"
  },
+ "devops-ph|j_b0318283d6": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_b0d5ca9300": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "devops-ph|j_b222a09830": {
+  "grade": 0,
+  "reason": "Engineering manager for search/AI growth, not infrastructure"
+ },
+ "devops-ph|j_b34d21f8e6": {
+  "grade": 0,
+  "reason": "Customer support agent"
+ },
  "devops-ph|j_b39b7d629c": {
   "grade": 0,
   "reason": "Customer service"
  },
+ "devops-ph|j_b42ae13d15": {
+  "grade": 0,
+  "reason": "Content/editorial leadership"
+ },
+ "devops-ph|j_b4fdaa76c7": {
+  "grade": 1,
+  "reason": "Data platform architecture; adjacent to platform engineering but primarily data engineering"
+ },
  "devops-ph|j_b6e1d5f353": {
   "grade": 0,
   "reason": "STEM AI training"
+ },
+ "devops-ph|j_b8f04812cd": {
+  "grade": 0,
+  "reason": "Technical customer support"
  },
  "devops-ph|j_b93fb15aa2": {
   "grade": 0,
@@ -1531,6 +5851,22 @@
   "grade": 0,
   "reason": "Graphic design"
  },
+ "devops-ph|j_bd9ee4f522": {
+  "grade": 0,
+  "reason": "Website management/marketing"
+ },
+ "devops-ph|j_bdc41ba16c": {
+  "grade": 0,
+  "reason": "Accounts receivable"
+ },
+ "devops-ph|j_bedf622a68": {
+  "grade": 0,
+  "reason": "Magento application development"
+ },
+ "devops-ph|j_c020057ebf": {
+  "grade": 0,
+  "reason": "CAD scripting benchmark tasks"
+ },
  "devops-ph|j_c14e307e95": {
   "grade": 0,
   "reason": "Generic talent pipeline, no infra role specified"
@@ -1539,21 +5875,97 @@
   "grade": 0,
   "reason": "STEM AI training"
  },
+ "devops-ph|j_c201d72e59": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "devops-ph|j_c2d27068a0": {
+  "grade": 0,
+  "reason": "SQL query planner engineering, not DevOps/SRE"
+ },
+ "devops-ph|j_c39a116b01": {
+  "grade": 0,
+  "reason": "Sales/business development"
+ },
+ "devops-ph|j_c39d6842ba": {
+  "grade": 0,
+  "reason": "Partnerships/alliances role"
+ },
+ "devops-ph|j_c3c6044abc": {
+  "grade": 0,
+  "reason": "Interview coordination"
+ },
  "devops-ph|j_c3eb1737e5": {
   "grade": 0,
   "reason": "Legal AI training"
+ },
+ "devops-ph|j_c44a264c51": {
+  "grade": 1,
+  "reason": "Support engineering at a CI/CD company; involves DevOps tooling but the role is customer support."
+ },
+ "devops-ph|j_c490e038de": {
+  "grade": 0,
+  "reason": "Podcast growth role."
+ },
+ "devops-ph|j_c61dae077c": {
+  "grade": 0,
+  "reason": "CRM systems consultant, not infrastructure."
  },
  "devops-ph|j_c65608f773": {
   "grade": 0,
   "reason": "Hardware/RTL expert for AI training, not infra"
  },
+ "devops-ph|j_c673e84c6a": {
+  "grade": 1,
+  "reason": "Data engineering, which is adjacent to infrastructure but is a different specialty."
+ },
+ "devops-ph|j_c71909c5a8": {
+  "grade": 0,
+  "reason": "AI engineering/architecture, not DevOps/SRE."
+ },
  "devops-ph|j_c76ecce7c8": {
   "grade": 0,
   "reason": "AI rater role"
  },
+ "devops-ph|j_c8b88b1b89": {
+  "grade": 0,
+  "reason": "Social media role."
+ },
+ "devops-ph|j_c8f4e2a8fc": {
+  "grade": 0,
+  "reason": "Growth director at a platform company; not an engineering role."
+ },
+ "devops-ph|j_c90dd9eac6": {
+  "grade": 0,
+  "reason": "Marketing growth role."
+ },
+ "devops-ph|j_c9effb313c": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "devops-ph|j_cbbd6810be": {
+  "grade": 0,
+  "reason": "Tax role."
+ },
+ "devops-ph|j_cc57ff2e1d": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "devops-ph|j_cd35df7ef9": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
  "devops-ph|j_cd9685acf8": {
   "grade": 1,
   "reason": "Android engineer; mentions infrastructure but mobile role"
+ },
+ "devops-ph|j_cfc2df0fc2": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
+ "devops-ph|j_d064a5f353": {
+  "grade": 0,
+  "reason": "Sales role."
  },
  "devops-ph|j_d22202efbc": {
   "grade": 1,
@@ -1563,6 +5975,50 @@
   "grade": 0,
   "reason": "Design role"
  },
+ "devops-ph|j_d3b330485d": {
+  "grade": 1,
+  "reason": "General software engineering, not focused on infrastructure."
+ },
+ "devops-ph|j_d3b8a38b09": {
+  "grade": 0,
+  "reason": "UX research"
+ },
+ "devops-ph|j_d42235dd43": {
+  "grade": 0,
+  "reason": "Executive assistant"
+ },
+ "devops-ph|j_d458dff10e": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_d59ec6a865": {
+  "grade": 0,
+  "reason": "Lending"
+ },
+ "devops-ph|j_d5ff7f303d": {
+  "grade": 0,
+  "reason": "Full-stack dev, not infra"
+ },
+ "devops-ph|j_d68bc5bd3d": {
+  "grade": 1,
+  "reason": "Customer-facing solutions engineering at a database infrastructure company"
+ },
+ "devops-ph|j_d6b5a7f901": {
+  "grade": 0,
+  "reason": "Lead generation"
+ },
+ "devops-ph|j_d795bd7dc9": {
+  "grade": 2,
+  "reason": "Cloud systems admin, adjacent to infrastructure but focused on SaaS vendor administration"
+ },
+ "devops-ph|j_d8efce35ba": {
+  "grade": 1,
+  "reason": "Corporate security engineering, adjacent"
+ },
+ "devops-ph|j_da40487bc4": {
+  "grade": 1,
+  "reason": "Customer success at a telemetry infrastructure company"
+ },
  "devops-ph|j_db37e380bb": {
   "grade": 0,
   "reason": "Marketing"
@@ -1571,9 +6027,21 @@
   "grade": 0,
   "reason": "Legal expert"
  },
+ "devops-ph|j_dbdb5db04f": {
+  "grade": 1,
+  "reason": "Product engineer at a CI/CD company, developer infrastructure domain"
+ },
+ "devops-ph|j_dbfcee6386": {
+  "grade": 0,
+  "reason": "Salesforce admin"
+ },
  "devops-ph|j_dcb235b629": {
   "grade": 0,
   "reason": "Affiliate operations internship"
+ },
+ "devops-ph|j_dcfcdb213c": {
+  "grade": 0,
+  "reason": "Frontend"
  },
  "devops-ph|j_de6bda26f6": {
   "grade": 0,
@@ -1583,45 +6051,205 @@
   "grade": 0,
   "reason": "Marketing"
  },
+ "devops-ph|j_df0d5501af": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "devops-ph|j_df2d222fb8": {
+  "grade": 0,
+  "reason": "Resource management"
+ },
+ "devops-ph|j_e1b10744df": {
+  "grade": 0,
+  "reason": "Customer success engineer, customer-facing role, not infrastructure"
+ },
  "devops-ph|j_e21269d363": {
   "grade": 1,
   "reason": "ML engineering tasks, some systems work but not infra role"
+ },
+ "devops-ph|j_e32c4ef54b": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "devops-ph|j_e3f2474bc0": {
+  "grade": 0,
+  "reason": "Internal audit"
+ },
+ "devops-ph|j_e45e131f56": {
+  "grade": 1,
+  "reason": "Backend software engineering, not DevOps/infra"
+ },
+ "devops-ph|j_e515e3a56b": {
+  "grade": 0,
+  "reason": "Partnerships/events coordinator"
+ },
+ "devops-ph|j_e571a4187e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "devops-ph|j_e5eb993038": {
+  "grade": 0,
+  "reason": "Sales role"
  },
  "devops-ph|j_e64759b65e": {
   "grade": 0,
   "reason": "Calling role"
  },
+ "devops-ph|j_e6f9f86a92": {
+  "grade": 0,
+  "reason": "Identity/fraud consultant"
+ },
+ "devops-ph|j_e760a84c6b": {
+  "grade": 0,
+  "reason": "Video editor"
+ },
+ "devops-ph|j_e7a7646f30": {
+  "grade": 0,
+  "reason": "Customer success manager"
+ },
+ "devops-ph|j_e7ff1ba326": {
+  "grade": 0,
+  "reason": "Sales enablement at a DevOps platform company; the role itself isn't engineering"
+ },
+ "devops-ph|j_e90203fce9": {
+  "grade": 1,
+  "reason": "Customer-facing technical role at a telemetry infrastructure company; adjacent to infrastructure"
+ },
+ "devops-ph|j_e97a4caade": {
+  "grade": 0,
+  "reason": "Graphic design intern"
+ },
+ "devops-ph|j_eb20d4ca7c": {
+  "grade": 0,
+  "reason": "AI data annotation"
+ },
  "devops-ph|j_eb3621145f": {
   "grade": 0,
   "reason": "Data annotation"
+ },
+ "devops-ph|j_ec5550f26a": {
+  "grade": 0,
+  "reason": "Customer success manager"
+ },
+ "devops-ph|j_ec7e2f3139": {
+  "grade": 1,
+  "reason": "Generic engineering manager role; the specialty isn't stated"
+ },
+ "devops-ph|j_ec92a81f1f": {
+  "grade": 0,
+  "reason": "Applied AI and document-processing pipelines"
+ },
+ "devops-ph|j_ed3edaf00f": {
+  "grade": 0,
+  "reason": "Actuary"
+ },
+ "devops-ph|j_ed662701a1": {
+  "grade": 0,
+  "reason": "BI developer"
  },
  "devops-ph|j_edd15a47cd": {
   "grade": 0,
   "reason": "Marketing"
  },
+ "devops-ph|j_ee3b6dc0e3": {
+  "grade": 1,
+  "reason": "General head of technology, not an infrastructure-specific role"
+ },
  "devops-ph|j_ee871fa31b": {
   "grade": 1,
   "reason": "ML inference serving task design; infra-adjacent but benchmark content creation"
+ },
+ "devops-ph|j_ef13e6eb42": {
+  "grade": 0,
+  "reason": "Transcription work"
+ },
+ "devops-ph|j_efcfaae732": {
+  "grade": 1,
+  "reason": "Data engineering that mentions data platforms"
  },
  "devops-ph|j_f0ac351b71": {
   "grade": 0,
   "reason": "Cold email lead generation, not infrastructure."
  },
+ "devops-ph|j_f0ddd7585e": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "devops-ph|j_f128e585ea": {
+  "grade": 0,
+  "reason": "Recruitment"
+ },
  "devops-ph|j_f1938987b3": {
   "grade": 1,
   "reason": "Full-stack backend engineering; it only mentions reliability and platforms in passing."
+ },
+ "devops-ph|j_f20eb8effd": {
+  "grade": 2,
+  "reason": "Building the control plane for a managed database is close to infrastructure and platform work"
+ },
+ "devops-ph|j_f230635d1b": {
+  "grade": 3,
+  "reason": "Cloud engineer is an infrastructure role"
+ },
+ "devops-ph|j_f24233f2e0": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "devops-ph|j_f2b2f5b949": {
   "grade": 0,
   "reason": "Content and communications internship."
  },
+ "devops-ph|j_f310119d05": {
+  "grade": 1,
+  "reason": "Data platform architecture rather than infrastructure or DevOps"
+ },
+ "devops-ph|j_f3aa34e23b": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_f628e53e42": {
+  "grade": 1,
+  "reason": "Data engineering; cloud is only a secondary skill"
+ },
+ "devops-ph|j_f68a3597ad": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "devops-ph|j_f6b5f69e7f": {
+  "grade": 1,
+  "reason": "Data engineering, adjacent to infra but different specialty"
+ },
+ "devops-ph|j_f6ef333366": {
+  "grade": 0,
+  "reason": "Content review"
+ },
  "devops-ph|j_f7cfd57f2f": {
   "grade": 1,
   "reason": "Go backend and blockchain role. It covers reliability and incidents, but it isn't a DevOps or SRE job."
  },
+ "devops-ph|j_f8716052c6": {
+  "grade": 0,
+  "reason": "Recruiting"
+ },
  "devops-ph|j_f985e569f1": {
   "grade": 0,
   "reason": "Google Ads marketing role."
+ },
+ "devops-ph|j_fa401b71fb": {
+  "grade": 0,
+  "reason": "HR"
+ },
+ "devops-ph|j_fa8932c65f": {
+  "grade": 0,
+  "reason": "Game design"
+ },
+ "devops-ph|j_faba38b48d": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "devops-ph|j_faf3850192": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "devops-ph|j_fc4c84de99": {
   "grade": 0,
@@ -1631,45 +6259,229 @@
   "grade": 0,
   "reason": "Social media marketing role."
  },
+ "devops-ph|j_fda6ebe3fb": {
+  "grade": 1,
+  "reason": "AI/ML engineering with production deployment, not infra role"
+ },
+ "devops-ph|j_fe0a19cf83": {
+  "grade": 0,
+  "reason": "Category management"
+ },
+ "devops-ph|j_fe3f9272a1": {
+  "grade": 0,
+  "reason": "Marketing strategy"
+ },
+ "devops-ph|j_feb3cc8851": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "devops-ph|j_ff3fecc180": {
+  "grade": 0,
+  "reason": "Program management for customer onboarding"
+ },
+ "ml-in|j_00356f79a4": {
+  "grade": 0,
+  "reason": "YouTube content creator, covers AI tools but isn't ML engineering"
+ },
+ "ml-in|j_018382a8f2": {
+  "grade": 0,
+  "reason": "Animation internship"
+ },
  "ml-in|j_01911257fa": {
   "grade": 0,
   "reason": "Travel agency ambassador role"
+ },
+ "ml-in|j_03277fc15a": {
+  "grade": 0,
+  "reason": "Electrical sales role"
+ },
+ "ml-in|j_03a98fe055": {
+  "grade": 0,
+  "reason": "Manages a security engineering team, no ML work"
  },
  "ml-in|j_0446cd44d4": {
   "grade": 0,
   "reason": "Atlassian tools admin"
  },
+ "ml-in|j_04afff1742": {
+  "grade": 0,
+  "reason": "Database reliability engineering"
+ },
+ "ml-in|j_04edcc2aee": {
+  "grade": 0,
+  "reason": "Customer service admin"
+ },
+ "ml-in|j_05561072ab": {
+  "grade": 0,
+  "reason": "Graphic design"
+ },
+ "ml-in|j_063ec4a7c7": {
+  "grade": 0,
+  "reason": "English teaching"
+ },
+ "ml-in|j_06486940e7": {
+  "grade": 0,
+  "reason": "Sales development"
+ },
+ "ml-in|j_064f7e5a99": {
+  "grade": 0,
+  "reason": "Community moderation"
+ },
  "ml-in|j_069c5be345": {
   "grade": 1,
   "reason": "Legal data annotation for AI training, not ML engineering"
+ },
+ "ml-in|j_0864f69d6d": {
+  "grade": 0,
+  "reason": "Content marketing; using AI tools isn't ML engineering"
+ },
+ "ml-in|j_08d5f5517a": {
+  "grade": 0,
+  "reason": "Performance testing; the AI mention is about the company, not the role"
  },
  "ml-in|j_08ee88b3bd": {
   "grade": 1,
   "reason": "Hardware expert creating AI training data, not ML engineering"
  },
+ "ml-in|j_08fb419b09": {
+  "grade": 0,
+  "reason": "Sales account executive"
+ },
+ "ml-in|j_0a40723564": {
+  "grade": 0,
+  "reason": "Infrastructure capacity planning"
+ },
+ "ml-in|j_0b1041d9b0": {
+  "grade": 1,
+  "reason": "Consulting role on a data lakehouse platform for analytics and AI; the role itself isn't ML engineering"
+ },
+ "ml-in|j_0b3df2cb77": {
+  "grade": 2,
+  "reason": "Needs ML inference/serving expertise, but the job is designing benchmark tasks, not building production ML systems."
+ },
+ "ml-in|j_0c6babf894": {
+  "grade": 0,
+  "reason": "DevOps role focused on edge proxy and developer tooling, with no ML work."
+ },
  "ml-in|j_0eb10b18c6": {
   "grade": 1,
   "reason": "AI training data writing, not ML engineering"
+ },
+ "ml-in|j_0f0b3b6f0e": {
+  "grade": 0,
+  "reason": "Product management role in growth."
+ },
+ "ml-in|j_10e3a6ff6a": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "ml-in|j_1146ecf4be": {
+  "grade": 0,
+  "reason": "General DevOps role with no ML work."
+ },
+ "ml-in|j_1315be3b43": {
+  "grade": 0,
+  "reason": "DevOps/SRE role with no ML work."
+ },
+ "ml-in|j_13c8f2f55c": {
+  "grade": 0,
+  "reason": "UX design role."
  },
  "ml-in|j_146102a6de": {
   "grade": 1,
   "reason": "Legal annotation for AI, not ML engineering"
  },
+ "ml-in|j_14dfffcb83": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "ml-in|j_154d6632c2": {
+  "grade": 0,
+  "reason": "Ad sales role."
+ },
+ "ml-in|j_1564ba68ee": {
+  "grade": 0,
+  "reason": "Brand design role."
+ },
+ "ml-in|j_15ae21edde": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "ml-in|j_1683857016": {
+  "grade": 0,
+  "reason": "Category management role."
+ },
+ "ml-in|j_16d098d166": {
+  "grade": 1,
+  "reason": "Sales role for AI security products. It mentions AI, but the job is not engineering."
+ },
+ "ml-in|j_17754caff4": {
+  "grade": 0,
+  "reason": "SEO and digital marketing role."
+ },
+ "ml-in|j_182fef53a9": {
+  "grade": 0,
+  "reason": "Customer support role."
+ },
  "ml-in|j_1864763ae0": {
   "grade": 0,
   "reason": "Agile program management"
+ },
+ "ml-in|j_1883ab1107": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "ml-in|j_19db4389c5": {
+  "grade": 0,
+  "reason": "Sales role"
  },
  "ml-in|j_19e77563b6": {
   "grade": 0,
   "reason": "Compliance policy role"
  },
+ "ml-in|j_19f5cb47ec": {
+  "grade": 0,
+  "reason": "Tutoring role"
+ },
+ "ml-in|j_1b64105da0": {
+  "grade": 0,
+  "reason": "Tech support"
+ },
+ "ml-in|j_1cdf337fe9": {
+  "grade": 0,
+  "reason": "Lending quality oversight"
+ },
  "ml-in|j_1dd366cfd2": {
   "grade": 2,
   "reason": "LLM red teaming security engineering; adjacent to applied AI engineering"
  },
+ "ml-in|j_1e35a1d5a9": {
+  "grade": 0,
+  "reason": "Customer onboarding"
+ },
+ "ml-in|j_1fc58daf65": {
+  "grade": 0,
+  "reason": "People operations"
+ },
+ "ml-in|j_201d14ba08": {
+  "grade": 1,
+  "reason": "AI adoption operations management, not building models"
+ },
+ "ml-in|j_20238a568d": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "ml-in|j_20b74857db": {
+  "grade": 0,
+  "reason": "CRM software engineering"
+ },
  "ml-in|j_20cca9caab": {
   "grade": 0,
   "reason": "Market surveillance compliance"
+ },
+ "ml-in|j_2200d30c8b": {
+  "grade": 0,
+  "reason": "Account management"
  },
  "ml-in|j_220f8c4de5": {
   "grade": 0,
@@ -1683,33 +6495,197 @@
   "grade": 0,
   "reason": "Commission referral marketing"
  },
+ "ml-in|j_24c9e3d78e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "ml-in|j_24cc7f9f7a": {
+  "grade": 0,
+  "reason": "SEO role that uses AI tools"
+ },
+ "ml-in|j_251aae03a7": {
+  "grade": 0,
+  "reason": "DevSecOps, not ML"
+ },
+ "ml-in|j_2541f1d8a9": {
+  "grade": 2,
+  "reason": "Technical risk/AI role working with fraud-detection ML models; close to ML work but more client-facing"
+ },
+ "ml-in|j_262b2ebed3": {
+  "grade": 0,
+  "reason": "Customer support role"
+ },
+ "ml-in|j_297cd40725": {
+  "grade": 0,
+  "reason": "Channel sales role"
+ },
+ "ml-in|j_2bb8c095dd": {
+  "grade": 0,
+  "reason": "Product management at a cloud platform; mentions AI only in passing"
+ },
+ "ml-in|j_2d238fb4c9": {
+  "grade": 0,
+  "reason": "Sales agent role"
+ },
+ "ml-in|j_2e0c62b0b5": {
+  "grade": 0,
+  "reason": "Legal counsel role"
+ },
+ "ml-in|j_2e0f94a977": {
+  "grade": 0,
+  "reason": "CRM administration role"
+ },
  "ml-in|j_2e25de5358": {
   "grade": 0,
   "reason": "Hospitality sales coordination"
+ },
+ "ml-in|j_2e3156bac5": {
+  "grade": 0,
+  "reason": "Customer service role"
  },
  "ml-in|j_2e63d2db48": {
   "grade": 1,
   "reason": "Unreal dev for AI training data, not ML engineering"
  },
+ "ml-in|j_2f10cd1478": {
+  "grade": 2,
+  "reason": "ML platform engineering that supports deploying models, but the posting says it is not model development"
+ },
  "ml-in|j_2f48cc1bd4": {
   "grade": 0,
   "reason": "Category manager who reviews AI outputs as a domain expert, not ML engineering"
+ },
+ "ml-in|j_2f8efba89c": {
+  "grade": 0,
+  "reason": "Engineering manager for marketing technology, not ML"
+ },
+ "ml-in|j_2fa3b8ad40": {
+  "grade": 0,
+  "reason": "Data entry role"
+ },
+ "ml-in|j_2fd780d206": {
+  "grade": 0,
+  "reason": "Marketing role"
+ },
+ "ml-in|j_30ff05e838": {
+  "grade": 0,
+  "reason": "Dynamics 365 developer role, not ML"
  },
  "ml-in|j_312b6ce30d": {
   "grade": 1,
   "reason": "Runs data operations for AI training datasets. This is next to ML work, but it is not model engineering"
  },
+ "ml-in|j_313129d002": {
+  "grade": 0,
+  "reason": "Integration engineering role, not ML"
+ },
+ "ml-in|j_313839a788": {
+  "grade": 0,
+  "reason": "Customer support role"
+ },
+ "ml-in|j_32b88ba008": {
+  "grade": 0,
+  "reason": "Marketing automation role"
+ },
+ "ml-in|j_32f807f988": {
+  "grade": 0,
+  "reason": "IT systems engineering, not ML"
+ },
+ "ml-in|j_32fb162365": {
+  "grade": 0,
+  "reason": "Operations manager"
+ },
+ "ml-in|j_3446819ba0": {
+  "grade": 0,
+  "reason": "Competitive intelligence strategy"
+ },
+ "ml-in|j_3541ad5e4c": {
+  "grade": 0,
+  "reason": "RevOps"
+ },
+ "ml-in|j_356794525a": {
+  "grade": 1,
+  "reason": "Writes cryptography benchmark tasks for AI agents; not ML engineering"
+ },
+ "ml-in|j_357ce2fdb8": {
+  "grade": 0,
+  "reason": "Sales role for AI product"
+ },
  "ml-in|j_3692f8dbd8": {
   "grade": 0,
   "reason": "Domain SME evaluating AI outputs, no ML engineering"
+ },
+ "ml-in|j_36949da3e5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "ml-in|j_3868ecf684": {
+  "grade": 0,
+  "reason": "Fullstack web dev"
+ },
+ "ml-in|j_3895e5ddba": {
+  "grade": 0,
+  "reason": "Customer success"
+ },
+ "ml-in|j_38974a759c": {
+  "grade": 0,
+  "reason": "Support supervisor"
+ },
+ "ml-in|j_3ad29bcc39": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "ml-in|j_3aeb89062d": {
+  "grade": 0,
+  "reason": "Recruiter at AI company"
  },
  "ml-in|j_3c393917eb": {
   "grade": 2,
   "reason": "Builds RL environments and evaluates agents in Python. Relevant applied AI engineering, but it supports training rather than building models"
  },
+ "ml-in|j_3ce5a384f3": {
+  "grade": 1,
+  "reason": "Developer experience engineering for AI agent tooling (MCP, CLI); devrel, not building ML models"
+ },
+ "ml-in|j_3dcb594b42": {
+  "grade": 0,
+  "reason": "Backend software engineering; AI only mentioned as context"
+ },
+ "ml-in|j_3dd1eb6b4a": {
+  "grade": 1,
+  "reason": "Backend SDE; team did some LLM catalog enrichment work but ML is secondary"
+ },
+ "ml-in|j_4020d72fd1": {
+  "grade": 0,
+  "reason": "Ad sales"
+ },
  "ml-in|j_420845d314": {
   "grade": 0,
   "reason": "CFD domain expert writing tasks for AI training"
+ },
+ "ml-in|j_4343de41ab": {
+  "grade": 0,
+  "reason": "Security ops"
+ },
+ "ml-in|j_437d8fd29c": {
+  "grade": 0,
+  "reason": "CRM marketing"
+ },
+ "ml-in|j_439efd13af": {
+  "grade": 0,
+  "reason": "Shopify dev"
+ },
+ "ml-in|j_442f1eecd4": {
+  "grade": 0,
+  "reason": "Estimator"
+ },
+ "ml-in|j_453ce88a0d": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "ml-in|j_45c04cc283": {
+  "grade": 0,
+  "reason": "Appointment setter"
  },
  "ml-in|j_46b3b970a8": {
   "grade": 2,
@@ -1719,9 +6695,29 @@
   "grade": 0,
   "reason": "Legal domain expert for AI training"
  },
+ "ml-in|j_46c4c46320": {
+  "grade": 0,
+  "reason": "Sales at AI company"
+ },
+ "ml-in|j_47d22151df": {
+  "grade": 0,
+  "reason": "HR"
+ },
  "ml-in|j_47fd76a571": {
   "grade": 0,
   "reason": "Insurance operations director"
+ },
+ "ml-in|j_4831111755": {
+  "grade": 0,
+  "reason": "Collections"
+ },
+ "ml-in|j_494d0e016f": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "ml-in|j_498f406306": {
+  "grade": 0,
+  "reason": "Estimator"
  },
  "ml-in|j_4999adbc75": {
   "grade": 0,
@@ -1731,13 +6727,45 @@
   "grade": 0,
   "reason": "Crypto product manager"
  },
+ "ml-in|j_4aa2150834": {
+  "grade": 0,
+  "reason": "Fraud ops"
+ },
  "ml-in|j_4aecafafa6": {
   "grade": 1,
   "reason": "Data annotation and curation for AI. This is tangential to ML work"
  },
+ "ml-in|j_4b0ab24952": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
  "ml-in|j_4b0f849926": {
   "grade": 1,
   "reason": "Software engineering tasks and RL environments for model training. The role is SWE, not ML"
+ },
+ "ml-in|j_4db091910e": {
+  "grade": 0,
+  "reason": "DevOps for data platform, not ML"
+ },
+ "ml-in|j_4dc0f95049": {
+  "grade": 0,
+  "reason": "People operations role, not ML."
+ },
+ "ml-in|j_4de6a00d1e": {
+  "grade": 0,
+  "reason": "Marketing design role."
+ },
+ "ml-in|j_4e42c64d8c": {
+  "grade": 1,
+  "reason": "Creative role that uses AI tools to make ads; it doesn't build ML models."
+ },
+ "ml-in|j_4e44126058": {
+  "grade": 0,
+  "reason": "Recruiting role."
+ },
+ "ml-in|j_51ecc2b466": {
+  "grade": 0,
+  "reason": "Accounting role."
  },
  "ml-in|j_52078af5ea": {
   "grade": 1,
@@ -1751,13 +6779,53 @@
   "grade": 0,
   "reason": "CX specialist evaluating AI outputs"
  },
+ "ml-in|j_54155bbc84": {
+  "grade": 0,
+  "reason": "Sales account management."
+ },
+ "ml-in|j_5503bc89f9": {
+  "grade": 0,
+  "reason": "Recruitment supervision."
+ },
+ "ml-in|j_55195306c8": {
+  "grade": 1,
+  "reason": "Backend engineering on a knowledge graph; may support AI features, but it isn't ML engineering."
+ },
  "ml-in|j_558cb9202f": {
   "grade": 0,
   "reason": "Commission-based referral role at an HR company, not ML"
  },
+ "ml-in|j_55df8cbf81": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
  "ml-in|j_55f3a1f640": {
   "grade": 0,
   "reason": "Collecting data for AI training; not engineering"
+ },
+ "ml-in|j_5673da59f4": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "ml-in|j_575235c5c7": {
+  "grade": 0,
+  "reason": "Business development role."
+ },
+ "ml-in|j_58c52c8c15": {
+  "grade": 0,
+  "reason": "Broker dealer operations."
+ },
+ "ml-in|j_5932f5584e": {
+  "grade": 0,
+  "reason": "Communications leadership."
+ },
+ "ml-in|j_596874ce3d": {
+  "grade": 0,
+  "reason": "Enterprise sales."
+ },
+ "ml-in|j_5b96540f05": {
+  "grade": 0,
+  "reason": "Fullstack workflow engineering at an AI-branded company, but the role itself isn't ML."
  },
  "ml-in|j_5e0a1b548b": {
   "grade": 0,
@@ -1771,33 +6839,161 @@
   "grade": 0,
   "reason": "Recording videos at home"
  },
+ "ml-in|j_5e740713de": {
+  "grade": 0,
+  "reason": "Dynamics CRM consulting"
+ },
+ "ml-in|j_5e807e48b6": {
+  "grade": 0,
+  "reason": "Account support"
+ },
+ "ml-in|j_5efbdda2c3": {
+  "grade": 0,
+  "reason": "Marketing"
+ },
+ "ml-in|j_6000c2203e": {
+  "grade": 3,
+  "reason": "Senior ML engineer developing models"
+ },
  "ml-in|j_607cf99871": {
   "grade": 0,
   "reason": "Business development role"
+ },
+ "ml-in|j_60c7bf345d": {
+  "grade": 1,
+  "reason": "AI code evaluation for training data, not ML engineering"
+ },
+ "ml-in|j_61925adcfc": {
+  "grade": 0,
+  "reason": "Paid ads"
+ },
+ "ml-in|j_62611c4ab4": {
+  "grade": 0,
+  "reason": "Risk consulting"
+ },
+ "ml-in|j_62d5f94de8": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "ml-in|j_62f518b2c7": {
+  "grade": 0,
+  "reason": "CRM solutions architect"
+ },
+ "ml-in|j_65a3ec8461": {
+  "grade": 0,
+  "reason": "Community management"
+ },
+ "ml-in|j_65b58ea973": {
+  "grade": 0,
+  "reason": "3D design for AI labs, not engineering"
+ },
+ "ml-in|j_675dcd48ab": {
+  "grade": 0,
+  "reason": "Threat intelligence"
+ },
+ "ml-in|j_6785a57150": {
+  "grade": 0,
+  "reason": "Professional services management"
  },
  "ml-in|j_686f0d4114": {
   "grade": 0,
   "reason": "Community manager role"
  },
+ "ml-in|j_687dd79730": {
+  "grade": 0,
+  "reason": "CRM software engineering"
+ },
  "ml-in|j_691e215f9e": {
   "grade": 1,
   "reason": "AI red teaming and safety testing, not building models"
+ },
+ "ml-in|j_693aa22426": {
+  "grade": 0,
+  "reason": "Vue frontend developer"
  },
  "ml-in|j_6bac92ed55": {
   "grade": 1,
   "reason": "Rating AI model outputs, not engineering"
  },
+ "ml-in|j_6d62106272": {
+  "grade": 0,
+  "reason": "Developer engagement/community role, not ML engineering."
+ },
  "ml-in|j_6e59b15a43": {
   "grade": 0,
   "reason": "HR operations role"
+ },
+ "ml-in|j_6e612b8a9c": {
+  "grade": 0,
+  "reason": "Workforce planning analyst, not ML."
+ },
+ "ml-in|j_6e736b1791": {
+  "grade": 0,
+  "reason": "Data entry clerk."
+ },
+ "ml-in|j_6e7eee8df7": {
+  "grade": 0,
+  "reason": "Customer success engineer for developer tools, not ML."
+ },
+ "ml-in|j_6ea77c5096": {
+  "grade": 0,
+  "reason": "Outbound sales role."
+ },
+ "ml-in|j_6ef0b90f4f": {
+  "grade": 0,
+  "reason": "Product management/marketing for a database product."
+ },
+ "ml-in|j_6fb41c1f9b": {
+  "grade": 0,
+  "reason": "Sales renewals role."
  },
  "ml-in|j_6fd71657dc": {
   "grade": 2,
   "reason": "ML engineering tasks for AI training data; contract work that creates and checks tasks rather than building production models"
  },
+ "ml-in|j_7014075ffc": {
+  "grade": 0,
+  "reason": "Channel sales role."
+ },
  "ml-in|j_71db67eb7a": {
   "grade": 0,
   "reason": "Business development role"
+ },
+ "ml-in|j_71fd0d6146": {
+  "grade": 0,
+  "reason": "QA automation, not ML."
+ },
+ "ml-in|j_727e14c903": {
+  "grade": 0,
+  "reason": "Video editing role."
+ },
+ "ml-in|j_74990eb5d9": {
+  "grade": 0,
+  "reason": "Azure DevOps, not ML."
+ },
+ "ml-in|j_7530667469": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "ml-in|j_761e5b8482": {
+  "grade": 0,
+  "reason": "Product marketing specialist."
+ },
+ "ml-in|j_780c4812a2": {
+  "grade": 1,
+  "reason": "Backend product engineering; mentions an AI-enabled product push, but the role is general software engineering."
+ },
+ "ml-in|j_7842a402cc": {
+  "grade": 1,
+  "reason": "IT engineering that mentions AI and automation; not ML model building."
+ },
+ "ml-in|j_78d296f496": {
+  "grade": 0,
+  "reason": "Business development role at a crypto exchange"
+ },
+ "ml-in|j_78f903d57a": {
+  "grade": 0,
+  "reason": "IT endpoint consulting (Intune)"
  },
  "ml-in|j_7918656ab7": {
   "grade": 0,
@@ -1807,17 +7003,97 @@
   "grade": 0,
   "reason": "Partnerships role"
  },
+ "ml-in|j_79f2ca2f78": {
+  "grade": 0,
+  "reason": "Solutions architect, not ML engineering"
+ },
+ "ml-in|j_79f8be3217": {
+  "grade": 1,
+  "reason": "Analytics engineering with dbt is a nearby data field, but the job doesn't involve ML models"
+ },
+ "ml-in|j_7af72754e0": {
+  "grade": 0,
+  "reason": "Product security engineering"
+ },
+ "ml-in|j_7b0e84d2ee": {
+  "grade": 0,
+  "reason": "Web application security / WAF"
+ },
+ "ml-in|j_7bba233fa8": {
+  "grade": 1,
+  "reason": "Data annotation for AI training; mentions AI but is not engineering work"
+ },
+ "ml-in|j_7c38f3e5f9": {
+  "grade": 0,
+  "reason": "Customer support engineering"
+ },
+ "ml-in|j_7c3e59460c": {
+  "grade": 0,
+  "reason": "Marketing / SEO"
+ },
+ "ml-in|j_7c6444a90e": {
+  "grade": 0,
+  "reason": "Recruiting and scheduling"
+ },
+ "ml-in|j_7d4ae8d6ed": {
+  "grade": 0,
+  "reason": "Compliance internship"
+ },
+ "ml-in|j_7d61749e33": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
  "ml-in|j_7db2e21b93": {
   "grade": 0,
   "reason": "CRM marketing role"
+ },
+ "ml-in|j_7e8a65c012": {
+  "grade": 0,
+  "reason": "Zoho CRM development; brief mention of Zia agents but this is not ML work"
+ },
+ "ml-in|j_7f4b40f62b": {
+  "grade": 0,
+  "reason": "Video editing"
+ },
+ "ml-in|j_7f7b24817a": {
+  "grade": 0,
+  "reason": "Edtech product management"
+ },
+ "ml-in|j_8068844c98": {
+  "grade": 1,
+  "reason": "Product analytics/experimentation data science, not ML model building"
  },
  "ml-in|j_80b1ea5f26": {
   "grade": 0,
   "reason": "Growth marketing role"
  },
+ "ml-in|j_80f3e82570": {
+  "grade": 0,
+  "reason": "Data center mechanical commissioning"
+ },
+ "ml-in|j_81d589edaf": {
+  "grade": 0,
+  "reason": "Marketing role; mentions ML only as subject matter"
+ },
  "ml-in|j_839ad8cbcf": {
   "grade": 0,
   "reason": "SDET for fintech, not ML"
+ },
+ "ml-in|j_83d0710305": {
+  "grade": 0,
+  "reason": "General SaaS software engineering"
+ },
+ "ml-in|j_84f0e7cfdf": {
+  "grade": 0,
+  "reason": "Sales role at AI company"
+ },
+ "ml-in|j_851f6a996d": {
+  "grade": 0,
+  "reason": "Paid ads marketing"
+ },
+ "ml-in|j_85266795cc": {
+  "grade": 0,
+  "reason": "Content editing"
  },
  "ml-in|j_86bcdf41d5": {
   "grade": 0,
@@ -1827,25 +7103,89 @@
   "grade": 1,
   "reason": "Travel domain expert for AI training data, not ML engineering"
  },
+ "ml-in|j_895be090da": {
+  "grade": 0,
+  "reason": "Call center benefits verification"
+ },
+ "ml-in|j_8a53d8ea33": {
+  "grade": 0,
+  "reason": "E-commerce brand management"
+ },
+ "ml-in|j_8ac0503409": {
+  "grade": 0,
+  "reason": "Backend software engineering, no ML"
+ },
+ "ml-in|j_8ac68ea74e": {
+  "grade": 0,
+  "reason": "Business development at crypto exchange"
+ },
+ "ml-in|j_8b1b63dbf3": {
+  "grade": 0,
+  "reason": "Security product management"
+ },
  "ml-in|j_8c4aa0f0a6": {
   "grade": 1,
   "reason": "Data annotation for AI, not engineering"
+ },
+ "ml-in|j_8caf616380": {
+  "grade": 1,
+  "reason": "Frontend/interfaces engineering with some AI integration mention"
+ },
+ "ml-in|j_8cd7a12023": {
+  "grade": 0,
+  "reason": "Pre-sales solution engineering"
+ },
+ "ml-in|j_8cdf3686d8": {
+  "grade": 1,
+  "reason": "Data science with BI/analytics focus; ML modeling not central"
+ },
+ "ml-in|j_8d081ea981": {
+  "grade": 1,
+  "reason": "Backend product engineer; AI-enabled products mentioned but role is general backend"
  },
  "ml-in|j_8d7ea428a4": {
   "grade": 0,
   "reason": "Product design role"
  },
+ "ml-in|j_8d96bfc7e8": {
+  "grade": 0,
+  "reason": "Creative director"
+ },
  "ml-in|j_8daa145b01": {
   "grade": 0,
   "reason": "Growth/acquisition role"
+ },
+ "ml-in|j_8e0c1c4367": {
+  "grade": 0,
+  "reason": "Sales"
  },
  "ml-in|j_8e439fbcc3": {
   "grade": 0,
   "reason": "Full stack intern, no ML"
  },
+ "ml-in|j_8ebe8d2abd": {
+  "grade": 0,
+  "reason": "General software engineer"
+ },
+ "ml-in|j_8fd9ef6c0e": {
+  "grade": 0,
+  "reason": "Front end dev"
+ },
+ "ml-in|j_90449725cb": {
+  "grade": 0,
+  "reason": "ServiceNow dev"
+ },
  "ml-in|j_9207e7c871": {
   "grade": 1,
   "reason": "Designs AI agent benchmark tasks; operations expert, not ML engineer"
+ },
+ "ml-in|j_92143a33b7": {
+  "grade": 1,
+  "reason": "DevOps at AI company; not ML engineering"
+ },
+ "ml-in|j_92c6dbfc6c": {
+  "grade": 0,
+  "reason": "Marketing"
  },
  "ml-in|j_936f971f7a": {
   "grade": 0,
@@ -1855,6 +7195,14 @@
   "grade": 0,
   "reason": "Customer success at AI company"
  },
+ "ml-in|j_9448822031": {
+  "grade": 0,
+  "reason": "Sales enablement"
+ },
+ "ml-in|j_95b9088bf2": {
+  "grade": 0,
+  "reason": "Salesforce dev"
+ },
  "ml-in|j_96e352fd8a": {
   "grade": 1,
   "reason": "Attorney providing AI training feedback"
@@ -1862,6 +7210,30 @@
  "ml-in|j_9a7f3e981c": {
   "grade": 1,
   "reason": "Legal expert for AI training data"
+ },
+ "ml-in|j_9afc9cd9aa": {
+  "grade": 0,
+  "reason": "Product owner"
+ },
+ "ml-in|j_9b7028553d": {
+  "grade": 0,
+  "reason": "Sales role for AI security"
+ },
+ "ml-in|j_9b8b59dfb6": {
+  "grade": 0,
+  "reason": "Supply chain"
+ },
+ "ml-in|j_9ca310232e": {
+  "grade": 0,
+  "reason": "NOC engineer"
+ },
+ "ml-in|j_9db3d44824": {
+  "grade": 0,
+  "reason": "Business analyst"
+ },
+ "ml-in|j_9de6ec0ed8": {
+  "grade": 0,
+  "reason": "Category GM business role"
  },
  "ml-in|j_9ea8b434a2": {
   "grade": 0,
@@ -1871,6 +7243,14 @@
   "grade": 1,
   "reason": "Mechanical engineering tasks for AI training, not ML engineering"
  },
+ "ml-in|j_9f4883a3f5": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "ml-in|j_9ff77dfd10": {
+  "grade": 0,
+  "reason": "Renewals sales role"
+ },
  "ml-in|j_a09565c2f6": {
   "grade": 0,
   "reason": "Mobile Flutter development, not ML."
@@ -1878,6 +7258,10 @@
  "ml-in|j_a1759899b3": {
   "grade": 2,
   "reason": "Applied AI engineering building an AI marketing system using APIs; relevant, but leans creative/integration work."
+ },
+ "ml-in|j_a1798af89a": {
+  "grade": 1,
+  "reason": "AI data language review, not ML engineering"
  },
  "ml-in|j_a1fbec0fb3": {
   "grade": 1,
@@ -1887,33 +7271,177 @@
   "grade": 1,
   "reason": "Domain-expert input for AI training; not ML engineering."
  },
+ "ml-in|j_a2b1ad29c5": {
+  "grade": 0,
+  "reason": "Account management"
+ },
+ "ml-in|j_a309c2c156": {
+  "grade": 0,
+  "reason": "Law enforcement liaison"
+ },
+ "ml-in|j_a33f48882c": {
+  "grade": 0,
+  "reason": "Business continuity risk role"
+ },
+ "ml-in|j_a456720016": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "ml-in|j_a4b3c1dbb7": {
+  "grade": 0,
+  "reason": "Software engineering interviewer, not ML"
+ },
+ "ml-in|j_a60733eace": {
+  "grade": 0,
+  "reason": "Help desk IT"
+ },
+ "ml-in|j_a636c601e9": {
+  "grade": 0,
+  "reason": "Generic talent community"
+ },
+ "ml-in|j_a65920719d": {
+  "grade": 0,
+  "reason": "Manufacturing procurement"
+ },
  "ml-in|j_a68d3b62e6": {
   "grade": 1,
   "reason": "Mechanical engineering tasks for AI training data; not ML engineering."
+ },
+ "ml-in|j_a7278fe0e8": {
+  "grade": 0,
+  "reason": "Broker dealer operations"
+ },
+ "ml-in|j_a7411b7bb3": {
+  "grade": 2,
+  "reason": "Enterprise architect focused on ML/GenAI adoption on AWS; adjacent to ML engineering"
+ },
+ "ml-in|j_a742af0ff9": {
+  "grade": 0,
+  "reason": "Interior design"
+ },
+ "ml-in|j_a75c6606ea": {
+  "grade": 0,
+  "reason": "Sales solutions engineering role, not ML engineering"
+ },
+ "ml-in|j_a794d96b60": {
+  "grade": 0,
+  "reason": "Backend/platform engineering, no ML focus"
+ },
+ "ml-in|j_a8ca244cd6": {
+  "grade": 0,
+  "reason": "Affiliate marketing director"
+ },
+ "ml-in|j_a9b218e167": {
+  "grade": 0,
+  "reason": "Design systems role"
+ },
+ "ml-in|j_aa25696103": {
+  "grade": 0,
+  "reason": "Creative/web design"
+ },
+ "ml-in|j_ab3979c587": {
+  "grade": 0,
+  "reason": "Training of customer service agents, not ML training"
  },
  "ml-in|j_abdc39d3d8": {
   "grade": 1,
   "reason": "AI safety testing and red-teaming; adjacent to ML but not building models."
  },
+ "ml-in|j_abe594ff2f": {
+  "grade": 0,
+  "reason": "Head of design; AI mention is incidental"
+ },
+ "ml-in|j_ac57eed7e2": {
+  "grade": 0,
+  "reason": "Marketing assistant"
+ },
+ "ml-in|j_acdbc5372c": {
+  "grade": 0,
+  "reason": "Channel sales role"
+ },
+ "ml-in|j_acded89dc3": {
+  "grade": 0,
+  "reason": "Paid marketing"
+ },
  "ml-in|j_adc9c6c53a": {
   "grade": 1,
   "reason": "Data annotation work; tangential to ML."
+ },
+ "ml-in|j_ae16e50b99": {
+  "grade": 1,
+  "reason": "Generic freelance software development; may include AI projects but not ML-specific"
+ },
+ "ml-in|j_aec0db69b0": {
+  "grade": 0,
+  "reason": "Sales account executive"
+ },
+ "ml-in|j_af59bf1718": {
+  "grade": 0,
+  "reason": "QA/DevOps for ERP systems"
+ },
+ "ml-in|j_af7b16bbca": {
+  "grade": 0,
+  "reason": "Game tester"
  },
  "ml-in|j_b030f1fd2c": {
   "grade": 0,
   "reason": "Paid media marketing role."
  },
+ "ml-in|j_b0318283d6": {
+  "grade": 1,
+  "reason": "Sales role for AI security products; mentions AI but not ML engineering"
+ },
+ "ml-in|j_b0d5ca9300": {
+  "grade": 0,
+  "reason": "Sales role"
+ },
+ "ml-in|j_b222a09830": {
+  "grade": 2,
+  "reason": "Engineering manager for agentic systems/AI optimization; adjacent applied AI engineering leadership"
+ },
+ "ml-in|j_b34d21f8e6": {
+  "grade": 0,
+  "reason": "Customer support agent"
+ },
  "ml-in|j_b39b7d629c": {
   "grade": 0,
   "reason": "Customer service role."
+ },
+ "ml-in|j_b42ae13d15": {
+  "grade": 0,
+  "reason": "Content editorial role using AI tools"
+ },
+ "ml-in|j_b4fdaa76c7": {
+  "grade": 1,
+  "reason": "Data engineering, adjacent to ML but not ML engineering"
  },
  "ml-in|j_b6e1d5f353": {
   "grade": 1,
   "reason": "STEM expert producing AI training data; not ML engineering."
  },
+ "ml-in|j_b8f04812cd": {
+  "grade": 0,
+  "reason": "Technical support"
+ },
  "ml-in|j_b93fb15aa2": {
   "grade": 1,
   "reason": "Writing and evaluation for AI training; tangential."
+ },
+ "ml-in|j_bd9ee4f522": {
+  "grade": 0,
+  "reason": "Website management"
+ },
+ "ml-in|j_bdc41ba16c": {
+  "grade": 0,
+  "reason": "Accounts receivable"
+ },
+ "ml-in|j_bedf622a68": {
+  "grade": 0,
+  "reason": "Magento development"
+ },
+ "ml-in|j_c020057ebf": {
+  "grade": 1,
+  "reason": "Creating AI agent benchmarks from CAD tasks; tangential to ML"
  },
  "ml-in|j_c14e307e95": {
   "grade": 0,
@@ -1923,25 +7451,145 @@
   "grade": 1,
   "reason": "Coding-heavy STEM work for AI training data; not ML engineering."
  },
+ "ml-in|j_c201d72e59": {
+  "grade": 0,
+  "reason": "Customer support"
+ },
+ "ml-in|j_c2d27068a0": {
+  "grade": 0,
+  "reason": "SQL query planner engineering"
+ },
+ "ml-in|j_c39a116b01": {
+  "grade": 0,
+  "reason": "Sales"
+ },
+ "ml-in|j_c39d6842ba": {
+  "grade": 0,
+  "reason": "Alliances/partnerships"
+ },
+ "ml-in|j_c3c6044abc": {
+  "grade": 0,
+  "reason": "Interview coordination"
+ },
  "ml-in|j_c3eb1737e5": {
   "grade": 1,
   "reason": "Legal expert input for AI training; tangential."
+ },
+ "ml-in|j_c44a264c51": {
+  "grade": 1,
+  "reason": "Support engineering role. It involves managing AI support agents, but the job is customer support."
+ },
+ "ml-in|j_c490e038de": {
+  "grade": 0,
+  "reason": "Podcast growth role, not ML."
+ },
+ "ml-in|j_c61dae077c": {
+  "grade": 0,
+  "reason": "CRM IT consulting role."
  },
  "ml-in|j_c65608f773": {
   "grade": 1,
   "reason": "Hardware expert creating engineering tasks for AI evaluation; tangential."
  },
+ "ml-in|j_c673e84c6a": {
+  "grade": 1,
+  "reason": "Data engineering role. It's next to ML but isn't ML engineering."
+ },
+ "ml-in|j_c71909c5a8": {
+  "grade": 3,
+  "reason": "Senior AI/ML engineer working on production AI systems."
+ },
  "ml-in|j_c76ecce7c8": {
   "grade": 1,
   "reason": "AI output rater, not ML engineering"
+ },
+ "ml-in|j_c8b88b1b89": {
+  "grade": 0,
+  "reason": "Social media role."
+ },
+ "ml-in|j_c8f4e2a8fc": {
+  "grade": 0,
+  "reason": "Product-led growth director role."
+ },
+ "ml-in|j_c90dd9eac6": {
+  "grade": 0,
+  "reason": "Growth marketing role."
+ },
+ "ml-in|j_c9effb313c": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "ml-in|j_cbbd6810be": {
+  "grade": 0,
+  "reason": "Tax role."
+ },
+ "ml-in|j_cc57ff2e1d": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "ml-in|j_cd35df7ef9": {
+  "grade": 0,
+  "reason": "Marketing role."
  },
  "ml-in|j_cd9685acf8": {
   "grade": 0,
   "reason": "Android engineering"
  },
+ "ml-in|j_cfc2df0fc2": {
+  "grade": 0,
+  "reason": "Sales development role."
+ },
+ "ml-in|j_d064a5f353": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
  "ml-in|j_d22202efbc": {
   "grade": 0,
   "reason": "General junior developer"
+ },
+ "ml-in|j_d3b330485d": {
+  "grade": 0,
+  "reason": "General software engineering role with no visible ML focus."
+ },
+ "ml-in|j_d3b8a38b09": {
+  "grade": 0,
+  "reason": "UX research role, not ML engineering"
+ },
+ "ml-in|j_d42235dd43": {
+  "grade": 0,
+  "reason": "Executive assistant/project manager in construction"
+ },
+ "ml-in|j_d458dff10e": {
+  "grade": 0,
+  "reason": "Inside sales role"
+ },
+ "ml-in|j_d59ec6a865": {
+  "grade": 0,
+  "reason": "Lending manager in mortgage operations"
+ },
+ "ml-in|j_d5ff7f303d": {
+  "grade": 1,
+  "reason": "Full-stack .NET role at an 'AI-first' company; building ML models isn't the focus"
+ },
+ "ml-in|j_d68bc5bd3d": {
+  "grade": 0,
+  "reason": "Database solutions engineer"
+ },
+ "ml-in|j_d6b5a7f901": {
+  "grade": 0,
+  "reason": "Lead generation/cold calling lead that uses AI tools"
+ },
+ "ml-in|j_d795bd7dc9": {
+  "grade": 0,
+  "reason": "Cloud/SaaS systems administrator"
+ },
+ "ml-in|j_d8efce35ba": {
+  "grade": 0,
+  "reason": "Corporate security engineer"
+ },
+ "ml-in|j_da40487bc4": {
+  "grade": 0,
+  "reason": "Customer success engineer for telemetry platform"
  },
  "ml-in|j_db37e380bb": {
   "grade": 0,
@@ -1951,41 +7599,213 @@
   "grade": 1,
   "reason": "Legal expert for AI training data"
  },
+ "ml-in|j_dbdb5db04f": {
+  "grade": 1,
+  "reason": "Product engineer on CI/CD products for AI coding agents; touches AI but isn't ML engineering"
+ },
+ "ml-in|j_dbfcee6386": {
+  "grade": 0,
+  "reason": "Salesforce systems administrator"
+ },
+ "ml-in|j_dcfcdb213c": {
+  "grade": 0,
+  "reason": "Frontend engineer for ads"
+ },
+ "ml-in|j_df0d5501af": {
+  "grade": 0,
+  "reason": "Customer service role"
+ },
+ "ml-in|j_df2d222fb8": {
+  "grade": 0,
+  "reason": "Resource management associate"
+ },
+ "ml-in|j_e1b10744df": {
+  "grade": 0,
+  "reason": "Customer success, not ML"
+ },
  "ml-in|j_e21269d363": {
   "grade": 2,
   "reason": "ML engineering tasks for AI training project; hands-on ML work but task-creation contract"
+ },
+ "ml-in|j_e32c4ef54b": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "ml-in|j_e3f2474bc0": {
+  "grade": 0,
+  "reason": "Internal audit"
+ },
+ "ml-in|j_e45e131f56": {
+  "grade": 0,
+  "reason": "Backend software engineering, no ML"
+ },
+ "ml-in|j_e515e3a56b": {
+  "grade": 0,
+  "reason": "Partnerships coordinator"
+ },
+ "ml-in|j_e571a4187e": {
+  "grade": 0,
+  "reason": "Legal role"
+ },
+ "ml-in|j_e5eb993038": {
+  "grade": 0,
+  "reason": "Sales role"
  },
  "ml-in|j_e64759b65e": {
   "grade": 0,
   "reason": "Outbound calling"
  },
+ "ml-in|j_e6f9f86a92": {
+  "grade": 0,
+  "reason": "Fraud/identity consulting"
+ },
+ "ml-in|j_e760a84c6b": {
+  "grade": 0,
+  "reason": "Video editing"
+ },
+ "ml-in|j_e7a7646f30": {
+  "grade": 0,
+  "reason": "Customer success"
+ },
+ "ml-in|j_e7ff1ba326": {
+  "grade": 0,
+  "reason": "Sales enablement at AI company"
+ },
+ "ml-in|j_e90203fce9": {
+  "grade": 0,
+  "reason": "Customer success at telemetry company"
+ },
+ "ml-in|j_e97a4caade": {
+  "grade": 0,
+  "reason": "Graphic design"
+ },
+ "ml-in|j_eb20d4ca7c": {
+  "grade": 1,
+  "reason": "AI data annotation/review, not engineering ML models"
+ },
  "ml-in|j_eb3621145f": {
   "grade": 1,
   "reason": "Data annotation for AI"
+ },
+ "ml-in|j_ec5550f26a": {
+  "grade": 0,
+  "reason": "Customer success"
+ },
+ "ml-in|j_ec7e2f3139": {
+  "grade": 1,
+  "reason": "Engineering manager at a company focused on AI agents. This is a management role, not hands-on ML."
+ },
+ "ml-in|j_ec92a81f1f": {
+  "grade": 3,
+  "reason": "Applied AI engineer who owns document intelligence pipelines from start to finish."
+ },
+ "ml-in|j_ed3edaf00f": {
+  "grade": 0,
+  "reason": "Actuarial leadership role."
+ },
+ "ml-in|j_ed662701a1": {
+  "grade": 0,
+  "reason": "BI/Power BI developer."
  },
  "ml-in|j_edd15a47cd": {
   "grade": 0,
   "reason": "Marketing"
  },
+ "ml-in|j_ee3b6dc0e3": {
+  "grade": 1,
+  "reason": "Engineering leadership role. It mentions agentic coding, but the job isn't ML engineering."
+ },
  "ml-in|j_ee871fa31b": {
   "grade": 2,
   "reason": "ML inference expertise used to design benchmark tasks, not deploying models directly"
+ },
+ "ml-in|j_ef13e6eb42": {
+  "grade": 0,
+  "reason": "Annotation adjudication work, not engineering."
+ },
+ "ml-in|j_efcfaae732": {
+  "grade": 0,
+  "reason": "Data analytics/platform engineering."
  },
  "ml-in|j_f0ac351b71": {
   "grade": 0,
   "reason": "Lead generation"
  },
+ "ml-in|j_f0ddd7585e": {
+  "grade": 0,
+  "reason": "Marketing role."
+ },
+ "ml-in|j_f128e585ea": {
+  "grade": 0,
+  "reason": "Recruiting and social media role."
+ },
  "ml-in|j_f1938987b3": {
   "grade": 2,
   "reason": "Full-stack at AI company building agents; applied AI adjacent"
+ },
+ "ml-in|j_f20eb8effd": {
+  "grade": 0,
+  "reason": "Database control plane engineering."
+ },
+ "ml-in|j_f230635d1b": {
+  "grade": 0,
+  "reason": "Cloud infrastructure engineering."
+ },
+ "ml-in|j_f24233f2e0": {
+  "grade": 0,
+  "reason": "Sales role."
+ },
+ "ml-in|j_f310119d05": {
+  "grade": 1,
+  "reason": "Data platform architect. AI/ML enablement is mentioned only as a supporting goal."
+ },
+ "ml-in|j_f3aa34e23b": {
+  "grade": 0,
+  "reason": "Sales role."
  },
  "ml-in|j_f559da8c33": {
   "grade": 0,
   "reason": "Ads internship"
  },
+ "ml-in|j_f628e53e42": {
+  "grade": 0,
+  "reason": "Data engineering/ETL with no ML focus."
+ },
+ "ml-in|j_f68a3597ad": {
+  "grade": 0,
+  "reason": "Account management role"
+ },
+ "ml-in|j_f6b5f69e7f": {
+  "grade": 2,
+  "reason": "Data engineering supporting ML initiatives; adjacent"
+ },
+ "ml-in|j_f6ef333366": {
+  "grade": 1,
+  "reason": "Search evaluation/rating for AI; not engineering"
+ },
  "ml-in|j_f7cfd57f2f": {
   "grade": 0,
   "reason": "Blockchain Go developer"
+ },
+ "ml-in|j_f8716052c6": {
+  "grade": 0,
+  "reason": "Recruiter at AI company"
+ },
+ "ml-in|j_fa401b71fb": {
+  "grade": 0,
+  "reason": "People ops"
+ },
+ "ml-in|j_fa8932c65f": {
+  "grade": 0,
+  "reason": "Game design contract work for AI labs"
+ },
+ "ml-in|j_faba38b48d": {
+  "grade": 0,
+  "reason": "Customer service"
+ },
+ "ml-in|j_faf3850192": {
+  "grade": 0,
+  "reason": "Business development"
  },
  "ml-in|j_fc4c84de99": {
   "grade": 3,
@@ -1994,5 +7814,25 @@
  "ml-in|j_fd47b687ce": {
   "grade": 0,
   "reason": "Social media marketing role; using AI content tools is not ML engineering."
+ },
+ "ml-in|j_fda6ebe3fb": {
+  "grade": 3,
+  "reason": "AI/ML engineer building and deploying LLM systems"
+ },
+ "ml-in|j_fe0a19cf83": {
+  "grade": 0,
+  "reason": "Category management"
+ },
+ "ml-in|j_fe3f9272a1": {
+  "grade": 0,
+  "reason": "Marketing strategy for AI search"
+ },
+ "ml-in|j_feb3cc8851": {
+  "grade": 0,
+  "reason": "Business development"
+ },
+ "ml-in|j_ff3fecc180": {
+  "grade": 0,
+  "reason": "Technical program manager for onboarding"
  }
 }
