@@ -162,22 +162,22 @@ def score():
     data = load(os.path.join(HERE, "items.json"), {})
     verdicts = load(os.path.join(HERE, "verdicts.json"), {})
     from collections import Counter
-    right, seen = Counter(), Counter()
+    right, seen, open_ = Counter(), Counter(), Counter()
     for it in data["items"]:
         v = verdicts.get(it["id"], {})
         for o in it["options"]:
             mark = v.get("marks", {}).get(o["key"])
-            if mark not in ("right", "wrong"):
-                continue
             for s in o["sources"]:
                 seen[(it["kind"], s)] += 1
                 right[(it["kind"], s)] += mark == "right"
+                # an answer left unmarked is not counted right or wrong, and is shown
+                open_[(it["kind"], s)] += mark not in ("right", "wrong")
     for kind in ("pay", "role"):
         done = sum(1 for it in data["items"] if it["kind"] == kind and verdicts.get(it["id"], {}).get("done"))
-        print(f"{kind}: {done} reviewed")
+        print(f"{kind}: {done} fully marked")
         for (k, s), n in sorted(seen.items()):
             if k == kind:
-                print(f"  {s:16} right {right[(k, s)]}/{n}")
+                print(f"  {s:16} right {right[(k, s)]}/{n}" + (f"  ({open_[(k, s)]} unmarked)" if open_[(k, s)] else ""))
 
 
 if __name__ == "__main__":

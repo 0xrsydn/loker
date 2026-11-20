@@ -131,6 +131,27 @@ Failures to work on next round (then draw `holdout4`):
   Peso/month" (words between the figure and its period); "Pay Range
   $68,000—$70,000 USD" in one posting, to look into.
 
+### Rules v2.1: one range stated twice
+
+The hand-checked golden set (`eval/golden`) showed a posting stating
+"$45,000 - $55,000" under "Compensation" and again under "Salary Range",
+read as two ranges labelled "### Compensation" and "**Location:** Remote".
+Now a pay heading is not a label, an unlabelled range that repeats a
+labelled one is dropped, and ranges that all share figures are one. Across
+the snapshot 34 jobs change and no figure does. The scorer matched ranges
+many to one, so each copy of a duplicate counted as right; it now matches
+one to one. Rescored (no new holdout; these sets were read before):
+
+| | base precision | base recall | jobs exact | wrong figure |
+|---|---|---|---|---|
+| tuning sample, v2 rescored one to one | 97% (163/168) | 96% | 94% | 4 |
+| tuning sample, v2.1 | 100% (163/163) | 96% | 95% | 0 |
+| `holdout3`, v2 rescored one to one | 98% (81/83) | 94% | 92% | 2 |
+| `holdout3`, v2.1 | 99% (81/82) | 94% | 94% | 1 |
+
+So v2's logged precision (100% tuning, 99% `holdout3`) counted duplicates
+as right; one to one it was 97% and 98%.
+
 ## What was wrong, and what is still unverified
 
 Errors found by the audit, all corrected above:

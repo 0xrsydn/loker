@@ -224,10 +224,15 @@ def same_money(a, b):
 
 
 def compare(gold, got):
-    """Base ranges matched, extras by kind (with figures where both give one)."""
+    """Base ranges matched one to one (a range given twice matches once),
+    extras by kind only: their figures are not compared."""
     gb, pb = gold.get("base", []), got.get("base", []) if got else []
-    right = sum(any(same_money(p, g) for g in gb) for p in pb)
-    found = sum(any(same_money(p, g) for p in pb) for g in gb)
+    free = list(gb)
+    for p in pb:
+        g = next((g for g in free if same_money(p, g)), None)
+        if g is not None:
+            free.remove(g)
+    right = found = len(gb) - len(free)
     gk = {e["kind"]: e for e in gold.get("extras", [])}
     pk = {e["kind"]: e for e in (got.get("extras", []) if got else [])}
     return {"gold": len(gb), "pred": len(pb), "right": right, "found": found,
