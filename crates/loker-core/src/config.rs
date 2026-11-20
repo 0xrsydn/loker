@@ -133,6 +133,50 @@ pub fn template(country: Option<&str>) -> String {
         )
 }
 
+/// One configured source, checked: `error` says why its id isn't a source
+/// this build has.
+#[derive(Debug, Clone)]
+pub struct SourceStatus {
+    pub id: String,
+    pub enabled: bool,
+    pub error: Option<String>,
+}
+
+impl Config {
+    /// Every source in file order, with `known` (the adapters' check of an id).
+    pub fn check(&self, known: &dyn Fn(&str) -> Result<(), String>) -> Vec<SourceStatus> {
+        self.sources
+            .iter()
+            .map(|s| SourceStatus {
+                id: s.id.clone(),
+                enabled: s.enabled,
+                error: known(&s.id).err(),
+            })
+            .collect()
+    }
+}
+
+/// Said when the starter sources stand in for a missing config.toml.
+pub const STARTER_NOTICE: &str = "no config.toml: using the starter sources (Himalayas, Jobicy, Remote OK, We Work Remotely); `loker config init --country <ISO code>` writes one you can edit";
+
+/// Write a starting config.toml for a viewer in `country` (a name or ISO
+/// code); refuses to overwrite one. Returns its path.
+pub fn init(home: &Path, country: Option<&str>) -> anyhow::Result<PathBuf> {
+    let path = path(home);
+    if path.exists() {
+        bail!("{} already exists", path.display());
+    }
+    let code = country
+        .map(|c| {
+            crate::country::to_alpha2(c)
+                .ok_or_else(|| anyhow::anyhow!("unknown country `{c}` (use an ISO code, e.g. ID)"))
+        })
+        .transpose()?;
+    std::fs::create_dir_all(home)?;
+    std::fs::write(&path, template(code))?;
+    Ok(path)
+}
+
 /// The starter sources, for `loker ingest --all` before a config.toml exists.
 pub fn starter() -> Config {
     toml::from_str(TEMPLATE).expect("the template parses")

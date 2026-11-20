@@ -776,6 +776,241 @@ pub struct DoctorCheck {
     pub fix: Option<String>,
 }
 
+impl DoctorCheck {
+    fn new(
+        name: impl Into<String>,
+        status: CheckStatus,
+        detail: String,
+        fix: Option<String>,
+    ) -> Self {
+        DoctorCheck {
+            name: name.into(),
+            status,
+            detail,
+            fix: (status != CheckStatus::Pass).then_some(fix).flatten(),
+        }
+    }
+}
+
+impl DoctorReport {
+    pub fn new(checks: Vec<DoctorCheck>) -> Self {
+        DoctorReport {
+            contract_version: CONTRACT_VERSION,
+            ok: checks.iter().all(|c| c.status != CheckStatus::Fail),
+            checks,
+        }
+    }
+
+    /// Add checks (e.g. [`live_checks`]) and recompute `ok`.
+    pub fn extend(self, more: Vec<DoctorCheck>) -> Self {
+        Self::new(self.checks.into_iter().chain(more).collect())
+    }
+}
+
+/// `loker doctor`'s offline checks: home, config, database, each enabled
+/// source's last fetch, sources stored but not enabled, provider keys (set or
+/// not, never their values).
+///
+/// `config` is config.toml as loaded (`Ok(None)`: none yet, so the starter
+/// sources apply). `known_source` says why an id isn't a source this build
+/// has; the list of adapters lives outside core. Live checks are the
+/// caller's: run `verify` and add [`live_checks`].
+pub async fn doctor(
+    store: &Store,
+    home: &std::path::Path,
+    config: std::result::Result<Option<crate::config::Config>, String>,
+    known_source: &dyn Fn(&str) -> std::result::Result<(), String>,
+) -> Result<DoctorReport> {
+    use CheckStatus::{Fail, Pass, Warn};
+    let mut checks = vec![DoctorCheck::new(
+        "home",
+        Pass,
+        home.display().to_string(),
+        None,
+    )];
+    let config = match config {
+        Ok(Some(c)) => {
+            let bad: Vec<String> = c
+                .sources
+                .iter()
+                .filter_map(|s| known_source(&s.id).err())
+                .collect();
+            let n = c.enabled().count();
+            checks.push(if !bad.is_empty() {
+                DoctorCheck::new(
+                    "config",
+                    Fail,
+                    bad.join("; "),
+                    Some("fix the source ids in config.toml".into()),
+                )
+            } else if n == 0 {
+                DoctorCheck::new(
+                    "config",
+                    Warn,
+                    "no enabled source".into(),
+                    Some("enable a source in config.toml".into()),
+                )
+            } else {
+                DoctorCheck::new("config", Pass, format!("{n} enabled source(s)"), None)
+            });
+            c
+        }
+        Ok(None) => {
+            checks.push(DoctorCheck::new(
+                "config",
+                Warn,
+                "no config.toml: `loker ingest --all` uses the starter sources".into(),
+                Some("loker config init --country <ISO code>".into()),
+            ));
+            crate::config::starter()
+        }
+        Err(e) => {
+            checks.push(DoctorCheck::new(
+                "config",
+                Fail,
+                e,
+                Some("fix config.toml (`loker config check`)".into()),
+            ));
+            crate::config::starter()
+        }
+    };
+
+    let total = stats(store).await?.total;
+    let size = std::fs::metadata(crate::home::db_path(home))
+        .map(|m| m.len())
+        .unwrap_or(0);
+    checks.push(if total == 0 {
+        DoctorCheck::new(
+            "database",
+            Warn,
+            "no jobs stored yet".into(),
+            Some("loker ingest --all".into()),
+        )
+    } else {
+        DoctorCheck::new(
+            "database",
+            Pass,
+            format!("{total} active jobs, {:.0} MB", size as f64 / 1e6),
+            None,
+        )
+    });
+
+    // Each enabled source's last fetch: never, failed, or long ago.
+    let eval = sources_eval(store).await?;
+    let now = Utc::now();
+    let enabled: Vec<&str> = config.enabled().map(|s| s.id.as_str()).collect();
+    for id in &enabled {
+        let name = format!("source {id}");
+        let found = eval.sources.iter().find(|s| s.source == *id);
+        checks.push(match found.and_then(|s| s.last_run.as_ref()) {
+            None => DoctorCheck::new(
+                name,
+                Warn,
+                "never fetched".into(),
+                Some(format!("loker ingest {id}")),
+            ),
+            Some(r) if r.status != "completed" => DoctorCheck::new(
+                name,
+                Fail,
+                format!(
+                    "last fetch failed ({}): {}",
+                    r.at,
+                    r.error.as_deref().unwrap_or("no error recorded")
+                ),
+                Some(format!("loker verify {id}")),
+            ),
+            Some(r) => {
+                let hours = DateTime::parse_from_rfc3339(&r.at)
+                    .map(|t| (now - t.to_utc()).num_minutes() as f64 / 60.0)
+                    .unwrap_or(f64::INFINITY);
+                let jobs = found.map_or(0, |s| s.jobs);
+                if hours > STALE_HOURS {
+                    DoctorCheck::new(
+                        name,
+                        Warn,
+                        format!("last fetched {hours:.0} h ago; {jobs} live listings"),
+                        Some("loker ingest --all, or the timer in contrib/systemd".into()),
+                    )
+                } else {
+                    DoctorCheck::new(
+                        name,
+                        Pass,
+                        format!("fetched {hours:.1} h ago; {jobs} live listings"),
+                        None,
+                    )
+                }
+            }
+        });
+    }
+    for s in eval
+        .sources
+        .iter()
+        .filter(|s| s.jobs > 0 && !enabled.contains(&s.source.as_str()))
+    {
+        checks.push(DoctorCheck::new(
+            format!("source {}", s.source),
+            Warn,
+            format!(
+                "{} live listings from a source not enabled; they close after 30 days unseen",
+                s.jobs
+            ),
+            Some("enable it in config.toml, or let them close".into()),
+        ));
+    }
+
+    // Optional providers: whether the key is set, never its value.
+    if config.providers.jev.as_ref().is_some_and(|j| j.enabled) {
+        checks.push(
+            if std::env::var("OPENROUTER_API_KEY").is_ok_and(|k| !k.is_empty()) {
+                DoctorCheck::new(
+                    "provider jev",
+                    Pass,
+                    "OPENROUTER_API_KEY is set".into(),
+                    None,
+                )
+            } else {
+                DoctorCheck::new(
+                    "provider jev",
+                    Warn,
+                    "[providers.jev] is on but OPENROUTER_API_KEY isn't set: roles stay rules-only"
+                        .into(),
+                    Some("set OPENROUTER_API_KEY in the environment loker runs in".into()),
+                )
+            },
+        );
+    }
+    Ok(DoctorReport::new(checks))
+}
+
+/// A source not fetched for longer than this is worth a warning.
+const STALE_HOURS: f64 = 24.0;
+
+/// `verify` results as doctor checks, for `doctor --live`.
+pub fn live_checks(r: &VerifyReport) -> Vec<DoctorCheck> {
+    r.sources
+        .iter()
+        .map(|s| {
+            let failed: Vec<String> = s
+                .checks
+                .iter()
+                .filter(|c| c.status != CheckStatus::Pass)
+                .map(|c| format!("{}: {}", c.name, c.detail))
+                .collect();
+            let detail = if failed.is_empty() {
+                format!("live fetch ok, {} items", s.fetched)
+            } else {
+                failed.join("; ")
+            };
+            DoctorCheck::new(
+                format!("live {}", s.source),
+                s.status,
+                detail,
+                Some(format!("loker verify {}", s.source)),
+            )
+        })
+        .collect()
+}
+
 // ---------- ingest ----------
 // The params live here so the contract is in one place; the operation itself
 // lives in `loker-sources`, which owns the adapters.
@@ -811,6 +1046,9 @@ pub struct IngestAllReport {
     /// Role classification by a model, when `[providers.jev]` is configured.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub roles: Option<RoleEnrichReport>,
+    /// Set when there was no config.toml and the starter sources were used.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notice: Option<String>,
 }
 
 /// One run of role classification by a model (`loker roles enrich`).

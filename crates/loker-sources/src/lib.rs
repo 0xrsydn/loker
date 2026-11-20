@@ -367,6 +367,7 @@ pub async fn ingest_all(
         ok: outcomes.iter().all(|o| o.error.is_none()),
         sources: outcomes,
         roles: None,
+        notice: None,
     })
 }
 

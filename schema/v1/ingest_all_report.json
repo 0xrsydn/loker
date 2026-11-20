@@ -167,6 +167,13 @@
       "minimum": 0,
       "type": "integer"
     },
+    "notice": {
+      "description": "Set when there was no config.toml and the starter sources were used.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "ok": {
       "description": "Every source ingested without error.",
       "type": "boolean"

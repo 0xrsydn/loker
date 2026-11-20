@@ -199,12 +199,10 @@ async fn main() -> anyhow::Result<()> {
         Command::Ingest {
             all: true, json, ..
         } => {
-            if !loker_core::config::path(app.home()).exists() {
-                eprintln!(
-                    "no config.toml: using the starter sources (Himalayas, Jobicy, Remote OK, We Work Remotely); `loker config init --country <ISO code>` writes one you can edit"
-                );
-            }
             let report = app.ingest_all().await?;
+            if let Some(n) = &report.notice {
+                eprintln!("{n}");
+            }
             if json {
                 print_json(&report)?;
             } else {
@@ -242,19 +240,7 @@ async fn main() -> anyhow::Result<()> {
         Command::Config {
             command: ConfigCommand::Init { country },
         } => {
-            let path = loker_core::config::path(app.home());
-            if path.exists() {
-                anyhow::bail!("{} already exists", path.display());
-            }
-            let country = country
-                .map(|c| match loker_core::country::to_alpha2(&c) {
-                    Some(code) => Ok(code),
-                    None => Err(anyhow::anyhow!(
-                        "unknown country `{c}` (use an ISO code, e.g. ID)"
-                    )),
-                })
-                .transpose()?;
-            std::fs::write(&path, loker_core::config::template(country))?;
+            let path = loker_core::config::init(app.home(), country.as_deref())?;
             println!("wrote {}", path.display());
             println!("next: loker ingest --all, then loker doctor");
         }
@@ -262,15 +248,15 @@ async fn main() -> anyhow::Result<()> {
             command: ConfigCommand::Check,
         } => {
             let path = loker_core::config::path(app.home());
-            let config = app
-                .config()?
+            let sources = app
+                .config_check()?
                 .ok_or_else(|| anyhow::anyhow!("no {} (`loker config init`)", path.display()))?;
             let mut bad = 0;
-            for s in &config.sources {
+            for s in &sources {
                 let state = if s.enabled { "enabled " } else { "disabled" };
-                match loker_sources::Source::parse(&s.id) {
-                    Ok(_) => println!("{state} {}", s.id),
-                    Err(e) => {
+                match &s.error {
+                    None => println!("{state} {}", s.id),
+                    Some(e) => {
                         bad += 1;
                         println!("INVALID  {}: {e}", s.id)
                     }
