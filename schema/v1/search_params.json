@@ -211,7 +211,7 @@
     "view": {
       "$ref": "#/$defs/View",
       "default": "full",
-      "description": "`full` (default); `compact`: what's needed to pick jobs (id, title,\ncompany, link, scope, level, pay text, date, verdict), about a third of\nthe size; `titles`: id, title, company, level and verdict only, for\nscanning a long list. Get full details for the picks with `get_jobs`."
+      "description": "`full` (default); `compact`: what's needed to pick jobs (id, title,\ncompany, link, scope, level, pay text, visa sponsorship, date, verdict), about a third of\nthe size; `titles`: id, title, company, level and verdict only, for\nscanning a long list. Get full details for the picks with `get_jobs`."
     }
   },
   "title": "SearchParams",

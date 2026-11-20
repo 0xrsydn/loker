@@ -20,9 +20,10 @@ from where), and searched over a CLI and an MCP server.
 
 ```
 crates/loker-core/       domain and rules, no network
-  src/model.rs           NewJob (one listing), Job (search result), Eligibility, Pay
+  src/model.rs           NewJob (one listing), Job (search result), Eligibility, Pay, Visa
   src/normalize.rs       shared rules: match keys, URLs, pay, eligibility from text
   src/pay_text.rs        pay read from a description, for sources with no pay fields
+  src/visa_text.rs       visa sponsorship read from a description, when a job is read
   src/country.rs         country names as boards write them -> ISO codes
   src/dedup.rs           which listings are one job; no IO
   src/verdict.rs         can this viewer apply? (country, timezone)
@@ -41,6 +42,7 @@ eval/search/             manual search-ranking eval (Python, LLM-judged); not in
 eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); not in CI
 eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
 eval/pay/                manual eval of pay read from descriptions, with a holdout; not in CI
+eval/visa/               manual eval of visa sponsorship read from descriptions; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 ```
 

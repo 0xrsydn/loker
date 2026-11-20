@@ -239,6 +239,30 @@ pub enum PayMethod {
     Text,
 }
 
+/// Visa sponsorship as the posting states it. Absent when it says nothing:
+/// "must be authorized to work in the US" alone, a citizenship or clearance
+/// requirement, or an equal opportunity statement says nothing about it.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct Visa {
+    pub sponsorship: Sponsorship,
+    /// The sentence it was read from.
+    pub evidence: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Sponsorship {
+    /// The employer sponsors a visa or work permit, or supports the hire's
+    /// immigration process.
+    Offered,
+    /// Only in some cases: "may", "case by case", transfers only, or only in
+    /// some of the posting's locations.
+    Limited,
+    /// The employer won't sponsor, or the hire must not need sponsorship.
+    NotOffered,
+}
+
 /// Employer boards (Greenhouse, Ashby, …) are the primary record of a job;
 /// aggregators repost them. When both have a job, the employer's fields win.
 #[derive(
@@ -304,6 +328,8 @@ pub struct Job {
     pub employment_type: Option<String>,
     pub eligibility: Eligibility,
     pub pay: Option<Pay>,
+    /// Visa sponsorship, read from the description; absent when it says nothing.
+    pub visa: Option<Visa>,
     pub tech_tags: Vec<String>,
     pub url: String,
     pub posted_at: Option<DateTime<Utc>>,

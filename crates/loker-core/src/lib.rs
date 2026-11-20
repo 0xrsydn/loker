@@ -13,3 +13,4 @@ pub mod pay_text;
 pub mod role;
 pub mod store;
 pub mod verdict;
+pub mod visa_text;

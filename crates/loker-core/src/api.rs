@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 
 use crate::country;
-use crate::model::{Job, Scope, Seniority};
+use crate::model::{Job, Scope, Seniority, Sponsorship};
 use crate::role::{self, Modifier, Role, RoleFilter};
 use crate::store::{Found, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
@@ -90,7 +90,7 @@ pub struct SearchParams {
     #[serde(default)]
     pub role: Vec<RoleFilter>,
     /// `full` (default); `compact`: what's needed to pick jobs (id, title,
-    /// company, link, scope, level, pay text, date, verdict), about a third of
+    /// company, link, scope, level, pay text, visa sponsorship, date, verdict), about a third of
     /// the size; `titles`: id, title, company, level and verdict only, for
     /// scanning a long list. Get full details for the picks with `get_jobs`.
     #[serde(default)]
@@ -194,6 +194,9 @@ pub struct CompactHit {
     pub modifiers: Vec<Modifier>,
     /// The source's pay text, e.g. "USD 50–100 hourly".
     pub pay: Option<String>,
+    /// Visa sponsorship, when the posting states it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub visa: Option<Sponsorship>,
     pub posted_at: Option<DateTime<Utc>>,
     /// Verdict for the viewer in `country`/`tz`; absent when no country was given.
     pub eligible: Option<Verdict>,
@@ -234,6 +237,7 @@ impl Hit {
                 roles,
                 modifiers,
                 pay: job.pay.map(|p| p.raw),
+                visa: job.visa.map(|v| v.sponsorship),
                 id: job.id,
                 title: job.title,
                 company: job.company,

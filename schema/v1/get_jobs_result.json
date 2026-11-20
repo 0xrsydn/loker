@@ -539,6 +539,17 @@
         },
         "url": {
           "type": "string"
+        },
+        "visa": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Visa"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Visa sponsorship, read from the description; absent when it says nothing."
         }
       },
       "required": [
@@ -574,6 +585,25 @@
         {
           "const": "executive",
           "description": "Head of, director, VP, C-level.",
+          "type": "string"
+        }
+      ]
+    },
+    "Sponsorship": {
+      "oneOf": [
+        {
+          "const": "offered",
+          "description": "The employer sponsors a visa or work permit, or supports the hire's\nimmigration process.",
+          "type": "string"
+        },
+        {
+          "const": "limited",
+          "description": "Only in some cases: \"may\", \"case by case\", transfers only, or only in\nsome of the posting's locations.",
+          "type": "string"
+        },
+        {
+          "const": "not_offered",
+          "description": "The employer won't sponsor, or the hire must not need sponsorship.",
           "type": "string"
         }
       ]
@@ -630,6 +660,23 @@
         "no"
       ],
       "type": "string"
+    },
+    "Visa": {
+      "description": "Visa sponsorship as the posting states it. Absent when it says nothing:\n\"must be authorized to work in the US\" alone, a citizenship or clearance\nrequirement, or an equal opportunity statement says nothing about it.",
+      "properties": {
+        "evidence": {
+          "description": "The sentence it was read from.",
+          "type": "string"
+        },
+        "sponsorship": {
+          "$ref": "#/$defs/Sponsorship"
+        }
+      },
+      "required": [
+        "sponsorship",
+        "evidence"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",

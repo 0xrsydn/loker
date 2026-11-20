@@ -124,6 +124,14 @@ extra. A source with no pay fields gets pay from its description in `tidy`
 words around it and a period, and never next to benefit, funding or sales
 words. `eval/pay` measures it.
 
+**Visa.** `visa.sponsorship` is `offered`, `limited` (case by case,
+transfers only, some locations) or `not_offered`, with the sentence it was
+read from; absent when the posting says nothing about sponsorship. "Must be
+authorized to work in the US" alone, a citizenship or clearance requirement
+and equal opportunity text say nothing about it. `visa_text.rs` reads it
+from the description when a job is read (like seniority), so a rule change
+needs no re-fetch. `eval/visa` measures it.
+
 **Roles.** `role.rs` is the vocabulary for what a job does: families
 (`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,
 `operations`, ...) with roles in them (`backend`, `ai_engineering`,

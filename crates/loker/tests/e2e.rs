@@ -192,7 +192,7 @@ fn ashby() -> Vec<Value> {
             "jobUrl": "https://jobs.ashbyhq.com/globex/a-1",
             "applyUrl": "https://jobs.ashbyhq.com/globex/a-1/application",
             "publishedAt": "2026-09-22T10:00:00.000+00:00", "employmentType": "FullTime",
-            "descriptionHtml": "<p>React.</p>",
+            "descriptionHtml": "<p>React.</p><p>Visa sponsorship is not available.</p>",
             "compensation": {
                 "compensationTierSummary": "$100K – $130K • Offers Equity",
                 "compensationTiers": [{ "title": null, "components": [
@@ -524,6 +524,8 @@ fn pipeline_end_to_end() {
         ),
         "{r:#}"
     );
+    // Visa sponsorship is read from the description.
+    assert_eq!(r["jobs"][0]["visa"]["sponsorship"], "not_offered", "{r:#}");
     assert_eq!(job["employmentType"], "full_time");
 
     // Every adapter's jobs go through the shared cleanup.
