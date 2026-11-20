@@ -24,10 +24,17 @@ LOKER_EVAL_DB=$PWD/snapshot-wwr.db python3 agent_eval.py run --label X+wwr   # a
    role they want: "a data engineer in Berlin", "a DevOps engineer in Manila".
    The tasks run from scarce (a handful of eligible matches) to plentiful.
 2. **Ground truth** per task, computed with the binary under test: every job
-   the viewer can apply to (verdict yes or maybe), listed with no query so
-   ranking can't hide any, graded 0–3 for role fit by Opus 5.5 from title,
-   company and the start of the description. Good = grade ≥ 2. Grades are
-   cached in `fit-labels.json`.
+   loker marks yes or maybe for the viewer, listed with no query so ranking
+   can't hide any, graded 0–3 for role fit by Opus 5.5 from title, company
+   and the first 800 characters of the description. Good = grade ≥ 2.
+   Grades are cached in `fit-labels.json`, keyed by task and job;
+   `FIT_PROMPT` pins the prompt they were made with.
+
+   Eligibility here is loker's own verdict, not a checked one: an
+   eligibility bug that marks a job yes counts as a good pick, and a job
+   loker wrongly marks `unknown` counts as a wrong one. This eval measures
+   whether the agent finds what loker says the viewer can apply to; whether
+   loker is right is tested in `crates/loker-core/tests` and `eval/golden`.
 3. **Runs:** Pi with DeepSeek Flash and only loker's MCP tools, on a fresh
    copy of the snapshot. The prompt asks for up to 5 jobs and to say so when
    fewer qualify, and ends by asking for a `PICKS:` line of job ids.
@@ -39,14 +46,27 @@ LOKER_EVAL_DB=$PWD/snapshot-wwr.db python3 agent_eval.py run --label X+wwr   # a
 |---|---|
 | avail | Good jobs in the truth for the task |
 | picks | Jobs the agent recommended |
-| prec | Share of picks that are good (eligible and fit the role) |
-| rec@5 | Good picks / min(5, avail): did it find what was there? |
+| prec | Share of picks that are good (loker says yes or maybe, and Opus says the role fits); a run that picks nothing when good jobs exist counts 0 |
+| rec@5 | Good picks / min(5, avail): did it find enough of what was there (coverage, not recall)? |
 | pass | Every pick good and at least min(5, avail) of them; "none" passes only when avail is 0 |
 | calls, kchars, ktok, $, sec | Tool calls, characters of tool output, tokens (cache reads included), DeepSeek cost, wall time |
 | fail | Runs that errored, timed out, or had no `PICKS:` line |
 
 Each run is one sample of a noisy agent: compare labels over 3+ trials per
-task, and treat small differences as noise.
+task, and treat small differences as noise. With 5 tasks x 3 trials, one
+run moves pass by 7 points, and the 3 runs of a task are not independent.
+
+Limits:
+- One judge (Opus) grades fit, with no second judge and no human check.
+- The 5 tasks are also the ones the MCP descriptions were tuned on (the
+  titles view and the list-everything guidance came from these runs).
+  There is no held-out task set.
+- `meta.json` (binary hash, version, snapshot, agent model) is recorded
+  from now on; earlier runs are named after the git HEAD, but `--bin` could
+  have been any build.
+- The latest runs predate typed pay (388a92a) and visa (24880fa), which
+  added fields to every result: the characters and tokens below are not
+  what an agent reads today.
 
 ## Results log
 
@@ -95,7 +115,7 @@ fails 2 of 3 runs on one off-role pick each.
 
 ### Snapshot 2026-11-19 b (1,749 jobs, fetched with source categories)
 
-`eval/role/snapshot.db`. Truth: backend-id 57 good of 427 eligible, devops-ph
+`eval/role/snapshot.db`. Truth: backend-id 57 good of 468 eligible, devops-ph
 28/451, ml-in 22/444, data-de 16/422, designer-gb 7/442.
 
 | Label | calls | kchars | ktok | $/run | sec | prec | rec@5 | pass |
@@ -106,8 +126,8 @@ fails 2 of 3 runs on one off-role pick each.
 
 Agents used the `role` filter in 23 of 68 calls (`data_engineering`,
 `backend`, design and AI roles) and list_roles twice. Characters read fell
-38% and tokens 36%; designer-gb, the scarcest task (7 good jobs), went from
-2 of 3 runs passing to 3 of 3.
+38% and tokens 36%. designer-gb, the scarcest task (7 good jobs), went from
+2 of 3 runs passing to 3 of 3: one run, within noise.
 
 With Jev's roles (79% exact against 68%) the agent numbers stay the same:
 these tasks' good jobs have titles that name the role, which the rules

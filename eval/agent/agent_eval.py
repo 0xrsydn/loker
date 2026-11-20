@@ -14,7 +14,7 @@ output, tokens, cost and time are recorded.
 
 Needs DEEPSEEK_API_KEY in the environment (Pi) and the `claude` CLI (judge).
 """
-import argparse, glob, json, os, re, shutil, signal, sqlite3, subprocess, sys, tempfile, time
+import argparse, glob, hashlib, json, os, re, shutil, signal, sqlite3, subprocess, sys, tempfile, time
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -29,6 +29,18 @@ PICKS_LINE = ("\n\nFinish with one line: `PICKS:` followed by the ids of the job
 JOB_ID = re.compile(r"\bj_[0-9a-f]{10}\b")
 
 sys.path.insert(0, os.path.join(REPO, "eval", "search"))
+
+FIT_CHARS = 800  # description characters the fit judge sees
+# The fit prompt that grades in fit-labels.json were made with. They are
+# keyed task|job only, so a changed prompt, judge or truncation would mix
+# with old grades; `grade` refuses to run until this is updated (and
+# fit-labels.json moved away). Keep a task's id tied to its role text too.
+FIT_PROMPT = "10fc2efc9d9a"
+
+
+def fit_prompt_hash():
+    import eval as search_eval
+    return hashlib.sha256(f"{search_eval.BATCH}|{FIT_CHARS}|{search_eval.JUDGES['opus'][1]}".encode()).hexdigest()[:12]
 
 
 def tasks(only=None):
@@ -85,6 +97,8 @@ def job_text(db, jid):
 def grade(task, ids, labels):
     """Opus grades role fit (0-3) for jobs not yet graded for this task."""
     import eval as search_eval  # eval/search/eval.py: the same judge plumbing
+    if fit_prompt_hash() != FIT_PROMPT:
+        sys.exit(f"the fit prompt changed ({fit_prompt_hash()}): move fit-labels.json away and set FIT_PROMPT")
     todo = sorted(j for j in ids if f"{task['id']}|{j}" not in labels)
     db = sqlite3.connect(SNAPSHOT)
     for i in range(0, len(todo), 15):
@@ -92,7 +106,7 @@ def grade(task, ids, labels):
         jobs = []
         for n, jid in enumerate(chunk):
             t, c, d = job_text(db, jid)
-            jobs.append(f"[{n}] Title: {t}\nCompany: {c}\nDescription (start):\n{(d or '')[:800]}\n")
+            jobs.append(f"[{n}] Title: {t}\nCompany: {c}\nDescription (start):\n{(d or '')[:FIT_CHARS]}\n")
         prompt = search_eval.BATCH.format(q=task["role"], intent=task["role"], jobs="\n---\n".join(jobs))
         grades, _ = search_eval.ask_opus(prompt, len(chunk))
         for jid, g in zip(chunk, grades):
@@ -197,6 +211,14 @@ def score_picks(binary, home, task, answer, gt):
     return {"format": "ok", "picks": picks, "available": len(good)}
 
 
+def sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()
+
+
 def run(args):
     binary = os.path.abspath(args.bin)
     label = args.label or label_default()
@@ -206,6 +228,10 @@ def run(args):
     gt = truth(binary, ts)
     json.dump({k: {"good": v["good"], "eligible": len(v["eligible"])} for k, v in gt.items()},
               open(os.path.join(out_dir, "truth.json"), "w"), indent=1)
+    # What these runs measured: the label names a commit, but --bin can be any build.
+    json.dump({"bin_sha256": sha256(binary), "version": subprocess.run([binary, "--version"], capture_output=True,
+               text=True).stdout.strip(), "snapshot": SNAPSHOT, "snapshot_sha256": sha256(SNAPSHOT),
+               "model": list(MODEL)}, open(os.path.join(out_dir, "meta.json"), "w"), indent=1)
     for t in ts:
         print(f"  {t['id']}: {len(gt[t['id']]['eligible'])} eligible, {len(gt[t['id']]['good'])} fit the role", flush=True)
     jobs = [(t, n) for t in ts for n in range(1, args.trials + 1)]
@@ -227,7 +253,8 @@ def summarize(records):
         n_good = sum(p["good"] for p in picks)
         want = min(5, avail)
         return {
-            "precision": n_good / len(picks) if picks else (1.0 if avail == 0 else None),
+            # Picking nothing when good jobs exist is a miss, not a run to leave out.
+            "precision": n_good / len(picks) if picks else (1.0 if avail == 0 else 0.0),
             "recall": n_good / want if want else (1.0 if not picks else 0.0),
             "pass": r["status"] == "ok" and r.get("format") == "ok"
                     and n_good == len(picks) and n_good >= want,
