@@ -4,6 +4,8 @@ See README.md.
 
   python3 visa_eval.py sample                    # draw sample.json (tuning) and holdout.json, once
   python3 visa_eval.py sample2                   # draw holdout2.json (new companies), once
+  python3 visa_eval.py sample3                   # draw holdout3.json (new boards), once
+  python3 visa_eval.py sample4                   # draw holdout4.json (more new boards), once
   JUDGE=opus|deepseek python3 visa_eval.py label [--set holdout]
   python3 visa_eval.py agree [--set holdout]     # Opus vs DeepSeek
   python3 visa_eval.py score [--set holdout] [--bin PATH] [-v]
@@ -21,7 +23,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 EVAL = os.path.dirname(HERE)
 REPO = os.path.dirname(EVAL)
 DBS = {"sample": os.path.join(EVAL, "pay", "snapshot.db"), "holdout": os.path.join(EVAL, "role", "snapshot-fresh.db"),
-       "holdout2": os.path.join(EVAL, "role", "snapshot-fresh.db")}
+       "holdout2": os.path.join(EVAL, "role", "snapshot-fresh.db"), "holdout3": os.path.join(HERE, "snapshot-boards.db"),
+       "holdout4": os.path.join(HERE, "snapshot-boards2.db")}
 BIN = os.path.join(REPO, "target", "release", "examples", "visa_text")
 PROMPT_VERSION = "v1"
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
@@ -119,6 +122,35 @@ def sample2():
         out[stratum] = sorted(picked)
         print(f"holdout2 {stratum}: {len(picked)} of {len(pool)}, {len(per)} companies")
     save("holdout2.json", out)
+
+
+def sample3(name="holdout3"):
+    """holdout3: neither earlier holdout had an `offered` or `limited`
+    posting. From snapshot-boards.db: 19 employer boards loker had never
+    ingested, chosen (before any text was read) as employers known to hire
+    internationally, of which 17 returned jobs. At most 8 jobs per company,
+    so one company's template can't fill the set. holdout4 is drawn the same
+    way from snapshot-boards2.db, a second list of boards (19 with jobs),
+    after the rules were fixed on holdout3."""
+    if os.path.exists(os.path.join(HERE, f"{name}.json")):
+        sys.exit(f"{name} already drawn")
+    jobs = descriptions(DBS[name])
+    rng = random.Random(f"visa-{name}")
+    out = {}
+    for stratum, n, cap in (("mention", 120, 8), ("rest", 30, 2)):
+        pool = sorted(j for j, d in jobs.items() if bool(MENTION.search(d["description"])) == (stratum == "mention"))
+        rng.shuffle(pool)
+        per, picked = Counter(), []
+        for j in pool:
+            c = jobs[j]["company"].lower()
+            if per[c] < cap:
+                per[c] += 1
+                picked.append(j)
+            if len(picked) == n:
+                break
+        out[stratum] = sorted(picked)
+        print(f"{name} {stratum}: {len(picked)} of {len(pool)}, {len(per)} companies")
+    save(f"{name}.json", out)
 
 
 # ---------- label ----------
@@ -260,7 +292,7 @@ def score():
         s = [j for j in ids if gold[j] == a]
         print(f"  {a:12} precision {sum(gold[j] == a for j in c)}/{len(c)}   recall {sum(ours[j] == a for j in s)}/{len(s)}")
     print("  confusion (label -> ours):", dict(Counter((gold[j], ours[j]) for j in ids if gold[j] != ours[j])))
-    if "-v" in sys.argv and SET != "holdout":
+    if "-v" in sys.argv and SET not in ("holdout", "holdout4"):
         for j in ids:
             if gold[j] != ours[j]:
                 print(f"\n{j} label={gold[j]} ours={ours[j]}\n  label: {labels[key(j)]['evidence'][:300]}"
@@ -268,7 +300,7 @@ def score():
 
 
 if __name__ == "__main__":
-    cmds = {"sample": sample, "sample2": sample2, "label": label, "agree": agree, "score": score}
+    cmds = {"sample": sample, "sample2": sample2, "sample3": sample3, "sample4": lambda: sample3("holdout4"), "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()
