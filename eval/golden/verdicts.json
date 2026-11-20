@@ -1,0 +1,237 @@
+{
+ "j_0bc1f87281": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "wrong"
+  },
+  "note": "based on the role, its like what i stated before which is \"Software Engineer, <Niche/Specific Feature>\" role so yeah its interesection of product and engineering as well",
+  "set_in_chat": [
+   "A",
+   "C"
+  ]
+ },
+ "j_0fa724ad10": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_10e3a6ff6a": {
+  "correct": "CAD 80500-98500 a year + bonus compensation, no equity being mentioned",
+  "done": true,
+  "marks": {
+   "A": "wrong",
+   "B": "wrong",
+   "C": "right"
+  },
+  "note": "i dont see equity being mentioned here so maybe we can recheck and verify? i put it as right but please check might be wrong as im not sure"
+ },
+ "j_22868af661": {
+  "correct": "15k fo relocation bonus, specifically relocation, also other benefit as well ",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "right"
+  },
+  "note": ""
+ },
+ "j_54851803c4": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "wrong"
+  },
+  "note": "",
+  "set_in_chat": [
+   "B",
+   "C"
+  ]
+ },
+ "j_549e8afe70": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "wrong",
+   "C": "right"
+  },
+  "note": "",
+  "set_in_chat": [
+   "B"
+  ]
+ },
+ "j_56e4fdac40": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "right"
+  },
+  "note": ""
+ },
+ "j_6df3bb934a": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "wrong"
+  },
+  "note": "its music editor, like kind of video editor and audio engineer area perhaps? im not sure whats greater branch of this role tbh",
+  "set_in_chat": [
+   "B"
+  ]
+ },
+ "j_6e59b15a43": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right"
+  },
+  "note": ""
+ },
+ "j_8a6375a9a3": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "wrong",
+   "B": "right"
+  },
+  "note": "im not sure about this, we should read the jobdesc then deduct from there lol",
+  "set_in_chat": [
+   "B",
+   "A"
+  ]
+ },
+ "j_8f6ed8ce6d": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "right"
+  },
+  "note": "yeah i didnt see any salary range, base pay, mentioned while there is relocation bonus and equity grant mentioned with no amounts of it, also other benefit based on description given"
+ },
+ "j_914affb47d": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_9fdfd78d8d": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right"
+  },
+  "note": ""
+ },
+ "j_a1798af89a": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_aeea701b04": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right",
+   "C": "wrong"
+  },
+  "note": "",
+  "set_in_chat": [
+   "B",
+   "C"
+  ]
+ },
+ "j_b09fe5b10f": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": "is it right about ml engineering, but its more like software engineer -> machine learning specific domain, so it leans toward more on software engineering area. as you can see there is a lot of role with something like \"Software Engineer, <Specific Domain/Niche Feature>\" being mentioned across job board"
+ },
+ "j_bdf3994d09": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_c859f76cd3": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right",
+   "B": "right"
+  },
+  "note": "this is more of researcher but also can be scoped into ai roles as well"
+ },
+ "j_c9effb313c": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_cdd5e5c902": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_dc80a65d67": {
+  "correct": "anyway also no visa sponsorship available, this data point visa availabilty whenever as boolean true/false or none is great to be added here(?)",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_e0b4bd4f07": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_e3a719f788": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ },
+ "j_f24233f2e0": {
+  "correct": "",
+  "done": true,
+  "marks": {
+   "A": "right"
+  },
+  "note": ""
+ }
+}

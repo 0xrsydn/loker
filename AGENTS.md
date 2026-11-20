@@ -41,6 +41,7 @@ eval/search/             manual search-ranking eval (Python, LLM-judged); not in
 eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); not in CI
 eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
 eval/pay/                manual eval of pay read from descriptions, with a holdout; not in CI
+eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 ```
 
 ## Build and check
