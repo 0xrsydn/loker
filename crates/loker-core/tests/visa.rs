@@ -5,7 +5,7 @@ use loker_core::visa_text::visa_from_text;
 
 #[test]
 fn sponsorship_read_from_descriptions() {
-    let cases: [(&str, Option<Sponsorship>); 18] = [
+    let cases: [(&str, Option<Sponsorship>); 25] = [
         ("Visa sponsorship is available.", Some(Offered)),
         (
             "We'll fly you out, cover your visa sponsorship, and bring you in.",
@@ -35,7 +35,22 @@ fn sponsorship_read_from_descriptions() {
             Some(NotOffered),
         ),
         ("Visa sponsorship: Yes", Some(Offered)),
+        (
+            "A relocation package with visa support for those who need it.",
+            Some(Offered),
+        ),
+        ("Visa sponsorship for you and your family", Some(Offered)),
+        ("Visa \\& relocation will be provided.", Some(Offered)),
+        (
+            "you'll need the right to work in the UK, as we're unable to provide sponsorship at this time.",
+            Some(NotOffered),
+        ),
         // Hedged, transfers only, or different by place.
+        (
+            "You must be work authorized in the United States without the need for new visa sponsorship. The company can support visa transfers but will not sponsor individuals for H-1B CAP applications.",
+            Some(Limited),
+        ),
+        ("We can sponsor visas for the UK (not Spain)", Some(Limited)),
         (
             "the Company may not be able to support future H-1B sponsorship at this time",
             Some(Limited),
@@ -65,6 +80,10 @@ fn sponsorship_read_from_descriptions() {
         ),
         (
             "Manage immigration and visa sponsorship processes for new hires.",
+            None,
+        ),
+        (
+            "You have hands-on experience supporting immigration and employee relocation programs.",
             None,
         ),
     ];
