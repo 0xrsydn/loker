@@ -28,7 +28,10 @@ fn location_text_to_verdict() {
         ("Hong Kong; Singapore; Taiwan", None, No),
         ("Indonesia; Malaysia; Philippines", None, Maybe),
         ("APAC; Hong Kong", None, Maybe),
-        ("Berlin", None, Unknown),
+        ("Berlin", None, No),
+        ("Remote - Warsaw", Some(true), No),
+        ("Jakarta", Some(true), Maybe),
+        ("Remote, Colorado", Some(true), No),
         ("", None, Unknown),
         // On-site somewhere else.
         ("Singapore", Some(false), No),

@@ -511,6 +511,36 @@ const NOISE: &[&str] = &[
     "wfh",
 ];
 
+/// One place name as a location names it.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Place {
+    Worldwide,
+    Region(&'static str),
+    /// A country, or a state or province of one.
+    Country(&'static str),
+    /// A city's country: an office may be there.
+    City(&'static str),
+}
+
+/// Read one place name (lowercase, noise words removed): worldwide, a
+/// region, a country (or state, province), a city, or `None`.
+pub fn place(name: &str) -> Option<Place> {
+    let p = name.trim();
+    if WORLDWIDE.contains(&p) {
+        Some(Place::Worldwide)
+    } else if let Some((_, r)) = REGIONS.iter().find(|(k, _)| *k == p) {
+        Some(Place::Region(r))
+    } else if let Some(c) = country::to_alpha2(p) {
+        Some(Place::Country(c))
+    } else {
+        match country::place_country(p) {
+            Some((c, true)) => Some(Place::City(c)),
+            Some((c, false)) => Some(Place::Country(c)),
+            None => None,
+        }
+    }
+}
+
 /// Turn a free-text location ("Remote - US", "Hong Kong; Singapore", "EMEA",
 /// "Anywhere") into eligibility.
 ///
@@ -527,6 +557,9 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
     let mut regions = Vec::new();
     let mut worldwide = false;
     let mut unmapped = Vec::new();
+    // Countries named only through a city ("Warsaw"): where an office is,
+    // not necessarily where remote work may be done from.
+    let mut city_countries = Vec::new();
     for part in lower
         .split([';', ',', '/', '|', '(', ')'])
         .flat_map(|p| p.split(" or "))
@@ -550,16 +583,17 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
         if p.is_empty() {
             continue;
         }
-        if WORLDWIDE.contains(&p) {
-            worldwide = true;
-        } else if let Some((_, r)) = REGIONS.iter().find(|(k, _)| *k == p) {
-            regions.push(r.to_string());
-        } else if let Some(c) = country::to_alpha2(p) {
-            countries.push(c.to_string());
-        } else {
-            unmapped.push(p.to_string());
+        match place(p) {
+            Some(Place::Worldwide) => worldwide = true,
+            Some(Place::Region(r)) => regions.push(r.to_string()),
+            Some(Place::Country(c)) => countries.push(c.to_string()),
+            Some(Place::City(c)) => city_countries.push(c.to_string()),
+            None => unmapped.push(p.to_string()),
         }
     }
+    let only_cities =
+        countries.is_empty() && regions.is_empty() && !worldwide && !city_countries.is_empty();
+    countries.extend(city_countries);
     countries.sort();
     countries.dedup();
     regions.sort();
@@ -584,6 +618,16 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
             onsite_city: (!raw.is_empty()).then(|| raw.to_string()),
             countries,
             ..base(Scope::Onsite, 0.85, None)
+        },
+        // "Remote" with only a city: inside that country it may be on-site
+        // or hybrid there (maybe); outside it, no.
+        Some(true) if only_cities => Eligibility {
+            countries,
+            ..base(
+                Scope::Unknown,
+                0.5,
+                Some("names a city, not where remote work may be done from".into()),
+            )
         },
         Some(true) => {
             if !regions.is_empty() {
