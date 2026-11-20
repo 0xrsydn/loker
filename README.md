@@ -27,6 +27,7 @@ cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100  
 cargo run -- get j_6b78581675                  # full details for ids from a search
 cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
 cargo run -- ingest remoteok                   # also: jobicy, weworkremotely
+cargo run -- ingest workable --country PH       # Workable's search, remote jobs; opt-in (not a published API)
 cargo run -- search --country ID --offset 20   # next page (each page reports its next offset)
 cargo run -- sources eval                     # coverage, overlap, blocked merges, conflicts, closed jobs
 cargo run -- verify                           # live check of every configured source; non-zero exit on failure

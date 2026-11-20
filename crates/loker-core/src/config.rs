@@ -50,7 +50,7 @@ fn default_jev_model() -> String {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceConfig {
-    /// `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `greenhouse:<board>`,
+    /// `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `greenhouse:<board>`,
     /// `ashby:<board>`, `lever:<site>`.
     pub id: String,
     pub pages: Option<u32>,
@@ -136,6 +136,13 @@ id = "remoteok"
 
 [[sources]]
 id = "weworkremotely"
+
+# Workable's job search across every company on Workable: remote jobs only.
+# Not a published API (the one jobs.workable.com uses), so it is opt-in.
+# [[sources]]
+# id = "workable"
+# pages = 10           # 20 jobs per page
+# country = "PH"       # only jobs Workable places in this country
 
 # A company's own board: greenhouse:<slug>, ashby:<slug> or lever:<site>.
 # [[sources]]

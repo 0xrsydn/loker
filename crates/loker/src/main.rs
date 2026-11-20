@@ -28,16 +28,16 @@ struct Cli {
 enum Command {
     /// Fetch a source once and store what it returns (or every configured source with --all).
     Ingest {
-        /// Source: himalayas, jobicy, remoteok, greenhouse:<board>, ashby:<board>, lever:<site>.
+        /// Source: himalayas, jobicy, remoteok, weworkremotely, workable, greenhouse:<board>, ashby:<board>, lever:<site>.
         #[arg(required_unless_present = "all")]
         source: Option<String>,
         /// Every enabled source in config.toml; exits non-zero if any fails.
         #[arg(long, conflicts_with_all = ["source", "pages", "country", "company", "remote"])]
         all: bool,
-        /// Pages to fetch (himalayas: 20 jobs each).
+        /// Pages to fetch (himalayas, workable: 20 jobs each).
         #[arg(long)]
         pages: Option<u32>,
-        /// Only fetch jobs the source says are open to this country (ISO code).
+        /// Only fetch jobs the source says are open to this country (ISO code; himalayas, workable).
         #[arg(long)]
         country: Option<String>,
         /// Company display name for an employer board (Ashby and Lever only give the slug).

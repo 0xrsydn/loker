@@ -51,7 +51,7 @@ static OPEN_ENDED: LazyLock<Regex> =
 static STATES: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bstates\b").unwrap());
 
 static WORLDWIDE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b").unwrap()
+    Regex::new(r"(?i)(?:\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work(?:ing)?|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b)(?P<next>\s+\w+)?").unwrap()
 });
 
 /// "CET (+/- 3 hours)", "within 2 hours of EST", "UTC-3 to UTC+3".
@@ -203,6 +203,27 @@ fn window(s: &str, mut a: usize, b: usize) -> &str {
     &s[a..b]
 }
 
+/// Looser than "worldwide": the posting suggests it is open beyond a place a
+/// board gave it ("work from anywhere", "we hire worldwide", "from wherever
+/// you are"). Only to hold back a no, never to say yes: in `eval/eligibility`
+/// the labelers split on these, read against a board's place.
+pub fn open_wider(text: &str) -> bool {
+    static OPEN: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b").unwrap()
+    });
+    // "work from anywhere", but not "work from anywhere in the US".
+    static ANYWHERE: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(r"(?i)\b(?:work|working)\s+(?:flexibly\s+|remotely\s+)?from\s+anywhere\b(?P<next>\s+\w+)?").unwrap()
+    });
+    let text = text.replace(['*', '_'], "");
+    OPEN.is_match(&text)
+        || ANYWHERE.captures_iter(&text).any(|c| {
+            !c.name("next").is_some_and(|n| {
+                matches!(n.as_str().trim().to_lowercase().as_str(), "in" | "within")
+            })
+        })
+}
+
 /// Where the hire may be, and required hours, as `text` states them.
 pub fn stated(text: &str) -> Option<Stated> {
     let text: String = text.chars().take(200_000).collect();
@@ -231,9 +252,16 @@ pub fn stated(text: &str) -> Option<Stated> {
     }
     if out.countries.is_empty() && out.regions.is_empty() {
         out.only_cities = false;
-        if let Some(m) = WORLDWIDE.find(&text) {
+        // "work from anywhere", but not "anywhere in the US" (a place, read above).
+        let open = WORLDWIDE.captures_iter(&text).find(|c| {
+            !c.name("next").is_some_and(|n| {
+                matches!(n.as_str().trim().to_lowercase().as_str(), "in" | "within")
+            })
+        });
+        if let Some(c) = open {
             out.worldwide = true;
-            out.evidence.push(m.as_str().to_string());
+            out.evidence
+                .push(c.get(0).unwrap().as_str().trim().to_string());
         }
     }
     if let Some((w, ev)) = hours(&text) {
