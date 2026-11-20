@@ -6,7 +6,9 @@ when changing anything an agent sees (tool descriptions, result shapes,
 ranking, filters); it isn't part of CI. The search eval (`../search`)
 measures ranking alone and is cheaper; use this one for end-to-end effects.
 
-Needs Pi, `DEEPSEEK_API_KEY` (the agent), the `claude` CLI (the judge), a
+Needs Pi with the `opencode-go` provider logged in (the agent: DeepSeek v4.1
+Flash, high reasoning; `pi auth check --provider opencode-go`), the `claude`
+CLI (the judge), a
 release build, and the search eval's `snapshot.db`.
 
 ```sh
@@ -35,7 +37,9 @@ LOKER_EVAL_DB=$PWD/snapshot-wwr.db python3 agent_eval.py run --label X+wwr   # a
    loker wrongly marks `unknown` counts as a wrong one. This eval measures
    whether the agent finds what loker says the viewer can apply to; whether
    loker is right is tested in `crates/loker-core/tests` and `eval/golden`.
-3. **Runs:** Pi with DeepSeek Flash and only loker's MCP tools, on a fresh
+3. **Runs:** Pi with DeepSeek v4.1 Flash through OpenCode Go (high
+   reasoning; DeepSeek Flash through DeepSeek's API before 2026-11-20) and
+   only loker's MCP tools, on a fresh
    copy of the snapshot. The prompt asks for up to 5 jobs and to say so when
    fewer qualify, and ends by asking for a `PICKS:` line of job ids.
 4. **Scoring** from the `PICKS:` line and the session file.

@@ -12,7 +12,8 @@ cargo build --release -p loker-sources --example eligibility
 cd eval/eligibility
 python3 eligibility_eval.py parity [--db PATH]   # rebuilt vs stored; equal unless the rules changed
 python3 eligibility_eval.py sample               # once: sample.json (tuning), holdout.json
-JUDGE=opus python3 eligibility_eval.py label [--set holdout]   # cached; JUDGE=deepseek needs DEEPSEEK_API_KEY
+JUDGE=opus python3 eligibility_eval.py label [--set holdout]   # cached
+JUDGE=deepseek41 python3 eligibility_eval.py label [--set holdout]   # DeepSeek v4.1 via Pi (opencode-go), high reasoning
 python3 eligibility_eval.py agree [--set holdout]
 python3 eligibility_eval.py score [--set holdout] [--bin PATH] [-v]
 ```
@@ -175,6 +176,14 @@ DeepSeek ran out of credit (HTTP 402) after 20 jobs:
 |---|---|---|---|---|---|
 | Opus, 60 jobs | 29/36 | 2 | 222/249 | 6 | 21 |
 | DeepSeek, 20 jobs | 15/15 | 0 | 72/80 | 8 | 0 |
+
+DeepSeek v4.1 Flash (OpenCode Go, high reasoning; `deepseek41`, a new
+labeller kept apart from the old one) then labelled all 60: yes right
+31/36, wrong yes 3, no right 210/249, wrong no 37. It agrees with Opus on
+249/300 verdicts, mostly answering yes where Opus says no (19) or maybe
+(21): it reads Workable's remote jobs as open more widely. Whether that is
+Workable or the labeller needs a set where the old labellers agreed
+(holdout2: 474/525).
 
 Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
 still right 89% of the time against 97% for the other sources, and

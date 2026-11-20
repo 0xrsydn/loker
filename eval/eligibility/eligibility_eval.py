@@ -6,8 +6,8 @@ DeepSeek from the whole posting. Run by hand; not part of CI. See README.md.
   python3 eligibility_eval.py sample               # draw sample.json (tuning) and holdout.json, once
   python3 eligibility_eval.py sample2              # draw holdout2.json from snapshot-h2.db, once
   python3 eligibility_eval.py sample-workable      # draw workable.json (a new source), once
-  JUDGE=opus|deepseek python3 eligibility_eval.py label [--set holdout]
-  python3 eligibility_eval.py agree [--set holdout]
+  JUDGE=opus|deepseek41 python3 eligibility_eval.py label [--set holdout]   # deepseek: the old API judge
+  python3 eligibility_eval.py agree [--set holdout] [--with deepseek41]
   python3 eligibility_eval.py score [--set holdout] [-v]
 
 Verdicts come from `crates/loker-sources/examples/eligibility.rs`, which
@@ -46,7 +46,10 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
 PROMPT_VERSION = "v1"
-JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
+# deepseek: DeepSeek's own API (v4 Pro), used for the sets labelled before
+# 2026-11-20 16:30, when its credit ran out. deepseek41: DeepSeek v4.1 Flash
+# through OpenCode Go in Pi, high reasoning; its labels are kept apart.
+JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro", "deepseek41": "opencode-go/deepseek-v4.1-flash:high"}
 MAX_CHARS = 12000
 # November: standard time everywhere these viewers live.
 VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
@@ -335,6 +338,33 @@ def ask_deepseek(prompt, n):
     raise RuntimeError(f"deepseek failed: {err}")
 
 
+def ask_pi(prompt, n):
+    """DeepSeek v4.1 through Pi (OpenCode Go): no tools, no session, an empty
+    working directory, so nothing but the prompt reaches it. Pi holds the key."""
+    shape = {"labels": [{"i": 0, "verdicts": {c: "no" for c, _ in VIEWERS}, "evidence": "..."}]}
+    cmd = ["pi", "-p", "--no-tools", "--no-session", "--provider", "opencode-go", "--model", "deepseek-v4.1-flash",
+           "--thinking", "high", "--system-prompt",
+           "You read job eligibility from job postings. Reply only with the requested JSON, no prose."]
+    err = None
+    with tempfile.TemporaryDirectory(prefix="loker-judge-") as cwd:
+        for attempt in range(3):
+            if attempt:
+                time.sleep(10 * attempt)
+            try:
+                p = subprocess.run(cmd, input=prompt + "\n\nReply with JSON only, shaped as: " + json.dumps(shape),
+                                   capture_output=True, text=True, cwd=cwd, timeout=900,
+                                   env={**os.environ, "SECRETSPEC_REASON": "loker eligibility eval labels"})
+                text = p.stdout
+                out = json.loads(text[text.index("{"):text.rindex("}") + 1])
+                labels = {l["i"]: l for l in out["labels"]}
+                assert set(labels) == set(range(n)), sorted(labels)
+                assert all(l["verdicts"].get(c) in KINDS for l in labels.values() for c, _ in VIEWERS)
+                return [labels[i] for i in range(n)]
+            except Exception as e:  # noqa: BLE001
+                err = e
+    raise RuntimeError(f"pi deepseek-v4.1 failed: {err}")
+
+
 def key(jid):
     return f"{PROMPT_VERSION}|{jid}"
 
@@ -350,7 +380,7 @@ def label():
 
     def one(batch):
         text = "\n---\n".join(f"[{n}] {job_text(js[j])}" for n, j in enumerate(batch))
-        ask = ask_opus if judge == "opus" else ask_deepseek
+        ask = {"opus": ask_opus, "deepseek": ask_deepseek, "deepseek41": ask_pi}[judge]
         return list(zip(batch, ask(PROMPT.format(viewers=viewers, jobs=text), len(batch))))
 
     done = 0
@@ -368,11 +398,12 @@ def label():
 
 
 def agree():
-    a, b = load("labels-opus.json", {}), load("labels-deepseek.json", {})
+    other = arg("--with", "deepseek")
+    a, b = load("labels-opus.json", {}), load(f"labels-{other}.json", {})
     ids = [j for j in set_ids() if key(j) in a and key(j) in b]
     pairs = [(a[key(j)]["verdicts"][c], b[key(j)]["verdicts"][c]) for j in ids for c, _ in VIEWERS]
     print(f"{SET}: {len(ids)} jobs x {len(VIEWERS)} viewers labelled by both, same answer {sum(x == y for x, y in pairs)}/{len(pairs)}")
-    print("   (opus, deepseek):", dict(Counter(p for p in pairs if p[0] != p[1]).most_common()))
+    print(f"   (opus, {other}):", dict(Counter(p for p in pairs if p[0] != p[1]).most_common()))
 
 
 # ---------- score ----------

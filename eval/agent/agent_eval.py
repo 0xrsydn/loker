@@ -7,12 +7,12 @@ Run by hand; not part of CI. See README.md.
 For each task, the ground truth is every job the viewer can apply to (verdict
 yes or maybe, listed by the binary under test with no query, so search
 ranking can't bias it) that Opus grades as fitting the role. Then Pi
-(DeepSeek Flash, only loker's MCP tools) runs each task on a fresh copy of
+(DeepSeek v4.1 Flash via OpenCode Go, only loker's MCP tools) runs each task on a fresh copy of
 the search eval's snapshot. The agent ends with a `PICKS:` line of job ids;
 picks are scored against the truth, and tool calls, characters of tool
 output, tokens, cost and time are recorded.
 
-Needs DEEPSEEK_API_KEY in the environment (Pi) and the `claude` CLI (judge).
+Needs Pi's opencode-go provider (the agent) and the `claude` CLI (judge).
 """
 import argparse, glob, hashlib, json, os, re, shutil, signal, sqlite3, subprocess, sys, tempfile, time
 from concurrent.futures import ThreadPoolExecutor
@@ -22,7 +22,10 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 SNAPSHOT = os.environ.get("LOKER_EVAL_DB", os.path.join(REPO, "eval", "search", "snapshot.db"))
 RUNS = os.path.join(HERE, "runs")
 LABELS = os.path.join(HERE, "fit-labels.json")
-MODEL = ("deepseek", "deepseek-flash")
+# DeepSeek v4.1 Flash through OpenCode Go, high reasoning (from 2026-11-20;
+# runs before used DeepSeek's own API, deepseek-flash, default reasoning).
+MODEL = ("opencode-go", "deepseek-v4.1-flash")
+THINKING = "high"
 TIMEOUT = 900
 PICKS_LINE = ("\n\nFinish with one line: `PICKS:` followed by the ids of the jobs you recommend, "
               "comma-separated, or `PICKS: none`.")
@@ -145,7 +148,7 @@ def run_one(binary, task, trial, out_dir, gt):
         json.dump(mcp, open(os.path.join(work, ".pi", "mcp.json"), "w"))
         sessions = os.path.join(work, "sessions")
         cmd = ["pi", "-p", "-a", "--no-builtin-tools", "--tools", "mcp__loker__*",
-               "--provider", MODEL[0], "--model", MODEL[1], "--session-dir", sessions,
+               "--provider", MODEL[0], "--model", MODEL[1], "--thinking", THINKING, "--session-dir", sessions,
                task["prompt"] + PICKS_LINE]
         t0 = time.time()
         # stdin from /dev/null: `pi -p` reads a non-terminal stdin to its end,
@@ -231,7 +234,7 @@ def run(args):
     # What these runs measured: the label names a commit, but --bin can be any build.
     json.dump({"bin_sha256": sha256(binary), "version": subprocess.run([binary, "--version"], capture_output=True,
                text=True).stdout.strip(), "snapshot": SNAPSHOT, "snapshot_sha256": sha256(SNAPSHOT),
-               "model": list(MODEL)}, open(os.path.join(out_dir, "meta.json"), "w"), indent=1)
+               "model": list(MODEL), "thinking": THINKING}, open(os.path.join(out_dir, "meta.json"), "w"), indent=1)
     for t in ts:
         print(f"  {t['id']}: {len(gt[t['id']]['eligible'])} eligible, {len(gt[t['id']]['good'])} fit the role", flush=True)
     jobs = [(t, n) for t in ts for n in range(1, args.trials + 1)]
