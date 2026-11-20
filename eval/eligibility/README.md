@@ -103,10 +103,28 @@ On the holdout, scored once after both: unknown fell from 165 verdicts to
 no new wrong claims. The holdout has now seen this reader; a change to it
 needs a fresh holdout.
 
-What is left:
-- **75 unknown verdicts on the holdout** (50 no, 16 yes by Opus): phrasings
-  the reader doesn't know yet ("exclusive to Filipino locals", hours as
-  "overlap with US Eastern Time").
+Then, from unknowns across the whole tuning snapshot (not the labelled
+sample, which they don't change): "located in and authorized to work in
+the US", "residing in the following US states: ...", "any city within
+Italy or Spain", "either the NYC or Boston metro areas", "hiring for this
+role in Canada or the United States", "CET plus or minus three hours". All
+23 jobs this changed in the tuning snapshot and in
+`eval/role/snapshot-fresh.db` were read; that found and fixed "AZ, CA, CO"
+read as Azerbaijan, Canada and Colombia (a list of states is the US),
+"Europe, Singapore, or wherever you are" read as a restriction, and a later
+city ("Based in New York, you will...") undoing a country. Reading them
+means `snapshot-fresh.db` is no longer unseen for these phrasings. The
+holdout, scored again as a check (its second use), is unchanged: 44/53 and
+513/591.
+
+What is left, in the tuning snapshot's 263 jobs still unknown with no place:
+- 223 state nothing: no place, hours or requirement. Unknown is the answer.
+- 10 state hours only; viewers outside them already get no.
+- 11 have only pay by location ("for most US-based locations").
+- 19 state a requirement loker can't map: sales territories ("Great Lakes
+  region (IL, MI, OH)", "live local to the territory"), overlap percentages
+  ("70-80% overlap with San Francisco"), "an EU-compatible time zone".
+  Preferences ("US or Europe preferred") are left out on purpose.
 - Binance is ingested as an all-remote board; its postings say
   "remote-first ... may vary", which the labels read as maybe (3 tuning
   yeses).

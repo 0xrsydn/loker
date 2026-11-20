@@ -31,6 +31,31 @@ fn places_and_hours_read_from_descriptions() {
             &[],
             Some((-7.0, -3.0)),
         ),
+        (
+            "Candidates must be located in and authorized to work in the United States.",
+            &["US"],
+            None,
+        ),
+        (
+            "This role is open for candidates residing in the following US states: Maine, Vermont, Ohio.",
+            &["US"],
+            None,
+        ),
+        (
+            "You are based in any city within Italy or Spain, with a valid right to work.",
+            &["ES", "IT"],
+            None,
+        ),
+        (
+            "We're currently hiring for this role in Canada or the United States.",
+            &["CA", "US"],
+            None,
+        ),
+        (
+            "Remote, with required availability within CET plus or minus three hours.",
+            &[],
+            Some((-2.0, 4.0)),
+        ),
         // Not where the hire must be.
         ("Our team is based in Berlin.", &[], None),
         ("We serve customers based in the US.", &[], None),
@@ -56,6 +81,20 @@ fn places_and_hours_read_from_descriptions() {
         let tz = s.and_then(|s| s.tz).map(|w| (w.from, w.to));
         assert_eq!(tz, hours, "{text}");
     }
+}
+
+/// A city read after a country doesn't make the job "only a city".
+#[test]
+fn a_later_city_keeps_the_country() {
+    let s =
+        stated("Must be based in the United States. Based in New York, you will lead the team.")
+            .unwrap();
+    assert!(!s.only_cities, "{s:?}");
+    assert!(
+        stated("Based in Berlin, you will lead the team.")
+            .unwrap()
+            .only_cities
+    );
 }
 
 #[test]

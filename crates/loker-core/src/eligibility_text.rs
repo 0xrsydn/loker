@@ -25,7 +25,7 @@ pub struct Stated {
 /// A phrase that says where the hire must be, followed by the place.
 static WHERE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
-        r"(?i)\b(?:(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;:!?()\n]{2,90})",
+        r"(?i)\b(?:(?:located|based)\s+in\s+and\s+(?:authori[sz]ed|eligible)\s+to\s+work\s+in|(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|(?:hiring|hire|recruiting)\s+(?:for\s+this\s+(?:role|position)\s+)?(?:across|in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+(?:remotely\s+)?in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;!?()\n]{2,120})",
     )
     .unwrap()
 });
@@ -36,6 +36,20 @@ static NOT_THE_HIRE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:if|unless|not|outside|except|excluding|unable|cannot|can't|won't|customers?|clients?|users?|partners?|company|companies|headquarter\w*|hq|offices?|team|teams|startup|business(?:es)?)\b").unwrap()
 });
 
+/// Words before the place list.
+static FILLER: LazyLock<[Regex; 3]> = LazyLock::new(|| {
+    [
+        Regex::new(r"(?i)^(?:either|any of|one of)\s+").unwrap(),
+        Regex::new(r"(?i)^any\s+(?:city|cities|country|countries|state|states|location|locations)\s+(?:within|in)\s+").unwrap(),
+        Regex::new(r"(?i)^(?:the\s+)?following\s+(?:US\s+)?(?:cities|countries|states|locations|regions)\s*:?\s*").unwrap(),
+    ]
+});
+
+static OPEN_ENDED: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"(?i)\bwherever\b|\banywhere\b").unwrap());
+
+static STATES: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bstates\b").unwrap());
+
 static WORLDWIDE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b").unwrap()
 });
@@ -43,7 +57,8 @@ static WORLDWIDE: LazyLock<Regex> = LazyLock::new(|| {
 /// "CET (+/- 3 hours)", "within 2 hours of EST", "UTC-3 to UTC+3".
 static HOURS: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(&format!(
-        r"(?i)\b(?:(?P<z1>{Z})\s*(?:time\s*zone)?\s*\(?\s*(?:\+\s*/\s*-|±|\+-)\s*(?P<n1>\d{{1,2}})\s*(?:hours?|hrs?|h)\b|within\s+(?P<n2>\d{{1,2}})\s+hours?\s+of\s+(?P<z2>{Z})|between\s+(?P<a>{Z})\s+and\s+(?P<b>{Z})|(?P<c>UTC\s*[+-]\s*\d{{1,2}})\s*(?:to|-|–)\s*(?P<d>UTC\s*[+-]\s*\d{{1,2}}))",
+        r"(?i)\b(?:(?P<z1>{Z})\s*(?:time\s*zone)?\s*\(?\s*(?:\+\s*/\s*-|±|\+-|plus\s+or\s+minus)\s*(?P<n1>\d{{1,2}}|{N})\s*(?:hours?|hrs?|h)\b|within\s+(?P<n2>\d{{1,2}}|{N})\s+hours?\s+of\s+(?P<z2>{Z})|between\s+(?P<a>{Z})\s+and\s+(?P<b>{Z})|(?P<c>UTC\s*[+-]\s*\d{{1,2}})\s*(?:to|-|–)\s*(?P<d>UTC\s*[+-]\s*\d{{1,2}}))",
+        N = "one|two|three|four|five|six",
         Z = r"UTC\s*[+-]\s*\d{1,2}|GMT\s*[+-]\s*\d{1,2}|CEST|CET|EET|WET|GMT|UTC|BST|EST|EDT|ET|CST|CT|MST|MT|PST|PDT|PT|IST|SGT|AEST|AEDT|JST"
     ))
     .unwrap()
@@ -81,7 +96,16 @@ fn hours(text: &str) -> Option<(TzWindow, String)> {
     let c = HOURS.captures(text)?;
     let g = |n: &str| c.name(n).map(|m| m.as_str());
     let (from, to) = if let (Some(z), Some(n)) = (g("z1").or(g("z2")), g("n1").or(g("n2"))) {
-        let (o, n): (f64, f64) = (zone(z)?, n.parse().ok()?);
+        let n = match n.to_lowercase().as_str() {
+            "one" => 1.0,
+            "two" => 2.0,
+            "three" => 3.0,
+            "four" => 4.0,
+            "five" => 5.0,
+            "six" => 6.0,
+            d => d.parse().ok()?,
+        };
+        let o = zone(z)?;
         (o - n, o + n)
     } else {
         let (a, b) = (g("a").or(g("c"))?, g("b").or(g("d"))?);
@@ -102,6 +126,24 @@ fn hours(text: &str) -> Option<(TzWindow, String)> {
 /// willing to travel" → CO, MX, AR), stopping at the first part that isn't one.
 /// A two-letter code counts only in capitals: "US" is a place, "is" a word.
 fn places(phrase: &str, out: &mut Stated) -> bool {
+    // "one of the following states: Maine, ...", "any city within Italy",
+    // "either the New York City or Boston metro areas".
+    let had = !out.countries.is_empty() || !out.regions.is_empty();
+    let rest = FILLER
+        .iter()
+        .fold(phrase, |p, rx| rx.find(p).map_or(p, |m| &p[m.end()..]));
+    // "Europe, Singapore, or wherever you are": not a restriction.
+    if OPEN_ENDED.is_match(rest) {
+        return false;
+    }
+    // "any of the following states: AZ, CA, CO": US states, whatever their
+    // codes spell as countries (CA, CO, IN, DE...).
+    if STATES.is_match(&phrase[..phrase.len() - rest.len()]) {
+        out.countries.push("US".into());
+        out.only_cities = false;
+        return true;
+    }
+    let phrase = rest;
     let mut found = false;
     let mut cities_only = true;
     for part in phrase
@@ -143,10 +185,9 @@ fn places(phrase: &str, out: &mut Stated) -> bool {
             break;
         }
     }
-    if found && cities_only && out.regions.is_empty() {
-        out.only_cities = true;
-    } else if found {
-        out.only_cities = false;
+    // Only cities across every phrase read so far, not just this one.
+    if found {
+        out.only_cities = cities_only && (!had || out.only_cities);
     }
     found
 }
