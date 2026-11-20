@@ -7,10 +7,13 @@
 //!
 //! Each item states `region` ("Anywhere in the World", "USA Only", "Europe
 //! Only", ...), which is who may apply, and its title is "Company: Role".
+//! Some also state `country` ("🇨🇦 Canada and 🇺🇸 United States of
+//! America"): the countries the hire may be in, narrower than a region that
+//! often says "Anywhere in the World" beside it.
 use std::collections::BTreeSet;
 
 use chrono::DateTime;
-use loker_core::model::NewJob;
+use loker_core::model::{Eligibility, NewJob};
 use loker_core::normalize::{eligibility_from_text, employment_type};
 use serde_json::{Map, Value};
 
@@ -67,6 +70,27 @@ fn parse(xml: &str) -> anyhow::Result<Vec<Value>> {
         .collect())
 }
 
+/// "🇫🇷 France, 🇩🇪 Germany, and 🇬🇧 United Kingdom of Great Britain and
+/// Northern Ireland" → "France; Germany; United Kingdom of Great Britain and
+/// Northern Ireland". Each country follows its flag, so names that hold
+/// "and" stay whole.
+fn countries(field: &str) -> String {
+    let flag = |c: char| ('\u{1F1E6}'..='\u{1F1FF}').contains(&c);
+    field
+        .split(flag)
+        .map(|p| {
+            p.trim()
+                .trim_end_matches(',')
+                .trim_end_matches(", and")
+                .trim_end_matches(" and")
+                .trim_end_matches(',')
+                .trim()
+        })
+        .filter(|p| !p.is_empty())
+        .collect::<Vec<_>>()
+        .join("; ")
+}
+
 pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     let s = |k: &str| raw.get(k).and_then(Value::as_str).map(str::to_owned);
     let link = s("link").ok_or_else(|| anyhow::anyhow!("missing link"))?;
@@ -91,7 +115,25 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         seniority: None,
         category: s("category"),
         employment_type: s("type").as_deref().map(employment_type),
-        eligibility: eligibility_from_text(region.trim_end_matches(" Only"), Some(true)),
+        eligibility: match s("country")
+            .map(|c| countries(&c))
+            .filter(|c| !c.is_empty())
+        {
+            Some(places) => eligibility_from_text(&places, Some(true)),
+            // The board's default, and no evidence on its own: most postings
+            // that carry it without `country` restrict who may apply in their
+            // text (eval/eligibility: 2 of 11 open to all five viewers). It
+            // says remote, not where.
+            None if region == "Anywhere in the World" => Eligibility {
+                raw: Some(region.clone()),
+                evidence: Some(
+                    "\"Anywhere in the World\" is the board's default; the posting may say where"
+                        .into(),
+                ),
+                ..eligibility_from_text("", Some(true))
+            },
+            None => eligibility_from_text(region.trim_end_matches(" Only"), Some(true)),
+        },
         pay: None,
         tech_tags: s("skills")
             .map(|k| {

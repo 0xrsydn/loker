@@ -122,7 +122,7 @@ fn weworkremotely() -> String {
 <item>
   <media:content url="https://example.invalid/logo.png" type="image/png"/>
   <title>Initrode: Site Reliability Engineer</title>
-  <region>Anywhere in the World</region>
+  <region>Asia Only</region>
   <category>DevOps and Sysadmin</category>
   <type>Full-Time</type>
   <skills>Kubernetes, Terraform, and Go</skills>
