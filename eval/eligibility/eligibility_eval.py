@@ -5,6 +5,7 @@ DeepSeek from the whole posting. Run by hand; not part of CI. See README.md.
   python3 eligibility_eval.py parity [--db PATH]   # rebuilt eligibility vs what the snapshot stored
   python3 eligibility_eval.py sample               # draw sample.json (tuning) and holdout.json, once
   python3 eligibility_eval.py sample2              # draw holdout2.json from snapshot-h2.db, once
+  python3 eligibility_eval.py sample-workable      # draw workable.json (a new source), once
   JUDGE=opus|deepseek python3 eligibility_eval.py label [--set holdout]
   python3 eligibility_eval.py agree [--set holdout]
   python3 eligibility_eval.py score [--set holdout] [-v]
@@ -31,6 +32,12 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        # was written (the aggregators again, and 21 employer boards new to
        # loker), and snapshot-agg's jobs that no set drew and nobody read.
        # Himalayas pages 1-50 fetched with it: the first 10 were in older snapshots.
+       # A new source's first test: Workable, fetched 2026-11-20 15:10 (10
+       # pages, and 5 each for PH, ID, IN, DE), never used to write rules.
+       "workable": [os.path.join(HERE, "snapshot-workable.db")],
+       # After the Workable rules were written on `workable`: a deeper fetch
+       # (30 pages, 10 each for PH, ID, IN, DE), minus every job `workable` has.
+       "workable2": [os.path.join(HERE, "snapshot-workable2.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
@@ -41,7 +48,7 @@ MAX_CHARS = 12000
 VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
 NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia"}
 KINDS = ["yes", "maybe", "unknown", "no"]
-FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "greenhouse", "ashby", "lever"]
+FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "greenhouse", "ashby", "lever"]
 
 # What each board's fields mean, as the board documents them: what a person
 # reading the listing there would know. Not loker's reading of them.
@@ -51,6 +58,8 @@ BOARD = {
     "jobicy": "Jobicy lists remote jobs only; jobGeo is where the hire may be based.",
     "remoteok": "Remote OK lists remote jobs only; location is where the hire may be based, as the employer typed it.",
     "weworkremotely": "We Work Remotely lists remote jobs only; region is where the hire may be based.",
+    "workable": "Workable's job search across the companies hiring through Workable; workplace is remote, hybrid "
+                "or on_site and locations are the places, both as the employer set them.",
     "greenhouse": "An employer's own job board (Greenhouse); it lists on-site, hybrid and remote jobs.",
     "ashby": "An employer's own job board (Ashby); it lists on-site, hybrid and remote jobs.",
     "lever": "An employer's own job board (Lever); it lists on-site, hybrid and remote jobs.",
@@ -207,6 +216,19 @@ def sample2():
     old |= set(set_ids("sample")) | set(set_ids("holdout"))
     print(f"holdout2 ({len(old)} of {len(new)} jobs left out as already in a snapshot):")
     save("holdout2.json", draw(new, 20, 3, random.Random("elig-holdout2"), exclude=old))
+
+
+def sample_workable(name="workable"):
+    """workable.json: a new source, measured before it is trusted.
+    workable2.json: the same after its rules, from jobs `workable` doesn't have."""
+    if os.path.exists(os.path.join(HERE, f"{name}.json")):
+        sys.exit(f"{name} already drawn")
+    seen = set(jobs(DBS["workable"])) if name == "workable2" else set()
+    seen_urls = {url(l) for d in jobs(DBS["workable"]).values() for l in d["listings"]} if seen else set()
+    pool = jobs(DBS[name])
+    old = seen | {j for j, d in pool.items() if any(url(l) in seen_urls for l in d["listings"])}
+    print(f"{name} ({len(old & set(pool))} of {len(pool)} left out as already in `workable`):")
+    save(f"{name}.json", draw(pool, 60, 3, random.Random(f"elig-{name}"), exclude=old))
 
 
 def set_ids(name=None):
@@ -371,7 +393,7 @@ def score():
         fr = [r for r in rows if family(primary(js[r[0]])["source"]) == f]
         fy, fn = [r for r in fr if r[3] == "yes"], [r for r in fr if r[3] == "no"]
         print(f"    {f:15} {sum(r[2] != 'yes' for r in fy):3}/{len(fy):<4} {sum(r[2] == 'yes' for r in fn):3}/{len(fn):<4}")
-    if "-v" in sys.argv and SET not in ("holdout", "holdout2"):
+    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable2"):
         bad = sorted({r[0] for r in rows if (r[3] == "yes" and r[2] != "yes") or (r[3] == "no" and r[2] == "yes")})
         for j in bad:
             print(f"\n{j} [{primary(js[j])['source']}] {js[j]['title'][:60]}")
@@ -381,7 +403,7 @@ def score():
 
 
 if __name__ == "__main__":
-    cmds = {"parity": parity, "sample": sample, "sample2": sample2, "label": label, "agree": agree, "score": score}
+    cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"), "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()

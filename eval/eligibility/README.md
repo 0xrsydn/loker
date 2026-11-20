@@ -138,6 +138,33 @@ maybe against yes; DeepSeek's 6 wrong noes are jobs it reads as open where
 Opus doesn't. No Lever board was new, so Lever has no unseen test since
 `holdout`. `holdout2` is now used; the next change needs a new one.
 
+### Workable (a new source, 2026-11-20)
+
+`workable.json` (60 jobs, 46 companies) was Workable's first test, before
+any rule looked at it: yes right 39/42, but 33 (Opus) or 66 (DeepSeek)
+wrong noes. A remote job's Workable place is the employer's, not a limit:
+17 of 60 said "work from anywhere", "we hire worldwide", "based outside the
+US" or named other places. The adapter now lets places the description
+names win, gives no claim when the description suggests it is open wider
+(`eligibility_text::open_wider`, used only to hold back a no), and keeps
+Workable's place otherwise. On `workable.json`, now tuning: wrong noes
+33 -> 5 / 66 -> 13.
+
+`workable2.json` (60 jobs fetched after, none in `workable`), scored once:
+
+| judge | yes right | wrong yes | no right | wrong no |
+|---|---|---|---|---|
+| Opus | 29/38 | 4 | 233/247 | 11 |
+| DeepSeek | 29/38 | 6 | 222/247 | 21 |
+
+Weaker than the other sources (holdout2: 43/48 and 367/379). The misses:
+jobs the employer marked remote that aren't ("field-based ... travel to
+patients' homes"), a "Location:" line in the description ("Location:
+Remote – LATAM", "Location: Bangladesh, India, ..."), "open to candidates
+worldwide" read but not used by the Workable rule (a bug), and "live
+wherever you like". Workable stays opt-in until a round on these is
+checked on a fresh set.
+
 Citizenship and clearance are deferred, on purpose. Of the tuning
 snapshot's 1,749 jobs, 178 state citizenship, permanent residency or a
 clearance outside equal-opportunity text, and the location verdict already
