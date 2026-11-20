@@ -199,22 +199,8 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
     let raw_count = raw.len() as u32;
     let (mut jobs, mut errors) = (Vec::new(), Vec::new());
     for item in raw {
-        match source.transform(item) {
-            Ok(mut job) => {
-                if let Some(name) = &p.company {
-                    job.company = name.clone();
-                }
-                // The board says what its postings don't: re-read their
-                // location with that fact. Explicit on-site/hybrid/remote stays.
-                if let Some(remote) = p.remote
-                    && job.eligibility.scope == Scope::Unknown
-                {
-                    let raw = job.eligibility.raw.clone().unwrap_or_default();
-                    job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
-                }
-                normalize::tidy(&mut job);
-                jobs.push(job)
-            }
+        match job_from_raw(&source, item, p.company.as_deref(), p.remote) {
+            Ok(job) => jobs.push(job),
             Err(e) => errors.push(format!("{e:#}")),
         }
     }
@@ -225,6 +211,32 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
         errors,
         complete_ids,
     })
+}
+
+/// One raw item as loker stores it: the adapter's transform, the board's
+/// company name and remote flag (see `IngestParams`), then the cleanups every
+/// job gets. Ingest uses it, and so does `examples/eligibility.rs`, which
+/// re-reads stored raw items with the current rules.
+pub fn job_from_raw(
+    source: &Source,
+    raw: Value,
+    company: Option<&str>,
+    remote: Option<bool>,
+) -> anyhow::Result<NewJob> {
+    let mut job = source.transform(raw)?;
+    if let Some(name) = company {
+        job.company = name.to_string();
+    }
+    // The board says what its postings don't: re-read their location with
+    // that fact. Explicit on-site/hybrid/remote stays.
+    if let Some(remote) = remote
+        && job.eligibility.scope == Scope::Unknown
+    {
+        let raw = job.eligibility.raw.clone().unwrap_or_default();
+        job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
+    }
+    normalize::tidy(&mut job);
+    Ok(job)
 }
 
 /// Fetch one source once and store the result. Fetch failures are recorded in
