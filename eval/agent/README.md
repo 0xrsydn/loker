@@ -64,9 +64,9 @@ Limits:
 - `meta.json` (binary hash, version, snapshot, agent model) is recorded
   from now on; earlier runs are named after the git HEAD, but `--bin` could
   have been any build.
-- The latest runs predate typed pay (388a92a) and visa (24880fa), which
-  added fields to every result: the characters and tokens below are not
-  what an agent reads today.
+- Runs before 1af5861 predate typed pay (388a92a) and visa (24880fa),
+  which added fields to every result; compare characters and tokens only
+  between runs of the same code.
 
 ## Results log
 
@@ -123,6 +123,7 @@ fails 2 of 3 runs on one off-role pick each.
 | 93c1c9f (before roles) | 5.6 | 51 | 57 | 0.009 | 17 | 100% | 97% | 93% |
 | 1a0922e (roles, `role` filter, list_roles) | 4.5 | 32 | 37 | 0.006 | 15 | 100% | 100% | 100% |
 | 163403f + Jev answers (`eval/role/snapshot-jev.db`) | 4.7 | 30 | 36 | 0.006 | 14 | 100% | 99% | 93% |
+| 1af5861 (+ typed pay, visa; first run with `meta.json`) | 4.8 | 31 | 37 | 0.006 | 19 | 100% | 97% | 93% |
 
 Agents used the `role` filter in 23 of 68 calls (`data_engineering`,
 `backend`, design and AI roles) and list_roles twice. Characters read fell
@@ -134,4 +135,11 @@ these tasks' good jobs have titles that name the role, which the rules
 already get right. The one failure is a design run that stopped at 4 of 7
 good jobs after searching only `minVerdict: yes`; all 7 carry a design role.
 Jev's gain shows on jobs with vague titles, which these tasks rarely need.
+
+At 1af5861 (rules only, no Jev answers) the truth is unchanged and so is
+what agents read: typed pay and visa cost about nothing (31K characters a
+run against 32K at 1a0922e). The one failure is the same as Jev's: a design
+run that searched only `minVerdict: yes` (and gave the UK a UTC+1 offset
+in November) and stopped at 3 of 7 good jobs. Twice now, the scarcest task
+has failed by leaving out `maybe` jobs.
 
