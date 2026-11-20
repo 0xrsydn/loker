@@ -50,3 +50,33 @@ fn workplace_and_locations_say_who_may_apply() {
         Scope::Onsite
     );
 }
+
+/// A remote job's place is the employer's, not a limit: the description decides.
+#[test]
+fn the_description_settles_a_remote_place() {
+    let job = |text: &str| {
+        transform(json!({
+            "id": "j1", "url": "https://jobs.workable.com/view/abc/dev", "title": "Developer",
+            "company": {"title": "Acme"}, "workplace": "remote",
+            "locations": ["TELECOMMUTE", "Berlin, Berlin, Germany"],
+            "description": format!("<p>{text}</p>"),
+        }))
+        .unwrap()
+        .eligibility
+    };
+    let named = job("We recruit remotely in EMEA.");
+    assert_eq!(
+        (named.scope, named.regions),
+        (Scope::Region, vec!["EMEA".to_string()])
+    );
+    for wider in [
+        "Fully remote, based outside the US.",
+        "<strong>Location:</strong> International",
+        "Work from anywhere.",
+        "This remote position is open to candidates worldwide.",
+        "You have the freedom to live wherever you like.",
+    ] {
+        assert_eq!(job(wider).scope, Scope::Unknown, "{wider}");
+    }
+    assert_eq!(job("Build things.").countries, vec!["DE".to_string()]);
+}

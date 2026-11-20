@@ -56,7 +56,21 @@ fn places_and_hours_read_from_descriptions() {
             &[],
             Some((-2.0, 4.0)),
         ),
+        ("**Location:** Remote – LATAM", &["LATAM"], None),
+        (
+            "Sourcing Location : South Africa/Philippines",
+            &["PH", "ZA"],
+            None,
+        ),
+        (
+            "Location: Bangladesh, India, Pakistan, Indonesia",
+            &["BD", "ID", "IN", "PK"],
+            None,
+        ),
         // Not where the hire must be.
+        ("Office location: Berlin", &[], None),
+        ("Location: San Francisco or Singapore", &[], None),
+        ("Location: Remote", &[], None),
         ("Our team is based in Berlin.", &[], None),
         ("We serve customers based in the US.", &[], None),
         (

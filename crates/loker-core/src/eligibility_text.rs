@@ -25,7 +25,7 @@ pub struct Stated {
 /// A phrase that says where the hire must be, followed by the place.
 static WHERE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
-        r"(?i)\b(?:(?:located|based)\s+in\s+and\s+(?:authori[sz]ed|eligible)\s+to\s+work\s+in|(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|(?:hiring|hire|recruiting)\s+(?:for\s+this\s+(?:role|position)\s+)?(?:across|in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+(?:remotely\s+)?in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;!?()\n]{2,120})",
+        r"(?i)\b(?:location\s*:\s*(?:(?:fully\s+)?remote\s*(?:[-–—,(]|\bin\b|\bfrom\b)?)?|(?:located|based)\s+in\s+and\s+(?:authori[sz]ed|eligible)\s+to\s+work\s+in|(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|(?:hiring|hire|recruiting)\s+(?:for\s+this\s+(?:role|position)\s+)?(?:across|in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+(?:remotely\s+)?in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;!?()\n]{2,120})",
     )
     .unwrap()
 });
@@ -125,6 +125,19 @@ fn hours(text: &str) -> Option<(TzWindow, String)> {
 /// The leading places of a phrase ("Colombia, Mexico, or Argentina and
 /// willing to travel" → CO, MX, AR), stopping at the first part that isn't one.
 /// A two-letter code counts only in capitals: "US" is a place, "is" a word.
+fn names_a_city(phrase: &str) -> bool {
+    phrase
+        .split([',', '/', '|', ';'])
+        .flat_map(|p| p.split(" or "))
+        .flat_map(|p| p.split(" and "))
+        .any(|p| {
+            matches!(
+                crate::normalize::place(&p.trim().to_lowercase()),
+                Some(crate::normalize::Place::City(_))
+            )
+        })
+}
+
 fn places(phrase: &str, out: &mut Stated) -> bool {
     // "one of the following states: Maine, ...", "any city within Italy",
     // "either the New York City or Boston metro areas".
@@ -209,7 +222,7 @@ fn window(s: &str, mut a: usize, b: usize) -> &str {
 /// the labelers split on these, read against a board's place.
 pub fn open_wider(text: &str) -> bool {
     static OPEN: LazyLock<Regex> = LazyLock::new(|| {
-        Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b").unwrap()
+        Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\bwherever\s+you\s+(?:like|want|choose|prefer)\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b").unwrap()
     });
     // "work from anywhere", but not "work from anywhere in the US".
     static ANYWHERE: LazyLock<Regex> = LazyLock::new(|| {
@@ -246,8 +259,24 @@ pub fn stated(text: &str) -> Option<Stated> {
         if NOT_THE_HIRE.is_match(clause) {
             continue;
         }
+        // "Location: San Francisco or Singapore" is where the offices are; a
+        // "Location:" line counts when it says remote or names no city.
+        let line = all.as_str().trim_start().to_lowercase();
+        if line.starts_with("location") && !line.contains("remote") && names_a_city(phrase.as_str())
+        {
+            continue;
+        }
         if places(phrase.as_str(), &mut out) {
             out.evidence.push(all.as_str().trim().to_string());
+        } else {
+            // "Location: Fully remote, based in Colombia": the place is behind
+            // a second phrase inside this one.
+            for inner in WHERE.captures_iter(phrase.as_str()) {
+                if places(inner.get(1).unwrap().as_str(), &mut out) {
+                    out.evidence
+                        .push(inner.get(0).unwrap().as_str().trim().to_string());
+                }
+            }
         }
     }
     if out.countries.is_empty() && out.regions.is_empty() {

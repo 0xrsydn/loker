@@ -152,7 +152,9 @@ fn remote(place: &str, description: &str) -> Eligibility {
             ..eligibility_from_text(&named, Some(true))
         };
     }
-    if eligibility_text::open_wider(description) {
+    // "open to candidates worldwide" (read as worldwide afterwards) or looser.
+    let worldwide = eligibility_text::stated(description).is_some_and(|s| s.worldwide);
+    if worldwide || eligibility_text::open_wider(description) {
         return Eligibility {
             raw,
             evidence: Some(
