@@ -268,7 +268,7 @@ def agree():
 def predicted(binary, ids, t):
     lines = "".join(json.dumps({"id": j, "text": t[j]["description"]}) + "\n" for j in ids)
     out = subprocess.run([binary], input=lines, capture_output=True, text=True, check=True).stdout
-    return {r["id"]: r["visa"] for r in map(json.loads, out.splitlines())}
+    return {r["id"]: r["visa"] for r in (json.loads(l) for l in out.split("\n") if l)}
 
 
 def score():

@@ -265,7 +265,7 @@ def predicted(binary, ids):
     texts = descriptions(set(ids))
     lines = "".join(json.dumps({"id": j, "text": texts[j]["description"]}) + "\n" for j in ids)
     out = subprocess.run([binary], input=lines, capture_output=True, text=True, check=True).stdout
-    return {r["id"]: r["pay"] for r in map(json.loads, out.splitlines())}
+    return {r["id"]: r["pay"] for r in (json.loads(l) for l in out.split("\n") if l)}
 
 
 def templates(desc):
