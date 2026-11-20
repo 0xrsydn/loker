@@ -195,6 +195,10 @@
   "grade": 0,
   "reason": "Sales role"
  },
+ "backend-id|j_199698114b": {
+  "grade": 0,
+  "reason": "This is a crypto market analyst role, not software engineering."
+ },
  "backend-id|j_19db4389c5": {
   "grade": 0,
   "reason": "Sales role"
@@ -1971,6 +1975,10 @@
   "grade": 0,
   "reason": "Sales role"
  },
+ "data-de|j_09b0444aed": {
+  "grade": 0,
+  "reason": "Strategy & operations coaching role, nothing to do with data engineering."
+ },
  "data-de|j_0a40723564": {
   "grade": 0,
   "reason": "Capacity planning, not data engineering"
@@ -2070,6 +2078,10 @@
  "data-de|j_1883ab1107": {
   "grade": 0,
   "reason": "Sales role about data protection, not data engineering"
+ },
+ "data-de|j_199698114b": {
+  "grade": 0,
+  "reason": "Crypto market analyst role, not data engineering."
  },
  "data-de|j_19db4389c5": {
   "grade": 0,
@@ -2263,6 +2275,10 @@
   "grade": 0,
   "reason": "Marketing"
  },
+ "data-de|j_373cae5f16": {
+  "grade": 0,
+  "reason": "Business development role at a Web3 company."
+ },
  "data-de|j_37aa111220": {
   "grade": 0,
   "reason": "Product management"
@@ -2427,6 +2443,10 @@
   "grade": 0,
   "reason": "Recruiting"
  },
+ "data-de|j_51e8e9813d": {
+  "grade": 1,
+  "reason": "General software engineering role covering integrations and automation. It isn't a data engineering role."
+ },
  "data-de|j_52078af5ea": {
   "grade": 0,
   "reason": "Physical AI data capture with robotics; not data engineering."
@@ -2562,6 +2582,10 @@
  "data-de|j_63dab1ed71": {
   "grade": 0,
   "reason": "Sales/solutions consulting"
+ },
+ "data-de|j_655819ce01": {
+  "grade": 3,
+  "reason": "Senior data engineer role building ingestion pipelines, orchestration with tools like Airflow or Dagster, and a data platform."
  },
  "data-de|j_65a3ec8461": {
   "grade": 0,
@@ -3299,6 +3323,10 @@
   "grade": 0,
   "reason": "Tax role"
  },
+ "data-de|j_cbc701b73d": {
+  "grade": 1,
+  "reason": "Cloud architecture and migration role. Related infrastructure work, but not data engineering."
+ },
  "data-de|j_cc57ff2e1d": {
   "grade": 0,
   "reason": "Sales role"
@@ -3711,6 +3739,10 @@
   "grade": 0,
   "reason": "Sales role"
  },
+ "designer-gb|j_09b0444aed": {
+  "grade": 0,
+  "reason": "This is a strategy and operations coaching role, not design."
+ },
  "designer-gb|j_0a40723564": {
   "grade": 0,
   "reason": "Capacity planning role"
@@ -3818,6 +3850,10 @@
  "designer-gb|j_1883ab1107": {
   "grade": 0,
   "reason": "Sales"
+ },
+ "designer-gb|j_199698114b": {
+  "grade": 0,
+  "reason": "This is a crypto market analyst role."
  },
  "designer-gb|j_19db4389c5": {
   "grade": 0,
@@ -4027,6 +4063,10 @@
   "grade": 0,
   "reason": "Marketing campaign role"
  },
+ "designer-gb|j_373cae5f16": {
+  "grade": 0,
+  "reason": "This is a business development role."
+ },
  "designer-gb|j_37aa111220": {
   "grade": 1,
   "reason": "Product management works next to design but isn't a design role"
@@ -4199,6 +4239,10 @@
   "grade": 0,
   "reason": "Recruiting role"
  },
+ "designer-gb|j_51e8e9813d": {
+  "grade": 0,
+  "reason": "This is a software engineering role. It covers frontend work but not design."
+ },
  "designer-gb|j_52078af5ea": {
   "grade": 0,
   "reason": "Robotics data capture"
@@ -4338,6 +4382,10 @@
  "designer-gb|j_63dab1ed71": {
   "grade": 0,
   "reason": "Solutions consultant/sales"
+ },
+ "designer-gb|j_655819ce01": {
+  "grade": 0,
+  "reason": "This is a data engineering role."
  },
  "designer-gb|j_65a3ec8461": {
   "grade": 0,
@@ -5111,6 +5159,10 @@
   "grade": 0,
   "reason": "Tax role"
  },
+ "designer-gb|j_cbc701b73d": {
+  "grade": 0,
+  "reason": "This is a cloud architecture role."
+ },
  "designer-gb|j_cc57ff2e1d": {
   "grade": 0,
   "reason": "Sales role"
@@ -5455,6 +5507,10 @@
   "grade": 0,
   "reason": "AI research role on model distillation, not design."
  },
+ "designer-gb|j_fcb61411b1": {
+  "grade": 0,
+  "reason": "This is an AI research grant for benchmarks, not a design role."
+ },
  "designer-gb|j_fd47b687ce": {
   "grade": 0,
   "reason": "Social media marketing role; creates content but isn't product/UX/UI design."
@@ -5658,6 +5714,10 @@
  "devops-ph|j_1883ab1107": {
   "grade": 0,
   "reason": "Sales role"
+ },
+ "devops-ph|j_199698114b": {
+  "grade": 0,
+  "reason": "Crypto market analyst role. It has nothing to do with DevOps, SRE or infrastructure work."
  },
  "devops-ph|j_19db4389c5": {
   "grade": 0,
@@ -7287,6 +7347,10 @@
   "grade": 0,
   "reason": "AI research on model distillation."
  },
+ "devops-ph|j_fd153de64a": {
+  "grade": 1,
+  "reason": "HIL (hardware-in-the-loop) support likely means supporting test lab systems, which is only loosely related to infrastructure work. The description shown covers only benefits, so the role is unclear."
+ },
  "devops-ph|j_fd47b687ce": {
   "grade": 0,
   "reason": "Social media marketing role."
@@ -7490,6 +7554,10 @@
  "ml-in|j_1883ab1107": {
   "grade": 0,
   "reason": "Sales role"
+ },
+ "ml-in|j_199698114b": {
+  "grade": 0,
+  "reason": "Crypto market analyst role, no ML engineering."
  },
  "ml-in|j_19db4389c5": {
   "grade": 0,
