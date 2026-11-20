@@ -43,6 +43,7 @@ eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); 
 eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
 eval/pay/                manual eval of pay read from descriptions, with a holdout; not in CI
 eval/visa/               manual eval of visa sponsorship read from descriptions; not in CI
+eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 ```
 
