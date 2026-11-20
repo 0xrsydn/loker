@@ -179,6 +179,26 @@
    "US": "no"
   }
  },
+ "v1|j_0cdcc4b9e1": {
+  "evidence": "\"jobGeo\": \"Germany\"; no working hours specified",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0d0359439d": {
+  "evidence": "This will be a hybrid role based in our San Francisco office. Must be located in the San Francisco Bay area. Must be authorized to work in the U.S. without the need for current or future employer sponsorship.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0d03df47e0": {
   "evidence": "\"As an Enterprise Account Executive, based in Singapore\"; board: \"workplaceType\": \"hybrid\"",
   "verdicts": {
@@ -227,6 +247,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_11c7288199": {
+  "evidence": "Description says 'Based in our New York City office', 'All interns are considered hybrid employees, designated the 'in office' working model and are expected to be in their office location 3-5 days a week', and 'Must be authorized to work in the United States.'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_13526e315a": {
@@ -309,6 +339,16 @@
    "US": "yes"
   }
  },
+ "v1|j_169ed6964d": {
+  "evidence": "\"jobGeo\": \"Germany\"; no working hours specified",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_16ae49b111": {
   "evidence": "Location This is a fully on-site role based in San Francisco, CA. Candidates must be willing to work in-office.",
   "verdicts": {
@@ -317,6 +357,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_16fafa6c2e": {
+  "evidence": "Description: \"This is a full-time remote position based out of the US (EST Time Zone).\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_1717f88628": {
@@ -369,8 +419,28 @@
    "US": "yes"
   }
  },
+ "v1|j_19d053d259": {
+  "evidence": "\"This position may be performed remotely in most states within the US, with some exclusions\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_1a63025e7e": {
   "evidence": "workplaceType: hybrid; \"Many teams do offer hybrid options (WFH a day or two a week)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1a8aea00d7": {
+  "evidence": "\"Based in Canada\" and \"legally authorized to work in Canada\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -397,6 +467,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_1ac43ed3ab": {
+  "evidence": "The role is fully remote, open anywhere in the US.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_1c4b609a51": {
@@ -439,8 +519,28 @@
    "US": "no"
   }
  },
+ "v1|j_1d5871deaf": {
+  "evidence": "Board field location: \"US Only\"; Remote OK lists remote jobs only; no other countries or required hours mentioned.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_1e76cef320": {
   "evidence": "workplaceType: onsite; \"If the posting is specified as Onsite, you are required to work from an office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1fe7a35020": {
+  "evidence": "jobGeo: Mexico",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -499,6 +599,26 @@
    "US": "no"
   }
  },
+ "v1|j_233f919c41": {
+  "evidence": "This is a remote role that can be based anywhere in Ireland.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_23de7811a2": {
+  "evidence": "Board field location: \"US Only\"; description: \"This role is remote but may require flexible working hours\" (no specific required hours that rule out US offset).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_24b338e238": {
   "evidence": "\"Looking for Australian visa holders willing to stay in our Global Hubs for an initial onboarding period of 12 months before relocating into one of our local offices in the APAC market.\"",
   "verdicts": {
@@ -529,6 +649,16 @@
    "US": "yes"
   }
  },
+ "v1|j_265171a845": {
+  "evidence": "Employees are expected to be on-site 3 days per week (Monday, Tuesday, and Thursday); workplaceType: Hybrid; location: San Francisco, CA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2732f91681": {
   "evidence": "Board location: 'Taiwan' and office Taiwan; description only includes general 'Remote-first, work-from-home arrangement'. Only Taiwan is listed; none of the viewers are in Taiwan.",
   "verdicts": {
@@ -549,8 +679,28 @@
    "US": "no"
   }
  },
+ "v1|j_2828a917c8": {
+  "evidence": "Board addressCountry: \"US | EU\", location: \"Remote\", workplaceType: \"Remote\"; description: \"We are a natively remote company.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_28a54c62c9": {
   "evidence": "Board region: 'USA Only'; description says 'full-time or part-time REMOTE position' and can work on your own schedule.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_28fd2a3dfb": {
+  "evidence": "Board field location: \"US Only\"; description: \"we’re looking for someone located in the U.S.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -609,6 +759,16 @@
    "US": "no"
   }
  },
+ "v1|j_2d33106c98": {
+  "evidence": "This role is hybrid with three days a week onsite at our Boston or San Francisco office; workplaceType: Hybrid",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2d6f18bb01": {
   "evidence": "\"A flexible working model built around the field, spending 70 to 80% of your time with merchants and partners across your region\" in Denmark",
   "verdicts": {
@@ -639,6 +799,16 @@
    "US": "no"
   }
  },
+ "v1|j_2edd85f510": {
+  "evidence": "Board region: Anywhere in the World; description has no location restriction beyond 'Headquarters: US- Remote'.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_2ee9c390bc": {
   "evidence": "Location: 'Brazil'; description states 'Remote-first, work-from-home arrangement'",
   "verdicts": {
@@ -657,6 +827,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2f85012df4": {
+  "evidence": "Board fields: \"locationRestrictions\": [\"United States\"], \"timezoneRestrictions\": [-10, -9, -8, -7, -6, -5, 14]; Description: \"This position may be performed remotely anywhere within the United States except the state of Alaska.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_30ff05e838": {
@@ -709,6 +889,16 @@
    "US": "no"
   }
  },
+ "v1|j_3390d40e29": {
+  "evidence": "Board fields: \"locationRestrictions\": [\"United States\"], \"timezoneRestrictions\": [-10, -9, -8, -7, -6, -5, 14]; Himalayas lists remote jobs only; description has no narrower location.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_33a16a53a7": {
   "evidence": "Board country=DE, workplaceType=hybrid; Description: 'Hybrid remote policy - 3 days office / 2 days home-office.'",
   "verdicts": {
@@ -727,6 +917,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_346df0c0de": {
+  "evidence": "location: \"Remote U.S.\", addressCountry: \"USA\"; Work Authorization Requirements: \"You must be authorized to work in the United States without the need for employer sponsorship.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_34b535675e": {
@@ -849,6 +1049,16 @@
    "US": "no"
   }
  },
+ "v1|j_3a16206047": {
+  "evidence": "\"This is a unique role within PostHog and, as such, is a hybrid-remote position based out of our London office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3a600b908d": {
   "evidence": "\"Location: Berlin\" and \"Hybrid, 2 days working from home per week\"",
   "verdicts": {
@@ -889,6 +1099,16 @@
    "US": "no"
   }
  },
+ "v1|j_3e60573854": {
+  "evidence": "Board fields show location \"Vienna, Austria\" and workplaceType \"Hybrid\"; description has no remote statement.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3ecc47d190": {
   "evidence": "Board lists 'US - Remote' and isRemote true, but description says 'Work on site with partner teams' and 'Willingness to travel and spend multi-week stretches on site with partner teams'; the more specific on-site requirement rules out remote-from-home work for US, and other countries are not listed as allowed.",
   "verdicts": {
@@ -901,6 +1121,16 @@
  },
  "v1|j_40dd6aeab0": {
   "evidence": "Location: 'Hong Kong'; no viewer country listed",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4102320415": {
+  "evidence": "Board fields: \"locationRestrictions\": [\"Canada\"], \"timezoneRestrictions\": [-7, -6, -5, -4, -3.5]; Description: \"Fully remote within Canada\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1039,6 +1269,16 @@
    "US": "yes"
   }
  },
+ "v1|j_4a17db0ef2": {
+  "evidence": "Proof of eligibility to work in the United States is required; We expect employees to be in the office at least three days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_4b66819641": {
   "evidence": "Board location 'Paris, France' and workplaceType 'Hybrid'; description says 'open to a hybrid field role'; hybrid at the Paris office rules out all remote-from-home viewers, and only France is listed.",
   "verdicts": {
@@ -1047,6 +1287,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_4e0b2f46b4": {
+  "evidence": "Board fields show location \"US-CA-Menlo Park\" and workplaceType null; description has no remote statement.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_4e42c64d8c": {
@@ -1117,6 +1367,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_546e818c04": {
+  "evidence": "This role will need to be in the office for in-person collaboration 1-2 times/quarter; US based applicants only",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_549851e59b": {
@@ -1199,6 +1459,16 @@
    "US": "no"
   }
  },
+ "v1|j_5ab35a44f0": {
+  "evidence": "This role will be based remotely in the EMEA or Americas regions",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_5b97965c16": {
   "evidence": "Location This role will be remote, and based in the United States.",
   "verdicts": {
@@ -1251,6 +1521,16 @@
  },
  "v1|j_5f54f11ce1": {
   "evidence": "Board location is \"Ireland\" and office is \"Greece\"; no remote language for this role.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_606d27a997": {
+  "evidence": "Headquarters: CA - San Francisco HQ; CA-Remote (remote in California only); We are unable to accommodate remote work from Hawaii, Alaska or Puerto Rico at this time.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1349,6 +1629,26 @@
    "US": "no"
   }
  },
+ "v1|j_649c106ebf": {
+  "evidence": "Board field location: \"US Only\"; description: \"Location and Territory: Atlanta/Tennessee\" (more specific than US Only, but no explicit remote statement for that location, so US viewer is maybe; non-US ruled out by US Only).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_657deb2c0a": {
+  "evidence": "Board field region: 'Anywhere in the World'; description 'Headquarters:** Europe - Remote' does not restrict location; shift hours have no timezone specified.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_66897f2a33": {
   "evidence": "Location: 'United Arab Emirates; United Kingdom'; no global remote specified.",
   "verdicts": {
@@ -1359,8 +1659,28 @@
    "US": "no"
   }
  },
+ "v1|j_6776be97d0": {
+  "evidence": "Board fields: \"locationRestrictions\": [\"Poland\"], \"timezoneRestrictions\": [1]; Description: \"Long-term cooperation on an as-needed basis, with potential part-time assignments and travel to the client’s office if required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_67cfc00ad0": {
   "evidence": "board fields: country GB, workplaceType onsite; description: \"If the posting is specified as Onsite, you are required to work from an office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_681fc176e6": {
+  "evidence": "locationRestrictions: ['Australia', 'Christmas Island', 'Cocos (Keeling) Islands', 'New Zealand', 'Norfolk Island']; description says 'based in ANZ'",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1386,6 +1706,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_688894546d": {
+  "evidence": "Bengaluru, India; #LI-Hybrid",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -1439,6 +1769,16 @@
    "US": "no"
   }
  },
+ "v1|j_6968e186e7": {
+  "evidence": "jobGeo: USA; fully remote",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_6a5cb48382": {
   "evidence": "Board location is San Francisco, California, USA; description says 'We operate as a hybrid workplace' and '#LI-Hybrid', so it is hybrid at the San Francisco office.",
   "verdicts": {
@@ -1451,6 +1791,16 @@
  },
  "v1|j_6a68a64a0a": {
   "evidence": "jobGeo: USA; Description: 'This role may be performed fully remotely within the United States.'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_6ce7ef34ff": {
+  "evidence": "locationRestrictions: ['United States']; timezoneRestrictions includes -5; description says 'Work location: Remote' and 'Applicable to US Applicants Only'",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1489,6 +1839,16 @@
    "US": "yes"
   }
  },
+ "v1|j_707117dac2": {
+  "evidence": "Headquarters: Remote - US; Location: 'This role will be remote, but is not eligible to be hired in CA, CT, NJ, NY, PA, WA.' Implies US-based remote, excluding certain states; US viewer state unknown, others outside US not eligible.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_70dcca2e23": {
   "evidence": "Description: 'This role is based in our London Head Office (The River Building) and follows our hybrid working approach, with an expectation of around 60% of your time in the office.'",
   "verdicts": {
@@ -1497,6 +1857,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_7123cf1c6e": {
+  "evidence": "This position may be performed remotely in most states within the US, with some exclusions",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_714fd1dade": {
@@ -1539,6 +1909,26 @@
    "US": "yes"
   }
  },
+ "v1|j_7364e9a425": {
+  "evidence": "This role will be in-office on a hybrid schedule — Team Members will be expected to work in the office at least 3 days per week",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_751dbb9e5b": {
+  "evidence": "jobGeo: 'USA'; description: 'This position may be performed remotely in most states within the US'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_776d319ed1": {
   "evidence": "Job is on-site: 'Based in London or Paris and on-site five days a week'; board workplaceType OnSite.",
   "verdicts": {
@@ -1547,6 +1937,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_77e97f83ee": {
+  "evidence": "Board location: \"US Only\"; Remote OK lists remote jobs only, so remote from US only.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_78319b67ed": {
@@ -1649,6 +2049,16 @@
    "US": "no"
   }
  },
+ "v1|j_7b476cbd1e": {
+  "evidence": "jobGeo: 'EMEA, LATAM, Canada, USA'",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_7ba3ae64cc": {
   "evidence": "jobGeo: USA; Jobicy lists remote jobs only.",
   "verdicts": {
@@ -1667,6 +2077,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_7d316da3ea": {
+  "evidence": "Headquarters: Remote - US; pay zones: 'Zone 3: All other US locations' and 'Within the United States, our geographic pay zones...' Indicates US-only.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_7d9b5bb8cc": {
@@ -1709,6 +2129,16 @@
    "US": "no"
   }
  },
+ "v1|j_80112af983": {
+  "evidence": "Board fields: location \"Remote, US \"; offices \"Remote - USA\". No required working hours.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_804366d6ae": {
   "evidence": "Description: \"Location: San Francisco or Singapore (on-site), or remote (Singapore or US Pacific time zones)\"",
   "verdicts": {
@@ -1739,6 +2169,16 @@
    "US": "no"
   }
  },
+ "v1|j_80d4ba81de": {
+  "evidence": "Board fields: location \"Remote, US\"; offices \"Remote - USA\".",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_81ce29250e": {
   "evidence": "\"Based in Europe or a nearby time zone, with at least 2 to 3 hours of daily overlap with CET\"; \"anywhere in Europe or nearby time zones\"",
   "verdicts": {
@@ -1747,6 +2187,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_829929cb4b": {
+  "evidence": "Board fields: location \"US - Remote\"; description: \"This role can either be fully remote depending on which US state you live in, or based in our Chicago office with an office-centric hybrid schedule.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_83fc366cfb": {
@@ -1779,6 +2229,16 @@
    "US": "no"
   }
  },
+ "v1|j_85ca41fd9b": {
+  "evidence": "jobGeo: 'USA'; description: 'This is a full-time, fully remote position...'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_85f4b396c0": {
   "evidence": "Board country=FR, workplaceType=hybrid; Description: 'Hybrid position : 2 days at the office per week'.",
   "verdicts": {
@@ -1791,6 +2251,26 @@
  },
  "v1|j_8686038a15": {
   "evidence": "addressCountry: \"France\", addressLocality: \"Metz\"; workplaceType: \"Remote\"; title: \"Télétravail complet possible\"; no other country allowed",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_868c2b0ffb": {
+  "evidence": "Board fields: location \"Singapore\"; offices \"Singapore\". No statement allowing remote work from other countries.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_87bba3c4a6": {
+  "evidence": "Ce poste sera en présentiel selon un calendrier hybride - les membres de l'équipe devront travailler au bureau 3 jours par semaine, les lundis, mercredis et jeudis.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1829,6 +2309,16 @@
    "US": "no"
   }
  },
+ "v1|j_8d9d02592d": {
+  "evidence": "\"Employees are expected to be on-site 3 days per week (Monday, Tuesday, and Thursday)\"; board fields location \"San Francisco, CA\".",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_8daa145b01": {
   "evidence": "Board locationRestrictions empty; timezoneRestrictions includes all viewer offsets. Description: \"Async-first, with a few hours of overlap with CET\"—all viewer offsets can overlap some hours with CET; no location restriction.",
   "verdicts": {
@@ -1837,6 +2327,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_8dbc9e5b90": {
+  "evidence": "'Whilst the role can be worked remotely anywhere in Germany or London, UK.' Only Germany or London, UK allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_8ddb22bd26": {
@@ -1851,6 +2351,16 @@
  },
  "v1|j_8e439fbcc3": {
   "evidence": "Description: \"This job is a remote position. You can work anywhere in the Philippines.\" and \"Job opening exclusive only to Filipino locals.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8f23b7ee29": {
+  "evidence": "locationRestrictions: ['Portugal']; description: 'We seek team members who live in Portugal or are willing and legally qualified to live and work there'",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1899,6 +2409,26 @@
    "US": "yes"
   }
  },
+ "v1|j_92c05874a2": {
+  "evidence": "board locationRestrictions: ['Argentina','Chile','Colombia','Mexico','Peru','Spain']; description: 'open to candidates based in 6 countries, including Spain, Mexico, Argentina, Colombia, Chile, Peru'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_9311c850b4": {
+  "evidence": "jobGeo: 'Germany'; title/description require German (Germany)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_936f971f7a": {
   "evidence": "Description: \"No fixed hours, work from anywhere.\" and \"fully remote\".",
   "verdicts": {
@@ -1909,8 +2439,38 @@
    "US": "yes"
   }
  },
+ "v1|j_94e5ad7b68": {
+  "evidence": "Description: 'Location: Remote Canada, Pacific Time (PST) working hours required'. Board location NAMER is superseded by the more specific description restricting to Canada.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_94f762ca7d": {
   "evidence": "Board fields: country 'FR', workplaceType 'hybrid'; description mentions hybrid work but location France.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_955484064e": {
+  "evidence": "This is a remote position available in EMEA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_957760a2a9": {
+  "evidence": "Board: 'country': 'United States of America', 'region': 'Anywhere in the World'. Description: 'We're currently hiring for a physician who is based in PST and can work evening hours on Saturdays and during the week.'",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1927,6 +2487,16 @@
    "ID": "no",
    "IN": "yes",
    "US": "no"
+  }
+ },
+ "v1|j_96c7b3e368": {
+  "evidence": "This role will be remote, based in the Los Angeles area; A valid authorization to work in the U.S. is required",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_9727bb77c7": {
@@ -1961,6 +2531,16 @@
  },
  "v1|j_9a7f3e981c": {
   "evidence": "Description: \"Location: Remote\"; board locationRestrictions empty.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_9b39d86553": {
+  "evidence": "Board: 'region': 'Anywhere in the World'. Description: 'This is a remote-based position.'",
   "verdicts": {
    "BR": "yes",
    "DE": "yes",
@@ -2019,6 +2599,16 @@
    "US": "yes"
   }
  },
+ "v1|j_9dede8a507": {
+  "evidence": "Candidates must reside in Spain; This role is located in Spain.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_9e31c151a8": {
   "evidence": "Board locationRestrictions: [\"United States\"], timezoneRestrictions includes -5; Description: \"Must be able to sit or stand at a computer and work remotely and independently from personal home office\"; \"Must be legally authorized to work in the United States without sponsorship.\"",
   "verdicts": {
@@ -2031,6 +2621,16 @@
  },
  "v1|j_9e384dd539": {
   "evidence": "addressCountry: \"Netherlands\", addressLocality: \"Amsterdam\"; no remote mention; \"Keizersgracht 126, 1015 CW Amsterdam\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_9e5d8be604": {
+  "evidence": "Description: 'Fin has a hybrid working policy... We expect employees to be in the office at least three days per week.'",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2079,6 +2679,16 @@
    "US": "yes"
   }
  },
+ "v1|j_a11144fb12": {
+  "evidence": "Board: location 'FR-France-Remote'; secondary locations 'GB-London', 'FR-Paris', 'Rome, Italy', 'SE-Sweden-Remote'. No listed country matches the viewers.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_a1759899b3": {
   "evidence": "Description: \"Location: Remote, Worldwide\" and \"Work remotely from anywhere, at any time, on your own terms.\"",
   "verdicts": {
@@ -2087,6 +2697,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_a1b069c62c": {
+  "evidence": "This role is based in our Denver, CO, and Westlake, TX offices, with in-person attendance expected 5 days per week during the 10-week onboarding period.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_a1bbb14214": {
@@ -2189,6 +2809,16 @@
    "US": "no"
   }
  },
+ "v1|j_a5ec7c27d2": {
+  "evidence": "Board locationRestrictions: [\"France\", \"Germany\", \"Netherlands\"]; timezoneRestrictions: [1]. Description says \"This role is remote\". Only DE is in allowed country and UTC+1.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_a60815f648": {
   "evidence": "Description: \"This role is remote, but candidates must be based in Austria. We are hiring specifically for this market, so applicants should already be based in Austria.\"",
   "verdicts": {
@@ -2197,6 +2827,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_a66adaa8f6": {
+  "evidence": "Board locationRestrictions includes [\"United States\", \"Germany\", \"India\"]; timezoneRestrictions includes [-5, 1, 5.5]. Description says \"This is a fully remote position\". BR not listed and UTC-3 not allowed; ID not listed and UTC+7 not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_a79e502b14": {
+  "evidence": "Board: 'region': 'Anywhere in the World'. Description: 'Must be authorized to work in the United States at the time of hire and for the duration of employment.'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_a8c3552ffb": {
@@ -2239,6 +2889,16 @@
    "US": "no"
   }
  },
+ "v1|j_aa7b1af2f9": {
+  "evidence": "Board: 'workplaceType': 'Hybrid', 'location': 'San Francisco, California'. Hybrid at an office rules out all remote-only viewers.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ab3ec90d4a": {
   "evidence": "Board fields: locationRestrictions [\"United States\"], timezoneRestrictions [-10, -9, -8, -7, -6, -5, 14]; description has no location statement, so board governs",
   "verdicts": {
@@ -2256,6 +2916,36 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_af28840ff1": {
+  "evidence": "jobGeo: LATAM; fully remote company",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_b0d411c6ab": {
+  "evidence": "Board locationRestrictions: [\"United States\"]; timezoneRestrictions includes [-5]. Himalayas lists remote jobs only. US is in location and UTC-5 allowed; others are not in location list and their offsets are not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b1a6e9b05a": {
+  "evidence": "Board fields: region \"Anywhere in the World\"; description says \"Headquarters: United States - Remote\" but no location restriction; no working hours requirements.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
    "US": "yes"
   }
  },
@@ -2296,6 +2986,26 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b54b448c9f": {
+  "evidence": "Board locationRestrictions: [\"United States\"]; timezoneRestrictions includes [-5]. Himalayas lists remote jobs only. US is in location and UTC-5 allowed; others are not in location list and their offsets are not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b593db7f76": {
+  "evidence": "Board fields: region \"Anywhere in the World\"; description says \"Headquarters: Remote, Australia\" with no applicant location restriction.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
    "US": "yes"
   }
  },
@@ -2346,6 +3056,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ba3effeccb": {
+  "evidence": "Board fields: region \"Anywhere in the World\"; description says \"While candidates in the listed location(s) are encouraged for this role, candidates in other locations will be considered.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
    "US": "yes"
   }
  },
@@ -2409,6 +3129,46 @@
    "US": "unknown"
   }
  },
+ "v1|j_c069a9845e": {
+  "evidence": "Board: 'location': 'NAMER', 'workplaceType': 'Remote'. US is in NAMER and remote, so yes; other viewers are outside NAMER.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_c0e25cc2c7": {
+  "evidence": "\"locationRestrictions\": [\"Cyprus\"], \"timezoneRestrictions\": [2] — remote only from Cyprus/UTC+2; no viewer is in Cyprus or UTC+2.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c1451e55cc": {
+  "evidence": "Description says \"This role is open for candidates residing in the following US states: West Virginia, Virginia, Kentucky, Tennessee, North Carolina, South Carolina, Georgia, Florida.\" and \"All candidates must be located in one of the following states.\" More specific than board region \"Anywhere in the World\", so only those US states.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c18d360a11": {
+  "evidence": "Board region 'Anywhere in the World'; description includes '#LI-Remote' and 'Headquarters: United States - Remote'; no country or hours restrictions.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_c3f845506b": {
   "evidence": "\"locationRestrictions\": [\"India\"], \"timezoneRestrictions\": [5.5]; project title \"Andromeda Delta - Audio Transcription Raters Bengali (India)\"",
   "verdicts": {
@@ -2449,8 +3209,28 @@
    "US": "no"
   }
  },
+ "v1|j_c5bc34cc6c": {
+  "evidence": "\"US-VA-Remote\"; workplaceType \"Remote\"; address country \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_c625537b6a": {
   "evidence": "Board fields: country 'US', workplaceType 'onsite'. Description: 'If the posting is specified as Onsite, you are required to work from an office.'",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c6425f3593": {
+  "evidence": "This role is based in our New York City or Menlo Park office, with in-person attendance expected 5 days per week.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2479,6 +3259,36 @@
    "US": "yes"
   }
  },
+ "v1|j_c6d30b44a5": {
+  "evidence": "This role will be in-office on a hybrid schedule following the establishment of a Lyft office in Nashville — Team Members will be expected to work in the office 3 days per week on Mondays, Wednesdays, and Thursdays. Lyft considers working in the office at least 3 days per week to be an essential function of this hybrid role.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_caff184b20": {
+  "evidence": "jobGeo: Poland, UK; All of our roles are remote, however some roles may carry specific location-based eligibility requirements.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_cb9d9913a9": {
+  "evidence": "Location: \"We're also open to exceptional candidates working remotely in Canada.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_cc60e39633": {
   "evidence": "Title says \"APAC - Remote\", but board location \"Hong Kong; Taiwan\" is more specific; none of the viewers' countries are listed.",
   "verdicts": {
@@ -2499,6 +3309,16 @@
    "US": "no"
   }
  },
+ "v1|j_ccf1c5021d": {
+  "evidence": "\"locationRestrictions\": [\"United States\"], \"timezoneRestrictions\": [-10,-9,-8,-7,-6,-5,14]; \"Availability to collaborate during U.S. Eastern Time business hours.\" US viewer is in the US at UTC-5 and can meet ET hours; all other viewers are outside the US.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_ccfffc001e": {
   "evidence": "\"Remote role based in Latin America. Must work at least 6 hours of overlap with US Eastern Time.\"",
   "verdicts": {
@@ -2511,6 +3331,16 @@
  },
  "v1|j_cd0ddba73f": {
   "evidence": "\"This role is based out of our Amsterdam office. We are an office-first company and value in-person collaboration (hybrid); we do not offer remote-only roles.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ce2ce8c46d": {
+  "evidence": "\"locationRestrictions\": [\"Netherlands\"], \"timezoneRestrictions\": [1]; \"Volledig thuiswerken\" (fully remote) but only from Netherlands; no viewer is in the Netherlands.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2541,6 +3371,16 @@
  },
  "v1|j_d243d74221": {
   "evidence": "\"This role is remote, but candidates must be based in Sweden.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_d2cb897f4a": {
+  "evidence": "This is a bilingual Spanish field sales opportunity based out of a personal home office. You must live local to your territory in the North Bay, CA area or be willing to relocate to the area.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2619,6 +3459,16 @@
    "US": "no"
   }
  },
+ "v1|j_d86ba15431": {
+  "evidence": "\"London, UK\"; workplaceType \"Hybrid\"; \"#LI-hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_d9010ce7f7": {
   "evidence": "Locations: London, Copenhagen, Madrid; \"For our Team, we offer hybrid working options.\"",
   "verdicts": {
@@ -2669,6 +3519,16 @@
    "US": "no"
   }
  },
+ "v1|j_df40832a68": {
+  "evidence": "\"locationRestrictions\": [\"United Kingdom\"], \"timezoneRestrictions\": [0]; \"Applicant Types Accepted: Local Applicants Only\"; board UK/UTC+0 restriction is more specific than description's international/remote wording; no viewer is in the UK.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_dff8a1bb32": {
   "evidence": "Board location: 'Brazil'; description begins 'Remote, Brazil'.",
   "verdicts": {
@@ -2677,6 +3537,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_e00ab2ae0b": {
+  "evidence": "Description: \"This role is remote (must be based in the Eastern US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_e122e45597": {
@@ -2769,10 +3639,40 @@
    "US": "no"
   }
  },
+ "v1|j_e828e8e083": {
+  "evidence": "\"Toronto, Ontario, Canada\"; workplaceType \"Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_e8b70d5c12": {
   "evidence": "\"This is a Remote – Brazil position, meaning you can work from anywhere within the country. Please note that this role is only open to candidates in Brazil.\"",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_e9654807f8": {
+  "evidence": "Title: \"(6 Month Contract, Remote)\"; Salary: \"The anticipated hourly rate for this remote position is $36.00 to $43.00 per hour across the United States.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_e9dd4578c6": {
+  "evidence": "\"This role is remote, based Alberta, Canada MST\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -2839,8 +3739,48 @@
    "US": "no"
   }
  },
+ "v1|j_ee0c999f0e": {
+  "evidence": "Board fields: locationRestrictions [\"South Africa\"], timezoneRestrictions [2]; description says \"Remote\" and \"Working Hours: U.S. Business Hours\" but does not override the board's South Africa-only restriction.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ee1fd243e8": {
+  "evidence": "This role is based in our Menlo Park, CA office, with in-person attendance expected at least 3 days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ee51f9b69d": {
+  "evidence": "Board fields: locationRestrictions [\"Brazil\"], timezoneRestrictions [-5, -4, -3, -2]. Description says \"open to candidates based in 55 countries, including Brazil, United States, ... Germany, India\", but board's specific Brazil-only restriction wins. Brazil offset -3 is allowed, so BR yes; others no.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ee871fa31b": {
   "evidence": "Board location: Anywhere in the World; no required hours mentioned.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_ef94e511e3": {
+  "evidence": "Board region 'Anywhere in the World'; description says 'You will work remotely' and includes '#LI-Remote'; no location restrictions.",
   "verdicts": {
    "BR": "yes",
    "DE": "yes",
@@ -2867,6 +3807,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_f08634fcf9": {
+  "evidence": "Board location: \"US Only\"; Remote OK lists remote jobs only.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_f09a60e973": {
@@ -2917,6 +3867,36 @@
    "ID": "no",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_f230d07aab": {
+  "evidence": "Okta’s UKI Strategic Account Executive Sales Team is hiring! and the OTE range is for candidates located in the United Kingdom; board office is United Kingdom Remote.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f26c252ab1": {
+  "evidence": "\"Remote\"; address country \"US | EU\"; \"we're hiring in both [EU and US time zones]\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_f3c2c1e82d": {
+  "evidence": "This role will be based remotely in the APAC region",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "no"
   }
  },
  "v1|j_f3c3d42635": {
@@ -2981,6 +3961,16 @@
  },
  "v1|j_f4d5fabd24": {
   "evidence": "We work in person five days a week in San Francisco, New York, and London.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f590c30241": {
+  "evidence": "Board fields: locationRestrictions [\"Canada\"], timezoneRestrictions [-7, -6, -5, -4, -3.5]. Description: \"Eligibility: Open to Canadian Citizens and Permanent Residents of Canada only\". Restricts to Canada only.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3059,6 +4049,16 @@
    "US": "no"
   }
  },
+ "v1|j_f928b9ec87": {
+  "evidence": "Board fields: locationRestrictions [\"United States\"], timezoneRestrictions [-10, -9, -8, -7, -6, -5, 14]. Description: \"Location – Remote, USA\", \"Our business hours are 8:00 AM to 8:00 PM EST\". US allowed and offset -5 in allowed list; all other viewers' countries not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_f9752dfd4d": {
   "evidence": "Board fields list 'country': 'FR' and 'workplaceType': 'hybrid'; description lists 'Hybrid position' and does not indicate remote work. The role is based in France, so viewers outside France cannot work remotely from their home countries.",
   "verdicts": {
@@ -3071,6 +4071,16 @@
  },
  "v1|j_f9a52b2eeb": {
   "evidence": "\"locationRestrictions\": [\"United Kingdom\"], \"timezoneRestrictions\": [0]; \"Remote, UK-based with regular travel to customer sites, partner meetings, industry events and Onecom offices\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_fa2d80ad6c": {
+  "evidence": "This role can be based out of our Dublin/Cork office, or remotely in Ireland.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3099,8 +4109,28 @@
    "US": "no"
   }
  },
+ "v1|j_fae2837005": {
+  "evidence": "You must attend in person orientation in either Chicago or San Francisco. You must go into your local office 2 days a week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_fb5308b103": {
   "evidence": "Location Nearshore, based in Mexico or Brazil — remote-based delivery model.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_fb61ef1730": {
+  "evidence": "Board jobGeo: \"LATAM\"; Description: \"Remote First, Remote Always\"",
   "verdicts": {
    "BR": "yes",
    "DE": "no",
@@ -3127,6 +4157,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_fce49d18c0": {
+  "evidence": "Board says 'Anywhere in the World', but description's 'Where we work' states: 'PagerDuty operates a hybrid work model with offices in 8 major cities: Atlanta, Lisbon, London, San Francisco, Santiago, Sydney, Tokyo, and Toronto' and lists excluded locations such as certain US states ('Rhode Island', 'West Virginia'); Germany, Brazil, India, Indonesia are not among the established office locations. US is partially allowed with some UTC-5 states excluded, so US is maybe.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_fdb3210fe3": {
@@ -3176,6 +4216,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ffadc5bdbc": {
+  "evidence": "Board fields say Remote and APAC, but description states \"Location: India\" and \"You are located in India and able to work within the hours of ~9:00 pm - 7:00 am IST.\" The more specific description restricts the role to India, so only India is yes.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
    "US": "no"
   }
  },

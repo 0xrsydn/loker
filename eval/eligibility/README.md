@@ -42,6 +42,7 @@ python3 eligibility_eval.py score [--set holdout] [--bin PATH] [-v]
 | set | from | jobs |
 |---|---|---|
 | `sample.json` (tuning) | `eval/pay/snapshot.db` (2026-11-19), 28 per source | 196 |
+| `holdout2.json` | `snapshot-h2.db` (aggregators and 21 new employer boards, fetched 2026-11-20 14:30, after the description reader), `snapshot-h2-himalayas.db` (Himalayas pages 1-50) and the jobs of `snapshot-agg.db` no set drew; every job any other snapshot has, by id or URL, left out | 105 |
 | `holdout.json` | `snapshot-agg.db` (aggregators fetched 2026-11-20, URLs not in the tuning snapshot) and the 36 employer boards of `eval/visa` (`snapshot-boards*.db`), up to 20 per source, 3 per company | 123 |
 
 The tuning snapshot's employer boards are 4 companies (Binance, Palantir,
@@ -66,6 +67,8 @@ Each row is jobs x 5 viewers. "Wrong yes" is a yes the label calls no
 | WWR and merge fixes (e66140d), scored once | holdout | 37/46 / 37/46 | 3 / 5 | 388/399 / 399/399 | 3 / 0 |
 | + places and description, tuning | tuning | 174/183 / 176/183 | 0 / 4 | 701/709 / 709/709 | 0 / 0 |
 | **+ places and description, scored once** | holdout | **44/53 / 44/53** | **3 / 5** | **469/480 / 480/480** | 3 / 0 |
+| before places and description (74b2364), Opus / DeepSeek | holdout2 | 40/43 / 36/43 | 2 / 3 | 334/346 / 340/346 | 2 / 6 |
+| **now (bde0ee2), scored once**, Opus / DeepSeek | holdout2 | **43/48 / 39/48** | **2 / 4** | **367/379 / 373/379** | **2 / 6** |
 
 What changed, on the tuning set:
 - **We Work Remotely's `country` field is read.** 76 snapshot items say
@@ -125,6 +128,24 @@ What is left, in the tuning snapshot's 263 jobs still unknown with no place:
   region (IL, MI, OH)", "live local to the territory"), overlap percentages
   ("70-80% overlap with San Francisco"), "an EU-compatible time zone".
   Preferences ("US or Europe preferred") are left out on purpose.
+
+`holdout2` (105 jobs, fetched after the reader was written, nothing in it
+read) confirms the reader on unseen jobs: unknown verdicts 135 -> 85,
+settled verdicts right 374/495 -> 410/495 (Opus) and 376/518 -> 412/518
+(DeepSeek), with wrong claims flat (wrong yes 2 -> 2 by Opus, 3 -> 4 by
+DeepSeek; wrong no unchanged). Labelers agree less here (474/525), mostly
+maybe against yes; DeepSeek's 6 wrong noes are jobs it reads as open where
+Opus doesn't. No Lever board was new, so Lever has no unseen test since
+`holdout`. `holdout2` is now used; the next change needs a new one.
+
+Citizenship and clearance are deferred, on purpose. Of the tuning
+snapshot's 1,749 jobs, 178 state citizenship, permanent residency or a
+clearance outside equal-opportunity text, and the location verdict already
+tells all four non-US viewers no for 175 of them (and the US viewer no for
+168: most are on-site). A citizenship field would change about 10 answers,
+for people living in the US without citizenship. Worth building when
+loker's users include them, or sources heavy in government or defense work
+are added.
 - Binance is ingested as an all-remote board; its postings say
   "remote-first ... may vary", which the labels read as maybe (3 tuning
   yeses).

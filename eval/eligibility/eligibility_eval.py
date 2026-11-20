@@ -4,6 +4,7 @@ DeepSeek from the whole posting. Run by hand; not part of CI. See README.md.
 
   python3 eligibility_eval.py parity [--db PATH]   # rebuilt eligibility vs what the snapshot stored
   python3 eligibility_eval.py sample               # draw sample.json (tuning) and holdout.json, once
+  python3 eligibility_eval.py sample2              # draw holdout2.json from snapshot-h2.db, once
   JUDGE=opus|deepseek python3 eligibility_eval.py label [--set holdout]
   python3 eligibility_eval.py agree [--set holdout]
   python3 eligibility_eval.py score [--set holdout] [-v]
@@ -25,7 +26,13 @@ REPO = os.path.dirname(EVAL)
 # the 36 employer boards first fetched for the visa holdouts.
 DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        "holdout": [os.path.join(HERE, "snapshot-agg.db"), os.path.join(EVAL, "visa", "snapshot-boards.db"),
-                   os.path.join(EVAL, "visa", "snapshot-boards2.db")]}
+                   os.path.join(EVAL, "visa", "snapshot-boards2.db")],
+       # holdout2: a fetch on 2026-11-20 14:30, after the description reader
+       # was written (the aggregators again, and 21 employer boards new to
+       # loker), and snapshot-agg's jobs that no set drew and nobody read.
+       # Himalayas pages 1-50 fetched with it: the first 10 were in older snapshots.
+       "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
+                    os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
 PROMPT_VERSION = "v1"
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
@@ -169,6 +176,37 @@ def sample():
         for l in d["listings"])}
     print(f"holdout ({len(old)} fresh jobs left out as already known):")
     save("holdout.json", draw(fresh, 20, 3, random.Random("elig-holdout"), exclude=old))
+
+
+def url(listing):
+    r = listing["raw"]
+    return (r.get("absolute_url") or r.get("url") or r.get("link") or r.get("hostedUrl") or r.get("jobUrl")
+            or r.get("guid") or r.get("applicationLink"))
+
+
+def sample2():
+    """holdout2: the description reader was tuned on the tuning snapshot and
+    read jobs in eval/role/snapshot-fresh.db, and holdout was scored twice.
+    Draw from a later fetch, leaving out every job any snapshot has."""
+    if os.path.exists(os.path.join(HERE, "holdout2.json")):
+        sys.exit("holdout2 already drawn")
+    import glob
+    seen_ids, seen_urls = set(), set()
+    for db in glob.glob(os.path.join(EVAL, "*", "*.db")):
+        if os.path.basename(db) in ("snapshot-h2.db", "snapshot-agg.db", "snapshot-h2-himalayas.db"):
+            continue
+        try:
+            for jid, d in jobs_in(db).items():
+                seen_ids.add(jid)
+                seen_urls.update(url(l) for l in d["listings"])
+        except sqlite3.Error:
+            pass  # an older layout (eval/search, eval/agent): ids only
+    seen_urls.discard(None)
+    new = jobs(DBS["holdout2"])
+    old = {j for j, d in new.items() if j in seen_ids or any(url(l) in seen_urls for l in d["listings"])}
+    old |= set(set_ids("sample")) | set(set_ids("holdout"))
+    print(f"holdout2 ({len(old)} of {len(new)} jobs left out as already in a snapshot):")
+    save("holdout2.json", draw(new, 20, 3, random.Random("elig-holdout2"), exclude=old))
 
 
 def set_ids(name=None):
@@ -333,7 +371,7 @@ def score():
         fr = [r for r in rows if family(primary(js[r[0]])["source"]) == f]
         fy, fn = [r for r in fr if r[3] == "yes"], [r for r in fr if r[3] == "no"]
         print(f"    {f:15} {sum(r[2] != 'yes' for r in fy):3}/{len(fy):<4} {sum(r[2] == 'yes' for r in fn):3}/{len(fn):<4}")
-    if "-v" in sys.argv and SET != "holdout":
+    if "-v" in sys.argv and SET not in ("holdout", "holdout2"):
         bad = sorted({r[0] for r in rows if (r[3] == "yes" and r[2] != "yes") or (r[3] == "no" and r[2] == "yes")})
         for j in bad:
             print(f"\n{j} [{primary(js[j])['source']}] {js[j]['title'][:60]}")
@@ -343,7 +381,7 @@ def score():
 
 
 if __name__ == "__main__":
-    cmds = {"parity": parity, "sample": sample, "label": label, "agree": agree, "score": score}
+    cmds = {"parity": parity, "sample": sample, "sample2": sample2, "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()
