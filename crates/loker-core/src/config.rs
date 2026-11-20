@@ -54,7 +54,10 @@ pub struct SourceConfig {
     /// `ashby:<board>`, `lever:<site>`.
     pub id: String,
     pub pages: Option<u32>,
-    pub country: Option<String>,
+    /// One ISO code or a list (`["PH", "ID"]`): a search source fetches
+    /// `pages` for each.
+    #[serde(default, deserialize_with = "one_or_many")]
+    pub country: Vec<String>,
     /// Company display name for an employer board (Ashby and Lever only give the slug).
     pub company: Option<String>,
     /// `true` when every job on an employer board is remote (see `IngestParams::remote`).
@@ -68,15 +71,34 @@ fn enabled_by_default() -> bool {
 }
 
 impl SourceConfig {
-    pub fn params(&self) -> IngestParams {
-        IngestParams {
+    /// The fetches this entry makes: one, or one per country.
+    pub fn params(&self) -> Vec<IngestParams> {
+        let one = |country: Option<String>| IngestParams {
             source: self.id.clone(),
             pages: self.pages,
-            country: self.country.clone(),
+            country,
             company: self.company.clone(),
             remote: self.remote,
+        };
+        if self.country.is_empty() {
+            vec![one(None)]
+        } else {
+            self.country.iter().map(|c| one(Some(c.clone()))).collect()
         }
     }
+}
+
+fn one_or_many<'de, D: serde::Deserializer<'de>>(d: D) -> Result<Vec<String>, D::Error> {
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum OneOrMany {
+        One(String),
+        Many(Vec<String>),
+    }
+    Ok(match OneOrMany::deserialize(d)? {
+        OneOrMany::One(s) => vec![s],
+        OneOrMany::Many(v) => v,
+    })
 }
 
 impl Config {
@@ -208,7 +230,7 @@ id = "weworkremotely"
 # [[sources]]
 # id = "workable"
 # pages = 10           # 20 jobs per page
-# country = "PH"       # only jobs Workable places in this country
+# country = "PH"       # only jobs Workable places in this country; or a list: ["PH", "ID"]
 
 # A company's own board: greenhouse:<slug>, ashby:<slug> or lever:<site>.
 # [[sources]]
@@ -235,8 +257,21 @@ mod tests {
     fn a_country_turns_on_its_searches() {
         let c: super::Config = toml::from_str(&super::template(Some("PH"))).unwrap();
         let get = |id: &str| c.sources.iter().find(|s| s.id == id).unwrap();
-        assert_eq!(get("himalayas").country.as_deref(), Some("PH"));
-        assert_eq!(get("workable").country.as_deref(), Some("PH"));
+        assert_eq!(get("himalayas").country, ["PH"]);
+        assert_eq!(get("workable").country, ["PH"]);
+        assert_eq!(super::template(Some("PH")).matches("or a list").count(), 1);
+        let many: super::Config = toml::from_str(
+            "version = 1\n[[sources]]\nid = \"workable\"\ncountry = [\"PH\", \"ID\"]\n",
+        )
+        .unwrap();
+        let fetches = many.sources[0].params();
+        assert_eq!(
+            fetches
+                .iter()
+                .map(|p| p.country.as_deref())
+                .collect::<Vec<_>>(),
+            [Some("PH"), Some("ID")]
+        );
         assert_eq!(super::starter().sources.len(), 4);
     }
 }

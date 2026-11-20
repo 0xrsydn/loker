@@ -67,7 +67,7 @@ impl App {
             Some(c) => (c, None),
             None => (config::starter(), Some(config::STARTER_NOTICE.to_string())),
         };
-        let sources = config.enabled().map(|s| s.params()).collect();
+        let sources = config.enabled().flat_map(|s| s.params()).collect();
         let mut report = loker_sources::ingest_all(&self.store, &self.http, sources).await?;
         report.notice = notice;
         // Roles by a model after the sources, so ingest never waits on it;
@@ -131,10 +131,10 @@ impl App {
         let targets = if !p.sources.is_empty() {
             p.sources
                 .into_iter()
-                .map(|id| configured(&id).unwrap_or_else(|| plain(id)))
+                .flat_map(|id| configured(&id).unwrap_or_else(|| vec![plain(id)]))
                 .collect()
         } else if let Some(c) = &config {
-            c.enabled().map(|s| s.params()).collect()
+            c.enabled().flat_map(|s| s.params()).collect()
         } else {
             self.store
                 .source_ids()
@@ -166,7 +166,7 @@ impl App {
             return Ok(report);
         }
         let config = config.ok().flatten().unwrap_or_else(config::starter);
-        let targets = config.enabled().map(|s| s.params()).collect();
+        let targets = config.enabled().flat_map(|s| s.params()).collect();
         let verified = loker_sources::verify(&self.http, targets).await?;
         Ok(report.extend(api::live_checks(&verified)))
     }
