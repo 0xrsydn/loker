@@ -159,6 +159,16 @@
    "US": "no"
   }
  },
+ "v1|j_07e27f37fa": {
+  "evidence": "Board fields list \"locations\": [\"TELECOMMUTE\",\"Portugal\"] and \"workplace\": \"remote\"; description says \"Work fully remote around the globe\" but the more specific board country is Portugal.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0867bf7308": {
   "evidence": "Board lists location \"United States\" and workplace \"remote\"; description says \"build and grow our energy business nationwide\" and \"serving clients across all 50 states\".",
   "verdicts": {
@@ -327,6 +337,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_0f0622eaca": {
+  "evidence": "Board fields list \"locations\": [\"TELECOMMUTE\",\"United States\"] and \"workplace\": \"remote\"; description says \"Flexible hours, fully remote.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_0f7562b6bf": {
@@ -749,6 +769,16 @@
    "US": "no"
   }
  },
+ "v1|j_211d68b8a6": {
+  "evidence": "Board fields list \"locations\": [\"TELECOMMUTE\",\"Kenya\"] and \"workplace\": \"remote\"; title includes \"EMEA\" but the location is specifically Kenya.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2186472564": {
   "evidence": "Board fields: \"locationRestrictions\": [\"Netherlands\"], \"timezoneRestrictions\": [1]; description contains no broader location allowance.",
   "verdicts": {
@@ -807,6 +837,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2380691033": {
+  "evidence": "Board fields list \"locations\": [\"TELECOMMUTE\",\"Los Angeles, California, United States\"] and \"workplace\": \"remote\"; description says \"Fully remote position\".",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_23de7811a2": {
@@ -887,6 +927,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_2719257634": {
+  "evidence": "Board location: \"Philippines\" (remote). Description says \"Remote-first freedom: Work from wherever you do your best work,\" but board's specific country location controls; remote only from Philippines.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_2732f91681": {
@@ -987,6 +1037,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2c69a4f593": {
+  "evidence": "Board location: \"Camden, South Carolina, United States\" (remote). Description: \"South Carolina\", \"Licensed in North Carolina and/or South Carolina\", \"work remotely from home or from one of our office locations.\" US allowed; other countries not.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_2c6db24205": {
@@ -1106,6 +1166,16 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_2ee3d92e5d": {
+  "evidence": "Board location: \"Sioux Falls, South Dakota, United States\" (remote). Description: \"Fully remote position - Work from the comfort of your own home\"; requires \"Active Compact/Multi-State license (LPN)\"; hours \"8:00am - 4:30pm CST\". US viewer UTC-5 can meet; non-US not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "yes"
   }
  },
@@ -1249,6 +1319,16 @@
    "US": "no"
   }
  },
+ "v1|j_3591796fe2": {
+  "evidence": "Board location: \"India\" (remote). No broader location in description; no required hours. India allowed; others not.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
  "v1|j_366ccb2b2d": {
   "evidence": "Board locationRestrictions: [\"Indonesia\", \"Vietnam\"]; description: \"Must be located in the job opening location.\"",
   "verdicts": {
@@ -1261,6 +1341,16 @@
  },
  "v1|j_367c4a84be": {
   "evidence": "Board country=BR, workplaceType=hybrid; Description offers relocation but no remote, role is Brazil-based hybrid.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_36f3995268": {
+  "evidence": "Board lists remote only from Philippines (location countryName Philippines, workplace remote); description requires 'Available to work US business hours and weekends'. No viewer countries are allowed.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1489,6 +1579,16 @@
    "US": "no"
   }
  },
+ "v1|j_4148ae7470": {
+  "evidence": "Board lists remote from Mumbai, Maharashtra, India (workplace remote). No other countries/regions are listed; no required hours stated.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
  "v1|j_4189002ba9": {
   "evidence": "Board fields: location 'India', workplace 'remote'; description says 'working remotely'. Only India allowed.",
   "verdicts": {
@@ -1689,6 +1789,16 @@
    "US": "no"
   }
  },
+ "v1|j_4c7f230ecb": {
+  "evidence": "Board lists remote from Germany (countryName Germany, workplace remote). No other allowed countries listed; no required hours stated.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_4e0b2f46b4": {
   "evidence": "Board fields show location \"US-CA-Menlo Park\" and workplaceType null; description has no remote statement.",
   "verdicts": {
@@ -1697,6 +1807,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_4e2dd4d04c": {
+  "evidence": "Title says '(fluent Ukrainian) DevOps Engineer (EU, remote)' but board location is Spain and workplace remote; Spain is more specific than EU, so only Spain is allowed. No viewer country is Spain.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_4e37bf5093": {
@@ -1727,6 +1847,36 @@
    "ID": "yes",
    "IN": "yes",
    "US": "no"
+  }
+ },
+ "v1|j_4f70889a2d": {
+  "evidence": "\"Carry out regular maintenance and repairs on water treatment systems\", \"Handle the installation and troubleshooting of equipment directly at clients' locations\", \"Weekly visits to the designated Service Centre to replenish parts\", \"Hours of Work: Monday-Friday 8:30am-5:00pm\"; board location \"Dartford, England, United Kingdom\".",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4f8d477fc8": {
+  "evidence": "\"We’re a global, fully remote company with an HQ in Denver, Colorado.\"; \"This is an independent contractor engagement. You’ll need to be able to invoice us from your country of residence.\"; only bonus hours overlap not required.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_4fc9ef89f6": {
+  "evidence": "\"Location: Home-based / Remote\"; \"Ability to work collaboratively within an international and remotely distributed organisation.\"; no country restriction or required hours.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_50a5c5e266": {
@@ -1774,6 +1924,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_524a32f439": {
+  "evidence": "\"Bewerber:innen müssen in Deutschland wohnhaft sein und über die gesetzliche Berechtigung verfügen, in Deutschland zu arbeiten.\"; \"Work from anywhere – Genieße die Freiheit des Remote-Arbeitens innerhalb deines Beschäftigungslandes.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -1896,6 +2056,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_57badf849c": {
+  "evidence": "Board locations: [TELECOMMUTE, Germany]; Description: Location: Germany; Applicants must be authorized to work in the Germany",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -2099,6 +2269,16 @@
    "US": "no"
   }
  },
+ "v1|j_6287cb30f4": {
+  "evidence": "Description: Location: Remote | LATAM, Asia, EMEA; Minimum 6 hours overlap with Pacific Time (PT)",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
  "v1|j_62a7f7fe6a": {
   "evidence": "### Location On-site, office-first in Munich, Bavaria, Germany. Home office is available for sensible flexibility.",
   "verdicts": {
@@ -2219,6 +2399,16 @@
    "US": "no"
   }
  },
+ "v1|j_6697d9f5d4": {
+  "evidence": "Board locations: [TELECOMMUTE, Germany]; Description: full-time, remote role, working EU hours",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6728f0707c": {
   "evidence": "Board: workplace remote; locations: TELECOMMUTE, Indonesia. Description: 'Location: Malaysia preferred' and 'you have to be eligible to legally work in the country where we’re hiring.'",
   "verdicts": {
@@ -2231,6 +2421,16 @@
  },
  "v1|j_6776be97d0": {
   "evidence": "Board fields: \"locationRestrictions\": [\"Poland\"], \"timezoneRestrictions\": [1]; Description: \"Long-term cooperation on an as-needed basis, with potential part-time assignments and travel to the client’s office if required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_67a06d55cb": {
+  "evidence": "Board locations: [TELECOMMUTE, Bulgaria]; workplace remote",
   "verdicts": {
    "BR": "no",
    "DE": "no",

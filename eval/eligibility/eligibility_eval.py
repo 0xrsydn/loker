@@ -16,7 +16,7 @@ rules, so a rule change is measured without fetching again. Never print a
 holdout job's text or labels while writing rules; add any job you read to
 seen.json.
 """
-import json, os, random, re, sqlite3, subprocess, sys, tempfile, urllib.request
+import json, os, random, re, sqlite3, subprocess, sys, tempfile, time, urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 
@@ -38,6 +38,10 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        # After the Workable rules were written on `workable`: a deeper fetch
        # (30 pages, 10 each for PH, ID, IN, DE), minus every job `workable` has.
        "workable2": [os.path.join(HERE, "snapshot-workable2.db")],
+       # After the second round of Workable rules (Location lines, the
+       # worldwide bug): 50 pages, 15 each for PH, ID, IN, DE, minus every job
+       # `workable` and `workable2` have.
+       "workable3": [os.path.join(HERE, "snapshot-workable3.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
@@ -223,11 +227,13 @@ def sample_workable(name="workable"):
     workable2.json: the same after its rules, from jobs `workable` doesn't have."""
     if os.path.exists(os.path.join(HERE, f"{name}.json")):
         sys.exit(f"{name} already drawn")
-    seen = set(jobs(DBS["workable"])) if name == "workable2" else set()
-    seen_urls = {url(l) for d in jobs(DBS["workable"]).values() for l in d["listings"]} if seen else set()
+    earlier = {"workable": [], "workable2": ["workable"], "workable3": ["workable", "workable2"]}[name]
+    before = {j: d for e in earlier for j, d in jobs(DBS[e]).items()}
+    seen = set(before)
+    seen_urls = {url(l) for d in before.values() for l in d["listings"]} - {None}
     pool = jobs(DBS[name])
     old = seen | {j for j, d in pool.items() if any(url(l) in seen_urls for l in d["listings"])}
-    print(f"{name} ({len(old & set(pool))} of {len(pool)} left out as already in `workable`):")
+    print(f"{name} ({len(old & set(pool))} of {len(pool)} left out as already in {earlier or 'no earlier set'}):")
     save(f"{name}.json", draw(pool, 60, 3, random.Random(f"elig-{name}"), exclude=old))
 
 
@@ -314,7 +320,9 @@ def ask_deepseek(prompt, n):
     req = urllib.request.Request("https://api.deepseek.com/chat/completions", data=body, headers={
         "Content-Type": "application/json", "Authorization": "Bearer " + os.environ["DEEPSEEK_API_KEY"]})
     err = None
-    for _ in range(3):
+    for attempt in range(5):
+        if attempt:
+            time.sleep(10 * attempt)  # a 429 needs time, not a quick retry
         try:
             with urllib.request.urlopen(req, timeout=300) as r:
                 out = json.loads(json.load(r)["choices"][0]["message"]["content"])
@@ -346,7 +354,8 @@ def label():
         return list(zip(batch, ask(PROMPT.format(viewers=viewers, jobs=text), len(batch))))
 
     done = 0
-    with ThreadPoolExecutor(4 if judge == "opus" else 8) as ex:
+    workers = int(os.environ.get("LABEL_WORKERS", 4 if judge == "opus" else 8))
+    with ThreadPoolExecutor(workers) as ex:
         for pairs in ex.map(one, batches):
             for jid, l in pairs:
                 labels[key(jid)] = {"verdicts": l["verdicts"], "evidence": l.get("evidence", "")}
@@ -393,7 +402,7 @@ def score():
         fr = [r for r in rows if family(primary(js[r[0]])["source"]) == f]
         fy, fn = [r for r in fr if r[3] == "yes"], [r for r in fr if r[3] == "no"]
         print(f"    {f:15} {sum(r[2] != 'yes' for r in fy):3}/{len(fy):<4} {sum(r[2] == 'yes' for r in fn):3}/{len(fn):<4}")
-    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable2"):
+    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable3"):
         bad = sorted({r[0] for r in rows if (r[3] == "yes" and r[2] != "yes") or (r[3] == "no" and r[2] == "yes")})
         for j in bad:
             print(f"\n{j} [{primary(js[j])['source']}] {js[j]['title'][:60]}")
@@ -403,7 +412,8 @@ def score():
 
 
 if __name__ == "__main__":
-    cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"), "label": label, "agree": agree, "score": score}
+    cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"),
+            "sample-workable3": lambda: sample_workable("workable3"), "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()

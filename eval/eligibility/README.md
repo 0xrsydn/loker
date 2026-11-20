@@ -162,8 +162,23 @@ jobs the employer marked remote that aren't ("field-based ... travel to
 patients' homes"), a "Location:" line in the description ("Location:
 Remote – LATAM", "Location: Bangladesh, India, ..."), "open to candidates
 worldwide" read but not used by the Workable rule (a bug), and "live
-wherever you like". Workable stays opt-in until a round on these is
-checked on a fresh set.
+wherever you like".
+
+Second round, on those: "Location:" lines in the shared reader (a line
+naming a city is the office, unless it says remote), "open to candidates
+worldwide" now used by the Workable rule, "wherever you like". The tuning
+sample and both holdouts are unchanged by it. `workable3.json` (60 jobs
+fetched after, none in `workable` or `workable2`), scored once with Opus;
+DeepSeek ran out of credit (HTTP 402) after 20 jobs:
+
+| judge | yes right | wrong yes | no right | wrong no | no, labelled maybe |
+|---|---|---|---|---|---|
+| Opus, 60 jobs | 29/36 | 2 | 222/249 | 6 | 21 |
+| DeepSeek, 20 jobs | 15/15 | 0 | 72/80 | 8 | 0 |
+
+Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
+still right 89% of the time against 97% for the other sources, and
+DeepSeek's 20 jobs alone give 8 wrong noes. Workable stays opt-in.
 
 Citizenship and clearance are deferred, on purpose. Of the tuning
 snapshot's 1,749 jobs, 178 state citizenship, permanent residency or a
