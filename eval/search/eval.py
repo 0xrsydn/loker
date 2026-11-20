@@ -18,6 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DB = os.environ.get("LOKER_EVAL_DB", os.path.join(HERE, "snapshot.db"))
 K = 20
 PROMPT_VERSION = "v1"
+DESC_CHARS = 2500  # description characters the judge sees
 
 
 def quote(t):
@@ -190,6 +191,16 @@ Jobs:
 
 Return a grade for every job index."""
 
+# The prompts each PROMPT_VERSION names. A label key holds the version, not
+# the prompt, so editing a prompt without bumping the version would mix
+# grades from both under one key; `judge` refuses to run until they match.
+PROMPTS = {"v1": "e934178442fa"}
+
+
+def prompt_hash():
+    return hashlib.sha256(f"{JUDGE}|{BATCH}|{DESC_CHARS}".encode()).hexdigest()[:12]
+
+
 JUDGES = {"deepseek": ("labels-deepseek.json", "deepseek-v4-pro"), "opus": ("labels-opus.json", "claude-opus-5-5")}
 
 
@@ -258,6 +269,9 @@ def ask_opus(prompt, n):
 
 
 def judge():
+    if PROMPTS.get(PROMPT_VERSION) != prompt_hash():
+        sys.exit(f"the judge prompt changed: bump PROMPT_VERSION and add {PROMPT_VERSION!r}'s successor "
+                 f"to PROMPTS as {prompt_hash()!r}")
     j = which()
     labels = labels_for(j)
     pooled = load("pool.json", {})
@@ -276,7 +290,7 @@ def judge():
         def one(pair):
             q, jid = pair
             t, c, d = row(jid)
-            return [(key(qs[q], jid, j), ask_deepseek(JUDGE.format(q=q, intent=qs[q]["intent"], title=t, company=c, desc=d[:2500])))]
+            return [(key(qs[q], jid, j), ask_deepseek(JUDGE.format(q=q, intent=qs[q]["intent"], title=t, company=c, desc=d[:DESC_CHARS])))]
         tasks, workers = todo, 12
     else:
         by_q = {}
@@ -289,7 +303,7 @@ def judge():
             jobs = []
             for i, jid in enumerate(ids):
                 t, c, d = row(jid)
-                jobs.append(f"[{i}] Title: {t}\nCompany: {c}\nDescription (truncated):\n{d[:2500]}\n")
+                jobs.append(f"[{i}] Title: {t}\nCompany: {c}\nDescription (truncated):\n{d[:DESC_CHARS]}\n")
             res, cost = ask_opus(BATCH.format(q=q, intent=qs[q]["intent"], jobs="\n---\n".join(jobs)), len(ids))
             one.cost += cost
             return [(key(qs[q], jid, j), r) for jid, r in zip(ids, res)]
@@ -346,7 +360,9 @@ def score():
                                "junk": sum(1 for x in ranked[:K] if x not in rel)})
         return per
 
-    def table(title, qs, base_name=BASELINE):
+    base_flag = sys.argv[sys.argv.index("--base") + 1] if "--base" in sys.argv else BASELINE
+
+    def table(title, qs, base_name=base_flag):
         per = metrics(qs)
         base = per[base_name]
 
@@ -357,7 +373,7 @@ def score():
             return mean(d), ms[int(0.025 * iters)], ms[int(0.975 * iters)]
 
         print(f"\n## {title} ({len(qs)} queries; judge={j}; relevant = grade>=2; K={K})")
-        print(f"{'variant':24} {'nDCG@10':>8} {'P@10':>6} {'R@20':>6} {'empty':>6} {'unjudged':>9} {'results':>8} {'junk':>5}   ΔnDCG vs baseline [95% CI]")
+        print(f"{'variant':24} {'nDCG@10':>8} {'P@10':>6} {'R@20':>6} {'empty':>6} {'unjudged':>9} {'results':>8} {'junk':>5}   ΔnDCG vs {base_name} [95% CI]")
         for v in pooled:
             r = per[v]
             d, lo, hi = boot(v, "ndcg10")

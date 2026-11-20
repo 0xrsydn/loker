@@ -11,6 +11,7 @@ python3 eval.py snapshot                 # once: freeze $LOKER_HOME/loker.db -> 
 python3 eval.py pool                     # run every variant, top 20 per query
 JUDGE=opus python3 eval.py judge         # grade pairs not yet graded (cached)
 JUDGE=opus python3 eval.py score -q      # metrics; -q per query, --holdout for the holdout set
+                                         # --base VARIANT: Δ against that variant, not the baseline
 python3 eval.py agree                    # Opus vs DeepSeek agreement
 python3 eval.py sample 40                # blind sheet for a human spot-check
 ```
@@ -36,6 +37,8 @@ python3 eval.py sample 40                # blind sheet for a human spot-check
    the same pairs as a check. Grades are cached in `labels-*.json`, keyed by
    prompt version, model, query, intent and job id: a new variant only grades
    its new pairs, and editing a query's intent re-grades that query.
+   `PROMPTS` pins the prompt text and truncation each version names, so
+   `judge` refuses to run after a prompt edit until the version is bumped.
 
 ## Metrics
 
@@ -86,13 +89,27 @@ binary agreement 89%, kappa 0.79; Opus rates 51% relevant, DeepSeek 61%.
 | plain or (58be2e1 `anyWord`) | 0.565 | +0.061 [+0.005, +0.119] | 0.639 | 0.59 |
 | plain and->or t5 | 0.617 | +0.113 [+0.057, +0.172] | 0.656 | 0.61 |
 | porter or t5 | 0.679 | +0.174 [+0.094, +0.256] | 0.725 | 0.71 |
-| **porter and->or t5** | **0.681** | **+0.177 [+0.098, +0.258]** | **0.709** | **0.71** |
+| porter and->or t5 (shipped) | 0.681 | +0.177 [+0.098, +0.258] | 0.709 | 0.71 |
 | syn porter and->or t5 | 0.653 | +0.148 [+0.038, +0.249] | 0.695 | 0.71 |
 
+The shipped variant and `porter or t5` can't be told apart: +0.003
+[−0.002, +0.008] on tuning, and on the holdout `porter or t5` is ahead
+(−0.016 [−0.070, +0.021] for the shipped one). It was shipped for showing
+full matches first, not for its score, which breaks the rule above
+("beats the current best on the tuning set and the holdout").
+
+The holdout is 5 queries, and every variant here was scored on it, in two
+rounds: its intervals are about ±0.2, and it is no longer unseen. A new
+ranking needs new holdout queries, scored once.
+
 Findings:
-- Stemming is the largest single gain ("data engineer" 0.18 → 0.68,
-  "security engineer" 0.12 → 0.91).
-- A title weight of 5 helps; 10 is no better.
+- Stemming helps: +0.064 [+0.011, +0.125] with partial-match filling,
+  +0.076 [+0.017, +0.148] without ("data engineer" 0.18 → 0.68, "security engineer" 0.12 →
+  0.91). Filling with partial matches helps about as much: +0.086
+  [+0.036, +0.142] (`plain and t5` → `plain and->or t5`).
+- A title weight of 5 helps when any word matches (+0.037 [+0.003,
+  +0.078]); with every word it is within noise (+0.027 [−0.005, +0.062]).
+  10 is no better than 5.
 - AND, then filling with OR, removes empty results for long agent queries, but
   `air traffic controller` then returns 20 irrelevant jobs. Results filled
   from OR should be marked as partial matches.
