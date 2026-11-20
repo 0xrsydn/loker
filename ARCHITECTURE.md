@@ -93,8 +93,9 @@ The design chooses one kind of error over another. Each choice is deliberate.
 the store. Under one key, live listings merge when each source has at most one;
 if any source has two, all stay separate. A merge keeps the oldest canonical
 job's id. The merged job takes identity and text from employer boards first,
-then by source id; eligibility from the most confident source; pay from the
-first source that states base pay.
+then by source id; eligibility from a source that names places if any does
+(the narrower statement), then the most confident; pay from the first source
+that states base pay.
 
 **Storage.** A canonical job is a row holding its merged job as JSON
 (`canonical_jobs.job`, a `NewJob`), hashed as a whole together with its

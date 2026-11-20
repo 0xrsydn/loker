@@ -114,8 +114,14 @@ pub fn resolve(linked: Vec<Linked>) -> Option<Resolved> {
 }
 
 /// Merge jobs (in precedence order) into one. The first job supplies identity
-/// and text; eligibility comes from whichever source is most confident; pay
-/// prefers a source that states base pay.
+/// and text; eligibility comes from a source that names places when one does
+/// ("Canada" over another board's "Anywhere": the narrower statement is the
+/// rule), then from whichever is most confident; pay prefers a source that
+/// states base pay.
+fn names_places(e: &crate::model::Eligibility) -> bool {
+    !e.countries.is_empty() || !e.regions.is_empty() || e.onsite_city.is_some()
+}
+
 fn merge(jobs: &[NewJob]) -> NewJob {
     let primary = &jobs[0];
     let first = |f: fn(&NewJob) -> Option<String>| jobs.iter().find_map(f);
@@ -123,7 +129,7 @@ fn merge(jobs: &[NewJob]) -> NewJob {
         .iter()
         .map(|j| &j.eligibility)
         .fold(&primary.eligibility, |best, e| {
-            if e.confidence > best.confidence {
+            if (names_places(e), e.confidence) > (names_places(best), best.confidence) {
                 e
             } else {
                 best

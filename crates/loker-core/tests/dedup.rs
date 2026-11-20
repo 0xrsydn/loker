@@ -195,6 +195,32 @@ async fn retitled_job_leaves_its_cluster() {
     assert_eq!(clusters(&s).await.len(), 2);
 }
 
+/// One board says "Anywhere", another "Canada": the narrower statement wins,
+/// whichever is more confident.
+#[test]
+fn places_beat_worldwide_in_a_merge() {
+    use loker_core::dedup::{Linked, resolve};
+    use loker_core::model::SourceKind;
+    let mut canada = job("jobicy", "j1", "Acme", "Dev", Scope::Countries, 0.75);
+    canada.eligibility.countries = vec!["CA".into()];
+    let anywhere = job("weworkremotely", "w1", "Acme", "Dev", Scope::Worldwide, 0.8);
+    let linked = |j: loker_core::model::NewJob| Linked {
+        kind: SourceKind::Aggregator,
+        source_id: j.source_id.clone(),
+        source_job_id: j.source_job_id.clone(),
+        job: Some(j),
+        live: true,
+    };
+    let e = resolve(vec![linked(anywhere), linked(canada)])
+        .unwrap()
+        .job
+        .eligibility;
+    assert_eq!(
+        (e.scope, e.countries),
+        (Scope::Countries, vec!["CA".to_string()])
+    );
+}
+
 #[test]
 fn cluster_rules() {
     use loker_core::dedup::{Member, Plan, cluster};
