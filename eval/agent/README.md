@@ -143,3 +143,31 @@ run that searched only `minVerdict: yes` (and gave the UK a UTC+1 offset
 in November) and stopped at 3 of 7 good jobs. Twice now, the scarcest task
 has failed by leaving out `maybe` jobs.
 
+### Snapshot 2026-11-19 b, eligibility re-read with the rules of 8b8adb9
+
+`snapshot-b-rules-8b8adb9.db` (local only): the same jobs, with each job's
+eligibility rebuilt from its stored raw listings by
+`crates/loker-sources/examples/eligibility.rs`, since stored eligibility
+only changes on a new fetch. 745 of 1,749 jobs changed, most of them We
+Work Remotely "Anywhere in the World" jobs now unknown (195) or tied to the
+countries the posting names (122). Truth: backend-id 11 good, ml-in 11,
+data-de 4, designer-gb 2, devops-ph 1 (115-143 eligible per task, from
+412-468).
+
+| Label | calls | kchars | ktok | $/run | sec | prec | rec@5 | pass |
+|---|---|---|---|---|---|---|---|---|
+| 8b8adb9 (re-read rules) | 7.6 | 46 | 64 | 0.009 | 34 | 88% | 95% | 60% |
+
+Not comparable with the rows above: the truth is loker's own verdict, and
+the old one said yes to jobs the eligibility eval found mostly closed to the
+viewer. What the runs show:
+- data-de fails 3 of 3 the same way as before: three right picks, and the
+  fourth good job, a `maybe`, left out.
+- devops-ph has one good job. Every run found it, then padded the list with
+  off-role yes jobs and with `unknown` jobs instead of saying one qualifies.
+
+Both are what the tool descriptions should steer: `maybe` is worth
+offering, `unknown` is not eligible, and few matches is an answer. The
+release binary was rebuilt during this run for a config-only change (no
+effect on search or MCP); `meta.json` records the one it started with.
+
