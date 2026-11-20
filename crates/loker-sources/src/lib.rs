@@ -236,6 +236,14 @@ pub fn job_from_raw(
         job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
     }
     normalize::tidy(&mut job);
+    // What the board leaves open, the description may settle ("based in
+    // the US"). Every aggregator here lists remote jobs only.
+    let remote_board = source.kind() == SourceKind::Aggregator || remote == Some(true);
+    loker_core::eligibility_text::narrow(
+        &mut job.eligibility,
+        job.description_md.as_deref().unwrap_or(""),
+        remote_board,
+    );
     Ok(job)
 }
 

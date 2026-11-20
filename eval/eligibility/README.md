@@ -63,7 +63,9 @@ Each row is jobs x 5 viewers. "Wrong yes" is a yes the label calls no
 | before (5f4f0b6), Opus / DeepSeek | tuning | 169/256 / 186/256 | 71 / 67 | 586/594 / 594/594 | 0 / 0 |
 | now, Opus / DeepSeek | tuning | 159/175 / 161/175 | 9 / 13 | 612/620 / 620/620 | 0 / 0 |
 | before (5f4f0b6), Opus / DeepSeek | holdout | 54/148 / 62/148 | 78 / 82 | 371/382 / 382/382 | 3 / 0 |
-| **now, scored once**, Opus / DeepSeek | holdout | **37/46 / 37/46** | **3 / 5** | 388/399 / 399/399 | 3 / 0 |
+| WWR and merge fixes (e66140d), scored once | holdout | 37/46 / 37/46 | 3 / 5 | 388/399 / 399/399 | 3 / 0 |
+| + places and description, tuning | tuning | 174/183 / 176/183 | 0 / 4 | 701/709 / 709/709 | 0 / 0 |
+| **+ places and description, scored once** | holdout | **44/53 / 44/53** | **3 / 5** | **469/480 / 480/480** | 3 / 0 |
 
 What changed, on the tuning set:
 - **We Work Remotely's `country` field is read.** 76 snapshot items say
@@ -83,20 +85,35 @@ Also found by the property tests (`crates/loker-core/tests/verdict_props.rs`),
 not by this eval: viewers at UTC+13 and +14 were told no for hours listed as
 UTC-11 and -10.
 
+Then, on the tuning set:
+- **States, provinces and cities map to their country**
+  (`country::place_country`): Remote OK writes "Dallas, Texas", "Warsaw",
+  "Colorado". A state or province counts as the country; a city alone may
+  be an office, so it is maybe inside the country and no outside it.
+- **The description fills in what the board leaves open**
+  (`eligibility_text`): "based in Colombia, Mexico, or Argentina", "remote
+  within the U.S.", "eligible to work in X", "CET (+/- 3 hours)". It never
+  overrides a place or hours the board stated, and skips conditions ("if you
+  live in"), exclusions ("outside the US") and the company ("our team is
+  based in"). A spot check of 40 changed jobs outside the sample found two
+  misreadings ("is" as Iceland, an "if you live in" clause), both fixed.
+
+On the holdout, scored once after both: unknown fell from 165 verdicts to
+75 and settled verdicts found rose from 425/591 to 513/591 (Opus), with
+no new wrong claims. The holdout has now seen this reader; a change to it
+needs a fresh holdout.
+
 What is left:
-- **Unknown is the biggest gap.** On the holdout loker says unknown for 165
-  verdicts the labels mostly settle (132 no, 23 yes): the restriction is in
-  the description ("must reside in the US", "CET +/- 3 hours"), which loker
-  doesn't read. A description reader, like `visa_text`, is the next step;
-  it would also catch the remaining wrong yeses (Himalayas "worldwide" jobs
-  whose text says "Filipino locals only").
+- **75 unknown verdicts on the holdout** (50 no, 16 yes by Opus): phrasings
+  the reader doesn't know yet ("exclusive to Filipino locals", hours as
+  "overlap with US Eastern Time").
 - Binance is ingested as an all-remote board; its postings say
   "remote-first ... may vary", which the labels read as maybe (3 tuning
   yeses).
 - The 3 Opus wrong noes on the holdout are all Himalayas jobs, where the
   board states the countries; DeepSeek labels all three no.
-- Small sets: a holdout yes precision of 37/46 has a wide interval (Wilson 95%
-  interval 67-89%).
+- Small sets: a holdout yes precision of 44/53 has a Wilson 95% interval
+  of 71-91%.
 
 Jobs read while changing rules: every tuning-set miss listed by `score -v`.
 The holdout's text and labels were not read before it was scored.

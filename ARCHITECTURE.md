@@ -77,6 +77,12 @@ Eligibility records its method, confidence and evidence. *Why:* when sources
 disagree, the merge has a principled winner, and anyone can see why a job got
 its answer.
 
+Eligibility comes from the board's fields first. The description
+(`eligibility_text`) only fills in what they leave open: places when the
+board names none ("based in the US" under "Anywhere in the World"), hours
+when it gives none, never for on-site or hybrid jobs. It runs at ingest, in
+`job_from_raw`, since search filters on the verdict.
+
 ## Trade-offs
 
 The design chooses one kind of error over another. Each choice is deliberate.

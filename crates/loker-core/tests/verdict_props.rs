@@ -3,6 +3,7 @@
 //! verdicts order from best to worst: yes, maybe, unknown, no.
 use isocountry::CountryCode;
 use loker_core::country::region_contains;
+use loker_core::eligibility_text::narrow;
 use loker_core::model::{Eligibility, Method, Scope, TzStrength, TzWindow};
 use loker_core::normalize::eligibility_from_text;
 use loker_core::verdict::{VerdictKind, Viewer, eligible_for};
@@ -190,6 +191,30 @@ proptest! {
         let e = eligibility_from_text(&text, remote);
         if remote == Some(false) {
             prop_assert_eq!(e.scope, Scope::Onsite);
+        }
+    }
+
+    /// A description only fills in what the board left open: places the
+    /// board named, its hours, and on-site or hybrid jobs stay as they are.
+    #[test]
+    fn description_never_overrides_the_board(
+        e in eligibility(),
+        sentence in prop::sample::select(vec![
+            "Must be based in the United States.", "Remote within Europe.", "You will work remotely from Brazil.",
+            "Located in CET timezone (+/- 3 hours).", "No geographical restrictions.", "Based in Berlin.",
+        ]),
+        remote in any::<bool>(),
+    ) {
+        let mut after = e.clone();
+        narrow(&mut after, sentence, remote);
+        if matches!(e.scope, Scope::Onsite | Scope::Hybrid) {
+            prop_assert_eq!(&after, &e);
+        }
+        if !e.countries.is_empty() || !e.regions.is_empty() {
+            prop_assert_eq!((&after.scope, &after.countries, &after.regions), (&e.scope, &e.countries, &e.regions));
+        }
+        if e.tz.is_some() {
+            prop_assert_eq!(&after.tz, &e.tz);
         }
     }
 

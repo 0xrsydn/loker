@@ -24,7 +24,8 @@ crates/loker-core/       domain and rules, no network
   src/normalize.rs       shared rules: match keys, URLs, pay, eligibility from text
   src/pay_text.rs        pay read from a description, for sources with no pay fields
   src/visa_text.rs       visa sponsorship read from a description, when a job is read
-  src/country.rs         country names as boards write them -> ISO codes
+  src/eligibility_text.rs where a remote job may be done from, read from its description at ingest
+  src/country.rs         country, state, province and city names -> ISO codes; region tables
   src/dedup.rs           which listings are one job; no IO
   src/verdict.rs         can this viewer apply? (country, timezone)
   src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
