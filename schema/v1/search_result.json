@@ -878,6 +878,13 @@
         "null"
       ]
     },
+    "notice": {
+      "description": "Why there are no results when it isn't the query: nothing is stored\nyet. Absent otherwise.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "total": {
       "description": "Jobs matching every filter, across all pages.",
       "format": "uint32",

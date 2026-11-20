@@ -9,14 +9,16 @@ time zones), and answers searches from your point of view: "open to someone in
 Indonesia at UTC+7", not just "remote".
 
 > Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, We Work
-> Remotely, and any company's Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
+> Remotely, Workable (opt-in), and any company's Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
 > come next.
 
 ## Try it
 
 ```sh
 direnv allow                                  # or `nix develop`: toolchain, sqlite, litestream, secretspec
-cargo run -- ingest himalayas --country ID    # jobs open to Indonesia (worldwide + ID listed)
+cargo run -- config init --country ID         # starter sources, with Himalayas and Workable searching Indonesia
+cargo run -- ingest --all                     # fetch them all (without a config: the starter sources)
+cargo run -- doctor                           # setup, database, each source's last fetch; --live fetches too
 cargo run -- search engineer --country ID --tz 7
 cargo run -- search backend --country ID --tz 7 --min-verdict yes --compact   # only jobs you can take, short
 cargo run -- search golang rust kotlin        # every word first, then partial matches

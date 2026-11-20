@@ -116,6 +116,28 @@ pub fn load(home: &Path) -> anyhow::Result<Option<Config>> {
     Ok(Some(config))
 }
 
+/// The starting config for a viewer in `country` (ISO code): Himalayas'
+/// country search and Workable turned on for it. `None` is [`TEMPLATE`].
+pub fn template(country: Option<&str>) -> String {
+    let Some(c) = country else {
+        return TEMPLATE.to_string();
+    };
+    TEMPLATE
+        .replace(
+            "# country = \"ID\"       # only jobs open to this country (worldwide + listed)",
+            &format!("country = \"{c}\"         # only jobs open to this country (worldwide + listed)"),
+        )
+        .replace(
+            "# [[sources]]\n# id = \"workable\"\n# pages = 10           # 20 jobs per page\n# country = \"PH\"       # only jobs Workable places in this country",
+            &format!("[[sources]]\nid = \"workable\"\npages = 10             # 20 jobs per page\ncountry = \"{c}\"         # only jobs Workable places in this country"),
+        )
+}
+
+/// The starter sources, for `loker ingest --all` before a config.toml exists.
+pub fn starter() -> Config {
+    toml::from_str(TEMPLATE).expect("the template parses")
+}
+
 /// Written by `loker config init`.
 pub const TEMPLATE: &str = r#"# loker configuration: https://github.com/0xrsydn/loker
 version = 1
@@ -162,3 +184,15 @@ id = "weworkremotely"
 # [providers.jev]
 # model = "typesafe/jev-1.14-20261014"
 "#;
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn a_country_turns_on_its_searches() {
+        let c: super::Config = toml::from_str(&super::template(Some("PH"))).unwrap();
+        let get = |id: &str| c.sources.iter().find(|s| s.id == id).unwrap();
+        assert_eq!(get("himalayas").country.as_deref(), Some("PH"));
+        assert_eq!(get("workable").country.as_deref(), Some("PH"));
+        assert_eq!(super::starter().sources.len(), 4);
+    }
+}

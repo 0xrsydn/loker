@@ -10,9 +10,9 @@ pub mod mcp;
 use std::path::{Path, PathBuf};
 
 use loker_core::api::{
-    self, CONTRACT_VERSION, Error, GetJobsParams, GetJobsResult, IngestAllReport, IngestParams,
-    RoleEnrichReport, RolesResult, SearchParams, SearchResult, SourcesEval, Stats, VerifyParams,
-    VerifyReport,
+    self, CONTRACT_VERSION, CheckStatus, DoctorCheck, DoctorReport, Error, GetJobsParams,
+    GetJobsResult, IngestAllReport, IngestParams, RoleEnrichReport, RolesResult, SearchParams,
+    SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
 };
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
@@ -60,14 +60,10 @@ impl App {
         loker_sources::ingest(&self.store, &self.http, p).await
     }
 
-    /// Ingest every enabled source in config.toml.
+    /// Ingest every enabled source in config.toml, or the starter sources
+    /// when there is no config.toml yet.
     pub async fn ingest_all(&self) -> api::Result<IngestAllReport> {
-        let config = self.config()?.ok_or_else(|| {
-            Error::Invalid(format!(
-                "no {} yet (`loker config init` writes a starting one)",
-                config::path(&self.home).display()
-            ))
-        })?;
+        let config = self.config()?.unwrap_or_else(config::starter);
         let sources = config.enabled().map(|s| s.params()).collect();
         let mut report = loker_sources::ingest_all(&self.store, &self.http, sources).await?;
         // Roles by a model after the sources, so ingest never waits on it;
@@ -146,6 +142,206 @@ impl App {
         loker_sources::verify(&self.http, targets).await
     }
 
+    /// Is this install set up and healthy? Offline unless `live`, which also
+    /// fetches every enabled source (as `verify`).
+    pub async fn doctor(&self, live: bool) -> api::Result<DoctorReport> {
+        use CheckStatus::{Fail, Pass, Warn};
+        let mut checks = Vec::new();
+        let mut add = |name: &str, status, detail: String, fix: Option<String>| {
+            checks.push(DoctorCheck {
+                name: name.to_string(),
+                status,
+                detail,
+                fix: (status != Pass).then_some(fix).flatten(),
+            })
+        };
+        add("home", Pass, self.home.display().to_string(), None);
+
+        let config = match self.config() {
+            Ok(Some(c)) => {
+                let bad: Vec<String> = c
+                    .sources
+                    .iter()
+                    .filter_map(|s| {
+                        loker_sources::Source::parse(&s.id)
+                            .err()
+                            .map(|e| e.to_string())
+                    })
+                    .collect();
+                let n = c.enabled().count();
+                if !bad.is_empty() {
+                    add(
+                        "config",
+                        Fail,
+                        bad.join("; "),
+                        Some("fix the source ids in config.toml".into()),
+                    );
+                } else if n == 0 {
+                    add(
+                        "config",
+                        Warn,
+                        "no enabled source".into(),
+                        Some("enable a source in config.toml".into()),
+                    );
+                } else {
+                    add("config", Pass, format!("{n} enabled source(s)"), None);
+                }
+                Some(c)
+            }
+            Ok(None) => {
+                add(
+                    "config",
+                    Warn,
+                    "no config.toml: `loker ingest --all` uses the starter sources".into(),
+                    Some("loker config init --country <ISO code>".into()),
+                );
+                None
+            }
+            Err(e) => {
+                add(
+                    "config",
+                    Fail,
+                    e.to_string(),
+                    Some("fix config.toml (`loker config check`)".into()),
+                );
+                None
+            }
+        };
+        let config = config.unwrap_or_else(config::starter);
+
+        let stats = api::stats(&self.store).await?;
+        let size = std::fs::metadata(db_path(&self.home))
+            .map(|m| m.len())
+            .unwrap_or(0);
+        if stats.total == 0 {
+            add(
+                "database",
+                Warn,
+                "no jobs stored yet".into(),
+                Some("loker ingest --all".into()),
+            );
+        } else {
+            add(
+                "database",
+                Pass,
+                format!("{} active jobs, {:.0} MB", stats.total, size as f64 / 1e6),
+                None,
+            );
+        }
+
+        // Each enabled source's last fetch: never, failed, or long ago.
+        let eval = api::sources_eval(&self.store).await?;
+        let now = chrono::Utc::now();
+        let enabled: Vec<String> = config.enabled().map(|s| s.id.clone()).collect();
+        for id in &enabled {
+            let name = format!("source {id}");
+            let found = eval.sources.iter().find(|s| &s.source == id);
+            match found.and_then(|s| s.last_run.as_ref()) {
+                None => add(
+                    &name,
+                    Warn,
+                    "never fetched".into(),
+                    Some(format!("loker ingest {id}")),
+                ),
+                Some(r) if r.status != "completed" => add(
+                    &name,
+                    Fail,
+                    format!(
+                        "last fetch failed ({}): {}",
+                        r.at,
+                        r.error.as_deref().unwrap_or("no error recorded")
+                    ),
+                    Some(format!("loker verify {id}")),
+                ),
+                Some(r) => {
+                    let hours = chrono::DateTime::parse_from_rfc3339(&r.at)
+                        .map(|t| (now - t.to_utc()).num_minutes() as f64 / 60.0)
+                        .unwrap_or(f64::INFINITY);
+                    let jobs = found.map_or(0, |s| s.jobs);
+                    if hours > 24.0 {
+                        add(
+                            &name,
+                            Warn,
+                            format!("last fetched {hours:.0} h ago; {jobs} live listings"),
+                            Some("loker ingest --all, or the timer in contrib/systemd".into()),
+                        );
+                    } else {
+                        add(
+                            &name,
+                            Pass,
+                            format!("fetched {hours:.1} h ago; {jobs} live listings"),
+                            None,
+                        );
+                    }
+                }
+            }
+        }
+        for s in eval
+            .sources
+            .iter()
+            .filter(|s| s.jobs > 0 && !enabled.contains(&s.source))
+        {
+            add(
+                &format!("source {}", s.source),
+                Warn,
+                format!(
+                    "{} live listings from a source not enabled; they close after 30 days unseen",
+                    s.jobs
+                ),
+                Some("enable it in config.toml, or let them close".into()),
+            );
+        }
+
+        // Optional providers: whether the key is set, never its value.
+        if config.providers.jev.as_ref().is_some_and(|j| j.enabled) {
+            if std::env::var("OPENROUTER_API_KEY").is_ok_and(|k| !k.is_empty()) {
+                add(
+                    "provider jev",
+                    Pass,
+                    "OPENROUTER_API_KEY is set".into(),
+                    None,
+                );
+            } else {
+                add(
+                    "provider jev",
+                    Warn,
+                    "[providers.jev] is on but OPENROUTER_API_KEY isn't set: roles stay rules-only"
+                        .into(),
+                    Some("set OPENROUTER_API_KEY in the environment loker runs in".into()),
+                );
+            }
+        }
+
+        if live {
+            let targets = config.enabled().map(|s| s.params()).collect();
+            for s in loker_sources::verify(&self.http, targets).await?.sources {
+                let failed: Vec<String> = s
+                    .checks
+                    .iter()
+                    .filter(|c| c.status != Pass)
+                    .map(|c| format!("{}: {}", c.name, c.detail))
+                    .collect();
+                let detail = if failed.is_empty() {
+                    format!("live fetch ok, {} items", s.fetched)
+                } else {
+                    failed.join("; ")
+                };
+                add(
+                    &format!("live {}", s.source),
+                    s.status,
+                    detail,
+                    Some(format!("loker verify {}", s.source)),
+                );
+            }
+        }
+
+        Ok(DoctorReport {
+            contract_version: CONTRACT_VERSION,
+            ok: checks.iter().all(|c| c.status != Fail),
+            checks,
+        })
+    }
+
     /// The current config.toml, read fresh so edits apply without a restart.
     pub fn config(&self) -> api::Result<Option<Config>> {
         config::load(&self.home).map_err(|e| Error::Invalid(format!("{e:#}")))
@@ -180,5 +376,6 @@ pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
         ("ingest_all_report.json", schema!(IngestAllReport)),
         ("verify_params.json", schema!(VerifyParams)),
         ("verify_report.json", schema!(VerifyReport)),
+        ("doctor_report.json", schema!(DoctorReport)),
     ]
 }

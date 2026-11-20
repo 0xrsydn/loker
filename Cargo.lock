@@ -1250,6 +1250,7 @@ name = "loker"
 version = "0.0.1"
 dependencies = [
  "anyhow",
+ "chrono",
  "clap",
  "loker-core",
  "loker-sources",

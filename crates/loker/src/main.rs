@@ -4,8 +4,8 @@ use std::sync::Arc;
 use clap::{Parser, Subcommand};
 use loker::App;
 use loker_core::api::{
-    CheckStatus, GetJobsParams, GetJobsResult, Hit, IngestAllReport, IngestParams, MinVerdict,
-    RoleEnrichReport, SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams,
+    CheckStatus, DoctorReport, GetJobsParams, GetJobsResult, Hit, IngestAllReport, IngestParams,
+    MinVerdict, RoleEnrichReport, SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams,
     VerifyReport, View,
 };
 use loker_core::home::loker_home;
@@ -128,6 +128,15 @@ enum Command {
         #[arg(long)]
         json: bool,
     },
+    /// Check the setup: home, config, database, each source's last fetch,
+    /// optional provider keys. Exits non-zero if a check fails.
+    Doctor {
+        /// Also fetch every enabled source live (as `verify`).
+        #[arg(long)]
+        live: bool,
+        #[arg(long)]
+        json: bool,
+    },
     /// Print the v1 contract's JSON Schemas, or write them to a directory.
     Schema {
         #[arg(long)]
@@ -140,7 +149,11 @@ enum Command {
 #[derive(Subcommand)]
 enum ConfigCommand {
     /// Write a starting config.toml (refuses to overwrite one).
-    Init,
+    Init {
+        /// Where you are (ISO code): turns on Himalayas' and Workable's search for it.
+        #[arg(long)]
+        country: Option<String>,
+    },
     /// Parse config.toml and list the sources it enables.
     Check,
 }
@@ -186,6 +199,11 @@ async fn main() -> anyhow::Result<()> {
         Command::Ingest {
             all: true, json, ..
         } => {
+            if !loker_core::config::path(app.home()).exists() {
+                eprintln!(
+                    "no config.toml: using the starter sources (Himalayas, Jobicy, Remote OK, We Work Remotely); `loker config init --country <ISO code>` writes one you can edit"
+                );
+            }
             let report = app.ingest_all().await?;
             if json {
                 print_json(&report)?;
@@ -222,14 +240,23 @@ async fn main() -> anyhow::Result<()> {
             }
         }
         Command::Config {
-            command: ConfigCommand::Init,
+            command: ConfigCommand::Init { country },
         } => {
             let path = loker_core::config::path(app.home());
             if path.exists() {
                 anyhow::bail!("{} already exists", path.display());
             }
-            std::fs::write(&path, loker_core::config::TEMPLATE)?;
+            let country = country
+                .map(|c| match loker_core::country::to_alpha2(&c) {
+                    Some(code) => Ok(code),
+                    None => Err(anyhow::anyhow!(
+                        "unknown country `{c}` (use an ISO code, e.g. ID)"
+                    )),
+                })
+                .transpose()?;
+            std::fs::write(&path, loker_core::config::template(country))?;
             println!("wrote {}", path.display());
+            println!("next: loker ingest --all, then loker doctor");
         }
         Command::Config {
             command: ConfigCommand::Check,
@@ -383,6 +410,17 @@ async fn main() -> anyhow::Result<()> {
                 std::process::exit(1);
             }
         }
+        Command::Doctor { live, json } => {
+            let report = app.doctor(live).await?;
+            if json {
+                print_json(&report)?;
+            } else {
+                print_doctor(&report);
+            }
+            if !report.ok {
+                std::process::exit(1);
+            }
+        }
         Command::Schema { .. } => unreachable!("handled before opening the store"),
         Command::Mcp => loker::mcp::serve_stdio(Arc::new(app)).await?,
     }
@@ -405,6 +443,9 @@ fn print_json(v: &impl Serialize) -> anyhow::Result<()> {
 }
 
 fn print_search(r: &SearchResult) {
+    if let Some(n) = &r.notice {
+        println!("{n}");
+    }
     for hit in &r.jobs {
         match hit {
             Hit::Full(hit) => print_hit(hit),
@@ -621,6 +662,27 @@ fn print_verify(r: &VerifyReport) {
             println!("    {:<4} {:<16} {}", mark(c.status), c.name, c.detail);
         }
     }
+}
+
+fn print_doctor(r: &DoctorReport) {
+    let mark = |s: CheckStatus| match s {
+        CheckStatus::Pass => "pass",
+        CheckStatus::Warn => "WARN",
+        CheckStatus::Fail => "FAIL",
+    };
+    for c in &r.checks {
+        println!("{:<4} {:<28} {}", mark(c.status), c.name, c.detail);
+        if let Some(fix) = &c.fix {
+            println!("     {:<28} -> {fix}", "");
+        }
+    }
+    let n = |s| r.checks.iter().filter(|c| c.status == s).count();
+    println!(
+        "{} pass, {} warn, {} fail",
+        n(CheckStatus::Pass),
+        n(CheckStatus::Warn),
+        n(CheckStatus::Fail)
+    );
 }
 
 fn write_schemas(out: Option<&std::path::Path>) -> anyhow::Result<()> {

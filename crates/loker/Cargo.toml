@@ -14,6 +14,7 @@ path = "src/main.rs"
 
 [dependencies]
 anyhow.workspace = true
+chrono.workspace = true
 clap = { version = "4.6.8", features = ["derive"] }
 loker-core.workspace = true
 loker-sources.workspace = true

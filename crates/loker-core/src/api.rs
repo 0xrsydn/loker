@@ -132,7 +132,14 @@ pub struct SearchResult {
     pub jobs: Vec<Hit>,
     /// Pass as `offset` to get the next page; absent when this page is the last.
     pub next_offset: Option<u32>,
+    /// Why there are no results when it isn't the query: nothing is stored
+    /// yet. Absent otherwise.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notice: Option<String>,
 }
+
+/// The notice for a store with no jobs, for every adapter to show.
+pub const EMPTY_STORE: &str = "No jobs are stored yet: run `loker ingest --all` to fetch them (`loker doctor` checks the setup).";
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
@@ -329,6 +336,11 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             break;
         }
     }
+    let notice = if total == 0 && store.counts().await?.iter().all(|(_, n)| *n == 0) {
+        Some(EMPTY_STORE.to_string())
+    } else {
+        None
+    };
     Ok(SearchResult {
         contract_version: CONTRACT_VERSION,
         count: jobs.len(),
@@ -336,6 +348,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         full_matches: full,
         next_offset: (total > offset + limit).then_some(offset + limit),
         jobs,
+        notice,
     })
 }
 
@@ -736,6 +749,31 @@ pub enum CheckStatus {
     Pass,
     Warn,
     Fail,
+}
+
+// ---------- doctor ----------
+
+/// `loker doctor`: is this install set up and healthy? Offline checks of the
+/// home, config, database and each source's last fetch; with `live`, also
+/// `verify`. Each problem says how to fix it.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct DoctorReport {
+    pub contract_version: u32,
+    /// No check failed (warnings allowed).
+    pub ok: bool,
+    pub checks: Vec<DoctorCheck>,
+}
+
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+pub struct DoctorCheck {
+    /// What was checked: "home", "config", "database", "source <id>", "provider jev", ...
+    pub name: String,
+    pub status: CheckStatus,
+    pub detail: String,
+    /// The command or edit that fixes it, when the status isn't pass.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub fix: Option<String>,
 }
 
 // ---------- ingest ----------

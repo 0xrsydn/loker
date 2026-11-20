@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "CheckStatus": {
+      "enum": [
+        "pass",
+        "warn",
+        "fail"
+      ],
+      "type": "string"
+    },
+    "DoctorCheck": {
+      "properties": {
+        "detail": {
+          "type": "string"
+        },
+        "fix": {
+          "description": "The command or edit that fixes it, when the status isn't pass.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "description": "What was checked: \"home\", \"config\", \"database\", \"source <id>\", \"provider jev\", ...",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/CheckStatus"
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "detail"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "`loker doctor`: is this install set up and healthy? Offline checks of the\nhome, config, database and each source's last fetch; with `live`, also\n`verify`. Each problem says how to fix it.",
+  "properties": {
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/DoctorCheck"
+      },
+      "type": "array"
+    },
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "ok": {
+      "description": "No check failed (warnings allowed).",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "ok",
+    "checks"
+  ],
+  "title": "DoctorReport",
+  "type": "object"
+}

@@ -389,6 +389,13 @@ fn pipeline_end_to_end() {
     let stub = stub();
     let home = Home::new("forward", &stub);
 
+    // Before any ingest, a search says why it is empty, over CLI and MCP alike.
+    let r = home.json(&["search", "engineer", "--json"]);
+    assert!(
+        r["notice"].as_str().unwrap().contains("loker ingest --all"),
+        "{r:#}"
+    );
+
     // Every adapter parses its payload; three pairs merge across sources.
     let first: Vec<Value> = ORDER.iter().map(|s| home.ingest(s)).collect();
     let new: u64 = first.iter().map(|s| s["new"].as_u64().unwrap()).sum();
@@ -792,6 +799,28 @@ enabled = false
         !served.iter().any(|t| t.starts_with("/jobs/api?")),
         "{served:?}"
     );
+
+    // doctor, offline: the broken board's last fetch failed (and says how to
+    // check it); the others passed; exit status follows.
+    let out = home.run(&["doctor", "--json"]);
+    assert!(!out.status.success());
+    let report: Value = serde_json::from_slice(&out.stdout).unwrap();
+    let status = |name: &str| {
+        report["checks"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|c| c["name"] == name)
+            .map(|c| (c["status"].as_str().unwrap().to_string(), c["fix"].clone()))
+            .unwrap()
+    };
+    assert_eq!(status("source greenhouse:broken").0, "fail", "{report:#}");
+    assert_eq!(
+        status("source greenhouse:broken").1,
+        "loker verify greenhouse:broken"
+    );
+    assert_eq!(status("source jobicy").0, "pass", "{report:#}");
+    assert_eq!(status("database").0, "pass", "{report:#}");
 }
 
 #[test]
