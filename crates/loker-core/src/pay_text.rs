@@ -95,7 +95,7 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
         let label = i
             .checked_sub(1)
             .map(|j| lines[j])
-            .filter(|l| l.chars().count() <= 60 && !has_money(l));
+            .filter(|l| l.chars().count() <= 60 && !has_money(l) && names_something(l));
         let mut line_has_base = false;
         for sentence in sentences(line) {
             let mut used = false;
@@ -148,6 +148,25 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
                 extras.extend(extras_named(line));
             }
         }
+    }
+    // One range stated twice ("Compensation" up top, "Salary Range" at the
+    // end) is one range. Places that share figures in a list of several
+    // ("Washington" and "New York City") stay apart.
+    let unlabelled = |m: &Money| Money {
+        label: None,
+        ..m.clone()
+    };
+    let named: Vec<Money> = base
+        .iter()
+        .filter(|m| m.label.is_some())
+        .map(unlabelled)
+        .collect();
+    base.retain(|m| m.label.is_some() || !named.contains(m));
+    if base
+        .windows(2)
+        .all(|w| unlabelled(&w[0]) == unlabelled(&w[1]))
+    {
+        base.truncate(1);
     }
     // A single range needs no label; several keep theirs only if all have one.
     if base.len() < 2 || base.iter().any(|m| m.label.is_none()) {
@@ -300,6 +319,19 @@ fn dollar_country(text: &str) -> Option<&'static str> {
 
 fn has_money(text: &str) -> bool {
     RANGE.captures_iter(text).any(|m| currency(&m).is_some())
+}
+
+/// Whether a line above a range could name it: "California Pay Range" names
+/// a place; "### Compensation & Benefits" is only the pay heading.
+fn names_something(line: &str) -> bool {
+    static HEADING: LazyLock<Regex> = LazyLock::new(|| {
+        Regex::new(r"(?i)\b(?:range|ranges|benefits|details|package|and|base|the|for|this|role|position)\b").unwrap()
+    });
+    let rest = PAY_WORDS.replace_all(line, "");
+    HEADING
+        .replace_all(&rest, "")
+        .chars()
+        .any(char::is_alphanumeric)
 }
 
 fn currency(m: &regex::Captures) -> Option<String> {

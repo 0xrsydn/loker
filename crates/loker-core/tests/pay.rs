@@ -153,6 +153,31 @@ fn pay_read_from_descriptions() {
             "Pay Range\n\n$196,000—$230,000 USD",
             Some(vec![year("USD", Some(196e3), Some(230e3))]),
         ),
+        // The pay heading names no range; a restated range keeps its label.
+        (
+            "### Compensation & Benefits\n\nThe salary is $170,000 - $200,000/year by zone.\n\nZone 1\n\n$204,000 - $240,000/year\n\nZone 3\n\n$170,000 - $200,000/year",
+            Some(vec![
+                (
+                    "USD".into(),
+                    Some(Period::Year),
+                    Some(204e3),
+                    Some(240e3),
+                    Some("Zone 1".into()),
+                ),
+                (
+                    "USD".into(),
+                    Some(Period::Year),
+                    Some(170e3),
+                    Some(200e3),
+                    Some("Zone 3".into()),
+                ),
+            ]),
+        ),
+        // One range stated twice, under different lines above, is one range.
+        (
+            "### Compensation\n\n**$45,000 - $55,000 per year**\n\n**Location:** Remote\n\n**Salary Range:** 45,000 - 55,000 USD (gross, annually)",
+            Some(vec![year("USD", Some(45e3), Some(55e3))]),
+        ),
         // A code after the figure names the dollar; "min" is one end.
         (
             "an annual salary of min 80,000 EUR gross",
