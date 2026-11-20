@@ -55,11 +55,18 @@ pub struct TzWindow {
 }
 
 impl TzWindow {
+    /// Offsets a day apart are the same hours: UTC+13 (New Zealand in summer)
+    /// is inside a window that lists it as UTC-11.
     pub fn contains(&self, offset: f64) -> bool {
-        if self.from <= self.to {
-            (self.from..=self.to).contains(&offset)
+        let (from, to, offset) = (
+            normalize_offset(self.from),
+            normalize_offset(self.to),
+            normalize_offset(offset),
+        );
+        if from <= to {
+            (from..=to).contains(&offset)
         } else {
-            offset >= self.from || offset <= self.to
+            offset >= from || offset <= to
         }
     }
 
