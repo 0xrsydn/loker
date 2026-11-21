@@ -78,6 +78,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
             .map(|t| t.to_utc()),
         expires_at: None,
         visa: None,
+        experience: None,
         raw,
     })
 }

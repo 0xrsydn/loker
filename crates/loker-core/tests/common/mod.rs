@@ -55,6 +55,7 @@ pub fn job(
         posted_at: None,
         expires_at: None,
         visa: None,
+        experience: None,
         raw: serde_json::Value::Null,
     }
 }

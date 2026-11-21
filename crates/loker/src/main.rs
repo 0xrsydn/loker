@@ -76,7 +76,11 @@ enum Command {
         /// Keep only jobs at these levels; jobs that state none are dropped.
         #[arg(long, value_delimiter = ',', value_parser = ["intern", "junior", "mid", "senior", "lead", "executive"])]
         seniority: Vec<String>,
-        /// Return only id, title, company, link, scope, level, pay, date and verdict.
+        /// Your years of experience: drops jobs that require more; jobs that
+        /// state none are kept.
+        #[arg(long)]
+        years: Option<u8>,
+        /// Return only id, title, company, link, scope, level, pay, years, date and verdict.
         #[arg(long)]
         compact: bool,
         /// Return only id, title, company, level and verdict.
@@ -276,6 +280,7 @@ async fn main() -> anyhow::Result<()> {
             min_verdict,
             role,
             seniority,
+            years,
             compact,
             titles,
             any_word,
@@ -305,6 +310,7 @@ async fn main() -> anyhow::Result<()> {
                         .iter()
                         .map(|s| serde_json::from_value(serde_json::Value::String(s.clone())))
                         .collect::<Result<_, _>>()?,
+                    experience_years: years,
                     view: if titles {
                         View::Titles
                     } else if compact {
@@ -441,8 +447,9 @@ fn print_search(r: &SearchResult) {
                     None => format!("{:?}", c.scope).to_lowercase(),
                 };
                 let pay = c.pay.as_deref().unwrap_or("pay n/a");
+                let yrs = years_text(c.min_years);
                 println!(
-                    "{}  {} — {}{}{}\n    {elig} · {pay}\n    {}",
+                    "{}  {} — {}{}{}\n    {elig} · {pay}{yrs}\n    {}",
                     c.id,
                     c.title,
                     c.company,
@@ -490,6 +497,7 @@ fn print_hit(hit: &SearchHit) {
         Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
         None => format!("{:?}", job.eligibility.scope()).to_lowercase(),
     };
+    let yrs = years_text(job.experience.as_ref().map(|e| e.min_years));
     let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
     let roles: Vec<Role> = job
         .role
@@ -502,7 +510,7 @@ fn print_hit(hit: &SearchHit) {
         .map(|r| r.modifiers.as_slice())
         .unwrap_or(&[]);
     println!(
-        "{}  {} — {}{}{}\n    {elig} · {pay}\n    {}  (via {})",
+        "{}  {} — {}{}{}\n    {elig} · {pay}{yrs}\n    {}  (via {})",
         job.id,
         job.title,
         job.company,
@@ -547,6 +555,14 @@ fn level(s: Option<Seniority>) -> String {
         )
     })
     .unwrap_or_default()
+}
+
+fn years_text(min: Option<u8>) -> String {
+    match min {
+        Some(0) => " · no experience needed".into(),
+        Some(n) => format!(" · {n}+ yrs"),
+        None => String::new(),
+    }
 }
 
 fn partial_mark(partial: bool) -> &'static str {

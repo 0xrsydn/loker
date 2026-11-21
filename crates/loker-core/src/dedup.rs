@@ -182,6 +182,7 @@ fn merge(jobs: &[NewJob]) -> NewJob {
         // The first source that states sponsorship at all, employer boards
         // first (they sort ahead).
         visa: jobs.iter().find_map(|j| j.visa.clone()),
+        experience: jobs.iter().find_map(|j| j.experience.clone()),
         raw: serde_json::Value::Null,
     }
 }

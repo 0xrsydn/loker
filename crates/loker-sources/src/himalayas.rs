@@ -121,6 +121,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
             .expiry_date
             .and_then(|s| DateTime::from_timestamp(s, 0)),
         visa: None,
+        experience: None,
         raw,
     })
 }

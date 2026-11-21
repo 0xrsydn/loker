@@ -1,0 +1,4092 @@
+{
+ "v1|holdout2|j_00c0458931": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_037f2c7834": {
+  "evidence": "2+ years of related professional experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_089d52488c": {
+  "evidence": "3+ years of experience as a Technical Artist in the video game industry.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_0b8d321f86": {
+  "evidence": "This initiative is designed for recent graduates",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout2|j_0bc541ba34": {
+  "evidence": "Eight or more years of .NET / C# with ASP.NET Core Web APIs and EF Core",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout2|j_0c67d024bf": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_0ee0818229": {
+  "evidence": "3+ years of enterprise application support or production operations",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_161edf2dce": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_1af060a724": {
+  "evidence": "7+ years building and shipping web applications",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout2|j_1b379d95eb": {
+  "evidence": "Minimum of 2 years of hands-on experience handling U.S. immigration cases (required).",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_26eec79c99": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_2b51a33030": {
+  "evidence": "2 anos ou mais em prospecção outbound B2B",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_2eb1939cf7": {
+  "evidence": "8+ years across business process automation, professional services operations, revenue/partner operations or product management in B2B SaaS, with 3+ years leading a team.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout2|j_30841ce6c4": {
+  "evidence": "1–7 years of high-volume, quota-carrying sales experience",
+  "max_years": 7,
+  "min_years": 1
+ },
+ "v1|holdout2|j_388d15d60c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_3901ece01e": {
+  "evidence": "6+ years of experience in full-stack or backend development.",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout2|j_3a52d3b39f": {
+  "evidence": "proven sales track record",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_3d06d5bf93": {
+  "evidence": "5+ years of experience building Windows desktop or system-level software in C#/.NET.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_3ef04498f9": {
+  "evidence": "3+ years' experience in web development, with WordPress as your main platform",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_3f92da8df9": {
+  "evidence": "2 - 3+ years of sales experience, preferably in closing roles.",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_424d0dbc9a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_44a351f349": {
+  "evidence": "Substantial professional experience developing and supporting enterprise software",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_48e29a68f4": {
+  "evidence": "5+ years experience with Maximo / MAS 8 / MAS 9",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_49588d67b8": {
+  "evidence": "At least 1–2 years of recent acute care experience in an institutional setting.",
+  "max_years": 2,
+  "min_years": 1
+ },
+ "v1|holdout2|j_4dd1b8bba3": {
+  "evidence": "You’ll ideally have: 2+ years of B2B sales experience",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_4f70889a2d": {
+  "evidence": "Proven experience in plumbing or electrical fields preferred, but full training will be provided.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_53469896a1": {
+  "evidence": "6+ years of progressive product management experience",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout2|j_551eb386a5": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_57c2221fb2": {
+  "evidence": "2+ year of experience in outreach, care coordination, call center, sales, enrollment, or member/patient engagement roles",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_591d684dcf": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_5999d6fb49": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_5a5f63ddc0": {
+  "evidence": "Proven experience in managed services delivery coordination within enterprise environments.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_602cd9bac3": {
+  "evidence": "2+ years of proven experience in link building or digital PR",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_663d49c106": {
+  "evidence": "You have strong experience applying data science or ML to adversarial problems in production",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_6902041425": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_6987745afd": {
+  "evidence": "Minimum 3 years' experience in QA automation testing",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_69f1d0fd31": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_6b2372277a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_6e2e2eff36": {
+  "evidence": "7+ years in performance marketing or growth, including 3+ years leading a paid media team",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout2|j_717023d1ee": {
+  "evidence": "7+ years of quota-carrying SaaS sales experience in a new business role",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout2|j_74a0c1171b": {
+  "evidence": "3+ years of experience in IT administration, IT operations, systems administration or a similar hands-on role",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_74d60792d4": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_79eaca4348": {
+  "evidence": "Minimum 3-5+ years recruiting experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_7b26baa839": {
+  "evidence": "~8+ years of professional software engineering experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout2|j_7e7e23b178": {
+  "evidence": "At least 10 years of relevant experience.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout2|j_81368d0c1e": {
+  "evidence": "6+ years of experience in full-stack or backend development.",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout2|j_823b3b2d7e": {
+  "evidence": "10-20 years in finance, including 3+ years as CFO, Group CFO or VP Finance",
+  "max_years": 20,
+  "min_years": 10
+ },
+ "v1|holdout2|j_82e4e838c6": {
+  "evidence": "at least 5 years' sales experience... Proven track record of field sales (5 years minimum)",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_855ac5d047": {
+  "evidence": "3+ years of professional experience in game design",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_86cbbf9e89": {
+  "evidence": "5+ years of hands-on Salesforce engineering and architecture experience.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_87577ec958": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_889212a2ce": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_8c104e638e": {
+  "evidence": "5+ years of experience in CRM administration, sales operations or revenue operations",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_942cf1cb94": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_94d6a4453c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_97f524d874": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_9bcffaff89": {
+  "evidence": "7+ years of experience in marketplace operations or equivalent roles",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout2|j_9bd9a5f1fc": {
+  "evidence": "2 to 3 years of experience in blockchain analysis, crypto research, or a related field.",
+  "max_years": 3,
+  "min_years": 2
+ },
+ "v1|holdout2|j_9f03ff643b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_a0ae306d10": {
+  "evidence": "At least 2 years' experience in chartering on a Panamax desk",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_aaef91948a": {
+  "evidence": "Must have: 2+ years of attorney experience handling T visa, U visa and/or VAWA cases.",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_ab7cf3bf45": {
+  "evidence": "3-5 years in CRO, growth, or performance marketing",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout2|j_abf4d9e2a6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_ac4ae48c32": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_acb6bf0d04": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_b0551eba6b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_b08f2c8fbb": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_b2262c340b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_b4e2534aeb": {
+  "evidence": "10+ years of experience in Strategic Customer Success, Enterprise Account Management, or enterprise sales background",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout2|j_b752f18f8b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_bb8c017fcd": {
+  "evidence": "2+ years' experience working with victims of DV/SV/ or Human Trafficking",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_bd8058df2a": {
+  "evidence": "3-5 years’ selling experience in the consumer products industry is required",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout2|j_bfd26e6fff": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_c09b615ca6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_c4e0b0d0d6": {
+  "evidence": "0–1 year of experience in software engineering, application development, or a related technical role.",
+  "max_years": 1,
+  "min_years": 0
+ },
+ "v1|holdout2|j_c6840d063a": {
+  "evidence": "5+ years of experience as an Executive Assistant, with at least 2 years supporting C-level executives",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_c6add3fa13": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_c87c9c9925": {
+  "evidence": "with 6-10 years in organic search and at least two of those managing people",
+  "max_years": 10,
+  "min_years": 6
+ },
+ "v1|holdout2|j_c941fb69fc": {
+  "evidence": "3+ years of experience as a product manager",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_ce6979ba8d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_d01b232627": {
+  "evidence": "3+ years of experience as a product manager",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_d08f585b6e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_d76583e231": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_d818635fe4": {
+  "evidence": "One or more years pharmaceutical sales experience OR Two years or more of successful medical sales experience",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout2|j_da98798419": {
+  "evidence": "3 years of clinical research experience within the CRO, pharmaceutical, or biotechnology industry and at least 2 years of on-site monitoring experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_dca03e72f9": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_def6a60b02": {
+  "evidence": "At least three years of commercial experience building web applications with Python and Django",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_e3a2d8587f": {
+  "evidence": "1-2 years of experience in software testing, QA, or automation",
+  "max_years": 2,
+  "min_years": 1
+ },
+ "v1|holdout2|j_e46df9bf3c": {
+  "evidence": "2 years of industry experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_e47a351c3e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_e4a4ed0d34": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_f1016cf860": {
+  "evidence": "3+ years of full-cycle recruiting experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout2|j_f245a6c4fa": {
+  "evidence": "5+ years of experience designing consumer-facing digital products",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout2|j_f62960ff31": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_f6f8e7d747": {
+  "evidence": "2 - 3+ years of sales experience, preferably in closing roles",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout2|j_f73545e55f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_f8662a334e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_fd267f2026": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_fd7bdd5206": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout2|j_fe269d1b03": {
+  "evidence": "5+ years in grassroots and brand marketing",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_00957a9cb8": {
+  "evidence": "At least 1-2 years of experience handling customer inquiries with a legal and/or complaint focus",
+  "max_years": 2,
+  "min_years": 1
+ },
+ "v1|holdout3|j_075115b7c2": {
+  "evidence": "5+ years of product management experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_07658e5d71": {
+  "evidence": "You have two to four years administering Braze (or similar CRM platform)",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout3|j_0be53493d8": {
+  "evidence": "You have 15+ years of professional experience in software engineering",
+  "max_years": null,
+  "min_years": 15
+ },
+ "v1|holdout3|j_0d03df47e0": {
+  "evidence": "Extensive experience as a sales hunter",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_0ea78d05ea": {
+  "evidence": "2+ years of experience in data protection or privacy compliance",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout3|j_137febfa4f": {
+  "evidence": "4 to 5 years of experience in sales",
+  "max_years": 5,
+  "min_years": 4
+ },
+ "v1|holdout3|j_14a07b4b35": {
+  "evidence": "5+ years of motion design experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_14a8be31c6": {
+  "evidence": "2+ years of experience in People Operations, HR Operations, or HR administration",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout3|j_14f5c63b6c": {
+  "evidence": "Minimum 1–3 years of proven experience in a commercial/sales role",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout3|j_17e7af716c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_188427dd8c": {
+  "evidence": "8+ years of software engineering experience, including 2+ years managing engineers",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout3|j_18dd1945c4": {
+  "evidence": "dispose d’une solide expérience en comptabilité",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_1952d70939": {
+  "evidence": "5+ years in IT or SaaS, including 3+ years in customer success or another customer-facing role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_1ab512aa53": {
+  "evidence": "Expérience significative en déploiement ou implémentation de solutions SaaS chez un intégrateur ou éditeur logiciel (3+ ans) ... Egalement considéré : 8 ans d’expérience minimum en comptabilité",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_1ab6407f00": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_1ed488ca77": {
+  "evidence": "6+ years of Product Management experience, with at least 3+ years focused specifically on building and scaling DeFi or crypto products",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout3|j_22b3725b82": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_24cb35617b": {
+  "evidence": "2+ years of experience in a similar Workplace, Facilities, or Office Management role (internships and apprenticeships included)",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout3|j_27bd35047e": {
+  "evidence": "3–6 years of experience in Customer Success, Account Management, or related client-facing roles",
+  "max_years": 6,
+  "min_years": 3
+ },
+ "v1|holdout3|j_290e1ad7e4": {
+  "evidence": "Have solid experience in data engineering or platform engineering",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_2e1c9f5d50": {
+  "evidence": "8+ years in B2B SaaS, including at least 4 years leading Account Management, Customer Success, or Sales Development teams",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout3|j_30b6784aa6": {
+  "evidence": "4+ years of progressive experience in roles such as Financial Controller, Senior Management Accountant, or FP&A / Controlling",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_32d3b239b6": {
+  "evidence": "ideally 3+ years of relevant engineering experience or in a similar job",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_33a16a53a7": {
+  "evidence": "Mandatory: At least 1 full year of high-activity, outbound-heavy experience in SaaS/Tech Sales.",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout3|j_3bd7940c18": {
+  "evidence": "Berpengalaman sebagai jurujual.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_3c5d758f93": {
+  "evidence": "6–7+ years of senior B2B sales and business development experience",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout3|j_4132a0298f": {
+  "evidence": "Expérience d'au moins 3 ans en cabinet comptable",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_41f4856c23": {
+  "evidence": "8+ years of project or program management experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout3|j_43ae648b4d": {
+  "evidence": "6+ years of experience in fraud prevention, including 3+ years working directly on card fraud",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout3|j_44eaa4a8ae": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_4519e7a300": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_497c6cf4a7": {
+  "evidence": "Tu disposes de plusieurs années d'expérience au sein d'une néo-banque",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_4a13ae5267": {
+  "evidence": "6+ years of experience of software development using modern frameworks such as Micronaut/Spring Boot",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout3|j_4a18702c5d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_4c6d0d649d": {
+  "evidence": "4+ years of experience in investment banking, corporate development, private equity, strategic finance or FP&A",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_5053391871": {
+  "evidence": "Proven hands-on experience in the air freight sector",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_54886f3903": {
+  "evidence": "5–8+ years of relevant experience in transfer pricing, international tax or tax advisory",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|holdout3|j_5a079ea013": {
+  "evidence": "No formal experience is required",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout3|j_5cbc16563f": {
+  "evidence": "3+ years in Customer Success, Account Management, or a hybrid Sales/CS role within SaaS",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_5e366bc55c": {
+  "evidence": "Expérience d'au moins 3 ans en cabinet comptable",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_6654d712a9": {
+  "evidence": "7+ years of successful B2B SaaS sales experience",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout3|j_67b3d0ceda": {
+  "evidence": "5-8 years of experience in a customer-facing technical role",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|holdout3|j_695667b80b": {
+  "evidence": "Minimum 1–3 years of direct sales, field sales or business development experience",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout3|j_733f5e67a4": {
+  "evidence": "5+ years of experience in Revenue Operations, Sales Operations, or Business Operations",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_73fc5c2da2": {
+  "evidence": "6+ years of experience in a client-facing technical role",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout3|j_74a901e61c": {
+  "evidence": "Have significant software engineering experience",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_7aaa96145c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_806c74547f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_81989bd0c9": {
+  "evidence": "4+ years in a similar account management or customer success role",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_81cbc254c2": {
+  "evidence": "You have 4+ years of hands-on security engineering experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_84676545ca": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_8b3e529f62": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_8be0320a77": {
+  "evidence": "6-12+ years of product management experience",
+  "max_years": 12,
+  "min_years": 6
+ },
+ "v1|holdout3|j_8d55a42263": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_962c903e18": {
+  "evidence": "No formal experience is required",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout3|j_97bac07bb9": {
+  "evidence": "Mindestens fünf Jahre Erfahrung in einem High-Touch-Tech-Umfeld",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_992ee4f6a8": {
+  "evidence": "3+ years in Customer Success, Account Management, or a hybrid Sales/CS role within SaaS",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_9de875cda2": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_a3fb6b95fc": {
+  "evidence": "7 à 10 ans d'expérience en conformité / sécurité financière (AML, LCB-FT)",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|holdout3|j_a435c849b0": {
+  "evidence": "3+ years of experience managing engineering teams.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_a583747758": {
+  "evidence": "Pengalaman tidak diperlukan.",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout3|j_add55c95a7": {
+  "evidence": "4–6 years in performance marketing, growth, or lifecycle marketing",
+  "max_years": 6,
+  "min_years": 4
+ },
+ "v1|holdout3|j_ade81e0f1e": {
+  "evidence": "Expérience d'au moins 3 ans en cabinet comptable",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_b332fb122d": {
+  "evidence": "1–3 years in recruitment or client facing environments working with B2B Key Accounts",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout3|j_b4022dfbdd": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_b4a4cc8dab": {
+  "evidence": "3+ years of B2B account management or strategic sales experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_b58108c984": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_ba13c0bc23": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_c584fe4810": {
+  "evidence": "Berpengalaman sebagai jurujual.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_c5908c8d05": {
+  "evidence": "Relevant experience (minimum 3+ years) in enterprise account management",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout3|j_c697a1bad9": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_c70579e8b6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_c7154f667e": {
+  "evidence": "5+ years of experience in a SaaS Sales Engineering capacity",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_c82bf25fbe": {
+  "evidence": "1+ year of experience in risk management, and/or compliance at a CIRO-regulated investment dealer",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout3|j_c850473d3f": {
+  "evidence": "7+ years of successful B2B SaaS sales experience",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout3|j_cb0efa9a60": {
+  "evidence": "2 to 4 years of experience in data analytics, analytics engineering or data science",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout3|j_cb446b1399": {
+  "evidence": "10+ years of leadership in payment operations, treasury operations, fintech, or digital banking.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout3|j_ccb233c4d9": {
+  "evidence": "5+ years of proven experience running B2B digital marketing programs",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_cea21f997e": {
+  "evidence": "5+ years of backend engineering, with real production ownership of distributed systems.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_d260062d28": {
+  "evidence": "You have 5+ years of frontend engineering experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout3|j_d47d868e02": {
+  "evidence": "3–5 years of experience in Customer Success, Account Management, or related client-facing roles",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout3|j_d643f5180a": {
+  "evidence": "No formal experience is required",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout3|j_db291a3c80": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_dcb024f8c6": {
+  "evidence": "7+ years of Product Management experience",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout3|j_e2693c3dc3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_e5be88bf2a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_e61d74ab95": {
+  "evidence": "4+ years of experience in investment banking, corporate development, private equity, strategic finance or FP&A",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_e9c753fb03": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_ec5de52534": {
+  "evidence": "At least 2 Year(s) of working experience in a related field is required for this position.",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout3|j_ec9977bbda": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_ed1a01be98": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_ee32d298c0": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_eea9e6d1fd": {
+  "evidence": "1-3 years of relevant experience in a start-up/fast paced environment or within the payments, fintech, or financial services spaces",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout3|j_f1ea202a79": {
+  "evidence": "1+ years in Sales",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout3|j_f263117490": {
+  "evidence": "4+ years of PMM experience in B2B/SaaS",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_f292e52528": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout3|j_f3d04a5201": {
+  "evidence": "4+ years of backend engineering experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout3|j_fba7db047a": {
+  "evidence": "We are looking for enthusiastic students or young graduates who would be happy to join our team!",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout3|j_fd933b9dbd": {
+  "evidence": "4+ years of experience in investment banking, corporate development, private equity, strategic finance or FP&A",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_007aa17b32": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_01e06f9196": {
+  "evidence": "12+ yrs of expansive programming experience in an object-oriented programming language like Java",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|holdout4|j_02ca36d6ca": {
+  "evidence": "Five (5) years of professional work experience in Technology or related field like hotel operations",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_035d6911a4": {
+  "evidence": "10+ years of Product Management experience",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_03d7c1e219": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_0d0359439d": {
+  "evidence": "5+ years of experience in sales enablement, onboarding, or program management",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_0daea6d313": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_0e5df534de": {
+  "evidence": "5 plus years of related experience in providing support",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_0eb5c09bc7": {
+  "evidence": "You have 6+ years of experience in analytics, finance, revenue operations...",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_0edc153be5": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_11684a710c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_122f2ac97b": {
+  "evidence": "4+ years of experience in customer support, data analytics, or a related field",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_128c95f644": {
+  "evidence": "8+ years of policy, government affairs, sales, or business development experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_12ad06a2b7": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_13526e315a": {
+  "evidence": "8+ years of experience in a customer-facing technical role, with 5+ years specifically in pre-sales",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_1485d7985e": {
+  "evidence": "3-5 years of experience with event coordination and attendee enquiry response",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout4|j_162ccbaf20": {
+  "evidence": "Power BI experience (1-3+ years).",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout4|j_19d053d259": {
+  "evidence": "10+ years of B2B consultative sales experience",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_1a5d33c4b3": {
+  "evidence": "7+ years in a closing Account Executive role, including at least 5 years selling software into the Enterprise",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_1c9676568a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_1ef720459d": {
+  "evidence": "Proven track record of success in meeting and exceeding goals",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_231f462417": {
+  "evidence": "4+ years in analytics engineering, data engineering, or a closely related analytics role",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_2538f28fcf": {
+  "evidence": "At least 2 years of experience in a lab or research setting",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_2649ba2ebe": {
+  "evidence": "3+ years of experience working in a technical support environment",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_28fd2a3dfb": {
+  "evidence": "2+ years of outbound sales experience as a Sales Development Representative in the technology / SaaS space.",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_2b0eb83b65": {
+  "evidence": "5+ years of experience in enrollment and/or group insurance.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_2c54f7c3ed": {
+  "evidence": "Proven, repeated track record as a builder",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_2c93345f83": {
+  "evidence": "Experiencia en roles de arquitectura técnica, habitualmente a partir de 5 años en su dominio de especialización.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_30f5292ccd": {
+  "evidence": "8+ years of software engineering experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_3190a0393e": {
+  "evidence": "Minimum 6 years of experience working as a Product Manager or in a related role, including 2–4+ years of substantial ads data/signals or marketing measurement experience.",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_33635ffb90": {
+  "evidence": "7+ years in a financial crimes (AML/BSA) compliance role at a regulated financial services company",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_374f54e2f3": {
+  "evidence": "plus five years (5) of progressively responsible years of experience in job offered or related occupation",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_38a71aaa19": {
+  "evidence": "3+ years of experience in data intensive environments",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_3969b04d1e": {
+  "evidence": "10+ years of experience in internal or executive communications",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_3c90a8be0e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_407e21c20b": {
+  "evidence": "Minimum of 10 years of experience in communications, public relations or media relations",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_40dca614c3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_430172970c": {
+  "evidence": "15+ years of experience in marketing analytics, marketing technology, customer data, advertising, or related consulting",
+  "max_years": null,
+  "min_years": 15
+ },
+ "v1|holdout4|j_4842829d6d": {
+  "evidence": "Bachelor's and 5-10+ years related professional experience with significant experience building Android applications",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_4abe076d00": {
+  "evidence": "5+ years field experience of quota-carrying experience in a fast-paced and competitive market with a focus on new business",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_4c6f190589": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_4dd4bc4a4a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_4ebfc9fb17": {
+  "evidence": "coupled with 1-3 years' experience in Human Resources",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout4|j_5035194447": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_508517cc16": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_50dca925ee": {
+  "evidence": "A minimum of 7+ years of closing experience in B2B Enterprise sales",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_518e38f465": {
+  "evidence": "2+ years of Account management, Customer Success, Renewal Management, Sales, Professional Services, or Consulting experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_549081a15b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_5bd7202025": {
+  "evidence": "4–5+ years in logistics, with hands-on experience in both international and domestic shipping",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_5d0901edc0": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_60aada1866": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_6385c0e6c1": {
+  "evidence": "5+ years of experience in retail, with at least 2 years in a role focused on customer experience, training or retail operations.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_64d6a1cb8b": {
+  "evidence": "2 years of work experience in pricing or financial analysis to include 1 year of experience in Pharmacy Benefit Management (PBM)",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_672f7fe487": {
+  "evidence": "3 to 5 years of experience in content marketing, social media marketing or a related role.",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout4|j_67c8ba2458": {
+  "evidence": "7+ years of software or ML engineering, including 3+ years shipping LLM-backed systems to real users in production... and 2+ years leading other engineers",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_686ccf46ad": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_6c854df2e0": {
+  "evidence": "At least 1 year of coordination experience",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout4|j_6c8ed504fe": {
+  "evidence": "Several years of progressively senior experience in health services research and/or implementation science",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_6f77d312c5": {
+  "evidence": "10+ years of product management leadership",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_6fb56a9df8": {
+  "evidence": "Minimum 4–6 years of relevant clinical research experience",
+  "max_years": 6,
+  "min_years": 4
+ },
+ "v1|holdout4|j_70e826d4b4": {
+  "evidence": "5+ years of product management experience with direct responsibility over the success of a consumer-facing product",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_71bda1bbec": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_726bca7da1": {
+  "evidence": "5+ years of scheduling and project controls experience on large, complex construction projects.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_72acc96823": {
+  "evidence": "Minimum of 3+ years of professional coding experience.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_733a7f80a7": {
+  "evidence": "12+ years of progressive leadership experience across professional services, consulting, customer success operations...",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|holdout4|j_7351251362": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_741993209a": {
+  "evidence": "Core Experience: 8+ years of progressive experience in sales compensation operations, incentive compensation management (ICM), or revenue operations",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_79bd37afa7": {
+  "evidence": "Proven track record of at least 3 years of professional software development using Go or C++.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_7a99b4d702": {
+  "evidence": "4+ years of professional software development experience, with strong hands-on proficiency in Kotlin and/or Java.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_7b9650cd79": {
+  "evidence": "4+ years of experience practicing law",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_7cb37f3abe": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_81649716ab": {
+  "evidence": "At least 3-4 years of experience in a Customer Success Engineering, Solutions Consulting, Solutions Architecture, or a similar client-facing role",
+  "max_years": 4,
+  "min_years": 3
+ },
+ "v1|holdout4|j_8293396eae": {
+  "evidence": "10+ years of hands-on, professional experience in query engine development or database internals",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout4|j_85ca41fd9b": {
+  "evidence": "3+ years of experience programming and administering enterprise-wide physical security systems",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_866a6e12c9": {
+  "evidence": "Minimum of 5 years of progressive experience in employee benefits administration, Total Rewards, or HR Operations",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_8849d3a7fb": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_8b99df490c": {
+  "evidence": "You have 3+ years of experience in an engineering or technical role.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_8c57ec1bfa": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_8dc145bded": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_91f040d1ff": {
+  "evidence": "6+ years experience in an SRE/Operations/DevOps role as part of a team",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_9201d20fab": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_93dfb01dd4": {
+  "evidence": "5+ years of experience in customer-facing, lifecycle marketing, customer success, or program management roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_942325e42b": {
+  "evidence": "2+ years in a technical support, solutions engineering, or software engineering role; 2+ years in a customer-facing position",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_9462a0fb9f": {
+  "evidence": "Minimum 3 years of experience creating motion/ video for performance marketing, digital advertising, or social content.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_94e5ad7b68": {
+  "evidence": "Significant experience (7+ years) in technical account management, solutions architecture, customer engineering",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_960d9bfe71": {
+  "evidence": "You have 4+ years of experience of developing and architecting mobile applications",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_9645c5149f": {
+  "evidence": "Bring 8+ years of relevant channel sales, strategic partnerships, or partner management experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_981c16aecb": {
+  "evidence": "5–8+ years of experience in technical support engineering, systems engineering, or software development",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|holdout4|j_990970ec18": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_9973c79f1d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_9a02044a02": {
+  "evidence": "8+ years of professional software engineering experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_9a806b89ae": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_9ab9faad5e": {
+  "evidence": "4+ years of experience in a software engineering role",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_9b77b6f8fc": {
+  "evidence": "12+ years of experience in Data Engineering with a Bachelor's degree, or 8 years of experience with a Master's degree is preferred.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_a1fbec0fb3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_a22666e9f4": {
+  "evidence": "5+ years of relevant transactional experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_a4034bb674": {
+  "evidence": "5 to 8 years of NetSuite development experience",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|holdout4|j_a428c0c009": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_a6d6c877cd": {
+  "evidence": "2-5 years of industry experience in a detection and response, corporate security, or generalist security engineering role",
+  "max_years": 5,
+  "min_years": 2
+ },
+ "v1|holdout4|j_aba3abe27b": {
+  "evidence": "3+ years as a Solutions Engineer (preferred), Solutions Architect (preferred), Sales Engineer (preferred), Implementation Consultant, Support Engineer, Site Reliability Engineer, or a Software Developer",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_aca368c22d": {
+  "evidence": "Has no less than 5 years of combined experience in Industrial Sales and/or Safety Marketplace Sales",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_aedf63948f": {
+  "evidence": "15+ years of experience in marketing analytics, AdTech, marketing technology, customer data, identity resolution, or related consulting",
+  "max_years": null,
+  "min_years": 15
+ },
+ "v1|holdout4|j_b03a7d1563": {
+  "evidence": "Typically bring 6-8 years of HR experience",
+  "max_years": 8,
+  "min_years": 6
+ },
+ "v1|holdout4|j_b784b93046": {
+  "evidence": "No specific experience required.",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout4|j_b8627a5752": {
+  "evidence": "7+ years of industry experience designing, building, and supporting large-scale distributed systems",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_bb7bb33a71": {
+  "evidence": "12+ years of Product Management experience",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|holdout4|j_bc24cc3e6f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_bc5bfc1d8b": {
+  "evidence": "6+ years in applied AI, machine learning, or software development",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_bc74d4f1d5": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_c1fb6d4df0": {
+  "evidence": "débutants accepté(e)s",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout4|j_c2789ee8d3": {
+  "evidence": "6–12 months of prior business experience preferred",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_c376f3b0c4": {
+  "evidence": "with a minimum of 4 years of work experience, ideally customer facing",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_c4e4ce8964": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_c6425f3593": {
+  "evidence": "7+ years of experience in data science, analytics, or a related field, including 2+ years of people management",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_caf221f9db": {
+  "evidence": "2+ years experience in research or product design",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_cbab849d8f": {
+  "evidence": "8+ years of software engineering experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_cd0d4624f7": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_cde20985bf": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_ce4c85751b": {
+  "evidence": "Minimum 5 years of work experience with a strong background in IT",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_ceb3a1b195": {
+  "evidence": "8+ years of work experience in business development",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_d0b2d25a4d": {
+  "evidence": "mehrere Jahre Berufserfahrung im Bereich Cloud Infrastructure",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_d1288b304e": {
+  "evidence": "5+ years of industry experience designing, building, and operating large-scale distributed systems",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_d2757f2b4c": {
+  "evidence": "7-10 years of progressive experience in communications, public affairs",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|holdout4|j_d552df11ff": {
+  "evidence": "5+ years of experience in Data Analytics, Data Engineering, or Data Governance.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_d724b0c788": {
+  "evidence": "6+ years of experience in privacy operations or legal program management, with a focus on UK or EU data protection - Required",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_d8dbfa5a01": {
+  "evidence": "This role is ideal for professionals with 7+ years of experience.",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout4|j_db5e9c3262": {
+  "evidence": "You've sold SaaS before (2+ year minimum)",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_dd0ed5742e": {
+  "evidence": "You have 8+ years of experience designing, developing and launching backend systems at scale",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_dea7a7d98f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_df1358eae9": {
+  "evidence": "4+ years supporting or managing safety management programs in a safety-critical transportation industry",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout4|j_e01d2b6438": {
+  "evidence": "Minimum of 3 years consultative software sales experience.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_e031386169": {
+  "evidence": "5+ years of experience in performance marketing, paid media, digital marketing, growth marketing, or a related field",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_e30e130356": {
+  "evidence": "8+ years of professional software engineering experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_e3cbd53d29": {
+  "evidence": "0-3 years experience in FP&A",
+  "max_years": 3,
+  "min_years": 0
+ },
+ "v1|holdout4|j_e5e8cd3002": {
+  "evidence": "5+ years of core experience in People Operations/HR Ops",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_e7bbbaf20a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_e7bccc99ba": {
+  "evidence": "3+ years of experience in sales, business development, or outbound lead generation",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout4|j_e828e8e083": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_e8c723e2a5": {
+  "evidence": "8+ years of professional software engineering experience.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout4|j_ea1a1a34b9": {
+  "evidence": "1+ years of experience in a sourcing or closing sales role",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout4|j_ebaf18779f": {
+  "evidence": "2+ years of Account management, Customer Success, Renewal Management, Sales, Professional Services, or Consulting experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_f38ff59a90": {
+  "evidence": "2+ years in planning, forecasting, capacity/resource management, or a related analytical role",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout4|j_f420ac6b2e": {
+  "evidence": "5+ years of software engineering experience building and operating distributed, stateful systems in production.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_f4c8afcc4e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_f59516240b": {
+  "evidence": "5+ years of experience as a product designer with a strong visual design portfolio",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_f733f82a4a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_f83f41ad9c": {
+  "evidence": "6+ years of experience in brand design, visual design and motion for in-house studios, agencies, or content teams",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout4|j_fa3048a8f2": {
+  "evidence": "5+ years of experience in consumer or small business lending in a quantitative risk strategy / analytics role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout4|j_fd67751543": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout4|j_fe3d886773": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_029004904a": {
+  "evidence": "5 to 7 years of hands-on QA automation experience in fast-paced product environments",
+  "max_years": 7,
+  "min_years": 5
+ },
+ "v1|holdout5|j_080642aa3e": {
+  "evidence": "3-5 years of experience working with Identity and Access Management solutions",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout5|j_0f04dab7cd": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_110ad2d762": {
+  "evidence": "At least 4 years of project management experience in a digital agency environment",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout5|j_14b485756c": {
+  "evidence": "Five plus years in substation and/or transmission line electrical construction, with at least 3 years in direct supervision",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_14f21bd363": {
+  "evidence": "At least 3 years of professional experience as a linguist, translator, or MTPE specialist",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_160e0fddff": {
+  "evidence": "5+ years of experience as a Business Analyst or in an equivalent requirements-analysis role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_1b011af3f3": {
+  "evidence": "10 years of experience with vertical transportation systems",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout5|j_1e98ddc007": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_205416a1cc": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_23192778b6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_2448365fba": {
+  "evidence": "Proven experience in translation, editing, proofreading, or linguistic testing (at least 3 years)",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_25240aaa58": {
+  "evidence": "4+ years in software engineering or ML, with at least 2 years building LLM applications",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout5|j_286e31e892": {
+  "evidence": "5–8 years of finance experience",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|holdout5|j_2970a5e4b3": {
+  "evidence": "Minimum 5 years of digital marketing experience, with at least 2 years in a direct managerial or team leadership role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_29b1845665": {
+  "evidence": "Minimum 1 year of data entry or administrative experience",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout5|j_2aee2622ca": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_32f0a5ea12": {
+  "evidence": "5+ years of hands-on Shopify development experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_35dfab2cac": {
+  "evidence": "5+ years of experience in healthcare technical support, integration engineering or imaging IT",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_3d10795ce9": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_3f3a3220ec": {
+  "evidence": "3+ years of combined payroll and HR administration experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_3f3a5d0a67": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_449db99975": {
+  "evidence": "3+ years of experience in QA for web-based applications.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_44f2542a6c": {
+  "evidence": "Deep experience managing external vendors in regulated environments.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_489cb1de8c": {
+  "evidence": "Extensive hands-on experience with VMware vSphere environments",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_4905190b50": {
+  "evidence": "5+ years of professional software engineering experience, with at least 3 years focused on React Native",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_4cadf6584b": {
+  "evidence": "7+ years of backend engineering experience.",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout5|j_4d1b460882": {
+  "evidence": "Have at least one year of experience as a digital marketer in an engineering or architectural firm.",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout5|j_515fac1fc5": {
+  "evidence": "Prior internship experience required",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_51ca8693c5": {
+  "evidence": "7+ years in product design, including 3+ years owning the experience of a B2B SaaS product end to end",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout5|j_532e5361c3": {
+  "evidence": "3+ years of experience in purchasing, supply planning, or inventory planning, including raw material planning.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_5a4e746f06": {
+  "evidence": "Experience in content marketing, digital media, entertainment, social video, creator marketing, or local brand promotion.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_5ad8bf8377": {
+  "evidence": "4–8 years in information security, including 2+ years hands-on in GRC at a SaaS or technology company.",
+  "max_years": 8,
+  "min_years": 4
+ },
+ "v1|holdout5|j_5b8bf8a4d1": {
+  "evidence": "8–12 years of progressive experience across product management, data analytics, data science, and data management",
+  "max_years": 12,
+  "min_years": 8
+ },
+ "v1|holdout5|j_611a341ffd": {
+  "evidence": "Попередній досвід не потрібен",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout5|j_6323aff2e7": {
+  "evidence": "You have 2+ years of experience in a customer-facing role",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout5|j_668ecefffb": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_6e9d6fd0d3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_719f85003f": {
+  "evidence": "10+ years in banking strategy, digital transformation, or solution advisory",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout5|j_720db77dfc": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_778e827a1f": {
+  "evidence": "5+ years of specialized experience in retention and lifecycle marketing",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_799a39dded": {
+  "evidence": "Bachelor's degree with min 1 year of relevant experience",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout5|j_7f199d3e9f": {
+  "evidence": "+5 years in the field of software engineering.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_861ecb8461": {
+  "evidence": "8+ years of professional mobile engineering",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout5|j_8d6bb64c6a": {
+  "evidence": "8+ years in software engineering, technology development, solutions architecture, or related technical roles.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout5|j_8fbf4d095d": {
+  "evidence": "No prior experience needed.",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout5|j_954d642702": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_9699aaf7c7": {
+  "evidence": "7+ years of proven experience in solution architecture, technical architecture, technical design, or closely related digital solution roles.",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout5|j_970a310a4d": {
+  "evidence": "7–10 years of HRIS experience",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|holdout5|j_988b4d167f": {
+  "evidence": "Fresh graduates are highly encouraged to apply. ... Have up to 2 years of total full-time experience (maximum)",
+  "max_years": 2,
+  "min_years": 0
+ },
+ "v1|holdout5|j_a381f50ebd": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_a77d139e02": {
+  "evidence": "At least three years of experience in software engineering, AI/ML, or a related field; At least three years of experience in people management",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_ad72267aa5": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_afe260079a": {
+  "evidence": "2–4 years of experience in social media strategy, paid media, or content marketing",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout5|j_b011b6baa6": {
+  "evidence": "5+ years of experience in end-user computing, virtual desktop, or cloud infrastructure, with at least 2 years of hands-on Azure Virtual Desktop in production",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_b053a743c3": {
+  "evidence": "At least 5 years of progressive Human Resources experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_b100c99f36": {
+  "evidence": "5-7 years of relevant experience preferred.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_b237a5af3f": {
+  "evidence": "5+ years of hands-on experience with HubSpot",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_b2ab6f45f0": {
+  "evidence": "1 - 2 years of B2B full cycle sales experience in a revenue closing role",
+  "max_years": 2,
+  "min_years": 1
+ },
+ "v1|holdout5|j_b51762d66c": {
+  "evidence": "Minimum of 3 years of successful experience in the full sales life cycle within the travel industry",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_b727b93b12": {
+  "evidence": "2–4 years of experience working as a General Virtual Assistant, Administrative Assistant, or in a similar remote support role",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout5|j_b90c0d822d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_c1d30c4d79": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_c1ea6bbef7": {
+  "evidence": "5+ years of professional mobile engineering",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_c48247c329": {
+  "evidence": "5–7 years of solid, relevant experience as a Business Analyst.",
+  "max_years": 7,
+  "min_years": 5
+ },
+ "v1|holdout5|j_c877a31439": {
+  "evidence": "At least 3 years of professional experience as an Illustrator",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_c914888d86": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_cc4ded55e3": {
+  "evidence": "3+ years of proven success within a B2B technology sales or account executive role",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_cea7fde036": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_d21735fe6c": {
+  "evidence": "Minimum 3 years of experience as a Finance, Payroll, or Accountant is required",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_d39a6de18e": {
+  "evidence": "BS/BA degree and 4 (+) years of relevant experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout5|j_d3bb49f40f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_d464b11677": {
+  "evidence": "5+ years of experience in UX/UI, product design, interaction design, or an equivalent role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_d48bc94b59": {
+  "evidence": "Minimum of 5 years' experience, including experience working with a Japanese company.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_d4a7fba7ce": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_dd102be592": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_ddbdc94749": {
+  "evidence": "at least 3 years of direct patient-facing work experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_df07c28baf": {
+  "evidence": "1+ year direct hands-on Amazon Seller Central experience — non-negotiable",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout5|j_dfe7e93b74": {
+  "evidence": "At least 1 year of recent, hands-on experience working inside a California insurance agency",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout5|j_e329609a2f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_e339d5fc11": {
+  "evidence": "3+ years in application security or a closely related security role.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_e3c3a3acf6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_e50eba1558": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_e5b3da8809": {
+  "evidence": "4+ years of experience in HR support, onboarding coordination, employee lifecycle management, or mobility operations",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout5|j_e6939b19d4": {
+  "evidence": "6+ years of experience in Performance Marketing or Paid Media Operations",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout5|j_e88a954e4a": {
+  "evidence": "4+ years in DevOps or cloud engineering, with at least 2 years hands-on with Azure in production",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout5|j_e94d7fc70c": {
+  "evidence": "2-3 years in a Digital/Web Agency, with at least 1 year specifically managing Web Development projects",
+  "max_years": 3,
+  "min_years": 2
+ },
+ "v1|holdout5|j_ec4e635bf6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_ed77838f0a": {
+  "evidence": "4-7 years of progressive HR experience, including at least 2 years as an HR generalist or manager",
+  "max_years": 7,
+  "min_years": 4
+ },
+ "v1|holdout5|j_edab3e0b7e": {
+  "evidence": "2+ years of IEC 61131-3/PLC programming experience... 2+ years of SCADA development",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout5|j_ef7a4e2c4c": {
+  "evidence": "at least 3 years of direct patient-facing work experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_f27afc9397": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout5|j_f5383f3ae1": {
+  "evidence": "extensive experience in BI or analytics, including at least three years working at a senior level",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_f5cec0c7f1": {
+  "evidence": "No prior experience required — training is provided",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout5|j_f7307d62d9": {
+  "evidence": "10+ years of operations experience, including 5+ years leading multi-layer operations teams",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout5|j_fa82ea387a": {
+  "evidence": "5+ years of professional web engineering",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout5|j_fb9be41259": {
+  "evidence": "Minimum 2 years of experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout5|j_fd16c23e41": {
+  "evidence": "At least 3 years of professional experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout5|j_fd6c0778f0": {
+  "evidence": "3–5 years of experience",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout5|j_ff64d6f82b": {
+  "evidence": "at least 3 years of direct patient-facing work experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout6|j_062cf7df93": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_08ec2ca947": {
+  "evidence": "3+ years of technical writing experience or similar experience in software development.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout6|j_13f1cf2ed9": {
+  "evidence": "At least 4 years of finance operations experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout6|j_2a4f242366": {
+  "evidence": "4+ years of professional software development experience.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout6|j_4ede644580": {
+  "evidence": "4+ years of frontend software engineering experience.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout6|j_618edfcb47": {
+  "evidence": "3+ years of professional software development experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout6|j_6e2b3ef88b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_774370d6f8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_8ca1140d33": {
+  "evidence": "5+ years experience managing medium to large scale systems.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout6|j_8f25d64361": {
+  "evidence": "5+ years of hands-on experience in information security, infrastructure security, security engineering, security operations, or a closely related field.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout6|j_8fe2f73222": {
+  "evidence": "Software Engineer, New Grad ... Currently pursuing or recently completed a Bachelor's, Master's, or PhD",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout6|j_9108c2d11f": {
+  "evidence": "1+ years of experience identifying, recruiting, and working with exceptional talent",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout6|j_9c991eacbf": {
+  "evidence": "3+ years of previous legal and/or contract administrative support experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout6|j_a50137b833": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_c94896ebc0": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_dfeed28867": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_e068d697e6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout6|j_f24c9058dd": {
+  "evidence": "3+ years of professional software development experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_001cf39d06": {
+  "evidence": "Minimum 5 years' experience in account management, business development, partnership management, or supply/e-commerce roles.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_002488602b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_057ceb4cc0": {
+  "evidence": "At least 3 years of experience within either:",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_07dfb773ee": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_093676204f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_094449ee7a": {
+  "evidence": "At least 5-6 years of experience in People Ops",
+  "max_years": 6,
+  "min_years": 5
+ },
+ "v1|holdout|j_098ea17452": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_0b9173a1fa": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_0dcead9a3d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_0e5a4d1783": {
+  "evidence": "7+ years of marketing experience",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_120f9f47f9": {
+  "evidence": "5+ years closing complex Enterprise deals",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_149479ceff": {
+  "evidence": "A minimum of 7 years of experience in internal or external audit",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_1a66a2aba0": {
+  "evidence": "3+ years leading engineering teams",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_1a6bd0fd2a": {
+  "evidence": "Minimum of 6 months to 1 year experience in a food processing, manufacturing or service industry",
+  "max_years": 1,
+  "min_years": 0
+ },
+ "v1|holdout|j_1da900265a": {
+  "evidence": "8-10+ years of experience in strategic finance, commercial finance, commercial insights, strategy consulting role or similar",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_1dde928420": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_1f83f96363": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_1ffedb1a8c": {
+  "evidence": "2–3 years of admin work experience, or 1-year experience in a Recruiting Coordinator role",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout|j_202c3e3072": {
+  "evidence": "5+ years of experience in a similar role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_20c1e1f349": {
+  "evidence": "3+ years closing deals, consistently overachieving targets",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_218f6d4f6f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_225c7dbb8c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_27e1876bc0": {
+  "evidence": "5+ years Enterprise Sales experience selling into Fortune 100 companies",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_281e9de0c1": {
+  "evidence": "10+ years in product management, including 4+ years leading PM teams",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout|j_28fa94efb4": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_2a198c9caf": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_2a291ff1c2": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_2aa9e0d7d9": {
+  "evidence": "10+ years in accounting positions of increasing scope and complexity, including 4+ years as a manager and manager of managers.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout|j_2c4479a425": {
+  "evidence": "Significant VAT experience (typically 8+ years)",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_2daf450728": {
+  "evidence": "5-10 years' experience as Sales in a fast-growing globally operating travel/ e-commerce company",
+  "max_years": 10,
+  "min_years": 5
+ },
+ "v1|holdout|j_2dbbb10451": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_2dd87a3bfc": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_2f37e67abf": {
+  "evidence": "7+ years of experience in the software development industry",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_30dcc75ac9": {
+  "evidence": "18+ years of experience in internal HR partnering, talent management and organizational consulting experience",
+  "max_years": null,
+  "min_years": 18
+ },
+ "v1|holdout|j_32497e6843": {
+  "evidence": "5-10 years of experience leading hardware partnerships or product strategy",
+  "max_years": 10,
+  "min_years": 5
+ },
+ "v1|holdout|j_331d4f5e75": {
+  "evidence": "8+ years direct sales hunting experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_335cbdeb51": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_33da121530": {
+  "evidence": "6+ years in sales strategy, sales planning, commercial strategy",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout|j_34ea822728": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_36ed27f9fd": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_37eede6277": {
+  "evidence": "Have 4 to 5 years of experience in European public affairs",
+  "max_years": 5,
+  "min_years": 4
+ },
+ "v1|holdout|j_39c25483d4": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_3d1d0c455b": {
+  "evidence": "10+ years of software engineering experience",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout|j_3dc0d6d0e9": {
+  "evidence": "8+ years of industry experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_3e6d141513": {
+  "evidence": "At least 1 year of experience in (customer) support",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout|j_3f394b5c55": {
+  "evidence": "5+ years in paid social creative strategy",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_42e52d8961": {
+  "evidence": "Proven experience of 7+ years, with at least 3 years in deploying and managing containerized applications on Kubernetes",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_44371bcff5": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_453caa8688": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_4756732a27": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_478b39eeae": {
+  "evidence": "1 year experience in food production facility is an asset",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_478f105d98": {
+  "evidence": "1 to 3 years of experience in SQL and working dbt experience",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|holdout|j_49fd51f503": {
+  "evidence": "Minimum 5 years' experience in account management, business development, or supply/e-commerce role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_4aa1e7e1c7": {
+  "evidence": "Minimum 3+ years of experience as an ML Engineer or Data Scientist",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_4b38071a25": {
+  "evidence": "Significant product management experience (typically 8+ years, or equivalent)",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_4c81e069a8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_4cb362be05": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_4eb7f76c1c": {
+  "evidence": "You are a strategic leader with 7-10 years of experience navigating unstructured enterprise problems.",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|holdout|j_4efaf3ab2d": {
+  "evidence": "You have 5+ years of experience as a manager of managers",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_526da3d20d": {
+  "evidence": "You have 6+ years of relevant experience in (B2B) pricing",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout|j_573308ab4c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_5e5ee77fca": {
+  "evidence": "For SMB AE: 1–4 years in a SaaS or B2B tech sales environment",
+  "max_years": 4,
+  "min_years": 1
+ },
+ "v1|holdout|j_6677437106": {
+  "evidence": "mehrjährige Berufserfahrung im Bereich Automatisierung, Intralogistik, Lebensmitteltechnik oder Verpackungstechnik",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_6783374799": {
+  "evidence": "Significant commercial experience",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_679452bb1e": {
+  "evidence": "7+ years as an individual contributor in analytics/data science",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_67e91c8215": {
+  "evidence": "2+ years in security, GRC or compliance",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout|j_67ea7b0fcb": {
+  "evidence": "3-5 years experience as a Sales/Solution Engineer/Architect or Solution Consultant",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout|j_688baf0891": {
+  "evidence": "Une expérience préalable en prospection à froid est indispensable",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_6a7ba46345": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_6bd7b01b20": {
+  "evidence": "Tienes experiencia en ventas B2B, Field Sales o desarrollo de negocio.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_6d4dbd2202": {
+  "evidence": "10+ years with demonstrated project leadership ... For Senior DE: 6+ years with demonstrated project leadership.",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout|j_6e17e11c6e": {
+  "evidence": "3 to 5 years of experience in business operations, sales operations, business intelligence, or a similar role.",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout|j_6e7ecb43cc": {
+  "evidence": "You have 5+ years of prior experience in account management or sales or customer success roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_7374369813": {
+  "evidence": "3+ years of experience selling a technical platform",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_752fd37d98": {
+  "evidence": "3+ years of technical program management at a high-growth technology company",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_76d38c649b": {
+  "evidence": "8+ years experience in Google Advertising ecosystem",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_7bca4e1b69": {
+  "evidence": "6+ years of experience leading technical pre-sales",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|holdout|j_83ece96031": {
+  "evidence": "Avez entre 0 et 2 ans d'expérience en gestion de projet, conseil ou déploiement",
+  "max_years": 2,
+  "min_years": 0
+ },
+ "v1|holdout|j_8627440c99": {
+  "evidence": "At least 1 year of experience in (customer) support",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout|j_8817cf4eed": {
+  "evidence": "You have a multiple year track record of excellence",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_89d1bc7743": {
+  "evidence": "5+ years of marketing experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_8b1b967813": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_8be1c7c8d3": {
+  "evidence": "have 2-4 years of relevant accounts payable experience",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout|j_90fa5dd840": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_911c7829b2": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_91e8940722": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_92bb7d596f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_941b81b4b8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_98c2974598": {
+  "evidence": "5+ years of experience building customer-facing products in high-growth tech or fintech environments",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_9a86df6ac5": {
+  "evidence": "You bring 8+ years of full-cycle recruiting experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_9b4953ee16": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_9bf93182e0": {
+  "evidence": "3+ years of B2B sales experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_9e0e87ba7a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_a3eff169c8": {
+  "evidence": "mindestens zwei Jahre Berufserfahrung in den Bereichen Lebensmitteltechnik, Naturwissenschaften oder einem verwandten Fachgebiet",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|holdout|j_a427ad4c59": {
+  "evidence": "3+ years of experience in building Android applications at scale",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_a6e326a126": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_a70f9e394a": {
+  "evidence": "5–6 years of experience in B2B marketing, with at least 2 years in an ABM or strategic field marketing role",
+  "max_years": 6,
+  "min_years": 5
+ },
+ "v1|holdout|j_a767cf7584": {
+  "evidence": "5–6 years of experience in B2B marketing, with at least 2 years in an ABM or strategic field marketing role",
+  "max_years": 6,
+  "min_years": 5
+ },
+ "v1|holdout|j_a85d752345": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_a8b82c2c76": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_abe2f84d49": {
+  "evidence": "7+ years leading acquisition programs with meaningful budget ownership and measurable results",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_ac21ddf408": {
+  "evidence": "10 to 15 years of relevant experience",
+  "max_years": 15,
+  "min_years": 10
+ },
+ "v1|holdout|j_adac9bebf2": {
+  "evidence": "2–5 years of experience in a technical, customer-facing role",
+  "max_years": 5,
+  "min_years": 2
+ },
+ "v1|holdout|j_adb76b5a48": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_af31c05690": {
+  "evidence": "3~5 years of experience in sales, business development and account management roles",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout|j_b1252ca676": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_b2c10be83c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_b2ec1d562e": {
+  "evidence": "You've spent at least a year in a client-facing role, or completed a first internship in one",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|holdout|j_b771d012e6": {
+  "evidence": "Significant experience leading sales operations",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_bb13ff2f71": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_bd4d46a558": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_bf6f60c523": {
+  "evidence": "You have 3+ years of hands-on experience in a fraud role",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_c0a6e49781": {
+  "evidence": "5+ years in data-driven role, revenue/growth, marketing, strategy, or analytics roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_c341d43b5c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_c3e1932e14": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_c44699c6a3": {
+  "evidence": "5+ years of backend engineering experience with strong proficiency in Python or Go",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_c540bb3408": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_c599f777c4": {
+  "evidence": "5+ years of experience taking ownership of complex workstreams",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_c6122cff57": {
+  "evidence": "At least 5 years in insurance accounting",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_c70d1c3d0c": {
+  "evidence": "4+ of compensation or related experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|holdout|j_c8d84a08f5": {
+  "evidence": "5+ years of experience in a similar role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_cbf8abf4a8": {
+  "evidence": "7+ years of experience in Sales Engineering, Solutions Engineering, or a technical customer-facing role",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_ce33fcbcde": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_ce539b35c8": {
+  "evidence": "An established Recruiter or Sourcer with 3+ years of experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|holdout|j_d043446916": {
+  "evidence": "Experienced in 7+ years of partner-facing, quota-carrying business development",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|holdout|j_d399f94126": {
+  "evidence": "at least 8+ years of software engineering experience, combined with 2-3 + years of management experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_d652374980": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_d6eba062b7": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_d968e5a35d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_d9d67f8ee9": {
+  "evidence": "5+ years of relevant experience in automation development is required",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_dac74716a2": {
+  "evidence": "Have 8+ years of experience in forward deployed engineering, solutions architecture, software engineering, or related technical fields",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_dbf1e5eb74": {
+  "evidence": "A minimum of 3-5 years of experience in growth, performance marketing, CRO / Ad Progression, audience, or related roles",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|holdout|j_df5c7bde15": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_e02a940a99": {
+  "evidence": "Minimum of 15 years of experience in IT operations, with at least 10 years in a lead role.",
+  "max_years": null,
+  "min_years": 15
+ },
+ "v1|holdout|j_e1d9ba50ba": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_e4ab1fc629": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_e70c9450ff": {
+  "evidence": "You have at least 10 years of professional experience in Operations management or entrepreneurship",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|holdout|j_e88485c515": {
+  "evidence": "4-6 years of experience with refrigeration repair and maintenance in an industrial setting",
+  "max_years": 6,
+  "min_years": 4
+ },
+ "v1|holdout|j_e89b9015b4": {
+  "evidence": "5+ years closing complex Enterprise deals",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_e9c483e446": {
+  "evidence": "3+ years of B2B SaaS sales leadership experience - a minimum of 5 years in an individual contributor closing role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_ede7ea1249": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_f4c00a5d75": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_f7f218ccb9": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_f80ef5adde": {
+  "evidence": "Experience in customer support or operations is a plus, but not required",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|holdout|j_f85c2a5bca": {
+  "evidence": "5 years of people leadership experience, including experience managing managers",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_fa56fe3a57": {
+  "evidence": "Around 5+ years of experience in Treasury, ALM or balance sheet risk management",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|holdout|j_fb876179b3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|holdout|j_fc4010960c": {
+  "evidence": "Minimum +8 years of hands-on Workday Integrations experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|holdout|j_ff972d425f": {
+  "evidence": "2-4 years of experience in strategy, operations or consulting",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|holdout|j_ffed4ddd6f": {
+  "evidence": "5+ years of experience leading technical pre-sales",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_002b20ae4a": {
+  "evidence": "3+ years of commercial experience in Data Engineering or Analytics Engineering",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_01a1e1ca54": {
+  "evidence": "10+ years in an agency or in-house environment",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_045164d5cb": {
+  "evidence": "5+ years in fraud strategy, program management, or related risk management roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_05599464b1": {
+  "evidence": "7+ years of experience in release engineering, DevOps or a related discipline",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|sample|j_06328d7b5f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_069e000fb6": {
+  "evidence": "15+ years total experience across a combination of payments, fraud, SaaS, and Sales.",
+  "max_years": null,
+  "min_years": 15
+ },
+ "v1|sample|j_08decfb4de": {
+  "evidence": "with 2 to 4 years of experience in account management, client success, sales operations, or a similar client-facing role",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|sample|j_11021076ef": {
+  "evidence": "Experience Level: 8+ years",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_117237c7a5": {
+  "evidence": "3+ years of experience in editing, journalism, content strategy, publishing, communications, or a related field",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_1198da6a68": {
+  "evidence": "obtained by summer 2027, or equivalent work experience with no more than 18 months of professional experience (excluding internship)",
+  "max_years": 1,
+  "min_years": 0
+ },
+ "v1|sample|j_13774b8bc8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_138c45dd84": {
+  "evidence": "1–3 years of experience in Customer Success or Account Management (preferably in SaaS or tech).",
+  "max_years": 3,
+  "min_years": 1
+ },
+ "v1|sample|j_15fc181788": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_160df2ddd2": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_167295f239": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_1864763ae0": {
+  "evidence": "8+ years of experience in program or project management, with at least 5 years leading delivery in Agile environments.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_186ee3cffe": {
+  "evidence": "10+ years in e-commerce, merchandising, or consumer products leadership for a consumer-facing brand",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_19db4389c5": {
+  "evidence": "2+ years experience in a full-cycle, closing sales role",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_19f5cb47ec": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_1ab82b39ff": {
+  "evidence": "2+ years of social media marketing experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_1b64105da0": {
+  "evidence": "You have at least two years of tech support experience, either at an internal help desk or customer-facing position",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_1bc162917a": {
+  "evidence": "8+ years of experience",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_1c74d331fe": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_1ce8020602": {
+  "evidence": "3–7+ years of quota-carrying SaaS sales experience",
+  "max_years": 7,
+  "min_years": 3
+ },
+ "v1|sample|j_22eea15c64": {
+  "evidence": "2–4 years of relevant experience as a business analyst",
+  "max_years": 4,
+  "min_years": 2
+ },
+ "v1|sample|j_2465da275f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_263a8a542b": {
+  "evidence": "No previous experience required",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|sample|j_274f8c32ee": {
+  "evidence": "10+ years of software/platform engineering experience",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_28a54c62c9": {
+  "evidence": "You do not need experience to apply",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|sample|j_28cf4708f7": {
+  "evidence": "You have 6+ years of experience in revenue operations, sales operations, or go-to-market strategy",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_2a1698e55d": {
+  "evidence": "18+ years of life IRL, 10+ years of sweaty gaming, 3+ years of streaming experience",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_2a2186f141": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_2bade00d56": {
+  "evidence": "3-6+ years of experience (Senior or Mid-level) in designing, building, and operating production data pipelines",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_2cc165d41a": {
+  "evidence": "6+ years professional experience, 4+ years of sales engineering or solution consulting experience",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_2d00ef3604": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_2d0832e54e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_2dca12cc31": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_2e8e3f493c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_313839a788": {
+  "evidence": "1+ years in customer support, ideally for an app or SaaS product",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|sample|j_327c1103a5": {
+  "evidence": "6+ years of experience in Solutions Consulting, Sales Engineering, Solutions Architecture, Professional Services, or a related customer-facing technical role, including 2+ years of people management",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_37337da156": {
+  "evidence": "5+ years of B2B marketing experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_38673aea0c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_3868ecf684": {
+  "evidence": "5+ years experience as a Fullstack Developer.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_3a68ac4592": {
+  "evidence": "5+ years in a quota-carrying sales role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_3c7bc92da3": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_4059e082d8": {
+  "evidence": "4+ years of experience in Technical Account Management, Technical Customer Success, Customer Success, Customer Enablement, Account Management or a relevant customer-facing role in SaaS",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_41d02b7497": {
+  "evidence": "3 to 6 years of hands-on experience in backend engineering, data engineering, integration engineering",
+  "max_years": 6,
+  "min_years": 3
+ },
+ "v1|sample|j_44168db166": {
+  "evidence": "4+ years experience in growth, conversion, acquisition or lifecycle marketing",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_45c148db7f": {
+  "evidence": "Have 5+ years in client-facing intake or sales roles, ideally in legal services",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_45ed592e83": {
+  "evidence": "Minimum of one year of recruiting experience with a proven track record of success",
+  "max_years": null,
+  "min_years": 1
+ },
+ "v1|sample|j_47b829d1bb": {
+  "evidence": "6+ years of experience in B2B software product marketing, product management, growth, strategy, or another product-led GTM function",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_47d356af5a": {
+  "evidence": "8+ years of experience in analytics engineering, data analytics, or data engineering",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_48b7a198c7": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_4aa2150834": {
+  "evidence": "3-5+ years of direct fraud investigative experience, including in ACH and credit card fraud; 2-5+ years of direct scam and account integrity investigative experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_4c0be868e9": {
+  "evidence": "5+ years of Leadership Experience: You have successfully managed creative/design teams in digital marketing.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_4f2743e349": {
+  "evidence": "10+ years of software engineering experience with a demonstrated history of leading complex, organization-wide data initiatives.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_5189a0ad8e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_520ca4d773": {
+  "evidence": "5+ years of program or project management experience in a manufacturing or enterprise client-facing role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_549e8afe70": {
+  "evidence": "5+ years of hands-on ServiceNow development",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_550da15917": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_5517a8a265": {
+  "evidence": "1 - 2 years of scheduling experience in a home health, hospice, or healthcare setting preferred.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_555a00decb": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_55df4bba30": {
+  "evidence": "5+ years of relevant experience in data engineering or software engineering",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_5673da59f4": {
+  "evidence": "4+ years of hands-on digital marketing experience at a marketing agency",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_57f3ba1ee4": {
+  "evidence": "PhD or Master's degree w/ 3+ YOE in Computer Science, Machine Learning, Artificial Intelligence, or a related technical field — or equivalent industry experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_59d6601919": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_59f841c43b": {
+  "evidence": "5+ years of backend engineering experience, with recent experience in a JVM-based codebase.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_5a548f1a36": {
+  "evidence": "4-8+ years of hands-on performance marketing, growth marketing, or demand generation experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_5e2e8fff16": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_5e807e48b6": {
+  "evidence": "3+ years of client-facing experience in account management, account support, or B2B customer success",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_5f2b64ee37": {
+  "evidence": "5+ years in embedded, firmware, edge, or device software, with 2+ years leading a software team",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_5fb7ebee96": {
+  "evidence": "3+ years of experience in enterprise customer success, relationship management, or account management",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_6047c31c11": {
+  "evidence": "10+ years of experience in security engineering, software engineering, application security, or anti-abuse engineering",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_60c7bf345d": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_616ece4fea": {
+  "evidence": "3+ years in Account Management, Sales, or a related SaaS commercial role with direct ownership of a revenue number (5+ years preferred)",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_6186a0c977": {
+  "evidence": "5+ years of enterprise SaaS sales experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_6251b2d16e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_6308df1b6b": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_635782abfc": {
+  "evidence": "possessing 10+ years of business development, strategic partnerships, account management, solution selling, or program/product management experience in the software industry",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_636bf14526": {
+  "evidence": "3+ years of experience in content strategy, communications, digital marketing",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_638176edea": {
+  "evidence": "5+ years second-line leadership experience (managing managers)",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_6408270c39": {
+  "evidence": "7+ years selling and renewing platform-as-a-service and/or software-as-a-service",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|sample|j_687dd79730": {
+  "evidence": "2+ years of backend engineering experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_6d85bf293a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_6f2fb1031a": {
+  "evidence": "12+ years of experience in regulatory compliance, compliance program management, or regulatory operations",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|sample|j_70c0993728": {
+  "evidence": "Over 3 years of experience guiding backend product engineering teams",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_7131eb702f": {
+  "evidence": "You have 5+ years in Customer Success, strategic account management, or a senior post-sale role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_7185188046": {
+  "evidence": "You have 7+ years of progressive tax experience",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|sample|j_722c580471": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_7530667469": {
+  "evidence": "Have at least 4 years of hands-on marketing experience",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_76a41408ea": {
+  "evidence": "Proven Track Record: Demonstrated experience in direct-response marketing",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_78f903d57a": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_796b913833": {
+  "evidence": "3+ years of software engineering experience (or equivalent).",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_79f2ca2f78": {
+  "evidence": "4+ years of experience in technical consulting, solutions engineering, implementation, or a customer-facing technical delivery role.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_7a14558620": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_7abff422b1": {
+  "evidence": "Typically 8+ years of experience in product/application security",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_7d80ee3428": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_7fac510287": {
+  "evidence": "8+ years of experience leading technical teams in building scalable modern Java services.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_824f85a594": {
+  "evidence": "2–5 years of experience programming in Swift",
+  "max_years": 5,
+  "min_years": 2
+ },
+ "v1|sample|j_8338a307e7": {
+  "evidence": "Bring 5+ years of engineering or technical deployment experience that includes customer-facing work.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_834cdc889e": {
+  "evidence": "8+ years of experience in advertising sales and account management",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_83fc366cfb": {
+  "evidence": "5+ years of experience in the chemical industry",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_858fbfe7b8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_85b53dcd5d": {
+  "evidence": "5+ years in a quota-carrying sales role",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_85ddbb1532": {
+  "evidence": "5+ years of experience in public policy, public affairs, and/or civil society partnerships",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_8634119743": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_86507109b4": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_890657f634": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_8a30526780": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_8a4316f0c7": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_92139fa8de": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_935d5d6590": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_957105489e": {
+  "evidence": "8+ years of experience in strategic sourcing, procurement, or technology vendor management, including at least 3 years leading large technology deals.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_984972a5c9": {
+  "evidence": "5+ years of quota-carrying advertising, media, or SaaS sales experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_9bc452436b": {
+  "evidence": "7–10 years of enterprise sales experience",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|sample|j_9d9e5f9dbb": {
+  "evidence": "5+ years of recruiting or sourcing experience, including experience hiring for Design roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_9da5937b91": {
+  "evidence": "5+ years in assessment development, scoring/rater quality, certification, quality assurance",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_9dcbff38a8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_9de6ec0ed8": {
+  "evidence": "10+ years of experience in marketplace leadership, category general management",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_a102fbe105": {
+  "evidence": "2+ years in customer success, technical account management or a similar post-sale role",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_a22bfcd119": {
+  "evidence": "Minimum 3+ years of overall experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_a250095c02": {
+  "evidence": "8+ years of relevant experience including US or Canadian political and/or policy campaign work",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_a309c2c156": {
+  "evidence": "10+ years of work experience in law enforcement, intelligence, government, trust and safety, or an adjacent field.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_a4c481e6fe": {
+  "evidence": "You have 8+ years of experience in advertising sales, business development or client partnerships within digital media.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_a537c83da7": {
+  "evidence": "5+ years of full accounting experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_a60733eace": {
+  "evidence": "Have at least 5 years of IT support experience on the job.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_a8bfb4da8f": {
+  "evidence": "7-10 years of progressive experience in communications, public affairs, public relations",
+  "max_years": 10,
+  "min_years": 7
+ },
+ "v1|sample|j_a8ca244cd6": {
+  "evidence": "Minimum 5+ years' experience in affiliate management within iGaming",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_a9204542a7": {
+  "evidence": "5+ years of project scheduling experience in utility-scale energy, power generation, or heavy civil construction",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_a97683a9f9": {
+  "evidence": "Designer/Design Leader with 10+ years of experience.",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_ac2e05455c": {
+  "evidence": "12+ years in performance marketing or paid UA with most experience on mobile apps, including 5+ years leading teams",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|sample|j_ac2e7a7b00": {
+  "evidence": "8–15+ years of full-cycle, quota-carrying experience selling enterprise software",
+  "max_years": 15,
+  "min_years": 8
+ },
+ "v1|sample|j_ad8eb1ba42": {
+  "evidence": "2+ years of experience in account management, direct customer sales, or a similar post-sales or commercial role",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_aec8db2c0e": {
+  "evidence": "5 to 8 years in government affairs, public policy, regulatory operations or local government.",
+  "max_years": 8,
+  "min_years": 5
+ },
+ "v1|sample|j_b5c2508cfa": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_b7d0b3fe36": {
+  "evidence": "5+ years of experience building production web applications with JavaScript, TypeScript, and React.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_b8dd573b6d": {
+  "evidence": "you don't need years of closing experience to become an Account Executive",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|sample|j_b9f46dd7cf": {
+  "evidence": "4+ years of experience leading and growing engineering teams in infrastructure, observability, platform, or AI systems",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_bb06664d83": {
+  "evidence": "5+ years of experience in developing and executing clinical data management procedures",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_bfba6ef933": {
+  "evidence": "10+ years of advanced experience selling complex technology solutions in a B2B enterprise model",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_c08f000a51": {
+  "evidence": "Proven experience in full stack development and production applications; four or more years as a reference.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_c1766fa0ef": {
+  "evidence": "Have 10 years + of experience in growth, strategy, business operations or quantitative analytics",
+  "max_years": null,
+  "min_years": 10
+ },
+ "v1|sample|j_c201d72e59": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_c230df804f": {
+  "evidence": "At least three years of relevant experience in manufacturing quality, field service, commissioning, reliability engineering, technical investigations, or related technical project support.",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_c278075119": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_c2ed8c7034": {
+  "evidence": "6+ years of SRE, DevOps or Software Engineering experience.",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_c39d6842ba": {
+  "evidence": "12+ years of experience in channels, sales, or related fields",
+  "max_years": null,
+  "min_years": 12
+ },
+ "v1|sample|j_c3e2709833": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_c44beace48": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_c4aa46cba6": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_c61dae077c": {
+  "evidence": "3+ years of experience with configuring, supporting, and implementing software solutions (e.g. CRM)",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_c734f00c1b": {
+  "evidence": "Led new logo enterprise sales teams in a SaaS environment for 5+ years.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_c7b670b3f6": {
+  "evidence": "3+ years of software development experience in one or more general purpose programming languages",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_c90dd9eac6": {
+  "evidence": "5+ years of experience in Growth, Product, Product Marketing, or CRO/Experimentation roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_ca2e329092": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_ca38cfd016": {
+  "evidence": "You have 2+ years of Product Management experience",
+  "max_years": null,
+  "min_years": 2
+ },
+ "v1|sample|j_ca527c78f5": {
+  "evidence": "2-3 Jahre B2B-SaaS-Vertrieb als Account Executive",
+  "max_years": 3,
+  "min_years": 2
+ },
+ "v1|sample|j_caf0dea908": {
+  "evidence": "5+ years of experience in Site Reliability Engineering, Infrastructure Engineering, or related roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_cbc701b73d": {
+  "evidence": "8+ years in infrastructure or cloud engineering, including 5+ years designing and delivering on AWS.",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_ce71089faf": {
+  "evidence": "7–12 years of experience selling platform-as-a-service (PaaS), cloud, or other API products.",
+  "max_years": 12,
+  "min_years": 7
+ },
+ "v1|sample|j_cff797e567": {
+  "evidence": "8+ years of experience in risk management, compliance, or financial operations",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_d02fba1d92": {
+  "evidence": "You have 5+ years of experience as a Machine Learning Engineer, Data Scientist, or Applied Scientist. You have 3+ years of experience as an Engineering Manager",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_d064a5f353": {
+  "evidence": "7 + years experience calling on federal defense accounts in a field sales capacity.",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|sample|j_d07d01194f": {
+  "evidence": "Minimum 5 years experience in enterprise level client-facing work",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_d1330a067c": {
+  "evidence": "8–10+ years in supply chain and logistics",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_d3d6ed003d": {
+  "evidence": "5+ years in infrastructure or platform engineering.",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_d490aaffbd": {
+  "evidence": "5+ years of experience in account management, customer success, partner success, or channel or direct sales roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_d7db3926a3": {
+  "evidence": "No experience necessary. WE PROVIDE TRAINING !!",
+  "max_years": null,
+  "min_years": 0
+ },
+ "v1|sample|j_d91dae47f8": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_dafc104a7d": {
+  "evidence": "You bring 8+ years of experience in graphic design, visual design, or a related creative discipline",
+  "max_years": null,
+  "min_years": 8
+ },
+ "v1|sample|j_db46fc0c44": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_ddc16a16f0": {
+  "evidence": "3+ years of relevant professional experience with a technology company",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_dee7c9cb2b": {
+  "evidence": "years of experience required will vary based on Associate, Senior, Staff, or Principal leveling",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_df33580bec": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_dfe6dc92b3": {
+  "evidence": "years of experience required will vary based on Associate, Senior, Staff, or Principal leveling",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_dff8a1bb32": {
+  "evidence": "5+ years of experience in technical account management or integration engineering",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_e2441bdb2e": {
+  "evidence": "4-7+ years of experience selling technical products to technical buyers.",
+  "max_years": 7,
+  "min_years": 4
+ },
+ "v1|sample|j_e515e3a56b": {
+  "evidence": "2+ years of experience in marketing coordination, event coordination, hospitality, media, executive support, or business development preferred.",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_eb20d4ca7c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_ec51a9ac3c": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_ec5691a4fa": {
+  "evidence": "5 - 7+ years of full-cycle recruiting experience",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_ec8d11bf17": {
+  "evidence": "A minimum of 4 years of related experience in Customer Success / Experience.",
+  "max_years": null,
+  "min_years": 4
+ },
+ "v1|sample|j_ee5fded6b0": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_f30047c2fe": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_f310119d05": {
+  "evidence": "7+ years in database engineering with 3+ years in database architecture design and support.",
+  "max_years": null,
+  "min_years": 7
+ },
+ "v1|sample|j_f3d50d0425": {
+  "evidence": "6 années ou plus d'expérience pertinente au sein d'équipes de service à la clientèle multiculturelles",
+  "max_years": null,
+  "min_years": 6
+ },
+ "v1|sample|j_f3ecf43acc": {
+  "evidence": "5 years of project management experience in consulting and technology implementation",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_f60d20ef02": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_f65a293e3c": {
+  "evidence": "3+ years of creative/design management experience",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_f6ef333366": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_f96cbdc192": {
+  "evidence": "5+ years experience in client facing/sales roles supporting customers in Japan",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_fa20dc86f7": {
+  "evidence": "3+ years in field marketing, event marketing, or B2B events",
+  "max_years": null,
+  "min_years": 3
+ },
+ "v1|sample|j_fa401b71fb": {
+  "evidence": "Has 5+ years scaling HR support",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_fa8932c65f": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_fb4d337d21": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_fbb8f4e701": {
+  "evidence": "3-5 years of experience in post-sales or enablement, including at least 1-2 years of demonstrated success building enablement programs",
+  "max_years": 5,
+  "min_years": 3
+ },
+ "v1|sample|j_fc01b3607e": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_fe0a19cf83": {
+  "evidence": "5+ years of experience in category management, partnerships, marketplace growth, brand, dealer, or operator roles",
+  "max_years": null,
+  "min_years": 5
+ },
+ "v1|sample|j_feb3cc8851": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ },
+ "v1|sample|j_fecd85ebc0": {
+  "evidence": "",
+  "max_years": null,
+  "min_years": null
+ }
+}

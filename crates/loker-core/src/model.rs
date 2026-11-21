@@ -425,6 +425,29 @@ pub enum Sponsorship {
     NotOffered,
 }
 
+/// Years of experience a job requires.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct Experience {
+    /// Minimum years required; 0 when the posting says none is needed.
+    pub min_years: u8,
+    /// The upper end, when the posting gives a range ("3-5 years").
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub max_years: Option<u8>,
+    pub method: ExperienceMethod,
+    /// The phrase it was read from.
+    pub evidence: String,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum ExperienceMethod {
+    /// The source's own field (Y Combinator's "minimum experience").
+    Source,
+    /// Read from the description.
+    Description,
+}
+
 /// Employer boards (Greenhouse, Ashby, …) are the primary record of a job;
 /// aggregators repost them. When both have a job, the employer's fields win.
 #[derive(
@@ -477,6 +500,10 @@ pub struct NewJob {
     /// when only the description says; that is read when a job is read.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visa: Option<Visa>,
+    /// Years of experience as the source states them in a field of its own.
+    /// Absent when only the description says; that is read when a job is read.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub experience: Option<Experience>,
     #[serde(skip)]
     pub raw: serde_json::Value,
 }
@@ -496,6 +523,9 @@ pub struct Job {
     pub pay: Option<Pay>,
     /// Visa sponsorship, read from the description; absent when it says nothing.
     pub visa: Option<Visa>,
+    /// Years of experience required, from the source's field or the
+    /// description; absent when neither states a number.
+    pub experience: Option<Experience>,
     pub tech_tags: Vec<String>,
     pub url: String,
     pub posted_at: Option<DateTime<Utc>>,

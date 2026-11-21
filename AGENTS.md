@@ -20,10 +20,11 @@ from where), and searched over a CLI and an MCP server.
 
 ```
 crates/loker-core/       domain and rules, no network
-  src/model.rs           NewJob (one listing), Job (search result), Eligibility, Pay, Visa
+  src/model.rs           NewJob (one listing), Job (search result), Eligibility, Pay, Visa, Experience
   src/normalize.rs       shared rules: match keys, URLs, pay, eligibility from text
   src/pay_text.rs        pay read from a description, for sources with no pay fields
   src/visa_text.rs       visa sponsorship read from a description, when a job is read
+  src/experience_text.rs years of experience required, read from a description when a job is read
   src/eligibility_text.rs where a remote job may be done from, read from its description at ingest
   src/country.rs         country, state, province and city names -> ISO codes; region tables
   src/dedup.rs           which listings are one job; no IO
@@ -44,6 +45,7 @@ eval/agent/              manual end-to-end agent eval (Pi + DeepSeek over MCP); 
 eval/role/               manual role-classifier eval against LLM-labelled jobs; not in CI
 eval/pay/                manual eval of pay read from descriptions, with a holdout; not in CI
 eval/visa/               manual eval of visa sponsorship read from descriptions; not in CI
+eval/experience/         manual eval of required years read from descriptions; not in CI
 eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 ```

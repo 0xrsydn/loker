@@ -20,6 +20,16 @@
         "id": {
           "type": "string"
         },
+        "minYears": {
+          "description": "Minimum years of experience, when the posting states them.",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
         "modifiers": {
           "items": {
             "$ref": "#/$defs/Modifier"
@@ -197,6 +207,55 @@
         {
           "const": "open",
           "description": "Open beyond them (\"worldwide\", \"or wherever you are\").",
+          "type": "string"
+        }
+      ]
+    },
+    "Experience": {
+      "description": "Years of experience a job requires.",
+      "properties": {
+        "evidence": {
+          "description": "The phrase it was read from.",
+          "type": "string"
+        },
+        "maxYears": {
+          "description": "The upper end, when the posting gives a range (\"3-5 years\").",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "method": {
+          "$ref": "#/$defs/ExperienceMethod"
+        },
+        "minYears": {
+          "description": "Minimum years required; 0 when the posting says none is needed.",
+          "format": "uint8",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "minYears",
+        "method",
+        "evidence"
+      ],
+      "type": "object"
+    },
+    "ExperienceMethod": {
+      "oneOf": [
+        {
+          "const": "source",
+          "description": "The source's own field (Y Combinator's \"minimum experience\").",
+          "type": "string"
+        },
+        {
+          "const": "description",
+          "description": "Read from the description.",
           "type": "string"
         }
       ]
@@ -619,6 +678,17 @@
             "string",
             "null"
           ]
+        },
+        "experience": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Experience"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Years of experience required, from the source's field or the\ndescription; absent when neither states a number."
         },
         "firstSeen": {
           "format": "date-time",

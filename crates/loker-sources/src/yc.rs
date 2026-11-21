@@ -29,12 +29,12 @@ use std::collections::BTreeSet;
 use std::time::Duration;
 
 use chrono::{DateTime, Utc};
-use loker_core::country;
 use loker_core::model::{
     Eligibility, Elsewhere, Method, Money, NewJob, Pay, PayExtra, PayExtraKind, Period,
     Sponsorship, Visa, Workplace,
 };
 use loker_core::normalize::{self, Place, employment_type};
+use loker_core::{country, experience_text};
 use serde_json::{Map, Value};
 
 use crate::{HttpClient, as_string, get_text};
@@ -235,6 +235,9 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         posted_at: s("createdAt").and_then(|t| age(&t)),
         expires_at: None,
         visa: visa_of(job),
+        experience: s("minExperience")
+            .as_deref()
+            .and_then(experience_text::experience_from_field),
         raw,
     })
 }

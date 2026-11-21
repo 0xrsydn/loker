@@ -153,6 +153,21 @@ at ingest and wins; otherwise `visa_text.rs` reads it from the description
 when a job is read (like seniority), so a rule change needs no re-fetch.
 `eval/visa` measures the reading.
 
+**Experience.** `experience.minYears` is the years a job requires (0 when
+it says none is needed), with `maxYears` for a range and the phrase it was
+read from; absent when no number is stated ("several years" is none). It is
+separate from seniority: a title's level and the years asked don't line up
+across companies. Y Combinator's own field (`minExperience`) fills it at
+ingest and wins; otherwise `experience_text.rs` reads the description when
+a job is read. Only required years count: a preferred heading or "5+ years
+preferred" doesn't; of several required numbers the largest is the bar, of
+alternatives ("5 years with a bachelor's or 3 with a master's") or levels
+("For Senior: 6+") the smallest. A number too high would hide a job from
+someone who meets the real bar, so unclear phrasing and a company's own age
+("drawing on 30 years of experience") are left out, and the
+`experienceYears` filter keeps every job that states no years. `eval/experience`
+measures it.
+
 **Roles.** `role.rs` is the vocabulary for what a job does: families
 (`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,
 `operations`, ...) with roles in them (`backend`, `ai_engineering`,

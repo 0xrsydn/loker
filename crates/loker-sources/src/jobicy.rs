@@ -79,6 +79,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
             .map(|t| t.to_utc()),
         expires_at: None,
         visa: None,
+        experience: None,
         raw,
     })
 }

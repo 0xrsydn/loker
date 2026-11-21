@@ -83,6 +83,9 @@ pub struct SearchParams {
     /// level (most of them) are dropped, so leave this out to see everything.
     #[serde(default)]
     pub seniority: Vec<Seniority>,
+    /// The viewer's years of experience. Drops jobs that require more
+    /// (`experience.minYears` above this); jobs that state no years are kept.
+    pub experience_years: Option<u8>,
     /// Keep only jobs in any of these roles or with any of these modifiers:
     /// ids from `list_roles`, at any level (`engineering` takes in `backend`
     /// and `ai_engineering`; `forward_deployed` is a modifier). Jobs with no
@@ -90,7 +93,7 @@ pub struct SearchParams {
     #[serde(default)]
     pub role: Vec<RoleFilter>,
     /// `full` (default); `compact`: what's needed to pick jobs (id, title,
-    /// company, link, scope, level, pay text, visa sponsorship, date, verdict), about a third of
+    /// company, link, scope, level, pay text, visa sponsorship, minimum years, date, verdict), about a third of
     /// the size; `titles`: id, title, company, level and verdict only, for
     /// scanning a long list. Get full details for the picks with `get_jobs`.
     #[serde(default)]
@@ -204,6 +207,9 @@ pub struct CompactHit {
     /// Visa sponsorship, when the posting states it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visa: Option<Sponsorship>,
+    /// Minimum years of experience, when the posting states them.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub min_years: Option<u8>,
     pub posted_at: Option<DateTime<Utc>>,
     /// Verdict for the viewer in `country`/`tz`; absent when no country was given.
     pub eligible: Option<Verdict>,
@@ -245,6 +251,7 @@ impl Hit {
                 modifiers,
                 pay: job.pay.map(|p| p.raw),
                 visa: job.visa.map(|v| v.sponsorship),
+                min_years: job.experience.as_ref().map(|e| e.min_years),
                 id: job.id,
                 title: job.title,
                 company: job.company,
@@ -324,6 +331,11 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
                 continue;
             }
             if !p.seniority.is_empty() && !job.seniority.is_some_and(|s| p.seniority.contains(&s)) {
+                continue;
+            }
+            if let (Some(years), Some(e)) = (p.experience_years, &job.experience)
+                && e.min_years > years
+            {
                 continue;
             }
             total += 1;

@@ -210,3 +210,61 @@ async fn ranking() {
         assert_eq!(search_jobs(&s, p).await.unwrap().count, want, "{level:?}");
     }
 }
+
+#[tokio::test]
+async fn experience_filter_keeps_jobs_that_state_no_years() {
+    let s = store("experience").await;
+    let mut jobs = Vec::new();
+    for (id, desc) in [
+        ("a", Some("- 2+ years of experience with Go")),
+        ("b", Some("- 7+ years of experience with Go")),
+        ("c", Some("Strong Go skills.")),
+        ("d", None),
+    ] {
+        let mut j = job(
+            "jobicy",
+            id,
+            "Co",
+            &format!("Go Engineer {id}"),
+            Scope::Worldwide,
+            0.8,
+        );
+        j.description_md = desc.map(str::to_string);
+        jobs.push(j);
+    }
+    // The source's own field beats the description.
+    jobs[3].experience = loker_core::experience_text::experience_from_field("Any (new grads ok)");
+    ingest(&s, "jobicy", &jobs).await;
+    let titles = |years: Option<u8>| {
+        let s = &s;
+        async move {
+            let r = search_jobs(
+                s,
+                SearchParams {
+                    experience_years: years,
+                    view: View::Compact,
+                    ..Default::default()
+                },
+            )
+            .await
+            .unwrap();
+            let mut got: Vec<(String, Option<u8>)> = r
+                .jobs
+                .iter()
+                .map(|h| match h {
+                    Hit::Compact(c) => (c.title.clone(), c.min_years),
+                    _ => unreachable!(),
+                })
+                .collect();
+            got.sort();
+            got
+        }
+    };
+    let all = titles(None).await;
+    assert_eq!(
+        all.iter().map(|(_, y)| *y).collect::<Vec<_>>(),
+        [Some(2), Some(7), None, Some(0)]
+    );
+    let three: Vec<String> = titles(Some(3)).await.into_iter().map(|(t, _)| t).collect();
+    assert_eq!(three, ["Go Engineer a", "Go Engineer c", "Go Engineer d"]);
+}

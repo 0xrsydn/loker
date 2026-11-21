@@ -149,6 +149,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         posted_at: date("pubDate"),
         expires_at: date("expires_at"),
         visa: None,
+        experience: None,
         raw,
     })
 }

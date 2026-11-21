@@ -150,6 +150,16 @@
         "null"
       ]
     },
+    "experienceYears": {
+      "description": "The viewer's years of experience. Drops jobs that require more\n(`experience.minYears` above this); jobs that state no years are kept.",
+      "format": "uint8",
+      "maximum": 255,
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
     "limit": {
       "description": "Maximum results, default 20, at most 100.",
       "format": "uint32",
@@ -211,7 +221,7 @@
     "view": {
       "$ref": "#/$defs/View",
       "default": "full",
-      "description": "`full` (default); `compact`: what's needed to pick jobs (id, title,\ncompany, link, scope, level, pay text, visa sponsorship, date, verdict), about a third of\nthe size; `titles`: id, title, company, level and verdict only, for\nscanning a long list. Get full details for the picks with `get_jobs`."
+      "description": "`full` (default); `compact`: what's needed to pick jobs (id, title,\ncompany, link, scope, level, pay text, visa sponsorship, minimum years, date, verdict), about a third of\nthe size; `titles`: id, title, company, level and verdict only, for\nscanning a long list. Get full details for the picks with `get_jobs`."
     }
   },
   "title": "SearchParams",

@@ -162,6 +162,7 @@ pub fn transform(source_id: &str, site: &str, raw: Value) -> anyhow::Result<NewJ
         posted_at: item.created_at.and_then(DateTime::from_timestamp_millis),
         expires_at: None,
         visa: None,
+        experience: None,
         raw,
     })
 }

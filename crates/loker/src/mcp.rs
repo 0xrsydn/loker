@@ -46,7 +46,8 @@ impl LokerMcp {
                        `unknown` (the posting doesn't say; not a recommendation, at most \"check the posting\"). \
                        Jobs the viewer cannot take are dropped. `minVerdict: \"maybe\"` keeps yes and maybe: use \
                        it to find what the viewer can apply to; `\"yes\"` keeps only settled ones. If only a few \
-                       jobs qualify, say so: a short list is a good answer. `seniority: [\"junior\"]` keeps \
+                       jobs qualify, say so: a short list is a good answer. `experienceYears: 3` drops \
+                       jobs that require more than 3 years and keeps those that state none; `seniority: [\"junior\"]` keeps \
                        only jobs at those levels; `role: [\"backend\", \"ai\"]` keeps only jobs in those roles (ids \
                        from `list_roles`, any level: `engineering` takes in every engineering role; \
                        `forward_deployed` and `founding` are modifiers). To browse cheaply, use `view: \"compact\"` (about a third of the \
