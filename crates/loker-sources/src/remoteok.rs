@@ -69,6 +69,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
             .and_then(|d| DateTime::parse_from_rfc3339(&d).ok())
             .map(|t| t.to_utc()),
         expires_at: None,
+        visa: None,
         raw,
     })
 }

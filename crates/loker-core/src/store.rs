@@ -1010,10 +1010,13 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         employment_type: m.employment_type,
         eligibility: m.eligibility,
         pay: m.pay,
-        visa: m
-            .description_md
-            .as_deref()
-            .and_then(crate::visa_text::visa_from_text),
+        // A source that states sponsorship in a field of its own beats the
+        // reading of its description.
+        visa: m.visa.clone().or_else(|| {
+            m.description_md
+                .as_deref()
+                .and_then(crate::visa_text::visa_from_text)
+        }),
         tech_tags: m.tech_tags,
         url: m.apply_url.unwrap_or(m.canonical_url),
         posted_at: m.posted_at,

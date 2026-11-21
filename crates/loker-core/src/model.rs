@@ -473,6 +473,10 @@ pub struct NewJob {
     /// When the source says the listing ends, if it says.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<DateTime<Utc>>,
+    /// Visa sponsorship as the source states it in a field of its own. Absent
+    /// when only the description says; that is read when a job is read.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub visa: Option<Visa>,
     #[serde(skip)]
     pub raw: serde_json::Value,
 }

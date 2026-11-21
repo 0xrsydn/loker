@@ -148,6 +148,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         description_md: html_to_md(s("description").as_deref())?,
         posted_at: date("pubDate"),
         expires_at: date("expires_at"),
+        visa: None,
         raw,
     })
 }

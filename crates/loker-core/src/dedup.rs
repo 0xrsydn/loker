@@ -179,6 +179,9 @@ fn merge(jobs: &[NewJob]) -> NewJob {
         description_md: first(|j| j.description_md.clone().filter(|d| !d.trim().is_empty())),
         posted_at: jobs.iter().filter_map(|j| j.posted_at).min(),
         expires_at: jobs.iter().filter_map(|j| j.expires_at).max(),
+        // The first source that states sponsorship at all, employer boards
+        // first (they sort ahead).
+        visa: jobs.iter().find_map(|j| j.visa.clone()),
         raw: serde_json::Value::Null,
     }
 }

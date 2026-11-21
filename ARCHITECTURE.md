@@ -147,9 +147,11 @@ words. `eval/pay` measures it.
 transfers only, some locations) or `not_offered`, with the sentence it was
 read from; absent when the posting says nothing about sponsorship. "Must be
 authorized to work in the US" alone, a citizenship or clearance requirement
-and equal opportunity text say nothing about it. `visa_text.rs` reads it
-from the description when a job is read (like seniority), so a rule change
-needs no re-fetch. `eval/visa` measures it.
+and equal opportunity text say nothing about it. A source that states it in a
+field of its own (`NewJob::visa`, Y Combinator's three fixed values) fills it
+at ingest and wins; otherwise `visa_text.rs` reads it from the description
+when a job is read (like seniority), so a rule change needs no re-fetch.
+`eval/visa` measures the reading.
 
 **Roles.** `role.rs` is the vocabulary for what a job does: families
 (`engineering`, `ai`, `data`, `product`, `design`, `go_to_market`, `support`,
