@@ -223,6 +223,9 @@ with write access (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`),
 them it does nothing, so forks still pass. `NIX_CACHE_TO=file:///tmp/cache`
 tries it without touching R2.
 
+`lint/comment_ratchet.py --check` runs in `nix flake check` too: no file may
+gain a comment line (see AGENTS.md).
+
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),
   lifecycle (closing, reopening, truncated fetches, expiry with a moved clock),

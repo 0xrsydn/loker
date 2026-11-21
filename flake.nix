@@ -48,17 +48,18 @@
           default = b.package;
         });
 
-      # `nix flake check`: the build (which runs the tests), clippy with warnings
-      # denied, and rustfmt.
       checks = forAll (pkgs:
         let b = build pkgs; in {
           inherit (b) package clippy fmt;
+          comments = pkgs.runCommand "loker-comment-ratchet" { } ''
+            ${pkgs.python3}/bin/python3 ${self}/lint/comment_ratchet.py --root ${self} --check
+            touch $out
+          '';
         });
 
       devShells = forAll (pkgs: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ cargo rustc clippy rustfmt rust-analyzer sqlite litestream secretspec ];
-          # rust-analyzer needs the std sources of this exact toolchain.
+          packages = with pkgs; [ cargo rustc clippy rustfmt rust-analyzer sqlite litestream secretspec python3 ];
           RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
         };
       });

@@ -48,6 +48,7 @@ eval/visa/               manual eval of visa sponsorship read from descriptions;
 eval/experience/         manual eval of required years read from descriptions; not in CI
 eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
+lint/                    comment ratchet: no new comments, the count only goes down
 ```
 
 ## Build and check
@@ -59,7 +60,8 @@ The system `rustc` may not work; run cargo inside the shell.
 cargo test                       # all tests, offline, a few seconds
 cargo clippy --all-targets -- -D warnings
 cargo fmt                        # CI fails on unformatted code
-nix flake check                  # what CI runs: release build, tests, clippy, rustfmt
+python3 lint/comment_ratchet.py --check   # no new comments (CI runs it too)
+nix flake check                  # what CI runs: release build, tests, clippy, rustfmt, comments
 cargo run -- <command>           # ingest, search, verify, sources eval, stats, schema, mcp
 ```
 
@@ -82,6 +84,11 @@ in that database.
 - **Live sources are someone else's servers.** Prefer the e2e stub
   (`LOKER_FETCH_BASE` points every adapter at it) and `loker verify` (one page
   per source) over repeated live ingests.
+- **No comments:** say it in names, types and tests; a decision goes in
+  ARCHITECTURE.md, README.md or an eval README. `lint/comment_ratchet.py`
+  fails CI when a file gains a comment line and when one is deleted without
+  `--update`. Doc comments on `JsonSchema` and clap types are output (schema
+  descriptions, `--help`) and are not counted. `/delete-comment` runs a pass.
 - **Tests stay lean:** integration tests over real behaviour, a table-driven
   test for a pure rule, and a test to pin a fixed bug. No per-function test
   suites and no snapshot tests.
