@@ -45,6 +45,9 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        # After the workplace/places/elsewhere split: BR, GB, US, 10 pages each,
        # minus every job of the earlier Workable sets.
        "workable4": [os.path.join(HERE, "snapshot-workable4.db")],
+       # Y Combinator: the parser was written from snapshot-yc.db's 121 jobs;
+       # yc.json is drawn from a later fetch (80 company pages) minus those.
+       "yc": [os.path.join(HERE, "snapshot-yc2.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
@@ -58,7 +61,7 @@ MAX_CHARS = 12000
 VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
 NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia"}
 KINDS = ["yes", "maybe", "unknown", "no"]
-FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "greenhouse", "ashby", "lever"]
+FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "ycombinator", "greenhouse", "ashby", "lever"]
 
 # What each board's fields mean, as the board documents them: what a person
 # reading the listing there would know. Not loker's reading of them.
@@ -70,6 +73,8 @@ BOARD = {
     "weworkremotely": "We Work Remotely lists remote jobs only; region is where the hire may be based.",
     "workable": "Workable's job search across the companies hiring through Workable; workplace is remote, hybrid "
                 "or on_site and locations are the places, both as the employer set them.",
+    "ycombinator": "Y Combinator's job board for its companies; location is as the company set it, with remote "
+                   "options shown as \"Remote\" or \"Remote (...)\". The posting's description is not included.",
     "greenhouse": "An employer's own job board (Greenhouse); it lists on-site, hybrid and remote jobs.",
     "ashby": "An employer's own job board (Ashby); it lists on-site, hybrid and remote jobs.",
     "lever": "An employer's own job board (Lever); it lists on-site, hybrid and remote jobs.",
@@ -242,6 +247,17 @@ def sample_workable(name="workable"):
     old = seen | {j for j, d in pool.items() if any(url(l) in seen_urls for l in d["listings"])}
     print(f"{name} ({len(old & set(pool))} of {len(pool)} left out as already in {earlier or 'no earlier set'}):")
     save(f"{name}.json", draw(pool, 60, 3, random.Random(f"elig-{name}"), exclude=old))
+
+
+def sample_yc():
+    if os.path.exists(os.path.join(HERE, "yc.json")):
+        sys.exit("yc already drawn")
+    seen = jobs(os.path.join(HERE, "snapshot-yc.db"))
+    seen_urls = {url(l) for d in seen.values() for l in d["listings"]} - {None}
+    pool = jobs(DBS["yc"])
+    old = set(seen) | {j for j, d in pool.items() if any(url(l) in seen_urls for l in d["listings"])}
+    print(f"yc ({len(old & set(pool))} of {len(pool)} left out as read while writing the parser):")
+    save("yc.json", draw(pool, 60, 3, random.Random("elig-yc"), exclude=old))
 
 
 def set_ids(name=None):
@@ -449,7 +465,8 @@ def score():
 if __name__ == "__main__":
     cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"),
             "sample-workable3": lambda: sample_workable("workable3"),
-            "sample-workable4": lambda: sample_workable("workable4"), "label": label, "agree": agree, "score": score}
+            "sample-workable4": lambda: sample_workable("workable4"),
+            "sample-yc": sample_yc, "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()

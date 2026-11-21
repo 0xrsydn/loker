@@ -9,6 +9,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_0043876220": {
+  "evidence": "\"location\": \"Paris\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_007aabb5cb": {
   "evidence": "",
   "verdicts": {
@@ -163,6 +173,16 @@
   "evidence": "\"São Paulo, São Paulo, Brazil\", \"workplace\": \"remote\"; \"Our engineers work from Latin America, aligned to United States time zones\"; \"based remotely\"",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_07257db23a": {
+  "evidence": "\"location\": \"London, England, GB\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -379,6 +399,16 @@
    "US": "no"
   }
  },
+ "v1|j_0e5249cc8b": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_0ea1423ae7": {
   "evidence": "For this role, you need to be based in France, Belgium or Spain",
   "verdicts": {
@@ -427,6 +457,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_1007651143": {
+  "evidence": "\"location\": \"San Francisco, CA, US / Remote\"",
+  "verdicts": {
+   "BR": "unknown",
+   "DE": "unknown",
+   "ID": "unknown",
+   "IN": "unknown",
+   "US": "yes"
   }
  },
  "v1|j_10a870df45": {
@@ -487,6 +527,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_137fce3ac3": {
+  "evidence": "\"location\": \"New York City\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_13a2785932": {
@@ -609,6 +659,16 @@
    "US": "yes"
   }
  },
+ "v1|j_1707355987": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_1717f88628": {
   "evidence": "\"workplaceType\": \"onsite\"",
   "verdicts": {
@@ -617,6 +677,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_1755424587": {
+  "evidence": "\"location\": \"Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_17d82a1324": {
@@ -647,6 +717,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_18bdb87c59": {
+  "evidence": "\"location\": \"SF Headquarters\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_18d0d8b5ae": {
@@ -819,6 +899,16 @@
    "US": "yes"
   }
  },
+ "v1|j_1d83aedd19": {
+  "evidence": "San Francisco, CA, US / New York, NY, US / Remote (US)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_1e76cef320": {
   "evidence": "\"workplaceType\": \"onsite\"; \"If the posting is specified as Onsite, you are required to work from an office.\"",
   "verdicts": {
@@ -899,6 +989,16 @@
    "US": "no"
   }
  },
+ "v1|j_21c5a67012": {
+  "evidence": "San Francisco",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_220e2387e8": {
   "evidence": "\"You must be located in Latin America. This role is exclusively open to candidates residing in a LATAM country.\"; \"Monday to Friday, 8:00 AM–5:00 PM US Central Time\"",
   "verdicts": {
@@ -977,6 +1077,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2517027038": {
+  "evidence": "San Francisco, CA / Los Angeles, CA, US / Remote (US; CA)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_254857348b": {
@@ -1111,6 +1221,16 @@
  },
  "v1|j_28fd2a3dfb": {
   "evidence": "\"This is an all-remote team ,and we're looking for someone located in the U.S.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_29a47ce5f3": {
+  "evidence": "New York, San Francisco, Seattle, Washington DC, or Remote / Remote (US)",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1339,6 +1459,16 @@
    "US": "yes"
   }
  },
+ "v1|j_2fb6abb141": {
+  "evidence": "\"location\": \"New-York\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_30ff05e838": {
   "evidence": "\"Located in CET timezone (+/- 3 hours), we are unable to consider applications from candidates in other time zones.\"",
   "verdicts": {
@@ -1427,6 +1557,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_345c1acf40": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_346df0c0de": {
@@ -1699,6 +1839,16 @@
    "US": "yes"
   }
  },
+ "v1|j_3f613f6fc9": {
+  "evidence": "\"location\": \"Austin, TX, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_3f8b820214": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"London, England, United Kingdom\"]; \"Location: Remote\"",
   "verdicts": {
@@ -1869,6 +2019,16 @@
    "US": "no"
   }
  },
+ "v1|j_452ebbf559": {
+  "evidence": "\"location\": \"Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_453ce88a0d": {
   "evidence": "Headquarters: Remote - Germany; For candidates in Berlin, this is a hybrid role",
   "verdicts": {
@@ -2017,6 +2177,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_4daec503ca": {
+  "evidence": "\"location\": \"New York, NY, US / San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_4e0b2f46b4": {
@@ -2247,6 +2417,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_558a8de347": {
+  "evidence": "\"location\": \"New York City\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_560e387c87": {
@@ -2509,6 +2689,26 @@
    "US": "no"
   }
  },
+ "v1|j_622db240ea": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_6268d14357": {
+  "evidence": "\"location\": \"US, Europe, Asia, and/or Remote / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "yes"
+  }
+ },
  "v1|j_6287cb30f4": {
   "evidence": "\"Location: Remote | LATAM, Asia, EMEA\"; \"contractors are expected to maintain a minimum of 6 hours of overlap with the firm's operating hours in Pacific Time (PT)\"",
   "verdicts": {
@@ -2597,6 +2797,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_64935f5cd3": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_649c106ebf": {
@@ -2709,6 +2919,16 @@
    "US": "yes"
   }
  },
+ "v1|j_6860e40e46": {
+  "evidence": "\"San Francisco, CA, US / Remote (San Francisco, CA, US)\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_687dd79730": {
   "evidence": "\"country\": \"🇮🇳 India\"; \"#LI-Remote\"",
   "verdicts": {
@@ -2757,6 +2977,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_6910770607": {
+  "evidence": "\"location\": \"SF Headquarters\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_6919fc36e5": {
@@ -3149,6 +3379,16 @@
    "US": "no"
   }
  },
+ "v1|j_782be3b6a8": {
+  "evidence": "\"location\": \"New York, NY, US\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_78319b67ed": {
   "evidence": "location: \"United Arab Emirates\"; \"Work remotely in a global team\"",
   "verdicts": {
@@ -3329,6 +3569,16 @@
    "US": "no"
   }
  },
+ "v1|j_7c2723a0ea": {
+  "evidence": "\"location\": \"San Francisco\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_7cb57acba1": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Cavite, Calabarzon, Philippines\"]; \"100% remote, work-from-home setup\"",
   "verdicts": {
@@ -3429,6 +3679,16 @@
    "US": "yes"
   }
  },
+ "v1|j_802dfbc5eb": {
+  "evidence": "\"location\": \"San Francisco, CA and New York / Seattle, WA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_802e7bae3c": {
   "evidence": "\"workplace\": \"remote\"; \"locations\": [\"TELECOMMUTE\", \"Vietnam\"]",
   "verdicts": {
@@ -3499,6 +3759,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_8361ed0e74": {
+  "evidence": "\"location\": \"NY, SF or Remote / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_83fc366cfb": {
   "evidence": "jobGeo: \"Mexico\"",
   "verdicts": {
@@ -3511,6 +3781,16 @@
  },
  "v1|j_8404e19d92": {
   "evidence": "\"it is required that this candidate be a U.S. citizen who resides on U.S. soil\"; \"to support in-person federal customer engagements, with an on-site requirement of up to 25%\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_8408b149ff": {
+  "evidence": "\"location\": \"lehi, utah\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3537,6 +3817,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_85127ba6ec": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_8553fe805f": {
@@ -3639,6 +3929,16 @@
    "US": "yes"
   }
  },
+ "v1|j_8766f862d9": {
+  "evidence": "\"location\": \"San Francisco, CA, US / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_878904042c": {
   "evidence": "Board: \"TELECOMMUTE\", \"Athens, Attica, Greece\"; \"Fully remote role\"",
   "verdicts": {
@@ -3717,6 +4017,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_8aec2dd62d": {
+  "evidence": "\"location\": \"London, England, GB / Christchurch, England, GB\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8b82cc15a7": {
+  "evidence": "\"location\": \"Lehi, UT\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_8d19df56c5": {
@@ -3867,6 +4187,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_933bd2a8b1": {
+  "evidence": "\"location\": \"San Francisco, CA, US / New York, NY, US / Remote\"; \"visa\": \"US citizenship/visa not required\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_936f971f7a": {
@@ -4169,6 +4499,16 @@
    "US": "no"
   }
  },
+ "v1|j_9e58b6c895": {
+  "evidence": "\"location\": \"San Francisco, CA, US / New York, NY, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_9e5d8be604": {
   "evidence": "Fin has a hybrid working policy. ... We expect employees to be in the office at least three days per week.",
   "verdicts": {
@@ -4217,6 +4557,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_a0c76f494c": {
+  "evidence": "\"location\": \"San Francisco, CA, US / New York, NY, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_a101ef351b": {
@@ -4549,6 +4899,16 @@
    "US": "yes"
   }
  },
+ "v1|j_abd2fcb52b": {
+  "evidence": "\"location\": \"Barcelona, CT, ES\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ac8259ee79": {
   "evidence": "You can live anywhere. We are remote and we hire worldwide. The one hard requirement is that you can take client calls during US Eastern business hours",
   "verdicts": {
@@ -4667,6 +5027,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_b23947b4b8": {
+  "evidence": "\"location\": \"New York, NY, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_b284ccee6d": {
@@ -4849,6 +5219,16 @@
    "US": "yes"
   }
  },
+ "v1|j_ba5e3f5357": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_bafaecdb6a": {
   "evidence": "Applicants must have the right to work in the United Kingdom at the time of application and for the duration of employment.",
   "verdicts": {
@@ -4887,6 +5267,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_bcdf9b794f": {
+  "evidence": "\"location\": \"Remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_bdaa4142ed": {
@@ -4939,6 +5329,26 @@
    "US": "yes"
   }
  },
+ "v1|j_bf6e8270dc": {
+  "evidence": "Senior Platform Engineer (Onsite - SF)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_bf77ffe589": {
+  "evidence": "\"location\": \"England, GB\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_bfaeed351f": {
   "evidence": "",
   "verdicts": {
@@ -4949,6 +5359,16 @@
    "US": "unknown"
   }
  },
+ "v1|j_bfb01cde53": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_bfb7761661": {
   "evidence": "\"onboarding of new manufacturers and/or dealers in your defined region of the UK\"; \"role is field based\"",
   "verdicts": {
@@ -4957,6 +5377,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_c04ab68674": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_c069a9845e": {
@@ -5029,6 +5459,16 @@
    "US": "no"
   }
  },
+ "v1|j_c25221e540": {
+  "evidence": "\"location\": \"Barcelona, CT, ES / Barcelona, Catalonia, ES\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_c2f5f51f51": {
   "evidence": "\"TELECOMMUTE\", \"Poland\"",
   "verdicts": {
@@ -5049,6 +5489,16 @@
    "US": "no"
   }
  },
+ "v1|j_c40de1f856": {
+  "evidence": "\"location\": \"Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_c433b908ea": {
   "evidence": "\"This position is remote and based in the United States.\"",
   "verdicts": {
@@ -5067,6 +5517,16 @@
    "ID": "maybe",
    "IN": "maybe",
    "US": "maybe"
+  }
+ },
+ "v1|j_c564071527": {
+  "evidence": "\"location\": \"New York, NY, US / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_c5662decdc": {
@@ -5217,6 +5677,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_cbc0fde521": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"; \"visa\": \"US citizen/visa only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_cc4ded55e3": {
@@ -5489,6 +5959,16 @@
    "US": "yes"
   }
  },
+ "v1|j_d5e4af4459": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_d61c485672": {
   "evidence": "This role is 100% remote (US & Canada only)... Candidates based in ET timezone will be given preference",
   "verdicts": {
@@ -5497,6 +5977,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_d6ce43b0ef": {
+  "evidence": "\"location\": \"San Francisco\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_d7fbd67540": {
@@ -5539,8 +6029,38 @@
    "US": "no"
   }
  },
+ "v1|j_daf345e835": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_db053a94ef": {
+  "evidence": "\"location\": \"Barcelona, CT, ES / Barcelona, Catalonia, ES\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_dbf5884986": {
   "evidence": "\"Must be based in Singapore, with full working rights in Singapore\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_dbf5e3c4af": {
+  "evidence": "\"location\": \"London, England, GB\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5729,6 +6249,26 @@
    "US": "yes"
   }
  },
+ "v1|j_e2308d09c2": {
+  "evidence": "\"Mexico City / Remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_e246aede48": {
+  "evidence": "\"Mexico / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_e264f527cc": {
   "evidence": "\"Fully remote position\"; \"Oklahoma City, Oklahoma, United States\"; \"Hours: 8:00am - 4:30pm CST\"",
   "verdicts": {
@@ -5789,6 +6329,16 @@
    "US": "no"
   }
  },
+ "v1|j_e59c876b27": {
+  "evidence": "\"San Francisco, CA, US / Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_e6939b19d4": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"India\"]; \"This role requires you to work in an APAC-friendly time zone, starting at 5:30 a.m. IST.\"",
   "verdicts": {
@@ -5796,6 +6346,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_e6eabe4356": {
+  "evidence": "\"Warsaw, Masovian Voivodeship, PL\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -5853,6 +6413,16 @@
   "evidence": "This is a Remote – Brazil position, meaning you can work from anywhere within the country. Please note that this role is only open to candidates in Brazil.",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_e91c7df620": {
+  "evidence": "\"location\": \"Paris, IDF, FR\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -6027,6 +6597,16 @@
    "ID": "no",
    "IN": "maybe",
    "US": "yes"
+  }
+ },
+ "v1|j_ee6c4643d6": {
+  "evidence": "\"location\": \"Lehi, UT, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_ee871fa31b": {
@@ -6399,6 +6979,16 @@
    "US": "yes"
   }
  },
+ "v1|j_f936f039e5": {
+  "evidence": "\"location\": \"SF Headquarters\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_f9752dfd4d": {
   "evidence": "\"country\": \"FR\", \"workplaceType\": \"hybrid\"; \"Hybrid position\"",
   "verdicts": {
@@ -6617,6 +7207,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_ff8fc11751": {
+  "evidence": "\"location\": \"San Francisco, CA, US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_ffadc5bdbc": {

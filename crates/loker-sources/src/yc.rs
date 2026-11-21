@@ -29,8 +29,12 @@ use std::collections::BTreeSet;
 use std::time::Duration;
 
 use chrono::{DateTime, Utc};
-use loker_core::model::{Money, NewJob, Pay, PayExtra, PayExtraKind, Period, Sponsorship, Visa};
-use loker_core::normalize::{self, eligibility_from_text, employment_type};
+use loker_core::country;
+use loker_core::model::{
+    Eligibility, Elsewhere, Method, Money, NewJob, Pay, PayExtra, PayExtraKind, Period,
+    Sponsorship, Visa, Workplace,
+};
+use loker_core::normalize::{self, Place, employment_type};
 use serde_json::{Map, Value};
 
 use crate::{HttpClient, as_string, get_text};
@@ -212,10 +216,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
                 .flatten(),
         ),
         employment_type: s("type").as_deref().map(employment_type),
-        eligibility: eligibility_from_text(
-            &location,
-            Some(location.to_lowercase().contains("remote")),
-        ),
+        eligibility: eligibility(&location),
         pay: pay_of(job),
         tech_tags: job
             .get("skills")
@@ -236,6 +237,110 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         visa: visa_of(job),
         raw,
     })
+}
+
+/// The board's location, which has a grammar of its own: options separated
+/// by " / ", each an office ("San Francisco, CA, US", "Munich, Bavaria, DE",
+/// "San Francisco - In Office", a bare country code) or remote ("Remote",
+/// "Remote (US; CA; MX)", "Remote (San Francisco, CA, US)"). In "City, ST,
+/// CC" only the last part is a country: CA there is California, BY Bavaria.
+///
+/// - A remote option makes the job remote. Countries inside its parentheses
+///   are where it is open, and no one else. Cities there ("Remote (San
+///   Francisco, CA, US)") mean living nearby: maybe in that country.
+/// - A bare "Remote" keeps the countries of the other options, and says
+///   nothing about anyone else (`not_stated`).
+/// - No remote option: an office job, at the first office listed.
+fn eligibility(location: &str) -> Eligibility {
+    let raw = location.trim();
+    let mut offices: Vec<String> = Vec::new(); // countries of office options
+    let mut remote_countries: Vec<String> = Vec::new();
+    let mut remote_cities: Vec<String> = Vec::new(); // countries of "Remote (City, ST, CC)"
+    let mut bare_remote = false;
+    let mut first_office: Option<String> = None;
+    for option in raw.split(" / ").map(str::trim).filter(|o| !o.is_empty()) {
+        if let Some(inside) = option
+            .strip_prefix("Remote (")
+            .and_then(|r| r.strip_suffix(')'))
+        {
+            for item in inside.split(';').map(str::trim) {
+                match (item.contains(','), place_country(item)) {
+                    (false, Some(c)) => remote_countries.push(c),
+                    (true, Some(c)) => remote_cities.push(c),
+                    _ => {}
+                }
+            }
+        } else if option.eq_ignore_ascii_case("remote") {
+            bare_remote = true;
+        } else {
+            first_office.get_or_insert_with(|| option.to_string());
+            if let Some(c) = place_country(option) {
+                offices.push(c);
+            }
+        }
+    }
+    let sorted = |mut v: Vec<String>| {
+        v.sort();
+        v.dedup();
+        v
+    };
+    let base = Eligibility {
+        raw: (!raw.is_empty()).then(|| raw.to_string()),
+        confidence: 0.9,
+        method: Method::Source,
+        ..Eligibility::unknown(Method::Source)
+    };
+    if !remote_countries.is_empty() {
+        Eligibility {
+            workplace: Workplace::Remote,
+            countries: sorted(remote_countries),
+            ..base
+        }
+    } else if !remote_cities.is_empty() {
+        // Remote, but living near those cities: maybe there, no elsewhere.
+        Eligibility {
+            countries: sorted(remote_cities),
+            evidence: Some("remote near the listed cities".into()),
+            ..base
+        }
+    } else if bare_remote {
+        Eligibility {
+            workplace: Workplace::Remote,
+            elsewhere: Elsewhere::NotStated,
+            countries: sorted(offices),
+            evidence: Some("\"Remote\" without saying where".into()),
+            ..base
+        }
+    } else if let Some(office) = first_office {
+        Eligibility {
+            workplace: Workplace::Onsite,
+            onsite_city: Some(office),
+            countries: sorted(offices),
+            ..base
+        }
+    } else {
+        base
+    }
+}
+
+/// The country of one option: "City, ST, CC" or "City, Region, CC" by its
+/// last part, a bare code, or a city, region or country name.
+fn place_country(option: &str) -> Option<String> {
+    let option = option.trim_end_matches(" - In Office").trim();
+    let parts: Vec<&str> = option.split(',').map(str::trim).collect();
+    let last = *parts.last()?;
+    if last.len() == 2 && last.chars().all(|c| c.is_ascii_uppercase()) {
+        return country::to_alpha2(last).map(String::from);
+    }
+    // Names, last part first: "Munich, Germany", "Noida, Uttar Pradesh",
+    // "San Francisco".
+    parts
+        .iter()
+        .rev()
+        .find_map(|p| match normalize::place(&p.to_lowercase()) {
+            Some(Place::Country(c) | Place::City(c)) => Some(c.to_string()),
+            _ => None,
+        })
 }
 
 /// The board's three fixed values. "US citizenship/visa not required" says
@@ -515,6 +620,86 @@ mod tests {
         assert_eq!(pay.usd_month_max, Some(23_750));
         assert_eq!(pay.extras.len(), 1);
         assert!(j.posted_at.is_some());
+    }
+
+    /// The board's location shapes, as seen on it (2026-11-21).
+    #[test]
+    fn location_reads_the_boards_grammar() {
+        use Workplace::*;
+        let cases: &[(&str, Workplace, Elsewhere, &[&str])] = &[
+            (
+                "San Francisco, CA, US / Remote (US)",
+                Remote,
+                Elsewhere::Excluded,
+                &["US"],
+            ),
+            (
+                "Remote (US; CA; MX)",
+                Remote,
+                Elsewhere::Excluded,
+                &["CA", "MX", "US"],
+            ),
+            (
+                "US / CA / MX / Remote (US; CA; MX)",
+                Remote,
+                Elsewhere::Excluded,
+                &["CA", "MX", "US"],
+            ),
+            (
+                "San Francisco, CA, US / Remote (San Francisco, CA, US)",
+                Unknown,
+                Elsewhere::Excluded,
+                &["US"],
+            ),
+            (
+                "Berlin, BE, DE / Berlin, Berlin, DE / San Francisco, CA, US / New York, NY, US / TW / Remote",
+                Remote,
+                Elsewhere::NotStated,
+                &["DE", "TW", "US"],
+            ),
+            ("Remote", Remote, Elsewhere::NotStated, &[]),
+            (
+                "Munich, BY, DE / Munich, Bavaria, DE",
+                Onsite,
+                Elsewhere::Excluded,
+                &["DE"],
+            ),
+            (
+                "San Francisco - In Office",
+                Onsite,
+                Elsewhere::Excluded,
+                &["US"],
+            ),
+            ("New York, NY, US", Onsite, Elsewhere::Excluded, &["US"]),
+            ("Noida, Uttar Pradesh", Onsite, Elsewhere::Excluded, &["IN"]),
+            ("Munich, Germany", Onsite, Elsewhere::Excluded, &["DE"]),
+            (
+                "Austin, TX, US / Chih., MX / Chihuahua, MX",
+                Onsite,
+                Elsewhere::Excluded,
+                &["MX", "US"],
+            ),
+        ];
+        for &(text, workplace, elsewhere, countries) in cases {
+            let e = eligibility(text);
+            assert_eq!(
+                (
+                    e.workplace,
+                    e.elsewhere,
+                    e.countries
+                        .iter()
+                        .map(String::as_str)
+                        .collect::<Vec<_>>()
+                        .as_slice()
+                ),
+                (workplace, elsewhere, countries),
+                "{text}"
+            );
+        }
+        assert_eq!(
+            eligibility("San Francisco, CA, US").onsite_city.as_deref(),
+            Some("San Francisco, CA, US")
+        );
     }
 
     #[test]

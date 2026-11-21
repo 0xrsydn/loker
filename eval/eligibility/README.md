@@ -225,6 +225,30 @@ Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
 still right 89% of the time against 97% for the other sources, and
 DeepSeek's 20 jobs alone give 8 wrong noes. Workable stays opt-in.
 
+### Y Combinator (2026-11-21)
+
+The board's location has a grammar ("City, ST, CC" offices, "Remote (US;
+CA)", "Remote (San Francisco, CA, US)", a bare "Remote"), so the adapter
+reads it itself instead of through the generic text parser, which took
+"CA" in "San Francisco, CA, US" for Canada and "BY" (Bavaria) for Belarus.
+The parser was written from `snapshot-yc.db` (121 jobs, 40 companies).
+`yc.json`: 60 jobs from a later fetch of 80 other companies, none read,
+scored once. The board gives no description, so labellers saw its fields
+only.
+
+| yc | yes right | wrong yes | no right | wrong no |
+|---|---|---|---|---|
+| Opus, generic parsing | 14/18 | 0 | 232/277 | 9 |
+| Opus, the board's parser | 14/14 | 0 | 232/267 | 0 |
+| DeepSeek v4.1, generic parsing | 15/18 | 3 | 232/277 | 13 |
+| DeepSeek v4.1, the board's parser | 14/14 | 0 | 235/267 | 0 |
+
+The labellers agree on 292/300. Left: 18 unknown verdicts for a bare
+"Remote" (both labellers lean yes; the board doesn't say where), and 35
+office-only jobs ("San Francisco, CA, US") that loker calls no and Opus
+maybe, by the labelling rule that a city alone may be remote; on this board
+a remote option is always written out.
+
 Citizenship and clearance are deferred, on purpose. Of the tuning
 snapshot's 1,749 jobs, 178 state citizenship, permanent residency or a
 clearance outside equal-opportunity text, and the location verdict already
