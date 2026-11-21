@@ -13,6 +13,7 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 use crate::model::{Experience, ExperienceMethod};
+use crate::posting::{LineKind, PREFERRED, Posting, Section, sentences};
 
 const NUM: &str = r"\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen";
 
@@ -50,16 +51,6 @@ static NOT_HIRE: LazyLock<Regex> = LazyLock::new(|| {
 static PREFERRED_AFTER: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bpreferred\b|\bnice[- ]to[- ]have\b|\bbonus\b|\ba (?:big |huge |strong )?plus\b|\bdesir(?:ed|able)\b|\b(?:an?|big|real|great)\s+(?:advantage|asset)\b|\badvantageous\b|\bgood to have\b|\bwould be great\b|\bhelpful\b|\bbeneficial\b").unwrap()
 });
-
-/// Not required, said before the years or as a heading: "Ideally, you
-/// have", "Preferred qualifications", "Bonus points".
-static PREFERRED: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)\bprefer(?:red|ably|able)?\b|\bideally\b|\bnice[- ]to[- ]have\b|\bbonus\b|\ba plus\b|\bplus\s*:?\s*$|\bdesir(?:ed|able)\b|\badvantage(?:ous)?\b|\bgood to have\b|\bwould be great\b|\bstand out\b|\bextra credit\b|\bpluses\b").unwrap()
-});
-
-/// "Minimum and preferred qualifications": a heading over both, read as required.
-static HEADING_REQUIRED_ONLY: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new(r"(?i)\b(?:minimum|required|requirements|must)\b").unwrap());
 
 /// "No experience required", "new grads welcome", "0+ years".
 static NONE_NEEDED: LazyLock<Regex> = LazyLock::new(|| {
@@ -102,24 +93,21 @@ static AT_MOST: LazyLock<Regex> = LazyLock::new(|| {
 static MONTHS_TO: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)\bmonths?\s*(?:to|-|–)\s*$").unwrap());
 
-static ESCAPE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\\([[:punct:]])").unwrap());
-
 /// Years of experience `text` (a description) states the job requires, or `None`.
 pub fn experience_from_text(text: &str) -> Option<Experience> {
-    let text = ESCAPE.replace_all(text, "$1");
-    let text = A_YEAR.replace_all(&text, "$1 1 year");
+    read(&Posting::parse(text))
+}
+
+/// Years of experience a parsed posting states the job requires, or `None`.
+pub fn read(posting: &Posting) -> Option<Experience> {
     let mut required: Vec<Claim> = Vec::new();
     let mut none_needed: Option<String> = None;
-    let mut preferred_section = false;
     let mut last_had_claim = false;
     let mut levels = false;
     let mut level_block = false;
-    for line in text.lines() {
-        let bare = line.replace(['*', '_'], "");
-        let bare = bare.trim();
-        if bare.is_empty() {
-            continue;
-        }
+    for line in &posting.lines {
+        let bare = A_YEAR.replace_all(&line.text, "$1 1 year");
+        let bare = bare.as_ref();
         // "For SMB AE:" alone on a line: the years under it are one level's.
         if LEVEL_PREFIX.is_match(bare.trim_start_matches(['-', '•', '+', ' ']))
             && bare.trim_end().ends_with(':')
@@ -127,12 +115,12 @@ pub fn experience_from_text(text: &str) -> Option<Experience> {
             level_block = true;
             continue;
         }
-        if is_heading(line, bare) {
+        // A heading that states years ("Experience: 5+ years:") is read.
+        if line.kind == LineKind::Heading && !YEARS.is_match(bare) {
             level_block = false;
-            // Any other heading ("Requirements", "About us") ends a preferred list.
-            preferred_section = PREFERRED.is_match(bare) && !HEADING_REQUIRED_ONLY.is_match(bare);
             continue;
         }
+        let preferred_section = line.section == Section::Preferred;
         for sentence in sentences(bare) {
             if none_needed.is_none() && NONE_NEEDED.is_match(sentence) {
                 none_needed = Some(sentence.to_string());
@@ -338,21 +326,6 @@ fn number(s: &str) -> Option<u8> {
     Some(n)
 }
 
-/// A heading: a markdown heading, a line in bold alone, or a short line
-/// ending in a colon, that states no years itself.
-fn is_heading(line: &str, bare: &str) -> bool {
-    let t = line.trim();
-    let short = bare.chars().count() <= 70;
-    let list = t.starts_with(['-', '•', '+', '*']) && !t.starts_with("**")
-        || t.chars().next().is_some_and(|c| c.is_ascii_digit()) && t.contains(". ");
-    short
-        && !list
-        && !YEARS.is_match(bare)
-        && (t.starts_with('#')
-            || (t.starts_with("**") && t.trim_end_matches(':').ends_with("**"))
-            || bare.ends_with(':'))
-}
-
 fn clip(s: &str) -> String {
     s.chars().take(240).collect()
 }
@@ -369,34 +342,6 @@ fn ceil(s: &str, mut i: usize) -> usize {
         i += 1;
     }
     i
-}
-
-/// A line split at sentence ends; an initialism ("U.S.") is not an end.
-fn sentences(line: &str) -> Vec<&str> {
-    let b = line.as_bytes();
-    let mut out = Vec::new();
-    let mut from = 0;
-    for i in 0..b.len() {
-        let end = matches!(b[i], b'.' | b'!' | b'?')
-            && b.get(i + 1).is_none_or(|c| c.is_ascii_whitespace())
-            && !(b[i] == b'.'
-                && i >= 1
-                && b[i - 1].is_ascii_uppercase()
-                && (i < 2 || !b[i - 2].is_ascii_alphabetic()));
-        if end {
-            out.push(&line[from..=i]);
-            from = i + 1;
-        }
-    }
-    out.push(&line[from..]);
-    out.into_iter()
-        .map(|s| {
-            s.trim()
-                .trim_start_matches(['#', '>', '-', '•', '+', ' '])
-                .trim()
-        })
-        .filter(|s| !s.is_empty())
-        .collect()
 }
 
 /// The board's own field: "3+ years", "Any (new grads ok)".

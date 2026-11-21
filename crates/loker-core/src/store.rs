@@ -1001,6 +1001,14 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     let mut sources: Vec<JobSource> = serde_json::from_str(&r.get::<String, _>("sources"))?;
     sources.sort_by(|a, b| a.source.cmp(&b.source));
     let m: NewJob = serde_json::from_str(&r.get::<String, _>("job"))?;
+    // Parsed once for every reader, and only when a source field leaves one to read.
+    let posting = (m.visa.is_none() || m.experience.is_none())
+        .then(|| {
+            m.description_md
+                .as_deref()
+                .map(crate::posting::Posting::parse)
+        })
+        .flatten();
     Ok(Job {
         id: r.get("id"),
         // Derived when read, so old rows get it without a re-fetch.
@@ -1012,16 +1020,14 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         pay: m.pay,
         // A source that states sponsorship in a field of its own beats the
         // reading of its description.
-        visa: m.visa.clone().or_else(|| {
-            m.description_md
-                .as_deref()
-                .and_then(crate::visa_text::visa_from_text)
-        }),
-        experience: m.experience.clone().or_else(|| {
-            m.description_md
-                .as_deref()
-                .and_then(crate::experience_text::experience_from_text)
-        }),
+        visa: m
+            .visa
+            .clone()
+            .or_else(|| posting.as_ref().and_then(crate::visa_text::read)),
+        experience: m
+            .experience
+            .clone()
+            .or_else(|| posting.as_ref().and_then(crate::experience_text::read)),
         tech_tags: m.tech_tags,
         url: m.apply_url.unwrap_or(m.canonical_url),
         posted_at: m.posted_at,

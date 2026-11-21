@@ -12,6 +12,7 @@ pub mod home;
 pub mod model;
 pub mod normalize;
 pub mod pay_text;
+pub mod posting;
 pub mod role;
 pub mod store;
 pub mod verdict;

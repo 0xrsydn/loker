@@ -9,6 +9,7 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 use crate::model::{Sponsorship, Visa};
+use crate::posting::{Posting, sentences};
 
 /// The sentence is about visas or permission to work, not an event sponsor
 /// or employer-sponsored insurance.
@@ -61,23 +62,36 @@ static LIST_ITEM: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)(?:^|[,;:]\s*)(?:full\s+)?visa sponsorship\s*(?:[,;.]|$)").unwrap()
 });
 
-static ESCAPE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\\([[:punct:]])").unwrap());
-
+/// "### Visa sponsorship:" alone on a line, its answer on the next.
 static FIELD: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new(r"(?im)^([#\s]*visa sponsorship\s*:?)[ \t]*\n\s*").unwrap());
+    LazyLock::new(|| Regex::new(r"(?i)^[#\s]*visa sponsorship\s*:?$").unwrap());
 
 /// Visa sponsorship stated in `text` (a description), or `None`.
 pub fn visa_from_text(text: &str) -> Option<Visa> {
-    // Markdown escapes ("\\&", "\\-") and emphasis.
-    let text = ESCAPE.replace_all(text, "$1").replace(['*', '_'], "");
-    // A heading and its answer on the next line: "### Visa sponsorship:" "No".
-    let text = FIELD.replace_all(&text, "$1 ");
+    read(&Posting::parse(text))
+}
+
+/// Visa sponsorship a parsed posting states, or `None`.
+pub fn read(posting: &Posting) -> Option<Visa> {
     let mut found: Vec<(Sponsorship, String)> = Vec::new();
-    for sentence in sentences(&text) {
-        if let Some(s) = read(sentence)
-            && !found.iter().any(|(_, e)| e == sentence)
-        {
-            found.push((s, sentence.to_string()));
+    let mut lines = posting.lines.iter().peekable();
+    while let Some(line) = lines.next() {
+        // A heading and its answer on the next line: "### Visa sponsorship:" "No".
+        let text = match lines.peek() {
+            Some(next) if FIELD.is_match(&line.text) => {
+                let joined = format!("{} {}", line.text, next.text);
+                lines.next();
+                joined
+            }
+            _ => line.text.clone(),
+        };
+        // A question ("Do you need sponsorship?") states nothing.
+        for sentence in sentences(&text).into_iter().filter(|s| !s.ends_with('?')) {
+            if let Some(s) = read_sentence(sentence)
+                && !found.iter().any(|(_, e)| e == sentence)
+            {
+                found.push((s, sentence.to_string()));
+            }
         }
     }
     let first = found.first()?.0;
@@ -95,7 +109,7 @@ pub fn visa_from_text(text: &str) -> Option<Visa> {
     })
 }
 
-fn read(sentence: &str) -> Option<Sponsorship> {
+fn read_sentence(sentence: &str) -> Option<Sponsorship> {
     if sentence.chars().count() > 400 || !CONTEXT.is_match(sentence) || SKIP.is_match(sentence) {
         return None;
     }
@@ -149,36 +163,4 @@ fn window(s: &str, start: usize, end: usize, before: usize, after: usize) -> &st
         b += 1;
     }
     &s[a..b]
-}
-
-/// Lines, split at sentence ends. An initialism ("U.S.") is not an end,
-/// and a question is left out.
-fn sentences(text: &str) -> Vec<&str> {
-    let mut out = Vec::new();
-    for line in text.lines() {
-        let b = line.as_bytes();
-        let mut from = 0;
-        for i in 0..b.len() {
-            let end = matches!(b[i], b'.' | b'!' | b'?')
-                && b.get(i + 1).is_none_or(|c| c.is_ascii_whitespace())
-                && !(b[i] == b'.'
-                    && i >= 1
-                    && b[i - 1].is_ascii_uppercase()
-                    && (i < 2 || !b[i - 2].is_ascii_alphabetic()));
-            if end {
-                out.push(&line[from..=i]);
-                from = i + 1;
-            }
-        }
-        out.push(&line[from..]);
-    }
-    out.into_iter()
-        .filter(|s| !s.trim_end().ends_with('?'))
-        .map(|s| {
-            s.trim()
-                .trim_start_matches(['#', '>', '-', '•', ' '])
-                .trim()
-        })
-        .filter(|s| !s.is_empty())
-        .collect()
 }
