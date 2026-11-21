@@ -1,6 +1,7 @@
 {
   "$defs": {
     "Eligibility": {
+      "description": "Eligibility as stored and served: the axes plus the derived `scope`. Rows\nstored before the axes existed have only `scope`; they read as it says.",
       "properties": {
         "confidence": {
           "format": "double",
@@ -13,6 +14,17 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "elsewhere": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Elsewhere"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "evidence": {
           "type": [
@@ -44,7 +56,8 @@
           "type": "array"
         },
         "scope": {
-          "$ref": "#/$defs/Scope"
+          "$ref": "#/$defs/Scope",
+          "description": "Derived from the fields below; kept for earlier clients."
         },
         "tz": {
           "anyOf": [
@@ -55,6 +68,17 @@
               "type": "null"
             }
           ]
+        },
+        "workplace": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Workplace"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -63,6 +87,26 @@
         "method"
       ],
       "type": "object"
+    },
+    "Elsewhere": {
+      "description": "What the posting says about people outside its places. A list of places\nis not always a limit: \"USA Only\" is, an employer's office on a remote job\nisn't. Gray information gets its own value instead of a guess.",
+      "oneOf": [
+        {
+          "const": "excluded",
+          "description": "Only the listed places (\"USA Only\", \"must reside in Germany\").",
+          "type": "string"
+        },
+        {
+          "const": "not_stated",
+          "description": "Places are listed, nothing is said about anyone else.",
+          "type": "string"
+        },
+        {
+          "const": "open",
+          "description": "Open beyond them (\"worldwide\", \"or wherever you are\").",
+          "type": "string"
+        }
+      ]
     },
     "JobRole": {
       "description": "A job's role, and why it has it. A job no step could place has no\n`JobRole` at all, rather than an \"other\" role.",
@@ -432,6 +476,7 @@
       ]
     },
     "Scope": {
+      "description": "The eligibility summary every contract version has carried, derived from\n`workplace`, the places and `elsewhere` (see [`Eligibility::scope`]).",
       "enum": [
         "worldwide",
         "region",
@@ -677,6 +722,24 @@
         "evidence"
       ],
       "type": "object"
+    },
+    "Workplace": {
+      "description": "Whether the job is done remotely, as the posting or board says.",
+      "oneOf": [
+        {
+          "enum": [
+            "remote",
+            "hybrid",
+            "onsite"
+          ],
+          "type": "string"
+        },
+        {
+          "const": "unknown",
+          "description": "Not stated: a city or country alone may be an office.",
+          "type": "string"
+        }
+      ]
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",

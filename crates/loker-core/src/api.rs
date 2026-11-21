@@ -239,7 +239,7 @@ impl Hit {
                 partial,
             })),
             View::Compact => Hit::Compact(CompactHit {
-                scope: job.eligibility.scope,
+                scope: job.eligibility.scope(),
                 seniority: job.seniority,
                 roles,
                 modifiers,

@@ -47,8 +47,8 @@ fn reread(l: &Listing) -> anyhow::Result<(NewJob, bool)> {
     let stored_known = l.kind == "employer"
         && l.stored
             .as_ref()
-            .is_some_and(|j| j.eligibility.scope != Scope::Unknown);
-    if job.eligibility.scope == Scope::Unknown && stored_known {
+            .is_some_and(|j| j.eligibility.scope() != Scope::Unknown);
+    if job.eligibility.scope() == Scope::Unknown && stored_known {
         return Ok((
             job_from_raw(&source, l.raw.clone(), company, Some(true))?,
             true,

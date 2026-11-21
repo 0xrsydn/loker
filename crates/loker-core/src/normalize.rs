@@ -4,7 +4,7 @@
 use crate::country;
 use crate::model::{
     Eligibility, Method, Money, NewJob, Pay, PayExtra, PayExtraKind, PayMethod, Percent, Period,
-    Scope, Seniority,
+    Scope, Seniority, Workplace,
 };
 
 // ---------- every job ----------
@@ -601,16 +601,14 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
 
     let unmapped_note =
         (!unmapped.is_empty()).then(|| format!("unmapped: {}", unmapped.join(", ")));
-    let base = |scope, confidence: f64, evidence: Option<String>| Eligibility {
-        scope,
-        regions: Vec::new(),
-        countries: Vec::new(),
-        onsite_city: None,
-        tz: None,
-        confidence,
-        method: Method::Rules,
-        evidence,
-        raw: (!raw.is_empty()).then(|| raw.to_string()),
+    let base = |scope, confidence: f64, evidence: Option<String>| {
+        Eligibility {
+            confidence,
+            evidence,
+            raw: (!raw.is_empty()).then(|| raw.to_string()),
+            ..Eligibility::unknown(Method::Rules)
+        }
+        .with_scope(scope)
     };
 
     match remote {
@@ -645,8 +643,12 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
             } else if worldwide {
                 base(Scope::Worldwide, 0.8, None)
             } else {
+                // Remote, but not where: the one case `scope` never had a word for.
                 let why = unmapped_note.unwrap_or_else(|| "remote, no region stated".into());
-                base(Scope::Unknown, 0.3, Some(why))
+                Eligibility {
+                    workplace: Workplace::Remote,
+                    ..base(Scope::Unknown, 0.3, Some(why))
+                }
             }
         }
         None if raw.is_empty() => base(Scope::Unknown, 0.2, Some("no location given".into())),

@@ -41,7 +41,7 @@ fn country_is_narrower_than_region() {
         let e = item(region, country);
         assert_eq!(
             (
-                e.scope,
+                e.scope(),
                 e.countries
                     .iter()
                     .map(String::as_str)

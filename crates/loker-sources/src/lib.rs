@@ -237,7 +237,7 @@ pub fn job_from_raw(
     // The board says what its postings don't: re-read their location with
     // that fact. Explicit on-site/hybrid/remote stays.
     if let Some(remote) = remote
-        && job.eligibility.scope == Scope::Unknown
+        && job.eligibility.scope() == Scope::Unknown
     {
         let raw = job.eligibility.raw.clone().unwrap_or_default();
         job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
@@ -489,7 +489,7 @@ pub fn check_fetch(f: &Fetched, now: chrono::DateTime<chrono::Utc>) -> SourceChe
     let known = f
         .jobs
         .iter()
-        .filter(|j| j.eligibility.scope != loker_core::model::Scope::Unknown)
+        .filter(|j| j.eligibility.scope() != loker_core::model::Scope::Unknown)
         .count();
     checks.push(Check::new(
         "eligibility",

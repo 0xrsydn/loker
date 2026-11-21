@@ -18,6 +18,8 @@ pub enum Seniority {
     Executive,
 }
 
+/// The eligibility summary every contract version has carried, derived from
+/// `workplace`, the places and `elsewhere` (see [`Eligibility::scope`]).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum Scope {
@@ -27,6 +29,31 @@ pub enum Scope {
     Onsite,
     Hybrid,
     Unknown,
+}
+
+/// Whether the job is done remotely, as the posting or board says.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Workplace {
+    Remote,
+    Hybrid,
+    Onsite,
+    /// Not stated: a city or country alone may be an office.
+    Unknown,
+}
+
+/// What the posting says about people outside its places. A list of places
+/// is not always a limit: "USA Only" is, an employer's office on a remote job
+/// isn't. Gray information gets its own value instead of a guess.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Elsewhere {
+    /// Only the listed places ("USA Only", "must reside in Germany").
+    Excluded,
+    /// Places are listed, nothing is said about anyone else.
+    NotStated,
+    /// Open beyond them ("worldwide", "or wherever you are").
+    Open,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -112,14 +139,16 @@ fn normalize_offset(o: f64) -> f64 {
     x
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
-#[serde(rename_all = "camelCase")]
+/// Who can take a job, as three answers: is it remote (`workplace`), where
+/// it is open (`regions`, `countries`; for an office job, where the office
+/// is), and what it says about everyone else (`elsewhere`). `scope` on the
+/// wire is derived from them, for clients of earlier contract versions.
+#[derive(Debug, Clone, PartialEq)]
 pub struct Eligibility {
-    pub scope: Scope,
-    #[serde(default)]
+    pub workplace: Workplace,
+    pub elsewhere: Elsewhere,
     pub regions: Vec<String>,
     /// ISO 3166-1 alpha-2 codes.
-    #[serde(default)]
     pub countries: Vec<String>,
     pub onsite_city: Option<String>,
     pub tz: Option<TzWindow>,
@@ -128,6 +157,132 @@ pub struct Eligibility {
     pub evidence: Option<String>,
     /// Original location text, kept for the evidence trail.
     pub raw: Option<String>,
+}
+
+impl Eligibility {
+    /// Nothing known yet: no places, remote or not unstated.
+    pub fn unknown(method: Method) -> Self {
+        Eligibility {
+            workplace: Workplace::Unknown,
+            elsewhere: Elsewhere::Excluded,
+            regions: Vec::new(),
+            countries: Vec::new(),
+            onsite_city: None,
+            tz: None,
+            confidence: 0.0,
+            method,
+            evidence: None,
+            raw: None,
+        }
+    }
+
+    /// The axes a `scope` stands for: how rows stored before they existed
+    /// read, and a shorthand for building one.
+    pub fn axes_of(scope: Scope) -> (Workplace, Elsewhere) {
+        match scope {
+            Scope::Worldwide => (Workplace::Remote, Elsewhere::Open),
+            Scope::Region | Scope::Countries => (Workplace::Remote, Elsewhere::Excluded),
+            Scope::Onsite => (Workplace::Onsite, Elsewhere::Excluded),
+            Scope::Hybrid => (Workplace::Hybrid, Elsewhere::Excluded),
+            Scope::Unknown => (Workplace::Unknown, Elsewhere::Excluded),
+        }
+    }
+
+    /// Set both axes from a `scope`.
+    pub fn with_scope(mut self, scope: Scope) -> Self {
+        (self.workplace, self.elsewhere) = Self::axes_of(scope);
+        self
+    }
+
+    pub fn names_places(&self) -> bool {
+        !self.countries.is_empty() || !self.regions.is_empty()
+    }
+
+    /// The one-word summary earlier contract versions carried.
+    pub fn scope(&self) -> Scope {
+        match self.workplace {
+            Workplace::Onsite => Scope::Onsite,
+            Workplace::Hybrid => Scope::Hybrid,
+            Workplace::Unknown => Scope::Unknown,
+            Workplace::Remote if !self.regions.is_empty() => Scope::Region,
+            Workplace::Remote if !self.countries.is_empty() => Scope::Countries,
+            Workplace::Remote if self.elsewhere == Elsewhere::Open => Scope::Worldwide,
+            Workplace::Remote => Scope::Unknown,
+        }
+    }
+}
+
+/// Eligibility as stored and served: the axes plus the derived `scope`. Rows
+/// stored before the axes existed have only `scope`; they read as it says.
+#[derive(Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+struct EligibilityWire {
+    /// Derived from the fields below; kept for earlier clients.
+    scope: Scope,
+    #[serde(default)]
+    workplace: Option<Workplace>,
+    #[serde(default)]
+    elsewhere: Option<Elsewhere>,
+    #[serde(default)]
+    regions: Vec<String>,
+    /// ISO 3166-1 alpha-2 codes.
+    #[serde(default)]
+    countries: Vec<String>,
+    onsite_city: Option<String>,
+    tz: Option<TzWindow>,
+    confidence: f64,
+    method: Method,
+    evidence: Option<String>,
+    /// Original location text, kept for the evidence trail.
+    raw: Option<String>,
+}
+
+impl Serialize for Eligibility {
+    fn serialize<S: serde::Serializer>(&self, s: S) -> Result<S::Ok, S::Error> {
+        EligibilityWire {
+            scope: self.scope(),
+            workplace: Some(self.workplace),
+            elsewhere: Some(self.elsewhere),
+            regions: self.regions.clone(),
+            countries: self.countries.clone(),
+            onsite_city: self.onsite_city.clone(),
+            tz: self.tz.clone(),
+            confidence: self.confidence,
+            method: self.method,
+            evidence: self.evidence.clone(),
+            raw: self.raw.clone(),
+        }
+        .serialize(s)
+    }
+}
+
+impl<'de> Deserialize<'de> for Eligibility {
+    fn deserialize<D: serde::Deserializer<'de>>(d: D) -> Result<Self, D::Error> {
+        let w = EligibilityWire::deserialize(d)?;
+        let (workplace, elsewhere) = Eligibility::axes_of(w.scope);
+        Ok(Eligibility {
+            workplace: w.workplace.unwrap_or(workplace),
+            elsewhere: w.elsewhere.unwrap_or(elsewhere),
+            regions: w.regions,
+            countries: w.countries,
+            onsite_city: w.onsite_city,
+            tz: w.tz,
+            confidence: w.confidence,
+            method: w.method,
+            evidence: w.evidence,
+            raw: w.raw,
+        })
+    }
+}
+
+impl JsonSchema for Eligibility {
+    fn schema_name() -> std::borrow::Cow<'static, str> {
+        "Eligibility".into()
+    }
+
+    fn json_schema(generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+        EligibilityWire::json_schema(generator)
+    }
 }
 
 /// Pay as the posting states it. Absent when the posting says nothing usable;

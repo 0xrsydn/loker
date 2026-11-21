@@ -12,7 +12,7 @@
 use std::time::Duration;
 
 use chrono::DateTime;
-use loker_core::model::{Eligibility, NewJob, Scope};
+use loker_core::model::{Eligibility, NewJob, Scope, Workplace};
 use loker_core::normalize::{eligibility_from_text, employment_type, pay};
 use serde::Deserialize;
 use serde_json::Value;
@@ -110,7 +110,7 @@ pub fn transform(source_id: &str, site: &str, raw: Value) -> anyhow::Result<NewJ
         Some("remote") => eligibility_from_text(&text, Some(true)),
         Some("onsite" | "on-site") => eligibility_from_text(&text, Some(false)),
         Some("hybrid") => Eligibility {
-            scope: Scope::Hybrid,
+            workplace: Workplace::Hybrid,
             ..eligibility_from_text(&text, Some(false))
         },
         _ => eligibility_from_text(&text, None),
@@ -119,7 +119,7 @@ pub fn transform(source_id: &str, site: &str, raw: Value) -> anyhow::Result<NewJ
     // job that is where the work is, so it fills in when the location text
     // named no country ("New York, NY"). For a remote job it is only the
     // employer's country and says nothing about who may apply.
-    let physical = matches!(eligibility.scope, Scope::Onsite | Scope::Hybrid);
+    let physical = matches!(eligibility.scope(), Scope::Onsite | Scope::Hybrid);
     if physical
         && eligibility.countries.is_empty()
         && let Some(c) = item.country.filter(|c| c.len() == 2)

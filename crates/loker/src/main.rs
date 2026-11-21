@@ -488,7 +488,7 @@ fn print_hit(hit: &SearchHit) {
         .unwrap_or("pay n/a");
     let elig = match &hit.eligible {
         Some(v) => format!("{}: {}", format!("{:?}", v.kind).to_lowercase(), v.reason),
-        None => format!("{:?}", job.eligibility.scope).to_lowercase(),
+        None => format!("{:?}", job.eligibility.scope()).to_lowercase(),
     };
     let via: Vec<&str> = job.sources.iter().map(|s| s.source.as_str()).collect();
     let roles: Vec<Role> = job

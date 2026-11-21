@@ -45,16 +45,10 @@ pub fn job(
         category: None,
         employment_type: None,
         eligibility: Eligibility {
-            scope,
-            regions: vec![],
-            countries: vec![],
-            onsite_city: None,
-            tz: None,
             confidence,
-            method: Method::Rules,
-            evidence: None,
-            raw: None,
-        },
+            ..Eligibility::unknown(Method::Rules)
+        }
+        .with_scope(scope),
         pay: None,
         tech_tags: vec![],
         description_md: None,

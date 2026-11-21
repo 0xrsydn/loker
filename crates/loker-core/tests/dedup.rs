@@ -81,7 +81,7 @@ async fn merge_is_order_independent_and_idempotent() {
         let merged = s.search("expert", None, 10, 0).await.unwrap();
         assert_eq!(merged.len(), 1);
         assert_eq!(merged[0].url, "https://ashby:clera.example/a1");
-        assert_eq!(merged[0].eligibility.scope, Scope::Worldwide);
+        assert_eq!(merged[0].eligibility.scope(), Scope::Worldwide);
     }
 
     let again = ingest(&forward, "himalayas", &him).await;
@@ -216,7 +216,7 @@ fn places_beat_worldwide_in_a_merge() {
         .job
         .eligibility;
     assert_eq!(
-        (e.scope, e.countries),
+        (e.scope(), e.countries),
         (Scope::Countries, vec!["CA".to_string()])
     );
 }

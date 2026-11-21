@@ -8,7 +8,7 @@ use std::sync::LazyLock;
 
 use regex::Regex;
 
-use crate::model::{Eligibility, Scope, TzStrength, TzWindow};
+use crate::model::{Eligibility, Elsewhere, TzStrength, TzWindow, Workplace};
 
 /// What a description says.
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -310,33 +310,35 @@ pub fn stated(text: &str) -> Option<Stated> {
 /// `remote` is whether the board says the job is remote (a remote-only
 /// board, or its remote flag).
 pub fn narrow(e: &mut Eligibility, description: &str, remote: bool) {
-    if matches!(e.scope, Scope::Onsite | Scope::Hybrid) {
+    if matches!(e.workplace, Workplace::Onsite | Workplace::Hybrid) {
         return;
     }
     let Some(s) = stated(description) else {
         return;
     };
     let remote = remote
-        || matches!(e.scope, Scope::Worldwide | Scope::Region | Scope::Countries)
+        || e.workplace == Workplace::Remote
         || e.raw
             .as_deref()
             .is_some_and(|r| r.to_lowercase().contains("remote"));
     let mut used = Vec::new();
-    let open = e.countries.is_empty() && e.regions.is_empty();
+    let open = !e.names_places();
     if open && (!s.countries.is_empty() || !s.regions.is_empty()) {
         e.countries = s.countries.clone();
         e.regions = s.regions.clone();
-        // A remote job tied to places is open to them; a city alone may be
-        // an office (maybe inside, no outside), as for an unknown scope.
-        e.scope = match (remote && !s.only_cities, s.regions.is_empty()) {
-            (false, _) => Scope::Unknown,
-            (true, false) => Scope::Region,
-            (true, true) => Scope::Countries,
+        // A remote job tied to places is open to them and no one else; a
+        // city alone may be an office (maybe inside, no outside).
+        e.workplace = if remote && !s.only_cities {
+            Workplace::Remote
+        } else {
+            Workplace::Unknown
         };
+        e.elsewhere = Elsewhere::Excluded;
         e.confidence = 0.6;
         used.push("places");
-    } else if open && s.worldwide && e.scope == Scope::Unknown && remote {
-        e.scope = Scope::Worldwide;
+    } else if open && s.worldwide && remote {
+        e.workplace = Workplace::Remote;
+        e.elsewhere = Elsewhere::Open;
         e.confidence = 0.5;
         used.push("worldwide");
     }

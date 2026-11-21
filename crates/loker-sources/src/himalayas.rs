@@ -4,7 +4,9 @@ use std::time::Duration;
 use anyhow::Context;
 use chrono::DateTime;
 use loker_core::country;
-use loker_core::model::{Eligibility, Method, NewJob, Pay, Scope, TzStrength, TzWindow};
+use loker_core::model::{
+    Eligibility, Elsewhere, Method, NewJob, Pay, TzStrength, TzWindow, Workplace,
+};
 use loker_core::normalize;
 use serde::Deserialize;
 use serde_json::Value;
@@ -135,13 +137,15 @@ fn eligibility(item: &Item) -> Eligibility {
     }
     countries.sort();
     countries.dedup();
-    let scope = if item.location_restrictions.is_empty() {
-        Scope::Worldwide
+    // Remote only; an empty restriction list is worldwide, a list is the limit.
+    let elsewhere = if item.location_restrictions.is_empty() {
+        Elsewhere::Open
     } else {
-        Scope::Countries
+        Elsewhere::Excluded
     };
     Eligibility {
-        scope,
+        workplace: Workplace::Remote,
+        elsewhere,
         regions: Vec::new(),
         countries,
         onsite_city: None,

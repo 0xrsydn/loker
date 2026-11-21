@@ -18,7 +18,7 @@ use std::time::Duration;
 use anyhow::Context;
 use chrono::DateTime;
 use loker_core::eligibility_text;
-use loker_core::model::{Eligibility, NewJob, Scope};
+use loker_core::model::{Eligibility, NewJob, Workplace};
 use loker_core::normalize::{eligibility_from_text, employment_type};
 use serde::Deserialize;
 use serde_json::Value;
@@ -106,7 +106,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         Some("remote") => remote(&text, description),
         Some("on_site") => eligibility_from_text(&text, Some(false)),
         Some("hybrid") => Eligibility {
-            scope: Scope::Hybrid,
+            workplace: Workplace::Hybrid,
             ..eligibility_from_text(&text, Some(false))
         },
         _ => eligibility_from_text(&text, None),

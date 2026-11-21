@@ -18,7 +18,7 @@ fn workplace_and_locations_say_who_may_apply() {
     let remote = job("remote", vec!["TELECOMMUTE", "Philippines"]);
     assert_eq!(
         (
-            remote.eligibility.scope,
+            remote.eligibility.scope(),
             remote.eligibility.countries.clone()
         ),
         (Scope::Countries, vec!["PH".to_string()])
@@ -42,11 +42,11 @@ fn workplace_and_locations_say_who_may_apply() {
     assert_eq!(
         job("hybrid", vec!["Makati City, Metro Manila, Philippines"])
             .eligibility
-            .scope,
+            .scope(),
         Scope::Hybrid
     );
     assert_eq!(
-        job("on_site", vec!["Manila"]).eligibility.scope,
+        job("on_site", vec!["Manila"]).eligibility.scope(),
         Scope::Onsite
     );
 }
@@ -66,7 +66,7 @@ fn the_description_settles_a_remote_place() {
     };
     let named = job("We recruit remotely in EMEA.");
     assert_eq!(
-        (named.scope, named.regions),
+        (named.scope(), named.regions),
         (Scope::Region, vec!["EMEA".to_string()])
     );
     for wider in [
@@ -76,7 +76,7 @@ fn the_description_settles_a_remote_place() {
         "This remote position is open to candidates worldwide.",
         "You have the freedom to live wherever you like.",
     ] {
-        assert_eq!(job(wider).scope, Scope::Unknown, "{wider}");
+        assert_eq!(job(wider).scope(), Scope::Unknown, "{wider}");
     }
     assert_eq!(job("Build things.").countries, vec!["DE".to_string()]);
 }

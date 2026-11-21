@@ -5,7 +5,7 @@
 //! on-site jobs are recognized with high confidence. It has no company-name
 //! field; the board slug is used.
 use chrono::DateTime;
-use loker_core::model::{Eligibility, NewJob, Pay, PayExtra, PayExtraKind, Scope};
+use loker_core::model::{Eligibility, NewJob, Pay, PayExtra, PayExtraKind, Workplace};
 use loker_core::normalize::{self, eligibility_from_text, employment_type};
 use serde::Deserialize;
 use serde_json::Value;
@@ -132,7 +132,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
         Some("Remote") => eligibility_from_text(&text, Some(true)),
         Some("OnSite") => eligibility_from_text(&text, Some(false)),
         Some("Hybrid") => Eligibility {
-            scope: Scope::Hybrid,
+            workplace: Workplace::Hybrid,
             ..eligibility_from_text(&text, Some(false))
         },
         _ => eligibility_from_text(&text, item.is_remote),

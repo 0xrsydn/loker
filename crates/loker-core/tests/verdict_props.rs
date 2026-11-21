@@ -4,7 +4,7 @@
 use isocountry::CountryCode;
 use loker_core::country::region_contains;
 use loker_core::eligibility_text::narrow;
-use loker_core::model::{Eligibility, Method, Scope, TzStrength, TzWindow};
+use loker_core::model::{Eligibility, Elsewhere, Method, Scope, TzStrength, TzWindow, Workplace};
 use loker_core::normalize::eligibility_from_text;
 use loker_core::verdict::{VerdictKind, Viewer, eligible_for};
 use proptest::prelude::*;
@@ -73,31 +73,35 @@ fn window() -> impl Strategy<Value = TzWindow> {
 }
 
 fn eligibility() -> impl Strategy<Value = Eligibility> {
-    let scope = prop::sample::select(vec![
-        Scope::Worldwide,
-        Scope::Region,
-        Scope::Countries,
-        Scope::Onsite,
-        Scope::Hybrid,
-        Scope::Unknown,
+    let workplace = prop::sample::select(vec![
+        Workplace::Remote,
+        Workplace::Hybrid,
+        Workplace::Onsite,
+        Workplace::Unknown,
+    ]);
+    let elsewhere = prop::sample::select(vec![
+        Elsewhere::Excluded,
+        Elsewhere::NotStated,
+        Elsewhere::Open,
     ]);
     (
-        scope,
+        workplace,
+        elsewhere,
         prop::sample::subsequence(REGIONS.to_vec(), 0..3),
         prop::sample::subsequence(codes(), 0..6),
         prop::option::of(window()),
     )
-        .prop_map(|(scope, regions, countries, tz)| Eligibility {
-            scope,
-            regions: regions.into_iter().map(String::from).collect(),
-            countries: countries.into_iter().map(String::from).collect(),
-            onsite_city: None,
-            tz,
-            confidence: 0.5,
-            method: Method::Rules,
-            evidence: None,
-            raw: None,
-        })
+        .prop_map(
+            |(workplace, elsewhere, regions, countries, tz)| Eligibility {
+                workplace,
+                elsewhere,
+                regions: regions.into_iter().map(String::from).collect(),
+                countries: countries.into_iter().map(String::from).collect(),
+                tz,
+                confidence: 0.5,
+                ..Eligibility::unknown(Method::Rules)
+            },
+        )
 }
 
 /// Anyone on Earth: UTC-12 to UTC+14 (Kiribati).
@@ -120,10 +124,13 @@ fn kind(e: &Eligibility, v: &Viewer) -> VerdictKind {
 proptest! {
     #![proptest_config(ProptestConfig::with_cases(2000))]
 
-    /// A job that names no place and isn't worldwide can't tell anyone yes.
+    /// A job that names no place and doesn't say it is open anywhere can't
+    /// tell anyone yes.
     #[test]
     fn no_place_no_yes(mut e in eligibility(), v in viewer()) {
-        e.scope = Scope::Unknown;
+        if e.elsewhere == Elsewhere::Open {
+            e.elsewhere = Elsewhere::NotStated;
+        }
         e.countries.clear();
         e.regions.clear();
         let k = kind(&e, &v);
@@ -143,7 +150,10 @@ proptest! {
     #[test]
     fn region_verdict_follows_the_table(r in prop::sample::select(REGIONS.to_vec()), mut v in viewer()) {
         v.tz = None;
-        let e = Eligibility { scope: Scope::Region, regions: vec![r.to_string()], ..unrestricted() };
+        let e = Eligibility {
+            regions: vec![r.to_string()],
+            ..unrestricted().with_scope(Scope::Region)
+        };
         let want = match region_contains(r, &v.country) {
             Some(true) => VerdictKind::Yes,
             Some(false) => VerdictKind::No,
@@ -190,7 +200,7 @@ proptest! {
     fn any_text_parses(text in ".{0,80}", remote in prop::option::of(any::<bool>())) {
         let e = eligibility_from_text(&text, remote);
         if remote == Some(false) {
-            prop_assert_eq!(e.scope, Scope::Onsite);
+            prop_assert_eq!(e.scope(), Scope::Onsite);
         }
     }
 
@@ -207,15 +217,39 @@ proptest! {
     ) {
         let mut after = e.clone();
         narrow(&mut after, sentence, remote);
-        if matches!(e.scope, Scope::Onsite | Scope::Hybrid) {
+        if matches!(e.scope(), Scope::Onsite | Scope::Hybrid) {
             prop_assert_eq!(&after, &e);
         }
         if !e.countries.is_empty() || !e.regions.is_empty() {
-            prop_assert_eq!((&after.scope, &after.countries, &after.regions), (&e.scope, &e.countries, &e.regions));
+            prop_assert_eq!((&after.scope(), &after.countries, &after.regions), (&e.scope(), &e.countries, &e.regions));
         }
         if e.tz.is_some() {
             prop_assert_eq!(&after.tz, &e.tz);
         }
+    }
+
+    /// Outside a remote job's places, the answer is what it says about
+    /// everyone else: excluded is no, not stated is unknown, open is maybe.
+    #[test]
+    fn outside_follows_elsewhere(e in eligibility(), mut v in viewer()) {
+        v.tz = None;
+        let e = Eligibility { workplace: Workplace::Remote, tz: None, ..e };
+        prop_assume!(region_known(&e) && e.names_places() && !inside(&e, &v.country));
+        let want = match e.elsewhere {
+            Elsewhere::Excluded => VerdictKind::No,
+            Elsewhere::NotStated => VerdictKind::Unknown,
+            Elsewhere::Open => VerdictKind::Maybe,
+        };
+        prop_assert_eq!(kind(&e, &v), want);
+    }
+
+    /// Eligibility reads back as it was written, and its `scope` agrees.
+    #[test]
+    fn wire_round_trip(e in eligibility()) {
+        let json = serde_json::to_value(&e).unwrap();
+        let back: Eligibility = serde_json::from_value(json.clone()).unwrap();
+        prop_assert_eq!(&back, &e);
+        prop_assert_eq!(&json["scope"], &serde_json::to_value(e.scope()).unwrap());
     }
 
     /// The order and case places are written in don't change what is read.
@@ -223,13 +257,43 @@ proptest! {
     fn order_and_case_dont_matter(names in prop::sample::subsequence(NAMES.to_vec(), 1..4), remote in prop::option::of(Just(true))) {
         let read = |t: &str| {
             let e = eligibility_from_text(t, remote);
-            (e.scope, e.regions, e.countries)
+            (e.scope(), e.regions, e.countries)
         };
         let forward = names.join("; ");
         let backward = names.iter().rev().cloned().collect::<Vec<_>>().join("; ");
         prop_assert_eq!(read(&forward), read(&backward));
         prop_assert_eq!(read(&forward), read(&forward.to_uppercase()));
     }
+}
+
+fn region_known(e: &Eligibility) -> bool {
+    e.regions.iter().all(|r| region_contains(r, "US").is_some())
+}
+
+fn inside(e: &Eligibility, c: &str) -> bool {
+    e.countries.iter().any(|x| x == c)
+        || e.regions
+            .iter()
+            .any(|r| region_contains(r, c) == Some(true))
+}
+
+/// Rows stored before the axes existed carry only `scope`, and read as it says.
+#[test]
+fn old_rows_read_by_scope() {
+    let old = |scope: &str| -> Eligibility {
+        serde_json::from_value(serde_json::json!({
+            "scope": scope, "countries": ["US"], "regions": [], "onsiteCity": null, "tz": null,
+            "confidence": 0.7, "method": "rules", "evidence": null, "raw": null
+        }))
+        .unwrap()
+    };
+    assert_eq!(
+        (old("countries").workplace, old("countries").elsewhere),
+        (Workplace::Remote, Elsewhere::Excluded)
+    );
+    assert_eq!(old("worldwide").elsewhere, Elsewhere::Open);
+    assert_eq!(old("onsite").workplace, Workplace::Onsite);
+    assert_eq!(old("unknown").workplace, Workplace::Unknown);
 }
 
 /// Every region the parser can name is one the verdict can resolve.
@@ -261,14 +325,8 @@ fn parsed_regions_resolve() {
 
 fn unrestricted() -> Eligibility {
     Eligibility {
-        scope: Scope::Worldwide,
-        regions: Vec::new(),
-        countries: Vec::new(),
-        onsite_city: None,
-        tz: None,
         confidence: 0.5,
-        method: Method::Rules,
-        evidence: None,
-        raw: None,
+        ..Eligibility::unknown(Method::Rules)
     }
+    .with_scope(Scope::Worldwide)
 }
