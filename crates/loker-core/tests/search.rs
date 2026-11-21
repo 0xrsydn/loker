@@ -4,7 +4,8 @@ use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
 use loker_core::api::{Hit, SearchParams, View, search_jobs};
-use loker_core::model::{Scope, Seniority};
+use loker_core::model::{Elsewhere, Scope, Seniority};
+use loker_core::verdict::VerdictKind;
 
 fn params(limit: u32, offset: Option<u32>) -> SearchParams {
     SearchParams {
@@ -280,4 +281,56 @@ async fn experience_filter_keeps_jobs_that_state_no_years() {
     );
     let three: Vec<String> = titles(Some(3)).await.into_iter().map(|(t, _)| t).collect();
     assert_eq!(three, ["Go Engineer a", "Go Engineer c", "Go Engineer d"]);
+}
+
+#[tokio::test]
+async fn a_country_list_drops_only_jobs_that_exclude_everyone_else() {
+    let s = store("elsewhere").await;
+    let jobs: Vec<_> = [
+        ("excluded", Elsewhere::Excluded),
+        ("not_stated", Elsewhere::NotStated),
+        ("open", Elsewhere::Open),
+    ]
+    .into_iter()
+    .map(|(id, elsewhere)| {
+        let mut j = job(
+            "workable",
+            id,
+            "Co",
+            &format!("Engineer {id}"),
+            Scope::Countries,
+            0.8,
+        );
+        j.eligibility.countries = vec!["US".into()];
+        j.eligibility.elsewhere = elsewhere;
+        j
+    })
+    .collect();
+    ingest(&s, "workable", &jobs).await;
+
+    for q in ["", "engineer"] {
+        let p = SearchParams {
+            q: q.into(),
+            view: View::Titles,
+            ..params(10, None)
+        };
+        let found: BTreeSet<_> = search_jobs(&s, p)
+            .await
+            .unwrap()
+            .jobs
+            .into_iter()
+            .map(|h| match h {
+                Hit::Titles(t) => (t.title, t.verdict),
+                _ => unreachable!(),
+            })
+            .collect();
+        assert_eq!(
+            found,
+            BTreeSet::from([
+                ("Engineer not_stated".into(), Some(VerdictKind::Unknown)),
+                ("Engineer open".into(), Some(VerdictKind::Maybe)),
+            ]),
+            "q={q:?}: a US list stops a viewer in ID only when it excludes everyone else"
+        );
+    }
 }

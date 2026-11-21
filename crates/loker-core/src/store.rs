@@ -36,7 +36,9 @@ macro_rules! viewer_location {
         concat!(
             "(?",
             $n,
-            " IS NULL OR c.remote_scope <> 'countries' OR EXISTS ",
+            " IS NULL OR c.remote_scope <> 'countries' ",
+            "OR COALESCE(json_extract(c.job, '$.eligibility.elsewhere'), 'excluded') <> 'excluded' ",
+            "OR EXISTS ",
             "(SELECT 1 FROM json_each(c.job, '$.eligibility.countries') WHERE value = ?",
             $n,
             "))"
