@@ -1,5 +1,5 @@
 //! Who may take a Workable job, as its fields say.
-use loker_core::model::Scope;
+use loker_core::model::{Elsewhere, Scope};
 use loker_sources::workable::transform;
 use serde_json::json;
 
@@ -69,14 +69,29 @@ fn the_description_settles_a_remote_place() {
         (named.scope(), named.regions),
         (Scope::Region, vec!["EMEA".to_string()])
     );
+    assert_eq!(named.elsewhere, Elsewhere::Excluded);
+    // A looser hint: Workable's place holds, everyone else may be open.
     for wider in [
         "Fully remote, based outside the US.",
         "<strong>Location:</strong> International",
         "Work from anywhere.",
-        "This remote position is open to candidates worldwide.",
         "You have the freedom to live wherever you like.",
     ] {
-        assert_eq!(job(wider).scope(), Scope::Unknown, "{wider}");
+        let e = job(wider);
+        assert_eq!(
+            (e.countries, e.elsewhere),
+            (vec!["DE".to_string()], Elsewhere::Open),
+            "{wider}"
+        );
     }
-    assert_eq!(job("Build things.").countries, vec!["DE".to_string()]);
+    assert_eq!(
+        job("This remote position is open to candidates worldwide.").scope(),
+        Scope::Worldwide
+    );
+    // Nothing said: Workable's place for its own people, unknown for the rest.
+    let silent = job("Build things.");
+    assert_eq!(
+        (silent.countries, silent.elsewhere),
+        (vec!["DE".to_string()], Elsewhere::NotStated)
+    );
 }

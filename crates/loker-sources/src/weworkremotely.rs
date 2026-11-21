@@ -13,7 +13,7 @@
 use std::collections::BTreeSet;
 
 use chrono::DateTime;
-use loker_core::model::{Eligibility, NewJob};
+use loker_core::model::{Eligibility, Elsewhere, NewJob};
 use loker_core::normalize::{eligibility_from_text, employment_type};
 use serde_json::{Map, Value};
 
@@ -126,6 +126,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
             // says remote, not where.
             None if region == "Anywhere in the World" => Eligibility {
                 raw: Some(region.clone()),
+                elsewhere: Elsewhere::NotStated,
                 evidence: Some(
                     "\"Anywhere in the World\" is the board's default; the posting may say where"
                         .into(),

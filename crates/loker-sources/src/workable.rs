@@ -8,17 +8,17 @@
 //! (`["TELECOMMUTE", "Berlin, Berlin, Germany"]`). For a remote job the
 //! location is the employer's place, not a restriction: in `eval/eligibility`
 //! 17 of 60 such jobs said "work from anywhere", "we hire worldwide" or named
-//! other places, and the labelers split on what that means. So places the
-//! description names win; a description that suggests it is open wider
-//! leaves the job unknown (no claim either way); otherwise Workable's place
-//! stands. A search is not a complete list, so missing items close nothing;
+//! other places, and both labellers found the no outside it unreliable. So
+//! places the description names win; otherwise Workable's place holds for
+//! the people in it (yes), and for everyone else the posting is `open` (a
+//! maybe) when it hints so, else `not_stated` (unknown). A search is not a complete list, so missing items close nothing;
 //! staleness does.
 use std::time::Duration;
 
 use anyhow::Context;
 use chrono::DateTime;
 use loker_core::eligibility_text;
-use loker_core::model::{Eligibility, NewJob, Workplace};
+use loker_core::model::{Eligibility, Elsewhere, NewJob, Workplace};
 use loker_core::normalize::{eligibility_from_text, employment_type};
 use serde::Deserialize;
 use serde_json::Value;
@@ -152,18 +152,33 @@ fn remote(place: &str, description: &str) -> Eligibility {
             ..eligibility_from_text(&named, Some(true))
         };
     }
-    // "open to candidates worldwide" (read as worldwide afterwards) or looser.
-    let worldwide = eligibility_text::stated(description).is_some_and(|s| s.worldwide);
-    if worldwide || eligibility_text::open_wider(description) {
+    // "open to candidates worldwide": worldwide.
+    if eligibility_text::stated(description).is_some_and(|s| s.worldwide) {
         return Eligibility {
             raw,
-            evidence: Some(
-                "Workable lists a place, but the posting suggests it is open wider".into(),
-            ),
+            elsewhere: Elsewhere::Open,
             ..eligibility_from_text("", Some(true))
         };
     }
-    eligibility_from_text(place, Some(true))
+    // Workable's place holds for the people in it. For everyone else, a
+    // looser hint ("work from anywhere", "based outside the US") is open, a
+    // maybe; with no hint the posting doesn't say (unknown, not no).
+    let (elsewhere, evidence) = if eligibility_text::open_wider(description) {
+        (
+            Elsewhere::Open,
+            "Workable lists a place; the posting suggests it is open more widely",
+        )
+    } else {
+        (
+            Elsewhere::NotStated,
+            "Workable lists a place, which may be the employer's, not a limit",
+        )
+    };
+    Eligibility {
+        elsewhere,
+        evidence: Some(evidence.into()),
+        ..eligibility_from_text(place, Some(true))
+    }
 }
 
 /// The posting in three parts; the requirements often hold where the hire must be.

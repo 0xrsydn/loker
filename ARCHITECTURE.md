@@ -77,6 +77,18 @@ Eligibility records its method, confidence and evidence. *Why:* when sources
 disagree, the merge has a principled winner, and anyone can see why a job got
 its answer.
 
+Eligibility is three answers, so gray information has a value instead of
+a guess: `workplace` (remote, hybrid, onsite, unknown), the places
+(countries, regions; an office job's office) and `elsewhere` (excluded,
+not_stated, open: what the posting says about everyone outside its
+places). The verdict is a small table over them: inside the places, remote
+is yes and unknown workplace is maybe; outside, excluded is no, not stated
+is unknown and open is maybe; office jobs are no unless the viewer accepts
+that office. `scope` is derived from the three and still served, for
+earlier clients. *Why:* a list of places is not always a limit ("USA Only"
+is; an employer's office on a remote Workable job isn't), and both
+labellers found the no it implied wrong there.
+
 Eligibility comes from the board's fields first. The description
 (`eligibility_text`) only fills in what they leave open: places when the
 board names none ("based in the US" under "Anywhere in the World"), hours
