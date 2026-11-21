@@ -578,7 +578,10 @@ fn pipeline_end_to_end() {
         r["jobs"][0]["visa"]["sponsorship"], "not_offered",
         "visa sponsorship is read from the description: {r:#}"
     );
-    assert_eq!(job["employmentType"], "full_time");
+    assert_eq!(
+        r["jobs"][0]["employmentType"], "full_time",
+        "Ashby: employmentType \"FullTime\" reads as full_time: {r:#}"
+    );
 
     let r = home.json(&["search", "designer", "--json"]);
     let job = &r["jobs"][0];
