@@ -716,6 +716,13 @@ fn ycombinator_reads_the_sitemap_then_each_company_page() {
         "the sitemap first, then one page per company it named"
     );
 
+    let again = home.ingest("ycombinator");
+    assert_eq!(
+        (again["updated"].as_u64(), again["unchanged"].as_u64()),
+        (Some(0), Some(3)),
+        "the same board again changes nothing, though its dates are ages: {again}"
+    );
+
     let found = home.json(&["search", "--limit", "10", "--json"]);
     let jobs = found["jobs"].as_array().unwrap();
     let sre = jobs

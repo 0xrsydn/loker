@@ -297,7 +297,10 @@ Combinator's 429.
   then one per company. Company pages carry no descriptions, so pay, visa
   and experience come from the board's fields. The apply link is a login
   redirect, so the posting is the apply URL. Only an age is given ("23
-  days"), so `posted_at` is that age back from the fetch. The site
+  days", "over 1 year"), so `posted_at` is that age back from the first
+  fetch that saw the listing; the store keeps that date afterwards
+  (`SourceMeta::dated_by_age`), or every fetch would move it and rewrite
+  every listing. The site
   rate-limits per path with minutes-long 429s and no `Retry-After`: pages
   are a second apart and a 429 is retried after 20 s and 40 s. About 10% of
   the sitemap's job URLs already 404. A job refreshes only when its company

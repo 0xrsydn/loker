@@ -66,6 +66,7 @@ fn meta(id: &str) -> SourceMeta {
     SourceMeta {
         id: id.into(),
         kind,
+        dated_by_age: false,
     }
 }
 

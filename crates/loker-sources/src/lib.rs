@@ -243,6 +243,7 @@ pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Resu
     let meta = SourceMeta {
         id: source.id(),
         kind: source.kind(),
+        dated_by_age: source == Source::Ycombinator,
     };
     for e in &f.errors {
         tracing::warn!(source = %meta.id, "skipping item: {e}");

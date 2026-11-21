@@ -65,6 +65,7 @@ pub struct Batch {
 pub struct SourceMeta {
     pub id: String,
     pub kind: SourceKind,
+    pub dated_by_age: bool,
 }
 
 impl Store {
@@ -166,17 +167,26 @@ impl Store {
         for mut job in jobs {
             job.source_id = source.id.clone();
             let key = (company_key(&job.company), title_key(&job.title));
-            let json = serde_json::to_string(&job)?;
-            let hash = content_hash(&[&json]);
-            let expires = job.expires_at.map(|t| t.to_rfc3339());
             let existing = sqlx::query(
-                "SELECT canonical_job_id, content_hash, company_key, title_key, status FROM source_jobs
-                 WHERE source_id = ? AND source_job_id = ?",
+                "SELECT canonical_job_id, content_hash, company_key, title_key, status,
+                        json_extract(job, '$.postedAt') AS posted_at
+                 FROM source_jobs WHERE source_id = ? AND source_job_id = ?",
             )
             .bind(&source.id)
             .bind(&job.source_job_id)
             .fetch_optional(&mut *tx)
             .await?;
+            if source.dated_by_age
+                && let Some(stored) = existing
+                    .as_ref()
+                    .and_then(|row| row.get::<Option<String>, _>("posted_at"))
+                    .and_then(|t| DateTime::parse_from_rfc3339(&t).ok())
+            {
+                job.posted_at = Some(stored.with_timezone(&Utc));
+            }
+            let json = serde_json::to_string(&job)?;
+            let hash = content_hash(&[&json]);
+            let expires = job.expires_at.map(|t| t.to_rfc3339());
 
             match existing {
                 Some(row) if row.get::<String, _>("content_hash") == hash => {
