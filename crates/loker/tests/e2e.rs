@@ -106,6 +106,10 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         ),
         // Only the all-jobs feed: the category feeds 404 and are skipped.
         "/remote-jobs.rss" => ("200 OK", Value::String(weworkremotely())),
+        // YC: one request for the sitemap, then one per company page.
+        "/jobs/sitemap.xml" => ("200 OK", Value::String(yc_sitemap())),
+        "/companies/acme/jobs" => ("200 OK", Value::String(yc_page("Acme", yc_jobs().0))),
+        "/companies/globex/jobs" => ("200 OK", Value::String(yc_page("Globex", yc_jobs().1))),
         "/api" => {
             let mut items = vec![json!({ "legal": "API terms: link back to Remote OK." })];
             items.extend(remoteok());
@@ -113,6 +117,74 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         }
         _ => ("404 Not Found", json!({})),
     }
+}
+
+/// YC: the sitemap names the companies, each company page lists its jobs.
+fn yc_sitemap() -> String {
+    r#"<?xml version="1.0" encoding="UTF-8"?><urlset>
+  <url><loc>https://www.ycombinator.com/companies/acme/jobs/abc-sre</loc></url>
+  <url><loc>https://www.ycombinator.com/companies/acme/jobs/def-platform</loc></url>
+  <url><loc>https://www.ycombinator.com/companies/globex/jobs/ghi-designer</loc></url>
+</urlset>"#
+        .to_string()
+}
+
+/// One company page: Rails + Inertia, the props in a data-page attribute
+/// with the JSON's quotes escaped.
+fn yc_page(name: &str, jobs: Value) -> String {
+    let props = json!({
+        "component": "WaasShowJobsPage",
+        "props": { "jobPostings": jobs, "company": { "name": name } },
+    });
+    let escaped = props.to_string().replace('"', "&quot;");
+    format!(
+        "<html><body><div id=\"WaasShowJobsPage-react-component-1\" data-page=\"{escaped}\"></div></body></html>"
+    )
+}
+
+fn yc_jobs() -> (Value, Value) {
+    (
+        json!([
+            {
+                "id": 900001,
+                "title": "Site Reliability Engineer",
+                "url": "/companies/acme/jobs/abc-sre",
+                "companyName": "Acme",
+                "location": "San Francisco, CA, US / Remote (US)",
+                "type": "Full-time",
+                "prettyRole": "Engineering",
+                "roleSpecificType": "Backend",
+                "salaryRange": "$180K - $210K",
+                "equityRange": "0.10% - 0.30%",
+                "visa": "Will sponsor",
+                "skills": ["Kubernetes", "Go"],
+                "createdAt": "2 days"
+            },
+            {
+                "id": 900002,
+                "title": "Platform Engineer",
+                "url": "/companies/acme/jobs/def-platform",
+                "companyName": "Acme",
+                "location": "Remote (US; CA)",
+                "type": "Contract",
+                "prettyRole": "Engineering",
+                "salaryRange": "$1",
+                "visa": "US citizenship/visa not required",
+                "createdAt": "about 2 months"
+            }
+        ]),
+        json!([{
+            "id": 900003,
+            "title": "Product Designer",
+            "url": "/companies/globex/jobs/ghi-designer",
+            "companyName": "Globex",
+            "location": "London, England, GB",
+            "type": "Full-time",
+            "prettyRole": "Design",
+            "visa": "US citizen/visa only",
+            "createdAt": "1 day"
+        }]),
+    )
 }
 
 fn weworkremotely() -> String {
@@ -645,6 +717,61 @@ fn pipeline_end_to_end() {
     let st = home.ingest("ashby:globex");
     assert_eq!(st["reopened"].as_u64(), Some(1), "{st}");
     assert_eq!(home.clusters(), clusters);
+}
+
+/// YC's board is a sitemap of company slugs plus one page per company: the
+/// adapter must read both, and the board's own visa and salary fields must
+/// reach the output, placeholder salary dropped.
+#[test]
+fn ycombinator_reads_the_sitemap_then_each_company_page() {
+    let stub = stub();
+    let home = Home::new("yc", &stub);
+    let st = home.ingest("ycombinator");
+    assert_eq!(st["new"].as_u64(), Some(3), "{st}");
+    assert_eq!(st["skipped"].as_u64(), Some(0), "{st}");
+
+    // The sitemap first, then one page per company it named.
+    let served = stub.log.lock().unwrap().clone();
+    assert_eq!(
+        served,
+        [
+            "/jobs/sitemap.xml",
+            "/companies/acme/jobs",
+            "/companies/globex/jobs"
+        ]
+    );
+
+    let found = home.json(&["search", "--limit", "10", "--json"]);
+    let jobs = found["jobs"].as_array().unwrap();
+    let sre = jobs
+        .iter()
+        .find(|j| j["title"] == "Site Reliability Engineer")
+        .expect("the SRE posting");
+    assert_eq!(sre["company"], "Acme");
+    assert_eq!(
+        sre["url"],
+        "https://www.ycombinator.com/companies/acme/jobs/abc-sre"
+    );
+    assert_eq!(sre["visa"]["sponsorship"], "offered");
+    assert_eq!(sre["pay"]["base"][0]["min"], 180000.0);
+    assert_eq!(sre["pay"]["base"][0]["max"], 210000.0);
+    assert_eq!(sre["pay"]["base"][0]["currency"], "USD");
+
+    // The board's "$1" placeholder is not pay, and "not required" is not a
+    // statement about sponsorship.
+    let platform = jobs
+        .iter()
+        .find(|j| j["title"] == "Platform Engineer")
+        .expect("the platform posting");
+    assert!(platform["pay"].is_null(), "{platform:#}");
+    assert!(platform["visa"].is_null(), "{platform:#}");
+
+    // A post with no job pages left (the sitemap is a superset of the live
+    // board) must not look empty.
+    let ok = home.run(&["verify", "ycombinator", "--json"]);
+    let report: Value = serde_json::from_slice(&ok.stdout).unwrap();
+    assert!(ok.status.success(), "{report:#}");
+    assert_eq!(report["sources"][0]["status"], "pass");
 }
 
 #[test]

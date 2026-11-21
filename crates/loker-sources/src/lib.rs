@@ -15,6 +15,7 @@ pub mod lever;
 pub mod remoteok;
 pub mod weworkremotely;
 pub mod workable;
+pub mod yc;
 
 use loker_core::api::{
     CONTRACT_VERSION, Check, CheckStatus, Error, IngestAllReport, IngestOutcome, IngestParams,
@@ -35,6 +36,7 @@ pub const SOURCES: &[&str] = &[
     "remoteok",
     "weworkremotely",
     "workable",
+    "ycombinator",
     "greenhouse:<board>",
     "ashby:<board>",
     "lever:<site>",
@@ -48,6 +50,7 @@ pub enum Source {
     RemoteOk,
     WeWorkRemotely,
     Workable,
+    Ycombinator,
     Greenhouse(String),
     Ashby(String),
     Lever(String),
@@ -74,6 +77,7 @@ impl Source {
                 "remoteok" => Ok(Source::RemoteOk),
                 "weworkremotely" => Ok(Source::WeWorkRemotely),
                 "workable" => Ok(Source::Workable),
+                "ycombinator" => Ok(Source::Ycombinator),
                 _ => Err(bad()),
             },
             Some(("greenhouse", b)) => Ok(Source::Greenhouse(board(b)?)),
@@ -91,6 +95,7 @@ impl Source {
             Source::RemoteOk => "remoteok".into(),
             Source::WeWorkRemotely => weworkremotely::SOURCE_ID.into(),
             Source::Workable => workable::SOURCE_ID.into(),
+            Source::Ycombinator => yc::SOURCE_ID.into(),
             Source::Greenhouse(b) => format!("greenhouse:{}", b.to_lowercase()),
             Source::Ashby(b) => format!("ashby:{}", b.to_lowercase()),
             Source::Lever(b) => format!("lever:{}", b.to_lowercase()),
@@ -124,6 +129,7 @@ impl Source {
             Source::RemoteOk => remoteok::fetch(client).await,
             Source::WeWorkRemotely => weworkremotely::fetch(client).await,
             Source::Workable => workable::fetch(client, pages, p.country.as_deref()).await,
+            Source::Ycombinator => yc::fetch(client, pages).await,
             Source::Greenhouse(b) => greenhouse::fetch(client, b).await,
             Source::Ashby(b) => ashby::fetch(client, b).await,
             Source::Lever(b) => lever::fetch(client, b).await,
@@ -138,6 +144,7 @@ impl Source {
             Source::RemoteOk => remoteok::transform(raw),
             Source::WeWorkRemotely => weworkremotely::transform(raw),
             Source::Workable => workable::transform(raw),
+            Source::Ycombinator => yc::transform(raw),
             Source::Greenhouse(b) => greenhouse::transform(&id, b, raw),
             Source::Ashby(b) => ashby::transform(&id, b, raw),
             Source::Lever(b) => lever::transform(&id, b, raw),
