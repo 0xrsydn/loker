@@ -42,6 +42,9 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        # worldwide bug): 50 pages, 15 each for PH, ID, IN, DE, minus every job
        # `workable` and `workable2` have.
        "workable3": [os.path.join(HERE, "snapshot-workable3.db")],
+       # After the workplace/places/elsewhere split: BR, GB, US, 10 pages each,
+       # minus every job of the earlier Workable sets.
+       "workable4": [os.path.join(HERE, "snapshot-workable4.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
@@ -230,7 +233,8 @@ def sample_workable(name="workable"):
     workable2.json: the same after its rules, from jobs `workable` doesn't have."""
     if os.path.exists(os.path.join(HERE, f"{name}.json")):
         sys.exit(f"{name} already drawn")
-    earlier = {"workable": [], "workable2": ["workable"], "workable3": ["workable", "workable2"]}[name]
+    earlier = {"workable": [], "workable2": ["workable"], "workable3": ["workable", "workable2"],
+               "workable4": ["workable", "workable2", "workable3"]}[name]
     before = {j: d for e in earlier for j, d in jobs(DBS[e]).items()}
     seen = set(before)
     seen_urls = {url(l) for d in before.values() for l in d["listings"]} - {None}
@@ -433,7 +437,7 @@ def score():
         fr = [r for r in rows if family(primary(js[r[0]])["source"]) == f]
         fy, fn = [r for r in fr if r[3] == "yes"], [r for r in fr if r[3] == "no"]
         print(f"    {f:15} {sum(r[2] != 'yes' for r in fy):3}/{len(fy):<4} {sum(r[2] == 'yes' for r in fn):3}/{len(fn):<4}")
-    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable3"):
+    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable4"):
         bad = sorted({r[0] for r in rows if (r[3] == "yes" and r[2] != "yes") or (r[3] == "no" and r[2] == "yes")})
         for j in bad:
             print(f"\n{j} [{primary(js[j])['source']}] {js[j]['title'][:60]}")
@@ -444,7 +448,8 @@ def score():
 
 if __name__ == "__main__":
     cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"),
-            "sample-workable3": lambda: sample_workable("workable3"), "label": label, "agree": agree, "score": score}
+            "sample-workable3": lambda: sample_workable("workable3"),
+            "sample-workable4": lambda: sample_workable("workable4"), "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()

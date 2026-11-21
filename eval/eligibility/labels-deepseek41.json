@@ -1,4 +1,24 @@
 {
+ "v1|j_03f1c3631e": {
+  "evidence": "\"workplace\": \"remote\"; \"locations\": [\"TELECOMMUTE\", \"United Kingdom\"]; Title: \"Director of Professional Services, EMEA\"; \"You will build and lead the Professional Services organization in EMEA\" — remote within EMEA (Germany in EMEA); outside EMEA not allowed.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0704f34ec8": {
+  "evidence": "\"Our engineers work from Latin America, aligned to United States time zones\"; \"The QA Engineer will be **based remotely**.\"; locations: [\"TELECOMMUTE\", \"São Paulo, São Paulo, Brazil\"]",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_07e27f37fa": {
   "evidence": "\"Work fully remote around the globe, or in a hybrid work model from our office hubs\" ... \"Flexible schedule with participation in team ceremonies and cross-functional collaboration. Time zone: Europe/Kyiv.\" (Kyiv is UTC+2/+3: one hour from Germany, ~2.5-3.5 from India, ~4-5 from Indonesia, ~5-6 from Brazil, ~7-8 from the US, whose ceremonies would fall in the middle of the night)",
   "verdicts": {
@@ -7,6 +27,36 @@
    "ID": "yes",
    "IN": "yes",
    "US": "no"
+  }
+ },
+ "v1|j_089d52488c": {
+  "evidence": "Title: \"Tech & VFX Artist - Talent Pool - Talent Pool (LATAM)\"; \"workplace\": \"remote\"; \"locations\": [\"TELECOMMUTE\", \"São Paulo, State of São Paulo, Brazil\"]",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0aff54d2f4": {
+  "evidence": "\"A fully remote, international contractor position\"; \"we now run close to 150 people across more than 15 countries\"; \"The one constant across every role is overlap with our 8am to 12pm EST collaboration window\" (13:00–17:00 UTC, meetable from all listed offsets)",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_0bb49147f4": {
+  "evidence": "“You can live anywhere. We are remote and we hire worldwide. The one hard requirement is that you can take client calls during US Eastern business hours.”",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_0cdcc4b9e1": {
@@ -39,6 +89,16 @@
    "US": "yes"
   }
  },
+ "v1|j_0f54d89d5a": {
+  "evidence": "Title “(LATAM, Global)”; “Opportunity to cooperate fully remotely”; “Flexible schedule”.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_11c7288199": {
   "evidence": "\"Based in our New York City office\"; \"All interns are considered hybrid employees, designated the \\\"in office\\\" working model and are expected to be in their office location 3-5 days a week.\"; \"Must be authorized to work in the United States.\"",
   "verdicts": {
@@ -47,6 +107,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_122cb93761": {
+  "evidence": "“London-based position”; “Currently based in London or willing to relocate.”",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_12fa62aef4": {
+  "evidence": "“Trabalho 100% remoto (trabalhe de onde quiser)”; “Flexibilidade de horários”.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_169ed6964d": {
@@ -67,6 +147,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_19389e6a70": {
+  "evidence": "locations: \"TELECOMMUTE\", \"Florianópolis, Santa Catarina, Brazil\"; workplace: \"remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_19d053d259": {
@@ -106,6 +196,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1fc89fbf4a": {
+  "evidence": "\"fully remote organisation\"; \"the whole team is fully remote, which means you work where and when helps you perform at your best\"; \"Flexible working hours\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
    "US": "yes"
   }
  },
@@ -189,6 +289,16 @@
    "US": "yes"
   }
  },
+ "v1|j_28f74aa03c": {
+  "evidence": "\"Fully remote\"; \"Base salary: $75k–$100k/year (contractor arrangement, standard for our Latin America-based team; no equity)\"; location \"São Paulo, São Paulo, Brazil\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_28fd2a3dfb": {
   "evidence": "\"This is an all-remote team ,and weâre looking for someone located in the U.S.\"",
   "verdicts": {
@@ -217,6 +327,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2e6e6eaa8c": {
+  "evidence": "locations: \"TELECOMMUTE\", \"Brazil\"; workplace: \"remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2eb1939cf7": {
+  "evidence": "Board: workplace \"remote\", locations [\"TELECOMMUTE\", \"London, England, United Kingdom\"]; description only says \"Headquartered in Denver, with a growing global team across the UK, US, Australia and New Zealand\" and never states where the hire may live or work from.",
+  "verdicts": {
+   "BR": "unknown",
+   "DE": "unknown",
+   "ID": "unknown",
+   "IN": "unknown",
+   "US": "unknown"
   }
  },
  "v1|j_2edd85f510": {
@@ -249,6 +379,16 @@
    "US": "yes"
   }
  },
+ "v1|j_313ada059f": {
+  "evidence": "\"Full-time | Remote across Latin America and the Caribbean\"; \"Remote from Latin America or the Caribbean, with dependable availability for customer calls during North American/Eastern business hours.\"; \"Applicants throughout Latin America and the Caribbean are welcome.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3390d40e29": {
   "evidence": "locationRestrictions: [\"United States\"]",
   "verdicts": {
@@ -263,6 +403,16 @@
   "evidence": "\"location\": \"Remote U.S.\", \"workplaceType\": \"Remote\"; \"You must be authorized to work in the United States without the need for employer sponsorship.\"",
   "verdicts": {
    "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_353532abc3": {
+  "evidence": "\"Fully remote cooperation\"; \"Fixed schedule: Monday–Friday, 09:00–18:00 or 12:00–21:00 (Pacific/Gambier, UTC−9)\" — no country limit stated, but the fixed UTC−9 shift puts Europe, India and Indonesia outside the required hours.",
+  "verdicts": {
+   "BR": "yes",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -289,6 +439,16 @@
    "US": "no"
   }
  },
+ "v1|j_3952ff9afd": {
+  "evidence": "\"Fully remote, based outside the US.\"; \"We're a 100% remote, lean, senior team that moves fast\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
  "v1|j_3a16206047": {
   "evidence": "This is a unique role within PostHog and, as such, is a hybrid-remote position based out of our London office.",
   "verdicts": {
@@ -299,10 +459,40 @@
    "US": "no"
   }
  },
+ "v1|j_3c9894600d": {
+  "evidence": "Work from home: A remote-first role with the flexibility to manage your day in a way that works for you. ... Working closely with Support, Product, QA and backend engineers across a distributed team (board: workplace \"remote\", locations [\"TELECOMMUTE\", ...]); no country restriction or work-authorization requirement stated anywhere in the posting.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_3e60573854": {
   "evidence": "\"location\": \"Vienna, Austria\", \"workplaceType\": \"Hybrid\"",
   "verdicts": {
    "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3f8b820214": {
+  "evidence": "Location: Remote ... You must be able to work proficiently in English. — remote with no country, region or timezone requirement stated; the only requirements are language and Ukrainian-context knowledge, not residency.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_406d7a8ad8": {
+  "evidence": "board location \"Brazil\", locations [\"TELECOMMUTE\", \"Brazil\"]; \"Work-life fit: remote format with flexible hours across international teams.\" The role is remote but set in Brazil (one BDM per region for MENA/LatAm); no other country is listed or opened up.",
+  "verdicts": {
+   "BR": "yes",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -326,6 +516,36 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_4357ec1a9e": {
+  "evidence": "",
+  "verdicts": {
+   "BR": "unknown",
+   "DE": "unknown",
+   "ID": "unknown",
+   "IN": "unknown",
+   "US": "unknown"
+  }
+ },
+ "v1|j_4818bcf7df": {
+  "evidence": "Board: workplace \"remote\", locations [\"TELECOMMUTE\", \"United Kingdom\"]. Description: \"European time-zone coverage/embedded in Sweden time zone is essential\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_48388af917": {
+  "evidence": "\"You are based in any city within Italy, Spain, UK or Netherlands with a valid right to work - candidates outside of these countries will not be considered.\" \"100% remote position\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -399,6 +619,16 @@
    "US": "no"
   }
  },
+ "v1|j_50cf60bf86": {
+  "evidence": "\"Location: Fully remote, from anywhere that fits the working hours below\" / \"Hours: At least 4 hours a day of overlap with Central European Time (CET), and able to work with customers in US time zones\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_524a32f439": {
   "evidence": "\"Bewerber:innen müssen in Deutschland wohnhaft sein und über die gesetzliche Berechtigung verfügen, in Deutschland zu arbeiten.\"; \"Remote-Arbeitens innerhalb deines Beschäftigungslandes\"",
   "verdicts": {
@@ -427,6 +657,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_58ab7b1db5": {
+  "evidence": "Board: workplace \"remote\", location countryName \"United States\", locations [\"TELECOMMUTE\", \"United States\"]. Description: \"WORK FROM HOME TECHNICAL REQUIREMENTS: Supply and support their own internet services.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_5ab35a44f0": {
@@ -529,6 +769,26 @@
    "US": "no"
   }
  },
+ "v1|j_68de19ff2d": {
+  "evidence": "WBL operates with a fully remote, multinational workforce … Typically, the work schedule is from 9:00 AM to 6:00 PM Eastern Time, Monday through Friday … Work from the comfort of your own home – fully remote",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_6926719ad2": {
+  "evidence": "Location: Malaysia, India, Singapore or the UK Workplace Type: Remote",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
  "v1|j_6968e186e7": {
   "evidence": "jobGeo: \"USA\"; \"We are around 180 people, fully remote\"",
   "verdicts": {
@@ -547,6 +807,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_6e2e2eff36": {
+  "evidence": "Entirely remote, working from anywhere in the world, with team off-sites. … Full-time, 40 hours a week, with a flexible schedule",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_6fa7c5b475": {
+  "evidence": "Be a UK citizen. Currently reside in the UK … flexible and remote, which means you can work at your own pace from anywhere within the UK.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_6fe0958061": {
@@ -569,6 +849,16 @@
    "US": "yes"
   }
  },
+ "v1|j_70d2b9e63e": {
+  "evidence": "Fully remote — primarily East Coast working hours",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_7123cf1c6e": {
   "evidence": "This position may be performed remotely in most states within the US, with some exclusions ... This position is not eligible for immigration sponsorship",
   "verdicts": {
@@ -581,6 +871,16 @@
  },
  "v1|j_71c296d777": {
   "evidence": "We are a global team spread across more than 15 countries. ... Fully remote from anywhere ... Flexible working hours and an async-friendly culture ... Ability work across US and European time zones.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_7207a0f721": {
+  "evidence": "Fully remote: This is deep-focus analytical work with US-facing partners. We hire the best analyst regardless of city and trust you to manage your environment and overlap hours.",
   "verdicts": {
    "BR": "yes",
    "DE": "yes",
@@ -621,6 +921,16 @@
  },
  "v1|j_75a80df94d": {
   "evidence": "location: Makati, Philippines; locations: TELECOMMUTE, Makati, Philippines ... 100% Remote / Work-From-Home setup",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_772a9b4e8e": {
+  "evidence": "Field based covering the Coventry/Leciester/Peterbrough area ... Permanent, full time, remote (with some office attendance for training and meetings) ... This is a field-based role covering the Coventry/Leicester/Peterborough area involving regular customer visits across your territory, together with occasional attendance at company locations for meetings, collaboration and training.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -769,6 +1079,16 @@
    "US": "yes"
   }
  },
+ "v1|j_855ac5d047": {
+  "evidence": "Design - (Various Disciplines) - Talent Pool (LATAM) ... location: São Paulo, State of São Paulo, Brazil ... TELECOMMUTE",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_85ca41fd9b": {
   "evidence": "This is a full-time, fully remote position; jobGeo: USA",
   "verdicts": {
@@ -809,11 +1129,41 @@
    "US": "no"
   }
  },
+ "v1|j_8a328675cd": {
+  "evidence": "\"workplace\": \"remote\"; \"locations\": [\"TELECOMMUTE\", \"Miami, Florida, United States\"] — remote, but the only place listed is Miami, Florida, United States",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_8a6a6760fd": {
+  "evidence": "\"Location:** Remote\"; \"workplace\": \"remote\"; \"locations\": [\"TELECOMMUTE\", \"São Paulo, São Paulo, Brazil\"]",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_8d19df56c5": {
   "evidence": "\"Location: Berlin office / Germany remote\"",
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8d4297f114": {
+  "evidence": "\"Full-time | Remote across Latin America and the Caribbean\"; \"Remote from Latin America or the Caribbean, with dependable availability for customer calls during North American/Eastern business hours.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -874,6 +1224,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_94407b82f2": {
+  "evidence": "\"Remote — Latin America & the Caribbean\"; \"You must be based in Latin America or the Caribbean.\"; \"Hours are predominantly evenings and weekends in Toronto/Eastern time\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -949,6 +1309,16 @@
    "US": "yes"
   }
  },
+ "v1|j_9b62459bf8": {
+  "evidence": "\"This role is only open to candidates currently based in Brazil\"; \"Space Inch is not responsible for any job boards scraping this ad without showing the position as remote, but Brazil exclusive. Applicants from other countries will not be considered.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_9bab11c3f9": {
   "evidence": "\"Whether you prefer to work remotely from home or from one of our office locations\" \"Licensed in North Carolina and/or South Carolina\"",
   "verdicts": {
@@ -971,6 +1341,16 @@
  },
  "v1|j_9e5d8be604": {
   "evidence": "Fin has a hybrid working policy. ... We expect employees to be in the office at least three days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a0ae306d10": {
+  "evidence": "Board fields: \"location\": {\"countryName\": \"United Kingdom\"}, \"locations\": [\"TELECOMMUTE\", \"United Kingdom\"], \"workplace\": \"remote\" (remote, but only in the United Kingdom)",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1029,6 +1409,16 @@
    "US": "yes"
   }
  },
+ "v1|j_a85e5315d0": {
+  "evidence": "Board fields: \"location\": {\"city\": \"São Paulo\", \"countryName\": \"Brazil\"}, \"locations\": [\"TELECOMMUTE\", \"São Paulo, São Paulo, Brazil\"], \"workplace\": \"remote\"; \"Opportunity to cooperate fully remotely\"; \"Schedule: Monday to Friday, 9AM to 5PM at UTC+1\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_a941e64e7f": {
   "evidence": "\"GEOGRAPHIC FOCUS Europe, North Africa and India, with selected opportunities across APAC.\"",
   "verdicts": {
@@ -1047,6 +1437,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_ac8259ee79": {
+  "evidence": "\"You can live anywhere. We are remote and we hire worldwide. The one hard requirement is that you can take client calls during US Eastern business hours, because you are the client's point of contact.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ae1d9eb884": {
+  "evidence": "fully remote ... We're a 100% remote, lean, senior team that moves fast ... Fully remote, freelance, ongoing",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_ae6f4c1d1e": {
@@ -1079,6 +1489,16 @@
    "US": "yes"
   }
  },
+ "v1|j_b14aeeb641": {
+  "evidence": "Location: Birmingham Victoria Square House ... Employment Type: Apprenticeship - Fixed Term (approx. 16 months)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_b1a6e9b05a": {
   "evidence": "Board region: \"Anywhere in the World\"; description: \"Headquarters:** United States - Remote\" and \"**#LI-SS1 #LI-Remote**\" — remote with no country restriction and no required hours.",
   "verdicts": {
@@ -1086,6 +1506,36 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_b2262c340b": {
+  "evidence": "This is a home-based role where you'll travel directly to customer sites ... supporting customers across the Wolverhampton, Telford, Dudley and Kidderminster area ... A full UK driving licence.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_b2ad4e6951": {
+  "evidence": "**Location**: Remote",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_b2aff7bc5c": {
+  "evidence": "Full-time | Remote, U.S. ... Based in the U.S. and able to work 9 a.m. to 5 p.m. Central time.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "yes"
   }
  },
@@ -1109,6 +1559,16 @@
    "US": "no"
   }
  },
+ "v1|j_b5f4a537c2": {
+  "evidence": "This is a field-based position, with the successful candidate operating across either West-Central England or South West England ... occasional travel to our office in Lacock, Wiltshire ... A full UK driving licence.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_b8766c788b": {
   "evidence": "\"Flexible Remote Work: Work from anywhere, managing your own hours around project deadlines.\"",
   "verdicts": {
@@ -1116,6 +1576,16 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_b9d0285468": {
+  "evidence": "100% remote, U.S. based team",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "yes"
   }
  },
@@ -1129,8 +1599,28 @@
    "US": "yes"
   }
  },
+ "v1|j_bafaecdb6a": {
+  "evidence": "Applicants must have the right to work in the United Kingdom at the time of application and for the duration of employment.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_bf06539078": {
   "evidence": "\"This is a freelance, remote opportunity\" — \"Ontario, Canada\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_bfb7761661": {
+  "evidence": "the origination, conversion and onboarding of new manufacturers and/or dealers in your defined region of the UK ... Ability to work on own initiative as role is field based ... Willingness for travel and occasional overnight away from home",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1169,8 +1659,28 @@
    "US": "maybe"
   }
  },
+ "v1|j_c189faf65f": {
+  "evidence": "Field-based role covering the Central and Greater London area with occasional travel to other locations.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_c18d360a11": {
   "evidence": "\"Headquarters: United States - Remote\"; pay bands are US-only (\"Zone 1 (National Average) $107,500—$129,500 USD\", \"In compliance with California pay transparency laws\") and benefits are listed only for \"United States:\" and \"Costa Rica:\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_c1b1c61d63": {
+  "evidence": "This is a fully remote role, open to candidates based in the United States and Canada, with a few in-person offsites throughout the year.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1224,6 +1734,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c931b92792": {
+  "evidence": "United Kingdom",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -1309,6 +1829,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_d3bcb19723": {
+  "evidence": "\"location\": {\"city\": \"\", \"countryName\": \"Brazil\"}, \"locations\": [\"TELECOMMUTE\", \"Brazil\"], \"workplace\": \"remote\"; **Work Location** * **Remote** * **Working hours:** 8:30 AM – 5:00 PM.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_d452a68d92": {
   "evidence": "\"Fully remote.\"",
   "verdicts": {
@@ -1319,8 +1849,38 @@
    "US": "yes"
   }
  },
+ "v1|j_d538e9572b": {
+  "evidence": "\"location\": {\"city\": \"London\", \"countryName\": \"United Kingdom\", \"subregion\": \"England\"}, \"locations\": [\"TELECOMMUTE\", \"London, England, United Kingdom\"], \"workplace\": \"remote\"; \"UAE-based roles are tax-free, which materially changes take-home pay.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_d818635fe4": {
+  "evidence": "\"location\": {\"countryName\": \"United States\", \"subregion\": \"Florida\"}, \"locations\": [\"TELECOMMUTE\", \"Florida, United States\"], \"workplace\": \"remote\"; \"The Territory Sales Representative (TSR) has a responsibility to meet and exceed sales objectives in their assigned geography\"; \"Valid driver’s license and safe driving record\"; \"Some territory overnight travel may be required depending on geography\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_d86ba15431": {
   "evidence": "\"location\": \"London, UK\", \"workplaceType\": \"Hybrid\", \"#LI-hybrid\", \"Commuter benefits for team members who attend the office\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_dc12b96404": {
+  "evidence": "\"Location Home-based; you must live in the UK\"; \"locations\": [\"TELECOMMUTE\", \"United Kingdom\"], \"workplace\": \"remote\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1337,6 +1897,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_dd16a47108": {
+  "evidence": "\"Must be located in South America\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_dd3e04df05": {
@@ -1431,6 +2001,16 @@
  },
  "v1|j_eb6263e26a": {
   "evidence": "We are growing and looking to recruit a Full-time Payments Specialist in the Malaysia office. ... Ability to work from 2:00 PM – 11:00 PM (UTC+8) Asia Time, Monday to Friday",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ebba3d5cfc": {
+  "evidence": "\"locations\": [\"TELECOMMUTE\", \"United Kingdom\"], \"workplace\": \"remote\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1539,11 +2119,31 @@
    "US": "no"
   }
  },
+ "v1|j_f453e8ca0a": {
+  "evidence": "\"based in either of our UK studio sites (Daresbury or Newcastle), on a hybrid working basis ideally. We will also consider fully remote working too.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_f590c30241": {
   "evidence": "\"Eligibility:\" Open to Canadian Citizens and Permanent Residents of Canada only",
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f69d4d7e29": {
+  "evidence": "\"Based in Europe with the right to work in your country of residence, and willingness to travel extensively across Europe\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
    "ID": "no",
    "IN": "no",
    "US": "no"

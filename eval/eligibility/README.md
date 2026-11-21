@@ -198,6 +198,29 @@ So both labellers say the same about Workable: a no for viewers outside a
 remote job's listed country is not reliable there (Opus: 6 wrong and 21
 maybe; v4.1: 37 wrong), while the listed country's yes holds.
 
+Third round: eligibility became `workplace`, places and `elsewhere` (see
+ARCHITECTURE.md), and a Workable remote job's place is now `not_stated`
+for everyone outside it (unknown), or `open` (maybe) when the posting
+hints so ("work from anywhere", "based outside the US"); places the
+description names stay `excluded`. Every other set scores as before.
+`workable4.json` (60 jobs from BR, GB and US, none in the earlier sets),
+scored once:
+
+| workable4 | yes right | wrong yes | no right | wrong no | settled found |
+|---|---|---|---|---|---|
+| Opus, previous rule | 37/37 | 0 | 239/248 | 8 | 276/299 |
+| Opus, now | 39/39 | 0 | 55/55 | 0 | 94/299 |
+| DeepSeek v4.1, previous rule | 36/37 | 0 | 188/248 | 48 | 224/287 |
+| DeepSeek v4.1, now | 38/39 | 0 | 55/55 | 0 | 93/287 |
+
+No wrong yes or no under either labeller. The cost is silence: 193 verdicts
+are now unknown, which the labellers split on (Opus: 184 no, 8 yes;
+DeepSeek: 133 no, 48 yes); they disagree most on exactly these. An agent
+filtering with `minVerdict` sees no difference (unknown and no are both left
+out); one reading verdicts is no longer told no where the posting doesn't
+say. Workable can be enabled for a viewer's own country: its yes held 39/39
+and 38/39 here.
+
 Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
 still right 89% of the time against 97% for the other sources, and
 DeepSeek's 20 jobs alone give 8 wrong noes. Workable stays opt-in.
