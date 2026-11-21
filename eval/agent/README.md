@@ -165,13 +165,33 @@ data-de 4, designer-gb 2, devops-ph 1 (115-143 eligible per task, from
 Not comparable with the rows above: the truth is loker's own verdict, and
 the old one said yes to jobs the eligibility eval found mostly closed to the
 viewer. What the runs show:
-- data-de fails 3 of 3 the same way as before: three right picks, and the
-  fourth good job, a `maybe`, left out.
-- devops-ph has one good job. Every run found it, then padded the list with
-  off-role yes jobs and with `unknown` jobs instead of saying one qualifies.
-
-Both are what the tool descriptions should steer: `maybe` is worth
-offering, `unknown` is not eligible, and few matches is an answer. The
+- data-de fails 3 of 3: three right picks, and the fourth good job left
+  out. (Corrected later: that job is a `yes`, "Senior Site Reliability
+  Engineer (Data Platform)", which the fit judge graded as data
+  engineering; not a `maybe`, as first written here.)
+- devops-ph has one good job, a "NOC Engineer". Runs padded the list with
+  off-role yes jobs and with `unknown` jobs instead of saying one qualifies. The
 release binary was rebuilt during this run for a config-only change (no
 effect on search or MCP); `meta.json` records the one it started with.
+
+### The search tool's verdict guidance, DeepSeek v4.1 (OpenCode Go, high)
+
+Same re-read snapshot, the agent now DeepSeek v4.1 Flash at high
+reasoning. The new `search_jobs` description says what each verdict means
+(`maybe` is worth offering, `unknown` is not a recommendation), that
+`minVerdict: "maybe"` finds what the viewer can apply to, and that a short
+list is a good answer.
+
+| Label | calls | kchars | ktok | $/run | sec | prec | rec@5 | pass |
+|---|---|---|---|---|---|---|---|---|
+| 45fc866, old description | 6.6 | 42 | 58 | 0.004 | 47 | 82% | 80% | 47% |
+| new description | 8.3 | 50 | 75 | 0.005 | 46 | 81% | 81% | 53% |
+
+Behaviour changed as meant: agents filter with `minVerdict: "maybe"` (data-de
+5-7 calls a run, against mostly `"yes"` before). Pass did not move beyond
+noise (one run per task either way). The failures left are borderline role
+fit, not verdicts: data-de's missed job is the SRE title above (found in 1 of
+6 runs), devops-ph's only job is a NOC engineer (2 of 6). No good job in
+these tasks is a `maybe` or `unknown`, so this eval cannot show what the
+guidance is for; a task whose good jobs are `maybe` would.
 

@@ -39,16 +39,21 @@ impl LokerMcp {
     }
 
     #[tool(
-        description = "Search stored jobs. Give `country` (and ideally `tz`) to get an eligibility verdict \
-                       per job (yes / maybe / unknown, with a reason); jobs the viewer cannot take are dropped. \
-                       `minVerdict: \"yes\"` keeps only jobs the viewer can apply to; `seniority: [\"junior\"]` keeps \
+        description = "Search stored jobs. Give `country` (and ideally `tz`) to get a verdict per job, with \
+                       a reason: `yes` (the posting says the viewer can do it from where they are), `maybe` \
+                       (probably possible, not settled: it may be on-site, the viewer's hours are outside preferred \
+                       ones, or it hints it is open more widely; worth offering, saying what is unsettled) or \
+                       `unknown` (the posting doesn't say; not a recommendation, at most \"check the posting\"). \
+                       Jobs the viewer cannot take are dropped. `minVerdict: \"maybe\"` keeps yes and maybe: use \
+                       it to find what the viewer can apply to; `\"yes\"` keeps only settled ones. If only a few \
+                       jobs qualify, say so: a short list is a good answer. `seniority: [\"junior\"]` keeps \
                        only jobs at those levels; `role: [\"backend\", \"ai\"]` keeps only jobs in those roles (ids \
                        from `list_roles`, any level: `engineering` takes in every engineering role; \
                        `forward_deployed` and `founding` are modifiers). To browse cheaply, use `view: \"compact\"` (about a third of the \
                        size) or `view: \"titles\"` (about 70 characters a job), then `get_jobs` for the picks. \
                        `total` counts matches across all pages and `fullMatches` those with every query word, so \
                        `fullMatches: 0` means no job has all the words. To see everything the viewer can apply to, \
-                       search with an empty `q`, `minVerdict` and `view: \"titles\"` (100 per page). \
+                       search with an empty `q`, `minVerdict: \"maybe\"` and `view: \"titles\"` (100 per page). \
                        Jobs with every query word come first, then jobs with only some, marked `partial: true`; \
                        if every result is partial, nothing matched all the words. Words also match other forms \
                        (engineer, engineering). Keep `q` to the role and skills (\"backend golang\"): where the viewer \
