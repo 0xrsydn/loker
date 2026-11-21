@@ -1,5 +1,3 @@
-//! Search correctness: eligible jobs ranked below many ineligible ones are
-//! still found, and offset pages neither skip nor repeat.
 mod common;
 
 use std::collections::BTreeSet;
@@ -23,8 +21,6 @@ fn params(limit: u32, offset: Option<u32>) -> SearchParams {
 async fn eligible_jobs_behind_many_ineligible_ones_are_found() {
     let s = store("buried").await;
     let mut jobs = Vec::new();
-    // 600 newer jobs the viewer can't take: 300 US-only (dropped in SQL) and
-    // 300 on-site (kept by SQL, dropped by the verdict: more than one read).
     for i in 0..600 {
         let scope = if i % 2 == 0 {
             Scope::Countries
@@ -60,7 +56,9 @@ async fn eligible_jobs_behind_many_ineligible_ones_are_found() {
     let r = search_jobs(&s, params(10, None)).await.unwrap();
     assert_eq!(
         r.count, 5,
-        "all five worldwide jobs, despite 600 newer ineligible ones"
+        "all five worldwide jobs, despite 600 newer ineligible ones: 300 US-only \
+         (dropped in SQL) and 300 on-site (kept by SQL, dropped by the verdict: \
+         more than one read)"
     );
     assert_eq!(r.next_offset, None);
 }
@@ -68,7 +66,6 @@ async fn eligible_jobs_behind_many_ineligible_ones_are_found() {
 #[tokio::test]
 async fn offset_pages_cover_every_result_once() {
     let s = store("pages").await;
-    // Same posted date everywhere, so only the id tiebreak orders them.
     let jobs: Vec<_> = (0..25)
         .map(|i| {
             let mut j = job(
@@ -97,10 +94,13 @@ async fn offset_pages_cover_every_result_once() {
             None => break,
         }
     }
-    assert_eq!((seen.len(), pages), (25, 3));
+    assert_eq!(
+        (seen.len(), pages),
+        (25, 3),
+        "same posted date everywhere, so only the id tiebreak orders them"
+    );
 }
 
-/// Titles of the jobs a query finds, best first; `~` marks a partial match.
 async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
     let p = SearchParams {
         q: q.into(),
@@ -118,7 +118,6 @@ async fn ranked(s: &loker_core::store::Store, q: &str) -> Vec<String> {
         .collect()
 }
 
-/// The ranking rules eval/search measured, one case each.
 #[tokio::test]
 async fn ranking() {
     let s = store("ranking").await;
@@ -142,28 +141,33 @@ async fn ranking() {
     ];
     ingest(&s, "jobicy", &jobs).await;
 
-    // Stemming: "engineer" and "pipeline" find "Engineering" and "pipelines".
-    assert_eq!(ranked(&s, "pipeline").await, ["Data Engineering Lead"]);
-    assert_eq!(ranked(&s, "engineer").await.len(), 3);
-
-    // A title match outranks the same word repeated in a description.
     assert_eq!(
-        ranked(&s, "rust").await,
-        ["Rust Engineer", "Platform Engineer"]
+        ranked(&s, "pipeline").await,
+        ["Data Engineering Lead"],
+        "stemming: \"pipeline\" finds \"pipelines\""
+    );
+    assert_eq!(
+        ranked(&s, "engineer").await.len(),
+        3,
+        "stemming: \"engineer\" finds \"Engineering\""
     );
 
-    // Jobs with every word first, then jobs with some, marked partial.
+    assert_eq!(
+        ranked(&s, "rust").await,
+        ["Rust Engineer", "Platform Engineer"],
+        "a title match outranks the same word repeated in a description"
+    );
+
     assert_eq!(
         ranked(&s, "rust team").await,
-        ["Rust Engineer", "~Platform Engineer"]
+        ["Rust Engineer", "~Platform Engineer"],
+        "jobs with every word first, then jobs with some, marked partial"
     );
     assert_eq!(
         ranked(&s, "pipelines kotlin").await,
         ["~Data Engineering Lead"]
     );
 
-    // `total` counts every match across pages; `fullMatches` those with
-    // every word.
     let p = SearchParams {
         q: "rust team".into(),
         limit: Some(1),
@@ -171,10 +175,13 @@ async fn ranking() {
         ..Default::default()
     };
     let r = search_jobs(&s, p).await.unwrap();
-    assert_eq!((r.count, r.total, r.full_matches), (1, 2, 1));
+    assert_eq!(
+        (r.count, r.total, r.full_matches),
+        (1, 2, 1),
+        "`total` counts every match across pages; `fullMatches` those with every word"
+    );
     assert!(r.next_offset.is_some());
 
-    // A role filter takes in any level and modifiers; jobs with no role drop.
     let p = |names: &[&str]| SearchParams {
         q: "engineer".into(),
         role: names
@@ -188,26 +195,33 @@ async fn ranking() {
         count(search_jobs(&s, p(&["data_engineering"])).await.unwrap()),
         1
     );
-    assert_eq!(count(search_jobs(&s, p(&["data"])).await.unwrap()), 1);
-    // Data engineering also sits in engineering; the Rust Engineer is backend
-    // (its title names Rust), the Platform Engineer infrastructure.
+    assert_eq!(
+        count(search_jobs(&s, p(&["data"])).await.unwrap()),
+        1,
+        "a role filter takes in any level"
+    );
     assert_eq!(
         count(search_jobs(&s, p(&["engineering"])).await.unwrap()),
-        3
+        3,
+        "data engineering also sits in engineering; the Rust Engineer is backend \
+         (its title names Rust), the Platform Engineer infrastructure"
     );
     assert_eq!(
         count(search_jobs(&s, p(&["design", "founding"])).await.unwrap()),
         0
     );
 
-    // A level filter keeps only jobs at those levels.
     for (level, want) in [(Seniority::Lead, 1), (Seniority::Senior, 0)] {
         let p = SearchParams {
             q: "engineer".into(),
             seniority: vec![level],
             ..Default::default()
         };
-        assert_eq!(search_jobs(&s, p).await.unwrap().count, want, "{level:?}");
+        assert_eq!(
+            search_jobs(&s, p).await.unwrap().count,
+            want,
+            "a level filter keeps only jobs at those levels: {level:?}"
+        );
     }
 }
 
@@ -232,7 +246,6 @@ async fn experience_filter_keeps_jobs_that_state_no_years() {
         j.description_md = desc.map(str::to_string);
         jobs.push(j);
     }
-    // The source's own field beats the description.
     jobs[3].experience = loker_core::experience_text::experience_from_field("Any (new grads ok)");
     ingest(&s, "jobicy", &jobs).await;
     let titles = |years: Option<u8>| {

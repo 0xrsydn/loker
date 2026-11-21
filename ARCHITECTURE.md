@@ -69,8 +69,9 @@ some of its fields by name. New fields are optional and omitted when empty
 (`#[serde(default, skip_serializing_if = "Option::is_none")]`, as `expires_at`
 is), and nothing is renamed without a migration. *Why:* otherwise every stored
 listing reads as changed at once, or old rows stop parsing and fail the whole
-ingest. *Enforced by:* `tests/storage.rs` (every JSON path the SQL reads still
-resolves).
+ingest. A renamed field doesn't fail in SQL either: its JSON path just reads
+NULL. *Enforced by:* `tests/storage.rs` (pins every JSON path the SQL reads
+through a number it feeds).
 
 **6. Derived values carry their source and confidence.**
 Eligibility records its method, confidence and evidence. *Why:* when sources
@@ -84,8 +85,9 @@ not_stated, open: what the posting says about everyone outside its
 places). The verdict is a small table over them: inside the places, remote
 is yes and unknown workplace is maybe; outside, excluded is no, not stated
 is unknown and open is maybe; office jobs are no unless the viewer accepts
-that office. `scope` is derived from the three and still served, for
-earlier clients. *Why:* a list of places is not always a limit ("USA Only"
+that office. The verdict is computed per request from the stored
+eligibility and the viewer, never stored. `scope` is derived from the three
+and still served, for earlier clients. *Why:* a list of places is not always a limit ("USA Only"
 is; an employer's office on a remote Workable job isn't), and both
 labellers found the no it implied wrong there.
 
@@ -113,7 +115,9 @@ if any source has two, all stay separate. A merge keeps the oldest canonical
 job's id. The merged job takes identity and text from employer boards first,
 then by source id; eligibility from a source that names places if any does
 (the narrower statement), then the most confident; pay from the first source
-that states base pay.
+that states base pay; visa and experience from the first that states them.
+Categories are the union of every listing's, since each is evidence of what
+the job is.
 
 **Storage.** A canonical job is a row holding its merged job as JSON
 (`canonical_jobs.job`, a `NewJob`), hashed as a whole together with its
@@ -121,14 +125,27 @@ status, so an unchanged rebuild writes nothing. SQL reads only generated
 columns (`canonical_url`, `remote_scope`, `posted_at`, `title`, `company`) and
 JSON paths (`tests/storage.rs` pins each one).
 
+**Search.** Any word of the query matches. Jobs with every word rank first,
+then by bm25 with a title match weighted five times: `eval/search` found
+all-words-first as good as score alone, and it never comes back empty when
+some word matches; a title weight of 5 beats 1, and 10 is no better. The
+verdict, level, role and years filters are derived when a job is read, so
+they run in Rust over every match: the only way to fill a page and count
+`total`, and a few thousand rows take milliseconds. The SQL pre-filter on
+the viewer's country must never be stricter than the verdict.
+
 **Liveness.** A listing goes `gone` when a complete fetch of its source no
 longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
 seen it for 30 days (`stale`), and goes `live` again when seen. A job is active
-exactly while one of its listings is live.
+exactly while one of its listings is live. A complete fetch's ids come from
+its raw items, so an item that fails to transform still counts as present;
+if any item has no id, the fetch closes nothing.
 
 **Seniority.** Derived when a job is read, like a verdict, so every stored
 job has it without a re-fetch: level words in the title first, else the level
 the source states (`normalize::seniority`). About 40% of jobs name a level.
+Jobicy's `jobLevel` "Director" is ignored: it is set on account executives
+and BDRs as often as on directors.
 
 **Pay.** Optional, and only what the posting states, in its own currency:
 `base` ranges (salary or wage, one per level or location when there are
@@ -137,19 +154,29 @@ stated), and `usdMonthMin/Max` for comparing, from USD amounts only.
 `normalize::money` drops a figure rather than keep it wrong: no currency
 code, no period for base pay, `min > max`, a top over 10× the bottom, or a
 dollar-like currency (USD, EUR, GBP, ...) outside 100..=100k a month.
+A zero end counts as not stated, since sources write 0 for none. A `$` is
+another dollar when a place or code names it ("Ontario based" is CAD); when
+two are named, the figure is dropped.
 "Competitive" is no pay; "competitive salary + equity" is pay with only an
 extra. A source with no pay fields gets pay from its description in `tidy`
 (`pay_text.rs`, `method: text`): a figure counts only with a currency, pay
 words around it and a period, and never next to benefit, funding or sales
-words. `eval/pay` measures it.
+words. A salary with no period is a year only at 15,000 or more and only in
+currencies whose salaries are yearly at that size (USD, EUR, GBP, CAD, AUD,
+NZD, CHF, SGD); 25,000 ZAR may be a month. Extras count only within three
+lines of base pay or where the posting offers pay ("eligible for a bonus"),
+never alone. `eval/pay` measures it.
 
 **Visa.** `visa.sponsorship` is `offered`, `limited` (case by case,
 transfers only, some locations) or `not_offered`, with the sentence it was
 read from; absent when the posting says nothing about sponsorship. "Must be
 authorized to work in the US" alone, a citizenship or clearance requirement
-and equal opportunity text say nothing about it. A source that states it in a
+and equal opportunity text say nothing about it, nor does text that only
+mentions sponsorship (an interview question, an HR duty): a wrong
+`not_offered` turns someone away from a job they could take. A source that states it in a
 field of its own (`NewJob::visa`, Y Combinator's three fixed values) fills it
-at ingest and wins; otherwise `visa_text.rs` reads it from the description
+at ingest and wins (YC's "US citizenship/visa not required" says nothing
+about sponsorship); otherwise `visa_text.rs` reads it from the description
 when a job is read (like seniority), so a rule change needs no re-fetch.
 `eval/visa` measures the reading.
 
@@ -176,15 +203,25 @@ measures it.
 sit in others (`data_engineering` is in data and engineering); `ai` sits
 inside engineering. Filters name any id or modifier and `Role::within`
 resolves them, like regions. Role is function only: seniority, domain (game,
-web3), company stage and employment type are other fields. A job stores its
+web3), company stage and employment type are other fields, and specialisms
+(computer vision, NLP) are left to search. A job stores its
 most specific id, a family alone when the evidence says no more, or nothing:
-there is no "other" role. `JobRole` records method, confidence, evidence and
-the vocabulary version (rule 6).
+there is no "other" role. Adapters keep the source's category, department
+or team as written (`NewJob::category`); only `classify` decides which
+phrases name a role. A job has at most three roles, a primary and two
+secondary, as LinkedIn caps job functions. `JobRole` records method,
+confidence, evidence and the vocabulary version (rule 6).
 
 `classify.rs` decides a job's role from the merged job: phrases in the title
 first (multi-word role nouns before single keywords, a matched phrase used
 up), then the source's category when the title names no specific role, then
-a role named early in the description. It is stored with the job
+a role named early in the description. The team a manager runs is a second
+role ("Engineering Manager, Applied AI"); a domain word is not ("Data
+Engineer, Marketing Analytics" is data engineering only). A category never
+makes a role broader than the title says, and an engineer title takes only
+an engineering category. `product_engineer` is not inside `fullstack` in the
+vocabulary; the classifier gives product engineers `fullstack` as a
+secondary role, which is how a fullstack filter finds them. It is stored with the job
 (`canonical_jobs.role`) along with `classify::STAMP`; when the rules or the
 vocabulary change, `Store::open` classifies stored jobs again, without a
 re-fetch. `eval/role` measures it against labelled jobs.
@@ -192,11 +229,86 @@ re-fetch. `eval/role` measures it against labelled jobs.
 **Providers.** Third-party services are optional and never on the search
 path. `[providers.jev]` in config.toml (key from `OPENROUTER_API_KEY`) adds
 Jev's choice over the vocabulary: `loker roles enrich`, or the end of
-`ingest --all`, asks about active jobs with no cached answer and stores each
+`ingest --all` (after every source is stored; a provider failure lands in
+the report's `roles.errors` and doesn't fail the run), asks about active jobs
+with no cached answer and stores each
 in `role_answers`, keyed by vocabulary, question and what the model saw, so
-an unchanged job is never asked twice. `classify::classify_with` prefers the
+an unchanged job is never asked twice. The model is a dated id
+(`typesafe/jev-1.14-20261014`), since an alias moves between releases. The key leaves out the model id, so a
+new model keeps the cached answers until a job changes; bump
+`classify::QUESTION` to ask every job again. Storing answers classifies every
+active job again rather than tracking which changed: a few thousand take
+milliseconds. `classify::classify_with` prefers the
 model unless a title names the role and the model is under 0.6; modifiers
 stay with the rules. Without the provider, roles come from the rules alone.
+Jev's Decisions endpoint is alpha, so only `jev::ask` calls it; its
+confidence is the probability of the chosen role, the number `eval/role` set
+the 0.6 threshold on. The cache keys on the model config names, not the one
+the response reports.
+
+**Sources.** What each source's data means, as found when writing its
+adapter. All of them share one HTTP client: User-Agent `loker/<version>` and
+nothing personal, a 30 s timeout, and the platform's TLS roots plus Mozilla's
+bundled ones, so the binary works without system CA certificates (minimal
+containers, the Nix sandbox). A network failure (timeout, refused or dropped
+connection, a cut-off body) is retried twice, after 2 s and 4 s; an HTTP
+status never is (a 404 for a missing board is an answer), except Y
+Combinator's 429.
+
+- *Ashby:* unlisted postings (`isListed: false`) are reachable by link only,
+  so they are skipped.
+- *Greenhouse:* the canonical URL is built from board and id, because
+  `absolute_url` varies (an EU host, a careers page with `?gh_jid=`). The
+  description arrives as escaped HTML.
+- *Himalayas:* remote only. With a country, the page-numbered search (which
+  returns worldwide jobs plus those listing it); otherwise the cursor feed.
+  An empty country list is worldwide, a list is the limit;
+  `timezoneRestrictions` covering every zone is no restriction.
+- *Jobicy:* remote only, so `jobGeo` is where the job is open.
+- *Lever:* pages of 25 until a short page, so the fetch is the complete
+  board. One unpaged request also returns everything, but Lever sends each
+  posting's HTML (about 20 KB) uncompressed at as little as 15–60 KB/s, so a
+  large board outlasts the timeout; each page gets two minutes. Lever's ISO
+  `country` fills in an on-site or hybrid job's country; for a remote job it
+  is only the employer's and is ignored.
+- *Remote OK:* the first array element is a legal notice. Salaries are USD a
+  year, 0 means not given, and the pay bounds drop junk values.
+- *We Work Remotely:* RSS. The all-jobs feed holds only about ten of each
+  category's newest, so each category feed is read too and merged by guid;
+  a failing category feed is skipped (its slug may have changed), the
+  all-jobs feed must load. Not a complete list: expiry and staleness close
+  its jobs. `region` is who may apply; `country`, when present, is narrower
+  and wins. "Anywhere in the World" alone is the board's default, not
+  evidence (2 of 11 such postings in `eval/eligibility` were open to all five
+  viewers), so it is remote with `elsewhere` not stated.
+- *Workable:* the search jobs.workable.com uses, not a published API, so it
+  may change without notice (`loker verify` notices). Remote jobs only, 20 a
+  page, a second apart. A remote job's location is the employer's, not a
+  limit (17 of 60 in `eval/eligibility` said "work from anywhere" or named
+  other places), so places the description names win; otherwise Workable's
+  place is a yes for the people in it, and everyone else gets `open` when the
+  posting hints so, else `not_stated`. The stored description adds the
+  requirements section, which often says where the hire must be. Only
+  staleness closes its jobs.
+- *Y Combinator:* no JSON API; each page is Rails + Inertia with its data in
+  one `data-page` attribute. Listing routes are capped (20 on the landing
+  page, 36–50 per role or location) and ignore pagination, but the sitemap
+  is complete and each company page lists all its jobs: one sitemap request,
+  then one per company. Company pages carry no descriptions, so pay, visa
+  and experience come from the board's fields. The apply link is a login
+  redirect, so the posting is the apply URL. Only an age is given ("23
+  days"), so `posted_at` is that age back from the fetch. The site
+  rate-limits per path with minutes-long 429s and no `Retry-After`: pages
+  are a second apart and a 429 is retried after 20 s and 40 s. About 10% of
+  the sitemap's job URLs already 404. A job refreshes only when its company
+  page is fetched and staleness closes it after 30 days, so `--pages 50` (40
+  companies a page) covers the board; smaller runs take the next window each
+  day of the shuffled, undated sitemap. A location is options separated by
+  " / ": in "City, ST, CC" only the last part is a country (CA there is
+  California); "Remote (US; CA)" is open to those countries only; "Remote
+  (San Francisco, CA, US)" means living nearby, a maybe in that country; a
+  bare "Remote" keeps the office countries and says nothing about anyone
+  else; with no remote option the job is on-site at its first office.
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.
@@ -234,8 +346,16 @@ don't know. Bump `role::VERSION` and note the change here.
 `tests/role.rs` checks the invariants (every id listed, homes are families,
 no cycles, no name shared with a modifier).
 
+**A change to the role rules**
+Phrases in the `classify.rs` tables are lowercase whole words with
+punctuation as spaces ("Full-Stack" is "full stack", "ML/AI" is "ml ai"),
+most specific role first; the first match is the primary role. Bump
+`classify::RULES`; `Store::open` then classifies stored jobs again.
+
 **A new rule**
 A function with no IO next to the rules it belongs with, called from the store.
+Shared normalizers stay simple: add a rule when `loker sources eval` or an
+eval under `eval/` shows what the current ones miss.
 If it needs a test, test the function directly with a table of cases (see
 `cluster_rules` in `tests/dedup.rs`).
 
@@ -254,6 +374,7 @@ Nothing here is needed now; each change waits for its trigger.
 |---|---|
 | An `Adapter` trait and shared fetch methods (JSON-LD, RSS) | About 10 adapters, or the first HTML source |
 | Concurrent `ingest --all` with per-host rate limits | Hundreds of company boards |
+| A read pool beside the one writer connection `Store::open` opens | A long-running server with concurrent clients (REST) |
 | More signals inside `dedup::cluster` (location, apply-URL domain) to tell apart listings that share a key | `sources eval` shows blocked keys hiding real separate jobs |
 | Fuzzy matching across keys (a new candidate query, e.g. by company) | `sources eval` or real use shows missed merges. A real design change, not a tweak. |
 

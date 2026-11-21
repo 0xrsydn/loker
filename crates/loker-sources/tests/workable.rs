@@ -1,4 +1,3 @@
-//! Who may take a Workable job, as its fields say.
 use loker_core::model::{Elsewhere, Scope};
 use loker_sources::workable::transform;
 use serde_json::json;
@@ -34,10 +33,10 @@ fn workplace_and_locations_say_who_may_apply() {
         vec!["TELECOMMUTE", "Milwaukee, Wisconsin, United States"],
     );
     assert_eq!(state.eligibility.countries, vec!["US".to_string()]);
-    // No place but the marker: the country Workable gives.
     assert_eq!(
         job("remote", vec!["TELECOMMUTE"]).eligibility.countries,
-        vec!["PH".to_string()]
+        vec!["PH".to_string()],
+        "no place but the marker: the country Workable gives"
     );
     assert_eq!(
         job("hybrid", vec!["Makati City, Metro Manila, Philippines"])
@@ -51,7 +50,6 @@ fn workplace_and_locations_say_who_may_apply() {
     );
 }
 
-/// A remote job's place is the employer's, not a limit: the description decides.
 #[test]
 fn the_description_settles_a_remote_place() {
     let job = |text: &str| {
@@ -70,7 +68,6 @@ fn the_description_settles_a_remote_place() {
         (Scope::Region, vec!["EMEA".to_string()])
     );
     assert_eq!(named.elsewhere, Elsewhere::Excluded);
-    // A looser hint: Workable's place holds, everyone else may be open.
     for wider in [
         "Fully remote, based outside the US.",
         "<strong>Location:</strong> International",
@@ -81,17 +78,17 @@ fn the_description_settles_a_remote_place() {
         assert_eq!(
             (e.countries, e.elsewhere),
             (vec!["DE".to_string()], Elsewhere::Open),
-            "{wider}"
+            "a looser hint keeps Workable's place and may open it to everyone else: {wider}"
         );
     }
     assert_eq!(
         job("This remote position is open to candidates worldwide.").scope(),
         Scope::Worldwide
     );
-    // Nothing said: Workable's place for its own people, unknown for the rest.
     let silent = job("Build things.");
     assert_eq!(
         (silent.countries, silent.elsewhere),
-        (vec!["DE".to_string()], Elsewhere::NotStated)
+        (vec!["DE".to_string()], Elsewhere::NotStated),
+        "nothing said: Workable's place for its own people, unknown for the rest"
     );
 }

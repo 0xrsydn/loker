@@ -1,7 +1,3 @@
-# Every push and pull request: `nix flake check` builds the release binary,
-# runs all tests (offline: store rules, search, lifecycle, e2e against a local
-# stub, contract schema drift), runs clippy with warnings denied and checks
-# formatting with rustfmt.
 name: ci
 
 on:
@@ -20,19 +16,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
-          # cache.nixos.org has the toolchain; loker's R2 cache has what only this
-          # repo builds (crane's compiled dependencies, the vendored crates).
-          # Reads are public, through the cache.rasyidanaf.com gateway (a Worker in
-          # personal-clan-nix); every path is signed by loker-ci-1. If the cache is
-          # unreachable, Nix builds instead (fallback).
           extra_nix_config: |
             accept-flake-config = false
             extra-substituters = https://cache.rasyidanaf.com/loker-nix-cache
             extra-trusted-public-keys = loker-ci-1:uzoeDmTAwNEvZTMuCmd28RZngImk4Oj5L9zS0WvohX4=
             fallback = true
       - run: nix flake check -L --show-trace
-      # Only pushes to main write to the cache; pull requests (and forks, which
-      # get no secrets) only read from it.
       - name: Push build dependencies to the R2 cache
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:

@@ -1,6 +1,3 @@
-//! Rules the verdict must keep for any eligibility and any viewer, checked on
-//! generated inputs (`tests/eligibility.rs` holds the worked examples). The
-//! verdicts order from best to worst: yes, maybe, unknown, no.
 use isocountry::CountryCode;
 use loker_core::country::region_contains;
 use loker_core::eligibility_text::narrow;
@@ -104,7 +101,6 @@ fn eligibility() -> impl Strategy<Value = Eligibility> {
         )
 }
 
-/// Anyone on Earth: UTC-12 to UTC+14 (Kiribati).
 fn viewer() -> impl Strategy<Value = Viewer> {
     (
         prop::sample::select(codes()),
@@ -124,8 +120,6 @@ fn kind(e: &Eligibility, v: &Viewer) -> VerdictKind {
 proptest! {
     #![proptest_config(ProptestConfig::with_cases(2000))]
 
-    /// A job that names no place and doesn't say it is open anywhere can't
-    /// tell anyone yes.
     #[test]
     fn no_place_no_yes(mut e in eligibility(), v in viewer()) {
         if e.elsewhere == Elsewhere::Open {
@@ -134,19 +128,22 @@ proptest! {
         e.countries.clear();
         e.regions.clear();
         let k = kind(&e, &v);
-        prop_assert!(matches!(k, VerdictKind::Unknown | VerdictKind::No), "{k:?}");
+        prop_assert!(
+            matches!(k, VerdictKind::Unknown | VerdictKind::No),
+            "a job that names no place and doesn't say it is open anywhere can't tell anyone yes: {k:?}"
+        );
     }
 
-    /// Listing the viewer's own country never makes their verdict worse.
     #[test]
     fn listing_your_country_never_hurts(e in eligibility(), v in viewer()) {
         let mut listed = e.clone();
         listed.countries.push(v.country.clone());
-        prop_assert!(kind(&listed, &v) <= kind(&e, &v));
+        prop_assert!(
+            kind(&listed, &v) <= kind(&e, &v),
+            "listing the viewer's own country made their verdict worse (best to worst: yes, maybe, unknown, no)"
+        );
     }
 
-    /// A remote job open to one region: yes inside it, no outside, unknown
-    /// when the region isn't in the table, exactly as the table says.
     #[test]
     fn region_verdict_follows_the_table(r in prop::sample::select(REGIONS.to_vec()), mut v in viewer()) {
         v.tz = None;
@@ -159,11 +156,13 @@ proptest! {
             Some(false) => VerdictKind::No,
             None => VerdictKind::Unknown,
         };
-        prop_assert_eq!(kind(&e, &v), want);
+        prop_assert_eq!(
+            kind(&e, &v),
+            want,
+            "a remote job open to one region: yes inside it, no outside, unknown when the region isn't in the table"
+        );
     }
 
-    /// Required hours the viewer can't meet are a no; hours they can meet
-    /// change nothing; preferred hours they can't meet cap the verdict at maybe.
     #[test]
     fn hours(e in eligibility(), w in window(), v in viewer()) {
         let base = kind(&Eligibility { tz: None, ..e.clone() }, &v);
@@ -173,19 +172,17 @@ proptest! {
             return Ok(());
         };
         match (w.contains(off), w.strength) {
-            (true, _) => prop_assert_eq!(with, base),
-            (false, TzStrength::Required) => prop_assert_eq!(with, VerdictKind::No),
-            (false, TzStrength::Preferred) => prop_assert_eq!(with, base.max(VerdictKind::Maybe)),
+            (true, _) => prop_assert_eq!(with, base, "hours the viewer can meet change nothing"),
+            (false, TzStrength::Required) => prop_assert_eq!(with, VerdictKind::No, "required hours the viewer can't meet are a no"),
+            (false, TzStrength::Preferred) => prop_assert_eq!(with, base.max(VerdictKind::Maybe), "preferred hours the viewer can't meet cap the verdict at maybe"),
         }
     }
 
-    /// UTC+13 and UTC-11 are the same clock time: a window can't tell them apart.
     #[test]
     fn offsets_a_day_apart_are_the_same_hours(w in window(), off in half_hours(12.0, 14.0)) {
-        prop_assert_eq!(w.contains(off), w.contains(off - 24.0), "{:?} at {}", w, off);
+        prop_assert_eq!(w.contains(off), w.contains(off - 24.0), "UTC+13 and UTC-11 are the same clock time: {:?} at {}", w, off);
     }
 
-    /// A window built from allowed offsets lets every one of them in.
     #[test]
     fn window_holds_its_offsets(offs in prop::collection::vec(half_hours(-12.0, 14.0), 1..8)) {
         if let Some(w) = TzWindow::from_offsets(&offs, TzStrength::Required) {
@@ -195,17 +192,14 @@ proptest! {
         }
     }
 
-    /// Any text parses, and an explicit on-site flag is always on-site.
     #[test]
     fn any_text_parses(text in ".{0,80}", remote in prop::option::of(any::<bool>())) {
         let e = eligibility_from_text(&text, remote);
         if remote == Some(false) {
-            prop_assert_eq!(e.scope(), Scope::Onsite);
+            prop_assert_eq!(e.scope(), Scope::Onsite, "an explicit on-site flag is always on-site");
         }
     }
 
-    /// A description only fills in what the board left open: places the
-    /// board named, its hours, and on-site or hybrid jobs stay as they are.
     #[test]
     fn description_never_overrides_the_board(
         e in eligibility(),
@@ -218,18 +212,16 @@ proptest! {
         let mut after = e.clone();
         narrow(&mut after, sentence, remote);
         if matches!(e.scope(), Scope::Onsite | Scope::Hybrid) {
-            prop_assert_eq!(&after, &e);
+            prop_assert_eq!(&after, &e, "on-site or hybrid jobs stay as they are");
         }
         if !e.countries.is_empty() || !e.regions.is_empty() {
-            prop_assert_eq!((&after.scope(), &after.countries, &after.regions), (&e.scope(), &e.countries, &e.regions));
+            prop_assert_eq!((&after.scope(), &after.countries, &after.regions), (&e.scope(), &e.countries, &e.regions), "places the board named stay");
         }
         if e.tz.is_some() {
-            prop_assert_eq!(&after.tz, &e.tz);
+            prop_assert_eq!(&after.tz, &e.tz, "the board's hours stay");
         }
     }
 
-    /// Outside a remote job's places, the answer is what it says about
-    /// everyone else: excluded is no, not stated is unknown, open is maybe.
     #[test]
     fn outside_follows_elsewhere(e in eligibility(), mut v in viewer()) {
         v.tz = None;
@@ -240,19 +232,21 @@ proptest! {
             Elsewhere::NotStated => VerdictKind::Unknown,
             Elsewhere::Open => VerdictKind::Maybe,
         };
-        prop_assert_eq!(kind(&e, &v), want);
+        prop_assert_eq!(
+            kind(&e, &v),
+            want,
+            "outside a remote job's places: excluded is no, not stated is unknown, open is maybe"
+        );
     }
 
-    /// Eligibility reads back as it was written, and its `scope` agrees.
     #[test]
     fn wire_round_trip(e in eligibility()) {
         let json = serde_json::to_value(&e).unwrap();
         let back: Eligibility = serde_json::from_value(json.clone()).unwrap();
         prop_assert_eq!(&back, &e);
-        prop_assert_eq!(&json["scope"], &serde_json::to_value(e.scope()).unwrap());
+        prop_assert_eq!(&json["scope"], &serde_json::to_value(e.scope()).unwrap(), "its `scope` agrees");
     }
 
-    /// The order and case places are written in don't change what is read.
     #[test]
     fn order_and_case_dont_matter(names in prop::sample::subsequence(NAMES.to_vec(), 1..4), remote in prop::option::of(Just(true))) {
         let read = |t: &str| {
@@ -277,7 +271,6 @@ fn inside(e: &Eligibility, c: &str) -> bool {
             .any(|r| region_contains(r, c) == Some(true))
 }
 
-/// Rows stored before the axes existed carry only `scope`, and read as it says.
 #[test]
 fn old_rows_read_by_scope() {
     let old = |scope: &str| -> Eligibility {
@@ -289,14 +282,14 @@ fn old_rows_read_by_scope() {
     };
     assert_eq!(
         (old("countries").workplace, old("countries").elsewhere),
-        (Workplace::Remote, Elsewhere::Excluded)
+        (Workplace::Remote, Elsewhere::Excluded),
+        "rows stored before the axes existed carry only `scope`, and read as it says"
     );
     assert_eq!(old("worldwide").elsewhere, Elsewhere::Open);
     assert_eq!(old("onsite").workplace, Workplace::Onsite);
     assert_eq!(old("unknown").workplace, Workplace::Unknown);
 }
 
-/// Every region the parser can name is one the verdict can resolve.
 #[test]
 fn parsed_regions_resolve() {
     for text in [
@@ -318,7 +311,10 @@ fn parsed_regions_resolve() {
         "oceania",
     ] {
         for r in eligibility_from_text(text, Some(true)).regions {
-            assert!(region_contains(&r, "US").is_some(), "{text} -> {r}");
+            assert!(
+                region_contains(&r, "US").is_some(),
+                "the parser names a region the verdict can't resolve: {text} -> {r}"
+            );
         }
     }
 }

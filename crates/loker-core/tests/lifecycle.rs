@@ -1,5 +1,3 @@
-//! Liveness: listings close (absent from a complete fetch, expired, stale) and
-//! reopen; a job is active exactly while one of its listings is live.
 mod common;
 
 use common::{closed_jobs, clusters, days, ingest, ingest_at, job, store, t0};
@@ -80,7 +78,6 @@ async fn closing_a_duplicate_unblocks_the_merge_in_any_order() {
         0.95,
     )];
 
-    // Himalayas before the duplicate closes.
     let early = store("unblock-early").await;
     ingest(&early, "himalayas", &him).await;
     ingest_at(&early, "greenhouse:binance", &gh(&["g1", "g2"]), t0(), true).await;
@@ -91,7 +88,6 @@ async fn closing_a_duplicate_unblocks_the_merge_in_any_order() {
     );
     ingest_at(&early, "greenhouse:binance", &gh(&["g1"]), days(1), true).await;
 
-    // Himalayas after it closed.
     let late = store("unblock-late").await;
     ingest_at(&late, "greenhouse:binance", &gh(&["g1", "g2"]), t0(), true).await;
     ingest_at(&late, "greenhouse:binance", &gh(&["g1"]), days(1), true).await;
@@ -156,16 +152,20 @@ async fn expiry_and_staleness_close_listings() {
     ingest_at(&s, "ashby:acme", &board, t0(), true).await;
     assert_eq!(clusters(&s).await.len(), 3);
 
-    // Day 11: both Himalayas listings expired. The Engineer job stays active
-    // through its live board listing; the Designer job closes.
     let st = ingest_at(&s, "ashby:acme", &board, days(11), true).await;
-    assert_eq!(st.closed, 2);
-    assert_eq!(clusters(&s).await.len(), 2);
-    assert_eq!(closed_jobs(&s).await, 1);
+    assert_eq!(st.closed, 2, "day 11: both Himalayas listings expired");
+    assert_eq!(
+        clusters(&s).await.len(),
+        2,
+        "the Engineer job stays active through its live board listing"
+    );
+    assert_eq!(closed_jobs(&s).await, 1, "the Designer job closes");
 
-    // Day 31: nobody has seen the Jobicy listing for 30 days.
     let st = ingest_at(&s, "ashby:acme", &board, days(31), true).await;
-    assert_eq!(st.closed, 1);
+    assert_eq!(
+        st.closed, 1,
+        "day 31: nobody has seen the Jobicy listing for 30 days"
+    );
     let left = clusters(&s).await;
     assert_eq!(left.len(), 1);
     assert!(

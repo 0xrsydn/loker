@@ -1,9 +1,3 @@
-//! Greenhouse job board API (public, no key):
-//! `GET https://boards-api.greenhouse.io/v1/boards/<board>/jobs?content=true`.
-//!
-//! Location is free text and Greenhouse has no remote flag, so eligibility
-//! comes from the text rules; "Hong Kong; Singapore" stays `unknown` because it
-//! doesn't say remote or on-site.
 use chrono::DateTime;
 use loker_core::model::NewJob;
 use loker_core::normalize::{decode_entities, eligibility_from_text};
@@ -39,7 +33,6 @@ struct Item {
     departments: Vec<Location>,
 }
 
-/// Anything with an optional `name` (a location, a department).
 #[derive(Deserialize)]
 struct Location {
     name: Option<String>,
@@ -48,11 +41,9 @@ struct Location {
 pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<NewJob> {
     let item: Item = serde_json::from_value(raw.clone())?;
     let board = board.to_lowercase();
-    // Identity from board + id: `absolute_url` varies (EU host, company careers page with ?gh_jid=).
     let canonical = format!("https://job-boards.greenhouse.io/{board}/jobs/{}", item.id);
     let location = item.location.and_then(|l| l.name).unwrap_or_default();
     let posted = item.first_published.or(item.updated_at);
-    // Greenhouse sends the description as escaped HTML (`&lt;p&gt;`).
     let content = item.content.as_deref().map(decode_entities);
     Ok(NewJob {
         source_id: source_id.into(),

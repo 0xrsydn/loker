@@ -1,8 +1,3 @@
-//! Jobicy remote jobs API (public, no key): `GET https://jobicy.com/api/v2/remote-jobs?count=100`.
-//!
-//! Terms: credit Jobicy with a link to the listing, and send applicants to the
-//! job URL from the feed. Jobicy is remote-only, so `jobGeo` is where the
-//! remote job is open ("USA", "Europe", "Anywhere").
 use chrono::DateTime;
 use loker_core::model::NewJob;
 use loker_core::normalize::{decode_entities, eligibility_from_text, employment_type, pay};
@@ -31,7 +26,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     let url = s("url").ok_or_else(|| anyhow::anyhow!("missing url"))?;
     let title = s("jobTitle").ok_or_else(|| anyhow::anyhow!("missing jobTitle"))?;
     let company = s("companyName").ok_or_else(|| anyhow::anyhow!("missing companyName"))?;
-    // jobType arrives as a list or as a string like "['Full-Time']".
     let job_type = match raw.get("jobType") {
         Some(Value::Array(a)) => a.first().and_then(as_string),
         Some(Value::String(t)) => t
@@ -50,12 +44,9 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         apply_url: Some(url),
         title,
         company,
-        // "Director" is set on account executives and BDRs as often as on
-        // directors, so it says nothing; the title decides instead.
         seniority: s("jobLevel")
             .map(|l| l.to_lowercase())
             .filter(|l| l != "any" && l != "director"),
-        // jobIndustry is a list, like jobType.
         category: match raw.get("jobIndustry") {
             Some(Value::Array(a)) => crate::categories(a.iter().filter_map(as_string)),
             Some(v) => as_string(v),

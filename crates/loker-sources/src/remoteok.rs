@@ -1,9 +1,3 @@
-//! Remote OK API (public, no key): `GET https://remoteok.com/api`.
-//!
-//! Terms: link back to the listing on Remote OK and name it as the source; the
-//! first array element is the legal notice, not a job. Salaries are USD per
-//! year, with 0 meaning "not given" and occasional junk values (caught by the
-//! pay sanity bounds).
 use chrono::DateTime;
 use loker_core::model::NewJob;
 use loker_core::normalize::{decode_entities, eligibility_from_text, pay};

@@ -1,4 +1,3 @@
-//! The seniority rule: title first, then the source's stated level.
 use loker_core::model::Seniority::{self, *};
 use loker_core::normalize::seniority;
 
@@ -14,7 +13,6 @@ fn seniority_rules() {
         ("Senior/Staff Software Engineer", None, Some(Lead)),
         ("Head of Engineering", None, Some(Executive)),
         ("AI Engineer (Mid-Level)", None, Some(Mid)),
-        // The title is more precise than the source's level.
         (
             "Staff Engineer - Backend/Kotlin",
             Some("senior"),
@@ -25,11 +23,9 @@ fn seniority_rules() {
             Some("entry-level"),
             Some(Intern),
         ),
-        // No level word in the title: the source's level.
         ("Backend Engineer", Some("Mid-level"), Some(Mid)),
         ("Data Engineer", Some("entry-level, junior"), Some(Junior)),
         ("Operations", Some("Executive"), Some(Executive)),
-        // Level words that aren't levels.
         ("Member of Technical Staff", None, None),
         (
             "B2B Lead Generation Specialist",

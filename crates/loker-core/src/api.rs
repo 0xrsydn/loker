@@ -1,9 +1,3 @@
-//! The v1 contract: one typed params struct and one typed result per operation.
-//!
-//! Every adapter (CLI, MCP, later REST) builds these params and returns these
-//! results unchanged, so behaviour and output shape cannot drift between them.
-//! The schemas come from the same derives, so MCP tool schemas and the future
-//! `schema/v1/*.json` files are generated, never written by hand.
 use std::fmt;
 
 use schemars::JsonSchema;
@@ -17,18 +11,14 @@ use crate::role::{self, Modifier, Role, RoleFilter};
 use crate::store::{Found, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
-/// Bumped only on breaking changes; additive changes keep it.
 pub const CONTRACT_VERSION: u32 = 1;
 
 pub const DEFAULT_LIMIT: u32 = 20;
 pub const MAX_LIMIT: u32 = 100;
 
-/// Errors every adapter maps to its own channel (exit code, MCP error, HTTP status).
 #[derive(Debug)]
 pub enum Error {
-    /// The caller sent something unusable; safe to show as-is.
     Invalid(String),
-    /// Something broke on our side.
     Internal(anyhow::Error),
 }
 
@@ -50,8 +40,6 @@ impl From<anyhow::Error> for Error {
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
-
-// ---------- search_jobs ----------
 
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -141,7 +129,6 @@ pub struct SearchResult {
     pub notice: Option<String>,
 }
 
-/// The notice for a store with no jobs, for every adapter to show.
 pub const EMPTY_STORE: &str = "No jobs are stored yet: run `loker ingest --all` to fetch them (`loker doctor` checks the setup).";
 
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -274,7 +261,6 @@ impl Hit {
     }
 }
 
-/// The viewer described by `country` and `tz`, if a country was given.
 fn viewer(country: Option<&str>, tz: Option<f64>) -> Result<Option<Viewer>> {
     if let Some(tz) = tz
         && !(-12.0..=14.0).contains(&tz)
@@ -302,16 +288,12 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             "`minVerdict` needs `country`: a verdict is about a viewer".into(),
         ));
     }
-    // Verdicts sort best first (yes, maybe, unknown, no); keep up to this one.
     let worst = match p.min_verdict {
         Some(MinVerdict::Yes) => VerdictKind::Yes,
         Some(MinVerdict::Maybe) => VerdictKind::Maybe,
         None => VerdictKind::Unknown,
     };
 
-    // Read every match: the verdict and level filters run here, not in SQL,
-    // so this is the only way to fill a page and to count `total`. A few
-    // thousand rows take milliseconds.
     const BATCH: u32 = 200;
     let offset = p.offset.unwrap_or(0);
     let country = viewer.as_ref().map(|v| v.country.as_str());
@@ -363,8 +345,6 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         notice,
     })
 }
-
-// ---------- list_roles ----------
 
 /// The role vocabulary: what `role` filters and `roles` fields can name.
 #[derive(Debug, Clone, Serialize, JsonSchema)]
@@ -432,8 +412,6 @@ pub fn list_roles() -> RolesResult {
     }
 }
 
-// ---------- get_jobs ----------
-
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct GetJobsParams {
@@ -455,7 +433,6 @@ pub struct GetJobsResult {
     pub missing: Vec<String>,
 }
 
-/// Full details for jobs picked from a (compact) search.
 pub async fn get_jobs(store: &Store, p: GetJobsParams) -> Result<GetJobsResult> {
     if p.ids.len() > MAX_LIMIT as usize {
         return Err(Error::Invalid(format!("at most {MAX_LIMIT} ids per call")));
@@ -489,8 +466,6 @@ pub async fn get_jobs(store: &Store, p: GetJobsParams) -> Result<GetJobsResult> 
     })
 }
 
-// ---------- stats ----------
-
 #[derive(Debug, Clone, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct Stats {
@@ -520,8 +495,6 @@ pub async fn stats(store: &Store) -> Result<Stats> {
         by_scope,
     })
 }
-
-// ---------- sources_eval ----------
 
 /// How good each source is, and how sources overlap: the numbers used to
 /// decide whether a source or a normalization rule earns its keep.
@@ -665,7 +638,6 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
             location_unmapped: s.unmapped,
         })
         .collect();
-    // Sources whose only runs failed still show up.
     sources.extend(runs.into_iter().map(|(source, run)| SourceEval {
         source,
         jobs: 0,
@@ -706,8 +678,6 @@ pub async fn sources_eval(store: &Store) -> Result<SourcesEval> {
             .collect(),
     })
 }
-
-// ---------- verify ----------
 
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -763,8 +733,6 @@ pub enum CheckStatus {
     Fail,
 }
 
-// ---------- doctor ----------
-
 /// `loker doctor`: is this install set up and healthy? Offline checks of the
 /// home, config, database and each source's last fetch; with `live`, also
 /// `verify`. Each problem says how to fix it.
@@ -813,20 +781,11 @@ impl DoctorReport {
         }
     }
 
-    /// Add checks (e.g. [`live_checks`]) and recompute `ok`.
     pub fn extend(self, more: Vec<DoctorCheck>) -> Self {
         Self::new(self.checks.into_iter().chain(more).collect())
     }
 }
 
-/// `loker doctor`'s offline checks: home, config, database, each enabled
-/// source's last fetch, sources stored but not enabled, provider keys (set or
-/// not, never their values).
-///
-/// `config` is config.toml as loaded (`Ok(None)`: none yet, so the starter
-/// sources apply). `known_source` says why an id isn't a source this build
-/// has; the list of adapters lives outside core. Live checks are the
-/// caller's: run `verify` and add [`live_checks`].
 pub async fn doctor(
     store: &Store,
     home: &std::path::Path,
@@ -907,7 +866,6 @@ pub async fn doctor(
         )
     });
 
-    // Each enabled source's last fetch: never, failed, or long ago.
     let eval = sources_eval(store).await?;
     let now = Utc::now();
     let enabled: Vec<&str> = config.enabled().map(|s| s.id.as_str()).collect();
@@ -970,7 +928,6 @@ pub async fn doctor(
         ));
     }
 
-    // Optional providers: whether the key is set, never its value.
     if config.providers.jev.as_ref().is_some_and(|j| j.enabled) {
         checks.push(
             if std::env::var("OPENROUTER_API_KEY").is_ok_and(|k| !k.is_empty()) {
@@ -994,10 +951,8 @@ pub async fn doctor(
     Ok(DoctorReport::new(checks))
 }
 
-/// A source not fetched for longer than this is worth a warning.
 const STALE_HOURS: f64 = 24.0;
 
-/// `verify` results as doctor checks, for `doctor --live`.
 pub fn live_checks(r: &VerifyReport) -> Vec<DoctorCheck> {
     r.sources
         .iter()
@@ -1023,10 +978,6 @@ pub fn live_checks(r: &VerifyReport) -> Vec<DoctorCheck> {
         .collect()
 }
 
-// ---------- ingest ----------
-// The params live here so the contract is in one place; the operation itself
-// lives in `loker-sources`, which owns the adapters.
-
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
@@ -1044,8 +995,6 @@ pub struct IngestParams {
     /// posting doesn't state it; an explicit remote/on-site/hybrid wins.
     pub remote: Option<bool>,
 }
-
-// ---------- ingest_all ----------
 
 /// One `loker ingest --all` run over the configured sources.
 #[derive(Debug, Clone, Serialize, JsonSchema)]

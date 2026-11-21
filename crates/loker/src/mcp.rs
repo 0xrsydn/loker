@@ -1,8 +1,3 @@
-//! MCP adapter: each tool deserializes the contract's params, calls [`App`],
-//! and returns the result as structured content. No logic lives here.
-//!
-//! Failures come back as tool results with `isError`, so the calling model can
-//! read the message ("unknown country `Narnia`") and retry.
 use std::sync::Arc;
 
 use loker_core::api::{
@@ -134,7 +129,6 @@ impl LokerMcp {
 )]
 impl ServerHandler for LokerMcp {}
 
-/// Serve MCP over stdin/stdout until the client disconnects.
 pub async fn serve_stdio(app: Arc<App>) -> anyhow::Result<()> {
     let service = LokerMcp { app }.serve(rmcp::transport::stdio()).await?;
     service.waiting().await?;

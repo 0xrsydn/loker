@@ -27,10 +27,8 @@ DB = os.environ.get("LOKER_EVAL_DB", os.path.join(HERE, "snapshot.db"))
 BIN = os.path.join(REPO, "target", "release", "examples", "pay_text")
 PROMPT_VERSION = "v1"
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
-MAX_CHARS = 15000  # pay is usually near the end, so the judge sees it all
+MAX_CHARS = 15000
 
-# Any currency sign or code next to a figure: the sampler's net for jobs
-# that might state pay. Wide on purpose; the random share measures what it misses.
 MENTION = re.compile(
     r"([$€£₹]|\b(USD|EUR|GBP|CAD|AUD|INR|IDR|SGD|PHP|CHF|JPY|BRL|MXN|PLN|SEK|NOK|DKK)\b)\s?\d"
     r"|\d[\d,.]*\s?(k|K)?\s?\b(USD|EUR|GBP|CAD|AUD|INR|IDR|SGD|PHP|CHF)\b")
@@ -62,15 +60,11 @@ def descriptions(ids=None):
     return out
 
 
-# ---------- sample ----------
-
 SET = arg("--set", "holdout" if "--holdout" in sys.argv else "sample")
 SAMPLE = f"{SET}.json"
 
 
 def sample():
-    """Jobs whose description mentions money, and a random share of the rest,
-    from jobs in no other set and not in seen.json."""
     n = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 300
     taken = set(load("seen.json", []))
     for name in os.listdir(HERE):
@@ -95,8 +89,6 @@ def sample_ids():
     s = load(SAMPLE, {})
     return s.get("mention", []) + s.get("rest", [])
 
-
-# ---------- label ----------
 
 PROMPT = """You extract the pay a job posting offers, exactly as the posting states it.
 
@@ -210,8 +202,6 @@ def label():
     print("done")
 
 
-# ---------- compare ----------
-
 def close(a, b):
     if a is None or b is None:
         return a is None and b is None
@@ -224,8 +214,6 @@ def same_money(a, b):
 
 
 def compare(gold, got):
-    """Base ranges matched one to one (a range given twice matches once),
-    extras by kind only: their figures are not compared."""
     gb, pb = gold.get("base", []), got.get("base", []) if got else []
     free = list(gb)
     for p in pb:
@@ -269,8 +257,6 @@ def predicted(binary, ids):
 
 
 def templates(desc):
-    """The 30 characters before each figure, digits masked: a posting's pay
-    wording, so a job can be matched to others written from the same template."""
     t = desc.replace("\\$", "$")
     return {re.sub(r"\d", "9", t[max(0, m.start() - 30):m.start()]) for m in re.finditer(r"[$€£₱]\s?\d", t)}
 
@@ -284,10 +270,6 @@ def score():
     gold = {j: labels[f"{PROMPT_VERSION}|{j}"] for j in ids}
     got = predicted(binary, ids)
     texts = descriptions(set(ids))
-    # "novel": jobs whose pay wording appears in no tuning job. The rules were
-    # fitted to the tuning sample, and templates repeat across a company's
-    # postings (one sentence is in 232 jobs), so a holdout job sharing one
-    # measures a format already tuned on. Novel is the number for new boards.
     tuning = sample_ids_of("sample.json")
     tk = set().union(*(templates(d["description"]) for d in descriptions(set(tuning)).values()))
     novel = {j for j in ids if not (templates(texts[j]["description"]) & tk)}

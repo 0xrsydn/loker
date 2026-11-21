@@ -1,9 +1,3 @@
-//! Ashby job board API (public, no key):
-//! `GET https://api.ashbyhq.com/posting-api/job-board/<board>?includeCompensation=true`.
-//!
-//! Ashby states `workplaceType` (Remote / OnSite / Hybrid) structurally, so
-//! on-site jobs are recognized with high confidence. It has no company-name
-//! field; the board slug is used.
 use chrono::DateTime;
 use loker_core::model::{Eligibility, NewJob, Pay, PayExtra, PayExtraKind, Workplace};
 use loker_core::normalize::{self, eligibility_from_text, employment_type};
@@ -23,7 +17,6 @@ pub async fn fetch(client: &HttpClient, board: &str) -> anyhow::Result<Vec<Value
         .and_then(Value::as_array)
         .cloned()
         .unwrap_or_default();
-    // Unlisted postings are reachable by link only; don't aggregate them.
     Ok(jobs
         .into_iter()
         .filter(|j| j.get("isListed").and_then(Value::as_bool) != Some(false))
@@ -55,9 +48,6 @@ struct Secondary {
     location: Option<String>,
 }
 
-/// Ashby's pay: one tier per level (or one in all), each a list of
-/// components: `Salary`, `EquityPercentage`, `EquityCashValue`, `Bonus`,
-/// `Commission`, with `interval` like `1 YEAR` or `NONE`.
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Compensation {

@@ -65,8 +65,6 @@ def with_home(binary, fn):
         shutil.rmtree(home, ignore_errors=True)
 
 
-# ---------- sample ----------
-
 def sample():
     n = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 600
     db = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
@@ -79,9 +77,6 @@ def sample():
         save(SAMPLE, picked)
         print(f"{len(picked)} of {len(ids)} active jobs -> {SAMPLE}")
         return
-    # A holdout of jobs that did not exist in the database the rules were
-    # written against: none of their text can have shaped the rules. At most
-    # 40 per source, so a few large boards don't make up the set.
     old = sqlite3.connect(f"file:{os.path.join(HERE, arg('--new-since', ''))}?mode=ro", uri=True)
     known = {u for (u,) in old.execute("SELECT canonical_url FROM canonical_jobs")}
     by_source = defaultdict(list)
@@ -112,8 +107,6 @@ def jobs_text(ids):
         }
     return out
 
-
-# ---------- label ----------
 
 def vocabulary():
     v = with_home(BIN, lambda home: loker(BIN, home, "roles"))
@@ -236,14 +229,10 @@ def label():
     print("done")
 
 
-# ---------- Jev as a contender ----------
-
 JEV_MODEL = "typesafe/jev-1.14-20261014"  # pinned: aliases move between releases
 
 
 def jev():
-    """Jev (TypeSafe, via OpenRouter Decisions) picks one role per sample job.
-    Predictions, not labels: it is scored against the Opus labels."""
     v = with_home(BIN, lambda home: loker(BIN, home, "roles"))
     criteria = {r["id"]: f"{r['label']}: {r['definition']}" for r in v["roles"]}
     criteria["none"] = "None of these: the job is outside this vocabulary (e.g. cooking, driving, retail)."
@@ -301,8 +290,6 @@ def jev_roles(version, ids):
     return out
 
 
-# ---------- score ----------
-
 def vocab_tree(binary):
     v = with_home(binary, lambda home: loker(binary, home, "roles"))
     parents = {r["id"]: ([r["family"]] if r.get("family") else []) + r.get("alsoIn", []) for r in v["roles"]}
@@ -347,8 +334,6 @@ def score():
             rules = got[jid].get("role")
             if pred.startswith("jev"):
                 got[jid]["role"] = jv[jid]
-            # hybrid: the rules where a title names a role; Jev for the rest
-            # when it is at least `threshold` sure, else the rules.
             elif not (rules and rules["method"] == "title" and rules["confidence"] >= 0.9):
                 j = jv[jid]
                 if j is None or j["confidence"] >= threshold:
@@ -370,8 +355,6 @@ def score():
         compatible = exact or (mine != "none" and want != "none" and (
             within(parents, mine, want) or within(parents, want, mine) or want in mine_all))
         same_family = mine != "none" and want != "none" and top(parents, mine) == top(parents, want)
-        # What a role filter does (JobRole::matches): a search for the
-        # label's role returns the job only if one of our roles sits inside it.
         findable = (mine == want == "none") or (want != "none" and any(
             within(parents, r, want) for r in mine_all if r != "none"))
         c["findable"] += findable

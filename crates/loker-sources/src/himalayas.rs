@@ -1,4 +1,3 @@
-//! Himalayas public jobs API: https://himalayas.app/jobs/api (no key, cursor pagination).
 use std::time::Duration;
 
 use anyhow::Context;
@@ -12,8 +11,6 @@ use serde::Deserialize;
 use serde_json::Value;
 
 pub const SOURCE_ID: &str = "himalayas";
-/// Feed: `/jobs/api` (cursor). Filtered search: `/jobs/api/search` (e.g. `country=ID`
-/// returns worldwide jobs plus jobs listing that country; page-numbered).
 const BASE: &str = "https://himalayas.app";
 const PAGE_SIZE: u32 = 20;
 
@@ -25,8 +22,6 @@ struct Page {
     next_cursor: Option<String>,
 }
 
-/// Fetch up to `pages` pages, newest first, politely (one request per second).
-/// With `country`, uses the search endpoint (page-numbered); without, the full feed (cursor).
 pub async fn fetch(
     client: &reqwest::Client,
     pages: u32,
@@ -126,8 +121,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     })
 }
 
-/// Himalayas states eligibility as data: an empty country list means worldwide, and
-/// `timezoneRestrictions` lists the allowed UTC offsets (every zone = no restriction).
 fn eligibility(item: &Item) -> Eligibility {
     let mut countries: Vec<String> = Vec::new();
     let mut unmapped: Vec<&str> = Vec::new();
@@ -139,7 +132,6 @@ fn eligibility(item: &Item) -> Eligibility {
     }
     countries.sort();
     countries.dedup();
-    // Remote only; an empty restriction list is worldwide, a list is the limit.
     let elsewhere = if item.location_restrictions.is_empty() {
         Elsewhere::Open
     } else {

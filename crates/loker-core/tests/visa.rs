@@ -1,5 +1,3 @@
-//! Visa sponsorship read from descriptions. A wrong "not offered" turns a job
-//! away, so the rows that say nothing about sponsorship matter as much.
 use loker_core::model::Sponsorship::{self, *};
 use loker_core::visa_text::visa_from_text;
 
@@ -29,7 +27,6 @@ fn sponsorship_read_from_descriptions() {
             "Revlon is unable to sponsor or transfer employment visas for this role.",
             Some(NotOffered),
         ),
-        // A heading with its answer on the next line.
         (
             "### VISA Sponsorship:\n\nNo\n\n### Travel:",
             Some(NotOffered),
@@ -45,7 +42,6 @@ fn sponsorship_read_from_descriptions() {
             "you'll need the right to work in the UK, as we're unable to provide sponsorship at this time.",
             Some(NotOffered),
         ),
-        // Hedged, transfers only, or different by place.
         (
             "You must be work authorized in the United States without the need for new visa sponsorship. The company can support visa transfers but will not sponsor individuals for H-1B CAP applications.",
             Some(Limited),
@@ -63,7 +59,6 @@ fn sponsorship_read_from_descriptions() {
             "No visa sponsorship for candidates outside the US.\nVisa sponsorship available for eligible candidates",
             Some(Limited),
         ),
-        // Says nothing about sponsorship.
         (
             "Candidates must be legally authorized to work in the United States.",
             None,

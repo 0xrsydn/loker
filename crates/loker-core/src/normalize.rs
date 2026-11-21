@@ -1,23 +1,9 @@
-//! Normalization shared by every adapter: match keys, URLs, pay, employment
-//! type, seniority, and free-text locations → `Eligibility`. Kept deliberately simple;
-//! `loker sources eval` measures what these rules miss before new rules are added.
 use crate::country;
 use crate::model::{
     Eligibility, Method, Money, NewJob, Pay, PayExtra, PayExtraKind, PayMethod, Percent, Period,
     Scope, Seniority, Workplace,
 };
 
-// ---------- every job ----------
-
-/// The cleanups every job gets after its adapter's `transform`, whatever the
-/// source: so an adapter only maps fields, and no source can forget one.
-///
-/// * title, company and category: HTML entities decoded, whitespace collapsed;
-/// * every URL through [`clean_url`];
-/// * empty optional text (apply URL, seniority, employment type, category,
-///   description) becomes `None`;
-/// * no pay from the source: pay stated in the description, if any
-///   ([`crate::pay_text`]).
 pub fn tidy(job: &mut NewJob) {
     job.title = one_line(&decode_entities(&job.title));
     job.company = one_line(&decode_entities(&job.company));
@@ -56,9 +42,6 @@ fn non_empty(s: Option<String>) -> Option<String> {
     s.map(|s| s.trim().to_string()).filter(|s| !s.is_empty())
 }
 
-// ---------- match keys ----------
-
-/// Legal-form words dropped from the end of company names.
 const COMPANY_SUFFIXES: &[&str] = &[
     "inc",
     "llc",
@@ -84,7 +67,6 @@ const COMPANY_SUFFIXES: &[&str] = &[
     "pt",
 ];
 
-/// "Lemon.io, Inc." → "lemonio". Lowercase alphanumerics only, legal suffixes dropped.
 pub fn company_key(name: &str) -> String {
     let mut words: Vec<String> = name
         .to_lowercase()
@@ -102,7 +84,6 @@ pub fn company_key(name: &str) -> String {
     words.concat()
 }
 
-/// "Expert Talent Pool, Physical AI" → "expert talent pool physical ai".
 pub fn title_key(title: &str) -> String {
     title
         .to_lowercase()
@@ -112,10 +93,6 @@ pub fn title_key(title: &str) -> String {
         .join(" ")
 }
 
-// ---------- URLs ----------
-
-/// Drop `utm_*`, `ref` and `source` query parameters and lowercase the host,
-/// so the same posting always has the same URL.
 pub fn clean_url(url: &str) -> String {
     let url = url.trim();
     let (scheme_host, rest) = match url.find("://") {
@@ -147,9 +124,6 @@ pub fn clean_url(url: &str) -> String {
     }
 }
 
-// ---------- pay ----------
-
-/// Pay from one range in a source's own fields, the common case.
 pub fn pay(
     min: Option<f64>,
     max: Option<f64>,
@@ -160,10 +134,6 @@ pub fn pay(
     pay_from(vec![money(min, max, currency, Some(period))?], vec![], None)
 }
 
-/// Pay from base ranges and extras. Base ranges without a period, and
-/// dollar-like ranges outside 100..=100k a month (a source's typo or a
-/// placeholder), are dropped; extras are kept one per kind, the one with figures first. `None`
-/// when nothing is left. `raw` is the source's own summary, if it has one.
 pub fn pay_from(base: Vec<Money>, mut extras: Vec<PayExtra>, raw: Option<&str>) -> Option<Pay> {
     let base: Vec<Money> = base
         .into_iter()
@@ -192,10 +162,6 @@ pub fn pay_from(base: Vec<Money>, mut extras: Vec<PayExtra>, raw: Option<&str>) 
     })
 }
 
-/// A checked amount: ends that are finite and positive, `min <= max`, a top
-/// at most 10× the bottom (wider is a typo in any currency: "65,000–6,000,000"),
-/// and an ISO 4217 code. `None` when any check fails: a wrong figure is worse
-/// than none. A zero end counts as not stated (sources use 0 for "none").
 pub fn money(
     min: Option<f64>,
     max: Option<f64>,
@@ -221,7 +187,6 @@ pub fn money(
     })
 }
 
-/// A checked percentage, as [`money`], at most 100.
 pub fn percent(min: Option<f64>, max: Option<f64>) -> Option<Percent> {
     let (min, max) = ends(min, max)?;
     [min, max]
@@ -240,9 +205,6 @@ fn ends(min: Option<f64>, max: Option<f64>) -> Option<(Option<f64>, Option<f64>)
     }
 }
 
-/// A period as sources write it: "annual", "yearly", "per-year-salary",
-/// "1 YEAR", "hr". `None` for anything else ("NONE", "2 WEEK", "biweekly"),
-/// so an unknown period is never read as a known one.
 pub fn pay_period(s: &str) -> Option<Period> {
     let mut found = None;
     for w in s
@@ -266,12 +228,8 @@ pub fn pay_period(s: &str) -> Option<Period> {
     found
 }
 
-/// Currencies worth roughly a dollar (0.6 to 1.3 USD), so USD's bounds hold
-/// for them too. Others can't be checked until there are exchange rates.
 const NEAR_USD: &[&str] = &["USD", "EUR", "GBP", "CHF", "CAD", "AUD", "NZD", "SGD"];
 
-/// Base pay in a dollar-like currency must be 100..=100k a month: below is a
-/// benefit or a typo ("800 EUR a year"), above a placeholder or a grant.
 fn plausible(m: &Money) -> bool {
     let Some(f) = m.period.map(Period::per_month) else {
         return true;
@@ -283,13 +241,11 @@ fn plausible(m: &Money) -> bool {
             .all(|v| (100.0..=100_000.0).contains(&(v * f)))
 }
 
-/// A USD amount per month, `None` for other currencies or no period.
 fn usd_month(m: &Money) -> Option<(Option<f64>, Option<f64>)> {
     let f = m.period?.per_month();
     (m.currency == "USD").then(|| (m.min.map(|v| v * f), m.max.map(|v| v * f)))
 }
 
-/// "USD 120,000–150,000 a year + equity, bonus"
 fn pay_text(base: &[Money], extras: &[PayExtra]) -> String {
     let base = base.iter().map(money_text).collect::<Vec<_>>().join("; ");
     let extras = extras
@@ -339,7 +295,6 @@ fn money_text(m: &Money) -> String {
     format!("{label}{amount}{per}")
 }
 
-/// "120,000–150,000", "120,000", or one end.
 fn span(min: Option<f64>, max: Option<f64>) -> String {
     match (min, max) {
         (Some(a), Some(b)) if a == b => number(a),
@@ -349,7 +304,6 @@ fn span(min: Option<f64>, max: Option<f64>) -> String {
     }
 }
 
-/// 120000 → "120,000"; 18.5 → "18.50".
 fn number(v: f64) -> String {
     let cents = (v * 100.0).round() as u64;
     let digits = (cents / 100).to_string();
@@ -366,9 +320,6 @@ fn number(v: f64) -> String {
     out
 }
 
-// ---------- seniority ----------
-
-/// Level words as word sequences, lowest level first.
 const LEVEL_WORDS: &[(Seniority, &[&str])] = &[
     (
         Seniority::Intern,
@@ -404,7 +355,6 @@ const LEVEL_WORDS: &[(Seniority, &[&str])] = &[
     ),
 ];
 
-/// Phrases with a level word that don't name a level.
 const NOT_LEVELS: &[&str] = &[
     "member of technical staff",
     "staff accountant",
@@ -412,11 +362,6 @@ const NOT_LEVELS: &[&str] = &[
     "lead gen",
 ];
 
-/// A job's level: from the title when it names one (the employer's own
-/// words, and more precise than a source's "senior" for "Staff Engineer"),
-/// else from the level the source states. The highest level named wins:
-/// "Senior Staff Engineer" is lead. A source's "executive" counts; a title's
-/// doesn't ("Account Executive").
 pub fn seniority(stated: Option<&str>, title: &str) -> Option<Seniority> {
     level_in(title).or_else(|| {
         let stated = stated?;
@@ -440,8 +385,6 @@ fn level_in(text: &str) -> Option<Seniority> {
         .map(|(level, _)| *level)
 }
 
-/// Lowercase alphanumeric words joined by single spaces, padded with a space
-/// on each side so phrases match whole words.
 fn words(text: &str) -> String {
     let lower = text.to_lowercase();
     let ws: Vec<&str> = lower
@@ -450,8 +393,6 @@ fn words(text: &str) -> String {
         .collect();
     format!(" {} ", ws.join(" "))
 }
-
-// ---------- employment type ----------
 
 pub fn employment_type(s: &str) -> String {
     let k: String = s
@@ -468,8 +409,6 @@ pub fn employment_type(s: &str) -> String {
         _ => s.trim().to_lowercase().replace([' ', '-'], "_"),
     }
 }
-
-// ---------- locations ----------
 
 const WORLDWIDE: &[&str] = &[
     "anywhere",
@@ -499,7 +438,6 @@ const REGIONS: &[(&str, &str)] = &[
     ("oceania", "Oceania"),
 ];
 
-/// Words that say "remote" without saying where.
 const NOISE: &[&str] = &[
     "remote",
     "only",
@@ -511,19 +449,14 @@ const NOISE: &[&str] = &[
     "wfh",
 ];
 
-/// One place name as a location names it.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Place {
     Worldwide,
     Region(&'static str),
-    /// A country, or a state or province of one.
     Country(&'static str),
-    /// A city's country: an office may be there.
     City(&'static str),
 }
 
-/// Read one place name (lowercase, noise words removed): worldwide, a
-/// region, a country (or state, province), a city, or `None`.
 pub fn place(name: &str) -> Option<Place> {
     let p = name.trim();
     if WORLDWIDE.contains(&p) {
@@ -541,13 +474,6 @@ pub fn place(name: &str) -> Option<Place> {
     }
 }
 
-/// Turn a free-text location ("Remote - US", "Hong Kong; Singapore", "EMEA",
-/// "Anywhere") into eligibility.
-///
-/// `remote` is what the source states structurally: `Some(true)` for a
-/// remote-only board or an explicit remote flag, `Some(false)` for an explicit
-/// on-site flag, `None` when the source doesn't say. Text containing "remote"
-/// counts as `Some(true)`.
 pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
     let raw = text.trim();
     let lower = raw.to_lowercase();
@@ -557,8 +483,6 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
     let mut regions = Vec::new();
     let mut worldwide = false;
     let mut unmapped = Vec::new();
-    // Countries named only through a city ("Warsaw"): where an office is,
-    // not necessarily where remote work may be done from.
     let mut city_countries = Vec::new();
     for part in lower
         .split([';', ',', '/', '|', '(', ')'])
@@ -617,8 +541,6 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
             countries,
             ..base(Scope::Onsite, 0.85, None)
         },
-        // "Remote" with only a city: inside that country it may be on-site
-        // or hybrid there (maybe); outside it, no.
         Some(true) if only_cities => Eligibility {
             countries,
             ..base(
@@ -652,8 +574,6 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
             }
         }
         None if raw.is_empty() => base(Scope::Unknown, 0.2, Some("no location given".into())),
-        // Remote or on-site isn't stated, but the places are: whichever it is,
-        // the job is tied to them. Scope stays unknown; the verdict uses them.
         None if !countries.is_empty() || !regions.is_empty() => {
             let places = [regions.as_slice(), countries.as_slice()]
                 .concat()

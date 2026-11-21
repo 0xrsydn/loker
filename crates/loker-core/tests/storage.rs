@@ -1,6 +1,3 @@
-//! SQL reads fields out of the stored job JSON by name (`'$.eligibility.scope'`,
-//! `'$.descriptionMd'`, …). A renamed Rust field would make those reads come
-//! back NULL instead of failing, so pin each one through the numbers it feeds.
 mod common;
 
 use common::{days, ingest, job, store};
@@ -31,8 +28,6 @@ async fn every_json_path_the_sql_reads_resolves() {
     let s = store("json-paths").await;
     ingest(&s, "himalayas", &[j]).await;
 
-    // sources_eval: '$.eligibility.{scope,evidence,tz}', '$.pay', '$.pay.usdMonth*',
-    // '$.postedAt', '$.descriptionMd'.
     let eval = serde_json::to_value(api::sources_eval(&s).await.unwrap()).unwrap();
     let src = &eval["sources"][0];
     for field in [
@@ -43,18 +38,29 @@ async fn every_json_path_the_sql_reads_resolves() {
         "postedAt",
         "description",
     ] {
-        assert_eq!(src["coverage"][field], 1.0, "coverage.{field}: {src:#}");
+        assert_eq!(
+            src["coverage"][field], 1.0,
+            "sources_eval reads '$.eligibility.scope', '$.eligibility.tz', '$.pay', \
+             '$.pay.usdMonth*', '$.postedAt', '$.descriptionMd': coverage.{field}: {src:#}"
+        );
     }
-    assert_eq!(src["locationUnmapped"], 1, "{src:#}");
+    assert_eq!(
+        src["locationUnmapped"], 1,
+        "sources_eval reads '$.eligibility.evidence': {src:#}"
+    );
 
-    // canonical_jobs columns generated from the merged job JSON:
-    // `remote_scope` ('$.eligibility.scope') and '$.eligibility.countries'.
     let stats = api::stats(&s).await.unwrap();
-    assert_eq!(stats.by_scope[0].scope, "countries");
-    assert_eq!(s.search("", Some("ID"), 10, 0).await.unwrap().len(), 1);
+    assert_eq!(
+        stats.by_scope[0].scope, "countries",
+        "generated column `remote_scope` ('$.eligibility.scope')"
+    );
+    assert_eq!(
+        s.search("", Some("ID"), 10, 0).await.unwrap().len(),
+        1,
+        "generated from '$.eligibility.countries'"
+    );
     assert_eq!(s.search("", Some("US"), 10, 0).await.unwrap().len(), 0);
 
-    // `posted_at` ('$.postedAt') orders an empty query newest first.
     let mut newer = job(
         "himalayas",
         "h2",
@@ -72,5 +78,9 @@ async fn every_json_path_the_sql_reads_resolves() {
         .into_iter()
         .map(|j| j.title)
         .collect();
-    assert_eq!(titles, ["Data Engineer", "Backend Engineer"]);
+    assert_eq!(
+        titles,
+        ["Data Engineer", "Backend Engineer"],
+        "`posted_at` ('$.postedAt') orders an empty query newest first"
+    );
 }

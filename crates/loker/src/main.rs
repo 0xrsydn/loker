@@ -1,4 +1,3 @@
-//! CLI adapter: flags → contract params → [`App`] → text (or the same JSON MCP returns).
 use std::sync::Arc;
 
 use clap::{Parser, Subcommand};
@@ -521,7 +520,6 @@ fn print_hit(hit: &SearchHit) {
     );
 }
 
-/// An enum's serde id ("ai_engineering").
 fn id_str(v: impl Serialize) -> String {
     serde_json::to_value(v)
         .ok()
@@ -542,7 +540,6 @@ fn roles_text(roles: &[Role], modifiers: &[Modifier]) -> String {
     }
 }
 
-/// " · senior [backend, forward_deployed]": level, then roles and modifiers.
 fn about(s: Option<Seniority>, roles: &[Role], modifiers: &[Modifier]) -> String {
     format!("{}{}", level(s), roles_text(roles, modifiers))
 }

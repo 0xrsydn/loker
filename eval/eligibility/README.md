@@ -31,12 +31,15 @@ python3 eligibility_eval.py score [--set holdout] [--bin PATH] [-v]
   recovered when the stored scope was known and re-reading without the
   flag gives none (226 Binance jobs).
 - **Viewers.** US (UTC-5), DE (+1), BR (-3), IN (+5.5), ID (+7): each wants
-  to work remotely from home and won't relocate or commute.
+  to work remotely from home and won't relocate or commute. The offsets are
+  standard time, as in November when the sets were labelled.
 - **Labels.** Prompt v1 in the script. The labeler sees the board's own
   fields (long text dropped), a line on what each board's fields mean as
   the board documents them, and the description; never loker's reading.
   When a board field and the description disagree, the more specific one
-  wins.
+  wins. Each labeller runs with no tools, no session and an empty working
+  directory, so nothing but the prompt reaches it; Pi holds the OpenCode Go
+  key for DeepSeek.
 
 ## Sets
 
@@ -140,6 +143,12 @@ Opus doesn't. No Lever board was new, so Lever has no unseen test since
 `holdout`. `holdout2` is now used; the next change needs a new one.
 
 ### Workable (a new source, 2026-11-20)
+
+Each Workable snapshot was fetched after the previous round of rules, and
+each set leaves out every job of the earlier ones: `workable` (2026-11-20
+15:10) is 10 pages plus 5 each for PH, ID, IN and DE, `workable2` 30 pages
+plus 10 each, `workable3` 50 pages plus 15 each, and `workable4` 10 pages
+each for BR, GB and US.
 
 `workable.json` (60 jobs, 46 companies) was Workable's first test, before
 any rule looked at it: yes right 39/42, but 33 (Opus) or 66 (DeepSeek)

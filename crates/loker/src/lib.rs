@@ -1,10 +1,3 @@
-//! loker as a library: [`App`] is the one handle every adapter holds.
-//!
-//! Each operation is one method taking the contract's params type and returning
-//! its result type (see `loker_core::api`). Adapters only translate:
-//! CLI flags → params → `App` → text or JSON; MCP arguments → params → `App` →
-//! structured content. A new adapter (REST, a test harness) is the same shape.
-
 pub mod mcp;
 
 use std::path::{Path, PathBuf};
@@ -27,7 +20,6 @@ pub struct App {
 }
 
 impl App {
-    /// Open (or create) the database under a loker home directory.
     pub async fn open(home: &Path) -> anyhow::Result<Self> {
         Ok(Self {
             home: home.to_path_buf(),
@@ -60,8 +52,6 @@ impl App {
         loker_sources::ingest(&self.store, &self.http, p).await
     }
 
-    /// Ingest every enabled source in config.toml, or the starter sources
-    /// when there is no config.toml yet.
     pub async fn ingest_all(&self) -> api::Result<IngestAllReport> {
         let (config, notice) = match self.config()? {
             Some(c) => (c, None),
@@ -70,8 +60,6 @@ impl App {
         let sources = config.enabled().flat_map(|s| s.params()).collect();
         let mut report = loker_sources::ingest_all(&self.store, &self.http, sources).await?;
         report.notice = notice;
-        // Roles by a model after the sources, so ingest never waits on it;
-        // a failure here is reported, not fatal.
         if let Some(jev) = config.providers.jev.as_ref().filter(|j| j.enabled) {
             report.roles = Some(match self.enrich_with(&jev.model, usize::MAX).await {
                 Ok(r) => r,
@@ -86,8 +74,6 @@ impl App {
         Ok(report)
     }
 
-    /// Classify job roles with the model in `[providers.jev]`: jobs with no
-    /// cached answer, at most `limit`.
     pub async fn enrich_roles(&self, limit: Option<usize>) -> api::Result<RoleEnrichReport> {
         let jev = self
             .config()?
@@ -113,9 +99,6 @@ impl App {
             .map_err(Error::Internal)
     }
 
-    /// Named sources use their config.toml parameters when listed there; with
-    /// no names, the enabled config sources (or, without a config, every
-    /// source in the store).
     pub async fn verify(&self, p: VerifyParams) -> api::Result<VerifyReport> {
         let config = self.config()?;
         let configured = |id: &str| {
@@ -146,14 +129,10 @@ impl App {
         loker_sources::verify(&self.http, targets).await
     }
 
-    /// config.toml's sources, each checked against the sources this build has;
-    /// `None` when there is no config.toml.
     pub fn config_check(&self) -> api::Result<Option<Vec<config::SourceStatus>>> {
         Ok(self.config()?.map(|c| c.check(&known_source)))
     }
 
-    /// Is this install set up and healthy? The checks are
-    /// `loker_core::api::doctor`; `live` adds a `verify` of every enabled source.
     pub async fn doctor(&self, live: bool) -> api::Result<DoctorReport> {
         let config = config::load(&self.home).map_err(|e| format!("{e:#}"));
         let known = |id: &str| {
@@ -171,7 +150,6 @@ impl App {
         Ok(report.extend(api::live_checks(&verified)))
     }
 
-    /// The current config.toml, read fresh so edits apply without a restart.
     pub fn config(&self) -> api::Result<Option<Config>> {
         config::load(&self.home).map_err(|e| Error::Invalid(format!("{e:#}")))
     }
@@ -181,16 +159,12 @@ impl App {
     }
 }
 
-/// Why `id` isn't a source this build has, if it isn't.
 fn known_source(id: &str) -> Result<(), String> {
     loker_sources::Source::parse(id)
         .map(|_| ())
         .map_err(|e| e.to_string())
 }
 
-/// JSON Schemas of the v1 contract: every operation's params and result, by
-/// file name. Committed under `schema/v1/`; the e2e test fails when they drift,
-/// so contract changes are always deliberate (and additive within v1).
 pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
     use loker_core::model::IngestStats;
     macro_rules! schema {

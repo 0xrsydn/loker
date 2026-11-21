@@ -69,12 +69,17 @@ id = "remoteok"
 enabled = false        # listed but skipped
 ```
 
+config.toml holds intent (which sources, with what parameters); what
+happened lives in the database. The file is versioned, and an unknown key is
+an error, so a typo never silently disables a source.
 `loker ingest --all` fetches every enabled source in order; one failing source
 doesn't stop the others, and the exit status is non-zero if any failed.
 `loker verify` checks the same sources with the same parameters.
 `contrib/systemd/` has a oneshot service (ingest, then verify) and a timer
-that runs it every 6 hours; the service file says how to install it as a user
-unit.
+that runs it every 6 hours, with up to 20 minutes of random delay so many
+installs don't hit the sources at the same moment; a run missed while the
+machine was off happens at the next boot. The service file says how to
+install it as a user unit.
 
 **Secrets.** None is required: without them loker runs fully offline.
 Optional providers read their key from the environment, never from
@@ -115,11 +120,16 @@ Each job records where it is open (worldwide, countries, regions such as APAC
 or EMEA, or on-site), and every search with `--country` turns that into a
 verdict for you: `yes`, `maybe`, `unknown`, or `no` (dropped). Regions resolve
 to their countries when you search, so "APAC" is a yes from Indonesia and a no
-from Brazil. A posting that lists places but not whether it is remote (most
+from Brazil. Regions mean what job posts mean by them, not geography: APAC is
+East, Southeast and South Asia plus Oceania; EMEA is Europe, the Middle East
+and Africa; LATAM is Mexico, Central America, the Latin Caribbean and South
+America. Türkiye and Egypt count in two blocks. A posting that lists places but not whether it is remote (most
 Greenhouse boards) is still tied to them: `no` from elsewhere, `maybe` from
 inside, since it may be on-site. For a remote-first company whose locations
 are where you can be based, `remote = true` on its board in config.toml makes
-those countries a plain list: `yes` from inside.
+those countries a plain list: `yes` from inside. The flag only fills in what a
+posting leaves unknown; a posting that says on-site, hybrid or remote keeps
+it.
 
 ### Jobs close
 
@@ -151,6 +161,8 @@ Tools: `search_jobs` (query, `anyWord`, `country`, `tz`, `limit`, `offset`,
 and its role), `get_jobs`, `list_roles` (the role vocabulary), `sources_eval`, `verify_sources`
 and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
+config.toml is read each time it is needed, so edits apply without
+restarting the server.
 
 For agents, the cheap flow is a compact search for jobs the viewer can apply
 to, then full details for the picks:
@@ -200,7 +212,16 @@ files disagree, so contract changes are always deliberate.
 with warnings denied and checks formatting with rustfmt; CI runs it on every
 push and pull request. CI reads build dependencies from a public, signed Nix
 cache on Cloudflare R2 (alongside cache.nixos.org), and pushes to `main` refill
-it (`.github/push-nix-cache.sh`).
+it (`.github/push-nix-cache.sh`). Reads are public, through the
+cache.rasyidanaf.com gateway (a Cloudflare Worker), every path is signed by
+`loker-ci-1`, and if the cache is unreachable Nix builds instead. The push
+uploads only what cache.nixos.org doesn't serve: crane's compiled
+dependencies and the vendored crate sources; per-commit outputs (the binary,
+clippy, fmt, the filtered source) would never be reused. It needs an R2 token
+with write access (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`),
+`R2_ENDPOINT` and the `loker-ci-1` signing key (`NIX_SIGNING_KEY`); without
+them it does nothing, so forks still pass. `NIX_CACHE_TO=file:///tmp/cache`
+tries it without touching R2.
 
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),

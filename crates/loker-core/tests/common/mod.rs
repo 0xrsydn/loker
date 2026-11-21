@@ -1,5 +1,3 @@
-//! Helpers for the offline store tests: hand-written jobs, a temp database and
-//! a fixed clock the tests move by hand.
 #![allow(dead_code)]
 use std::collections::BTreeSet;
 
@@ -7,7 +5,6 @@ use chrono::{DateTime, Duration, TimeZone, Utc};
 use loker_core::model::{Eligibility, IngestStats, Method, NewJob, Scope, SourceKind};
 use loker_core::store::{Batch, SourceMeta, Store};
 
-/// Active jobs as sets of "source url", comparable across databases (ids are not).
 pub type Clusters = BTreeSet<Vec<String>>;
 
 pub async fn store(name: &str) -> Store {
@@ -72,12 +69,10 @@ fn meta(id: &str) -> SourceMeta {
     }
 }
 
-/// A partial feed (an aggregator's newest N) at `t0`.
 pub async fn ingest(s: &Store, source: &str, jobs: &[NewJob]) -> IngestStats {
     ingest_at(s, source, jobs, t0(), false).await
 }
 
-/// `complete`: the batch is the source's whole list, so missing listings close.
 pub async fn ingest_at(
     s: &Store,
     source: &str,

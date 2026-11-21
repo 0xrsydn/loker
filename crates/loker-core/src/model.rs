@@ -82,8 +82,6 @@ pub struct TzWindow {
 }
 
 impl TzWindow {
-    /// Offsets a day apart are the same hours: UTC+13 (New Zealand in summer)
-    /// is inside a window that lists it as UTC-11.
     pub fn contains(&self, offset: f64) -> bool {
         let (from, to, offset) = (
             normalize_offset(self.from),
@@ -127,7 +125,6 @@ impl TzWindow {
     }
 }
 
-/// Map an offset into `[-12, 12)`, so `+14` (Kiribati) sits next to `-10`.
 fn normalize_offset(o: f64) -> f64 {
     let mut x = o;
     while x >= 12.0 {
@@ -139,28 +136,21 @@ fn normalize_offset(o: f64) -> f64 {
     x
 }
 
-/// Who can take a job, as three answers: is it remote (`workplace`), where
-/// it is open (`regions`, `countries`; for an office job, where the office
-/// is), and what it says about everyone else (`elsewhere`). `scope` on the
-/// wire is derived from them, for clients of earlier contract versions.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Eligibility {
     pub workplace: Workplace,
     pub elsewhere: Elsewhere,
     pub regions: Vec<String>,
-    /// ISO 3166-1 alpha-2 codes.
     pub countries: Vec<String>,
     pub onsite_city: Option<String>,
     pub tz: Option<TzWindow>,
     pub confidence: f64,
     pub method: Method,
     pub evidence: Option<String>,
-    /// Original location text, kept for the evidence trail.
     pub raw: Option<String>,
 }
 
 impl Eligibility {
-    /// Nothing known yet: no places, remote or not unstated.
     pub fn unknown(method: Method) -> Self {
         Eligibility {
             workplace: Workplace::Unknown,
@@ -176,8 +166,6 @@ impl Eligibility {
         }
     }
 
-    /// The axes a `scope` stands for: how rows stored before they existed
-    /// read, and a shorthand for building one.
     pub fn axes_of(scope: Scope) -> (Workplace, Elsewhere) {
         match scope {
             Scope::Worldwide => (Workplace::Remote, Elsewhere::Open),
@@ -188,7 +176,6 @@ impl Eligibility {
         }
     }
 
-    /// Set both axes from a `scope`.
     pub fn with_scope(mut self, scope: Scope) -> Self {
         (self.workplace, self.elsewhere) = Self::axes_of(scope);
         self
@@ -198,7 +185,6 @@ impl Eligibility {
         !self.countries.is_empty() || !self.regions.is_empty()
     }
 
-    /// The one-word summary earlier contract versions carried.
     pub fn scope(&self) -> Scope {
         match self.workplace {
             Workplace::Onsite => Scope::Onsite,
@@ -341,8 +327,6 @@ pub enum Period {
 }
 
 impl Period {
-    /// How many of this period make a month, by the usual convention
-    /// (160 working hours, 21 working days).
     pub fn per_month(self) -> f64 {
         match self {
             Period::Hour => 160.0,
@@ -468,9 +452,6 @@ impl SourceKind {
     }
 }
 
-/// A job as an adapter produces it, normalized, before it is linked to a
-/// canonical job. Stored per source (without `raw`) so the canonical job can be
-/// rebuilt from all its sources.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NewJob {
@@ -483,9 +464,6 @@ pub struct NewJob {
     pub company: String,
     pub seniority: Option<String>,
     pub employment_type: Option<String>,
-    /// The source's own category, department or team, as it says it
-    /// ("DevOps and Sysadmin", "Engineering; Core Engineering"). Raw input for
-    /// the role classifier, which knows which phrases mean something.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub category: Option<String>,
     pub eligibility: Eligibility,
@@ -493,15 +471,10 @@ pub struct NewJob {
     pub tech_tags: Vec<String>,
     pub description_md: Option<String>,
     pub posted_at: Option<DateTime<Utc>>,
-    /// When the source says the listing ends, if it says.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<DateTime<Utc>>,
-    /// Visa sponsorship as the source states it in a field of its own. Absent
-    /// when only the description says; that is read when a job is read.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub visa: Option<Visa>,
-    /// Years of experience as the source states them in a field of its own.
-    /// Absent when only the description says; that is read when a job is read.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub experience: Option<Experience>,
     #[serde(skip)]

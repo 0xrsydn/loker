@@ -1,6 +1,3 @@
-# Runs loker-ingest.service every 6 hours, spread over 20 minutes so many
-# installs don't hit the sources at the same moment. Persistent: a run missed
-# while the machine was off happens at the next boot.
 [Unit]
 Description=loker: ingest job sources every 6 hours
 Documentation=https://github.com/0xrsydn/loker

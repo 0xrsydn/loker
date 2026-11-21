@@ -1,54 +1,8 @@
-//! What a job is: a vocabulary of roles grouped into families, plus modifiers
-//! that cut across them. Every source's words (titles, categories,
-//! departments) map onto this one vocabulary, at whatever level the source is
-//! specific to; a filter may name any level, like a region naming countries.
-//!
-//! ```text
-//! engineering ─ software, backend, frontend, fullstack, product_engineer,
-//!               mobile, infrastructure, security, qa, embedded, hardware,
-//!               technical_writing, engineering_management,
-//!               design_engineer (also design), devrel (also go_to_market)
-//! ai ────────── ai_engineering, ml_engineering, ml_infrastructure, research
-//!               (the family sits inside engineering)
-//! data ──────── data_engineering (also engineering), data_science, data_analysis
-//! product ───── product_management, program_management
-//! design ────── product_design, ux_research, brand_design
-//! go_to_market  sales, marketing, product_marketing,
-//!               sales_engineering (also engineering), customer_success (also support)
-//! support ───── customer_support, technical_support
-//! operations ── business_operations, finance, legal, compliance, people,
-//!               recruiting, it, admin
-//! ai_training, education, healthcare        (families with no roles yet)
-//!
-//! modifiers: forward_deployed, founding
-//! ```
-//!
-//! Function only: seniority, domain (game, web3), company stage and
-//! employment type are other fields, and specialisms (computer vision, NLP)
-//! are left to search. A job stores its most specific role, a family alone
-//! when its source says no more, or no role.
-//!
-//! # Changing the vocabulary
-//!
-//! Ids are stable: once data uses one it is never renamed, reused or given a
-//! new meaning; labels and definitions may change. Clients must accept ids
-//! they don't know. Every change bumps [`VERSION`] and is noted in
-//! ARCHITECTURE.md.
-//!
-//! * **Add** a role: a variant, its [`Role::info`], its place in [`Role::ALL`].
-//! * **Split** a role: add the narrower roles with the old one among their
-//!   `also_in`, so filters naming the old id still find them.
-//! * **Move** a role: change its `home` (and `also_in`); the id stays.
-//! * **Retire** a role: set `replaced_by`; the classifier stops emitting it
-//!   and stored jobs keep resolving.
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-/// Version of the vocabulary, bumped on every change to it.
 pub const VERSION: u32 = 1;
 
-/// At most this many roles per job (primary plus secondary), as LinkedIn
-/// caps job functions.
 pub const MAX_ROLES: usize = 3;
 
 /// A family (`engineering`) or a role in one (`backend`). The list is open:
@@ -58,7 +12,6 @@ pub const MAX_ROLES: usize = 3;
 )]
 #[serde(rename_all = "snake_case")]
 pub enum Role {
-    // Families.
     Engineering,
     Ai,
     Data,
@@ -70,7 +23,6 @@ pub enum Role {
     AiTraining,
     Education,
     Healthcare,
-    // Engineering.
     Software,
     Backend,
     Frontend,
@@ -86,32 +38,25 @@ pub enum Role {
     EngineeringManagement,
     DesignEngineer,
     Devrel,
-    // AI.
     AiEngineering,
     MlEngineering,
     MlInfrastructure,
     Research,
-    // Data.
     DataEngineering,
     DataScience,
     DataAnalysis,
-    // Product.
     ProductManagement,
     ProgramManagement,
-    // Design.
     ProductDesign,
     UxResearch,
     BrandDesign,
-    // Go to market.
     Sales,
     Marketing,
     ProductMarketing,
     SalesEngineering,
     CustomerSuccess,
-    // Support.
     CustomerSupport,
     TechnicalSupport,
-    // Operations.
     BusinessOperations,
     Finance,
     Legal,
@@ -122,17 +67,12 @@ pub enum Role {
     Admin,
 }
 
-/// What the vocabulary says about one id.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct RoleInfo {
     pub label: &'static str,
     pub definition: &'static str,
-    /// The family it belongs to; `None` for a family that sits in no other.
     pub home: Option<Role>,
-    /// Other families (or a role it was split from) whose filters also take
-    /// it in.
     pub also_in: &'static [Role],
-    /// Set when the id is retired: what to use instead.
     pub replaced_by: Option<Role>,
 }
 
@@ -152,7 +92,6 @@ const fn info(
 }
 
 impl Role {
-    /// Every id, families first, each family's roles after it.
     pub const ALL: &[Role] = &[
         Role::Engineering,
         Role::Ai,
@@ -487,7 +426,6 @@ impl Role {
         }
     }
 
-    /// Everything this id sits directly inside: its home, then `also_in`.
     pub fn parents(self) -> Vec<Role> {
         let i = self.info();
         i.home
@@ -496,18 +434,14 @@ impl Role {
             .collect()
     }
 
-    /// Whether this id is a family: a top-level id, or one other ids call
-    /// home (`ai`, inside engineering).
     pub fn is_family(self) -> bool {
         self.info().home.is_none() || Role::ALL.iter().any(|r| r.info().home == Some(self))
     }
 
-    /// Whether this id is `filter` or sits anywhere inside it.
     pub fn within(self, filter: Role) -> bool {
         self == filter || self.parents().into_iter().any(|p| p.within(filter))
     }
 
-    /// Whether `other` sits inside this id, so `other` says more.
     pub fn is_broader_than(self, other: Role) -> bool {
         self != other && other.within(self)
     }
@@ -583,7 +517,6 @@ pub enum RoleFilter {
 }
 
 impl JobRole {
-    /// Whether any of `filters` takes this job in.
     pub fn matches(&self, filters: &[RoleFilter]) -> bool {
         filters.iter().any(|f| match *f {
             RoleFilter::Role(r) => {

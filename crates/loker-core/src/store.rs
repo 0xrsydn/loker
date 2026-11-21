@@ -1,23 +1,3 @@
-//! SQLite store: one file, WAL mode, migrations embedded at compile time.
-//!
-//! Ingest is idempotent per source and dedup is order-independent:
-//!
-//! 1. Each source job is upserted into `source_jobs` with its normalized
-//!    content, its own hash and its match key (company_key, title_key).
-//! 2. Every key the batch touched is re-clustered from the stored rows alone
-//!    (see [`dedup::cluster`]), so the outcome never depends on which source
-//!    was ingested first.
-//! 3. Every canonical job whose members changed is rebuilt from its members
-//!    with a fixed precedence (see [`dedup::resolve`]).
-//!
-//! The rules live in [`dedup`], which does no IO; this module loads the rows
-//! they need and writes their answers back.
-//!
-//! Liveness: a listing goes `gone` when a complete fetch of its source no
-//! longer has it, when its source's expiry passes, or after [`STALE_AFTER_DAYS`]
-//! unseen; it comes back `live` when seen again. Only live listings are
-//! clustered, and a canonical job is `active` exactly while at least one of its
-//! listings is live, so status too depends only on stored rows.
 use std::collections::BTreeSet;
 use std::path::Path;
 use std::str::FromStr;
@@ -39,7 +19,6 @@ pub struct Store {
     pool: SqlitePool,
 }
 
-/// The `sources` column of a job row: every source listing it, for attribution.
 macro_rules! sources_col {
     () => {
         "(SELECT json_group_array(json_object('source', s.source_id, 'url', s.source_url))
@@ -51,8 +30,7 @@ macro_rules! sources_col {
 /// Drops jobs restricted to countries that don't include the viewer (bound
 /// as `?N`, NULL for no viewer). It must never be stricter than
 /// `verdict::eligible_for`: search pages until the limit fills, so this is only
-/// an optimization. If on-site preferences start producing `no` in the
-/// verdict, they can be mirrored here too.
+/// an optimization.
 macro_rules! viewer_location {
     ($n:literal) => {
         concat!(
@@ -66,35 +44,23 @@ macro_rules! viewer_location {
     };
 }
 
-/// Listings nobody has seen for this long are closed, whatever the source.
-/// A backstop for partial feeds (an aggregator's newest N) and for sources
-/// that stopped being ingested.
 pub const STALE_AFTER_DAYS: i64 = 30;
 
-/// A search result: the job, and whether it matched only some query words.
 pub struct Found {
     pub job: Job,
     pub partial: bool,
 }
 
-/// One fetch of one source, ready to store.
 pub struct Batch {
     pub source: SourceMeta,
     pub jobs: Vec<NewJob>,
-    /// Items the adapter could not transform.
     pub skipped: u32,
-    /// Ids of every item in the fetch, when the fetch is the source's complete
-    /// list (a company's whole board): listings missing from it are closed.
-    /// `None` for partial feeds.
     pub complete_ids: Option<BTreeSet<String>>,
-    /// The run's clock (tests move it).
     pub now: DateTime<Utc>,
 }
 
-/// Which source a batch came from.
 #[derive(Debug, Clone)]
 pub struct SourceMeta {
-    /// Instance id, e.g. `himalayas` or `greenhouse:binance`.
     pub id: String,
     pub kind: SourceKind,
 }
@@ -110,7 +76,6 @@ impl Store {
             .journal_mode(SqliteJournalMode::Wal)
             .busy_timeout(Duration::from_secs(5))
             .foreign_keys(true);
-        // One connection: the CLI is a single writer. `serve` will split a read pool from a writer task.
         let pool = SqlitePoolOptions::new()
             .max_connections(1)
             .connect_with(opts)
@@ -122,8 +87,6 @@ impl Store {
         Ok(store)
     }
 
-    /// Classify again every job whose role was computed by other rules or
-    /// another vocabulary (or never), from its stored job JSON.
     async fn classify_pending(&self) -> anyhow::Result<()> {
         let pending: Vec<(String, String)> =
             sqlx::query_as("SELECT id, job FROM canonical_jobs WHERE role_stamp != ?")
@@ -178,8 +141,6 @@ impl Store {
         Ok(())
     }
 
-    /// Store one source's batch in a single transaction. Re-ingesting identical
-    /// content only touches `fetched_at`/`last_seen`, so running ingest twice is a no-op.
     pub async fn ingest(&self, batch: Batch) -> anyhow::Result<IngestStats> {
         let Batch {
             source,
@@ -198,7 +159,6 @@ impl Store {
 
         let mut touched_keys: BTreeSet<(String, String)> = BTreeSet::new();
         let mut rebuild: BTreeSet<String> = BTreeSet::new();
-        // Source jobs that are new or changed in this batch, with their key.
         let mut changed: Vec<(String, (String, String))> = Vec::new();
 
         for mut job in jobs {
@@ -251,7 +211,6 @@ impl Store {
                         row.get::<String, _>("title_key"),
                     );
                     if old_key != key {
-                        // The match key changed: leave the old cluster before re-clustering both keys.
                         let shared: i64 = sqlx::query_scalar(
                             "SELECT count(*) FROM source_jobs WHERE canonical_job_id = ?",
                         )
@@ -300,7 +259,6 @@ impl Store {
             }
         }
 
-        // Close listings a complete fetch no longer has, unless the fetch looks truncated.
         if let Some(ids) = &complete_ids {
             let live: Vec<(String, String, String, String)> = sqlx::query_as(
                 "SELECT source_job_id, canonical_job_id, company_key, title_key FROM source_jobs
@@ -322,7 +280,6 @@ impl Store {
             }
         }
 
-        // Expiry and staleness, for every source.
         let stale_before = (now - chrono::Duration::days(STALE_AFTER_DAYS)).to_rfc3339();
         let expired: Vec<(String, String, String, String, String, String)> = sqlx::query_as(
             "SELECT source_id, source_job_id, canonical_job_id, company_key, title_key,
@@ -395,10 +352,6 @@ impl Store {
         Ok(())
     }
 
-    /// Full-text search over active jobs, best match first; an empty query
-    /// lists the newest. With `country`, jobs restricted to other countries
-    /// are skipped in SQL (see [`viewer_location`]). `offset` counts rows of
-    /// this query; ties are broken by id so pages never overlap.
     pub async fn search(
         &self,
         query: &str,
@@ -412,13 +365,6 @@ impl Store {
         Ok(found.into_iter().map(|f| f.job).collect())
     }
 
-    /// [`Store::search`], marking which jobs match only some of the words.
-    ///
-    /// A job matches when it has any word of `query`. Jobs with every word
-    /// come first, then the rest (`partial`), each group by score. With
-    /// `any_word`, score alone orders them. eval/search measured both
-    /// orders as equal; all-words-first keeps the strongest matches on top
-    /// and never comes back empty when some word matches.
     pub async fn search_with(
         &self,
         query: &str,
@@ -457,9 +403,6 @@ impl Store {
              FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
              WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
             viewer_location!("2"),
-            // Column weights (job_id, title, company, description): a title
-            // match counts five times. eval/search: 5 beats 1, and 10 is no
-            // better.
             " ORDER BY CASE WHEN ?6 THEN 0 ELSE all_words END DESC,
                        bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id
               LIMIT ?3 OFFSET ?4"
@@ -482,8 +425,6 @@ impl Store {
             .collect()
     }
 
-    /// Active jobs with no cached role answer from `model`, one per distinct
-    /// content (cache key, what the model should see), at most `limit`.
     pub async fn role_questions(
         &self,
         model: &str,
@@ -516,8 +457,6 @@ impl Store {
         Ok(out)
     }
 
-    /// Store model answers, then classify every active job again (a few
-    /// thousand take milliseconds). Returns how many jobs' role changed.
     pub async fn put_role_answers(
         &self,
         answers: &[(String, classify::RoleAnswer)],
@@ -555,9 +494,6 @@ impl Store {
         Ok(changed)
     }
 
-    /// Every source that has ever stored a listing.
-    /// Jobs by id, active or closed, in no particular order; unknown ids are
-    /// simply absent.
     pub async fn get(&self, ids: &[String]) -> anyhow::Result<Vec<Job>> {
         let rows = sqlx::query(concat!(
             "SELECT c.*, ",
@@ -590,7 +526,6 @@ impl Store {
             .collect())
     }
 
-    /// Raw numbers for `sources eval`; the api layer shapes them.
     pub async fn source_eval(&self) -> anyhow::Result<SourceEvalRows> {
         let per_source = sqlx::query(
             "WITH live AS (SELECT * FROM source_jobs WHERE job IS NOT NULL AND status = 'live'),
@@ -721,15 +656,11 @@ impl Store {
 }
 
 pub struct SourceEvalRows {
-    /// Active canonical jobs.
     pub canonical_jobs: i64,
     pub closed_jobs: i64,
-    /// Live listings.
     pub source_jobs: i64,
     pub per_source: Vec<SourceRow>,
-    /// (source a, source b, canonical jobs both list)
     pub overlaps: Vec<(String, String, i64)>,
-    /// (job id, "title — company", "source=scope, …")
     pub conflicts: Vec<(String, String, String)>,
     pub blocked_keys: i64,
     pub last_runs: Vec<RunRow>,
@@ -766,10 +697,6 @@ pub struct RunRow {
     pub held: Option<i64>,
 }
 
-// ---------- dedup (IO side; the rules are in `dedup`) ----------
-
-/// Re-cluster the live listings sharing `key` and carry out
-/// [`dedup::cluster`]'s plan. Returns `false` when the key is ambiguous.
 async fn recluster(
     conn: &mut SqliteConnection,
     key: &(String, String),
@@ -863,7 +790,6 @@ async fn load_job(conn: &mut SqliteConnection, sid: &str, sjid: &str) -> anyhow:
     Ok(serde_json::from_str(&json)?)
 }
 
-/// Insert a canonical job seeded from one source job; `rebuild_canonical` fills it properly.
 async fn new_canonical(
     conn: &mut SqliteConnection,
     job: &NewJob,
@@ -894,8 +820,6 @@ async fn new_canonical(
     Ok(id)
 }
 
-/// Recompute a canonical job from its listings (see [`dedup::resolve`]).
-/// Deletes the job when nothing links to it any more.
 async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> anyhow::Result<()> {
     let rows: Vec<(String, String, String, Option<String>, String)> = sqlx::query_as(
         "SELECT source_kind, source_id, source_job_id, job, status FROM source_jobs WHERE canonical_job_id = ?",
@@ -935,8 +859,6 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     };
     let status = if active { "active" } else { "closed" };
 
-    // The whole merged job is the stored record, so every field is in the
-    // hash; status too, so a job that only opens or closes is still written.
     let job = serde_json::to_string(&m)?;
     let hash = content_hash(&[status, &job]);
     let (current, closed_at): (String, Option<String>) =
@@ -977,8 +899,6 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     Ok(())
 }
 
-/// A job's role as stored: `JobRole` JSON, or NULL when nothing places it.
-/// Uses the model's cached answer for this job's content, if any.
 async fn role_json(conn: &mut SqliteConnection, job: &NewJob) -> anyhow::Result<Option<String>> {
     let answer: Option<String> =
         sqlx::query_scalar("SELECT answer FROM role_answers WHERE key = ?")
@@ -991,8 +911,6 @@ async fn role_json(conn: &mut SqliteConnection, job: &NewJob) -> anyhow::Result<
         .map(|r| serde_json::to_string(&r))
         .transpose()?)
 }
-
-// ---------- rows ----------
 
 fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     let parse_ts = |s: String| -> anyhow::Result<DateTime<Utc>> {
@@ -1011,15 +929,12 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
         .flatten();
     Ok(Job {
         id: r.get("id"),
-        // Derived when read, so old rows get it without a re-fetch.
         seniority: crate::normalize::seniority(m.seniority.as_deref(), &m.title),
         title: m.title,
         company: m.company,
         employment_type: m.employment_type,
         eligibility: m.eligibility,
         pay: m.pay,
-        // A source that states sponsorship in a field of its own beats the
-        // reading of its description.
         visa: m
             .visa
             .clone()
@@ -1041,9 +956,7 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     })
 }
 
-/// Quote every word so user input can never break FTS5 syntax. All words
-/// must match, or with `any_word` at least one (bm25 then ranks jobs that
-/// match more of them first).
+/// Quote every word so user input can never break FTS5 syntax.
 fn fts_query(q: &str, any_word: bool) -> Option<String> {
     let terms: Vec<String> = q
         .split_whitespace()

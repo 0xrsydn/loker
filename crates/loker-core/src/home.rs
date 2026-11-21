@@ -1,6 +1,5 @@
 use std::path::{Path, PathBuf};
 
-/// `LOKER_HOME` if set, otherwise `~/.loker`.
 pub fn loker_home() -> anyhow::Result<PathBuf> {
     if let Some(dir) = std::env::var_os("LOKER_HOME") {
         return Ok(PathBuf::from(dir));

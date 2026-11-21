@@ -1,13 +1,3 @@
-//! Years of experience a job requires, read from its description. Only a
-//! stated number counts ("5+ years of experience", "at least two years"), or
-//! a plain statement that none is needed ("no experience required"); "several
-//! years" or "extensive experience" says no number, and nothing is guessed.
-//! Years under a "preferred" or "nice to have" heading, or marked so in the
-//! sentence, are not required. Of several required numbers the largest is the
-//! bar (the hire must meet all); of alternatives ("5 years with a bachelor's
-//! or 3 with a master's") the smallest. A number too high hides a job from
-//! someone who meets the real bar, so a sentence that doesn't read clearly is
-//! left out. `eval/experience` measures it against labelled jobs.
 use std::sync::LazyLock;
 
 use regex::Regex;
@@ -17,7 +7,6 @@ use crate::posting::{LineKind, PREFERRED, Posting, Section, sentences};
 
 const NUM: &str = r"\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen";
 
-/// "5+ years", "3-5 years", "five (5) years", "2 or more years", "10 yrs".
 static YEARS: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(&format!(
         r"(?i)\b(?P<min>{NUM})(?:\s*\(\d{{1,2}}\))?\s*(?:\+|plus\b)?\s*(?:(?:-|–|—|~|to)\s*(?P<max>{NUM})\s*\+?\s*)?(?:or\s+more\s+)?(?:full\s+)?(?P<hy>-)?(?P<unit>years?|yrs?|yoe)\b'?"
@@ -25,9 +14,6 @@ static YEARS: LazyLock<Regex> = LazyLock::new(|| {
     .unwrap()
 });
 
-/// Experience, said around the number: "years of experience", "years in
-/// software", "years working as", "Experience: 3+ years".
-/// Right after the years: "5+ years in fraud strategy", "years as a".
 static FIELD_AFTER: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)^\s*(?:of\s+)?(?:in|as|at|across|within|on|with|[a-z]+ing|leading|working|building|developing|managing|selling|running|owning|supporting|designing|delivering|programming|coding|writing|teaching|hands[- ]on|professional|relevant|industry|post[- ]\w+|progressive|full[- ]time)\b").unwrap()
 });
@@ -36,8 +22,6 @@ static EXPERIENCE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bexperience|\bexperienced\b|\bbackground\b|\btrack record\b|\b(?:working|worked|building|developing|leading|managing|selling|designing|writing|operating|running)\b|\bin\s+(?:a|an|the|similar|comparable|relevant|professional|industry|software|engineering|sales|product|data|tech|technical|b2b|saas|fintech|customer|marketing|finance|accounting|recruiting|it)\b|\bas\s+an?\b|\bof\s+(?:professional|relevant|related|hands[- ]on|industry|progressive|post|full[- ]time|practical|commercial|direct|proven|recent|demonstrated|prior|work|production)").unwrap()
 });
 
-/// Not the hire's experience: the company's age, the hire's age, a degree's
-/// or contract's length, or what happens after some years.
 static NOT_HIRE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(&format!(
         r"(?i)\b(?:for|since|over the (?:past|last)|in the (?:past|last)|within|after|every|first|next|ago)\s+(?:(?:over|more than|nearly|almost|about|the|a|up to)\s+)?(?:{NUM})\+?\s*years?\b|\bin\s+(?:less than|under|just|only)\s+(?:{NUM})\s+years?\b|\byears?\s+(?:old|of age|ago|in business|in a row|running|straight|of history|of operation|of growth|of innovation|of excellence|of service|of combined|combined|of research|of study|of school|of college|of university|of education|of schooling)\b|\bcombined\s+(?:experience|years)\b|\bdrawing on\b|\b(?:kept|retain(?:ed)?|stored|held)\b|\b(?:he|she|his|her)\b|\b(?:we|we've|we have|our|company|founded|established)\b[^.]{{0,40}}\b(?:{NUM})\+?\s*years\b(?:\s+of\s+(?:experience|expertise))?(?:\s+(?:in|of)\s+(?:business|the industry|the market))?\s*(?:,|we|our)"
@@ -52,48 +36,38 @@ static PREFERRED_AFTER: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bpreferred\b|\bnice[- ]to[- ]have\b|\bbonus\b|\ba (?:big |huge |strong )?plus\b|\bdesir(?:ed|able)\b|\b(?:an?|big|real|great)\s+(?:advantage|asset)\b|\badvantageous\b|\bgood to have\b|\bwould be great\b|\bhelpful\b|\bbeneficial\b").unwrap()
 });
 
-/// "No experience required", "new grads welcome", "0+ years".
 static NONE_NEEDED: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bno\s+(?:prior\s+|previous\s+|professional\s+|work\s+|formal\s+)*experience\s+(?:is\s+)?(?:required|needed|necessary)\b|\b(?:new|recent)\s+grad(?:uate)?s?\s+(?:are\s+)?(?:welcome|encouraged)|\b0\s*\+\s*years?\b|\b(?:do not|don't|doesn't|does not)\s+need\s+(?:any\s+)?(?:prior\s+|previous\s+|years\s+of\s+)?(?:\w+\s+)?experience\s+to\b").unwrap()
 });
 
-/// "..., or a master's degree and 3 years": another path to the job, not
-/// "program or project management".
 static OR_BETWEEN: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bor\b[^;]{0,60}\b(?:bachelor|master|ph\.?d|doctorate|degree|b\.?s\.?c?|b\.?a|m\.?s\.?c?|mba|diploma)\b|[,;]\s*or\s+[^,]{0,30}$").unwrap()
 });
 
-/// "Hugo has spent 3+ years at Qonto": someone else's story.
 static SOMEONE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"\b[A-Z][a-z]+\s+(?:has|had)\s+(?:spent|been|worked|led)\b").unwrap()
 });
 
-/// "For Senior DE: 6+ years": one of several levels in one posting.
 static LEVEL_PREFIX: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)^for\s+[^:]{1,40}:").unwrap());
 
 static OR_START: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)^or\b").unwrap());
 
-/// "At least a year" reads as "at least 1 year".
 static A_YEAR: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(at least|a minimum of|minimum of|more than|over)\s+a\s+year\b").unwrap()
 });
 
-/// "we don't need 10+ years of experience".
 static NEGATED: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)(?:\bnot\b|n['’]t\b|\bno\b|\bnever\b)\s+(?:\w+\s+){0,3}$").unwrap()
 });
 
-/// "less than 2 years": a ceiling, not a bar.
 static AT_MOST: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:less than|fewer than|no more than|not more than|under|up to|maximum(?: of)?|max\.?|at most)\s*$").unwrap()
 });
 
-/// "6 months to 1 year": under a year is the minimum.
 static MONTHS_TO: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)\bmonths?\s*(?:to|-|–)\s*$").unwrap());
 
-/// Years of experience `text` (a description) states the job requires, or `None`.
 pub fn experience_from_text(text: &str) -> Option<Experience> {
     read(&Posting::parse(text))
 }
@@ -108,7 +82,6 @@ pub fn read(posting: &Posting) -> Option<Experience> {
     for line in &posting.lines {
         let bare = A_YEAR.replace_all(&line.text, "$1 1 year");
         let bare = bare.as_ref();
-        // "For SMB AE:" alone on a line: the years under it are one level's.
         if LEVEL_PREFIX.is_match(bare.trim_start_matches(['-', '•', '+', ' ']))
             && bare.trim_end().ends_with(':')
         {
@@ -134,7 +107,6 @@ pub fn read(posting: &Posting) -> Option<Experience> {
                 claims(sentence)
             };
             levels |= (level_block || LEVEL_PREFIX.is_match(sentence)) && !found.is_empty();
-            // "One or more years of X" / "OR two years of Y": another path.
             if OR_START.is_match(sentence)
                 && last_had_claim
                 && let (Some(last), Some(first)) = (required.last_mut(), found.first())
@@ -154,8 +126,6 @@ pub fn read(posting: &Posting) -> Option<Experience> {
             required.extend(found);
         }
     }
-    // Several levels in one posting: the lowest level's bar; otherwise the
-    // hire must meet every number, so the largest.
     let top = if levels {
         required.iter().min_by_key(|c| c.min)
     } else {
@@ -185,8 +155,6 @@ struct Claim {
     evidence: String,
 }
 
-/// The required years one sentence states; alternatives joined by "or"
-/// count as one claim, their smallest.
 fn claims(sentence: &str) -> Vec<Claim> {
     if sentence.chars().count() > 500 {
         return Vec::new();
@@ -213,8 +181,6 @@ fn claims(sentence: &str) -> Vec<Claim> {
             prev_kept = false;
             continue;
         };
-        // "a 4-year degree", "2-year contract": a length, not experience
-        // ("1-year experience" is experience).
         let singular = !c["unit"].to_lowercase().ends_with('s');
         if c.name("hy").is_some()
             && singular
@@ -231,8 +197,6 @@ fn claims(sentence: &str) -> Vec<Claim> {
             || (after.trim_start().to_lowercase().starts_with("of ")
                 && (m.start() <= 12 || EXPERIENCE.is_match(after_clause)))
             || near_before.to_lowercase().contains("experience");
-        // 20 years or more is a company's age, not a hire's bar; "we don't
-        // need 10+ years" is no bar either.
         if !says_experience
             || min >= 20
             || NOT_HIRE.is_match(around)
@@ -290,7 +254,6 @@ fn preferred_after(clause: &str, required_before: bool) -> bool {
         {
             return true;
         }
-        // "... is required (Go), good to have: Rust": what follows is extra.
         if REQUIRED_WORD.is_match(part) {
             return false;
         }
@@ -344,7 +307,6 @@ fn ceil(s: &str, mut i: usize) -> usize {
     i
 }
 
-/// The board's own field: "3+ years", "Any (new grads ok)".
 pub fn experience_from_field(text: &str) -> Option<Experience> {
     let t = text.trim();
     let lower = t.to_lowercase();

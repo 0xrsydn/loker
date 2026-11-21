@@ -1,7 +1,5 @@
-//! Where a remote job may be done from, as its description says.
 use loker_core::eligibility_text::stated;
 
-/// Text, the places read (regions first), the hours window read.
 type Case = (&'static str, &'static [&'static str], Option<(f64, f64)>);
 
 #[test]
@@ -67,7 +65,6 @@ fn places_and_hours_read_from_descriptions() {
             &["BD", "ID", "IN", "PK"],
             None,
         ),
-        // Not where the hire must be.
         ("Office location: Berlin", &[], None),
         ("Location: San Francisco or Singapore", &[], None),
         ("Location: Remote", &[], None),
@@ -97,13 +94,15 @@ fn places_and_hours_read_from_descriptions() {
     }
 }
 
-/// A city read after a country doesn't make the job "only a city".
 #[test]
 fn a_later_city_keeps_the_country() {
     let s =
         stated("Must be based in the United States. Based in New York, you will lead the team.")
             .unwrap();
-    assert!(!s.only_cities, "{s:?}");
+    assert!(
+        !s.only_cities,
+        "a city read after a country doesn't make the job only a city: {s:?}"
+    );
     assert!(
         stated("Based in Berlin, you will lead the team.")
             .unwrap()

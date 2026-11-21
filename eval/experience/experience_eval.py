@@ -29,12 +29,11 @@ DBS = {"sample": os.path.join(EVAL, "role", "snapshot-fresh.db"),
        "holdout4": os.path.join(EVAL, "eligibility", "snapshot-h2.db"),
        "holdout5": os.path.join(EVAL, "eligibility", "snapshot-workable3.db"),
        "holdout6": os.path.join(EVAL, "pay", "snapshot.db")}
-SIZES = {"sample": (140, 60, 4), "holdout": (110, 40, 8), "holdout2": (70, 30, 3)}  # net, rest, per company
+SIZES = {"sample": (140, 60, 4), "holdout": (110, 40, 8), "holdout2": (70, 30, 3)}
 BIN = os.path.join(REPO, "target", "release", "examples", "experience_text")
 PROMPT_VERSION = "v1"
 MAX_CHARS = 15000
 
-# The sampler's net: wide on purpose; the random share measures what it misses.
 NUM = r"(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|twelve|fifteen)"
 NET = re.compile(rf"(?i)\b{NUM}\s*(?:\+|plus|or more)?\s*(?:-|–|to)?\s*(?:\d{{1,2}})?\s*\+?\s*years?\b|"
                  r"no (?:prior |previous )?experience|new grad|entry[- ]level|recent graduates?")
@@ -78,10 +77,6 @@ def texts(name=SET):
 
 
 def sample2():
-    """holdout3 and holdout4, drawn after the rules were fixed on the first
-    two holdouts (which are tuning since): visa's second list of employer
-    boards (snapshot-boards2.db), and eligibility's snapshot-h2.db without
-    any company in an earlier set's snapshot."""
     if os.path.exists(os.path.join(HERE, "holdout3.json")):
         sys.exit("holdout3 already drawn")
     seen = set()
@@ -109,10 +104,6 @@ def sample2():
 
 
 def sample3():
-    """holdout5 and holdout6, drawn after the rules were fixed on holdout3
-    and holdout4: Workable's earlier search (snapshot-workable3.db) and the
-    pay eval's employer boards (Clera, Mercor, Binance, Palantir), without
-    any company in an earlier set's snapshot."""
     if os.path.exists(os.path.join(HERE, "holdout5.json")):
         sys.exit("holdout5 already drawn")
     seen = set()
@@ -167,8 +158,6 @@ def sample():
         save(f"{name}.json", out)
 
 
-# ---------- label ----------
-
 PROMPT = """You read how many years of work experience a job posting requires, exactly as the posting states it.
 
 For each job, give:
@@ -218,8 +207,6 @@ def ask_opus(prompt, n):
 
 
 def ask_pi(prompt, n):
-    """DeepSeek v4.1 through Pi (OpenCode Go): no tools, no session, an empty
-    working directory, so nothing but the prompt reaches it. Pi holds the key."""
     shape = {"labels": [{"i": 0, "min_years": 3, "max_years": None, "evidence": "..."}]}
     cmd = ["pi", "-p", "--no-tools", "--no-session", "--provider", "opencode-go", "--model", "deepseek-v4.1-flash",
            "--thinking", "high", "--system-prompt",
@@ -287,8 +274,6 @@ def agree():
                        if a[key(j)]["min_years"] != b[key(j)]["min_years"]))
 
 
-# ---------- score ----------
-
 def predicted(binary, ids, t):
     lines = "".join(json.dumps({"id": j, "text": t[j]["description"]}) + "\n" for j in ids)
     out = subprocess.run([binary], input=lines, capture_output=True, text=True, check=True).stdout
@@ -304,9 +289,6 @@ def score():
     gold = {j: labels[key(j)]["min_years"] for j in ids}
     ours = {j: (got.get(j) or {}).get("minYears") for j in ids}
     print(f"{len(ids)} labelled jobs in {SET}.json (judge={judge})")
-    # A number is a claim. Too high hides the job from someone who meets the
-    # real bar (or invents a bar where none is stated; a 0 hides no one): the
-    # number to keep near zero. Too low only shows a job to someone a little short of it.
     claims = [j for j in ids if ours[j] is not None]
     stated = [j for j in ids if gold[j] is not None]
     right = [j for j in claims if ours[j] == gold[j]]

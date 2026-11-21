@@ -1,6 +1,3 @@
-//! `$LOKER_HOME/config.toml`: which sources to ingest, with their parameters.
-//! Intent lives here; state lives in the database. Versioned like the contract,
-//! and unknown keys are errors, so a typo never silently disables a source.
 use std::path::{Path, PathBuf};
 
 use anyhow::{Context, bail};
@@ -16,8 +13,6 @@ pub struct Config {
     pub version: u32,
     #[serde(default)]
     pub sources: Vec<SourceConfig>,
-    /// Optional third-party services. None is needed: without them loker
-    /// works fully offline.
     #[serde(default)]
     pub providers: Providers,
 }
@@ -25,15 +20,12 @@ pub struct Config {
 #[derive(Debug, Clone, Default, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Providers {
-    /// Jev (TypeSafe) through OpenRouter's Decisions API classifies job
-    /// roles; the key comes from `OPENROUTER_API_KEY`, never this file.
     pub jev: Option<JevConfig>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct JevConfig {
-    /// A dated model id: aliases move between releases.
     #[serde(default = "default_jev_model")]
     pub model: String,
     #[serde(default = "enabled_by_default")]
@@ -46,21 +38,14 @@ fn default_jev_model() -> String {
     DEFAULT_JEV_MODEL.into()
 }
 
-/// One source instance. Field meanings match `IngestParams`.
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SourceConfig {
-    /// `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `greenhouse:<board>`,
-    /// `ashby:<board>`, `lever:<site>`.
     pub id: String,
     pub pages: Option<u32>,
-    /// One ISO code or a list (`["PH", "ID"]`): a search source fetches
-    /// `pages` for each.
     #[serde(default, deserialize_with = "one_or_many")]
     pub country: Vec<String>,
-    /// Company display name for an employer board (Ashby and Lever only give the slug).
     pub company: Option<String>,
-    /// `true` when every job on an employer board is remote (see `IngestParams::remote`).
     pub remote: Option<bool>,
     #[serde(default = "enabled_by_default")]
     pub enabled: bool,
@@ -71,7 +56,6 @@ fn enabled_by_default() -> bool {
 }
 
 impl SourceConfig {
-    /// The fetches this entry makes: one, or one per country.
     pub fn params(&self) -> Vec<IngestParams> {
         let one = |country: Option<String>| IngestParams {
             source: self.id.clone(),
@@ -102,7 +86,6 @@ fn one_or_many<'de, D: serde::Deserializer<'de>>(d: D) -> Result<Vec<String>, D:
 }
 
 impl Config {
-    /// Enabled sources, in file order.
     pub fn enabled(&self) -> impl Iterator<Item = &SourceConfig> {
         self.sources.iter().filter(|s| s.enabled)
     }
@@ -112,7 +95,6 @@ pub fn path(home: &Path) -> PathBuf {
     home.join("config.toml")
 }
 
-/// `None` when there is no config file yet.
 pub fn load(home: &Path) -> anyhow::Result<Option<Config>> {
     let path = path(home);
     let text = match std::fs::read_to_string(&path) {
@@ -138,8 +120,6 @@ pub fn load(home: &Path) -> anyhow::Result<Option<Config>> {
     Ok(Some(config))
 }
 
-/// The starting config for a viewer in `country` (ISO code): Himalayas'
-/// country search and Workable turned on for it. `None` is [`TEMPLATE`].
 pub fn template(country: Option<&str>) -> String {
     let Some(c) = country else {
         return TEMPLATE.to_string();
@@ -155,8 +135,6 @@ pub fn template(country: Option<&str>) -> String {
         )
 }
 
-/// One configured source, checked: `error` says why its id isn't a source
-/// this build has.
 #[derive(Debug, Clone)]
 pub struct SourceStatus {
     pub id: String,
@@ -165,7 +143,6 @@ pub struct SourceStatus {
 }
 
 impl Config {
-    /// Every source in file order, with `known` (the adapters' check of an id).
     pub fn check(&self, known: &dyn Fn(&str) -> Result<(), String>) -> Vec<SourceStatus> {
         self.sources
             .iter()
@@ -178,11 +155,8 @@ impl Config {
     }
 }
 
-/// Said when the starter sources stand in for a missing config.toml.
 pub const STARTER_NOTICE: &str = "no config.toml: using the starter sources (Himalayas, Jobicy, Remote OK, We Work Remotely); `loker config init --country <ISO code>` writes one you can edit";
 
-/// Write a starting config.toml for a viewer in `country` (a name or ISO
-/// code); refuses to overwrite one. Returns its path.
 pub fn init(home: &Path, country: Option<&str>) -> anyhow::Result<PathBuf> {
     let path = path(home);
     if path.exists() {
@@ -199,12 +173,10 @@ pub fn init(home: &Path, country: Option<&str>) -> anyhow::Result<PathBuf> {
     Ok(path)
 }
 
-/// The starter sources, for `loker ingest --all` before a config.toml exists.
 pub fn starter() -> Config {
     toml::from_str(TEMPLATE).expect("the template parses")
 }
 
-/// Written by `loker config init`.
 pub const TEMPLATE: &str = r#"# loker configuration: https://github.com/0xrsydn/loker
 version = 1
 

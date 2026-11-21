@@ -1,6 +1,3 @@
-//! Cross-source dedup rules, offline: hand-written jobs into a temp database.
-//! Clusters are compared as sets of (source, url), never by id, because ids
-//! legitimately depend on which source arrived first.
 mod common;
 
 use std::collections::BTreeSet;
@@ -10,8 +7,6 @@ use loker_core::model::Scope;
 
 #[tokio::test]
 async fn merge_is_order_independent_and_idempotent() {
-    // The same role on an aggregator, the employer's board and a second aggregator,
-    // spelled the way each really spells it.
     let him = [
         job(
             "himalayas",
@@ -73,15 +68,21 @@ async fn merge_is_order_independent_and_idempotent() {
     assert_eq!(
         f.len(),
         3,
-        "three listings of one role become one job: {f:#?}"
+        "three listings of one role, each spelled as its source spells it, become one job: {f:#?}"
     );
 
-    // Employer board supplies identity; the most confident source supplies eligibility.
     for s in [&forward, &backward] {
         let merged = s.search("expert", None, 10, 0).await.unwrap();
         assert_eq!(merged.len(), 1);
-        assert_eq!(merged[0].url, "https://ashby:clera.example/a1");
-        assert_eq!(merged[0].eligibility.scope(), Scope::Worldwide);
+        assert_eq!(
+            merged[0].url, "https://ashby:clera.example/a1",
+            "the employer board supplies identity"
+        );
+        assert_eq!(
+            merged[0].eligibility.scope(),
+            Scope::Worldwide,
+            "the most confident source supplies eligibility"
+        );
     }
 
     let again = ingest(&forward, "himalayas", &him).await;
@@ -90,7 +91,6 @@ async fn merge_is_order_independent_and_idempotent() {
 
 #[tokio::test]
 async fn same_source_duplicates_block_the_merge() {
-    // Binance posts one title per city; a single aggregator copy can't be matched to either.
     let gh = [
         job(
             "greenhouse:binance",
@@ -126,7 +126,6 @@ async fn same_source_duplicates_block_the_merge() {
         0.3,
     )];
 
-    // Every order of three sources gives the same answer: four separate jobs.
     let mut seen = BTreeSet::new();
     for (i, order) in [["h", "r", "g"], ["g", "h", "r"], ["r", "g", "h"]]
         .iter()
@@ -141,10 +140,15 @@ async fn same_source_duplicates_block_the_merge() {
             };
         }
         let c = clusters(&s).await;
-        assert_eq!(c.len(), 4, "order {order:?}: {c:#?}");
+        assert_eq!(
+            c.len(),
+            4,
+            "Binance posts one title per city, so no aggregator copy can be matched \
+             to either: order {order:?}: {c:#?}"
+        );
         seen.insert(c);
     }
-    assert_eq!(seen.len(), 1);
+    assert_eq!(seen.len(), 1, "every order gives the same answer");
 }
 
 #[tokio::test]
@@ -195,8 +199,6 @@ async fn retitled_job_leaves_its_cluster() {
     assert_eq!(clusters(&s).await.len(), 2);
 }
 
-/// One board says "Anywhere", another "Canada": the narrower statement wins,
-/// whichever is more confident.
 #[test]
 fn places_beat_worldwide_in_a_merge() {
     use loker_core::dedup::{Linked, resolve};
@@ -217,14 +219,14 @@ fn places_beat_worldwide_in_a_merge() {
         .eligibility;
     assert_eq!(
         (e.scope(), e.countries),
-        (Scope::Countries, vec!["CA".to_string()])
+        (Scope::Countries, vec!["CA".to_string()]),
+        "the narrower statement wins, whichever is more confident"
     );
 }
 
 #[test]
 fn cluster_rules() {
     use loker_core::dedup::{Member, Plan, cluster};
-    // Rows as the store hands them over: oldest canonical job first.
     let m = |source: &str, id: &str, canonical: &str| Member {
         source_id: source.into(),
         source_job_id: id.into(),

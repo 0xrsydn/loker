@@ -1,12 +1,3 @@
-//! Jev (TypeSafe), a "System One" model that answers typed questions with
-//! probabilities, through OpenRouter's Decisions API:
-//! `POST https://openrouter.ai/api/alpha/decisions` with `{model, state,
-//! questions}`. Not a job source: an optional provider that classifies job
-//! roles ([`loker_core::classify::question`]) for jobs with no cached answer.
-//!
-//! Neither OpenRouter nor TypeSafe caches decisions, so every answer is kept
-//! in `role_answers` by job content; an unchanged job is never asked twice.
-//! The endpoint is alpha: everything goes through [`ask`].
 use std::time::Duration;
 
 use loker_core::api::{CONTRACT_VERSION, RoleEnrichReport};
@@ -16,12 +7,9 @@ use serde_json::{Value, json};
 
 use crate::HttpClient;
 
-/// Calls in flight at once.
 const PARALLEL: usize = 8;
 const TIMEOUT: Duration = Duration::from_secs(60);
 
-/// Ask about every active job with no cached answer from `model` (at most
-/// `limit`), store the answers and classify jobs again.
 pub async fn enrich_roles(
     store: &Store,
     client: &HttpClient,
@@ -72,8 +60,6 @@ pub async fn enrich_roles(
     Ok(report)
 }
 
-/// One Decisions request; the answer and what it cost. Rate limits, server
-/// errors and network failures are retried twice, after 2 s and 4 s.
 async fn ask(
     client: &HttpClient,
     model: &str,
@@ -129,7 +115,6 @@ async fn ask(
         .unwrap_or_default();
     top.sort_by(|x, y| y.1.total_cmp(&x.1));
     top.truncate(3);
-    // The chosen option's probability: what eval/role thresholded on.
     let confidence = top
         .iter()
         .find(|(k, _)| *k == choice)

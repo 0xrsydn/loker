@@ -1,18 +1,3 @@
-//! Workable's job search, across every company that hires through Workable:
-//! `GET https://jobs.workable.com/api/v1/jobs?workplace=remote[&location=PH]`.
-//! Not a published API: it is the one jobs.workable.com itself uses, so it
-//! may change without notice (`loker verify` notices). Remote jobs only, 20 a
-//! page, one request a second; `location` takes an ISO country code.
-//!
-//! Each job states `workplace` (remote, hybrid, on_site) and `locations`
-//! (`["TELECOMMUTE", "Berlin, Berlin, Germany"]`). For a remote job the
-//! location is the employer's place, not a restriction: in `eval/eligibility`
-//! 17 of 60 such jobs said "work from anywhere", "we hire worldwide" or named
-//! other places, and both labellers found the no outside it unreliable. So
-//! places the description names win; otherwise Workable's place holds for
-//! the people in it (yes), and for everyone else the posting is `open` (a
-//! maybe) when it hints so, else `not_stated` (unknown). A search is not a complete list, so missing items close nothing;
-//! staleness does.
 use std::time::Duration;
 
 use anyhow::Context;
@@ -36,8 +21,6 @@ struct Page {
     next_page_token: Option<String>,
 }
 
-/// Up to `pages` pages of remote jobs, newest first; with `country`, only
-/// jobs Workable places in that country.
 pub async fn fetch(
     client: &reqwest::Client,
     pages: u32,
@@ -84,7 +67,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         .get("company")
         .and_then(|c| s(c, "title"))
         .ok_or_else(|| anyhow::anyhow!("missing company"))?;
-    // Where: every listed place but the "TELECOMMUTE" marker, else the country.
     let mut places: Vec<String> = raw
         .get("locations")
         .and_then(Value::as_array)
@@ -136,8 +118,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     })
 }
 
-/// A remote job: places the description names, else no claim if it says it
-/// is open wider, else Workable's place.
 fn remote(place: &str, description: &str) -> Eligibility {
     let raw = Some(place.to_string());
     if let Some(s) = eligibility_text::stated(description)
@@ -154,7 +134,6 @@ fn remote(place: &str, description: &str) -> Eligibility {
             ..eligibility_from_text(&named, Some(true))
         };
     }
-    // "open to candidates worldwide": worldwide.
     if eligibility_text::stated(description).is_some_and(|s| s.worldwide) {
         return Eligibility {
             raw,
@@ -162,9 +141,6 @@ fn remote(place: &str, description: &str) -> Eligibility {
             ..eligibility_from_text("", Some(true))
         };
     }
-    // Workable's place holds for the people in it. For everyone else, a
-    // looser hint ("work from anywhere", "based outside the US") is open, a
-    // maybe; with no hint the posting doesn't say (unknown, not no).
     let (elsewhere, evidence) = if eligibility_text::open_wider(description) {
         (
             Elsewhere::Open,
@@ -183,7 +159,6 @@ fn remote(place: &str, description: &str) -> Eligibility {
     }
 }
 
-/// The posting in three parts; the requirements often hold where the hire must be.
 fn posting_html(raw: &Value) -> String {
     let s = |k: &str| raw.get(k).and_then(Value::as_str).map(str::to_owned);
     [

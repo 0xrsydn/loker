@@ -1,28 +1,19 @@
-//! Where a remote job may be done from, read from its description: "based in
-//! Colombia, Mexico, or Argentina", "remote within the U.S.", "eligible to
-//! work in Bulgaria", "CET (+/- 3 hours)". Used only to narrow what the
-//! board's fields leave open (see [`narrow`]); `eval/eligibility` measures it.
-//! A sentence about the company ("our team is based in Berlin", "customers in
-//! the US") or one that excludes ("outside the US") is left out.
 use std::sync::LazyLock;
 
 use regex::Regex;
 
 use crate::model::{Eligibility, Elsewhere, TzStrength, TzWindow, Workplace};
 
-/// What a description says.
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Stated {
     pub countries: Vec<String>,
     pub regions: Vec<String>,
-    /// Countries named only through a city: maybe an office there.
     pub only_cities: bool,
     pub worldwide: bool,
     pub tz: Option<TzWindow>,
     pub evidence: Vec<String>,
 }
 
-/// A phrase that says where the hire must be, followed by the place.
 static WHERE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
         r"(?i)\b(?:location\s*:\s*(?:(?:fully\s+)?remote\s*(?:[-–—,(]|\bin\b|\bfrom\b)?)?|(?:located|based)\s+in\s+and\s+(?:authori[sz]ed|eligible)\s+to\s+work\s+in|(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|(?:hiring|hire|recruiting)\s+(?:for\s+this\s+(?:role|position)\s+)?(?:across|in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+(?:remotely\s+)?in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;!?()\n]{2,120})",
@@ -30,13 +21,10 @@ static WHERE: LazyLock<Regex> = LazyLock::new(|| {
     .unwrap()
 });
 
-/// Just before the phrase: a condition ("if you live in"), an exclusion, or
-/// the company rather than the hire.
 static NOT_THE_HIRE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:if|unless|not|outside|except|excluding|unable|cannot|can't|won't|customers?|clients?|users?|partners?|company|companies|headquarter\w*|hq|offices?|team|teams|startup|business(?:es)?)\b").unwrap()
 });
 
-/// Words before the place list.
 static FILLER: LazyLock<[Regex; 3]> = LazyLock::new(|| {
     [
         Regex::new(r"(?i)^(?:either|any of|one of)\s+").unwrap(),
@@ -54,7 +42,6 @@ static WORLDWIDE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)(?:\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work(?:ing)?|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b)(?P<next>\s+\w+)?").unwrap()
 });
 
-/// "CET (+/- 3 hours)", "within 2 hours of EST", "UTC-3 to UTC+3".
 static HOURS: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(&format!(
         r"(?i)\b(?:(?P<z1>{Z})\s*(?:time\s*zone)?\s*\(?\s*(?:\+\s*/\s*-|±|\+-|plus\s+or\s+minus)\s*(?P<n1>\d{{1,2}}|{N})\s*(?:hours?|hrs?|h)\b|within\s+(?P<n2>\d{{1,2}}|{N})\s+hours?\s+of\s+(?P<z2>{Z})|between\s+(?P<a>{Z})\s+and\s+(?P<b>{Z})|(?P<c>UTC\s*[+-]\s*\d{{1,2}})\s*(?:to|-|–)\s*(?P<d>UTC\s*[+-]\s*\d{{1,2}}))",
@@ -122,9 +109,6 @@ fn hours(text: &str) -> Option<(TzWindow, String)> {
     (to - from < 23.0).then(|| (TzWindow { from, to, strength }, all.as_str().to_string()))
 }
 
-/// The leading places of a phrase ("Colombia, Mexico, or Argentina and
-/// willing to travel" → CO, MX, AR), stopping at the first part that isn't one.
-/// A two-letter code counts only in capitals: "US" is a place, "is" a word.
 fn names_a_city(phrase: &str) -> bool {
     phrase
         .split([',', '/', '|', ';'])
@@ -139,18 +123,13 @@ fn names_a_city(phrase: &str) -> bool {
 }
 
 fn places(phrase: &str, out: &mut Stated) -> bool {
-    // "one of the following states: Maine, ...", "any city within Italy",
-    // "either the New York City or Boston metro areas".
     let had = !out.countries.is_empty() || !out.regions.is_empty();
     let rest = FILLER
         .iter()
         .fold(phrase, |p, rx| rx.find(p).map_or(p, |m| &p[m.end()..]));
-    // "Europe, Singapore, or wherever you are": not a restriction.
     if OPEN_ENDED.is_match(rest) {
         return false;
     }
-    // "any of the following states: AZ, CA, CO": US states, whatever their
-    // codes spell as countries (CA, CO, IN, DE...).
     if STATES.is_match(&phrase[..phrase.len() - rest.len()]) {
         out.countries.push("US".into());
         out.only_cities = false;
@@ -172,7 +151,6 @@ fn places(phrase: &str, out: &mut Stated) -> bool {
         if p.is_empty() {
             continue;
         }
-        // "united states on a W2 basis": the longest leading words that name a place.
         let words: Vec<&str> = p.split_whitespace().collect();
         let hit = (1..=words.len().min(4)).rev().find_map(|n| {
             let name = words[..n].join(" ");
@@ -198,7 +176,6 @@ fn places(phrase: &str, out: &mut Stated) -> bool {
             break;
         }
     }
-    // Only cities across every phrase read so far, not just this one.
     if found {
         out.only_cities = cities_only && (!had || out.only_cities);
     }
@@ -216,15 +193,10 @@ fn window(s: &str, mut a: usize, b: usize) -> &str {
     &s[a..b]
 }
 
-/// Looser than "worldwide": the posting suggests it is open beyond a place a
-/// board gave it ("work from anywhere", "we hire worldwide", "from wherever
-/// you are"). Only to hold back a no, never to say yes: in `eval/eligibility`
-/// the labelers split on these, read against a board's place.
 pub fn open_wider(text: &str) -> bool {
     static OPEN: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\bwherever\s+you\s+(?:like|want|choose|prefer)\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b").unwrap()
     });
-    // "work from anywhere", but not "work from anywhere in the US".
     static ANYWHERE: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"(?i)\b(?:work|working)\s+(?:flexibly\s+|remotely\s+)?from\s+anywhere\b(?P<next>\s+\w+)?").unwrap()
     });
@@ -237,7 +209,6 @@ pub fn open_wider(text: &str) -> bool {
         })
 }
 
-/// Where the hire may be, and required hours, as `text` states them.
 pub fn stated(text: &str) -> Option<Stated> {
     let text: String = text.chars().take(200_000).collect();
     let text = text
@@ -250,7 +221,6 @@ pub fn stated(text: &str) -> Option<Stated> {
     let mut out = Stated::default();
     for c in WHERE.captures_iter(&text) {
         let (all, phrase) = (c.get(0).unwrap(), c.get(1).unwrap());
-        // The same clause, just before the phrase.
         let before = window(&text, all.start().saturating_sub(30), all.start());
         let clause = before
             .rsplit(['.', ';', ',', '!', '?', '\n'])
@@ -259,8 +229,6 @@ pub fn stated(text: &str) -> Option<Stated> {
         if NOT_THE_HIRE.is_match(clause) {
             continue;
         }
-        // "Location: San Francisco or Singapore" is where the offices are; a
-        // "Location:" line counts when it says remote or names no city.
         let line = all.as_str().trim_start().to_lowercase();
         if line.starts_with("location") && !line.contains("remote") && names_a_city(phrase.as_str())
         {
@@ -269,8 +237,6 @@ pub fn stated(text: &str) -> Option<Stated> {
         if places(phrase.as_str(), &mut out) {
             out.evidence.push(all.as_str().trim().to_string());
         } else {
-            // "Location: Fully remote, based in Colombia": the place is behind
-            // a second phrase inside this one.
             for inner in WHERE.captures_iter(phrase.as_str()) {
                 if places(inner.get(1).unwrap().as_str(), &mut out) {
                     out.evidence
@@ -281,7 +247,6 @@ pub fn stated(text: &str) -> Option<Stated> {
     }
     if out.countries.is_empty() && out.regions.is_empty() {
         out.only_cities = false;
-        // "work from anywhere", but not "anywhere in the US" (a place, read above).
         let open = WORLDWIDE.captures_iter(&text).find(|c| {
             !c.name("next").is_some_and(|n| {
                 matches!(n.as_str().trim().to_lowercase().as_str(), "in" | "within")
@@ -304,11 +269,6 @@ pub fn stated(text: &str) -> Option<Stated> {
     (!out.evidence.is_empty()).then_some(out)
 }
 
-/// Narrow `e` with what the description says, only where the board's fields
-/// leave it open, and never wider: places only when the board named none,
-/// hours only when it gave none, nothing for on-site or hybrid jobs.
-/// `remote` is whether the board says the job is remote (a remote-only
-/// board, or its remote flag).
 pub fn narrow(e: &mut Eligibility, description: &str, remote: bool) {
     if matches!(e.workplace, Workplace::Onsite | Workplace::Hybrid) {
         return;
@@ -326,8 +286,6 @@ pub fn narrow(e: &mut Eligibility, description: &str, remote: bool) {
     if open && (!s.countries.is_empty() || !s.regions.is_empty()) {
         e.countries = s.countries.clone();
         e.regions = s.regions.clone();
-        // A remote job tied to places is open to them and no one else; a
-        // city alone may be an office (maybe inside, no outside).
         e.workplace = if remote && !s.only_cities {
             Workplace::Remote
         } else {

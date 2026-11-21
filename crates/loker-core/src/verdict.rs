@@ -1,4 +1,3 @@
-//! The per-viewer eligibility verdict: computed per request, never stored.
 use schemars::JsonSchema;
 use serde::Serialize;
 
@@ -28,8 +27,6 @@ pub struct Viewer {
     pub accept_onsite_in: Vec<String>,
 }
 
-/// Whether `country` is among the job's countries or inside one of its
-/// regions; `None` when it isn't listed and a region can't be resolved.
 fn within(e: &Eligibility, country: &str) -> Option<bool> {
     if e.countries.iter().any(|c| c == country) {
         return Some(true);
@@ -45,7 +42,6 @@ fn within(e: &Eligibility, country: &str) -> Option<bool> {
     known.then_some(false)
 }
 
-/// "APAC, HK, SG", for reasons.
 fn places(e: &Eligibility) -> String {
     let all: Vec<&str> = e
         .regions
@@ -62,7 +58,6 @@ fn places(e: &Eligibility) -> String {
 pub fn eligible_for(e: &Eligibility, v: &Viewer) -> Verdict {
     use VerdictKind::*;
     let c = &v.country;
-    // Outside the places: what the posting says about everyone else.
     let outside = |places: String| match e.elsewhere {
         Elsewhere::Excluded => (No, format!("{c} not in {places}")),
         Elsewhere::NotStated => (Unknown, format!("lists {places}; doesn't say if {c} is ok")),
@@ -90,7 +85,6 @@ pub fn eligible_for(e: &Eligibility, v: &Viewer) -> Verdict {
                 None => (No, what.to_string()),
             }
         }
-        // Remote with no place: worldwide if it says so, else it doesn't say where.
         Workplace::Remote if !e.names_places() => match e.elsewhere {
             Elsewhere::Open => (Yes, "worldwide".to_string()),
             _ => (Unknown, format!("remote, but doesn't say if {c} is ok")),
@@ -103,7 +97,6 @@ pub fn eligible_for(e: &Eligibility, v: &Viewer) -> Verdict {
                 format!("region {} not resolved", e.regions.join("/")),
             ),
         },
-        // Remote or on-site not stated: inside the places it may be on-site.
         Workplace::Unknown if !e.names_places() => (Unknown, format!("doesn't say if {c} is ok")),
         Workplace::Unknown => match within(e, c) {
             Some(true) => (

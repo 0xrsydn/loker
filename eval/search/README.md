@@ -33,7 +33,7 @@ python3 eval.py sample 40                # blind sheet for a human spot-check
    are graded, so recall means "of the relevant jobs any variant found".
 5. **Judge.** Each (query, job) gets 0–3: 3 exactly the role sought, 2 clearly
    relevant, 1 tangential, 0 not relevant. Opus 5.5 (`claude -p`, 10 jobs a
-   call, no tools, empty working directory) is the main judge; DeepSeek grades
+   call, no tools, an empty working directory so no CLAUDE.md reaches it) is the main judge; DeepSeek grades
    the same pairs as a check. Grades are cached in `labels-*.json`, keyed by
    prompt version, model, query, intent and job id: a new variant only grades
    its new pairs, and editing a query's intent re-grades that query.
@@ -62,7 +62,7 @@ confirm a winner on `--holdout` before shipping it.
 
 - **New idea:** add a variant, run `pool`, `judge`, `score`. Ship it to loker
   only if it beats the current best on the tuning set and the holdout.
-- **After shipping:** update the comment above `VARIANTS` so it says which
+- **After shipping:** update step 3 of How it works so it says which
   variant loker now matches, and add a row to the results log.
 - **New queries:** add them before looking at any variant's results for them.
   Don't tune toward the holdout.

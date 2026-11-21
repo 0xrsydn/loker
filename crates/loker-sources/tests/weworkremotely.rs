@@ -1,4 +1,3 @@
-//! Where a We Work Remotely posting may be done from, as its feed fields say.
 use loker_core::model::Scope;
 use loker_sources::weworkremotely::transform;
 use serde_json::json;
@@ -33,7 +32,6 @@ fn country_is_narrower_than_region() {
             Scope::Countries,
             &["US"],
         ),
-        // The board's default says remote, not where.
         ("Anywhere in the World", None, Scope::Unknown, &[]),
         ("USA Only", None, Scope::Countries, &["US"]),
     ];

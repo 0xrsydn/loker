@@ -1,51 +1,23 @@
-//! Which role a job is ([`crate::role`]), from its title, then the source's
-//! category, then the start of its description. No IO: a job in, a
-//! [`JobRole`] or nothing out.
-//!
-//! The title decides when it names a role: it is the employer's own words. A
-//! category or the description only refines a title that says just
-//! "engineer" (or nothing), never overrides a specific one. Phrases are whole
-//! words, matched on lowercase text with punctuation as spaces, so
-//! "Full-Stack" is "full stack" and "ML/AI" is "ml ai". Each table lists the
-//! most specific role first; the first match is the primary role, later
-//! matches of other roles are secondary.
-//!
-//! Change a table, bump [`RULES`]: stored jobs are classified again when the
-//! store opens (see `Store::open`).
-//!
-//! A model may also have answered (Jev's choice over the vocabulary, cached
-//! per job content; see [`RoleAnswer`]). [`classify_with`] then prefers the
-//! model, except where a title names a role and the model is unsure: on 600
-//! labelled jobs that mix was 81.5% exact against 68% for the rules alone
-//! (eval/role). Modifiers always come from the rules.
 use serde::{Deserialize, Serialize};
 
 use crate::model::NewJob;
 use crate::role::{self, JobRole, MAX_ROLES, Modifier, Role, RoleMethod};
 
-/// Version of these rules, bumped on any change to them.
 pub const RULES: u32 = 2;
 
-/// Version of the question put to a model ([`question`] and
-/// [`model_state`]), part of every answer's cache key.
 pub const QUESTION: u32 = 1;
 
-/// Below this, a model's choice gives way to a role the title names.
 pub const MODEL_THRESHOLD: f64 = 0.6;
 
-/// A model's answer for one job: the id it chose (`"none"` when no role
-/// fits) and how sure it was.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RoleAnswer {
     pub model: String,
     pub choice: String,
     pub confidence: f64,
-    /// The few most likely ids with their probabilities, for the record.
     #[serde(default)]
     pub top: Vec<(String, f64)>,
 }
 
-/// What a model sees of a job. Changing it changes every cache key.
 pub fn model_state(job: &NewJob) -> serde_json::Value {
     let description: String = job
         .description_md
@@ -65,16 +37,12 @@ pub fn model_state(job: &NewJob) -> serde_json::Value {
     })
 }
 
-/// The cache key of a job's answer: vocabulary, question and what the model
-/// sees. Not the model id, so a cached answer survives a model change until
-/// the job is asked again.
 pub fn answer_key(job: &NewJob) -> String {
     let state = model_state(job).to_string();
     let seed = format!("{}|{QUESTION}|{state}", role::VERSION);
     blake3::hash(seed.as_bytes()).to_hex()[..32].to_string()
 }
 
-/// The question put to a model: a choice over every id, plus "none".
 pub fn question() -> serde_json::Value {
     let mut criteria = serde_json::Map::new();
     for r in Role::ALL {
@@ -102,14 +70,10 @@ pub fn question() -> serde_json::Value {
     })
 }
 
-/// The rules and vocabulary versions in one number, stored with each job's
-/// role so the store knows which jobs to classify again.
 pub const STAMP: i64 = role::VERSION as i64 * 1000 + RULES as i64;
 
 use Role::*;
 
-/// Title phrases per role, most specific first. A role may appear twice
-/// when some of its phrases must win over a role in between.
 const TITLE: &[(Role, &[&str])] = &[
     (
         EngineeringManagement,
@@ -744,7 +708,6 @@ const TITLE: &[(Role, &[&str])] = &[
             "psychiatrist",
         ],
     ),
-    // Last: engineering whose specialty the title doesn't state.
     (
         Software,
         &[
@@ -759,11 +722,9 @@ const TITLE: &[(Role, &[&str])] = &[
             "coder",
         ],
     ),
-    // A designer of no stated kind (game designer, "Designer").
     (Design, &["designer", "design"]),
 ];
 
-/// Engineers that aren't software, hardware or anything this vocabulary has.
 const NOT_SOFTWARE: &[&str] = &[
     "civil engineer",
     "structural engineer",
@@ -779,9 +740,6 @@ const NOT_SOFTWARE: &[&str] = &[
     "petroleum engineer",
 ];
 
-/// Category phrases that name a role or only a family. Matched like titles,
-/// after the role phrases of [`TITLE`]; unknown categories ("Delta", "VIP")
-/// match nothing.
 const CATEGORY: &[(Role, &[&str])] = &[
     (Backend, &["back end programming"]),
     (Frontend, &["front end programming"]),
@@ -833,14 +791,10 @@ const MODIFIERS: &[(Modifier, &[&str])] = &[
     (Modifier::Founding, &["founding"]),
 ];
 
-/// The job's role from the rules alone, or `None` when nothing places it.
 pub fn classify(job: &NewJob) -> Option<JobRole> {
     classify_with(job, None)
 }
 
-/// The job's role from the rules and, when there is one, a model's answer:
-/// the model wins unless the title names a role and the model is under
-/// [`MODEL_THRESHOLD`]. Modifiers come from the rules either way.
 pub fn classify_with(job: &NewJob, answer: Option<&RoleAnswer>) -> Option<JobRole> {
     let rules = rules(job);
     let Some(a) = answer else {
@@ -857,11 +811,7 @@ pub fn classify_with(job: &NewJob, answer: Option<&RoleAnswer>) -> Option<JobRol
         .map(|r| r.modifiers.clone())
         .unwrap_or_default();
     let chosen: Option<Role> = serde_json::from_value(serde_json::json!(a.choice)).ok();
-    let Some(primary) = chosen else {
-        // "none", or an id this build doesn't know: no role.
-        return None;
-    };
-    // Keep the rules' secondary roles when they agree on the primary.
+    let primary = chosen?;
     let found: Vec<(Role, &str)> = match &rules {
         Some(r) if r.primary == primary => r.secondary.iter().map(|&s| (s, "from rules")).collect(),
         _ => Vec::new(),
@@ -876,7 +826,6 @@ pub fn classify_with(job: &NewJob, answer: Option<&RoleAnswer>) -> Option<JobRol
     ))
 }
 
-/// The rules: title, then category, then description.
 fn rules(job: &NewJob) -> Option<JobRole> {
     let title = words(&job.title);
     let modifiers: Vec<Modifier> = MODIFIERS
@@ -886,7 +835,6 @@ fn rules(job: &NewJob) -> Option<JobRole> {
         .collect();
     let found = matches(&title, TITLE);
 
-    // A title that names a role decides.
     if let Some(&(primary, phrase)) = found.iter().find(|(r, _)| !is_generic(*r)) {
         return Some(build(
             primary,
@@ -899,9 +847,6 @@ fn rules(job: &NewJob) -> Option<JobRole> {
     }
     let generic = found.first().copied();
 
-    // A title that says only "engineer" or nothing: the source's category.
-    // A known category ("Data Science", "DevOps and Sysadmin") maps as a
-    // whole; otherwise a role phrase inside it ("Product Management").
     if let Some(c) = job.category.as_deref() {
         let parts: Vec<String> = c.split(';').map(|p| words(p).trim().to_string()).collect();
         let known = CATEGORY.iter().find_map(|(r, ps)| {
@@ -928,7 +873,6 @@ fn rules(job: &NewJob) -> Option<JobRole> {
         }
     }
 
-    // Then a role named near the start of the description ("as a data engineer").
     if let Some(d) = job.description_md.as_deref() {
         let start: String = d.chars().take(600).collect();
         let desc = words(&start);
@@ -958,9 +902,6 @@ fn rules(job: &NewJob) -> Option<JobRole> {
     ))
 }
 
-/// Whether a title naming both may give the job both: roles in one family,
-/// or two technical roles ("Data Scientist / ML Engineer"). Otherwise the
-/// second is a domain ("Data Engineer, Marketing Analytics").
 fn related(a: Role, b: Role) -> bool {
     let top = |mut r: Role| {
         while let Some(h) = r.info().home {
@@ -972,13 +913,10 @@ fn related(a: Role, b: Role) -> bool {
     top(a) == top(b) || (tech(a) && tech(b))
 }
 
-/// `software` (no stated specialty) and the bare `design` family.
 fn is_generic(r: Role) -> bool {
     matches!(r, Software | Design)
 }
 
-/// Whether evidence for `role` may refine a generic title match: an
-/// "engineer" title takes only engineering roles.
 fn fits(generic: Option<(Role, &str)>, role: Role) -> bool {
     match generic {
         Some((g, _)) => role.within(g.info().home.unwrap_or(g)) || role.within(g),
@@ -995,8 +933,6 @@ fn build(
     evidence: String,
 ) -> JobRole {
     let mut secondary: Vec<Role> = Vec::new();
-    // A product engineer is a full-stack engineer who also owns the product:
-    // full-stack searches should find one.
     if primary == ProductEngineer {
         secondary.push(Fullstack);
     }
@@ -1005,9 +941,6 @@ fn build(
         if secondary.len() + 1 >= MAX_ROLES {
             break;
         }
-        // A single word next to a role is usually a qualifier ("Sales
-        // Solutions Engineer"); it counts only between two technical roles
-        // ("Backend / Infrastructure Engineer").
         let strong = phrase.contains(' ') || (tech(primary) && tech(r));
         if r != primary
             && !is_generic(r)
@@ -1030,15 +963,8 @@ fn build(
     }
 }
 
-/// Every role whose phrase occurs, each role once with the phrase that
-/// matched: multi-word phrases first (a role noun like "technical program
-/// manager" beats a keyword like "security"), then single words, each in
-/// table order. A matched phrase is used up, so its words can't also match
-/// another role ("ux researcher" is not also "ux"). False friends are taken
-/// out first.
 fn matches(text: &str, table: &[(Role, &'static [&'static str])]) -> Vec<(Role, &'static str)> {
     let mut text = text.to_string();
-    // A mechanical or electrical "design engineer" is hardware.
     for p in [
         "mechanical design engineer",
         "electrical design engineer",
@@ -1072,8 +998,6 @@ fn has(text: &str, phrase: &str) -> bool {
     text.contains(&format!(" {phrase} "))
 }
 
-/// Lowercase alphanumeric words joined by single spaces and padded with a
-/// space on each side, so a phrase only matches whole words.
 fn words(text: &str) -> String {
     let lower = text.to_lowercase();
     let ws: Vec<&str> = lower

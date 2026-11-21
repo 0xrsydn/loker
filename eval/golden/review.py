@@ -63,7 +63,6 @@ def role_text(r):
 
 
 def options(answers, rng):
-    """{source: text} -> shuffled distinct options, each with the sources behind it."""
     by_text = {}
     for src, text in answers.items():
         by_text.setdefault(text, []).append(src)
@@ -77,7 +76,6 @@ def options(answers, rng):
 def build():
     rng = random.Random("golden-v1")
     items = []
-    # pay: from holdout3, the clean pay holdout
     import pay_eval as pe
     h = load(os.path.join(EVAL, "pay", "holdout3.json"), {})
     ids = rng.sample(h["mention"], 9) + rng.sample(h["rest"], 3)
@@ -88,7 +86,6 @@ def build():
         answers = {"opus": pay_text(lo.get(f"v1|{j}")), "deepseek": pay_text(ld.get(f"v1|{j}")), "loker": pay_text(ours.get(j))}
         items.append({"id": j, "kind": "pay", "title": texts[j]["title"], "company": texts[j]["company"],
                       "description": texts[j]["description"], "options": options(answers, rng)})
-    # roles: from fresh.json, jobs fetched after the rules were frozen
     os.environ["LOKER_EVAL_DB"] = ""
     sys.argv = ["role_eval.py", "--set", "fresh"]
     import role_eval as re_
@@ -130,7 +127,6 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, open(PAGE, "rb").read(), "text/html; charset=utf-8")
         if self.path == "/data":
             data = load(os.path.join(HERE, "items.json"), {})
-            # the page never learns which source gave which answer
             for it in data.get("items", []):
                 for o in it["options"]:
                     o.pop("sources", None)
@@ -170,7 +166,6 @@ def score():
             for s in o["sources"]:
                 seen[(it["kind"], s)] += 1
                 right[(it["kind"], s)] += mark == "right"
-                # an answer left unmarked is not counted right or wrong, and is shown
                 open_[(it["kind"], s)] += mark not in ("right", "wrong")
     for kind in ("pay", "role"):
         done = sum(1 for it in data["items"] if it["kind"] == kind and verdicts.get(it["id"], {}).get("done"))

@@ -42,6 +42,9 @@ Rulings (2026-11-20), in the labelling prompt (v1) and the rules:
 | `holdout3.json` | `snapshot-boards.db`, 2026-11-20: 17 employer boards new to loker, chosen before reading as employers that hire internationally (Adyen, N26, Monzo, Agoda, Celonis, ...), at most 8 per company | 147 | 117 | 51 |
 | `holdout4.json` | `snapshot-boards2.db`, 2026-11-20: 19 more such boards (trivago, BlaBlaCar, Pennylane, Ninja Van, ...), drawn after the holdout3 fixes | 62 | 32 | 10 |
 
+Each set draws from two strata: jobs that mention visa words (a net kept
+wide on purpose) and jobs that don't, so misses outside the net show.
+
 Labelers agree on 198/200, 150/150, 63/63, 147/147 and 62/62. The two tuning
 disagreements are "may not be able to ... support future H-1B
 sponsorship" (Opus `limited`, DeepSeek `not_offered`); the rules say

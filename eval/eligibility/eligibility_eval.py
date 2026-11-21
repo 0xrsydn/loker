@@ -23,48 +23,25 @@ from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 EVAL = os.path.dirname(HERE)
 REPO = os.path.dirname(EVAL)
-# Holdout: aggregators fetched 2026-11-20, after the tuning snapshot, and
-# the 36 employer boards first fetched for the visa holdouts.
 DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        "holdout": [os.path.join(HERE, "snapshot-agg.db"), os.path.join(EVAL, "visa", "snapshot-boards.db"),
                    os.path.join(EVAL, "visa", "snapshot-boards2.db")],
-       # holdout2: a fetch on 2026-11-20 14:30, after the description reader
-       # was written (the aggregators again, and 21 employer boards new to
-       # loker), and snapshot-agg's jobs that no set drew and nobody read.
-       # Himalayas pages 1-50 fetched with it: the first 10 were in older snapshots.
-       # A new source's first test: Workable, fetched 2026-11-20 15:10 (10
-       # pages, and 5 each for PH, ID, IN, DE), never used to write rules.
        "workable": [os.path.join(HERE, "snapshot-workable.db")],
-       # After the Workable rules were written on `workable`: a deeper fetch
-       # (30 pages, 10 each for PH, ID, IN, DE), minus every job `workable` has.
        "workable2": [os.path.join(HERE, "snapshot-workable2.db")],
-       # After the second round of Workable rules (Location lines, the
-       # worldwide bug): 50 pages, 15 each for PH, ID, IN, DE, minus every job
-       # `workable` and `workable2` have.
        "workable3": [os.path.join(HERE, "snapshot-workable3.db")],
-       # After the workplace/places/elsewhere split: BR, GB, US, 10 pages each,
-       # minus every job of the earlier Workable sets.
        "workable4": [os.path.join(HERE, "snapshot-workable4.db")],
-       # Y Combinator: the parser was written from snapshot-yc.db's 121 jobs;
-       # yc.json is drawn from a later fetch (80 company pages) minus those.
        "yc": [os.path.join(HERE, "snapshot-yc2.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
 PROMPT_VERSION = "v1"
-# deepseek: DeepSeek's own API (v4 Pro), used for the sets labelled before
-# 2026-11-20 16:30, when its credit ran out. deepseek41: DeepSeek v4.1 Flash
-# through OpenCode Go in Pi, high reasoning; its labels are kept apart.
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro", "deepseek41": "opencode-go/deepseek-v4.1-flash:high"}
 MAX_CHARS = 12000
-# November: standard time everywhere these viewers live.
 VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
 NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia"}
 KINDS = ["yes", "maybe", "unknown", "no"]
 FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "ycombinator", "greenhouse", "ashby", "lever"]
 
-# What each board's fields mean, as the board documents them: what a person
-# reading the listing there would know. Not loker's reading of them.
 BOARD = {
     "himalayas": "Himalayas lists remote jobs only. An empty locationRestrictions means the employer hires from "
                  "anywhere; timezoneRestrictions lists the UTC offsets allowed (empty means no restriction).",
@@ -110,7 +87,6 @@ def connect(db):
 
 
 def jobs(dbs):
-    """Active canonical jobs: id -> title, company, description, listings."""
     out = {}
     for db in [dbs] if isinstance(dbs, str) else dbs:
         out.update(jobs_in(db))
@@ -134,7 +110,6 @@ def jobs_in(db):
 
 
 def primary(job):
-    """The listing the store takes text from: employer boards first, then by id."""
     live = [l for l in job["listings"] if l["live"]] or job["listings"]
     return sorted(live, key=lambda l: (l["kind"] != "employer", l["source"]))[0]
 
@@ -146,8 +121,6 @@ def predicted(ids, js, binary=None):
 
 
 def parity():
-    """The rebuilt eligibility should equal what ingest stored, unless the
-    rules changed since. Checks the pipeline before anything is scored."""
     db = arg("--db", DBS["sample"][0])
     js = jobs(db)
     got = predicted(sorted(js), js)
@@ -161,7 +134,6 @@ def parity():
 
 
 def draw(js, n, cap, rng, exclude=()):
-    """n jobs per source family, at most `cap` per company, in random order."""
     by = defaultdict(list)
     for j in sorted(js):
         if j not in exclude:
@@ -189,8 +161,6 @@ def sample():
     tune = jobs(DBS["sample"])
     print("sample (tuning):")
     save("sample.json", draw(tune, 28, 28, random.Random("elig-sample")))
-    # Holdout: jobs the tuning snapshot doesn't have, by id or URL, and not
-    # in the golden set.
     fresh = jobs(DBS["holdout"])
     urls = {l["raw"].get("absolute_url") or l["raw"].get("url") or l["raw"].get("link") or l["raw"].get("hostedUrl")
             for j in tune.values() for l in j["listings"]} - {None}
@@ -209,9 +179,6 @@ def url(listing):
 
 
 def sample2():
-    """holdout2: the description reader was tuned on the tuning snapshot and
-    read jobs in eval/role/snapshot-fresh.db, and holdout was scored twice.
-    Draw from a later fetch, leaving out every job any snapshot has."""
     if os.path.exists(os.path.join(HERE, "holdout2.json")):
         sys.exit("holdout2 already drawn")
     import glob
@@ -224,7 +191,7 @@ def sample2():
                 seen_ids.add(jid)
                 seen_urls.update(url(l) for l in d["listings"])
         except sqlite3.Error:
-            pass  # an older layout (eval/search, eval/agent): ids only
+            pass
     seen_urls.discard(None)
     new = jobs(DBS["holdout2"])
     old = {j for j, d in new.items() if j in seen_ids or any(url(l) in seen_urls for l in d["listings"])}
@@ -234,8 +201,6 @@ def sample2():
 
 
 def sample_workable(name="workable"):
-    """workable.json: a new source, measured before it is trusted.
-    workable2.json: the same after its rules, from jobs `workable` doesn't have."""
     if os.path.exists(os.path.join(HERE, f"{name}.json")):
         sys.exit(f"{name} already drawn")
     earlier = {"workable": [], "workable2": ["workable"], "workable3": ["workable", "workable2"],
@@ -264,8 +229,6 @@ def set_ids(name=None):
     s = load(f"{name or SET}.json", {})
     return [j for f in FAMILIES for j in s.get(f, [])]
 
-
-# ---------- label ----------
 
 PROMPT = """You read who can take a job, exactly as the posting states it.
 
@@ -345,7 +308,7 @@ def ask_deepseek(prompt, n):
     err = None
     for attempt in range(5):
         if attempt:
-            time.sleep(10 * attempt)  # a 429 needs time, not a quick retry
+            time.sleep(10 * attempt)
         try:
             with urllib.request.urlopen(req, timeout=300) as r:
                 out = json.loads(json.load(r)["choices"][0]["message"]["content"])
@@ -359,8 +322,6 @@ def ask_deepseek(prompt, n):
 
 
 def ask_pi(prompt, n):
-    """DeepSeek v4.1 through Pi (OpenCode Go): no tools, no session, an empty
-    working directory, so nothing but the prompt reaches it. Pi holds the key."""
     shape = {"labels": [{"i": 0, "verdicts": {c: "no" for c, _ in VIEWERS}, "evidence": "..."}]}
     cmd = ["pi", "-p", "--no-tools", "--no-session", "--provider", "opencode-go", "--model", "deepseek-v4.1-flash",
            "--thinking", "high", "--system-prompt",
@@ -426,8 +387,6 @@ def agree():
     print(f"   (opus, {other}):", dict(Counter(p for p in pairs if p[0] != p[1]).most_common()))
 
 
-# ---------- score ----------
-
 def score():
     judge = os.environ.get("JUDGE", "opus")
     labels = load(f"labels-{judge}.json", {})
@@ -436,9 +395,6 @@ def score():
     got = predicted(ids, js)
     rows = [(j, c, labels[key(j)]["verdicts"][c], got[j]["verdicts"][c]["kind"]) for j in ids for c, _ in VIEWERS]
     print(f"{len(ids)} labelled jobs x {len(VIEWERS)} viewers in {SET}.json (judge={judge})")
-    # A "yes" sends someone to a job; a wrong one (they can't take it) is the
-    # number to keep at zero. A "no" turns them away. "maybe" and "unknown"
-    # make no claim; how often they could have been yes or no is coverage.
     for ours in KINDS:
         mine = [r for r in rows if r[3] == ours]
         print(f"  loker {ours:8} {len(mine):4}   labels: {dict(Counter(r[2] for r in mine).most_common())}")

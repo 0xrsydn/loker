@@ -31,7 +31,6 @@ JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro"}
 MAX_CHARS = 15000
 ANSWERS = ["offered", "limited", "not_offered", None]
 
-# The sampler's net: wide on purpose; the random share measures what it misses.
 MENTION = re.compile(r"(?i)visa|sponsor|work(?:ing)?[ -](?:authori[sz]ation|permit)|right to work|"
                      r"authori[sz]ed to work|immigration|\bH-?1B\b|green card")
 
@@ -93,10 +92,6 @@ def sample():
 
 
 def sample2():
-    """holdout2: the first holdout had 4 jobs stating sponsorship, too few to
-    judge by. From the fresh snapshot's jobs in no set and not in the old
-    snapshot, at companies the old snapshot doesn't have (so no tuned
-    template), at most 3 per company."""
     if os.path.exists(os.path.join(HERE, "holdout2.json")):
         sys.exit("holdout2 already drawn")
     old = descriptions(DBS["sample"])
@@ -125,13 +120,6 @@ def sample2():
 
 
 def sample3(name="holdout3"):
-    """holdout3: neither earlier holdout had an `offered` or `limited`
-    posting. From snapshot-boards.db: 19 employer boards loker had never
-    ingested, chosen (before any text was read) as employers known to hire
-    internationally, of which 17 returned jobs. At most 8 jobs per company,
-    so one company's template can't fill the set. holdout4 is drawn the same
-    way from snapshot-boards2.db, a second list of boards (19 with jobs),
-    after the rules were fixed on holdout3."""
     if os.path.exists(os.path.join(HERE, f"{name}.json")):
         sys.exit(f"{name} already drawn")
     jobs = descriptions(DBS[name])
@@ -152,8 +140,6 @@ def sample3(name="holdout3"):
         print(f"{name} {stratum}: {len(picked)} of {len(pool)}, {len(per)} companies")
     save(f"{name}.json", out)
 
-
-# ---------- label ----------
 
 PROMPT = """You read whether a job posting offers visa sponsorship, exactly as the posting states it.
 
@@ -263,8 +249,6 @@ def agree():
                        if a[key(j)]["sponsorship"] != b[key(j)]["sponsorship"]))
 
 
-# ---------- score ----------
-
 def predicted(binary, ids, t):
     lines = "".join(json.dumps({"id": j, "text": t[j]["description"]}) + "\n" for j in ids)
     out = subprocess.run([binary], input=lines, capture_output=True, text=True, check=True).stdout
@@ -280,9 +264,6 @@ def score():
     gold = {j: labels[key(j)]["sponsorship"] for j in ids}
     ours = {j: (got.get(j) or {}).get("sponsorship") for j in ids}
     print(f"{len(ids)} labelled jobs in {SET}.json (judge={judge})")
-    # A stated answer is a claim: precision is how many claims are right,
-    # recall how many stated answers we found. A wrong claim is the number to
-    # keep near zero ("not offered" where it is offered turns a job away).
     claims = [j for j in ids if ours[j]]
     stated = [j for j in ids if gold[j]]
     right = [j for j in claims if ours[j] == gold[j]]

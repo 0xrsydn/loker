@@ -1,7 +1,5 @@
-//! Country names as job boards write them → ISO 3166-1 alpha-2.
 use isocountry::CountryCode;
 
-/// Common names that differ from the ISO short names.
 const ALIASES: &[(&str, &str)] = &[
     ("united states", "US"),
     ("usa", "US"),
@@ -51,14 +49,11 @@ pub fn to_alpha2(name: &str) -> Option<&'static str> {
         .map(|c| c.alpha2())
 }
 
-/// "Bolivia (Plurinational State of)" → "Bolivia"; "Korea, Republic of" → "Korea".
 fn short_name(full: &str) -> &str {
     let s = full.split(" (").next().unwrap_or(full);
     s.split(',').next().unwrap_or(s).trim()
 }
 
-// ---------- places inside a country ----------
-//
 // States and provinces job boards write instead of a country, and the cities
 // they hire in most. Only names that mean one country in job posts: no
 // "Cambridge", "Georgia" (a country first) or "Santiago de Compostela".
@@ -139,7 +134,6 @@ const CA_PROVINCES: &[&str] = &[
     "prince edward island",
 ];
 
-/// City → country.
 const CITIES: &[(&str, &str)] = &[
     ("new york", "US"),
     ("new york city", "US"),
@@ -289,15 +283,6 @@ pub fn place_country(name: &str) -> Option<(&'static str, bool)> {
         .map(|(_, code)| (*code, true))
 }
 
-// ---------- regions ----------
-//
-// Which countries a region a job names takes in, for the per-viewer verdict.
-// Common usage in job posts, not geography exams: APAC is East, Southeast and
-// South Asia plus Oceania; EMEA is Europe, the Middle East and Africa; LATAM
-// is Mexico, Central America, the Spanish-, Portuguese- and French-speaking
-// Caribbean and South America. Türkiye and Egypt sit in two blocks, as posts
-// use them.
-
 const EUROPE: &[&str] = &[
     "AD", "AL", "AT", "BA", "BE", "BG", "BY", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FO",
     "FR", "GB", "GG", "GI", "GR", "HR", "HU", "IE", "IM", "IS", "IT", "JE", "LI", "LT", "LU", "LV",
@@ -334,8 +319,6 @@ const SOUTH_AMERICA: &[&str] = &[
     "AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GY", "PE", "PY", "SR", "UY", "VE",
 ];
 
-/// Whether `region` (a name `normalize` produces, e.g. "APAC") takes in the
-/// country with ISO code `code`. `None` for a region this table doesn't know.
 pub fn region_contains(region: &str, code: &str) -> Option<bool> {
     let blocks: &[&[&str]] = match region {
         "Europe" => &[EUROPE],

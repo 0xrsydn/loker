@@ -1,5 +1,3 @@
-//! For eval/visa: reads JSON lines `{"id", "text"}` on stdin and prints
-//! `{"id", "visa"}`, what `visa_text::visa_from_text` reads from each text.
 use std::io::{BufRead, Write};
 
 fn main() -> anyhow::Result<()> {

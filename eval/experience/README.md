@@ -2,8 +2,10 @@
 
 Measures the years of experience read from job descriptions
 (`crates/loker-core/src/experience_text.rs`) against the minimum years
-labelled by Opus and DeepSeek v4.1 (Pi, OpenCode Go, high thinking). Run it
-by hand when changing those rules; it isn't part of CI.
+labelled by Opus and DeepSeek v4.1 (Pi, OpenCode Go, high thinking). Both
+labellers run with no tools, no session and an empty working directory, so
+nothing but the prompt reaches them. Run it by hand when changing those
+rules; it isn't part of CI.
 
 A number too high hides a job from someone who meets the real bar (the
 `experienceYears` filter drops jobs asking for more), so **too high** is

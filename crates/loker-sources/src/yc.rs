@@ -1,30 +1,3 @@
-//! Y Combinator's job board (ycombinator.com/jobs), read from its sitemap.
-//!
-//! The board has no JSON API: every page is Rails + Inertia with the whole
-//! payload in one `data-page` attribute, and the listing routes are capped
-//! (20 on the landing page, 36-50 per role or location) with pagination
-//! parameters ignored. What is complete is `/jobs/sitemap.xml`: one request,
-//! about nine thousand URLs, seven thousand of them job pages, each with the
-//! company slug. A company's own page (` /companies/<slug>/jobs `) then
-//! lists every job it has, uncapped, with the fields below - one request per
-//! company instead of one per job.
-//!
-//! Two things the board states and the postings do not: `visa` (three fixed
-//! values) and `salaryRange` (87% of postings, in mixed currencies and
-//! periods, sometimes a placeholder). Both are read here rather than from the
-//! description, which this route does not fetch.
-//!
-//! Politeness: the site rate-limits per path (429 after a burst, for minutes,
-//! with no `Retry-After`), so pages are fetched one second apart and a 429
-//! backs off instead of counting as an answer. Ten percent of the sitemap's
-//! job URLs are already gone (404); those companies simply contribute nothing.
-//!
-//! Coverage: a job is only refreshed when its company page is fetched, and a
-//! listing not seen for 30 days closes as stale, so a run must reach every
-//! company at least that often. One `pages` unit is `COMPANIES_PER_PAGE`
-//! companies; the default three covers 120 of about 1700, so a timer that
-//! ingests this source should pass `--pages 50` (2000 companies, the whole
-//! board). Smaller runs rotate by day and still get there eventually.
 use std::collections::BTreeSet;
 use std::time::Duration;
 
@@ -44,10 +17,7 @@ pub const SOURCE_ID: &str = "ycombinator";
 const HOST: &str = "https://www.ycombinator.com";
 const SITEMAP: &str = "/jobs/sitemap.xml";
 
-/// Companies fetched per unit of `pages` (one company page is one request).
 const COMPANIES_PER_PAGE: usize = 40;
-/// Between two page fetches. The site answers 429 to bursts; one a second held
-/// for a whole sweep without a single 429 in testing.
 const PAUSE: Duration = Duration::from_secs(1);
 
 pub async fn fetch(client: &HttpClient, pages: u32) -> anyhow::Result<Vec<Value>> {
@@ -56,8 +26,6 @@ pub async fn fetch(client: &HttpClient, pages: u32) -> anyhow::Result<Vec<Value>
     if slugs.is_empty() {
         anyhow::bail!("the sitemap lists no job pages");
     }
-    // The sitemap is shuffled and has no dates, so a run that cannot cover it
-    // takes the next window by day: successive runs walk the whole board.
     let take = (pages.clamp(1, 50) as usize)
         .saturating_mul(COMPANIES_PER_PAGE)
         .min(slugs.len());
@@ -85,9 +53,6 @@ pub async fn fetch(client: &HttpClient, pages: u32) -> anyhow::Result<Vec<Value>
     Ok(items)
 }
 
-/// A page of the board, with one more try per 429: a rate limit is a pause,
-/// not the answer. `get_text` treats every status as final, which is right
-/// for a missing board and wrong here.
 async fn get_page(client: &HttpClient, url: &str) -> anyhow::Result<String> {
     let mut pause = Duration::from_secs(20);
     for attempt in 1..=3 {
@@ -105,8 +70,6 @@ async fn get_page(client: &HttpClient, url: &str) -> anyhow::Result<String> {
     unreachable!()
 }
 
-/// Job page paths in the sitemap, as their company slugs. The sitemap also
-/// lists role and location pages; those are not jobs.
 fn company_slugs(xml: &str) -> anyhow::Result<Vec<String>> {
     let doc = roxmltree::Document::parse(xml)?;
     let mut slugs = BTreeSet::new();
@@ -131,8 +94,6 @@ fn company_slugs(xml: &str) -> anyhow::Result<Vec<String>> {
     Ok(slugs.into_iter().collect())
 }
 
-/// The jobs on one company page: `data-page` holds the Inertia props, with
-/// the JSON's quotes HTML-escaped as `&quot;`.
 fn page_jobs(html: &str, slug: &str) -> anyhow::Result<Vec<Value>> {
     let raw = data_page(html).ok_or_else(|| anyhow::anyhow!("{slug}: no data-page"))?;
     let page: Value = serde_json::from_str(&raw)?;
@@ -167,7 +128,6 @@ fn page_jobs(html: &str, slug: &str) -> anyhow::Result<Vec<Value>> {
         .collect())
 }
 
-/// The HTML-unescaped `data-page` attribute of the component div.
 fn data_page(html: &str) -> Option<String> {
     let start = html.find("data-page=\"")? + "data-page=\"".len();
     let rest = &html[start..];
@@ -204,8 +164,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         source_job_id: id,
         source_url: link.clone(),
         canonical_url: link.clone(),
-        // The board's own apply link is a login redirect; the posting is the
-        // honest target.
         apply_url: Some(link),
         title,
         company,
@@ -229,8 +187,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
                     .collect()
             })
             .unwrap_or_default(),
-        // This route reads the company page, which lists jobs without their
-        // descriptions; reading them would cost one request per job.
         description_md: None,
         posted_at: s("createdAt").and_then(|t| age(&t)),
         expires_at: None,
@@ -242,23 +198,11 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     })
 }
 
-/// The board's location, which has a grammar of its own: options separated
-/// by " / ", each an office ("San Francisco, CA, US", "Munich, Bavaria, DE",
-/// "San Francisco - In Office", a bare country code) or remote ("Remote",
-/// "Remote (US; CA; MX)", "Remote (San Francisco, CA, US)"). In "City, ST,
-/// CC" only the last part is a country: CA there is California, BY Bavaria.
-///
-/// - A remote option makes the job remote. Countries inside its parentheses
-///   are where it is open, and no one else. Cities there ("Remote (San
-///   Francisco, CA, US)") mean living nearby: maybe in that country.
-/// - A bare "Remote" keeps the countries of the other options, and says
-///   nothing about anyone else (`not_stated`).
-/// - No remote option: an office job, at the first office listed.
 fn eligibility(location: &str) -> Eligibility {
     let raw = location.trim();
-    let mut offices: Vec<String> = Vec::new(); // countries of office options
+    let mut offices: Vec<String> = Vec::new();
     let mut remote_countries: Vec<String> = Vec::new();
-    let mut remote_cities: Vec<String> = Vec::new(); // countries of "Remote (City, ST, CC)"
+    let mut remote_cities: Vec<String> = Vec::new();
     let mut bare_remote = false;
     let mut first_office: Option<String> = None;
     for option in raw.split(" / ").map(str::trim).filter(|o| !o.is_empty()) {
@@ -300,7 +244,6 @@ fn eligibility(location: &str) -> Eligibility {
             ..base
         }
     } else if !remote_cities.is_empty() {
-        // Remote, but living near those cities: maybe there, no elsewhere.
         Eligibility {
             countries: sorted(remote_cities),
             evidence: Some("remote near the listed cities".into()),
@@ -326,8 +269,6 @@ fn eligibility(location: &str) -> Eligibility {
     }
 }
 
-/// The country of one option: "City, ST, CC" or "City, Region, CC" by its
-/// last part, a bare code, or a city, region or country name.
 fn place_country(option: &str) -> Option<String> {
     let option = option.trim_end_matches(" - In Office").trim();
     let parts: Vec<&str> = option.split(',').map(str::trim).collect();
@@ -335,8 +276,6 @@ fn place_country(option: &str) -> Option<String> {
     if last.len() == 2 && last.chars().all(|c| c.is_ascii_uppercase()) {
         return country::to_alpha2(last).map(String::from);
     }
-    // Names, last part first: "Munich, Germany", "Noida, Uttar Pradesh",
-    // "San Francisco".
     parts
         .iter()
         .rev()
@@ -346,8 +285,6 @@ fn place_country(option: &str) -> Option<String> {
         })
 }
 
-/// The board's three fixed values. "US citizenship/visa not required" says
-/// nothing about sponsorship, so it is not a statement either way.
 fn visa_of(job: &Value) -> Option<Visa> {
     let text = job.get("visa").and_then(as_string)?;
     let sponsorship = match text.trim() {
@@ -388,10 +325,6 @@ fn pay_of(job: &Value) -> Option<Pay> {
     normalize::pay_from(base, extras, (!text.is_empty()).then_some(text))
 }
 
-/// "$250K - $285K", "15K-20K INR / monthly", "50K-95K EUR", "$60K".
-/// The currency is the trailing code when there is one (a lone symbol is USD),
-/// and the period is a month only when the text says so. A figure that fails
-/// `normalize::money`'s checks (the board's "$1" placeholder) yields nothing.
 fn parse_money(text: &str) -> Option<Money> {
     let (min, max) = amounts(text)?;
     let currency = currency(text)?;
@@ -403,8 +336,6 @@ fn parse_money(text: &str) -> Option<Money> {
     normalize::money(min, max, Some(&currency), Some(period))
 }
 
-/// The figures in a range, in the text's order, scaled by K/M/B. One figure
-/// is one amount (min == max), not a range with an open end.
 fn amounts(text: &str) -> Option<(Option<f64>, Option<f64>)> {
     let mut found: Vec<f64> = Vec::new();
     let chars: Vec<char> = text.chars().collect();
@@ -422,7 +353,6 @@ fn amounts(text: &str) -> Option<(Option<f64>, Option<f64>)> {
         let Ok(mut v) = digits.parse::<f64>() else {
             continue;
         };
-        // A suffix may be glued on ("250K") or spaced ("2 M").
         let mut j = i;
         while j < chars.len() && chars[j] == ' ' {
             j += 1;
@@ -452,9 +382,6 @@ fn amounts(text: &str) -> Option<(Option<f64>, Option<f64>)> {
     }
 }
 
-/// The ISO code the text states: a trailing three-letter code ("INR", "CAD"),
-/// else the currency's symbol. A symbol is a guess only for "$", which is USD
-/// unless the text names another dollar.
 fn currency(text: &str) -> Option<String> {
     let code = text
         .split_whitespace()
@@ -478,8 +405,6 @@ fn currency(text: &str) -> Option<String> {
     )
 }
 
-/// "about 10 hours", "23 days", "over 1 year", "1 day": the board only gives
-/// an age, so the posting date is that age back from now.
 fn age(text: &str) -> Option<DateTime<Utc>> {
     let lower = text.to_lowercase();
     let n: f64 = lower
@@ -553,7 +478,6 @@ mod tests {
                 "2M-5M INR",
                 Some((2_000_000.0, 5_000_000.0, "INR", Period::Year)),
             ),
-            // No currency, no pay.
             ("Competitive", None),
             ("", None),
         ];
@@ -573,9 +497,6 @@ mod tests {
         }
     }
 
-    /// The board's placeholder ("$1") and a range that reads as dollars a
-    /// year but is really something else survive parsing and are dropped by
-    /// the plausibility check, so a junk figure never becomes pay.
     #[test]
     fn pay_drops_what_cannot_be_a_salary() {
         for text in ["$1", "$220 - $285", "$0"] {
@@ -625,7 +546,6 @@ mod tests {
         assert!(j.posted_at.is_some());
     }
 
-    /// The board's location shapes, as seen on it (2026-11-21).
     #[test]
     fn location_reads_the_boards_grammar() {
         use Workplace::*;

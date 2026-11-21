@@ -1,18 +1,3 @@
-//! Pay read from a job description, for sources with no pay fields
-//! (Greenhouse, Lever, We Work Remotely). Precision first, because a wrong
-//! figure is worse than none:
-//!
-//! * a figure needs a currency, and a sentence (or the heading above it) that
-//!   talks about pay: "salary", "compensation", "pay range", "per hour", "OTE";
-//! * a figure next to a benefit, funding or sales word ("$200 monthly wellness
-//!   reimbursement", "raised $3M", "$5M ACV deals") is never pay;
-//! * base pay needs a period: stated ("/year", "per hour", "annually"), or a
-//!   salary of 15,000 or more, which is a year;
-//! * extras (equity, bonus, commission, sign-on) count only on a line that
-//!   also states base pay; OTE counts with its figure anywhere a figure would.
-//!
-//! The checks in `normalize::money` and `normalize::pay_from` apply on top.
-//! `eval/pay` measures it against labelled jobs.
 use std::sync::LazyLock;
 
 use regex::Regex;
@@ -20,9 +5,7 @@ use regex::Regex;
 use crate::model::{Money, Pay, PayExtra, PayExtraKind, PayMethod, Period};
 use crate::normalize::{self, money, percent};
 
-/// A currency before a figure. Dollar prefixes name their country.
 const CUR: &str = r"(?:Php|Rp|US\$|CA\$|C\$|AU\$|A\$|NZ\$|S\$|SG\$|HK\$|R\$|\$|€|£|₹|₱|\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|MYR|THB|VND|KRW|TWD|CNY|AED|SAR|ILS|TRY|CHF|JPY|BRL|MXN|ARS|CLP|COP|PEN|PLN|CZK|HUF|RON|SEK|NOK|DKK|ZAR|NGN|KES|EGP|PKR|BDT)\b)";
-/// A currency code or sign after a figure ("59,000 EUR", "100k€").
 const CODE: &str = r"(?:\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|MYR|THB|VND|KRW|TWD|CNY|AED|SAR|ILS|TRY|CHF|JPY|BRL|MXN|ARS|CLP|COP|PEN|PLN|CZK|HUF|RON|SEK|NOK|DKK|ZAR|NGN|KES|EGP|PKR|BDT)\b|€|£)";
 /// A figure: "120,000", "15,00,000", "2.800" (thousands), "24.50".
 const NUM: &str = r"\d{1,3}(?:\.\d{3})+\b|\d[\d,]*(?:\.\d+)?";
@@ -40,12 +23,10 @@ static EQUITY_PERCENT: LazyLock<Regex> = LazyLock::new(|| {
         .unwrap()
 });
 
-/// Words that make a sentence about this job's pay.
 static PAY_WORDS: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:salary|salaries|compensation|remuneration|wages?|pay|pays|comp|hourly rate|day rate|rate of|(?:monthly|weekly|daily|annual) rate|gehalt|salaire|sueldo|salario|gaji|ote|on[- ]target|per hour|an hour|/\s?hr|/\s?hour)\b|\brate\s*:").unwrap()
 });
 
-/// Words that make a figure something other than pay, near it.
 static NOT_PAY: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
         r"(?i)\b(?:rais(?:e|ed|ing)|funding|funded|series [a-f]|seed|pre-seed|valuation|valued|revenue|arr|acv|gmv|deals?|invest(?:ed|ors?|ment)?|backed|budgets?|grants?|reimburse\w*|allowance|stipend|wellness|laundry|meals?|lunch|relocation|401\(?k?\)?|hsa|fsa|retirement|pension|match(?:ing)?|home office|workstation|set ?up|equipment|learning|education|training|(?:professional|career|personal) development|conference|gym|fitness|health|medical|dental|vision|childcare|vacation|bike|commut\w*|mobility|perks?|vouchers?|subscriptions?|membership|saved|set aside|members|internet|phone|coworking|referral|customers|users|clients|quota|prize|award|fund|fees?|price|pricing|cost|spend|savings|insurance|cpa|cpc|aum|assets|portfolio|transactions|loans?|billion|draw|per (?:referred|active|candidate|lead|sale|task|word|video))\b",
@@ -53,8 +34,6 @@ static NOT_PAY: LazyLock<Regex> = LazyLock::new(|| {
     .unwrap()
 });
 
-/// "(about $2,500 a month)", "equivalent to €72,000 annually": a range
-/// already given, restated.
 static RESTATED: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)(?:\(|equivalent to|approximately|approx\.?|roughly|about)\s*$").unwrap()
 });
@@ -63,7 +42,6 @@ static LABEL: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"^\s*(?:per year\s+|annually\s+)?(?:in|for)\s+(?:most\s+|all\s+|the\s+)?(?P<l>[A-Z][\w.\- ]{1,30}?)(?:-based)?\s+(?:locations?|roles?|candidates|employees|residents|applicants)").unwrap()
 });
 
-/// Pay stated in `text` (a description), or `None`.
 pub fn pay_from_text(text: &str) -> Option<Pay> {
     let text = clean(text);
     let lines: Vec<&str> = text
@@ -75,8 +53,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
         (Vec::<Money>::new(), Vec::new(), Vec::<String>::new());
     let mut base_lines = Vec::new();
     for (i, line) in lines.iter().enumerate() {
-        // Pay words may sit around the figure: "Annual Salary" or "Base Pay
-        // Range" above it, "Average base salary range." below.
         // A period above counts only from a heading, not from a paragraph.
         let heading: String = lines[i.saturating_sub(2)..i]
             .iter()
@@ -85,13 +61,9 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
             .collect::<Vec<_>>()
             .join(" ");
         let around = lines[i.saturating_sub(2)..(i + 4).min(lines.len())].join(" ");
-        // An OTE named in the paragraph introducing the figures ("On-Target
-        // Earnings (OTE) for this role are listed below").
         let intro = lines[i.saturating_sub(5)..i].join(" ");
-        // Ranges listed one after another under one pay heading share it.
         let pay_context =
             PAY_WORDS.is_match(&around) || base_lines.last().is_some_and(|b: &usize| i - b <= 3);
-        // With several ranges, the line just above names each: "US Metro Zone 2".
         let label = i
             .checked_sub(1)
             .map(|j| lines[j])
@@ -109,7 +81,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
                         if line_has_base && RESTATED.is_match(&sentence[..at.start()]) {
                             continue;
                         }
-                        // "Metro 2: $130,000 - 150,000" names its range first.
                         let prefix = sentence[..at.start()].trim();
                         let prefix = prefix
                             .strip_suffix(':')
@@ -139,9 +110,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
             base_lines.push(i);
         }
     }
-    // Extras are named near base pay, or where the posting offers pay ("may
-    // also be eligible for bonus, equity"), never alone: "administer equity
-    // plans" is a duty, not pay.
     if !base_lines.is_empty() {
         for (i, line) in lines.iter().enumerate() {
             if base_lines.iter().any(|b| b.abs_diff(i) <= 3) || OFFER.is_match(line) {
@@ -149,9 +117,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
             }
         }
     }
-    // One range stated twice ("Compensation" up top, "Salary Range" at the
-    // end) is one range. Places that share figures in a list of several
-    // ("Washington" and "New York City") stay apart.
     let unlabelled = |m: &Money| Money {
         label: None,
         ..m.clone()
@@ -168,7 +133,6 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
     {
         base.truncate(1);
     }
-    // A single range needs no label; several keep theirs only if all have one.
     if base.len() < 2 || base.iter().any(|m| m.label.is_none()) {
         base.iter_mut().for_each(|m| m.label = None);
     }
@@ -183,14 +147,8 @@ enum Found {
     Extra(PayExtra),
 }
 
-/// Currencies whose annual salaries start around 15,000: a salary figure that
-/// large with no period is a year. Elsewhere a monthly salary can be that
-/// large (25,000 ZAR), so no period means no figure.
 const YEARLY_AT_15K: &[&str] = &["USD", "EUR", "GBP", "CAD", "AUD", "NZD", "CHF", "SGD"];
 
-/// One figure in a sentence: base pay, an extra with its figure, or nothing
-/// (no currency, no pay words around and no stated period, a benefit or a
-/// sales number, a total, no period).
 fn figure(
     sentence: &str,
     above: &str,
@@ -212,7 +170,6 @@ fn figure(
     // With no pay words around, only a range with its period counts:
     // "$10,000–$25,000 USD annually", not "an average of $1,800 annually".
     let stated = period_after(after);
-    // "$185K–$215K base": the word after the figure says what it is.
     let pay_context = pay_context
         || head(after, 8)
             .trim_start()
@@ -264,7 +221,6 @@ static OFFER: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\b(?:eligible for|may (?:also )?include|also includes?|total rewards|compensation package|in addition to (?:base|salary))\b").unwrap()
 });
 
-/// "total compensation of up to €120,000": not base pay.
 static TOTAL: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
         r"total (?:cash |target |annual )?(?:compensation|comp|cash|package|rewards?|potential|earnings)\b[^$€£\d]*$",
@@ -278,7 +234,6 @@ static FROM: LazyLock<Regex> = LazyLock::new(|| {
         .unwrap()
 });
 
-/// A bare "$" (no country prefix, no code after).
 fn bare_dollar(m: &regex::Captures) -> bool {
     m.name("c3").is_none()
         && m.name("cm").is_none()
@@ -287,9 +242,6 @@ fn bare_dollar(m: &regex::Captures) -> bool {
             .is_some_and(|c| c.as_str().trim() == "$")
 }
 
-/// "$" is the US dollar unless the text names another dollar country
-/// ("Ontario based: $80,000" is CAD); `None` when it names both, since the
-/// figure could be either.
 fn dollar_country(text: &str) -> Option<&'static str> {
     static OTHERS: LazyLock<Vec<(&str, Regex)>> = LazyLock::new(|| {
         [
@@ -321,8 +273,6 @@ fn has_money(text: &str) -> bool {
     RANGE.captures_iter(text).any(|m| currency(&m).is_some())
 }
 
-/// Whether a line above a range could name it: "California Pay Range" names
-/// a place; "### Compensation & Benefits" is only the pay heading.
 fn names_something(line: &str) -> bool {
     static HEADING: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"(?i)\b(?:range|ranges|benefits|details|package|and|base|the|for|this|role|position)\b").unwrap()
@@ -335,7 +285,6 @@ fn names_something(line: &str) -> bool {
 }
 
 fn currency(m: &regex::Captures) -> Option<String> {
-    // A code after the figure names the dollar: "$175,000 - $235,000 CAD".
     let c = m
         .name("c3")
         .or_else(|| m.name("cm"))
@@ -364,10 +313,7 @@ fn currency(m: &regex::Captures) -> Option<String> {
     )
 }
 
-/// A figure with its suffix ("120k", "1.2M"); `other` is the range's other
-/// suffix, for "$130-225K".
 fn number(n: &str, suffix: Option<regex::Match>, other: Option<regex::Match>) -> Option<f64> {
-    // "60,000,00": a comma before two final digits is a decimal comma.
     let n = &match n.rsplit_once(',') {
         Some((head, cents)) if cents.len() == 2 && !n.contains('.') => format!("{head}.{cents}"),
         _ => n.to_string(),
@@ -395,10 +341,6 @@ fn number(n: &str, suffix: Option<regex::Match>, other: Option<regex::Match>) ->
     })
 }
 
-/// What a figure is, when not base pay: a kind word right after it ("€90,000
-/// OTE", "$10,000 signing bonus"), else the nearest kind word before it
-/// unless a base-pay word is nearer ("salary is $200K … OTE up to $500K"),
-/// else a heading that says OTE ("Annual OTE Salary").
 fn extra_kind(before: &str, after: &str, above: &str) -> Option<PayExtraKind> {
     static WORD: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"\b(?:ote|on[- ]target|sign[- ]on|signing|bonus|commission|equity|stock|rsus?|salary|base|wage|rate)\b").unwrap()
@@ -440,8 +382,6 @@ fn extra_kind(before: &str, after: &str, above: &str) -> Option<PayExtraKind> {
         .then_some(PayExtraKind::Ote)
 }
 
-/// Extras named on a line that states base pay ("plus equity", "eligible
-/// for a bonus"), with equity as a percentage when given.
 fn extras_named(line: &str) -> Vec<PayExtra> {
     let lower = line.to_lowercase();
     let named = |words: &[&str]| {
@@ -493,7 +433,6 @@ fn extras_named(line: &str) -> Vec<PayExtra> {
     out
 }
 
-/// A period stated right after the figure: "/year", " per hour", " USD annually".
 fn period_after(after: &str) -> Option<Period> {
     static AFTER: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"(?i)^\s*(?:(?:USD|EUR|GBP|CAD|AUD|gross|base|salary)\s+)*(?:/\s?|per\s+|an?\s+|each\s+)?(?P<p>year|yr|annum|annually|annual|yearly|hour|hr|hourly|month|mo|monthly|week|weekly|day|daily)\b").unwrap()
@@ -501,7 +440,6 @@ fn period_after(after: &str) -> Option<Period> {
     normalize::pay_period(&AFTER.captures(after)?["p"])
 }
 
-/// The first period word in `text`: "annual base salary", "Hourly Pay Range".
 fn period_word(text: &str) -> Option<Period> {
     static WORD: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(r"(?i)\b(?:per\s+|an?\s+)?(?P<p>annum|annually|annual|yearly|year|hourly|hour|monthly|month|weekly|daily)\b").unwrap()
@@ -514,8 +452,6 @@ fn period_word(text: &str) -> Option<Period> {
     })
 }
 
-/// Markdown escapes and emphasis out, so "\$120,000" and "**Salary:**" read
-/// plainly; "Min: $18.53, Max: $24.35" as the range it is.
 fn clean(text: &str) -> String {
     static MIN_MAX: LazyLock<Regex> = LazyLock::new(|| {
         Regex::new(
@@ -523,7 +459,6 @@ fn clean(text: &str) -> String {
         )
         .unwrap()
     });
-    // UTF-8 dashes and dots a feed decoded as Latin-1: "$185Kâ\u{80}\u{93}$215K".
     let text = text
         .replace("â\u{80}\u{93}", "–")
         .replace("â\u{80}\u{94}", "—")
@@ -540,8 +475,6 @@ fn clean(text: &str) -> String {
     MIN_MAX.replace_all(&text, "${a} - ").into_owned()
 }
 
-/// Sentences of a line, split after ". ", "! ", "? " and "; " but not inside
-/// figures ("$24.50").
 fn sentences(line: &str) -> Vec<&str> {
     let mut out = Vec::new();
     let mut start = 0;

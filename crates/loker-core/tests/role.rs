@@ -1,4 +1,3 @@
-//! The role vocabulary: its shape, its names, and how filters take jobs in.
 use std::collections::BTreeSet;
 
 use loker_core::role::{self, JobRole, Modifier, Role, RoleFilter, RoleMethod};
@@ -11,10 +10,8 @@ fn name<T: serde::Serialize>(v: T) -> String {
         .to_string()
 }
 
-/// The invariants every change to the vocabulary must keep.
 #[test]
 fn the_vocabulary_is_well_formed() {
-    // ALL lists every variant once (the JSON Schema enum lists every variant).
     let schema = serde_json::to_value(schemars::schema_for!(Role)).unwrap();
     // Plain variants come as `enum`; documented ones as `oneOf` of `const`s.
     let variants: BTreeSet<String> = match schema.get("enum") {
@@ -36,8 +33,6 @@ fn the_vocabulary_is_well_formed() {
     for &r in Role::ALL {
         let i = r.info();
         assert!(!i.label.is_empty() && !i.definition.is_empty(), "{r:?}");
-        // A role's home is a family; families nest at most one deep (ai in
-        // engineering), so every id reaches a top-level family in two steps.
         if let Some(home) = i.home {
             assert!(home.is_family(), "{r:?}'s home {home:?} is not a family");
         }
@@ -46,7 +41,10 @@ fn the_vocabulary_is_well_formed() {
         while let Some(h) = at.info().home {
             at = h;
             depth += 1;
-            assert!(depth <= 2, "{r:?} nests too deep");
+            assert!(
+                depth <= 2,
+                "{r:?} nests too deep: families nest at most one deep"
+            );
         }
         for p in i.also_in {
             assert_ne!(*p, r, "{r:?} is inside itself");
@@ -60,9 +58,11 @@ fn the_vocabulary_is_well_formed() {
         }
     }
 
-    // Role and modifier names never collide, so a filter entry is unambiguous.
     for m in Modifier::ALL {
-        assert!(!listed.contains(&name(m)), "{m:?} is also a role");
+        assert!(
+            !listed.contains(&name(m)),
+            "{m:?} is also a role, so a filter entry is ambiguous"
+        );
     }
 }
 
@@ -72,21 +72,15 @@ fn within() {
     let cases = [
         (Backend, Backend, true),
         (Backend, Engineering, true),
-        // `ai` sits inside engineering: an engineering filter finds AI roles,
-        // an ai filter finds only them.
         (AiEngineering, Ai, true),
         (MlInfrastructure, Engineering, true),
         (Ai, Engineering, true),
         (Backend, Ai, false),
-        // Software is engineering with no stated specialty, not every specialty.
         (Software, Engineering, true),
         (Software, Backend, false),
         (Backend, Software, false),
-        // Product engineers are found by fullstack through a secondary role,
-        // not by the vocabulary.
         (ProductEngineer, Fullstack, false),
         (ProductEngineer, Product, false),
-        // Roles that also sit in a second family.
         (DataEngineering, Data, true),
         (DataEngineering, Engineering, true),
         (DataScience, Engineering, false),
@@ -96,7 +90,6 @@ fn within() {
         (CustomerSuccess, Support, true),
         (ProgramManagement, Product, true),
         (ProductDesign, Product, false),
-        // AI-training gigs are not AI engineering.
         (AiTraining, Ai, false),
         (AiTraining, Engineering, false),
         (Engineering, Backend, false),
@@ -131,7 +124,7 @@ fn filters() {
         (&["ai_engineering"], true),
         (&["ai"], true),
         (&["engineering"], true),
-        (&["backend"], true), // its secondary role
+        (&["backend"], true),
         (&["forward_deployed"], true),
         (&["founding"], false),
         (&["ml_engineering"], false),

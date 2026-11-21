@@ -1,5 +1,3 @@
-//! For eval/experience: reads JSON lines `{"id", "text"}` on stdin and prints
-//! `{"id", "experience"}`, what `experience_text::experience_from_text` reads.
 use std::io::{BufRead, Write};
 
 fn main() -> anyhow::Result<()> {

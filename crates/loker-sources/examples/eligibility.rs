@@ -1,18 +1,3 @@
-//! For `eval/eligibility`: re-reads stored jobs with the current rules and
-//! prints each one's verdict for a set of viewers.
-//!
-//! stdin, one JSON object per line: `{"id", "viewers": [["US", -5.0], ...],
-//! "listings": [{"source", "kind", "sourceJobId", "raw", "stored", "live"}]}`
-//! with every listing of a canonical job as `source_jobs` holds it. Each raw
-//! item goes through the adapter again (`job_from_raw`), the listings merge as
-//! the store merges them (`dedup::resolve`), and the verdict is computed per
-//! viewer.
-//!
-//! An employer board's `remote` flag isn't stored. It is recovered per
-//! listing: when the stored job had a known scope and re-reading without the
-//! flag gives none, the board was ingested as remote. `recovered` counts these.
-//! Only employer boards take the flag, so an aggregator's listing is never
-//! recovered (that would undo a rule that now reads it as unknown).
 use std::io::{BufRead, Write};
 
 use loker_core::dedup::{Linked, resolve};

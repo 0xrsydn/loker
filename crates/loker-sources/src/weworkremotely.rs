@@ -1,15 +1,3 @@
-//! We Work Remotely RSS feeds (public, no key): the all-jobs feed and one
-//! feed per category, merged by guid. The all-jobs feed holds only about ten
-//! of each category's newest; the category feeds go deeper. A category feed
-//! that fails is skipped (its slug may have changed); the all-jobs feed must
-//! load. Not a complete list, so missing items close nothing: `expires_at`
-//! and staleness close them.
-//!
-//! Each item states `region` ("Anywhere in the World", "USA Only", "Europe
-//! Only", ...), which is who may apply, and its title is "Company: Role".
-//! Some also state `country` ("🇨🇦 Canada and 🇺🇸 United States of
-//! America"): the countries the hire may be in, narrower than a region that
-//! often says "Anywhere in the World" beside it.
 use std::collections::BTreeSet;
 
 use chrono::DateTime;
@@ -50,7 +38,6 @@ pub async fn fetch(client: &HttpClient) -> anyhow::Result<Vec<Value>> {
     Ok(items)
 }
 
-/// Each `<item>` as a JSON object of its child elements' text.
 fn parse(xml: &str) -> anyhow::Result<Vec<Value>> {
     let doc = roxmltree::Document::parse(xml)?;
     Ok(doc
@@ -70,10 +57,6 @@ fn parse(xml: &str) -> anyhow::Result<Vec<Value>> {
         .collect())
 }
 
-/// "🇫🇷 France, 🇩🇪 Germany, and 🇬🇧 United Kingdom of Great Britain and
-/// Northern Ireland" → "France; Germany; United Kingdom of Great Britain and
-/// Northern Ireland". Each country follows its flag, so names that hold
-/// "and" stay whole.
 fn countries(field: &str) -> String {
     let flag = |c: char| ('\u{1F1E6}'..='\u{1F1FF}').contains(&c);
     field
@@ -120,10 +103,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
             .filter(|c| !c.is_empty())
         {
             Some(places) => eligibility_from_text(&places, Some(true)),
-            // The board's default, and no evidence on its own: most postings
-            // that carry it without `country` restrict who may apply in their
-            // text (eval/eligibility: 2 of 11 open to all five viewers). It
-            // says remote, not where.
             None if region == "Anywhere in the World" => Eligibility {
                 raw: Some(region.clone()),
                 elsewhere: Elsewhere::NotStated,

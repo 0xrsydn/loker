@@ -1,10 +1,3 @@
-//! End to end, offline: the real `loker` binary against a local stub that
-//! serves one small hand-written payload per adapter shape (not snapshots).
-//!
-//! Covers ingest through every adapter, idempotent re-runs, order-independent
-//! dedup, closing and reopening through a real complete fetch, CLI = MCP
-//! parity, `loker verify` (pass and fail), and drift of the committed v1
-//! contract schemas.
 use std::collections::BTreeSet;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::net::TcpListener;
@@ -15,14 +8,9 @@ use std::sync::{Arc, Mutex};
 
 use serde_json::{Value, json};
 
-// ---------- stub sources ----------
-
-/// Serves every adapter's endpoint on one port. `shrink` drops a job from the
-/// Ashby board, as if the company closed it.
 struct Stub {
     base: String,
     shrink: Arc<AtomicBool>,
-    /// Every request target served, in order.
     log: Arc<Mutex<Vec<String>>>,
 }
 
@@ -56,7 +44,6 @@ fn stub() -> Stub {
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
             served.lock().unwrap().push(target.clone());
             let (status, body) = route(&target, flag.load(Ordering::SeqCst));
-            // A string body is sent as is (RSS); anything else as JSON.
             let body = match body {
                 Value::String(text) => text,
                 other => other.to_string(),
@@ -89,10 +76,8 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
             ("200 OK", json!({ "apiVersion": "1", "jobs": jobs }))
         }
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
-        // Paged: the second page is empty only if the adapter asks for one.
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
-        // Jev through OpenRouter: every job is a data engineer, 90% sure.
         "/api/alpha/decisions" => (
             "200 OK",
             json!({
@@ -106,7 +91,6 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         ),
         // Only the all-jobs feed: the category feeds 404 and are skipped.
         "/remote-jobs.rss" => ("200 OK", Value::String(weworkremotely())),
-        // YC: one request for the sitemap, then one per company page.
         "/jobs/sitemap.xml" => ("200 OK", Value::String(yc_sitemap())),
         "/companies/acme/jobs" => ("200 OK", Value::String(yc_page("Acme", yc_jobs().0))),
         "/companies/globex/jobs" => ("200 OK", Value::String(yc_page("Globex", yc_jobs().1))),
@@ -119,7 +103,6 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
     }
 }
 
-/// YC: the sitemap names the companies, each company page lists its jobs.
 fn yc_sitemap() -> String {
     r#"<?xml version="1.0" encoding="UTF-8"?><urlset>
   <url><loc>https://www.ycombinator.com/companies/acme/jobs/abc-sre</loc></url>
@@ -129,8 +112,6 @@ fn yc_sitemap() -> String {
         .to_string()
 }
 
-/// One company page: Rails + Inertia, the props in a data-page attribute
-/// with the JSON's quotes escaped.
 fn yc_page(name: &str, jobs: Value) -> String {
     let props = json!({
         "component": "WaasShowJobsPage",
@@ -208,7 +189,6 @@ fn weworkremotely() -> String {
         .into()
 }
 
-/// Far in the future, so nothing expires during the test.
 const LATER: i64 = 4_102_444_800;
 
 fn himalayas() -> Vec<Value> {
@@ -225,7 +205,6 @@ fn himalayas() -> Vec<Value> {
         }),
         json!({
             "guid": "https://himalayas.app/companies/other/jobs/designer",
-            // Messy on purpose: the shared cleanup (normalize::tidy) must fix it.
             "title": "  Designer &amp;\n Illustrator ", "companyName": "Other ",
             "applicationLink": "https://HIMALAYAS.app/companies/other/jobs/designer?utm_source=api&ref=feed",
             "locationRestrictions": ["Indonesia", "Vietnam"], "timezoneRestrictions": [7, 8],
@@ -246,7 +225,6 @@ fn greenhouse() -> Vec<Value> {
             "content": "&lt;p&gt;Build APIs at Acme.&lt;/p&gt;"
         }),
         json!({
-            // Greenhouse doesn't say remote or on-site; this lists countries only.
             "id": 102, "title": "Data Analyst", "company_name": "Acme, Inc.",
             "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/102",
             "location": { "name": "Germany; Netherlands" },
@@ -297,7 +275,6 @@ fn jobicy() -> Vec<Value> {
 
 fn lever() -> Vec<Value> {
     vec![
-        // The same role as Jobicy's: one job across two sources.
         json!({
             "id": "lv-1", "text": "Writer", "workplaceType": "remote", "country": "US",
             "categories": { "commitment": "Full-time", "location": "Anywhere", "allLocations": ["Anywhere"] },
@@ -306,7 +283,6 @@ fn lever() -> Vec<Value> {
             "createdAt": 1_790_000_000_000_i64, "description": "<p>Words.</p>",
             "lists": [{ "text": "You have", "content": "<li>A pen</li>" }], "additional": ""
         }),
-        // On-site, with Lever's ISO country and a yearly salary.
         json!({
             "id": "lv-2", "text": "Office Manager", "workplaceType": "onsite", "country": "US",
             "categories": { "commitment": "Full-time", "location": "New York, NY", "allLocations": ["New York, NY"] },
@@ -329,8 +305,6 @@ fn remoteok() -> Vec<Value> {
         "description": "<p>React at Globex.</p>"
     })]
 }
-
-// ---------- running loker ----------
 
 struct Home {
     dir: PathBuf,
@@ -379,7 +353,6 @@ impl Home {
         self.json(&args)
     }
 
-    /// Active jobs as sets of "source url" (ids depend on arrival order; these don't).
     fn clusters(&self) -> BTreeSet<Vec<String>> {
         let r = self.json(&["search", "--limit", "100", "--json"]);
         r["jobs"]
@@ -405,7 +378,6 @@ impl Home {
             .collect()
     }
 
-    /// One MCP session over stdio: initialize, then call a tool.
     fn mcp_call(&self, tool: &str, arguments: Value) -> Value {
         let mut child = self
             .cmd(&["mcp"])
@@ -454,21 +426,17 @@ const ORDER: [&str; 7] = [
     "weworkremotely",
 ];
 
-// ---------- tests ----------
-
 #[test]
 fn pipeline_end_to_end() {
     let stub = stub();
     let home = Home::new("forward", &stub);
 
-    // Before any ingest, a search says why it is empty, over CLI and MCP alike.
     let r = home.json(&["search", "engineer", "--json"]);
     assert!(
         r["notice"].as_str().unwrap().contains("loker ingest --all"),
-        "{r:#}"
+        "before any ingest, a search says why it is empty: {r:#}"
     );
 
-    // Every adapter parses its payload; three pairs merge across sources.
     let first: Vec<Value> = ORDER.iter().map(|s| home.ingest(s)).collect();
     let new: u64 = first.iter().map(|s| s["new"].as_u64().unwrap()).sum();
     let skipped: u64 = first.iter().map(|s| s["skipped"].as_u64().unwrap()).sum();
@@ -482,7 +450,8 @@ fn pipeline_end_to_end() {
     assert!(
         clusters.iter().any(|c| c.len() == 2
             && c[0].starts_with("jobicy")
-            && c[1].starts_with("lever:initech"))
+            && c[1].starts_with("lever:initech")),
+        "Jobicy's and Lever's Writer are one job"
     );
     assert!(clusters.iter().any(|c| c.len() == 2
         && c[0].starts_with("greenhouse:acme")
@@ -493,16 +462,14 @@ fn pipeline_end_to_end() {
             && c[1].starts_with("remoteok"))
     );
 
-    // Re-running changes nothing.
     for (s, stats) in ORDER.iter().zip(ORDER.iter().map(|s| home.ingest(s))) {
         assert_eq!(
             (stats["new"].as_u64(), stats["updated"].as_u64()),
             (Some(0), Some(0)),
-            "{s}: {stats}"
+            "{s}: re-running changes nothing: {stats}"
         );
     }
 
-    // The same data in the opposite order gives the same jobs.
     let reverse = Home::new("reverse", &stub);
     for s in ORDER.iter().rev() {
         reverse.ingest(s);
@@ -513,7 +480,6 @@ fn pipeline_end_to_end() {
         "dedup must not depend on ingest order"
     );
 
-    // The merged job takes the employer board's link and the confident eligibility.
     let r = home.json(&[
         "search",
         "backend",
@@ -525,20 +491,23 @@ fn pipeline_end_to_end() {
     ]);
     let job = &r["jobs"][0];
     assert_eq!(
-        job["url"],
-        "https://job-boards.greenhouse.io/acme/jobs/101?gh_src=x"
+        job["url"], "https://job-boards.greenhouse.io/acme/jobs/101?gh_src=x",
+        "the merged job takes the employer board's link"
     );
-    assert_eq!(job["eligibility"]["scope"], "worldwide");
+    assert_eq!(
+        job["eligibility"]["scope"], "worldwide",
+        "and the confident eligibility"
+    );
     assert_eq!(job["eligible"]["kind"], "yes");
 
-    // Remote or on-site unstated, but tied to its countries: maybe inside
-    // them, and dropped (no) for a viewer elsewhere.
     let r = home.json(&["search", "analyst", "--country", "DE", "--json"]);
-    assert_eq!(r["jobs"][0]["eligible"]["kind"], "maybe", "{r:#}");
+    assert_eq!(
+        r["jobs"][0]["eligible"]["kind"], "maybe",
+        "Greenhouse lists countries without saying remote: maybe inside them: {r:#}"
+    );
     let r = home.json(&["search", "analyst", "--country", "ID", "--json"]);
-    assert_eq!(r["count"], 0, "{r:#}");
+    assert_eq!(r["count"], 0, "and dropped (no) elsewhere: {r:#}");
 
-    // No job has both words: jobs with either come back, marked partial.
     let mcp = home.mcp_call("search_jobs", json!({"q": "writer office"}));
     let found: Vec<(&str, bool)> = mcp["structuredContent"]["jobs"]
         .as_array()
@@ -548,17 +517,16 @@ fn pipeline_end_to_end() {
         .collect();
     assert!(
         found.contains(&("Writer", true)) && found.contains(&("Office Manager", true)),
-        "{found:?}"
+        "no job has both words: jobs with either come back, marked partial: {found:?}"
     );
     let cli = home.json(&["search", "writer", "office", "--json"]);
     assert_eq!(mcp["structuredContent"], cli, "CLI and MCP differ");
 
-    // Roles: the vocabulary is the same over CLI and MCP, and a job's title
-    // places it (the stub's WWR job is a site reliability engineer).
     let cli = home.json(&["roles", "--json"]);
     assert_eq!(
         home.mcp_call("list_roles", json!({}))["structuredContent"],
-        cli
+        cli,
+        "roles: CLI and MCP differ"
     );
     let r = home.json(&["search", "--role", "infrastructure", "--compact", "--json"]);
     assert!(
@@ -567,10 +535,9 @@ fn pipeline_end_to_end() {
             .unwrap()
             .iter()
             .any(|j| j["title"] == "Site Reliability Engineer" && j["roles"][0] == "infrastructure"),
-        "{r:#}"
+        "the WWR job's title places it: {r:#}"
     );
 
-    // We Work Remotely: "Company: Role" splits, and its region is who may apply.
     let r = home.json(&["search", "reliability", "--country", "ID", "--json"]);
     let job = &r["jobs"][0];
     assert_eq!(
@@ -580,18 +547,22 @@ fn pipeline_end_to_end() {
             &json!("Site Reliability Engineer"),
             &json!("yes")
         ),
-        "{r:#}"
+        "WWR: \"Company: Role\" splits, and its region is who may apply: {r:#}"
     );
 
-    // Lever: an on-site job takes the posting's country, and a yearly salary
-    // becomes USD per month.
     let r = home.json(&["search", "office", "--json"]);
     let job = &r["jobs"][0];
     assert_eq!(job["eligibility"]["scope"], "onsite");
-    assert_eq!(job["eligibility"]["countries"], json!(["US"]));
-    assert_eq!(job["pay"]["usdMonthMin"], 5000);
+    assert_eq!(
+        job["eligibility"]["countries"],
+        json!(["US"]),
+        "Lever: an on-site job takes the posting's country"
+    );
+    assert_eq!(
+        job["pay"]["usdMonthMin"], 5000,
+        "Lever: a yearly salary becomes USD per month"
+    );
 
-    // Ashby: pay from its components; the employer's wins over Remote OK's.
     let r = home.json(&["search", "frontend", "--json"]);
     let pay = &r["jobs"][0]["pay"];
     assert_eq!(
@@ -601,23 +572,26 @@ fn pipeline_end_to_end() {
             &json!([{ "kind": "equity" }]),
             &json!("$100K – $130K • Offers Equity")
         ),
-        "{r:#}"
+        "Ashby: pay from its components; the employer's wins over Remote OK's: {r:#}"
     );
-    // Visa sponsorship is read from the description.
-    assert_eq!(r["jobs"][0]["visa"]["sponsorship"], "not_offered", "{r:#}");
+    assert_eq!(
+        r["jobs"][0]["visa"]["sponsorship"], "not_offered",
+        "visa sponsorship is read from the description: {r:#}"
+    );
     assert_eq!(job["employmentType"], "full_time");
 
-    // Every adapter's jobs go through the shared cleanup.
     let r = home.json(&["search", "designer", "--json"]);
     let job = &r["jobs"][0];
-    assert_eq!(job["title"], "Designer & Illustrator");
+    assert_eq!(
+        job["title"], "Designer & Illustrator",
+        "the stub's messy title goes through normalize::tidy"
+    );
     assert_eq!(job["company"], "Other");
     assert_eq!(
         job["url"],
         "https://himalayas.app/companies/other/jobs/designer"
     );
 
-    // CLI and MCP return the same thing.
     let args = [
         "search",
         "engineer",
@@ -640,7 +614,6 @@ fn pipeline_end_to_end() {
     let bad = home.mcp_call("search_jobs", json!({"country": "Narnia"}));
     assert_eq!(bad["isError"], true);
 
-    // An agent's flow: browse compact, eligible only; then full details for the picks.
     let browse = json!({"country": "ID", "tz": 7, "minVerdict": "yes", "view": "compact"});
     let compact = home.mcp_call("search_jobs", browse.clone())["structuredContent"].clone();
     let cli = home.json(&[
@@ -700,28 +673,27 @@ fn pipeline_end_to_end() {
     let args: Vec<&str> = args.iter().map(String::as_str).collect();
     assert_eq!(home.json(&args), got, "get_jobs: CLI and MCP differ");
 
-    // A verdict filter needs a viewer.
     let bad = home.mcp_call("search_jobs", json!({"minVerdict": "yes"}));
-    assert_eq!(bad["isError"], true);
+    assert_eq!(bad["isError"], true, "a verdict filter needs a viewer");
 
-    // A complete board that stops listing a job closes it; listing it again reopens it.
     stub.shrink.store(true, Ordering::SeqCst);
     let st = home.ingest("ashby:globex");
     assert_eq!(
         (st["closed"].as_u64(), st["held"].as_u64()),
         (Some(1), Some(0)),
-        "{st}"
+        "a complete board that stops listing a job closes it: {st}"
     );
     assert_eq!(home.clusters().len(), clusters.len() - 1);
     stub.shrink.store(false, Ordering::SeqCst);
     let st = home.ingest("ashby:globex");
-    assert_eq!(st["reopened"].as_u64(), Some(1), "{st}");
+    assert_eq!(
+        st["reopened"].as_u64(),
+        Some(1),
+        "listing it again reopens it: {st}"
+    );
     assert_eq!(home.clusters(), clusters);
 }
 
-/// YC's board is a sitemap of company slugs plus one page per company: the
-/// adapter must read both, and the board's own visa and salary fields must
-/// reach the output, placeholder salary dropped.
 #[test]
 fn ycombinator_reads_the_sitemap_then_each_company_page() {
     let stub = stub();
@@ -730,7 +702,6 @@ fn ycombinator_reads_the_sitemap_then_each_company_page() {
     assert_eq!(st["new"].as_u64(), Some(3), "{st}");
     assert_eq!(st["skipped"].as_u64(), Some(0), "{st}");
 
-    // The sitemap first, then one page per company it named.
     let served = stub.log.lock().unwrap().clone();
     assert_eq!(
         served,
@@ -738,7 +709,8 @@ fn ycombinator_reads_the_sitemap_then_each_company_page() {
             "/jobs/sitemap.xml",
             "/companies/acme/jobs",
             "/companies/globex/jobs"
-        ]
+        ],
+        "the sitemap first, then one page per company it named"
     );
 
     let found = home.json(&["search", "--limit", "10", "--json"]);
@@ -757,17 +729,19 @@ fn ycombinator_reads_the_sitemap_then_each_company_page() {
     assert_eq!(sre["pay"]["base"][0]["max"], 210000.0);
     assert_eq!(sre["pay"]["base"][0]["currency"], "USD");
 
-    // The board's "$1" placeholder is not pay, and "not required" is not a
-    // statement about sponsorship.
     let platform = jobs
         .iter()
         .find(|j| j["title"] == "Platform Engineer")
         .expect("the platform posting");
-    assert!(platform["pay"].is_null(), "{platform:#}");
-    assert!(platform["visa"].is_null(), "{platform:#}");
+    assert!(
+        platform["pay"].is_null(),
+        "the board's \"$1\" placeholder is not pay: {platform:#}"
+    );
+    assert!(
+        platform["visa"].is_null(),
+        "\"not required\" says nothing about sponsorship: {platform:#}"
+    );
 
-    // A post with no job pages left (the sitemap is a superset of the live
-    // board) must not look empty.
     let ok = home.run(&["verify", "ycombinator", "--json"]);
     let report: Value = serde_json::from_slice(&ok.stdout).unwrap();
     assert!(ok.status.success(), "{report:#}");
@@ -852,7 +826,6 @@ enabled = false
     )
     .unwrap();
 
-    // One broken source fails the run but not the others; disabled ones are skipped.
     let out = home.run(&["ingest", "--all", "--json"]);
     assert!(
         !out.status.success(),
@@ -873,7 +846,8 @@ enabled = false
             "ashby:globex",
             "greenhouse:broken",
             "jobicy"
-        ]
+        ],
+        "disabled sources are skipped"
     );
     let failed: Vec<&Value> = report["sources"]
         .as_array()
@@ -881,20 +855,22 @@ enabled = false
         .iter()
         .filter(|o| !o["error"].is_null())
         .collect();
-    assert_eq!(failed.len(), 1);
+    assert_eq!(failed.len(), 1, "one broken source doesn't fail the others");
     assert_eq!(failed[0]["source"], "greenhouse:broken");
 
-    // A remote board: its postings' countries are where you can work from.
     let r = home.json(&["search", "analyst", "--country", "DE", "--json"]);
-    assert_eq!(r["jobs"][0]["eligibility"]["scope"], "countries", "{r:#}");
+    assert_eq!(
+        r["jobs"][0]["eligibility"]["scope"], "countries",
+        "a remote board's countries are where you can work from: {r:#}"
+    );
     assert_eq!(r["jobs"][0]["eligible"]["kind"], "yes", "{r:#}");
 
-    // The board's display name from config replaces Ashby's slug.
     let r = home.json(&["search", "support", "--json"]);
-    assert_eq!(r["jobs"][0]["company"], "Globex");
+    assert_eq!(
+        r["jobs"][0]["company"], "Globex",
+        "the display name from config replaces Ashby's slug"
+    );
 
-    // verify with no names checks the enabled config sources with their own
-    // parameters: Himalayas on the country search endpoint ingest uses.
     stub.log.lock().unwrap().clear();
     let out = home.run(&["verify", "--json"]);
     let report: Value = serde_json::from_slice(&out.stdout).unwrap();
@@ -913,22 +889,21 @@ enabled = false
             "ashby:globex",
             "greenhouse:broken",
             "jobicy"
-        ]
+        ],
+        "verify with no names checks the enabled config sources"
     );
     let served = stub.log.lock().unwrap().clone();
     assert!(
         served
             .iter()
             .any(|t| t.starts_with("/jobs/api/search?") && t.contains("country=ID")),
-        "{served:?}"
+        "verify uses each source's config parameters, as ingest does: {served:?}"
     );
     assert!(
         !served.iter().any(|t| t.starts_with("/jobs/api?")),
         "{served:?}"
     );
 
-    // doctor, offline: the broken board's last fetch failed (and says how to
-    // check it); the others passed; exit status follows.
     let out = home.run(&["doctor", "--json"]);
     assert!(!out.status.success());
     let report: Value = serde_json::from_slice(&out.stdout).unwrap();
@@ -977,12 +952,18 @@ fn a_model_classifies_roles_once_per_job() {
         "{r:#}"
     );
 
-    // The stub's answer (data_engineering, 0.9) wins over every title.
     let found = home.json(&["search", "--role", "data_engineering", "--json"]);
-    assert_eq!(found["total"].as_u64(), Some(jobs), "{found:#}");
+    assert_eq!(
+        found["total"].as_u64(),
+        Some(jobs),
+        "the stub's answer (data_engineering, 0.9) wins over every title: {found:#}"
+    );
     assert_eq!(found["jobs"][0]["role"]["method"], "model");
 
-    // Answers are cached per job content: nothing is asked again.
     let again = home.json(&["roles", "enrich", "--json"]);
-    assert_eq!(again["asked"].as_u64(), Some(0), "{again:#}");
+    assert_eq!(
+        again["asked"].as_u64(),
+        Some(0),
+        "answers are cached per job content: {again:#}"
+    );
 }

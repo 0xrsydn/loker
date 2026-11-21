@@ -30,7 +30,11 @@ LOKER_EVAL_DB=$PWD/snapshot-wwr.db python3 agent_eval.py run --label X+wwr   # a
    can't hide any, graded 0–3 for role fit by Opus 5.5 from title, company
    and the first 800 characters of the description. Good = grade ≥ 2.
    Grades are cached in `fit-labels.json`, keyed by task and job;
-   `FIT_PROMPT` pins the prompt they were made with.
+   `FIT_PROMPT` pins the prompt they were made with. Because the key is only
+   task and job, a changed prompt, judge or truncation would mix with old
+   grades: `grade` refuses to run until `FIT_PROMPT` is updated and
+   `fit-labels.json` moved away. For the same reason a task's id stays tied
+   to its role text; a changed role gets a new id.
 
    Eligibility here is loker's own verdict, not a checked one: an
    eligibility bug that marks a job yes counts as a good pick, and a job

@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DB = os.environ.get("LOKER_EVAL_DB", os.path.join(HERE, "snapshot.db"))
 K = 20
 PROMPT_VERSION = "v1"
-DESC_CHARS = 2500  # description characters the judge sees
+DESC_CHARS = 2500
 
 
 def quote(t):
@@ -30,9 +30,6 @@ def fts(q, any_word):
     return (" OR " if any_word else " ").join(terms)
 
 
-# Query-side synonym expansion (eval only): each word becomes (word OR syn...).
-# Multi-word synonyms are phrases. Tokenizer splits "front-end" into front+end,
-# so the phrase "front end" also matches it.
 SYN = {
     "k8s": ["kubernetes"], "kubernetes": ["k8s"],
     "golang": ["go"], "sre": ["site reliability"],
@@ -64,9 +61,6 @@ def run(db, table, q, any_word, w, k=K, build=fts):
 
 
 def and_then_or(db, table, q, w, k=K, build=fts, fill_below=None):
-    """Every-word matches, then any-word matches. With `fill_below`, the
-    any-word matches are added only when fewer than that many jobs have
-    every word (counted over all of them, not just this page)."""
     first = run(db, table, q, False, w, k, build)
     if fill_below is not None:
         total = len(run(db, table, q, False, w, 10_000, build))
@@ -79,12 +73,7 @@ def and_then_or(db, table, q, w, k=K, build=fts, fill_below=None):
 T5 = (5, 1, 1)
 T10 = (10, 2, 1)
 PLAIN, PORTER = "eval_plain", "eval_porter"
-# Names say what a variant does, not which loker version it matches.
-# loker 58be2e1: default search = "plain and", anyWord = "plain or".
-# loker since the stemming/title-weight/partial commits: default search =
-# "porter and->or t5", anyWord = "porter or t5" (checked id for id).
 VARIANTS = {
-    # name: fn(db, q) -> ranked job ids
     "plain and": lambda db, q: run(db, PLAIN, q, False, None),
     "plain or": lambda db, q: run(db, PLAIN, q, True, None),
     "plain and t5": lambda db, q: run(db, PLAIN, q, False, T5),
@@ -104,8 +93,6 @@ BASELINE = "plain and"
 
 
 def connect():
-    """The snapshot, with the eval's own FTS tables (built once from loker's
-    jobs_fts content, so they don't depend on loker's tokenizer)."""
     if not os.path.exists(DB):
         sys.exit(f"no snapshot at {DB}; run `python3 eval.py snapshot` first")
     db = sqlite3.connect(DB)
@@ -191,9 +178,6 @@ Jobs:
 
 Return a grade for every job index."""
 
-# The prompts each PROMPT_VERSION names. A label key holds the version, not
-# the prompt, so editing a prompt without bumping the version would mix
-# grades from both under one key; `judge` refuses to run until they match.
 PROMPTS = {"v1": "e934178442fa"}
 
 
@@ -253,7 +237,6 @@ def ask_opus(prompt, n):
            "--system-prompt", "You grade search results for a job search engine. Reply only in the requested JSON.",
            "--json-schema", SCHEMA]
     err = None
-    # An empty directory outside the repo, so no CLAUDE.md reaches the judge.
     with tempfile.TemporaryDirectory(prefix="loker-judge-") as cwd:
         for _ in range(3):
             try:
@@ -425,7 +408,6 @@ def agree():
 
 
 def sample():
-    """Stratified blind sample for a human spot-check -> spotcheck.md + spotcheck-key.json."""
     labels = labels_for("opus")
     pooled = load("pool.json", {})
     rnd = random.Random(1)

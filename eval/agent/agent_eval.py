@@ -1,19 +1,3 @@
-"""Agent eval for loker: an LLM agent answers job-hunting tasks over MCP.
-Run by hand; not part of CI. See README.md.
-
-  python3 agent_eval.py run [--label L] [--trials 3] [--bin PATH] [--only TASK,...]
-  python3 agent_eval.py report [LABEL ...]
-
-For each task, the ground truth is every job the viewer can apply to (verdict
-yes or maybe, listed by the binary under test with no query, so search
-ranking can't bias it) that Opus grades as fitting the role. Then Pi
-(DeepSeek v4.1 Flash via OpenCode Go, only loker's MCP tools) runs each task on a fresh copy of
-the search eval's snapshot. The agent ends with a `PICKS:` line of job ids;
-picks are scored against the truth, and tool calls, characters of tool
-output, tokens, cost and time are recorded.
-
-Needs Pi's opencode-go provider (the agent) and the `claude` CLI (judge).
-"""
 import argparse, glob, hashlib, json, os, re, shutil, signal, sqlite3, subprocess, sys, tempfile, time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -22,8 +6,6 @@ REPO = os.path.dirname(os.path.dirname(HERE))
 SNAPSHOT = os.environ.get("LOKER_EVAL_DB", os.path.join(REPO, "eval", "search", "snapshot.db"))
 RUNS = os.path.join(HERE, "runs")
 LABELS = os.path.join(HERE, "fit-labels.json")
-# DeepSeek v4.1 Flash through OpenCode Go, high reasoning (from 2026-11-20;
-# runs before used DeepSeek's own API, deepseek-flash, default reasoning).
 MODEL = ("opencode-go", "deepseek-v4.1-flash")
 THINKING = "high"
 TIMEOUT = 900
@@ -33,11 +15,7 @@ JOB_ID = re.compile(r"\bj_[0-9a-f]{10}\b")
 
 sys.path.insert(0, os.path.join(REPO, "eval", "search"))
 
-FIT_CHARS = 800  # description characters the fit judge sees
-# The fit prompt that grades in fit-labels.json were made with. They are
-# keyed task|job only, so a changed prompt, judge or truncation would mix
-# with old grades; `grade` refuses to run until this is updated (and
-# fit-labels.json moved away). Keep a task's id tied to its role text too.
+FIT_CHARS = 800
 FIT_PROMPT = "10fc2efc9d9a"
 
 
@@ -71,10 +49,7 @@ def fresh_home():
     return work, home
 
 
-# ---------- ground truth ----------
-
 def eligible(binary, home, task):
-    """Every job the task's viewer can apply to: id -> verdict."""
     out, offset = {}, 0
     while True:
         r = loker(binary, home, "search", "--country", task["country"], f"--tz={task['tz']}",
@@ -98,8 +73,7 @@ def job_text(db, jid):
 
 
 def grade(task, ids, labels):
-    """Opus grades role fit (0-3) for jobs not yet graded for this task."""
-    import eval as search_eval  # eval/search/eval.py: the same judge plumbing
+    import eval as search_eval
     if fit_prompt_hash() != FIT_PROMPT:
         sys.exit(f"the fit prompt changed ({fit_prompt_hash()}): move fit-labels.json away and set FIT_PROMPT")
     todo = sorted(j for j in ids if f"{task['id']}|{j}" not in labels)
@@ -118,7 +92,6 @@ def grade(task, ids, labels):
 
 
 def truth(binary, ts):
-    """Per task: the eligible jobs that fit the role (grade >= 2)."""
     work, home = fresh_home()
     try:
         labels = json.load(open(LABELS)) if os.path.exists(LABELS) else {}
@@ -133,8 +106,6 @@ def truth(binary, ts):
     finally:
         shutil.rmtree(work, ignore_errors=True)
 
-
-# ---------- runs ----------
 
 def run_one(binary, task, trial, out_dir, gt):
     work, home = fresh_home()
@@ -205,7 +176,7 @@ def score_picks(binary, home, task, answer, gt):
     good, elig = set(gt["good"]), gt["eligible"]
     picks = [{"id": j, "verdict": elig.get(j), "good": j in good} for j in ids]
     unknown = [p["id"] for p in picks if p["verdict"] is None]
-    if unknown:  # not eligible: say which verdict it has instead
+    if unknown:
         r = loker(binary, home, "get", *unknown, "--country", task["country"], f"--tz={task['tz']}")
         got = {j["id"]: (j.get("eligible") or {}).get("kind", "?") for j in r["jobs"]}
         for p in picks:
@@ -231,7 +202,6 @@ def run(args):
     gt = truth(binary, ts)
     json.dump({k: {"good": v["good"], "eligible": len(v["eligible"])} for k, v in gt.items()},
               open(os.path.join(out_dir, "truth.json"), "w"), indent=1)
-    # What these runs measured: the label names a commit, but --bin can be any build.
     json.dump({"bin_sha256": sha256(binary), "version": subprocess.run([binary, "--version"], capture_output=True,
                text=True).stdout.strip(), "snapshot": SNAPSHOT, "snapshot_sha256": sha256(SNAPSHOT),
                "model": list(MODEL), "thinking": THINKING}, open(os.path.join(out_dir, "meta.json"), "w"), indent=1)
@@ -244,8 +214,6 @@ def run(args):
     report_labels([label])
 
 
-# ---------- report ----------
-
 def summarize(records):
     def mean(xs):
         xs = [x for x in xs if x is not None]
@@ -256,7 +224,6 @@ def summarize(records):
         n_good = sum(p["good"] for p in picks)
         want = min(5, avail)
         return {
-            # Picking nothing when good jobs exist is a miss, not a run to leave out.
             "precision": n_good / len(picks) if picks else (1.0 if avail == 0 else 0.0),
             "recall": n_good / want if want else (1.0 if not picks else 0.0),
             "pass": r["status"] == "ok" and r.get("format") == "ok"
