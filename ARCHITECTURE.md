@@ -95,7 +95,10 @@ Eligibility comes from the board's fields first. The description
 (`eligibility_text`) only fills in what they leave open: places when the
 board names none ("based in the US" under "Anywhere in the World"), hours
 when it gives none, never for on-site or hybrid jobs. It runs at ingest, in
-`job_from_raw`, since search filters on the verdict.
+`job_from_raw`, since search filters on the verdict. A job whose workplace is
+unknown counts as remote only on a board that lists nothing but remote jobs
+(`Source::remote_only`; not Y Combinator, which lists on-site jobs too) or
+an employer board configured `remote = true`.
 
 ## Trade-offs
 

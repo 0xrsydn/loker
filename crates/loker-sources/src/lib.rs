@@ -98,6 +98,23 @@ impl Source {
         }
     }
 
+    pub fn remote_only(&self) -> bool {
+        match self {
+            Source::Himalayas
+            | Source::Jobicy
+            | Source::RemoteOk
+            | Source::WeWorkRemotely
+            | Source::Workable => true,
+            Source::Ycombinator | Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => {
+                false
+            }
+        }
+    }
+
+    pub fn dated_by_age(&self) -> bool {
+        matches!(self, Source::Ycombinator)
+    }
+
     /// The id of a raw item, for sources whose fetch is the complete list of
     /// open jobs (a company's whole board). `None` for partial feeds, whose
     /// missing items mean nothing.
@@ -219,7 +236,7 @@ pub fn job_from_raw(
         job.eligibility = normalize::eligibility_from_text(&raw, Some(remote));
     }
     normalize::tidy(&mut job);
-    let remote_board = source.kind() == SourceKind::Aggregator || remote == Some(true);
+    let remote_board = source.remote_only() || remote == Some(true);
     loker_core::eligibility_text::narrow(
         &mut job.eligibility,
         job.description_md.as_deref().unwrap_or(""),
@@ -243,7 +260,7 @@ pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Resu
     let meta = SourceMeta {
         id: source.id(),
         kind: source.kind(),
-        dated_by_age: source == Source::Ycombinator,
+        dated_by_age: source.dated_by_age(),
     };
     for e in &f.errors {
         tracing::warn!(source = %meta.id, "skipping item: {e}");
