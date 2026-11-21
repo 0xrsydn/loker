@@ -794,6 +794,32 @@ fn contract_schemas_match_committed_v1() {
 }
 
 #[test]
+fn every_source_is_named_in_the_schema_and_the_help() {
+    let schemas = loker::contract_schemas();
+    let ingest = &schemas
+        .iter()
+        .find(|(name, _)| *name == "ingest_params.json")
+        .expect("ingest_params schema")
+        .1;
+    let described = ingest["properties"]["source"]["description"]
+        .as_str()
+        .unwrap();
+    let help = Command::new(env!("CARGO_BIN_EXE_loker"))
+        .args(["ingest", "--help"])
+        .output()
+        .unwrap();
+    let help = String::from_utf8(help.stdout).unwrap();
+    let missing: Vec<_> = loker_sources::SOURCES
+        .iter()
+        .filter(|s| !described.contains(*s) || !help.contains(*s))
+        .collect();
+    assert!(
+        missing.is_empty(),
+        "sources missing from IngestParams.source or `ingest --help`: {missing:?}"
+    );
+}
+
+#[test]
 fn config_drives_ingest_all_and_verify() {
     let stub = stub();
     let home = Home::new("config", &stub);

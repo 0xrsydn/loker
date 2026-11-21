@@ -102,7 +102,7 @@ impl LokerMcp {
     #[tool(
         description = "Fetch sources live (nothing is stored) and check adapter invariants: \
                        non-empty, parse rate, unique ids, required fields, ids for closures, dates. \
-                       Default: every source in the store.",
+                       Default: the enabled sources in config.toml, or every source in the store without one.",
         annotations(read_only_hint = true, open_world_hint = true)
     )]
     async fn verify_sources(

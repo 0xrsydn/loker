@@ -27,13 +27,13 @@ struct Cli {
 enum Command {
     /// Fetch a source once and store what it returns (or every configured source with --all).
     Ingest {
-        /// Source: himalayas, jobicy, remoteok, weworkremotely, workable, greenhouse:<board>, ashby:<board>, lever:<site>.
+        /// Source: himalayas, jobicy, remoteok, weworkremotely, workable, ycombinator, greenhouse:<board>, ashby:<board>, lever:<site>.
         #[arg(required_unless_present = "all")]
         source: Option<String>,
         /// Every enabled source in config.toml; exits non-zero if any fails.
         #[arg(long, conflicts_with_all = ["source", "pages", "country", "company", "remote"])]
         all: bool,
-        /// Pages to fetch (himalayas, workable: 20 jobs each).
+        /// Pages to fetch, default 3, at most 50 (himalayas, workable: 20 jobs each; ycombinator: 40 companies each).
         #[arg(long)]
         pages: Option<u32>,
         /// Only fetch jobs the source says are open to this country (ISO code; himalayas, workable).
@@ -126,7 +126,7 @@ enum Command {
     /// Fetch sources live (storing nothing) and check adapter invariants.
     /// Exits non-zero if any source fails.
     Verify {
-        /// Sources to check (default: every source in the store).
+        /// Sources to check (default: the enabled sources in config.toml, or every source in the store without one).
         sources: Vec<String>,
         #[arg(long)]
         json: bool,

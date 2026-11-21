@@ -981,11 +981,11 @@ pub fn live_checks(r: &VerifyReport) -> Vec<DoctorCheck> {
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
-    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
+    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
     pub source: String,
-    /// Pages to fetch where the source paginates (himalayas), default 3.
+    /// Pages to fetch where the source paginates (himalayas and workable: 20 jobs a page; ycombinator: 40 companies a page), default 3, at most 50.
     pub pages: Option<u32>,
-    /// Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).
+    /// Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas, workable).
     pub country: Option<String>,
     /// Company display name for an employer board (`greenhouse:`/`ashby:`/`lever:`); Ashby and Lever only give the slug.
     pub company: Option<String>,

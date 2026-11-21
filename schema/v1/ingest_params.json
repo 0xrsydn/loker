@@ -10,14 +10,14 @@
       ]
     },
     "country": {
-      "description": "Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas).",
+      "description": "Ask the source for jobs open to this country only (ISO alpha-2), where supported (himalayas, workable).",
       "type": [
         "string",
         "null"
       ]
     },
     "pages": {
-      "description": "Pages to fetch where the source paginates (himalayas), default 3.",
+      "description": "Pages to fetch where the source paginates (himalayas and workable: 20 jobs a page; ycombinator: 40 companies a page), default 3, at most 50.",
       "format": "uint32",
       "minimum": 0,
       "type": [
@@ -33,7 +33,7 @@
       ]
     },
     "source": {
-      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.",
+      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.",
       "type": "string"
     }
   },
