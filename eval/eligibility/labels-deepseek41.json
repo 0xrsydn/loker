@@ -9,6 +9,26 @@
    "US": "no"
   }
  },
+ "v1|j_0cdcc4b9e1": {
+  "evidence": "Jobicy lists remote jobs only; jobGeo is where the hire may be based. Board field: \"jobGeo\": \"Germany\"; \"This is a quota carrying, external field position.\" (DACH territory)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0d0359439d": {
+  "evidence": "This will be a hybrid role based in our San Francisco office. ... Must be located in the San Francisco Bay area.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0f0622eaca": {
   "evidence": "\"Flexible hours, fully remote.\" with board location \"United States\" / locations [\"TELECOMMUTE\", \"United States\"]",
   "verdicts": {
@@ -19,11 +39,101 @@
    "US": "yes"
   }
  },
+ "v1|j_11c7288199": {
+  "evidence": "\"Based in our New York City office\"; \"All interns are considered hybrid employees, designated the \\\"in office\\\" working model and are expected to be in their office location 3-5 days a week.\"; \"Must be authorized to work in the United States.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_169ed6964d": {
+  "evidence": "Jobicy lists remote jobs only; jobGeo is where the hire may be based. Board field: \"jobGeo\": \"Germany\"; \"Developing and implementing sales and market strategies for the DACH region\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_16fafa6c2e": {
+  "evidence": "This is a full-time remote position based out of the US (EST Time Zone).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_19d053d259": {
+  "evidence": "\"This position may be performed remotely in most states within the US, with some exclusions\"; board field \"jobGeo\": \"USA\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1a8aea00d7": {
+  "evidence": "\"Based in Canada and legally authorized to work in Canada.\"; \"We're looking for experienced and dedicated Customer Experience Dental Lab Technicians in Canada\"; \"Available shift(s): 8 am - 5 pm ET\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1ac43ed3ab": {
+  "evidence": "The role is fully remote, open anywhere in the US. ... Authorized to work in the United States without sponsorship.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1d5871deaf": {
+  "evidence": "Board location: \"US Only\" (nothing in the description opens it beyond the US)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1fe7a35020": {
+  "evidence": "jobGeo: \"Mexico\"; \"Our team of 600+ highly skilled tech professionals, based in Latin America\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_211d68b8a6": {
   "evidence": "\"Vendor Operations Manager EMEA\" (EMEA = Europe, the Middle East and Africa; board location Kenya, locations [\"TELECOMMUTE\", \"Kenya\"])",
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_233f919c41": {
+  "evidence": "**Location:** This is a remote role that can be based anywhere in Ireland.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -39,6 +149,26 @@
    "US": "yes"
   }
  },
+ "v1|j_23de7811a2": {
+  "evidence": "Board location: \"US Only\"; \"This role is remote but may require flexible working hours.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_265171a845": {
+  "evidence": "We offer a flexible hybrid work arrangement that prioritizes in-office collaboration. Employees are expected to be on-site 3 days per week (Monday, Tuesday, and Thursday).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2719257634": {
   "evidence": "\"location\": {\"countryName\": \"Philippines\"}, \"locations\": [\"TELECOMMUTE\", \"Philippines\"], \"workplace\": \"remote\"",
   "verdicts": {
@@ -47,6 +177,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_2828a917c8": {
+  "evidence": "\"addressCountry\": \"US | EU\" ... \"location\": \"Remote\", \"workplaceType\": \"Remote\"; \"We're a natively remote company. We default to async communication\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_28fd2a3dfb": {
+  "evidence": "\"This is an all-remote team ,and weâre looking for someone located in the U.S.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_2c69a4f593": {
@@ -59,8 +209,58 @@
    "US": "yes"
   }
  },
+ "v1|j_2d33106c98": {
+  "evidence": "To foster in-person collaboration, this role is hybrid with three days a week onsite at our Boston or San Francisco office.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2edd85f510": {
+  "evidence": "**Headquarters:** US- Remote",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_2ee3d92e5d": {
   "evidence": "\"location\": {\"city\": \"Sioux Falls\", \"countryName\": \"United States\", \"subregion\": \"South Dakota\"}; \"Fully remote position - Work from the comfort of your own home\"; \"Active Compact/Multi-State license (LPN) (LVN)\"; \"8:00am - 4:30pm CST\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_2f85012df4": {
+  "evidence": "This position may be performed remotely anywhere within the United States except the state of Alaska.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_3390d40e29": {
+  "evidence": "locationRestrictions: [\"United States\"]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_346df0c0de": {
+  "evidence": "\"location\": \"Remote U.S.\", \"workplaceType\": \"Remote\"; \"You must be authorized to work in the United States without the need for employer sponsorship.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -89,6 +289,36 @@
    "US": "no"
   }
  },
+ "v1|j_3a16206047": {
+  "evidence": "This is a unique role within PostHog and, as such, is a hybrid-remote position based out of our London office.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3e60573854": {
+  "evidence": "\"location\": \"Vienna, Austria\", \"workplaceType\": \"Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4102320415": {
+  "evidence": "Fully remote within Canada",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_4148ae7470": {
   "evidence": "workplace: \"remote\", locations: [\"TELECOMMUTE\", \"Mumbai, Maharashtra, India\"], location: {\"city\": \"Mumbai\", \"countryName\": \"India\"}",
   "verdicts": {
@@ -96,6 +326,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_4a17db0ef2": {
+  "evidence": "Fin has a hybrid working policy. ... We expect employees to be in the office at least three days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -107,6 +347,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_4e0b2f46b4": {
+  "evidence": "\"location\": \"US-CA-Menlo Park\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_4e2dd4d04c": {
@@ -159,6 +409,16 @@
    "US": "no"
   }
  },
+ "v1|j_546e818c04": {
+  "evidence": "\"This role will need to be in the office for in-person collaboration 1-2 times/quarter\" and \"US based applicants only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_57badf849c": {
   "evidence": "Board: workplace \"remote\", locations [\"TELECOMMUTE\", \"Germany\"]. Description: \"Location: Germany \\*Applicants must be authorized to work in the Germany\" — remote, but the hire must be authorized to work in Germany only; no required hours.",
   "verdicts": {
@@ -167,6 +427,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_5ab35a44f0": {
+  "evidence": "\"This role will be based remotely in the EMEA or Americas regions\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_606d27a997": {
+  "evidence": "**Headquarters:** CA - San Francisco HQ; CA-Remote ... We are unable to accommodate remote work from Hawaii, Alaska or Puerto Rico at this time.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_6287cb30f4": {
@@ -179,11 +459,41 @@
    "US": "no"
   }
  },
+ "v1|j_649c106ebf": {
+  "evidence": "\"Location and Territory: Atlanta/Tennessee\" and \"strategic owner and revenue driver for Everpure's most valuable Enterprise accounts across the greater Atlanta and Tennessee area\" (no statement that the job is remote)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_657deb2c0a": {
+  "evidence": "**Headquarters:** Europe - Remote",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6697d9f5d4": {
   "evidence": "Board: workplace \"remote\", location countryName \"Germany\", locations [\"TELECOMMUTE\", \"Germany\"]. Description: \"This is a full-time, remote role, working EU hours.\" — remote but set in Germany/EU hours.",
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6776be97d0": {
+  "evidence": "locationRestrictions: [\"Poland\"]; travel to the client’s office if required",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -199,6 +509,46 @@
    "US": "no"
   }
  },
+ "v1|j_681fc176e6": {
+  "evidence": "all remote team **based in ANZ.**",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_688894546d": {
+  "evidence": "\"Bengaluru, India\"; \"#LI-Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6968e186e7": {
+  "evidence": "jobGeo: \"USA\"; \"We are around 180 people, fully remote\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_6ce7ef34ff": {
+  "evidence": "Must be legally authorized to work in country of employment without sponsorship for employment visa status",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_6fe0958061": {
   "evidence": "We're a global, fully remote company with an HQ in Denver, Colorado. ... This is an independent contractor engagement. You'll need to be able to invoice us from your country of residence. We're not able to offer visa sponsorship or relocation. ... Clear communication: written updates in Slack and our project tools, async across time zones. ... Availability that overlaps with EMEA or APAC business hours (bonus points)",
   "verdicts": {
@@ -206,6 +556,26 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_707117dac2": {
+  "evidence": "**Headquarters:** Remote - US ... This role will be remote, but is not eligible to be hired in CA, CT, NJ, NY, PA, WA.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_7123cf1c6e": {
+  "evidence": "This position may be performed remotely in most states within the US, with some exclusions ... This position is not eligible for immigration sponsorship",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "yes"
   }
  },
@@ -219,6 +589,16 @@
    "US": "yes"
   }
  },
+ "v1|j_7364e9a425": {
+  "evidence": "\"This role will be in-office on a hybrid schedule — Team Members will be expected to work in the office at least 3 days per week\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7407f0a8bf": {
   "evidence": "Schedule: Monday to Friday, 9AM to 5PM at UTC+1; Opportunity to cooperate fully remotely",
   "verdicts": {
@@ -229,6 +609,16 @@
    "US": "no"
   }
  },
+ "v1|j_751dbb9e5b": {
+  "evidence": "This position may be performed remotely in most states within the US, with some exclusions",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_75a80df94d": {
   "evidence": "location: Makati, Philippines; locations: TELECOMMUTE, Makati, Philippines ... 100% Remote / Work-From-Home setup",
   "verdicts": {
@@ -237,6 +627,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_77e97f83ee": {
+  "evidence": "Board location: \"US Only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_782a931b13": {
@@ -279,6 +679,16 @@
    "US": "no"
   }
  },
+ "v1|j_7b476cbd1e": {
+  "evidence": "A fully remote environment designed around autonomy and flexibility; jobGeo: EMEA, LATAM, Canada, USA",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_7c10017e22": {
   "evidence": "Title: \"Become a Luxury Brand Evaluator in Berlin (German Speaking), DE\"; locations: [\"TELECOMMUTE\", \"Prenzlauer Berg, Berlin, Germany\"], workplace: \"remote\"; \"Visit luxury stores or evaluate online - engage with sales associates in the stores or online from the comfort of your home.\" — remote gig tied to Berlin, Germany",
   "verdicts": {
@@ -289,6 +699,26 @@
    "US": "no"
   }
  },
+ "v1|j_7d316da3ea": {
+  "evidence": "**Headquarters:** Remote - US ... Zone 3: All other US locations ... Within the United States, our geographic pay zones are defined by counties surrounding major metropolitan areas.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_80112af983": {
+  "evidence": "Remote, US | Remote - USA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_802e7bae3c": {
   "evidence": "location: {\"countryName\": \"Vietnam\"}, locations: [\"TELECOMMUTE\", \"Vietnam\"], workplace: \"remote\"; \"Experience managing regional or international events is a plus, with willingness to travel across APAC as required. ... Exceptional verbal and written English communication and presentation skills to cover projects across APAC.\" — APAC refers to event coverage, not where the hire may live; remote is from Vietnam",
   "verdicts": {
@@ -297,6 +727,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_80d4ba81de": {
+  "evidence": "Remote, US | Remote - USA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_829929cb4b": {
+  "evidence": "US - Remote | This role can either be fully remote depending on which US state you live in",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_84be68620e": {
@@ -319,8 +769,38 @@
    "US": "yes"
   }
  },
+ "v1|j_85ca41fd9b": {
+  "evidence": "This is a full-time, fully remote position; jobGeo: USA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_85f4076db7": {
   "evidence": "location: Philippines; \"you have to be eligible to legally work in the country where we’re hiring.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_868c2b0ffb": {
+  "evidence": "Singapore | combination of remote & on-site engagements",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_87bba3c4a6": {
+  "evidence": "Ce poste sera en présentiel selon un calendrier hybride - les membres de l'équipe devront travailler au bureau 3 jours par semaine, les lundis, mercredis et jeudis.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -339,6 +819,36 @@
    "US": "no"
   }
  },
+ "v1|j_8d9d02592d": {
+  "evidence": "We offer a flexible hybrid work arrangement that prioritizes in-office collaboration. Employees are expected to be on-site 3 days per week (Monday, Tuesday, and Thursday).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8dbc9e5b90": {
+  "evidence": "**Headquarters:** Remote - Germany ... Whilst the role can be worked remotely anywhere in Germany or London, UK, there is a need to visit clients in the region as required",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8f23b7ee29": {
+  "evidence": "We seek team members who live in Portugal or are willing and legally qualified to live and work there",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_911714ce95": {
   "evidence": "\"Remote (deutschlandweit)\"; \"Home-Office (deutschlandweit)\"",
   "verdicts": {
@@ -349,8 +859,78 @@
    "US": "no"
   }
  },
+ "v1|j_92c05874a2": {
+  "evidence": "open to candidates based in 6 countries, including Spain, Mexico, Argentina, Colombia, Chile, Peru",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_9311c850b4": {
+  "evidence": "jobGeo: Germany; Native or near-native speaker level in German language",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_94e5ad7b68": {
+  "evidence": "\"Location: Remote Canada, Pacific Time (PST) working hours required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_955484064e": {
+  "evidence": "This is a remote position available in EMEA",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_957760a2a9": {
+  "evidence": "Headquarters: Remote, United States ... We're currently hiring for a physician who is based in PST and can work evening hours on Saturdays and during the week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_96c7b3e368": {
+  "evidence": "This role will be remote, based in the Los Angeles area ... A valid authorization to work in the U.S. is required",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_9890d5ffc2": {
   "evidence": "location: United States; \"Immigration Sponsorship is not available for this role.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_9b39d86553": {
+  "evidence": "Headquarters: US - Remote ... This is a remote-based position.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -379,6 +959,76 @@
    "US": "yes"
   }
  },
+ "v1|j_9dede8a507": {
+  "evidence": "Candidates must reside in Spain ... This role is located in Spain.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_9e5d8be604": {
+  "evidence": "Fin has a hybrid working policy. ... We expect employees to be in the office at least three days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a11144fb12": {
+  "evidence": "\"location\": \"FR-France-Remote\", secondaryLocations: \"GB-London\", \"FR-Paris\", \"Rome, Italy\", \"SE-Sweden-Remote\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a1b069c62c": {
+  "evidence": "This role is based in our Denver, CO, and Westlake, TX offices, with in-person attendance expected 5 days per week during the 10-week onboarding period. After onboarding, remote shifts expected with overnight-shift hours at least 5 days a week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a5ec7c27d2": {
+  "evidence": "locationRestrictions: [\"France\", \"Germany\", \"Netherlands\"], timezoneRestrictions: [1]; \"This role is remote\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a66adaa8f6": {
+  "evidence": "\"This is a fully remote position, open to candidates based in 55 countries, including Spain, United States, United Kingdom, Canada, Germany, India, France, Netherlands\"; locationRestrictions list; timezoneRestrictions [-10,-9,-8,-7,-6,-5,-4,-3.5,0,1,5.5,14]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_a79e502b14": {
+  "evidence": "Headquarters: Remote US - Southern California ... Must be authorized to work in the United States at the time of hire and for the duration of employment.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_a941e64e7f": {
   "evidence": "\"GEOGRAPHIC FOCUS Europe, North Africa and India, with selected opportunities across APAC.\"",
   "verdicts": {
@@ -386,6 +1036,16 @@
    "DE": "yes",
    "ID": "maybe",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_aa7b1af2f9": {
+  "evidence": "\"workplaceType\": \"Hybrid\", \"location\": \"San Francisco, California\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -399,6 +1059,56 @@
    "US": "yes"
   }
  },
+ "v1|j_af28840ff1": {
+  "evidence": "jobGeo: LATAM; Superside is a fully remote company with over 700 team members working across 60+ countries and 13 timezones",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_b0d411c6ab": {
+  "evidence": "locationRestrictions: [\"United States\"], timezoneRestrictions: [-10,-9,-8,-7,-6,-5,14]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b1a6e9b05a": {
+  "evidence": "Board region: \"Anywhere in the World\"; description: \"Headquarters:** United States - Remote\" and \"**#LI-SS1 #LI-Remote**\" — remote with no country restriction and no required hours.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_b54b448c9f": {
+  "evidence": "locationRestrictions: [\"United States\"], timezoneRestrictions: [-10,-9,-8,-7,-6,-5,14]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b593db7f76": {
+  "evidence": "\"**Headquarters:** Remote, Australia\" (board country: \"🇦🇺 Australia\") — remote from Australia only.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_b8766c788b": {
   "evidence": "\"Flexible Remote Work: Work from anywhere, managing your own hours around project deadlines.\"",
   "verdicts": {
@@ -406,6 +1116,16 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_ba3effeccb": {
+  "evidence": "\"Remote - Colorado; Remote - Georgia; Remote - Ohio; Remote - Oregon; Remote - Pennsylvania; Remote - Texas; Remote - Washington; Remote - Washington D.C. While candidates in the listed location(s) are encouraged for this role, candidates in other locations will be considered.\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
    "US": "yes"
   }
  },
@@ -419,8 +1139,78 @@
    "US": "no"
   }
  },
+ "v1|j_c069a9845e": {
+  "evidence": "\"location\": \"NAMER\", \"workplaceType\": \"Remote\", \"isRemote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_c0e25cc2c7": {
+  "evidence": "Board: \"locationRestrictions\": [\"Cyprus\"], \"timezoneRestrictions\": [2]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c1451e55cc": {
+  "evidence": "\"This role is open for candidates residing in the following US states: West Virginia, Virginia, Kentucky, Tennessee, North Carolina, South Carolina, Georgia, Florida\" and \"All candidates must be located in one of the following states\" / \"Headquarters:** Remote - US\" — US-only, and only for residents of those states.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_c18d360a11": {
+  "evidence": "\"Headquarters: United States - Remote\"; pay bands are US-only (\"Zone 1 (National Average) $107,500—$129,500 USD\", \"In compliance with California pay transparency laws\") and benefits are listed only for \"United States:\" and \"Costa Rica:\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_c2f5f51f51": {
   "evidence": "\"Poland\" — \"TELECOMMUTE\" — \"remote\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c5bc34cc6c": {
+  "evidence": "\"location\": \"US-VA-Remote\", \"workplaceType\": \"Remote\", \"addressCountry\": \"United States\"; \"For jobs located in the United States...\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_c6425f3593": {
+  "evidence": "This role is based in our New York City or Menlo Park office, with in-person attendance expected 5 days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c6d30b44a5": {
+  "evidence": "This role will be in-office on a hybrid schedule following the establishment of a Lyft office in Nashville — Team Members will be expected to work in the office 3 days per week on Mondays, Wednesdays, and Thursdays.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -434,6 +1224,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_caff184b20": {
+  "evidence": "jobGeo: Poland,  UK",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -459,6 +1259,36 @@
    "US": "no"
   }
  },
+ "v1|j_cb9d9913a9": {
+  "evidence": "We're also open to exceptional candidates working remotely in Canada.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ccf1c5021d": {
+  "evidence": "Board: \"locationRestrictions\": [\"United States\"], \"timezoneRestrictions\": [-10, -9, -8, -7, -6, -5, 14]; \"Availability to collaborate during U.S. Eastern Time business hours.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ce2ce8c46d": {
+  "evidence": "Board: \"locationRestrictions\": [\"Netherlands\"], \"timezoneRestrictions\": [1]; \"Volledig thuiswerken\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_cfdc839244": {
   "evidence": "workplace: \"remote\"; locations: [\"TELECOMMUTE\", \"Delhi, India\"]",
   "verdicts": {
@@ -469,6 +1299,16 @@
    "US": "no"
   }
  },
+ "v1|j_d2cb897f4a": {
+  "evidence": "This is a bilingual Spanish field sales opportunity based out of a personal home office. You must live local to your territory in the North Bay, CA area or be willing to relocate to the area.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_d452a68d92": {
   "evidence": "\"Fully remote.\"",
   "verdicts": {
@@ -477,6 +1317,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_d86ba15431": {
+  "evidence": "\"location\": \"London, UK\", \"workplaceType\": \"Hybrid\", \"#LI-hybrid\", \"Commuter benefits for team members who attend the office\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_dc9e08ad27": {
@@ -497,6 +1347,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_df40832a68": {
+  "evidence": "Board: \"locationRestrictions\": [\"United Kingdom\"], \"timezoneRestrictions\": [0]; \"Applicant Types Accepted: Local Applicants Only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_e00ab2ae0b": {
+  "evidence": "This role is remote (must be based in the Eastern US)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_e01b2c684d": {
@@ -524,6 +1394,36 @@
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_e828e8e083": {
+  "evidence": "\"location\": \"Toronto, Ontario, Canada\", \"addressCountry\": \"Canada\", \"workplaceType\": \"Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_e9654807f8": {
+  "evidence": "The anticipated hourly rate for this remote position is $36.00 to $43.00 per hour across the United States.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_e9dd4578c6": {
+  "evidence": "This role is remote, based Alberta, Canada MST",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -559,6 +1459,96 @@
    "US": "no"
   }
  },
+ "v1|j_ee0c999f0e": {
+  "evidence": "\"locationRestrictions\": [\"South Africa\"]; \"Position Type:\" Full-Time, Remote; \"Working Hours:\" U.S. Business Hours — remote, but hire must be in South Africa",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ee1fd243e8": {
+  "evidence": "This role is based in our Menlo Park, CA office, with in-person attendance expected at least 3 days per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ee51f9b69d": {
+  "evidence": "\"This is a fully remote position, open to candidates based in 55 countries, including Brazil, United States, ... Germany, India\"; board \"timezoneRestrictions\": [-5, -4, -3, -2] — only offsets -5 to -2 allowed",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ef94e511e3": {
+  "evidence": "\"You will work remotely and report to the Security Engineering Manager.\" (board region: \"Anywhere in the World\"; no country or hours restriction stated)",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
+ "v1|j_f08634fcf9": {
+  "evidence": "Board location: \"US Only\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_f230d07aab": {
+  "evidence": "The OTE range for this position for candidates located in the United Kingdom is between: £193,000—£265,000 GBP",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f26c252ab1": {
+  "evidence": "\"location\": \"Remote\", \"workplaceType\": \"Remote\", \"addressCountry\": \"US | EU\"; \"We provide support across EU and US time zones, and we're hiring in both.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_f3c2c1e82d": {
+  "evidence": "Location: This role will be based remotely in the APAC region",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_f590c30241": {
+  "evidence": "\"Eligibility:\" Open to Canadian Citizens and Permanent Residents of Canada only",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_f83259dc57": {
   "evidence": "That Makes a Difference—From Anywhere ... 100% Remote Work-from-Home ... Comfortable working remotely during U.S. Central Time (CST) business hours ... Active Texas Registered Nurse (RN) License",
   "verdicts": {
@@ -579,8 +1569,58 @@
    "US": "no"
   }
  },
+ "v1|j_f928b9ec87": {
+  "evidence": "\"Location – Remote, USA\"; \"Our business hours are 8:00 AM to 8:00 PM EST Monday – Friday\"; \"locationRestrictions\": [\"United States\"]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_fa2d80ad6c": {
+  "evidence": "This role can be based out of our Dublin/Cork office, or remotely in Ireland.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_fae2837005": {
+  "evidence": "You must go into your local office 2 days a week. #LI-Hybrid",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_fb61ef1730": {
+  "evidence": "jobGeo: LATAM ... Remote First, Remote Always ... applicants must be currently authorized to work in the location where the position is located",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_fc261cdbd8": {
   "evidence": "High-speed internet required for remote work, Cable or Fiber ONLY (board location: United States, workplace: remote)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_fce49d18c0": {
+  "evidence": "\"Headquarters: Remote (USA - New York City, NY)\"; \"PagerDuty operates a hybrid work model with offices in 8 major cities: Atlanta, Lisbon, London, San Francisco, Santiago, Sydney, Tokyo, and Toronto\"; \"Candidates must reside in an eligible location, which vary by role.\" (US excluded states listed: Alaska, Hawaii, Iowa, ... Wyoming)",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -596,6 +1636,16 @@
    "DE": "yes",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ffadc5bdbc": {
+  "evidence": "Location: India ... You are located in India and able to work within the hours of ~9:00 pm - 7:00 am IST.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
    "US": "no"
   }
  }

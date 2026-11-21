@@ -181,9 +181,22 @@ DeepSeek v4.1 Flash (OpenCode Go, high reasoning; `deepseek41`, a new
 labeller kept apart from the old one) then labelled all 60: yes right
 31/36, wrong yes 3, no right 210/249, wrong no 37. It agrees with Opus on
 249/300 verdicts, mostly answering yes where Opus says no (19) or maybe
-(21): it reads Workable's remote jobs as open more widely. Whether that is
-Workable or the labeller needs a set where the old labellers agreed
-(holdout2: 474/525).
+(21): it reads Workable's remote jobs as open more widely. It is Workable, not the
+labeller: on holdout2 (all sources) DeepSeek v4.1 agrees with Opus on
+496/525, more than DeepSeek v4 Pro did (474/525), and where it differs it
+is stricter (no where Opus says maybe, 21), not looser. Scored with it,
+holdout2 gives yes right 43/48 and no right 381/384 (2 wrong noes), against
+37 wrong noes on workable3.
+
+| holdout2 scored by | yes right | wrong yes | no right | wrong no | agrees with Opus |
+|---|---|---|---|---|---|
+| Opus | 43/48 | 2 | 372/384 | 2 | |
+| DeepSeek v4 Pro | 39/48 | 4 | 378/384 | 6 | 474/525 |
+| DeepSeek v4.1 (high) | 43/48 | 3 | 381/384 | 2 | 496/525 |
+
+So both labellers say the same about Workable: a no for viewers outside a
+remote job's listed country is not reliable there (Opus: 6 wrong and 21
+maybe; v4.1: 37 wrong), while the listed country's yes holds.
 
 Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
 still right 89% of the time against 97% for the other sources, and
