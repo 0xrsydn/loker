@@ -8,7 +8,9 @@ use loker_core::board::{Ats, Board, BoardCheck, BoardStatus};
 use loker_core::store::Store;
 use serde_json::Value;
 
-use crate::{HttpClient, Paced, Source, get_json_unless_missing, joined, segment, url};
+use crate::{
+    HttpClient, Paced, Source, commoncrawl, get_json_unless_missing, joined, segment, url,
+};
 
 const ERRORS_SHOWN: usize = 10;
 
@@ -53,9 +55,26 @@ pub async fn discover(
 ) -> Result<DiscoverReport> {
     let (candidates, skipped) = match p.from.as_str() {
         "commoncrawl" => {
-            return Err(Error::Invalid(
-                "commoncrawl is not available yet; pass a file".into(),
-            ));
+            let crawl = match p.crawl {
+                Some(c) if commoncrawl::valid_crawl(&c) => c,
+                Some(c) => {
+                    return Err(Error::Invalid(format!(
+                        "`{c}` is not a crawl id (like CC-MAIN-2026-43)"
+                    )));
+                }
+                None => commoncrawl::latest_crawl(client)
+                    .await
+                    .map_err(Error::Internal)?,
+            };
+            let finder = format!("commoncrawl:{crawl}");
+            if !p.again && store.discovered(&finder).await? {
+                (Candidates::collect(finder, []), true)
+            } else {
+                let found = commoncrawl::candidates(client, &crawl)
+                    .await
+                    .map_err(Error::Internal)?;
+                (found, false)
+            }
         }
         path => {
             for (set, field) in [(p.crawl.is_some(), "crawl"), (p.again, "again")] {

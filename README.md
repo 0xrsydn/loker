@@ -163,9 +163,18 @@ and a check stores the spelling the ATS itself uses. A board whose check
 gets no answer is asked again on the next run.
 
 ```sh
+cargo run -- discover                     # Common Crawl's newest crawl, then check every new board
+cargo run -- discover --check 0           # store what the crawl names, ask later
 cargo run -- discover --from boards.txt   # board URLs or ids, one per line
-cargo run -- discover --from boards.txt --check 0   # store them, ask later
 ```
+
+By default it reads [Common Crawl](https://commoncrawl.org)'s URL index, a
+free monthly crawl of the web, for URLs on the three ATS hosts (EU hosts
+included), without its rate-limited query server. Each crawl is read
+once; `--again` reads it anew. CC-MAIN-2026-43 named 5,582 boards in 31 s
+(1,079 Ashby, 4,173 Greenhouse, 330 Lever). A crawl misses newer and smaller
+companies: it had 288 of the 509 boards on forwarddeployed.fun, whose list
+loads as a file. Checking those 509 took 113 s: 503 live, 6 empty.
 
 ### As an MCP server
 

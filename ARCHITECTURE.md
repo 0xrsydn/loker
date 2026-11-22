@@ -144,8 +144,8 @@ stay on one task, in the order fetches finish; that is safe because dedup
 depends only on what is stored, never on ingest order. Pauses between pages
 of one source (Himalayas, Workable, YC) stay in the adapter.
 
-**Boards.** `loker discover` collects candidate boards from a finder (a file
-of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
+**Boards.** `loker discover` collects candidate boards from a finder (Common
+Crawl, or a file of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
 row per `Board::key` in `boards`, with every finder that named it in
 `board_finds`. A candidate becomes `live`, `empty` or `missing` only by asking
 its ATS's API (`discover::check_board`, paced like ingest), so a finder can be
@@ -332,6 +332,14 @@ Combinator's 429.
   (San Francisco, CA, US)" means living nearby, a maybe in that country; a
   bare "Remote" keeps the office countries and says nothing about anyone
   else; with no remote option the job is on-site at its first office.
+- **Common Crawl** (a board finder, not a job source; `commoncrawl.rs`):
+  `cluster.idx` (about 100 MB) is streamed and only the blocks whose key
+  range can hold one of the ATS hosts are range-read from
+  `data.commoncrawl.org`; `index.commoncrawl.org`'s query server returned
+  504s throughout when measured. A 5xx on a block is retried like a network
+  failure. A block's sort key (SURT) is lower-cased, so the board comes from
+  each record's `url`, which keeps Lever's case. A crawl is read once
+  (`discovery_runs`).
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.

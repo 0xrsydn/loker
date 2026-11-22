@@ -43,6 +43,15 @@ fn stub() -> Stub {
             let _ = stream.read_exact(&mut body);
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
             served.lock().unwrap().push(target.clone());
+            if let Some(bytes) = cc_block(&target) {
+                let _ = write!(
+                    stream,
+                    "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+                    bytes.len()
+                );
+                let _ = stream.write_all(&bytes);
+                continue;
+            }
             let (status, body) = route(&target, flag.load(Ordering::SeqCst));
             let body = match body {
                 Value::String(text) => text,
@@ -56,6 +65,60 @@ fn stub() -> Stub {
         }
     });
     Stub { base, shrink, log }
+}
+
+const CC_INDEXES: &str = "/cc-index/collections/CC-MAIN-2026-43/indexes";
+const CC_CLUSTER: &str = "/cc-index/collections/CC-MAIN-2026-43/indexes/cluster.idx";
+
+fn cdx_block(records: &[(&str, &str)]) -> Vec<u8> {
+    let mut gz = flate2::write::GzEncoder::new(Vec::new(), flate2::Compression::default());
+    for (key, url) in records {
+        writeln!(
+            gz,
+            "{key} 20261001 {}",
+            json!({ "url": url, "status": "200" })
+        )
+        .unwrap();
+    }
+    gz.finish().unwrap()
+}
+
+fn cc_block(target: &str) -> Option<Vec<u8>> {
+    match target.strip_prefix(CC_INDEXES)? {
+        "/cdx-00000.gz" => Some(cdx_block(&[
+            ("co,example)/", "https://example.co/"),
+            (
+                "co,lever,jobs)/initech/1",
+                "https://jobs.lever.co/initech/1",
+            ),
+        ])),
+        "/cdx-00001.gz" => Some(cdx_block(&[
+            (
+                "com,ashbyhq,jobs)/globex/a-1",
+                "https://jobs.ashbyhq.com/GLOBEX/a-1",
+            ),
+            (
+                "io,greenhouse,boards)/acme",
+                "https://boards.greenhouse.io/acme",
+            ),
+            (
+                "io,greenhouse,boards)/robots.txt",
+                "https://boards.greenhouse.io/robots.txt",
+            ),
+        ])),
+        _ => None,
+    }
+}
+
+fn cc_cluster() -> String {
+    let len = |file: &str| cc_block(&format!("{CC_INDEXES}/{file}")).unwrap().len();
+    format!(
+        "co,example)/ 20261001\tcdx-00000.gz\t0\t{}\t1\n\
+         com,ashbyhq,jobs)/globex/a-1 20261001\tcdx-00001.gz\t0\t{}\t2\n\
+         org,example)/ 20261001\tcdx-00002.gz\t0\t10\t3\n",
+        len("cdx-00000.gz"),
+        len("cdx-00001.gz")
+    )
 }
 
 fn route(target: &str, shrink: bool) -> (&'static str, Value) {
@@ -81,6 +144,8 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         "/posting-api/job-board/Hippocratic%20AI" => {
             ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
         }
+        "/collinfo.json" => ("200 OK", json!([{ "id": "CC-MAIN-2026-43" }])),
+        CC_CLUSTER => ("200 OK", Value::String(cc_cluster())),
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
@@ -856,6 +921,37 @@ fn discover_checks_each_board_once_and_asks_again_when_unanswered() {
     assert_eq!(
         again["boards"],
         json!({ "live": 2, "empty": 1, "missing": 1, "unchecked": 1, "failed": 1 })
+    );
+}
+
+#[test]
+fn discover_reads_the_newest_common_crawl_once() {
+    let stub = stub();
+    let home = Home::new("commoncrawl", &stub);
+    let r = home.json(&["discover", "--json"]);
+    assert_eq!(r["finder"], "commoncrawl:CC-MAIN-2026-43");
+    assert_eq!(
+        (&r["found"], &r["unreadable"]),
+        (&json!(3), &json!(1)),
+        "{r:#}"
+    );
+    assert_eq!(
+        r["checked"],
+        json!({ "live": 2, "empty": 1, "missing": 0, "unchecked": 0, "failed": 0 })
+    );
+    assert!(
+        !stub
+            .log
+            .lock()
+            .unwrap()
+            .iter()
+            .any(|t| t.contains("cdx-00002")),
+        "a block that can't hold a board host is never read"
+    );
+    let again = home.json(&["discover", "--json"]);
+    assert_eq!(
+        (&again["skipped"], &again["found"]),
+        (&json!(true), &json!(0))
     );
 }
 
