@@ -16,6 +16,7 @@ use loker_core::api::{
 use loker_core::model::{IngestStats, NewJob, Scope, SourceKind};
 use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
+use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 use serde_json::Value;
 use std::collections::{BTreeSet, HashMap};
 use std::sync::Arc;
@@ -64,8 +65,10 @@ impl Source {
         };
         let board = |b: &str| {
             let ok = !b.is_empty()
-                && b.chars()
-                    .all(|c| c.is_ascii_alphanumeric() || c == '-' || c == '_');
+                && b.trim() == b
+                && !b
+                    .chars()
+                    .any(|c| c.is_control() || matches!(c, '/' | '?' | '#' | '%'));
             ok.then(|| b.to_string()).ok_or_else(bad)
         };
         match id.split_once(':') {
@@ -591,6 +594,23 @@ pub fn check_fetch(f: &Fetched, now: chrono::DateTime<chrono::Utc>) -> SourceChe
         fetched: n,
         checks,
     }
+}
+
+const PATH_SEGMENT: &AsciiSet = &CONTROLS
+    .add(b' ')
+    .add(b'"')
+    .add(b'#')
+    .add(b'%')
+    .add(b'/')
+    .add(b'<')
+    .add(b'>')
+    .add(b'?')
+    .add(b'`')
+    .add(b'{')
+    .add(b'}');
+
+fn segment(s: &str) -> String {
+    utf8_percent_encode(s, PATH_SEGMENT).to_string()
 }
 
 fn url(default_base: &str, path: &str) -> String {

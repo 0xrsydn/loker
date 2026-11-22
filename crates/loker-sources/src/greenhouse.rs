@@ -9,7 +9,7 @@ use crate::{HttpClient, get_json, html_to_md};
 pub async fn fetch(client: &HttpClient, board: &str) -> anyhow::Result<Vec<Value>> {
     let url = crate::url(
         "https://boards-api.greenhouse.io",
-        &format!("/v1/boards/{board}/jobs?content=true"),
+        &format!("/v1/boards/{}/jobs?content=true", crate::segment(board)),
     );
     let body = get_json(client, &url).await?;
     Ok(body

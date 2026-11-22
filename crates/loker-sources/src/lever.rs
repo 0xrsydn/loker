@@ -18,7 +18,8 @@ pub async fn fetch(client: &HttpClient, site: &str) -> anyhow::Result<Vec<Value>
         let url = crate::url(
             "https://api.lever.co",
             &format!(
-                "/v0/postings/{site}?mode=json&skip={}&limit={PAGE}",
+                "/v0/postings/{}?mode=json&skip={}&limit={PAGE}",
+                crate::segment(site),
                 page * PAGE
             ),
         );

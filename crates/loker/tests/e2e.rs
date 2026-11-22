@@ -75,6 +75,9 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
             }
             ("200 OK", json!({ "apiVersion": "1", "jobs": jobs }))
         }
+        "/posting-api/job-board/Hippocratic%20AI" => {
+            ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
+        }
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
@@ -798,6 +801,16 @@ fn contract_schemas_match_committed_v1() {
         "the v1 contract changed: {drift:?}. If the change is additive, run \
          `cargo run -- schema --out schema/v1` and commit; if not, it needs a new contract version."
     );
+}
+
+#[test]
+fn an_ashby_slug_keeps_its_spaces_and_case() {
+    let stub = stub();
+    let home = Home::new("ashby-space", &stub);
+    let r = home.ingest("ashby:Hippocratic AI");
+    assert!(r["new"].as_u64().unwrap() > 0, "{r:#}");
+    let bad = home.run(&["ingest", "ashby:a/b", "--json"]);
+    assert!(!bad.status.success(), "a slash is never part of a slug");
 }
 
 #[test]

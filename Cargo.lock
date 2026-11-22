@@ -1288,6 +1288,7 @@ dependencies = [
  "chrono",
  "htmd",
  "loker-core",
+ "percent-encoding",
  "reqwest",
  "roxmltree",
  "serde",
