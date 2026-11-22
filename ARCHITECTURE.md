@@ -153,6 +153,8 @@ noisy without being wrong: it decides coverage, never correctness. A check
 that gets no answer leaves the board `unchecked` with its error, to be asked
 again. The check also stores the ATS's own spelling of the slug (Ashby's
 `jobUrl`; Greenhouse lower case).
+With `[discovery] ingest = true`, `ingest --all` adds every `live` board whose
+key config.toml doesn't list, after the configured sources.
 
 **Liveness.** A listing goes `gone` when a complete fetch of its source no
 longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
@@ -394,6 +396,9 @@ If it needs a test, test the function directly with a table of cases (see
 
 - **Liveness decisions live inside `Store::ingest`:** the truncation guard,
   expired-or-stale, reopening. They should move into a pure module like `dedup`.
+- **A discovered board is checked once.** One found `empty` isn't asked
+  again when it starts hiring, and a `live` one that later disappears keeps
+  failing in `ingest --all` instead of turning `missing`.
 - **Matching is an exact key.** Near-miss titles ("Sr. Backend Eng" vs
   "Senior Backend Engineer") don't merge.
 

@@ -16,6 +16,15 @@ pub struct Config {
     pub sources: Vec<SourceConfig>,
     #[serde(default)]
     pub providers: Providers,
+    #[serde(default)]
+    pub discovery: Discovery,
+}
+
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Discovery {
+    #[serde(default)]
+    pub ingest: bool,
 }
 
 #[derive(Debug, Clone, Default, Deserialize)]
@@ -216,6 +225,11 @@ id = "weworkremotely"
 # [[sources]]
 # id = "greenhouse:binance"
 # remote = true        # every job is remote; its locations are where you can work from
+
+# Boards `loker discover` found (Common Crawl, a list) and checked live:
+# ingest them all too, except those listed above, enabled or not.
+# [discovery]
+# ingest = true
 
 # Optional: Jev (TypeSafe, through OpenRouter) classifies job roles the
 # title rules can't place, about $0.0001 a job and cached per job. `loker

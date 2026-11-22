@@ -956,6 +956,41 @@ fn discover_reads_the_newest_common_crawl_once() {
 }
 
 #[test]
+fn ingest_all_takes_live_discovered_boards_not_already_listed() {
+    let stub = stub();
+    let home = Home::new("discovered", &stub);
+    std::fs::create_dir_all(&home.dir).unwrap();
+    std::fs::write(
+        home.dir.join("config.toml"),
+        "version = 1\n\n[[sources]]\nid = \"greenhouse:acme\"\n\n[discovery]\ningest = true\n",
+    )
+    .unwrap();
+    let list = home.dir.join("boards.txt");
+    std::fs::write(
+        &list,
+        "https://jobs.ashbyhq.com/GLOBEX/a-1\n\
+         https://boards.greenhouse.io/ACME\n\
+         lever:initech\n",
+    )
+    .unwrap();
+    home.json(&["discover", "--from", list.to_str().unwrap(), "--json"]);
+
+    let report = home.json(&["ingest", "--all", "--json"]);
+    let sources: Vec<&str> = report["sources"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|o| o["source"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        sources,
+        ["greenhouse:acme", "ashby:globex"],
+        "a listed board isn't fetched twice, an empty one not at all, and Ashby's spelling wins"
+    );
+    assert_eq!(report["ok"], true, "{report:#}");
+}
+
+#[test]
 fn every_source_is_named_in_the_schema_and_the_help() {
     let schemas = loker::contract_schemas();
     let ingest = &schemas

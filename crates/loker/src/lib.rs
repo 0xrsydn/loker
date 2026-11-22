@@ -1,5 +1,6 @@
 pub mod mcp;
 
+use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 
 use loker_core::api::{
@@ -7,6 +8,7 @@ use loker_core::api::{
     GetJobsResult, IngestAllReport, IngestParams, RoleEnrichReport, RolesResult, SearchParams,
     SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
 };
+use loker_core::board::{Board, BoardStatus};
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
 use loker_core::model::IngestStats;
@@ -57,7 +59,10 @@ impl App {
             Some(c) => (c, None),
             None => (config::starter(), Some(config::STARTER_NOTICE.to_string())),
         };
-        let sources = config.enabled().flat_map(|s| s.params()).collect();
+        let mut sources: Vec<IngestParams> = config.enabled().flat_map(|s| s.params()).collect();
+        if config.discovery.ingest {
+            sources.extend(self.discovered_boards(&config).await?);
+        }
         let mut report = loker_sources::ingest_all(&self.store, &self.http, sources).await?;
         report.notice = notice;
         if let Some(jev) = config.providers.jev.as_ref().filter(|j| j.enabled) {
@@ -127,6 +132,25 @@ impl App {
                 .collect()
         };
         loker_sources::verify(&self.http, targets).await
+    }
+
+    async fn discovered_boards(&self, config: &Config) -> api::Result<Vec<IngestParams>> {
+        let declared: BTreeSet<String> = config
+            .sources
+            .iter()
+            .map(|s| Board::from_id(&s.id).map_or_else(|| s.id.clone(), |b| b.key()))
+            .collect();
+        Ok(self
+            .store
+            .boards_with_status(BoardStatus::Live, None)
+            .await?
+            .into_iter()
+            .filter(|b| !declared.contains(&b.key()))
+            .map(|b| IngestParams {
+                source: b.to_string(),
+                ..Default::default()
+            })
+            .collect())
     }
 
     pub async fn discover(&self, p: DiscoverParams) -> api::Result<DiscoverReport> {

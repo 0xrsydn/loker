@@ -176,6 +176,18 @@ once; `--again` reads it anew. CC-MAIN-2026-43 named 5,582 boards in 31 s
 companies: it had 288 of the 509 boards on forwarddeployed.fun, whose list
 loads as a file. Checking those 509 took 113 s: 503 live, 6 empty.
 
+To fetch what it finds, turn it on in config.toml:
+
+```toml
+[discovery]
+ingest = true          # `ingest --all` also fetches every live discovered board
+```
+
+Boards config.toml lists (enabled or not) are skipped there, compared by
+key, so a board you configured or disabled is never fetched twice. Run
+`loker discover` before `ingest --all`; on a day with no new crawl it only
+checks boards found since the last run.
+
 ### As an MCP server
 
 `loker mcp` serves the tools over stdio. For Claude Code:
