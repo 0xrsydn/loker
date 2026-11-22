@@ -4,6 +4,7 @@ use anyhow::{Context, bail};
 use serde::Deserialize;
 
 use crate::api::IngestParams;
+use crate::board::Board;
 
 pub const CONFIG_VERSION: u32 = 1;
 
@@ -113,7 +114,8 @@ pub fn load(home: &Path) -> anyhow::Result<Option<Config>> {
     }
     let mut seen = std::collections::BTreeSet::new();
     for s in &config.sources {
-        if !seen.insert(s.id.as_str()) {
+        let key = Board::from_id(&s.id).map_or_else(|| s.id.clone(), |b| b.key());
+        if !seen.insert(key) {
             bail!("{}: source `{}` is listed twice", path.display(), s.id);
         }
     }
@@ -245,5 +247,21 @@ mod tests {
             [Some("PH"), Some("ID")]
         );
         assert_eq!(super::starter().sources.len(), 4);
+    }
+
+    #[test]
+    fn a_board_is_listed_twice_when_its_ats_reads_both_ids_as_one() {
+        let home = std::env::temp_dir().join(format!("loker-config-twice-{}", std::process::id()));
+        std::fs::create_dir_all(&home).unwrap();
+        let load = |a: &str, b: &str| {
+            let text =
+                format!("version = 1\n[[sources]]\nid = \"{a}\"\n[[sources]]\nid = \"{b}\"\n");
+            std::fs::write(home.join("config.toml"), text).unwrap();
+            super::load(&home)
+        };
+        assert!(load("greenhouse:Stripe", "greenhouse:stripe").is_err());
+        assert!(load("ashby:Hippocratic AI", "ashby:hippocratic ai").is_err());
+        assert!(load("lever:Palantir", "lever:palantir").is_ok());
+        std::fs::remove_dir_all(&home).unwrap();
     }
 }

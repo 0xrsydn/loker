@@ -1270,6 +1270,7 @@ dependencies = [
  "blake3",
  "chrono",
  "isocountry",
+ "percent-encoding",
  "proptest",
  "regex",
  "schemars",
@@ -1278,6 +1279,7 @@ dependencies = [
  "sqlx",
  "tokio",
  "toml",
+ "url",
 ]
 
 [[package]]

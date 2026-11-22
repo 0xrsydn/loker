@@ -64,12 +64,9 @@ impl Source {
             ))
         };
         let board = |b: &str| {
-            let ok = !b.is_empty()
-                && b.trim() == b
-                && !b
-                    .chars()
-                    .any(|c| c.is_control() || matches!(c, '/' | '?' | '#' | '%'));
-            ok.then(|| b.to_string()).ok_or_else(bad)
+            loker_core::board::valid_slug(b)
+                .then(|| b.to_string())
+                .ok_or_else(bad)
         };
         match id.split_once(':') {
             None => match id {

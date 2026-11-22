@@ -28,6 +28,7 @@ crates/loker-core/       domain and rules, no network
   src/eligibility_text.rs where a remote job may be done from, read from its description at ingest
   src/country.rs         country, state, province and city names -> ISO codes; region tables
   src/dedup.rs           which listings are one job; no IO
+  src/board.rs           which Ashby, Greenhouse or Lever board a URL names; board keys
   src/verdict.rs         can this viewer apply? (country, timezone)
   src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
   src/classify.rs        which role a job is: title, then category, then description

@@ -10,6 +10,7 @@ anyhow.workspace = true
 blake3 = "1.8.7"
 chrono.workspace = true
 isocountry = "0.3.2"
+percent-encoding = "2.3.2"
 schemars.workspace = true
 serde.workspace = true
 serde_json.workspace = true
@@ -17,6 +18,7 @@ sqlx = { version = "0.9.1", default-features = false, features = ["runtime-tokio
 tokio.workspace = true
 regex = "1"
 toml = "1"
+url = "2.5.8"
 
 [dev-dependencies]
 proptest = "1"
