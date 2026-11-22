@@ -72,9 +72,12 @@ enabled = false        # listed but skipped
 config.toml holds intent (which sources, with what parameters); what
 happened lives in the database. The file is versioned, and an unknown key is
 an error, so a typo never silently disables a source.
-`loker ingest --all` fetches every enabled source in order; one failing source
-doesn't stop the others, and the exit status is non-zero if any failed.
-`loker verify` checks the same sources with the same parameters.
+`loker ingest --all` fetches every enabled source, several at once: at most
+4 fetches in flight to one API host (all Greenhouse boards share one), started
+at least 250 ms apart, so hundreds of company boards take minutes, not hours.
+The report lists sources in config order. One failing source doesn't stop the
+others, and the exit status is non-zero if any failed.
+`loker verify` checks the same sources with the same parameters, the same way.
 `contrib/systemd/` has a oneshot service (ingest, then verify) and a timer
 that runs it every 6 hours, with up to 20 minutes of random delay so many
 installs don't hit the sources at the same moment; a run missed while the

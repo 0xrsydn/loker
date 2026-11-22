@@ -17,9 +17,17 @@ use loker_core::model::{IngestStats, NewJob, Scope, SourceKind};
 use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
 use serde_json::Value;
-use std::collections::BTreeSet;
+use std::collections::{BTreeSet, HashMap};
+use std::sync::Arc;
+use std::time::Duration;
+use tokio::sync::{Mutex, Semaphore, SemaphorePermit};
+use tokio::task::{Id, JoinSet};
+use tokio::time::Instant;
 
 pub use reqwest::Client as HttpClient;
+
+pub const FETCHES_PER_HOST: usize = 4;
+pub const HOST_START_GAP: Duration = Duration::from_millis(250);
 
 pub const SOURCES: &[&str] = &[
     "himalayas",
@@ -124,6 +132,20 @@ impl Source {
                 Some(raw.get("id").and_then(as_string))
             }
             _ => None,
+        }
+    }
+
+    pub fn host(&self) -> &'static str {
+        match self {
+            Source::Himalayas => "himalayas.app",
+            Source::Jobicy => "jobicy.com",
+            Source::RemoteOk => "remoteok.com",
+            Source::WeWorkRemotely => "weworkremotely.com",
+            Source::Workable => "jobs.workable.com",
+            Source::Ycombinator => "www.ycombinator.com",
+            Source::Greenhouse(_) => "boards-api.greenhouse.io",
+            Source::Ashby(_) => "api.ashbyhq.com",
+            Source::Lever(_) => "api.lever.co",
         }
     }
 
@@ -245,9 +267,83 @@ pub fn job_from_raw(
     Ok(job)
 }
 
+struct HostTurns {
+    slots: Semaphore,
+    next_start: Mutex<Instant>,
+}
+
+impl HostTurns {
+    fn new() -> Self {
+        Self {
+            slots: Semaphore::new(FETCHES_PER_HOST),
+            next_start: Mutex::new(Instant::now()),
+        }
+    }
+
+    async fn take(&self) -> Option<SemaphorePermit<'_>> {
+        let slot = self.slots.acquire().await.ok();
+        let start = {
+            let mut next = self.next_start.lock().await;
+            let start = (*next).max(Instant::now());
+            *next = start + HOST_START_GAP;
+            start
+        };
+        tokio::time::sleep_until(start).await;
+        slot
+    }
+}
+
+struct Fetches {
+    tasks: JoinSet<Result<Fetched>>,
+    position: HashMap<Id, usize>,
+}
+
+impl Fetches {
+    fn start(client: &HttpClient, targets: Vec<IngestParams>) -> Self {
+        let mut hosts: HashMap<&'static str, Arc<HostTurns>> = HashMap::new();
+        let mut tasks = JoinSet::new();
+        let mut position = HashMap::new();
+        for (i, params) in targets.into_iter().enumerate() {
+            let host = Source::parse(&params.source)
+                .map(|s| s.host())
+                .unwrap_or_default();
+            let turns = hosts
+                .entry(host)
+                .or_insert_with(|| Arc::new(HostTurns::new()))
+                .clone();
+            let client = client.clone();
+            let task = tasks.spawn(async move {
+                let _slot = turns.take().await;
+                fetch_batch(&client, &params).await
+            });
+            position.insert(task.id(), i);
+        }
+        Self { tasks, position }
+    }
+
+    async fn next(&mut self) -> Option<(usize, Result<Fetched>)> {
+        Some(match self.tasks.join_next_with_id().await? {
+            Ok((id, fetched)) => (self.position[&id], fetched),
+            Err(e) => (
+                self.position[&e.id()],
+                Err(Error::Internal(anyhow::anyhow!("fetch task failed: {e}"))),
+            ),
+        })
+    }
+}
+
 pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Result<IngestStats> {
-    let source = Source::parse(&p.source)?;
-    let f = match fetch_batch(client, &p).await {
+    let fetched = fetch_batch(client, &p).await;
+    store_fetched(store, &p.source, fetched).await
+}
+
+async fn store_fetched(
+    store: &Store,
+    source: &str,
+    fetched: Result<Fetched>,
+) -> Result<IngestStats> {
+    let source = Source::parse(source)?;
+    let f = match fetched {
         Ok(f) => f,
         Err(Error::Internal(e)) => {
             store
@@ -290,21 +386,31 @@ pub async fn verify(client: &HttpClient, targets: Vec<IngestParams>) -> Result<V
             "no sources to verify: add some to config.toml or name them".into(),
         ));
     }
-    let mut sources = Vec::new();
-    for mut params in targets {
+    for params in &targets {
         Source::parse(&params.source)?;
-        params.pages = Some(1);
-        let check = match fetch_batch(client, &params).await {
+    }
+    let names: Vec<String> = targets.iter().map(|p| p.source.clone()).collect();
+    let one_page = targets
+        .into_iter()
+        .map(|p| IngestParams {
+            pages: Some(1),
+            ..p
+        })
+        .collect();
+    let mut checks: Vec<Option<SourceCheck>> = names.iter().map(|_| None).collect();
+    let mut fetches = Fetches::start(client, one_page);
+    while let Some((i, fetched)) = fetches.next().await {
+        checks[i] = Some(match fetched {
             Ok(f) => check_fetch(&f, chrono::Utc::now()),
             Err(e) => SourceCheck {
-                source: params.source,
+                source: names[i].clone(),
                 status: CheckStatus::Fail,
                 fetched: 0,
                 checks: vec![Check::new("fetch", CheckStatus::Fail, e.to_string())],
             },
-        };
-        sources.push(check);
+        });
     }
+    let sources: Vec<SourceCheck> = checks.into_iter().flatten().collect();
     Ok(VerifyReport {
         contract_version: CONTRACT_VERSION,
         ok: sources.iter().all(|s| s.status != CheckStatus::Fail),
@@ -322,13 +428,12 @@ pub async fn ingest_all(
             "no enabled sources in config.toml (`loker config init` writes a starting one)".into(),
         ));
     }
-    let mut outcomes = Vec::new();
-    for (i, params) in sources.into_iter().enumerate() {
-        if i > 0 {
-            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
-        }
-        let source = params.source.clone();
-        let outcome = match ingest(store, client, params).await {
+    let names: Vec<String> = sources.iter().map(|p| p.source.clone()).collect();
+    let mut outcomes: Vec<Option<IngestOutcome>> = names.iter().map(|_| None).collect();
+    let mut fetches = Fetches::start(client, sources);
+    while let Some((i, fetched)) = fetches.next().await {
+        let source = names[i].clone();
+        let outcome = match store_fetched(store, &source, fetched).await {
             Ok(stats) => IngestOutcome {
                 source,
                 stats: Some(stats),
@@ -343,8 +448,9 @@ pub async fn ingest_all(
                 }
             }
         };
-        outcomes.push(outcome);
+        outcomes[i] = Some(outcome);
     }
+    let outcomes: Vec<IngestOutcome> = outcomes.into_iter().flatten().collect();
     Ok(IngestAllReport {
         contract_version: CONTRACT_VERSION,
         ok: outcomes.iter().all(|o| o.error.is_none()),

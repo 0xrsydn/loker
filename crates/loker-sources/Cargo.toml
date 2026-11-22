@@ -14,6 +14,6 @@ loker-core.workspace = true
 reqwest = { version = "0.13.5", default-features = false, features = ["json", "query", "rustls"] }
 serde.workspace = true
 serde_json.workspace = true
-tokio = { workspace = true, features = ["time"] }
+tokio = { workspace = true, features = ["time", "sync", "rt"] }
 tracing.workspace = true
 webpki-root-certs = "1"

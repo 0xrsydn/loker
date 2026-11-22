@@ -137,6 +137,13 @@ they run in Rust over every match: the only way to fill a page and count
 `total`, and a few thousand rows take milliseconds. The SQL pre-filter on
 the viewer's country must never be stricter than the verdict.
 
+**Fetching.** `ingest --all` and `verify` fetch concurrently, limited per API
+host (`Source::host`): `FETCHES_PER_HOST` in flight, starts `HOST_START_GAP`
+apart. Every Greenhouse board is one host, every Ashby board another. Writes
+stay on one task, in the order fetches finish; that is safe because dedup
+depends only on what is stored, never on ingest order. Pauses between pages
+of one source (Himalayas, Workable, YC) stay in the adapter.
+
 **Liveness.** A listing goes `gone` when a complete fetch of its source no
 longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
 seen it for 30 days (`stale`), and goes `live` again when seen. A job is active
@@ -379,7 +386,6 @@ Nothing here is needed now; each change waits for its trigger.
 | Change | Trigger |
 |---|---|
 | An `Adapter` trait and shared fetch methods (JSON-LD, RSS) | About 10 adapters, or the first HTML source |
-| Concurrent `ingest --all` with per-host rate limits | Hundreds of company boards |
 | A read pool beside the one writer connection `Store::open` opens | A long-running server with concurrent clients (REST) |
 | More signals inside `dedup::cluster` (location, apply-URL domain) to tell apart listings that share a key | `sources eval` shows blocked keys hiding real separate jobs |
 | Fuzzy matching across keys (a new candidate query, e.g. by company) | `sources eval` or real use shows missed merges. A real design change, not a tweak. |
