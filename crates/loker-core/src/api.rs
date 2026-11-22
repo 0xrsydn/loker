@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use chrono::{DateTime, Utc};
 
+use crate::board::BoardStatus;
 use crate::country;
 use crate::model::{Job, Scope, Seniority, Sponsorship};
 use crate::role::{self, Modifier, Role, RoleFilter};
@@ -1036,4 +1037,65 @@ pub struct IngestOutcome {
     pub source: String,
     pub stats: Option<crate::model::IngestStats>,
     pub error: Option<String>,
+}
+
+#[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct DiscoverParams {
+    /// Where to look for company boards: `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.
+    pub from: String,
+    /// A Common Crawl crawl id such as `CC-MAIN-2026-43`; default the newest.
+    pub crawl: Option<String>,
+    /// Read a crawl again although it was read before.
+    #[serde(default)]
+    pub again: bool,
+    /// Check at most this many unchecked boards against their ATS, oldest found first; default all, 0 checks none.
+    pub check: Option<u32>,
+}
+
+/// One `loker discover` run: boards found, then unchecked boards asked about.
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoverReport {
+    pub contract_version: u32,
+    /// What was read: `commoncrawl:<crawl>` or `file:<name>`.
+    pub finder: String,
+    /// The crawl was read before, so only checking ran (`again` reads it anew).
+    pub skipped: bool,
+    /// Distinct boards the finder named.
+    pub found: u32,
+    /// Of those, boards loker did not know before.
+    pub new: u32,
+    /// URLs or lines that name no board.
+    pub unreadable: u32,
+    /// Boards asked about in this run, by what their ATS answered; `failed` got no answer and is asked again next run.
+    pub checked: BoardTally,
+    /// Every board loker knows, by status; `failed` counts unchecked boards whose last check got no answer.
+    pub boards: BoardTally,
+    /// The first check failures.
+    pub errors: Vec<String>,
+}
+
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct BoardTally {
+    /// Boards with open jobs.
+    pub live: u32,
+    /// Boards that exist with no open jobs.
+    pub empty: u32,
+    /// Boards the ATS says don't exist.
+    pub missing: u32,
+    pub unchecked: u32,
+    pub failed: u32,
+}
+
+impl BoardTally {
+    pub fn add(&mut self, status: BoardStatus, n: u32) {
+        match status {
+            BoardStatus::Live => self.live += n,
+            BoardStatus::Empty => self.empty += n,
+            BoardStatus::Missing => self.missing += n,
+            BoardStatus::Unchecked => self.unchecked += n,
+        }
+    }
 }

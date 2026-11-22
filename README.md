@@ -151,6 +151,22 @@ company and URL present, ids for closures, dates. It is how an upstream API
 change shows up. With no names it checks the sources in config.toml, each with
 its configured parameters.
 
+### Finding company boards
+
+Greenhouse, Ashby and Lever publish no list of their boards, so loker finds
+them. `loker discover` reads board URLs or ids, stores each board once, then
+asks each new board's API whether it exists: `live` (open jobs), `empty`, or
+`missing`. Each board is stored under a key, so two spellings of one board
+count once: Ashby and Greenhouse slugs ignore case, Lever's don't
+(`lever:Palantir` is not `lever:palantir`). Slugs keep their spaces (`ashby:Hippocratic AI`),
+and a check stores the spelling the ATS itself uses. A board whose check
+gets no answer is asked again on the next run.
+
+```sh
+cargo run -- discover --from boards.txt   # board URLs or ids, one per line
+cargo run -- discover --from boards.txt --check 0   # store them, ask later
+```
+
 ### As an MCP server
 
 `loker mcp` serves the tools over stdio. For Claude Code:

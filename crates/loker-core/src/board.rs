@@ -35,6 +35,44 @@ impl Ats {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "lowercase")]
+pub enum BoardStatus {
+    Unchecked,
+    Live,
+    Empty,
+    Missing,
+}
+
+impl BoardStatus {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            BoardStatus::Unchecked => "unchecked",
+            BoardStatus::Live => "live",
+            BoardStatus::Empty => "empty",
+            BoardStatus::Missing => "missing",
+        }
+    }
+
+    pub fn parse(s: &str) -> Option<BoardStatus> {
+        [
+            BoardStatus::Unchecked,
+            BoardStatus::Live,
+            BoardStatus::Empty,
+            BoardStatus::Missing,
+        ]
+        .into_iter()
+        .find(|b| b.as_str() == s)
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct BoardCheck {
+    pub slug: String,
+    pub status: BoardStatus,
+    pub jobs: Option<u32>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 pub struct Board {
     pub ats: Ats,

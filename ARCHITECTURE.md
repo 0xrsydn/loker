@@ -144,6 +144,16 @@ stay on one task, in the order fetches finish; that is safe because dedup
 depends only on what is stored, never on ingest order. Pauses between pages
 of one source (Himalayas, Workable, YC) stay in the adapter.
 
+**Boards.** `loker discover` collects candidate boards from a finder (a file
+of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
+row per `Board::key` in `boards`, with every finder that named it in
+`board_finds`. A candidate becomes `live`, `empty` or `missing` only by asking
+its ATS's API (`discover::check_board`, paced like ingest), so a finder can be
+noisy without being wrong: it decides coverage, never correctness. A check
+that gets no answer leaves the board `unchecked` with its error, to be asked
+again. The check also stores the ATS's own spelling of the slug (Ashby's
+`jobUrl`; Greenhouse lower case).
+
 **Liveness.** A listing goes `gone` when a complete fetch of its source no
 longer has it (`absent`), its source's expiry passes (`expired`), or nobody has
 seen it for 30 days (`stale`), and goes `live` again when seen. A job is active

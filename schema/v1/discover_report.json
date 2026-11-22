@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "BoardTally": {
+      "properties": {
+        "empty": {
+          "description": "Boards that exist with no open jobs.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "failed": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "live": {
+          "description": "Boards with open jobs.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "missing": {
+          "description": "Boards the ATS says don't exist.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unchecked": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "live",
+        "empty",
+        "missing",
+        "unchecked",
+        "failed"
+      ],
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "One `loker discover` run: boards found, then unchecked boards asked about.",
+  "properties": {
+    "boards": {
+      "$ref": "#/$defs/BoardTally",
+      "description": "Every board loker knows, by status; `failed` counts unchecked boards whose last check got no answer."
+    },
+    "checked": {
+      "$ref": "#/$defs/BoardTally",
+      "description": "Boards asked about in this run, by what their ATS answered; `failed` got no answer and is asked again next run."
+    },
+    "contractVersion": {
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "errors": {
+      "description": "The first check failures.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "finder": {
+      "description": "What was read: `commoncrawl:<crawl>` or `file:<name>`.",
+      "type": "string"
+    },
+    "found": {
+      "description": "Distinct boards the finder named.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "new": {
+      "description": "Of those, boards loker did not know before.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "skipped": {
+      "description": "The crawl was read before, so only checking ran (`again` reads it anew).",
+      "type": "boolean"
+    },
+    "unreadable": {
+      "description": "URLs or lines that name no board.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "contractVersion",
+    "finder",
+    "skipped",
+    "found",
+    "new",
+    "unreadable",
+    "checked",
+    "boards",
+    "errors"
+  ],
+  "title": "DiscoverReport",
+  "type": "object"
+}

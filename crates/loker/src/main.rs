@@ -3,9 +3,9 @@ use std::sync::Arc;
 use clap::{Parser, Subcommand};
 use loker::App;
 use loker_core::api::{
-    CheckStatus, DoctorReport, GetJobsParams, GetJobsResult, Hit, IngestAllReport, IngestParams,
-    MinVerdict, RoleEnrichReport, SearchHit, SearchParams, SearchResult, SourcesEval, VerifyParams,
-    VerifyReport, View,
+    BoardTally, CheckStatus, DiscoverParams, DiscoverReport, DoctorReport, GetJobsParams,
+    GetJobsResult, Hit, IngestAllReport, IngestParams, MinVerdict, RoleEnrichReport, SearchHit,
+    SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport, View,
 };
 use loker_core::home::loker_home;
 use loker_core::model::Seniority;
@@ -125,6 +125,23 @@ enum Command {
     },
     /// Fetch sources live (storing nothing) and check adapter invariants.
     /// Exits non-zero if any source fails.
+    /// Find company boards (Ashby, Greenhouse, Lever), then ask each new one's ATS whether it exists and has jobs.
+    Discover {
+        /// `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.
+        #[arg(long, default_value = "commoncrawl")]
+        from: String,
+        /// Common Crawl crawl id, e.g. CC-MAIN-2026-43 (default: the newest).
+        #[arg(long)]
+        crawl: Option<String>,
+        /// Read a crawl again although it was read before.
+        #[arg(long)]
+        again: bool,
+        /// Check at most this many unchecked boards (default: all; 0 checks none).
+        #[arg(long)]
+        check: Option<u32>,
+        #[arg(long)]
+        json: bool,
+    },
     Verify {
         /// Sources to check (default: the enabled sources in config.toml, or every source in the store without one).
         sources: Vec<String>,
@@ -390,6 +407,27 @@ async fn main() -> anyhow::Result<()> {
                 print_eval(&eval);
             }
         }
+        Command::Discover {
+            from,
+            crawl,
+            again,
+            check,
+            json,
+        } => {
+            let report = app
+                .discover(DiscoverParams {
+                    from,
+                    crawl,
+                    again,
+                    check,
+                })
+                .await?;
+            if json {
+                print_json(&report)?;
+            } else {
+                print_discover(&report);
+            }
+        }
         Command::Verify { sources, json } => {
             let report = app.verify(VerifyParams { sources }).await?;
             if json {
@@ -641,6 +679,28 @@ fn print_eval(e: &SourcesEval) {
         for c in e.scope_conflicts.iter().take(10) {
             println!("  {}  {}\n      {}", c.job_id, c.job, c.scopes);
         }
+    }
+}
+
+fn print_discover(r: &DiscoverReport) {
+    let tally = |t: &BoardTally| {
+        format!(
+            "{} live, {} empty, {} missing, {} unchecked, {} failed",
+            t.live, t.empty, t.missing, t.unchecked, t.failed
+        )
+    };
+    if r.skipped {
+        println!("{}: read before (--again reads it anew)", r.finder);
+    } else {
+        println!(
+            "{}: {} boards, {} new, {} unreadable",
+            r.finder, r.found, r.new, r.unreadable
+        );
+    }
+    println!("checked: {}", tally(&r.checked));
+    println!("boards:  {}", tally(&r.boards));
+    for e in &r.errors {
+        println!("    {e}");
     }
 }
 

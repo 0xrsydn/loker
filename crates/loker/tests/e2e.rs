@@ -75,6 +75,9 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
             }
             ("200 OK", json!({ "apiVersion": "1", "jobs": jobs }))
         }
+        "/posting-api/job-board/GLOBEX" => {
+            ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
+        }
         "/posting-api/job-board/Hippocratic%20AI" => {
             ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
         }
@@ -811,6 +814,49 @@ fn an_ashby_slug_keeps_its_spaces_and_case() {
     assert!(r["new"].as_u64().unwrap() > 0, "{r:#}");
     let bad = home.run(&["ingest", "ashby:a/b", "--json"]);
     assert!(!bad.status.success(), "a slash is never part of a slug");
+}
+
+#[test]
+fn discover_checks_each_board_once_and_asks_again_when_unanswered() {
+    let stub = stub();
+    let home = Home::new("discover", &stub);
+    std::fs::create_dir_all(&home.dir).unwrap();
+    let list = home.dir.join("boards.txt");
+    std::fs::write(
+        &list,
+        "https://jobs.ashbyhq.com/GLOBEX/a-1\n\
+         ashby:globex\n\
+         https://boards.greenhouse.io/embed/job_app?for=acme\n\
+         greenhouse:broken\n\
+         lever:initech\n\
+         ashby:nobody\n\
+         https://example.com/careers\n\n",
+    )
+    .unwrap();
+    let args = ["discover", "--from", list.to_str().unwrap(), "--json"];
+    let r = home.json(&args);
+    assert_eq!(r["finder"], "file:boards.txt");
+    assert_eq!(
+        (&r["found"], &r["new"], &r["unreadable"]),
+        (&json!(5), &json!(5), &json!(1)),
+        "one board under two spellings counts once: {r:#}"
+    );
+    assert_eq!(
+        r["checked"],
+        json!({ "live": 2, "empty": 1, "missing": 1, "unchecked": 0, "failed": 1 })
+    );
+
+    let again = home.json(&args);
+    assert_eq!(again["new"], 0);
+    assert_eq!(
+        again["checked"],
+        json!({ "live": 0, "empty": 0, "missing": 0, "unchecked": 0, "failed": 1 }),
+        "only the board that got no answer is asked again"
+    );
+    assert_eq!(
+        again["boards"],
+        json!({ "live": 2, "empty": 1, "missing": 1, "unchecked": 1, "failed": 1 })
+    );
 }
 
 #[test]

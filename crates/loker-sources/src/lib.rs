@@ -1,4 +1,5 @@
 pub mod ashby;
+pub mod discover;
 pub mod greenhouse;
 pub mod himalayas;
 pub mod jev;
@@ -13,6 +14,7 @@ use loker_core::api::{
     CONTRACT_VERSION, Check, CheckStatus, Error, IngestAllReport, IngestOutcome, IngestParams,
     Result, SourceCheck, VerifyReport,
 };
+use loker_core::board::{Ats, Board};
 use loker_core::model::{IngestStats, NewJob, Scope, SourceKind};
 use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
@@ -22,7 +24,7 @@ use std::collections::{BTreeSet, HashMap};
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::{Mutex, Semaphore, SemaphorePermit};
-use tokio::task::{Id, JoinSet};
+use tokio::task::{Id, JoinError, JoinSet};
 use tokio::time::Instant;
 
 pub use reqwest::Client as HttpClient;
@@ -180,6 +182,16 @@ impl Source {
     }
 }
 
+impl From<&Board> for Source {
+    fn from(b: &Board) -> Self {
+        match b.ats {
+            Ats::Ashby => Source::Ashby(b.slug.clone()),
+            Ats::Greenhouse => Source::Greenhouse(b.slug.clone()),
+            Ats::Lever => Source::Lever(b.slug.clone()),
+        }
+    }
+}
+
 pub fn http_client() -> anyhow::Result<HttpClient> {
     let bundled = webpki_root_certs::TLS_SERVER_ROOT_CERTS
         .iter()
@@ -293,43 +305,63 @@ impl HostTurns {
     }
 }
 
-struct Fetches {
-    tasks: JoinSet<Result<Fetched>>,
+struct Paced<R> {
+    tasks: JoinSet<R>,
     position: HashMap<Id, usize>,
 }
 
-impl Fetches {
-    fn start(client: &HttpClient, targets: Vec<IngestParams>) -> Self {
+impl<R: Send + 'static> Paced<R> {
+    fn start<T, Fut>(
+        items: Vec<T>,
+        host: impl Fn(&T) -> &'static str,
+        work: impl Fn(T) -> Fut,
+    ) -> Self
+    where
+        Fut: Future<Output = R> + Send + 'static,
+    {
         let mut hosts: HashMap<&'static str, Arc<HostTurns>> = HashMap::new();
         let mut tasks = JoinSet::new();
         let mut position = HashMap::new();
-        for (i, params) in targets.into_iter().enumerate() {
-            let host = Source::parse(&params.source)
-                .map(|s| s.host())
-                .unwrap_or_default();
+        for (i, item) in items.into_iter().enumerate() {
             let turns = hosts
-                .entry(host)
+                .entry(host(&item))
                 .or_insert_with(|| Arc::new(HostTurns::new()))
                 .clone();
-            let client = client.clone();
+            let job = work(item);
             let task = tasks.spawn(async move {
                 let _slot = turns.take().await;
-                fetch_batch(&client, &params).await
+                job.await
             });
             position.insert(task.id(), i);
         }
         Self { tasks, position }
     }
 
-    async fn next(&mut self) -> Option<(usize, Result<Fetched>)> {
+    async fn next(&mut self) -> Option<(usize, std::result::Result<R, JoinError>)> {
         Some(match self.tasks.join_next_with_id().await? {
-            Ok((id, fetched)) => (self.position[&id], fetched),
-            Err(e) => (
-                self.position[&e.id()],
-                Err(Error::Internal(anyhow::anyhow!("fetch task failed: {e}"))),
-            ),
+            Ok((id, done)) => (self.position[&id], Ok(done)),
+            Err(e) => (self.position[&e.id()], Err(e)),
         })
     }
+}
+
+fn joined<T>(done: std::result::Result<Result<T>, JoinError>) -> Result<T> {
+    done.unwrap_or_else(|e| Err(Error::Internal(anyhow::anyhow!("task failed: {e}"))))
+}
+
+fn fetch_all(client: &HttpClient, targets: Vec<IngestParams>) -> Paced<Result<Fetched>> {
+    Paced::start(
+        targets,
+        |p| {
+            Source::parse(&p.source)
+                .map(|s| s.host())
+                .unwrap_or_default()
+        },
+        |p| {
+            let client = client.clone();
+            async move { fetch_batch(&client, &p).await }
+        },
+    )
 }
 
 pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Result<IngestStats> {
@@ -398,9 +430,9 @@ pub async fn verify(client: &HttpClient, targets: Vec<IngestParams>) -> Result<V
         })
         .collect();
     let mut checks: Vec<Option<SourceCheck>> = names.iter().map(|_| None).collect();
-    let mut fetches = Fetches::start(client, one_page);
+    let mut fetches = fetch_all(client, one_page);
     while let Some((i, fetched)) = fetches.next().await {
-        checks[i] = Some(match fetched {
+        checks[i] = Some(match joined(fetched) {
             Ok(f) => check_fetch(&f, chrono::Utc::now()),
             Err(e) => SourceCheck {
                 source: names[i].clone(),
@@ -430,10 +462,10 @@ pub async fn ingest_all(
     }
     let names: Vec<String> = sources.iter().map(|p| p.source.clone()).collect();
     let mut outcomes: Vec<Option<IngestOutcome>> = names.iter().map(|_| None).collect();
-    let mut fetches = Fetches::start(client, sources);
+    let mut fetches = fetch_all(client, sources);
     while let Some((i, fetched)) = fetches.next().await {
         let source = names[i].clone();
-        let outcome = match store_fetched(store, &source, fetched).await {
+        let outcome = match store_fetched(store, &source, joined(fetched)).await {
             Ok(stats) => IngestOutcome {
                 source,
                 stats: Some(stats),
@@ -629,6 +661,20 @@ async fn get_json_within(
     use anyhow::Context;
     let body = get_text_within(client, url, timeout).await?;
     serde_json::from_str(&body).with_context(|| format!("GET {url}: not JSON"))
+}
+
+async fn get_json_unless_missing(client: &HttpClient, url: &str) -> anyhow::Result<Option<Value>> {
+    match get_json(client, url).await {
+        Ok(v) => Ok(Some(v)),
+        Err(e)
+            if e.downcast_ref::<reqwest::Error>()
+                .and_then(reqwest::Error::status)
+                == Some(reqwest::StatusCode::NOT_FOUND) =>
+        {
+            Ok(None)
+        }
+        Err(e) => Err(e),
+    }
 }
 
 async fn get_text(client: &HttpClient, url: &str) -> anyhow::Result<String> {

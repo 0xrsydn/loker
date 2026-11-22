@@ -3,9 +3,9 @@ pub mod mcp;
 use std::path::{Path, PathBuf};
 
 use loker_core::api::{
-    self, CONTRACT_VERSION, DoctorReport, Error, GetJobsParams, GetJobsResult, IngestAllReport,
-    IngestParams, RoleEnrichReport, RolesResult, SearchParams, SearchResult, SourcesEval, Stats,
-    VerifyParams, VerifyReport,
+    self, CONTRACT_VERSION, DiscoverParams, DiscoverReport, DoctorReport, Error, GetJobsParams,
+    GetJobsResult, IngestAllReport, IngestParams, RoleEnrichReport, RolesResult, SearchParams,
+    SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
 };
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
@@ -129,6 +129,10 @@ impl App {
         loker_sources::verify(&self.http, targets).await
     }
 
+    pub async fn discover(&self, p: DiscoverParams) -> api::Result<DiscoverReport> {
+        loker_sources::discover::discover(&self.store, &self.http, p).await
+    }
+
     pub fn config_check(&self) -> api::Result<Option<Vec<config::SourceStatus>>> {
         Ok(self.config()?.map(|c| c.check(&known_source)))
     }
@@ -187,5 +191,7 @@ pub fn contract_schemas() -> Vec<(&'static str, serde_json::Value)> {
         ("verify_params.json", schema!(VerifyParams)),
         ("verify_report.json", schema!(VerifyReport)),
         ("doctor_report.json", schema!(DoctorReport)),
+        ("discover_params.json", schema!(DiscoverParams)),
+        ("discover_report.json", schema!(DiscoverReport)),
     ]
 }

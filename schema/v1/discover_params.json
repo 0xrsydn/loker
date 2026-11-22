@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "again": {
+      "default": false,
+      "description": "Read a crawl again although it was read before.",
+      "type": "boolean"
+    },
+    "check": {
+      "description": "Check at most this many unchecked boards against their ATS, oldest found first; default all, 0 checks none.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "crawl": {
+      "description": "A Common Crawl crawl id such as `CC-MAIN-2026-43`; default the newest.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "from": {
+      "description": "Where to look for company boards: `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "from"
+  ],
+  "title": "DiscoverParams",
+  "type": "object"
+}

@@ -1,0 +1,226 @@
+use std::collections::BTreeMap;
+use std::path::Path;
+
+use loker_core::api::{
+    BoardTally, CONTRACT_VERSION, DiscoverParams, DiscoverReport, Error, Result,
+};
+use loker_core::board::{Ats, Board, BoardCheck, BoardStatus};
+use loker_core::store::Store;
+use serde_json::Value;
+
+use crate::{HttpClient, Paced, Source, get_json_unless_missing, joined, segment, url};
+
+const ERRORS_SHOWN: usize = 10;
+
+pub struct Candidates {
+    pub finder: String,
+    pub boards: Vec<Board>,
+    pub unreadable: u32,
+}
+
+impl Candidates {
+    pub fn collect(finder: String, found: impl IntoIterator<Item = Option<Board>>) -> Self {
+        let mut by_key = BTreeMap::new();
+        let mut unreadable = 0;
+        for board in found {
+            match board {
+                Some(b) => {
+                    by_key.entry(b.key()).or_insert(b);
+                }
+                None => unreadable += 1,
+            }
+        }
+        Candidates {
+            finder,
+            boards: by_key.into_values().collect(),
+            unreadable,
+        }
+    }
+}
+
+pub fn read_lines(finder: String, text: &str) -> Candidates {
+    let lines = text.lines().map(str::trim).filter(|l| !l.is_empty());
+    Candidates::collect(
+        finder,
+        lines.map(|l| Board::from_id(l).or_else(|| Board::from_url(l))),
+    )
+}
+
+pub async fn discover(
+    store: &Store,
+    client: &HttpClient,
+    p: DiscoverParams,
+) -> Result<DiscoverReport> {
+    let (candidates, skipped) = match p.from.as_str() {
+        "commoncrawl" => {
+            return Err(Error::Invalid(
+                "commoncrawl is not available yet; pass a file".into(),
+            ));
+        }
+        path => {
+            for (set, field) in [(p.crawl.is_some(), "crawl"), (p.again, "again")] {
+                if set {
+                    return Err(Error::Invalid(format!(
+                        "`{field}` only applies to commoncrawl"
+                    )));
+                }
+            }
+            let text = std::fs::read_to_string(path)
+                .map_err(|e| Error::Invalid(format!("reading {path}: {e}")))?;
+            let name = Path::new(path)
+                .file_name()
+                .map_or_else(|| path.to_string(), |n| n.to_string_lossy().into_owned());
+            (read_lines(format!("file:{name}"), &text), false)
+        }
+    };
+    let new = if skipped {
+        0
+    } else {
+        let new = store
+            .add_boards(&candidates.finder, &candidates.boards)
+            .await?;
+        store
+            .finish_discovery(&candidates.finder, candidates.boards.len() as u32)
+            .await?;
+        new
+    };
+    let (checked, errors) = check_unchecked(store, client, p.check).await?;
+    Ok(DiscoverReport {
+        contract_version: CONTRACT_VERSION,
+        finder: candidates.finder,
+        skipped,
+        found: candidates.boards.len() as u32,
+        new,
+        unreadable: candidates.unreadable,
+        checked,
+        boards: tally(store).await?,
+        errors,
+    })
+}
+
+async fn check_unchecked(
+    store: &Store,
+    client: &HttpClient,
+    limit: Option<u32>,
+) -> Result<(BoardTally, Vec<String>)> {
+    let boards = store
+        .boards_with_status(BoardStatus::Unchecked, limit)
+        .await?;
+    let mut checked = BoardTally::default();
+    let mut errors = Vec::new();
+    let mut checks = Paced::start(
+        boards.clone(),
+        |b| Source::from(b).host(),
+        |b| {
+            let client = client.clone();
+            async move { check_board(&client, &b).await.map_err(Error::Internal) }
+        },
+    );
+    while let Some((i, done)) = checks.next().await {
+        let board = &boards[i];
+        match joined(done) {
+            Ok(check) => {
+                store.record_board_check(board, Ok(&check)).await?;
+                checked.add(check.status, 1);
+            }
+            Err(e) => {
+                let message = e.to_string();
+                store.record_board_check(board, Err(&message)).await?;
+                checked.failed += 1;
+                if errors.len() < ERRORS_SHOWN {
+                    errors.push(format!("{board}: {message}"));
+                }
+            }
+        }
+    }
+    Ok((checked, errors))
+}
+
+async fn tally(store: &Store) -> Result<BoardTally> {
+    let mut boards = BoardTally::default();
+    for (status, failed, n) in store.board_counts().await? {
+        boards.add(status, n);
+        if failed && status == BoardStatus::Unchecked {
+            boards.failed += n;
+        }
+    }
+    Ok(boards)
+}
+
+pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<BoardCheck> {
+    let slug = segment(&board.slug);
+    let missing = BoardCheck {
+        slug: board.slug.clone(),
+        status: BoardStatus::Missing,
+        jobs: None,
+    };
+    let counted = |slug: String, jobs: usize| BoardCheck {
+        slug,
+        status: if jobs > 0 {
+            BoardStatus::Live
+        } else {
+            BoardStatus::Empty
+        },
+        jobs: Some(jobs as u32),
+    };
+    match board.ats {
+        Ats::Ashby => {
+            let api = url(
+                "https://api.ashbyhq.com",
+                &format!("/posting-api/job-board/{slug}"),
+            );
+            let Some(body) = get_json_unless_missing(client, &api).await? else {
+                return Ok(missing);
+            };
+            let jobs: Vec<&Value> = body
+                .get("jobs")
+                .and_then(Value::as_array)
+                .map(|all| {
+                    all.iter()
+                        .filter(|j| j.get("isListed").and_then(Value::as_bool) != Some(false))
+                        .collect()
+                })
+                .unwrap_or_default();
+            let spelled = jobs
+                .iter()
+                .filter_map(|j| j.get("jobUrl")?.as_str())
+                .filter_map(Board::from_url)
+                .find(|b| b.key() == board.key())
+                .map_or_else(|| board.slug.clone(), |b| b.slug);
+            Ok(counted(spelled, jobs.len()))
+        }
+        Ats::Greenhouse => {
+            let api = url(
+                "https://boards-api.greenhouse.io",
+                &format!("/v1/boards/{slug}/jobs"),
+            );
+            let Some(body) = get_json_unless_missing(client, &api).await? else {
+                return Ok(missing);
+            };
+            let jobs = body
+                .get("jobs")
+                .and_then(Value::as_array)
+                .map_or(0, Vec::len);
+            Ok(counted(board.slug.to_lowercase(), jobs))
+        }
+        Ats::Lever => {
+            let api = url(
+                "https://api.lever.co",
+                &format!("/v0/postings/{slug}?mode=json&limit=1"),
+            );
+            let Some(body) = get_json_unless_missing(client, &api).await? else {
+                return Ok(missing);
+            };
+            let any = body.as_array().is_some_and(|a| !a.is_empty());
+            Ok(BoardCheck {
+                slug: board.slug.clone(),
+                status: if any {
+                    BoardStatus::Live
+                } else {
+                    BoardStatus::Empty
+                },
+                jobs: None,
+            })
+        }
+    }
+}

@@ -10,6 +10,7 @@ use sqlx::sqlite::{
     SqliteConnectOptions, SqliteConnection, SqliteJournalMode, SqlitePool, SqlitePoolOptions,
 };
 
+use crate::board::{Ats, Board, BoardCheck, BoardStatus};
 use crate::classify;
 use crate::dedup::{self, Linked, Member, Plan};
 use crate::model::{IngestStats, Job, JobSource, NewJob, SourceKind};
@@ -993,4 +994,118 @@ fn content_hash(parts: &[&str]) -> String {
 
 fn now() -> String {
     Utc::now().to_rfc3339()
+}
+
+impl Store {
+    pub async fn add_boards(&self, finder: &str, boards: &[Board]) -> anyhow::Result<u32> {
+        let at = now();
+        let mut tx = self.pool.begin().await?;
+        let mut new = 0;
+        for b in boards {
+            let key = b.key();
+            let added = sqlx::query(
+                "INSERT INTO boards (key, ats, slug, first_found) VALUES (?, ?, ?, ?) ON CONFLICT (key) DO NOTHING",
+            )
+            .bind(&key)
+            .bind(b.ats.as_str())
+            .bind(&b.slug)
+            .bind(&at)
+            .execute(&mut *tx)
+            .await?;
+            new += added.rows_affected() as u32;
+            sqlx::query(
+                "INSERT INTO board_finds (key, finder, found_at) VALUES (?, ?, ?) ON CONFLICT DO NOTHING",
+            )
+            .bind(&key)
+            .bind(finder)
+            .bind(&at)
+            .execute(&mut *tx)
+            .await?;
+        }
+        tx.commit().await?;
+        Ok(new)
+    }
+
+    pub async fn finish_discovery(&self, finder: &str, found: u32) -> anyhow::Result<()> {
+        sqlx::query(
+            "INSERT INTO discovery_runs (finder, finished_at, found) VALUES (?, ?, ?)
+             ON CONFLICT (finder) DO UPDATE SET finished_at = excluded.finished_at, found = excluded.found",
+        )
+        .bind(finder)
+        .bind(now())
+        .bind(found as i64)
+        .execute(&self.pool)
+        .await?;
+        Ok(())
+    }
+
+    pub async fn discovered(&self, finder: &str) -> anyhow::Result<bool> {
+        let n: i64 = sqlx::query_scalar("SELECT count(*) FROM discovery_runs WHERE finder = ?")
+            .bind(finder)
+            .fetch_one(&self.pool)
+            .await?;
+        Ok(n > 0)
+    }
+
+    pub async fn boards_with_status(
+        &self,
+        status: BoardStatus,
+        limit: Option<u32>,
+    ) -> anyhow::Result<Vec<Board>> {
+        let rows = sqlx::query(
+            "SELECT ats, slug FROM boards WHERE status = ? ORDER BY first_found, key LIMIT ?",
+        )
+        .bind(status.as_str())
+        .bind(limit.map_or(-1, i64::from))
+        .fetch_all(&self.pool)
+        .await?;
+        Ok(rows
+            .iter()
+            .filter_map(|r| {
+                let ats = Ats::parse(r.get::<&str, _>("ats"))?;
+                Board::new(ats, r.get("slug"))
+            })
+            .collect())
+    }
+
+    pub async fn record_board_check(
+        &self,
+        board: &Board,
+        check: Result<&BoardCheck, &str>,
+    ) -> anyhow::Result<()> {
+        match check {
+            Ok(c) => sqlx::query(
+                "UPDATE boards SET slug = ?, status = ?, jobs = ?, checked_at = ?, error = NULL WHERE key = ?",
+            )
+            .bind(&c.slug)
+            .bind(c.status.as_str())
+            .bind(c.jobs.map(i64::from))
+            .bind(now())
+            .bind(board.key())
+            .execute(&self.pool)
+            .await?,
+            Err(e) => sqlx::query("UPDATE boards SET checked_at = ?, error = ? WHERE key = ?")
+                .bind(now())
+                .bind(e)
+                .bind(board.key())
+                .execute(&self.pool)
+                .await?,
+        };
+        Ok(())
+    }
+
+    pub async fn board_counts(&self) -> anyhow::Result<Vec<(BoardStatus, bool, u32)>> {
+        let rows = sqlx::query(
+            "SELECT status, error IS NOT NULL AS failed, count(*) AS n FROM boards GROUP BY 1, 2",
+        )
+        .fetch_all(&self.pool)
+        .await?;
+        Ok(rows
+            .iter()
+            .filter_map(|r| {
+                let status = BoardStatus::parse(r.get::<&str, _>("status"))?;
+                Some((status, r.get("failed"), r.get::<i64, _>("n") as u32))
+            })
+            .collect())
+    }
 }
