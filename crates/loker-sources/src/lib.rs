@@ -16,7 +16,7 @@ use loker_core::api::{
     Result, SourceCheck, VerifyReport,
 };
 use loker_core::board::{Ats, Board};
-use loker_core::model::{IngestStats, NewJob, Scope, SourceKind};
+use loker_core::model::{IngestStats, NewJob, Scope, SourceKind, Workplace};
 use loker_core::normalize;
 use loker_core::store::{Batch, SourceMeta, Store};
 use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
@@ -106,6 +106,17 @@ impl Source {
         match self {
             Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => SourceKind::Employer,
             _ => SourceKind::Aggregator,
+        }
+    }
+
+    pub fn posting_country(&self, raw: &Value) -> Option<String> {
+        match self {
+            Source::Lever(_) => raw
+                .get("country")
+                .and_then(Value::as_str)
+                .filter(|c| c.len() == 2 && c.chars().all(|ch| ch.is_ascii_alphabetic()))
+                .map(str::to_uppercase),
+            _ => None,
         }
     }
 
@@ -260,6 +271,7 @@ pub fn job_from_raw(
     company: Option<&str>,
     remote: Option<bool>,
 ) -> anyhow::Result<NewJob> {
+    let posting_country = source.posting_country(&raw);
     let mut job = source.transform(raw)?;
     if let Some(name) = company {
         job.company = name.to_string();
@@ -277,6 +289,13 @@ pub fn job_from_raw(
         job.description_md.as_deref().unwrap_or(""),
         remote_board,
     );
+    if job.eligibility.workplace == Workplace::Remote
+        && job.eligibility.scope() == Scope::Unknown
+        && names_a_place(job.eligibility.raw.as_deref().unwrap_or(""))
+        && let Some(country) = posting_country
+    {
+        job.eligibility.countries = vec![country];
+    }
     Ok(job)
 }
 
@@ -344,6 +363,12 @@ impl<R: Send + 'static> Paced<R> {
             Err(e) => (self.position[&e.id()], Err(e)),
         })
     }
+}
+
+fn names_a_place(location: &str) -> bool {
+    location
+        .split(|c: char| !c.is_alphanumeric())
+        .any(|w| !w.is_empty() && !w.eq_ignore_ascii_case("remote"))
 }
 
 fn joined<T>(done: std::result::Result<Result<T>, JoinError>) -> Result<T> {

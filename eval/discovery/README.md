@@ -99,4 +99,6 @@ jobs have an unknown scope wherever they come from; its discovered boards
 are less often US tech companies, so they state pay less often. Lever's
 unmapped share is two boards: Veeva writes "Massachusetts - Boston" (scope
 unknown on 3 in 4 of its 860 jobs, though Lever's own `country` field says US), and
-Bluelight lists Latin American cities the tables don't know.
+Bluelight lists Latin American cities the tables don't know. Since fixed
+for the first kind: a remote Lever job whose location no rule reads takes
+Lever's `country` (685 of the sample's jobs).

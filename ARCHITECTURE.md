@@ -309,8 +309,14 @@ Combinator's 429.
   board. One unpaged request also returns everything, but Lever sends each
   posting's HTML (about 20 KB) uncompressed at as little as 15–60 KB/s, so a
   large board outlasts the timeout; each page gets two minutes. Lever's ISO
-  `country` fills in an on-site or hybrid job's country; for a remote job it
-  is only the employer's and is ignored.
+  `country` fills in an on-site or hybrid job's country. For a remote job it
+  is the posting location's country, used (`Source::posting_country`, after
+  the description is read) only when the location names a place no rule
+  reads, like Veeva's "Massachusetts - Boston": on the 2026-11-23 sample it
+  filled 685 of 6,742 jobs, and the eligibility holdout gained 5 right
+  verdicts and no wrong ones. A location of just "Remote" may carry the
+  employer's own country, so it stays unknown, as does a lone city (the
+  normalizer's rule).
 - *Remote OK:* the first array element is a legal notice. Salaries are USD a
   year, 0 means not given, and the pay bounds drop junk values.
 - *We Work Remotely:* RSS. The all-jobs feed holds only about ten of each
