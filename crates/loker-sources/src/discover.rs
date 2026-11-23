@@ -169,13 +169,6 @@ async fn tally(store: &Store) -> Result<BoardTally> {
 
 pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<BoardCheck> {
     let slug = segment(&board.slug);
-    let status = |live: bool| {
-        if live {
-            BoardStatus::Live
-        } else {
-            BoardStatus::Empty
-        }
-    };
     let missing = BoardCheck {
         slug: board.slug.clone(),
         status: BoardStatus::Missing,
@@ -215,12 +208,12 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
                 );
                 page_company(client, &page, ashby_organization).await
             };
-            Ok(BoardCheck {
-                slug: spelled,
-                status: status(!jobs.is_empty()),
-                jobs: Some(jobs.len() as u32),
+            Ok(BoardCheck::answered(
+                spelled,
+                !jobs.is_empty(),
+                Some(jobs.len() as u32),
                 company,
-            })
+            ))
         }
         Ats::Greenhouse => {
             let api = url(
@@ -244,12 +237,12 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
                     name,
                     website: None,
                 });
-            Ok(BoardCheck {
-                slug: board.slug.to_lowercase(),
-                status: status(!jobs.is_empty()),
-                jobs: Some(jobs.len() as u32),
+            Ok(BoardCheck::answered(
+                board.slug.to_lowercase(),
+                !jobs.is_empty(),
+                Some(jobs.len() as u32),
                 company,
-            })
+            ))
         }
         Ats::Lever => {
             let api = url(
@@ -266,12 +259,12 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
             } else {
                 None
             };
-            Ok(BoardCheck {
-                slug: board.slug.clone(),
-                status: status(live),
-                jobs: None,
+            Ok(BoardCheck::answered(
+                board.slug.clone(),
+                live,
+                None,
                 company,
-            })
+            ))
         }
     }
 }

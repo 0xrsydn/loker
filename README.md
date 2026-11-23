@@ -157,8 +157,9 @@ its configured parameters.
 
 Greenhouse, Ashby and Lever publish no list of their boards, so loker finds
 them. `loker discover` reads board URLs or ids, stores each board once, then
-asks each new board's API whether it exists: `live` (open jobs), `empty`, or
-`missing`. Each board is stored under a key, so two spellings of one board
+asks each new board's API whether it exists: `live` (open jobs), `empty`,
+`missing`, or `private` (jobs not for the public: an internal, referral-only
+or talent-community board, or a LinkedIn mirror, told by its name). Each board is stored under a key, so two spellings of one board
 count once: Ashby and Greenhouse slugs ignore case, Lever's don't
 (`lever:Palantir` is not `lever:palantir`). Slugs keep their spaces (`ashby:Hippocratic AI`),
 and a check stores the spelling the ATS itself uses, with the company's name

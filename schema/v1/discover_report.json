@@ -25,6 +25,12 @@
           "minimum": 0,
           "type": "integer"
         },
+        "private": {
+          "description": "Boards with jobs that aren't for the public: internal, referral-only,\nalumni or talent-community boards, and LinkedIn or third-party\nmirrors of a main board, told by the board's name. Never ingested.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
         "unchecked": {
           "format": "uint32",
           "minimum": 0,
@@ -35,6 +41,7 @@
         "live",
         "empty",
         "missing",
+        "private",
         "unchecked",
         "failed"
       ],

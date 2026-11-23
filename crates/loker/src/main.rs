@@ -685,8 +685,8 @@ fn print_eval(e: &SourcesEval) {
 fn print_discover(r: &DiscoverReport) {
     let tally = |t: &BoardTally| {
         format!(
-            "{} live, {} empty, {} missing, {} unchecked, {} failed",
-            t.live, t.empty, t.missing, t.unchecked, t.failed
+            "{} live, {} empty, {} missing, {} private, {} unchecked, {} failed",
+            t.live, t.empty, t.missing, t.private, t.unchecked, t.failed
         )
     };
     if r.skipped {

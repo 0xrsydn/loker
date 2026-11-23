@@ -161,7 +161,13 @@ answer; for Ashby and Lever, whose APIs carry no company, one more request to
 the board's own page (the organization in Ashby's `window.__appData`, with its
 website; Lever's `<title>`). A failed page leaves the name empty, not the
 check failed. `ingest --all` passes the name as the board's `company`, as a
-configured `company` would.
+configured `company` would. A board with jobs whose name says it isn't for
+the public (`Company::names_a_private_board`: internal, referral-only,
+alumni, talent-community, LinkedIn or third-party mirror) is `private`, and
+never ingested: its jobs are closed to the reader, or copies of a main
+board's under another name. The phrases are whole words, so "HiddenLayer"
+and "SandboxAQ" stay live; on the 2026-11-23 check they marked 26 boards,
+all correctly (eval/discovery).
 With `[discovery] ingest = true`, `ingest --all` adds every `live` board whose
 key config.toml doesn't list, after the configured sources.
 

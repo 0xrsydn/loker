@@ -1085,6 +1085,10 @@ pub struct BoardTally {
     pub empty: u32,
     /// Boards the ATS says don't exist.
     pub missing: u32,
+    /// Boards with jobs that aren't for the public: internal, referral-only,
+    /// alumni or talent-community boards, and LinkedIn or third-party
+    /// mirrors of a main board, told by the board's name. Never ingested.
+    pub private: u32,
     pub unchecked: u32,
     pub failed: u32,
 }
@@ -1095,6 +1099,7 @@ impl BoardTally {
             BoardStatus::Live => self.live += n,
             BoardStatus::Empty => self.empty += n,
             BoardStatus::Missing => self.missing += n,
+            BoardStatus::Private => self.private += n,
             BoardStatus::Unchecked => self.unchecked += n,
         }
     }

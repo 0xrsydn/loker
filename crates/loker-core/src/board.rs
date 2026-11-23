@@ -42,6 +42,7 @@ pub enum BoardStatus {
     Live,
     Empty,
     Missing,
+    Private,
 }
 
 impl BoardStatus {
@@ -51,6 +52,7 @@ impl BoardStatus {
             BoardStatus::Live => "live",
             BoardStatus::Empty => "empty",
             BoardStatus::Missing => "missing",
+            BoardStatus::Private => "private",
         }
     }
 
@@ -60,6 +62,7 @@ impl BoardStatus {
             BoardStatus::Live,
             BoardStatus::Empty,
             BoardStatus::Missing,
+            BoardStatus::Private,
         ]
         .into_iter()
         .find(|b| b.as_str() == s)
@@ -74,10 +77,78 @@ pub struct BoardCheck {
     pub company: Option<Company>,
 }
 
+impl BoardCheck {
+    pub fn answered(
+        slug: String,
+        open: bool,
+        jobs: Option<u32>,
+        company: Option<Company>,
+    ) -> BoardCheck {
+        let status = match &company {
+            _ if !open => BoardStatus::Empty,
+            Some(c) if c.names_a_private_board() => BoardStatus::Private,
+            _ => BoardStatus::Live,
+        };
+        BoardCheck {
+            slug,
+            status,
+            jobs,
+            company,
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Company {
     pub name: String,
     pub website: Option<String>,
+}
+
+const PRIVATE_BOARD_PHRASES: &[&str] = &[
+    "internal job",
+    "internal jobs",
+    "internal board",
+    "internal employees",
+    "internal vacancies",
+    "internal mobility",
+    "internal candidates",
+    "internal only",
+    "internal postings",
+    "referrals only",
+    "referral only",
+    "referral board",
+    "referral job board",
+    "employee referral",
+    "alumni network",
+    "alumni job board",
+    "talent community",
+    "talent network",
+    "talent pool",
+    "invitation only",
+    "linkedin",
+    "third party job",
+    "job links only",
+    "integration sandbox",
+    "test board",
+    "do not use",
+];
+
+impl Company {
+    pub fn names_a_private_board(&self) -> bool {
+        let words: Vec<String> = self
+            .name
+            .to_lowercase()
+            .split(|c: char| !c.is_alphanumeric())
+            .filter(|w| !w.is_empty())
+            .map(String::from)
+            .collect();
+        let text = format!(" {} ", words.join(" "));
+        text != " linkedin "
+            && (text.ends_with(" internal ")
+                || PRIVATE_BOARD_PHRASES
+                    .iter()
+                    .any(|p| text.contains(&format!(" {p} "))))
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
@@ -261,6 +332,35 @@ mod tests {
         for (url, want) in cases {
             let got = Board::from_url(url).map(|b| b.to_string());
             assert_eq!(got.as_deref(), *want, "{url}");
+        }
+    }
+
+    #[test]
+    fn a_board_named_for_insiders_or_a_mirror_is_private() {
+        let cases = [
+            ("Referrals Only", true),
+            ("Home Chef (Internal Employees)", true),
+            ("Acorn Health - Internal", true),
+            ("Jumia Internal Mobility Board", true),
+            ("Stone - Linkedin", true),
+            ("SingleStore-LinkedIn", true),
+            ("Third-Party Job Posts", true),
+            ("Scout Motors Talent Community", true),
+            ("EVG Hidden (Job Links Only)", true),
+            ("Businessolver - Invitation Only Job Board", true),
+            ("LinkedIn", false),
+            ("HiddenLayer", false),
+            ("SandboxAQ", false),
+            ("Alumni Ventures", false),
+            ("Internal Medicine Partners", false),
+            ("Human Agency", false),
+        ];
+        for (name, private) in cases {
+            let company = Company {
+                name: name.to_string(),
+                website: None,
+            };
+            assert_eq!(company.names_a_private_board(), private, "{name}");
         }
     }
 

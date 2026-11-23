@@ -143,6 +143,13 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         "/v1/boards/acme/jobs" | "/v1/boards/throttled/jobs" => {
             ("200 OK", json!({ "jobs": greenhouse() }))
         }
+        "/v1/boards/acmereferrals/jobs" => {
+            let mut jobs = greenhouse();
+            for j in &mut jobs {
+                j["company_name"] = json!("Referrals Only");
+            }
+            ("200 OK", json!({ "jobs": jobs }))
+        }
         "/v1/boards/broken/jobs" => ("500 Internal Server Error", json!({ "error": "boom" })),
         "/posting-api/job-board/globex" => {
             let mut jobs = ashby();
@@ -935,6 +942,7 @@ fn discover_checks_each_board_once_and_asks_again_when_unanswered() {
          ashby:globex\n\
          https://boards.greenhouse.io/embed/job_app?for=acme\n\
          greenhouse:broken\n\
+         greenhouse:acmereferrals\n\
          lever:initech\n\
          ashby:nobody\n\
          https://example.com/careers\n\n",
@@ -945,24 +953,25 @@ fn discover_checks_each_board_once_and_asks_again_when_unanswered() {
     assert_eq!(r["finder"], "file:boards.txt");
     assert_eq!(
         (&r["found"], &r["new"], &r["unreadable"]),
-        (&json!(5), &json!(5), &json!(1)),
+        (&json!(6), &json!(6), &json!(1)),
         "one board under two spellings counts once: {r:#}"
     );
     assert_eq!(
         r["checked"],
-        json!({ "live": 2, "empty": 1, "missing": 1, "unchecked": 0, "failed": 1 })
+        json!({ "live": 2, "empty": 1, "missing": 1, "private": 1, "unchecked": 0, "failed": 1 }),
+        "a referrals-only board has jobs, but not for the public"
     );
 
     let again = home.json(&args);
     assert_eq!(again["new"], 0);
     assert_eq!(
         again["checked"],
-        json!({ "live": 0, "empty": 0, "missing": 0, "unchecked": 0, "failed": 1 }),
+        json!({ "live": 0, "empty": 0, "missing": 0, "private": 0, "unchecked": 0, "failed": 1 }),
         "only the board that got no answer is asked again"
     );
     assert_eq!(
         again["boards"],
-        json!({ "live": 2, "empty": 1, "missing": 1, "unchecked": 1, "failed": 1 })
+        json!({ "live": 2, "empty": 1, "missing": 1, "private": 1, "unchecked": 1, "failed": 1 })
     );
 }
 
@@ -979,7 +988,7 @@ fn discover_reads_the_newest_common_crawl_once() {
     );
     assert_eq!(
         r["checked"],
-        json!({ "live": 2, "empty": 1, "missing": 0, "unchecked": 0, "failed": 0 })
+        json!({ "live": 2, "empty": 1, "missing": 0, "private": 0, "unchecked": 0, "failed": 0 })
     );
     assert!(
         !stub

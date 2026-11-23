@@ -65,7 +65,8 @@ What the name can't fix:
   boards, and LinkedIn or third-party mirrors of a main board ("Referrals
   Only", "Stone - Linkedin", "Home Chef (Internal Employees)"). Their name
   is the board's purpose, not the company, and internal jobs aren't open to
-  the reader.
+  the reader. Since fixed: such a board is `private` and not ingested; the
+  rule marks 26 of these boards (961 jobs) and no other.
 - **Careers-page decoration (about 36):** "Kaseya Careers", "Careers at
   Eucalyptus", "Astera Labs Early Career".
 - **One name, several boards (40 names, 82 boards):** the same company on
