@@ -8,7 +8,7 @@
       "type": "boolean"
     },
     "check": {
-      "description": "Check at most this many unchecked boards against their ATS, oldest found first; default all, 0 checks none.",
+      "description": "Check at most this many boards against their ATS: unchecked ones first (oldest found first), then any last checked over 7 days ago (or fetched by ingest), oldest first; default all, 0 checks none.",
       "format": "uint32",
       "minimum": 0,
       "type": [

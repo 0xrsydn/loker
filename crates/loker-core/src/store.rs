@@ -1047,15 +1047,16 @@ impl Store {
         Ok(n > 0)
     }
 
-    pub async fn boards_with_status(
+    pub async fn boards_due(
         &self,
-        status: BoardStatus,
+        checked_before: DateTime<Utc>,
         limit: Option<u32>,
     ) -> anyhow::Result<Vec<Board>> {
         let rows = sqlx::query(
-            "SELECT ats, slug FROM boards WHERE status = ? ORDER BY first_found, key LIMIT ?",
+            "SELECT ats, slug FROM boards WHERE status = 'unchecked' OR checked_at < ? \
+             ORDER BY status <> 'unchecked', checked_at, first_found, key LIMIT ?",
         )
-        .bind(status.as_str())
+        .bind(checked_before.to_rfc3339())
         .bind(limit.map_or(-1, i64::from))
         .fetch_all(&self.pool)
         .await?;
@@ -1066,6 +1067,22 @@ impl Store {
                 Board::new(ats, r.get("slug"))
             })
             .collect())
+    }
+
+    pub async fn record_board_fetch(&self, board: &Board, jobs: Option<u32>) -> anyhow::Result<()> {
+        let jobs = jobs.map(i64::from);
+        sqlx::query(
+            "UPDATE boards SET status = CASE WHEN ? IS NULL THEN 'missing' WHEN status = 'private' THEN 'private' \
+             WHEN ? > 0 THEN 'live' ELSE 'empty' END, jobs = ?, checked_at = ?, error = NULL WHERE key = ?",
+        )
+        .bind(jobs)
+        .bind(jobs)
+        .bind(jobs)
+        .bind(now())
+        .bind(board.key())
+        .execute(&self.pool)
+        .await?;
+        Ok(())
     }
 
     pub async fn live_boards(&self) -> anyhow::Result<Vec<(Board, Option<String>)>> {

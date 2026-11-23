@@ -42,12 +42,23 @@ fn stub() -> Stub {
             let mut body = vec![0u8; length];
             let _ = stream.read_exact(&mut body);
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
+            let path = target.split('?').next().unwrap_or_default().to_string();
             let times = {
                 let mut served = served.lock().unwrap();
                 served.push(target.clone());
-                served.iter().filter(|t| **t == target).count()
+                served
+                    .iter()
+                    .filter(|t| t.split('?').next() == Some(&path))
+                    .count()
             };
-            if target.starts_with("/v1/boards/throttled/jobs") && times == 1 {
+            if path == "/posting-api/job-board/fading" && times > 1 {
+                let _ = write!(
+                    stream,
+                    "HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
+                );
+                continue;
+            }
+            if path == "/v1/boards/throttled/jobs" && times == 1 {
                 let _ = write!(
                     stream,
                     "HTTP/1.1 429 Too Many Requests\r\nRetry-After: 1\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
@@ -157,6 +168,9 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
                 jobs.pop();
             }
             ("200 OK", json!({ "apiVersion": "1", "jobs": jobs }))
+        }
+        "/posting-api/job-board/fading" => {
+            ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
         }
         "/posting-api/job-board/GLOBEX" => {
             ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
@@ -1043,6 +1057,42 @@ fn ingest_all_takes_live_discovered_boards_not_already_listed() {
     assert_eq!(
         r["jobs"][0]["company"], "Globex Corporation",
         "the name on the board's own page replaces Ashby's slug"
+    );
+}
+
+#[test]
+fn a_discovered_board_that_disappears_is_fetched_no_more() {
+    let stub = stub();
+    let home = Home::new("fading", &stub);
+    std::fs::create_dir_all(&home.dir).unwrap();
+    std::fs::write(
+        home.dir.join("config.toml"),
+        "version = 1\n\n[[sources]]\nid = \"greenhouse:acme\"\n\n[discovery]\ningest = true\n",
+    )
+    .unwrap();
+    let list = home.dir.join("boards.txt");
+    std::fs::write(&list, "ashby:fading\n").unwrap();
+    let found = home.json(&["discover", "--from", list.to_str().unwrap(), "--json"]);
+    assert_eq!(found["checked"]["live"], 1, "{found:#}");
+
+    let sources = |report: &Value| -> Vec<String> {
+        report["sources"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|o| o["source"].as_str().unwrap().to_string())
+            .collect()
+    };
+    let out = home.run(&["ingest", "--all", "--json"]);
+    let first: Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(sources(&first), ["greenhouse:acme", "ashby:fading"]);
+    assert_eq!(first["ok"], false, "the board is gone: {first:#}");
+
+    let second = home.json(&["ingest", "--all", "--json"]);
+    assert_eq!(
+        (sources(&second), &second["ok"]),
+        (vec!["greenhouse:acme".to_string()], &json!(true)),
+        "a 404 from ingest marks the board missing"
     );
 }
 

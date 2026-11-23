@@ -192,7 +192,10 @@ ingest = true          # `ingest --all` also fetches every live discovered board
 Boards config.toml lists (enabled or not) are skipped there, compared by
 key, so a board you configured or disabled is never fetched twice. Run
 `loker discover` before `ingest --all`; on a day with no new crawl it only
-checks boards found since the last run.
+checks boards found since the last run and boards last checked over a week
+ago. An ingest counts as a check: a board whose fetch finds it gone (404) is
+marked `missing` and not fetched again, and one with no jobs left becomes
+`empty` until a later check finds jobs.
 
 ### As an MCP server
 

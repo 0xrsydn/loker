@@ -154,7 +154,14 @@ row per `Board::key` in `boards`, with every finder that named it in
 its ATS's API (`discover::check_board`, paced like ingest), so a finder can be
 noisy without being wrong: it decides coverage, never correctness. A check
 that gets no answer leaves the board `unchecked` with its error, to be asked
-again. The check also stores the ATS's own spelling of the slug (Ashby's
+again. A board is checked again once its last check is `RECHECK_AFTER` (7
+days) old, so an `empty` board that starts hiring turns `live` and a
+`missing` one that comes back is found; `Store::boards_due` puts unchecked
+boards first, then the oldest checks, and `--check` caps the run. Fetching a
+board in ingest is a check too (`Store::record_board_fetch`): jobs keep it
+`live`, none make it `empty`, a 404 makes it `missing`, other errors change
+nothing. So a board ingested daily is never asked twice, and one that dies
+fails one ingest, then is no longer fetched. The check also stores the ATS's own spelling of the slug (Ashby's
 `jobUrl`; Greenhouse lower case) and, for a live board, the company as the
 ATS names it (`board::Company`): Greenhouse's `company_name` from the same
 answer; for Ashby and Lever, whose APIs carry no company, one more request to
@@ -420,9 +427,6 @@ If it needs a test, test the function directly with a table of cases (see
 
 - **Liveness decisions live inside `Store::ingest`:** the truncation guard,
   expired-or-stale, reopening. They should move into a pure module like `dedup`.
-- **A discovered board is checked once.** One found `empty` isn't asked
-  again when it starts hiring, and a `live` one that later disappears keeps
-  failing in `ingest --all` instead of turning `missing`.
 - **Matching is an exact key.** Near-miss titles ("Sr. Backend Eng" vs
   "Senior Backend Engineer") don't merge.
 

@@ -13,6 +13,7 @@ use crate::{
 };
 
 const ERRORS_SHOWN: usize = 10;
+pub const RECHECK_AFTER: chrono::TimeDelta = chrono::TimeDelta::days(7);
 
 pub struct Candidates {
     pub finder: String,
@@ -103,7 +104,7 @@ pub async fn discover(
             .await?;
         new
     };
-    let (checked, errors) = check_unchecked(store, client, p.check).await?;
+    let (checked, errors) = check_due(store, client, p.check).await?;
     Ok(DiscoverReport {
         contract_version: CONTRACT_VERSION,
         finder: candidates.finder,
@@ -117,13 +118,13 @@ pub async fn discover(
     })
 }
 
-async fn check_unchecked(
+async fn check_due(
     store: &Store,
     client: &HttpClient,
     limit: Option<u32>,
 ) -> Result<(BoardTally, Vec<String>)> {
     let boards = store
-        .boards_with_status(BoardStatus::Unchecked, limit)
+        .boards_due(chrono::Utc::now() - RECHECK_AFTER, limit)
         .await?;
     let mut checked = BoardTally::default();
     let mut errors = Vec::new();

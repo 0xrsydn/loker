@@ -84,3 +84,53 @@ async fn every_json_path_the_sql_reads_resolves() {
         "`posted_at` ('$.postedAt') orders an empty query newest first"
     );
 }
+
+#[tokio::test]
+async fn boards_come_due_unchecked_first_then_the_longest_unchecked() {
+    use loker_core::board::{Board, BoardCheck};
+    let s = store("boards-due").await;
+    let board = |id: &str| Board::from_id(id).unwrap();
+    let ids = ["ashby:a", "greenhouse:b", "lever:c"];
+    s.add_boards("file:x", &ids.map(board)).await.unwrap();
+    for id in ["lever:c", "greenhouse:b"] {
+        let check = BoardCheck::answered(board(id).slug, true, Some(1), None);
+        s.record_board_check(&board(id), Ok(&check)).await.unwrap();
+    }
+    let due = |cutoff, limit| {
+        let s = &s;
+        async move {
+            let boards = s.boards_due(cutoff, limit).await.unwrap();
+            boards.iter().map(ToString::to_string).collect::<Vec<_>>()
+        }
+    };
+    let soon = chrono::Utc::now() - chrono::TimeDelta::days(7);
+    assert_eq!(
+        due(soon, None).await,
+        ["ashby:a"],
+        "a fresh check isn't due"
+    );
+    let later = chrono::Utc::now() + chrono::TimeDelta::days(1);
+    assert_eq!(
+        due(later, None).await,
+        ["ashby:a", "lever:c", "greenhouse:b"],
+        "unchecked first, then the oldest check"
+    );
+    assert_eq!(due(later, Some(2)).await, ["ashby:a", "lever:c"]);
+
+    s.record_board_fetch(&board("lever:c"), None).await.unwrap();
+    s.record_board_fetch(&board("greenhouse:b"), Some(0))
+        .await
+        .unwrap();
+    let counts = s.board_counts().await.unwrap();
+    let status_of = |want: &str| {
+        counts
+            .iter()
+            .find(|(st, _, _)| st.as_str() == want)
+            .map_or(0, |c| c.2)
+    };
+    assert_eq!(
+        (status_of("missing"), status_of("empty"), status_of("live")),
+        (1, 1, 0),
+        "a fetch that finds no board, or no jobs, says so"
+    );
+}

@@ -49,7 +49,7 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "One `loker discover` run: boards found, then unchecked boards asked about.",
+  "description": "One `loker discover` run: boards found, then unchecked and due boards asked about.",
   "properties": {
     "boards": {
       "$ref": "#/$defs/BoardTally",
@@ -57,7 +57,7 @@
     },
     "checked": {
       "$ref": "#/$defs/BoardTally",
-      "description": "Boards asked about in this run, by what their ATS answered; `failed` got no answer and is asked again next run."
+      "description": "Boards asked about in this run (new ones and re-checks), by what their ATS answered now; `failed` got no answer and is asked again next run."
     },
     "contractVersion": {
       "format": "uint32",

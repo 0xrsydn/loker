@@ -194,6 +194,17 @@ impl Source {
     }
 }
 
+impl Source {
+    pub fn board(&self) -> Option<Board> {
+        match self {
+            Source::Ashby(slug) => Board::new(Ats::Ashby, slug),
+            Source::Greenhouse(slug) => Board::new(Ats::Greenhouse, slug),
+            Source::Lever(slug) => Board::new(Ats::Lever, slug),
+            _ => None,
+        }
+    }
+}
+
 impl From<&Board> for Source {
     fn from(b: &Board) -> Self {
         match b.ats {
@@ -401,9 +412,15 @@ async fn store_fetched(
     fetched: Result<Fetched>,
 ) -> Result<IngestStats> {
     let source = Source::parse(source)?;
+    let board = source.board();
     let f = match fetched {
         Ok(f) => f,
         Err(Error::Internal(e)) => {
+            if let Some(board) = &board
+                && not_found(&e)
+            {
+                store.record_board_fetch(board, None).await?;
+            }
             store
                 .record_failure(&source.id(), &format!("{e:#}"))
                 .await?;
@@ -411,6 +428,9 @@ async fn store_fetched(
         }
         Err(e) => return Err(e),
     };
+    if let Some(board) = &board {
+        store.record_board_fetch(board, Some(f.raw_count)).await?;
+    }
     let meta = SourceMeta {
         id: source.id(),
         kind: source.kind(),
@@ -692,15 +712,15 @@ async fn get_json_within(
 async fn get_json_unless_missing(client: &HttpClient, url: &str) -> anyhow::Result<Option<Value>> {
     match get_json(client, url).await {
         Ok(v) => Ok(Some(v)),
-        Err(e)
-            if e.downcast_ref::<reqwest::Error>()
-                .and_then(reqwest::Error::status)
-                == Some(reqwest::StatusCode::NOT_FOUND) =>
-        {
-            Ok(None)
-        }
+        Err(e) if not_found(&e) => Ok(None),
         Err(e) => Err(e),
     }
+}
+
+fn not_found(e: &anyhow::Error) -> bool {
+    e.downcast_ref::<reqwest::Error>()
+        .and_then(reqwest::Error::status)
+        == Some(reqwest::StatusCode::NOT_FOUND)
 }
 
 async fn get_text(client: &HttpClient, url: &str) -> anyhow::Result<String> {

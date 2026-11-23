@@ -1049,11 +1049,11 @@ pub struct DiscoverParams {
     /// Read a crawl again although it was read before.
     #[serde(default)]
     pub again: bool,
-    /// Check at most this many unchecked boards against their ATS, oldest found first; default all, 0 checks none.
+    /// Check at most this many boards against their ATS: unchecked ones first (oldest found first), then any last checked over 7 days ago (or fetched by ingest), oldest first; default all, 0 checks none.
     pub check: Option<u32>,
 }
 
-/// One `loker discover` run: boards found, then unchecked boards asked about.
+/// One `loker discover` run: boards found, then unchecked and due boards asked about.
 #[derive(Debug, Clone, Serialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoverReport {
@@ -1068,7 +1068,7 @@ pub struct DiscoverReport {
     pub new: u32,
     /// URLs or lines that name no board.
     pub unreadable: u32,
-    /// Boards asked about in this run, by what their ATS answered; `failed` got no answer and is asked again next run.
+    /// Boards asked about in this run (new ones and re-checks), by what their ATS answered now; `failed` got no answer and is asked again next run.
     pub checked: BoardTally,
     /// Every board loker knows, by status; `failed` counts unchecked boards whose last check got no answer.
     pub boards: BoardTally,
