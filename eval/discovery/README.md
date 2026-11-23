@@ -66,9 +66,12 @@ What the name can't fix:
   Only", "Stone - Linkedin", "Home Chef (Internal Employees)"). Their name
   is the board's purpose, not the company, and internal jobs aren't open to
   the reader. Since fixed: such a board is `private` and not ingested; the
-  rule marks 26 of these boards (961 jobs) and no other.
+  rule marks 28 of these boards (about 1,000 jobs) and no other.
 - **Careers-page decoration (about 36):** "Kaseya Careers", "Careers at
-  Eucalyptus", "Astera Labs Early Career".
+  Eucalyptus", "Astera Labs Early Career". Since fixed: 42 names lose the
+  wording or stray punctuation ("Seso Inc.," is "Seso Inc."); taglines after
+  a dash ("Cognite - AI for Industry") stay, since a dash is also part of
+  real names.
 - **One name, several boards (40 names, 82 boards):** the same company on
   two ATSs after a move (Ramp: 187 jobs on Ashby, 1 left on Greenhouse;
   Kalshi, Miro, Etched) or two boards on one (BetterHelp), and different

@@ -133,7 +133,42 @@ const PRIVATE_BOARD_PHRASES: &[&str] = &[
     "do not use",
 ];
 
+const NAME_PREFIXES: &[&str] = &["careers at ", "jobs at ", "working at ", "work at "];
+
+const NAME_SUFFIXES: &[&str] = &[
+    "career opportunities",
+    "careers marketplace",
+    "careers page",
+    "careers site",
+    "career site",
+    "early careers",
+    "early career",
+    "company website",
+    "job board",
+    "jobs board",
+    "careers",
+];
+
+const NAME_EDGES: &[char] = &[' ', '-', '|', ':', ',', '`', '\'', '"', '·', '–', '—'];
+
 impl Company {
+    pub fn new(name: &str, website: Option<&str>) -> Option<Company> {
+        let name = crate::normalize::decode_entities(name.trim());
+        let cleaned = clean_name(&name);
+        let name = if cleaned.is_empty() {
+            name.trim_matches(NAME_EDGES).to_string()
+        } else {
+            cleaned
+        };
+        (!name.is_empty()).then(|| Company {
+            name,
+            website: website
+                .map(str::trim)
+                .filter(|w| w.starts_with("http"))
+                .map(String::from),
+        })
+    }
+
     pub fn names_a_private_board(&self) -> bool {
         let words: Vec<String> = self
             .name
@@ -145,10 +180,34 @@ impl Company {
         let text = format!(" {} ", words.join(" "));
         text != " linkedin "
             && (text.ends_with(" internal ")
+                || text.ends_with(" private ")
                 || PRIVATE_BOARD_PHRASES
                     .iter()
                     .any(|p| text.contains(&format!(" {p} "))))
     }
+}
+
+fn clean_name(name: &str) -> String {
+    let mut name = name.trim_matches(NAME_EDGES);
+    let lower = name.to_lowercase();
+    if let Some(p) = NAME_PREFIXES.iter().find(|p| lower.starts_with(**p))
+        && lower.len() == name.len()
+    {
+        name = name[p.len()..].trim_matches(NAME_EDGES);
+    }
+    loop {
+        let lower = name.to_lowercase();
+        let Some(suffix) = NAME_SUFFIXES.iter().find(|s| {
+            lower.len() == name.len()
+                && lower.strip_suffix(**s).is_some_and(|rest| {
+                    rest.is_empty() || rest.ends_with(|c: char| !c.is_alphanumeric())
+                })
+        }) else {
+            break;
+        };
+        name = name[..name.len() - suffix.len()].trim_matches(NAME_EDGES);
+    }
+    name.to_string()
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
@@ -348,6 +407,8 @@ mod tests {
             ("Scout Motors Talent Community", true),
             ("EVG Hidden (Job Links Only)", true),
             ("Businessolver - Invitation Only Job Board", true),
+            ("Campus Private Job Board", true),
+            ("Internal Job Board", true),
             ("LinkedIn", false),
             ("HiddenLayer", false),
             ("SandboxAQ", false),
@@ -356,11 +417,37 @@ mod tests {
             ("Human Agency", false),
         ];
         for (name, private) in cases {
-            let company = Company {
-                name: name.to_string(),
-                website: None,
-            };
+            let company = Company::new(name, None).unwrap();
             assert_eq!(company.names_a_private_board(), private, "{name}");
+        }
+    }
+
+    #[test]
+    fn a_company_name_loses_its_careers_page_wording() {
+        let cases = [
+            ("Kaseya Careers", Some("Kaseya")),
+            ("Careers at Eucalyptus", Some("Eucalyptus")),
+            ("Five Rings LLC - Careers", Some("Five Rings LLC")),
+            (
+                "Eye Care Partners Career Opportunities",
+                Some("Eye Care Partners"),
+            ),
+            (
+                "Alpha Financial Markets Consulting - Early Careers",
+                Some("Alpha Financial Markets Consulting"),
+            ),
+            ("LP Careers Page", Some("LP")),
+            ("Raft Company Website", Some("Raft")),
+            ("Cobblestone Energy`", Some("Cobblestone Energy")),
+            ("AT&amp;T", Some("AT&T")),
+            ("Careers", Some("Careers")),
+            ("Bluecareers", Some("Bluecareers")),
+            ("MrBeast Contract Jobs", Some("MrBeast Contract Jobs")),
+            ("  ", None),
+        ];
+        for (raw, want) in cases {
+            let got = Company::new(raw, None).map(|c| c.name);
+            assert_eq!(got.as_deref(), want, "{raw}");
         }
     }
 

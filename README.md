@@ -163,7 +163,8 @@ or talent-community board, or a LinkedIn mirror, told by its name). Each board i
 count once: Ashby and Greenhouse slugs ignore case, Lever's don't
 (`lever:Palantir` is not `lever:palantir`). Slugs keep their spaces (`ashby:Hippocratic AI`),
 and a check stores the spelling the ATS itself uses, with the company's name
-(`agiholdings` is "American Growth Insurance") and, from Ashby, its website.
+(`agiholdings` is "American Growth Insurance", "Kaseya Careers" is "Kaseya")
+and, from Ashby, its website.
 Discovered boards' jobs carry that name. A board whose check gets no answer is
 asked again on the next run.
 

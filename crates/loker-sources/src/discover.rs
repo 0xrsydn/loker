@@ -5,7 +5,6 @@ use loker_core::api::{
     BoardTally, CONTRACT_VERSION, DiscoverParams, DiscoverReport, Error, Result,
 };
 use loker_core::board::{Ats, Board, BoardCheck, BoardStatus, Company};
-use loker_core::normalize::decode_entities;
 use loker_core::store::Store;
 use serde_json::Value;
 
@@ -231,12 +230,7 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
             let company = jobs
                 .iter()
                 .find_map(|j| j.get("company_name")?.as_str())
-                .map(|name| decode_entities(name.trim()))
-                .filter(|name| !name.is_empty())
-                .map(|name| Company {
-                    name,
-                    website: None,
-                });
+                .and_then(|name| Company::new(name, None));
             Ok(BoardCheck::answered(
                 board.slug.to_lowercase(),
                 !jobs.is_empty(),
@@ -291,24 +285,14 @@ pub fn ashby_organization(html: &str) -> Option<Company> {
         .next()?
         .ok()?;
     let org = app.get("organization")?;
-    let name = org.get("name")?.as_str()?.trim();
-    let website = org
-        .get("publicWebsite")
-        .and_then(Value::as_str)
-        .map(str::trim)
-        .filter(|w| w.starts_with("http"));
-    (!name.is_empty()).then(|| Company {
-        name: name.to_string(),
-        website: website.map(String::from),
-    })
+    Company::new(
+        org.get("name")?.as_str()?,
+        org.get("publicWebsite").and_then(Value::as_str),
+    )
 }
 
 pub fn page_title(html: &str) -> Option<Company> {
     let start = html.find("<title>")? + "<title>".len();
     let end = start + html[start..].find("</title>")?;
-    let name = decode_entities(html[start..end].trim());
-    (!name.is_empty()).then_some(Company {
-        name,
-        website: None,
-    })
+    Company::new(&html[start..end], None)
 }

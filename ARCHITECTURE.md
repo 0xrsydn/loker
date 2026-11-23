@@ -166,8 +166,11 @@ the public (`Company::names_a_private_board`: internal, referral-only,
 alumni, talent-community, LinkedIn or third-party mirror) is `private`, and
 never ingested: its jobs are closed to the reader, or copies of a main
 board's under another name. The phrases are whole words, so "HiddenLayer"
-and "SandboxAQ" stay live; on the 2026-11-23 check they marked 26 boards,
-all correctly (eval/discovery).
+and "SandboxAQ" stay live; on the 2026-11-23 check they marked 28 boards,
+all correctly (eval/discovery). The name is cleaned before both uses
+(`Company::new`): entities decoded, careers-page wording dropped ("Kaseya
+Careers", "Careers at Tide", "LP Careers Page"), stray edge punctuation
+trimmed; a name that would become empty is kept as it was.
 With `[discovery] ingest = true`, `ingest --all` adds every `live` board whose
 key config.toml doesn't list, after the configured sources.
 
