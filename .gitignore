@@ -7,3 +7,4 @@
 /.loker-dev
 __pycache__/
 eval/**/*.log
+.amp/portals/*

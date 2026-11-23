@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+step() {
+  local name="$1"
+  shift
+  echo "==> $name"
+  local start=$SECONDS
+  "$@"
+  echo "<== $name ($((SECONDS - start))s)"
+}
+
+nix_profile="$HOME/.nix-profile"
+
+install_nix() {
+  if [[ -x "$nix_profile/bin/nix" ]]; then
+    "$nix_profile/bin/nix" --version
+    return
+  fi
+  curl -fsSL https://nixos.org/nix/install -o /tmp/nix-install
+  sh /tmp/nix-install --no-daemon --yes
+  rm -f /tmp/nix-install
+}
+
+configure_nix() {
+  mkdir -p "$HOME/.config/nix"
+  cat > "$HOME/.config/nix/nix.conf" <<'EOF'
+experimental-features = nix-command flakes
+accept-flake-config = false
+extra-substituters = https://cache.rasyidanaf.com/loker-nix-cache
+extra-trusted-public-keys = loker-ci-1:uzoeDmTAwNEvZTMuCmd28RZngImk4Oj5L9zS0WvohX4=
+fallback = true
+EOF
+}
+
+persist_dev_shell() {
+  local marker="# loker Nix development shell"
+  if grep -Fqx "$marker" "$HOME/.bash_profile" 2>/dev/null; then
+    return
+  fi
+  cat >> "$HOME/.bash_profile" <<EOF
+
+$marker
+if [[ -z "\${IN_NIX_SHELL:-}" && ( "\$PWD" == "$repo_root" || "\$PWD" == "$repo_root"/* ) ]]; then
+  eval "\$("$nix_profile/bin/nix" print-dev-env "$repo_root")"
+  export LOKER_HOME="$repo_root/.loker-dev"
+fi
+EOF
+}
+
+step "install nix" install_nix
+step "configure nix" configure_nix
+
+# shellcheck disable=SC1091
+source "$nix_profile/etc/profile.d/nix.sh"
+
+step "realize dev shell" bash -c 'nix print-dev-env . > /tmp/loker-dev-env.sh'
+# shellcheck disable=SC1091
+source /tmp/loker-dev-env.sh
+rm -f /tmp/loker-dev-env.sh
+export LOKER_HOME="$repo_root/.loker-dev"
+
+step "persist dev shell in ~/.bash_profile" persist_dev_shell
+step "cargo fetch" cargo fetch --locked
+step "build tests" cargo test --workspace --no-run --locked
+step "clippy" cargo clippy --all-targets --locked -- -D warnings
