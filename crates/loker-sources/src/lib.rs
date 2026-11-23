@@ -688,27 +688,81 @@ async fn get_text_within(
     timeout: Option<std::time::Duration>,
 ) -> anyhow::Result<String> {
     use anyhow::Context;
-    const ATTEMPTS: u32 = 3;
+    const ATTEMPTS: u32 = 4;
+    let host = reqwest::Url::parse(url)
+        .ok()
+        .and_then(|u| u.host_str().map(String::from))
+        .unwrap_or_default();
     let mut attempt = 1;
     loop {
+        wait_out_cooldown(&host).await;
         let mut req = client.get(url);
         if let Some(t) = timeout {
             req = req.timeout(t);
         }
+        let backoff = Duration::from_secs(2u64.pow(attempt));
         let result = async {
-            let resp = req.send().await?.error_for_status()?;
-            resp.text().await
+            let resp = req.send().await?;
+            if attempt < ATTEMPTS && slowed_down(resp.status()) {
+                return Ok(Err(retry_after(resp.headers()).unwrap_or(backoff)));
+            }
+            resp.error_for_status()?.text().await.map(Ok)
         }
         .await;
         match result {
-            Ok(v) => return Ok(v),
+            Ok(Ok(v)) => return Ok(v),
+            Ok(Err(wait)) => {
+                let wait = wait.min(MAX_COOLDOWN);
+                tracing::warn!(%url, attempt, "the host asked us to slow down; pausing it for {wait:?}");
+                cool_down(&host, wait);
+                attempt += 1;
+            }
             Err(e) if attempt < ATTEMPTS && transient(&e) => {
                 tracing::warn!(%url, attempt, "retrying after a network error: {e}");
-                tokio::time::sleep(std::time::Duration::from_secs(2u64.pow(attempt))).await;
+                tokio::time::sleep(backoff).await;
                 attempt += 1;
             }
             Err(e) => return Err(e).with_context(|| format!("GET {url}")),
         }
+    }
+}
+
+pub const MAX_COOLDOWN: Duration = Duration::from_secs(120);
+
+static COOLDOWNS: std::sync::LazyLock<std::sync::Mutex<HashMap<String, Instant>>> =
+    std::sync::LazyLock::new(Default::default);
+
+fn slowed_down(status: reqwest::StatusCode) -> bool {
+    status == reqwest::StatusCode::TOO_MANY_REQUESTS
+        || status == reqwest::StatusCode::SERVICE_UNAVAILABLE
+}
+
+fn retry_after(headers: &reqwest::header::HeaderMap) -> Option<Duration> {
+    let secs: u64 = headers
+        .get(reqwest::header::RETRY_AFTER)?
+        .to_str()
+        .ok()?
+        .trim()
+        .parse()
+        .ok()?;
+    Some(Duration::from_secs(secs.max(1)))
+}
+
+fn cool_down(host: &str, wait: Duration) {
+    let until = Instant::now() + wait;
+    let mut all = COOLDOWNS.lock().unwrap_or_else(|e| e.into_inner());
+    let entry = all.entry(host.to_string()).or_insert(until);
+    *entry = (*entry).max(until);
+}
+
+async fn wait_out_cooldown(host: &str) {
+    let until = COOLDOWNS
+        .lock()
+        .unwrap_or_else(|e| e.into_inner())
+        .get(host)
+        .copied();
+    if let Some(until) = until {
+        tokio::time::sleep_until(until).await;
     }
 }
 

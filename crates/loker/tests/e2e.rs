@@ -42,7 +42,18 @@ fn stub() -> Stub {
             let mut body = vec![0u8; length];
             let _ = stream.read_exact(&mut body);
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
-            served.lock().unwrap().push(target.clone());
+            let times = {
+                let mut served = served.lock().unwrap();
+                served.push(target.clone());
+                served.iter().filter(|t| **t == target).count()
+            };
+            if target.starts_with("/v1/boards/throttled/jobs") && times == 1 {
+                let _ = write!(
+                    stream,
+                    "HTTP/1.1 429 Too Many Requests\r\nRetry-After: 1\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
+                );
+                continue;
+            }
             if let Some(bytes) = cc_block(&target) {
                 let _ = write!(
                     stream,
@@ -129,7 +140,9 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         }
         "/jobs/api/search" => ("200 OK", json!({ "jobs": [] })),
         "/jobs/api" => ("200 OK", json!({ "jobs": himalayas(), "nextCursor": null })),
-        "/v1/boards/acme/jobs" => ("200 OK", json!({ "jobs": greenhouse() })),
+        "/v1/boards/acme/jobs" | "/v1/boards/throttled/jobs" => {
+            ("200 OK", json!({ "jobs": greenhouse() }))
+        }
         "/v1/boards/broken/jobs" => ("500 Internal Server Error", json!({ "error": "boom" })),
         "/posting-api/job-board/globex" => {
             let mut jobs = ashby();
@@ -879,6 +892,24 @@ fn an_ashby_slug_keeps_its_spaces_and_case() {
     assert!(r["new"].as_u64().unwrap() > 0, "{r:#}");
     let bad = home.run(&["ingest", "ashby:a/b", "--json"]);
     assert!(!bad.status.success(), "a slash is never part of a slug");
+}
+
+#[test]
+fn a_host_that_asks_to_slow_down_is_paused_then_asked_again() {
+    let stub = stub();
+    let home = Home::new("throttled", &stub);
+    let started = std::time::Instant::now();
+    let r = home.ingest("greenhouse:throttled");
+    assert!(r["new"].as_u64().unwrap() > 0, "{r:#}");
+    assert!(started.elapsed() >= std::time::Duration::from_secs(1));
+    let asked = stub
+        .log
+        .lock()
+        .unwrap()
+        .iter()
+        .filter(|t| t.starts_with("/v1/boards/throttled/jobs"))
+        .count();
+    assert_eq!(asked, 2);
 }
 
 #[test]

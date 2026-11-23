@@ -75,6 +75,8 @@ an error, so a typo never silently disables a source.
 `loker ingest --all` fetches every enabled source, several at once: at most
 4 fetches in flight to one API host (all Greenhouse boards share one), started
 at least 250 ms apart, so hundreds of company boards take minutes, not hours.
+A host that answers 429 or 503 is paused for its `Retry-After` (at most two
+minutes) before anything else is sent to it.
 The report lists sources in config order. One failing source doesn't stop the
 others, and the exit status is non-zero if any failed.
 `loker verify` checks the same sources with the same parameters, the same way.

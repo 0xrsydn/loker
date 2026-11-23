@@ -139,7 +139,10 @@ the viewer's country must never be stricter than the verdict.
 
 **Fetching.** `ingest --all` and `verify` fetch concurrently, limited per API
 host (`Source::host`): `FETCHES_PER_HOST` in flight, starts `HOST_START_GAP`
-apart. Every Greenhouse board is one host, every Ashby board another. Writes
+apart. Every Greenhouse board is one host, every Ashby board another. A 429 or
+503 pauses the whole host (`COOLDOWNS`, keyed by URL host, for `Retry-After`
+or an exponential backoff, capped at `MAX_COOLDOWN`), since the limit is on
+us, not on the one request; the request is asked again, up to four times. Writes
 stay on one task, in the order fetches finish; that is safe because dedup
 depends only on what is stored, never on ingest order. Pauses between pages
 of one source (Himalayas, Workable, YC) stay in the adapter.
