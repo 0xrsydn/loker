@@ -4,12 +4,13 @@ use std::path::Path;
 use loker_core::api::{
     BoardTally, CONTRACT_VERSION, DiscoverParams, DiscoverReport, Error, Result,
 };
-use loker_core::board::{Ats, Board, BoardCheck, BoardStatus};
+use loker_core::board::{Ats, Board, BoardCheck, BoardStatus, Company};
+use loker_core::normalize::decode_entities;
 use loker_core::store::Store;
 use serde_json::Value;
 
 use crate::{
-    HttpClient, Paced, Source, commoncrawl, get_json_unless_missing, joined, segment, url,
+    HttpClient, Paced, Source, commoncrawl, get_json_unless_missing, get_text, joined, segment, url,
 };
 
 const ERRORS_SHOWN: usize = 10;
@@ -168,19 +169,18 @@ async fn tally(store: &Store) -> Result<BoardTally> {
 
 pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<BoardCheck> {
     let slug = segment(&board.slug);
+    let status = |live: bool| {
+        if live {
+            BoardStatus::Live
+        } else {
+            BoardStatus::Empty
+        }
+    };
     let missing = BoardCheck {
         slug: board.slug.clone(),
         status: BoardStatus::Missing,
         jobs: None,
-    };
-    let counted = |slug: String, jobs: usize| BoardCheck {
-        slug,
-        status: if jobs > 0 {
-            BoardStatus::Live
-        } else {
-            BoardStatus::Empty
-        },
-        jobs: Some(jobs as u32),
+        company: None,
     };
     match board.ats {
         Ats::Ashby => {
@@ -206,7 +206,21 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
                 .filter_map(Board::from_url)
                 .find(|b| b.key() == board.key())
                 .map_or_else(|| board.slug.clone(), |b| b.slug);
-            Ok(counted(spelled, jobs.len()))
+            let company = if jobs.is_empty() {
+                None
+            } else {
+                let page = url(
+                    "https://jobs.ashbyhq.com",
+                    &format!("/{}", segment(&spelled)),
+                );
+                page_company(client, &page, ashby_organization).await
+            };
+            Ok(BoardCheck {
+                slug: spelled,
+                status: status(!jobs.is_empty()),
+                jobs: Some(jobs.len() as u32),
+                company,
+            })
         }
         Ats::Greenhouse => {
             let api = url(
@@ -219,8 +233,23 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
             let jobs = body
                 .get("jobs")
                 .and_then(Value::as_array)
-                .map_or(0, Vec::len);
-            Ok(counted(board.slug.to_lowercase(), jobs))
+                .map(Vec::as_slice)
+                .unwrap_or_default();
+            let company = jobs
+                .iter()
+                .find_map(|j| j.get("company_name")?.as_str())
+                .map(|name| decode_entities(name.trim()))
+                .filter(|name| !name.is_empty())
+                .map(|name| Company {
+                    name,
+                    website: None,
+                });
+            Ok(BoardCheck {
+                slug: board.slug.to_lowercase(),
+                status: status(!jobs.is_empty()),
+                jobs: Some(jobs.len() as u32),
+                company,
+            })
         }
         Ats::Lever => {
             let api = url(
@@ -230,16 +259,63 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
             let Some(body) = get_json_unless_missing(client, &api).await? else {
                 return Ok(missing);
             };
-            let any = body.as_array().is_some_and(|a| !a.is_empty());
+            let live = body.as_array().is_some_and(|a| !a.is_empty());
+            let company = if live {
+                let page = url("https://jobs.lever.co", &format!("/{slug}"));
+                page_company(client, &page, page_title).await
+            } else {
+                None
+            };
             Ok(BoardCheck {
                 slug: board.slug.clone(),
-                status: if any {
-                    BoardStatus::Live
-                } else {
-                    BoardStatus::Empty
-                },
+                status: status(live),
                 jobs: None,
+                company,
             })
         }
     }
+}
+
+async fn page_company(
+    client: &HttpClient,
+    page: &str,
+    read: fn(&str) -> Option<Company>,
+) -> Option<Company> {
+    match get_text(client, page).await {
+        Ok(html) => read(&html),
+        Err(e) => {
+            tracing::warn!(%page, "no company name from the board page: {e}");
+            None
+        }
+    }
+}
+
+pub fn ashby_organization(html: &str) -> Option<Company> {
+    let marker = "window.__appData = ";
+    let data = &html[html.find(marker)? + marker.len()..];
+    let app: Value = serde_json::Deserializer::from_str(data)
+        .into_iter()
+        .next()?
+        .ok()?;
+    let org = app.get("organization")?;
+    let name = org.get("name")?.as_str()?.trim();
+    let website = org
+        .get("publicWebsite")
+        .and_then(Value::as_str)
+        .map(str::trim)
+        .filter(|w| w.starts_with("http"));
+    (!name.is_empty()).then(|| Company {
+        name: name.to_string(),
+        website: website.map(String::from),
+    })
+}
+
+pub fn page_title(html: &str) -> Option<Company> {
+    let start = html.find("<title>")? + "<title>".len();
+    let end = start + html[start..].find("</title>")?;
+    let name = decode_entities(html[start..end].trim());
+    (!name.is_empty()).then_some(Company {
+        name,
+        website: None,
+    })
 }

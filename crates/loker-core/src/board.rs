@@ -71,6 +71,13 @@ pub struct BoardCheck {
     pub slug: String,
     pub status: BoardStatus,
     pub jobs: Option<u32>,
+    pub company: Option<Company>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Company {
+    pub name: String,
+    pub website: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]

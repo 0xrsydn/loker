@@ -161,8 +161,10 @@ asks each new board's API whether it exists: `live` (open jobs), `empty`, or
 `missing`. Each board is stored under a key, so two spellings of one board
 count once: Ashby and Greenhouse slugs ignore case, Lever's don't
 (`lever:Palantir` is not `lever:palantir`). Slugs keep their spaces (`ashby:Hippocratic AI`),
-and a check stores the spelling the ATS itself uses. A board whose check
-gets no answer is asked again on the next run.
+and a check stores the spelling the ATS itself uses, with the company's name
+(`agiholdings` is "American Growth Insurance") and, from Ashby, its website.
+Discovered boards' jobs carry that name. A board whose check gets no answer is
+asked again on the next run.
 
 ```sh
 cargo run -- discover                     # Common Crawl's newest crawl, then check every new board

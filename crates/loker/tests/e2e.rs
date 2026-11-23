@@ -157,6 +157,17 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         "/posting-api/job-board/Hippocratic%20AI" => {
             ("200 OK", json!({ "apiVersion": "1", "jobs": ashby() }))
         }
+        "/globex" => (
+            "200 OK",
+            Value::String(format!(
+                "<html><script>window.__appData = {};\n</script></html>",
+                json!({ "organization": {
+                    "name": "Globex Corporation",
+                    "publicWebsite": "https://globex.example",
+                    "isDemoOrg": false
+                }})
+            )),
+        ),
         "/collinfo.json" => ("200 OK", json!([{ "id": "CC-MAIN-2026-43" }])),
         CC_CLUSTER => ("200 OK", Value::String(cc_cluster())),
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
@@ -1019,6 +1030,11 @@ fn ingest_all_takes_live_discovered_boards_not_already_listed() {
         "a listed board isn't fetched twice, an empty one not at all, and Ashby's spelling wins"
     );
     assert_eq!(report["ok"], true, "{report:#}");
+    let r = home.json(&["search", "support", "--json"]);
+    assert_eq!(
+        r["jobs"][0]["company"], "Globex Corporation",
+        "the name on the board's own page replaces Ashby's slug"
+    );
 }
 
 #[test]

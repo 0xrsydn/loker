@@ -1068,6 +1068,21 @@ impl Store {
             .collect())
     }
 
+    pub async fn live_boards(&self) -> anyhow::Result<Vec<(Board, Option<String>)>> {
+        let rows = sqlx::query(
+            "SELECT ats, slug, name FROM boards WHERE status = 'live' ORDER BY first_found, key",
+        )
+        .fetch_all(&self.pool)
+        .await?;
+        Ok(rows
+            .iter()
+            .filter_map(|r| {
+                let board = Board::new(Ats::parse(r.get::<&str, _>("ats"))?, r.get("slug"))?;
+                Some((board, r.get("name")))
+            })
+            .collect())
+    }
+
     pub async fn record_board_check(
         &self,
         board: &Board,
@@ -1075,11 +1090,13 @@ impl Store {
     ) -> anyhow::Result<()> {
         match check {
             Ok(c) => sqlx::query(
-                "UPDATE boards SET slug = ?, status = ?, jobs = ?, checked_at = ?, error = NULL WHERE key = ?",
+                "UPDATE boards SET slug = ?, status = ?, jobs = ?, name = ?, website = ?, checked_at = ?, error = NULL WHERE key = ?",
             )
             .bind(&c.slug)
             .bind(c.status.as_str())
             .bind(c.jobs.map(i64::from))
+            .bind(c.company.as_ref().map(|c| c.name.as_str()))
+            .bind(c.company.as_ref().and_then(|c| c.website.as_deref()))
             .bind(now())
             .bind(board.key())
             .execute(&self.pool)

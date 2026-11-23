@@ -8,7 +8,7 @@ use loker_core::api::{
     GetJobsResult, IngestAllReport, IngestParams, RoleEnrichReport, RolesResult, SearchParams,
     SearchResult, SourcesEval, Stats, VerifyParams, VerifyReport,
 };
-use loker_core::board::{Board, BoardStatus};
+use loker_core::board::Board;
 use loker_core::config::{self, Config};
 use loker_core::home::db_path;
 use loker_core::model::IngestStats;
@@ -142,12 +142,13 @@ impl App {
             .collect();
         Ok(self
             .store
-            .boards_with_status(BoardStatus::Live, None)
+            .live_boards()
             .await?
             .into_iter()
-            .filter(|b| !declared.contains(&b.key()))
-            .map(|b| IngestParams {
+            .filter(|(b, _)| !declared.contains(&b.key()))
+            .map(|(b, company)| IngestParams {
                 source: b.to_string(),
+                company,
                 ..Default::default()
             })
             .collect())

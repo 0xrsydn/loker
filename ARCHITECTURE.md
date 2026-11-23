@@ -155,7 +155,13 @@ its ATS's API (`discover::check_board`, paced like ingest), so a finder can be
 noisy without being wrong: it decides coverage, never correctness. A check
 that gets no answer leaves the board `unchecked` with its error, to be asked
 again. The check also stores the ATS's own spelling of the slug (Ashby's
-`jobUrl`; Greenhouse lower case).
+`jobUrl`; Greenhouse lower case) and, for a live board, the company as the
+ATS names it (`board::Company`): Greenhouse's `company_name` from the same
+answer; for Ashby and Lever, whose APIs carry no company, one more request to
+the board's own page (the organization in Ashby's `window.__appData`, with its
+website; Lever's `<title>`). A failed page leaves the name empty, not the
+check failed. `ingest --all` passes the name as the board's `company`, as a
+configured `company` would.
 With `[discovery] ingest = true`, `ingest --all` adds every `live` board whose
 key config.toml doesn't list, after the configured sources.
 
