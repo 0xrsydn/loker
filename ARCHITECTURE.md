@@ -380,8 +380,16 @@ Combinator's 429.
   result's URL goes through `Board::from_url` like a file's lines; titles
   and excerpts are ignored, since the check names the company. A failed
   query is reported and the rest still run; only all failing fails the run.
-  Unlike a crawl, a search isn't read once: each run asks again, and the
-  finder is just `exa` or `parallel`.
+  A board's finder is `exa` or `parallel`; each query sent is a
+  `discovery_runs` row (`exa:<query>`, lower case, spaces collapsed), so it
+  isn't paid for twice. The engine is the only one that knows what else it
+  has, so loker sends what it knows instead: each request's exclude list
+  (`Store::search_exclusions`) holds boards any search returned, newest
+  first, then live boards by job count, cut to the engine's cap, as one path
+  per board on its main host (`websearch::board_path`). A board on another
+  host (`boards.greenhouse.io`) can still come back; it's only counted
+  again. Excluding helps more than it seems: the boards searches find are
+  the ones they find again, while most crawl-only boards never come up.
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.

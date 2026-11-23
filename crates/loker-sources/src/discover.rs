@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 use std::path::Path;
 
 use loker_core::api::{
-    BoardTally, CONTRACT_VERSION, DiscoverParams, DiscoverReport, Error, Result,
+    BoardTally, CONTRACT_VERSION, DiscoverParams, DiscoverReport, Error, Result, SearchTally,
 };
 use loker_core::board::{Ats, Board, BoardCheck, BoardStatus, Company};
 use loker_core::store::Store;
@@ -68,30 +68,67 @@ pub async fn discover(
     let engine = Engine::parse(&p.from);
     if p.from != "commoncrawl" {
         only("crawl", p.crawl.is_some(), "commoncrawl")?;
-        only("again", p.again, "commoncrawl")?;
     }
     if engine.is_none() {
         only("queries", !p.queries.is_empty(), "exa and parallel")?;
+        if p.from != "commoncrawl" {
+            only("again", p.again, "commoncrawl, exa and parallel")?;
+        }
     }
     let mut cost_usd = None;
+    let mut search = None;
+    let mut ran = Vec::new();
     let mut errors = Vec::new();
     let (candidates, skipped) = match (p.from.as_str(), engine) {
         (_, Some(engine)) => {
-            let key = std::env::var(engine.key_var())
-                .ok()
-                .filter(|k| !k.is_empty())
-                .ok_or_else(|| Error::Invalid(format!("{} is not set", engine.key_var())))?;
-            let queries = if p.queries.is_empty() {
+            let mut asked = if p.queries.is_empty() {
                 DEFAULT_QUERIES.map(String::from).to_vec()
             } else {
                 p.queries.clone()
             };
-            let searched = websearch::candidates(client, engine, &key, &queries)
-                .await
-                .map_err(Error::Internal)?;
-            cost_usd = searched.cost_usd;
-            errors = searched.errors;
-            (searched.candidates, false)
+            let mut seen = std::collections::HashSet::new();
+            asked.retain(|q| seen.insert(engine.query_finder(q)));
+            let total = asked.len();
+            let mut queries = Vec::new();
+            for q in asked {
+                if p.again || !store.discovered(&engine.query_finder(&q)).await? {
+                    queries.push(q);
+                }
+            }
+            let skipped_queries = (total - queries.len()) as u32;
+            if queries.is_empty() {
+                search = Some(SearchTally {
+                    run: 0,
+                    skipped: skipped_queries,
+                    excluded: 0,
+                });
+                (Candidates::collect(engine.name().to_string(), []), true)
+            } else {
+                let key = std::env::var(engine.key_var())
+                    .ok()
+                    .filter(|k| !k.is_empty())
+                    .ok_or_else(|| Error::Invalid(format!("{} is not set", engine.key_var())))?;
+                let finders = Engine::ALL.map(Engine::name);
+                let known = store
+                    .search_exclusions(&finders, engine.exclude_cap())
+                    .await?;
+                let searched = websearch::candidates(client, engine, &key, &queries, known)
+                    .await
+                    .map_err(Error::Internal)?;
+                search = Some(SearchTally {
+                    run: searched.ran.len() as u32,
+                    skipped: skipped_queries,
+                    excluded: searched.excluded,
+                });
+                ran = searched
+                    .ran
+                    .into_iter()
+                    .map(|(q, n)| (engine.query_finder(&q), n))
+                    .collect();
+                cost_usd = searched.cost_usd;
+                errors = searched.errors;
+                (searched.candidates, false)
+            }
         }
         ("commoncrawl", None) => {
             let crawl = match p.crawl {
@@ -133,6 +170,9 @@ pub async fn discover(
         store
             .finish_discovery(&candidates.finder, candidates.boards.len() as u32)
             .await?;
+        for (finder, found) in &ran {
+            store.finish_discovery(finder, *found).await?;
+        }
         new
     };
     let (checked, check_errors) = check_due(store, client, p.check).await?;
@@ -146,6 +186,7 @@ pub async fn discover(
         new,
         unreadable: candidates.unreadable,
         cost_usd,
+        search,
         checked,
         boards: tally(store).await?,
         errors,

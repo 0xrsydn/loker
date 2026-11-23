@@ -4,7 +4,7 @@
   "properties": {
     "again": {
       "default": false,
-      "description": "Read a crawl again although it was read before.",
+      "description": "Read a crawl, or send a search query, again although an earlier run did.",
       "type": "boolean"
     },
     "check": {

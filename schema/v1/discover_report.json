@@ -46,6 +46,34 @@
         "failed"
       ],
       "type": "object"
+    },
+    "SearchTally": {
+      "properties": {
+        "excluded": {
+          "description": "Known boards the first search was told to leave out, up to the engine's cap (Exa 1,200, Parallel 197): those earlier searches returned, newest first, then live boards with the most jobs. Each query also leaves out what the ones before it found.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "run": {
+          "description": "Queries sent in this run.",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "skipped": {
+          "description": "Queries an earlier run sent, not sent again (`again` sends them).",
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "run",
+        "skipped",
+        "excluded"
+      ],
+      "type": "object"
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -94,6 +122,17 @@
       "format": "uint32",
       "minimum": 0,
       "type": "integer"
+    },
+    "search": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SearchTally"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "For `exa` and `parallel`: the queries sent and skipped, and the known boards left out."
     },
     "skipped": {
       "description": "The crawl was read before, so only checking ran (`again` reads it anew).",

@@ -112,3 +112,23 @@ counted jobs), 6 empty, 11 missing. 94% of new boards were live, against
 81% of the crawl's, since a search returns pages indexed recently. Exa's
 results lean to Ashby. Parallel answered 402 (no credits), so it has no
 numbers yet.
+
+Leaving known boards out (six queries the database hadn't seen, same
+starting database each time: "backend engineer", "biotech company",
+"security engineer", "operations manager", "AI research lab", "logistics
+startup"):
+
+| left out | new boards | cost | per new board |
+|---|---|---|---|
+| nothing | 117 | $0.58 | $0.0049 |
+| the 581 boards searches had returned | 150 | $0.53 | $0.0035 |
+| those, then the biggest live boards, to 1,200 | 171 (166 live) | $0.50 | $0.0029 |
+
+With only searched boards left out, 172 results were still known boards,
+all found by the crawl or the list and never by a search; 60 of them were
+among the 619 biggest live boards, which is why the rest of the cap goes to
+boards by job count. Exa refuses more than 1,200 (HTTP 400, "must not
+exceed 1200"); in two probes (10 and 25 results) none of the excluded
+boards came back, and in the runs above about 3 did, likely under another
+Greenhouse host. The cost falls
+because Exa returns fewer than 100 results when it has fewer left.

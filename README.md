@@ -190,9 +190,16 @@ $0.10 on either; with no `--query` a dozen roles and sectors are searched.
 The key comes from `EXA_API_KEY` or `PARALLEL_API_KEY`, and the report
 shows the cost when the engine states it (Exa does). On 2026-11-23 the
 default dozen cost $1.16 on Exa and named 581 boards, 292 of them not in
-CC-MAIN-2026-43 or forwarddeployed.fun's list: 275 live, mostly Ashby. A
-search finds what's indexed now, so run it again with other queries rather
-than the same ones.
+CC-MAIN-2026-43 or forwarddeployed.fun's list: 275 live, mostly Ashby.
+
+A query is sent once: running it again skips it, like a crawl, unless
+`--again`. Every search also tells the engine which known boards to leave
+out, so its results go to boards loker doesn't have: first the boards
+earlier searches returned, then the live boards with the most jobs, up to
+the engine's limit (Exa takes 1,200 and refuses more, Parallel 197).
+Boards one query finds are left out of the next. On six new queries this
+found 171 new boards for $0.50, where the same queries with nothing left
+out found 117 for $0.58.
 
 To fetch what it finds, turn it on in config.toml:
 

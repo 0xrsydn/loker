@@ -1046,7 +1046,7 @@ pub struct DiscoverParams {
     pub from: String,
     /// A Common Crawl crawl id such as `CC-MAIN-2026-43`; default the newest.
     pub crawl: Option<String>,
-    /// Read a crawl again although it was read before.
+    /// Read a crawl, or send a search query, again although an earlier run did.
     #[serde(default)]
     pub again: bool,
     /// For `exa` and `parallel`: what to search for, one search each, up to 100 results apiece, kept to board pages on the three ATS hosts; default a dozen roles and sectors.
@@ -1074,12 +1074,26 @@ pub struct DiscoverReport {
     /// What the search engine said the searches cost, in US dollars; only Exa says.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cost_usd: Option<f64>,
+    /// For `exa` and `parallel`: the queries sent and skipped, and the known boards left out.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub search: Option<SearchTally>,
     /// Boards asked about in this run (new ones and re-checks), by what their ATS answered now; `failed` got no answer and is asked again next run.
     pub checked: BoardTally,
     /// Every board loker knows, by status; `failed` counts unchecked boards whose last check got no answer.
     pub boards: BoardTally,
     /// The first failures: searches that got no answer, then board checks.
     pub errors: Vec<String>,
+}
+
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct SearchTally {
+    /// Queries sent in this run.
+    pub run: u32,
+    /// Queries an earlier run sent, not sent again (`again` sends them).
+    pub skipped: u32,
+    /// Known boards the first search was told to leave out, up to the engine's cap (Exa 1,200, Parallel 197): those earlier searches returned, newest first, then live boards with the most jobs. Each query also leaves out what the ones before it found.
+    pub excluded: u32,
 }
 
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, JsonSchema)]

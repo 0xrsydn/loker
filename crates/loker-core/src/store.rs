@@ -1100,6 +1100,28 @@ impl Store {
             .collect())
     }
 
+    pub async fn search_exclusions(
+        &self,
+        finders: &[&str],
+        limit: u32,
+    ) -> anyhow::Result<Vec<Board>> {
+        let rows = sqlx::query(
+            "SELECT b.ats, b.slug FROM boards b LEFT JOIN \
+             (SELECT key, max(found_at) AS seen FROM board_finds \
+              WHERE finder IN (SELECT value FROM json_each(?)) GROUP BY key) s ON s.key = b.key \
+             WHERE s.key IS NOT NULL OR b.status = 'live' \
+             ORDER BY s.key IS NULL, s.seen DESC, coalesce(b.jobs, 0) DESC, b.key LIMIT ?",
+        )
+        .bind(serde_json::to_string(finders)?)
+        .bind(i64::from(limit))
+        .fetch_all(&self.pool)
+        .await?;
+        Ok(rows
+            .iter()
+            .filter_map(|r| Board::new(Ats::parse(r.get::<&str, _>("ats"))?, r.get("slug")))
+            .collect())
+    }
+
     pub async fn record_board_check(
         &self,
         board: &Board,

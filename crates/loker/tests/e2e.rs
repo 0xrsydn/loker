@@ -12,6 +12,7 @@ struct Stub {
     base: String,
     shrink: Arc<AtomicBool>,
     log: Arc<Mutex<Vec<String>>>,
+    bodies: Arc<Mutex<Vec<Value>>>,
 }
 
 fn stub() -> Stub {
@@ -21,6 +22,8 @@ fn stub() -> Stub {
     let flag = shrink.clone();
     let log = Arc::new(Mutex::new(Vec::new()));
     let served = log.clone();
+    let bodies = Arc::new(Mutex::new(Vec::new()));
+    let posted = bodies.clone();
     std::thread::spawn(move || {
         for stream in listener.incoming() {
             let Ok(mut stream) = stream else { continue };
@@ -41,6 +44,9 @@ fn stub() -> Stub {
                 .unwrap_or(0);
             let mut body = vec![0u8; length];
             let _ = stream.read_exact(&mut body);
+            if let Ok(sent) = serde_json::from_slice::<Value>(&body) {
+                posted.lock().unwrap().push(sent);
+            }
             let target = line.split_whitespace().nth(1).unwrap_or("/").to_string();
             let path = target.split('?').next().unwrap_or_default().to_string();
             let times = {
@@ -86,7 +92,12 @@ fn stub() -> Stub {
             );
         }
     });
-    Stub { base, shrink, log }
+    Stub {
+        base,
+        shrink,
+        log,
+        bodies,
+    }
 }
 
 const CC_INDEXES: &str = "/cc-index/collections/CC-MAIN-2026-43/indexes";
@@ -1064,10 +1075,45 @@ fn discover_asks_a_search_engine_for_board_pages() {
         "{r:#}"
     );
     assert_eq!(r["checked"]["live"], 2);
+    let excluded = |i: usize, field: &str| {
+        let bodies = stub.bodies.lock().unwrap();
+        let sent = bodies[i]
+            .pointer(field)
+            .and_then(Value::as_array)
+            .cloned()
+            .unwrap_or_default();
+        sent.iter()
+            .map(|v| v.as_str().unwrap().to_string())
+            .collect::<Vec<_>>()
+    };
+    assert!(excluded(0, "/excludeDomains").is_empty());
+    assert!(
+        excluded(1, "/excludeDomains").contains(&"job-boards.greenhouse.io/acme".to_string()),
+        "a query leaves out what the one before it found"
+    );
+
+    let r = home.json(&args);
+    assert_eq!(
+        (&r["skipped"], &r["search"]),
+        (
+            &json!(true),
+            &json!({ "run": 0, "skipped": 2, "excluded": 0 })
+        ),
+        "a query sent before isn't paid for again"
+    );
 
     let r = home.json(&["discover", "--from", "parallel", "--json"]);
     assert_eq!((&r["found"], &r["new"]), (&json!(1), &json!(1)), "{r:#}");
+    assert_eq!(
+        r["search"],
+        json!({ "run": 12, "skipped": 0, "excluded": 2 }),
+        "boards Exa returned are left out of Parallel's searches"
+    );
     assert!(r.get("costUsd").is_none(), "Parallel states no cost");
+    assert_eq!(
+        excluded(2, "/advanced_settings/source_policy/exclude_domains").len(),
+        2
+    );
     let searches = |path: &str| {
         stub.log
             .lock()
@@ -1081,9 +1127,19 @@ fn discover_asks_a_search_engine_for_board_pages() {
         (2, 12),
         "one search per query, a dozen by default"
     );
+    home.json(&[
+        "discover",
+        "--from",
+        "exa",
+        "--query",
+        " ROBOTICS ",
+        "--again",
+        "--json",
+    ]);
+    assert_eq!(searches("/search"), 3, "--again sends a query anew");
 
     let out = home
-        .cmd(&["discover", "--from", "exa", "--json"])
+        .cmd(&["discover", "--from", "exa", "--query", "unseen", "--json"])
         .env_remove("EXA_API_KEY")
         .output()
         .unwrap();

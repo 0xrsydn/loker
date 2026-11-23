@@ -133,7 +133,7 @@ enum Command {
         /// Common Crawl crawl id, e.g. CC-MAIN-2026-43 (default: the newest).
         #[arg(long)]
         crawl: Option<String>,
-        /// Read a crawl again although it was read before.
+        /// Read a crawl, or send a search query, again although an earlier run did.
         #[arg(long)]
         again: bool,
         /// With exa or parallel: a search, repeatable; up to 100 results each, about $0.10 (default: a dozen roles and sectors).
@@ -700,6 +700,12 @@ fn print_discover(r: &DiscoverReport) {
         println!(
             "{}: {} boards, {} new, {} unreadable",
             r.finder, r.found, r.new, r.unreadable
+        );
+    }
+    if let Some(s) = &r.search {
+        println!(
+            "searches: {} sent, {} sent before (--again sends them), {} known boards left out",
+            s.run, s.skipped, s.excluded
         );
     }
     if let Some(cost) = r.cost_usd {
