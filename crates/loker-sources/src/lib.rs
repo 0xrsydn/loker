@@ -772,6 +772,47 @@ async fn get_text_within(
     }
 }
 
+async fn post_json(
+    client: &HttpClient,
+    url: &str,
+    (header, value): (&str, &str),
+    body: &Value,
+    timeout: Duration,
+) -> anyhow::Result<Value> {
+    const ATTEMPTS: u32 = 3;
+    let mut attempt = 1;
+    loop {
+        let sent = client
+            .post(url)
+            .header(header, value)
+            .json(body)
+            .timeout(timeout)
+            .send()
+            .await;
+        let retry = match sent {
+            Ok(r) if r.status().is_success() => return Ok(r.json().await?),
+            Ok(r) if r.status().as_u16() == 429 || r.status().is_server_error() => {
+                format!("HTTP {}", r.status())
+            }
+            Ok(r) => {
+                let status = r.status();
+                let text = r.text().await.unwrap_or_default();
+                anyhow::bail!(
+                    "HTTP {status}: {}",
+                    text.chars().take(200).collect::<String>()
+                );
+            }
+            Err(e) if transient(&e) => e.to_string(),
+            Err(e) => return Err(e.into()),
+        };
+        if attempt == ATTEMPTS {
+            anyhow::bail!("{retry} after {attempt} attempts");
+        }
+        tokio::time::sleep(Duration::from_secs(2u64.pow(attempt))).await;
+        attempt += 1;
+    }
+}
+
 pub const MAX_COOLDOWN: Duration = Duration::from_secs(120);
 
 static COOLDOWNS: std::sync::LazyLock<std::sync::Mutex<HashMap<String, Instant>>> =

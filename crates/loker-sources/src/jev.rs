@@ -69,37 +69,8 @@ async fn ask(
 ) -> anyhow::Result<(RoleAnswer, f64)> {
     let url = crate::url("https://openrouter.ai", "/api/alpha/decisions");
     let body = json!({ "model": model, "state": state, "questions": question });
-    let mut attempt = 1;
-    let resp: Value = loop {
-        let sent = client
-            .post(&url)
-            .bearer_auth(key)
-            .json(&body)
-            .timeout(TIMEOUT)
-            .send()
-            .await;
-        let retry = match sent {
-            Ok(r) if r.status().is_success() => break r.json().await?,
-            Ok(r) if r.status().as_u16() == 429 || r.status().is_server_error() => {
-                format!("HTTP {}", r.status())
-            }
-            Ok(r) => {
-                let status = r.status();
-                let text = r.text().await.unwrap_or_default();
-                anyhow::bail!(
-                    "HTTP {status}: {}",
-                    text.chars().take(200).collect::<String>()
-                );
-            }
-            Err(e) if crate::transient(&e) => e.to_string(),
-            Err(e) => return Err(e.into()),
-        };
-        if attempt == 3 {
-            anyhow::bail!("{retry} after {attempt} attempts");
-        }
-        tokio::time::sleep(Duration::from_secs(2u64.pow(attempt))).await;
-        attempt += 1;
-    };
+    let auth = format!("Bearer {key}");
+    let resp = crate::post_json(client, &url, ("authorization", &auth), &body, TIMEOUT).await?;
     let a = &resp["answers"]["role"];
     let choice = a["choice"]
         .as_str()
