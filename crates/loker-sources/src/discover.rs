@@ -9,7 +9,9 @@ use loker_core::store::Store;
 use serde_json::Value;
 
 use crate::{
-    HttpClient, Paced, Source, commoncrawl, get_json_unless_missing, get_text, joined, segment, url,
+    HttpClient, Paced, Source, commoncrawl, get_json_unless_missing, get_text, joined, segment,
+    url,
+    websearch::{self, DEFAULT_QUERIES, Engine},
 };
 
 const ERRORS_SHOWN: usize = 10;
@@ -54,8 +56,44 @@ pub async fn discover(
     client: &HttpClient,
     p: DiscoverParams,
 ) -> Result<DiscoverReport> {
-    let (candidates, skipped) = match p.from.as_str() {
-        "commoncrawl" => {
+    let only = |field: &str, set: bool, applies: &str| {
+        if set {
+            Err(Error::Invalid(format!(
+                "`{field}` only applies to {applies}"
+            )))
+        } else {
+            Ok(())
+        }
+    };
+    let engine = Engine::parse(&p.from);
+    if p.from != "commoncrawl" {
+        only("crawl", p.crawl.is_some(), "commoncrawl")?;
+        only("again", p.again, "commoncrawl")?;
+    }
+    if engine.is_none() {
+        only("queries", !p.queries.is_empty(), "exa and parallel")?;
+    }
+    let mut cost_usd = None;
+    let mut errors = Vec::new();
+    let (candidates, skipped) = match (p.from.as_str(), engine) {
+        (_, Some(engine)) => {
+            let key = std::env::var(engine.key_var())
+                .ok()
+                .filter(|k| !k.is_empty())
+                .ok_or_else(|| Error::Invalid(format!("{} is not set", engine.key_var())))?;
+            let queries = if p.queries.is_empty() {
+                DEFAULT_QUERIES.map(String::from).to_vec()
+            } else {
+                p.queries.clone()
+            };
+            let searched = websearch::candidates(client, engine, &key, &queries)
+                .await
+                .map_err(Error::Internal)?;
+            cost_usd = searched.cost_usd;
+            errors = searched.errors;
+            (searched.candidates, false)
+        }
+        ("commoncrawl", None) => {
             let crawl = match p.crawl {
                 Some(c) if commoncrawl::valid_crawl(&c) => c,
                 Some(c) => {
@@ -77,14 +115,7 @@ pub async fn discover(
                 (found, false)
             }
         }
-        path => {
-            for (set, field) in [(p.crawl.is_some(), "crawl"), (p.again, "again")] {
-                if set {
-                    return Err(Error::Invalid(format!(
-                        "`{field}` only applies to commoncrawl"
-                    )));
-                }
-            }
+        (path, None) => {
             let text = std::fs::read_to_string(path)
                 .map_err(|e| Error::Invalid(format!("reading {path}: {e}")))?;
             let name = Path::new(path)
@@ -104,7 +135,9 @@ pub async fn discover(
             .await?;
         new
     };
-    let (checked, errors) = check_due(store, client, p.check).await?;
+    let (checked, check_errors) = check_due(store, client, p.check).await?;
+    errors.extend(check_errors);
+    errors.truncate(ERRORS_SHOWN);
     Ok(DiscoverReport {
         contract_version: CONTRACT_VERSION,
         finder: candidates.finder,
@@ -112,6 +145,7 @@ pub async fn discover(
         found: candidates.boards.len() as u32,
         new,
         unreadable: candidates.unreadable,
+        cost_usd,
         checked,
         boards: tally(store).await?,
         errors,

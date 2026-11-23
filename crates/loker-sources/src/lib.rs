@@ -7,6 +7,7 @@ pub mod jev;
 pub mod jobicy;
 pub mod lever;
 pub mod remoteok;
+pub mod websearch;
 pub mod weworkremotely;
 pub mod workable;
 pub mod yc;

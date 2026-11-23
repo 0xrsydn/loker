@@ -148,7 +148,7 @@ depends only on what is stored, never on ingest order. Pauses between pages
 of one source (Himalayas, Workable, YC) stay in the adapter.
 
 **Boards.** `loker discover` collects candidate boards from a finder (Common
-Crawl, or a file of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
+Crawl, Exa or Parallel search, or a file of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
 row per `Board::key` in `boards`, with every finder that named it in
 `board_finds`. A candidate becomes `live`, `empty` or `missing` only by asking
 its ATS's API (`discover::check_board`, paced like ingest), so a finder can be
@@ -373,6 +373,15 @@ Combinator's 429.
   failure. A block's sort key (SURT) is lower-cased, so the board comes from
   each record's `url`, which keeps Lever's case. A crawl is read once
   (`discovery_runs`).
+- **Exa and Parallel** (board finders; `websearch.rs`): one POST per query,
+  up to 100 results, limited to the ATS hosts (Exa takes the board
+  hostnames; Parallel takes apex domains, which match their subdomains, and
+  answered 402 when measured, so only its stubbed shape is tested). Each
+  result's URL goes through `Board::from_url` like a file's lines; titles
+  and excerpts are ignored, since the check names the company. A failed
+  query is reported and the rest still run; only all failing fails the run.
+  Unlike a crawl, a search isn't read once: each run asks again, and the
+  finder is just `exa` or `parallel`.
 
 **Ids.** A canonical id is `j_` plus a hash of the first listing's source and
 id, assigned once and never recomputed.

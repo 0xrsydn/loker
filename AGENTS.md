@@ -37,7 +37,7 @@ crates/loker-core/       domain and rules, no network
   src/config.rs          $LOKER_HOME/config.toml
   migrations/            SQL migrations, embedded at compile time
   tests/                 dedup, lifecycle, search, storage
-crates/loker-sources/    adapters: fetch + transform per source, fetch_batch, verify; discover, commoncrawl
+crates/loker-sources/    adapters: fetch + transform per source, fetch_batch, verify; discover, commoncrawl, websearch
 crates/loker/            App facade, CLI (main.rs), MCP (mcp.rs), tests/e2e.rs
 schema/v1/               JSON Schemas generated from the api types
 contrib/systemd/         unattended ingest service + timer

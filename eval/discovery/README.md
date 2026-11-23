@@ -102,3 +102,13 @@ unknown on 3 in 4 of its 860 jobs, though Lever's own `country` field says US), 
 Bluelight lists Latin American cities the tables don't know. Since fixed
 for the first kind: a remote Lever job whose location no rule reads takes
 Lever's `country` (685 of the sample's jobs).
+
+### Search finders
+
+The default dozen queries on Exa (`loker discover --from exa`, 2026-11-23,
+over the database above): 12 searches for $1.16, naming 581 boards; 292
+were new. Checked: 275 live (196 Ashby, 50 Lever, 29 Greenhouse; 4,237
+counted jobs), 6 empty, 11 missing. 94% of new boards were live, against
+81% of the crawl's, since a search returns pages indexed recently. Exa's
+results lean to Ashby. Parallel answered 402 (no credits), so it has no
+numbers yet.

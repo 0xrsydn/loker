@@ -172,6 +172,7 @@ asked again on the next run.
 cargo run -- discover                     # Common Crawl's newest crawl, then check every new board
 cargo run -- discover --check 0           # store what the crawl names, ask later
 cargo run -- discover --from boards.txt   # board URLs or ids, one per line
+cargo run -- discover --from exa --query "robotics startup"   # web search, paid
 ```
 
 By default it reads [Common Crawl](https://commoncrawl.org)'s URL index, a
@@ -181,6 +182,17 @@ once; `--again` reads it anew. CC-MAIN-2026-43 named 5,582 boards in 31 s
 (1,079 Ashby, 4,173 Greenhouse, 330 Lever). A crawl misses newer and smaller
 companies: it had 288 of the 509 boards on forwarddeployed.fun, whose list
 loads as a file. Checking those 509 took 113 s: 503 live, 6 empty.
+
+`--from exa` and `--from parallel` ask a web search API for board pages
+instead, which finds the newer, smaller companies a crawl misses. Each
+`--query` is one search for up to 100 pages on the three ATS hosts, about
+$0.10 on either; with no `--query` a dozen roles and sectors are searched.
+The key comes from `EXA_API_KEY` or `PARALLEL_API_KEY`, and the report
+shows the cost when the engine states it (Exa does). On 2026-11-23 the
+default dozen cost $1.16 on Exa and named 581 boards, 292 of them not in
+CC-MAIN-2026-43 or forwarddeployed.fun's list: 275 live, mostly Ashby. A
+search finds what's indexed now, so run it again with other queries rather
+than the same ones.
 
 To fetch what it finds, turn it on in config.toml:
 

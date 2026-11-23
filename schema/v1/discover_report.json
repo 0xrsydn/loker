@@ -64,15 +64,23 @@
       "minimum": 0,
       "type": "integer"
     },
+    "costUsd": {
+      "description": "What the search engine said the searches cost, in US dollars; only Exa says.",
+      "format": "double",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
     "errors": {
-      "description": "The first check failures.",
+      "description": "The first failures: searches that got no answer, then board checks.",
       "items": {
         "type": "string"
       },
       "type": "array"
     },
     "finder": {
-      "description": "What was read: `commoncrawl:<crawl>` or `file:<name>`.",
+      "description": "What was read: `commoncrawl:<crawl>`, `exa`, `parallel` or `file:<name>`.",
       "type": "string"
     },
     "found": {

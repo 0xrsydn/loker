@@ -189,6 +189,29 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
                 }})
             )),
         ),
+        "/search" => (
+            "200 OK",
+            json!({
+                "results": [
+                    { "url": "https://jobs.ashbyhq.com/GLOBEX/a-1", "title": "Support" },
+                    { "url": "https://job-boards.greenhouse.io/acme/jobs/123", "title": "Engineer" },
+                    { "url": "https://jobs.ashbyhq.com/globex", "title": "Globex" },
+                    { "url": "https://jobs.ashbyhq.com/api/non-user-graphql", "title": "" }
+                ],
+                "costDollars": { "total": 0.097 }
+            }),
+        ),
+        "/v1/search" => (
+            "200 OK",
+            json!({
+                "search_id": "search_1",
+                "results": [
+                    { "url": "https://jobs.lever.co/initech/1", "excerpts": [] },
+                    { "url": "https://www.greenhouse.io/careers", "excerpts": [] }
+                ],
+                "usage": [{ "name": "sku_search", "count": 1 }]
+            }),
+        ),
         "/collinfo.json" => ("200 OK", json!([{ "id": "CC-MAIN-2026-43" }])),
         CC_CLUSTER => ("200 OK", Value::String(cc_cluster())),
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
@@ -443,6 +466,8 @@ impl Home {
             .env("LOKER_HOME", &self.dir)
             .env("LOKER_FETCH_BASE", &self.base)
             .env("OPENROUTER_API_KEY", "test-key")
+            .env("EXA_API_KEY", "test-key")
+            .env("PARALLEL_API_KEY", "test-key")
             .env("RUST_LOG", "error");
         c
     }
@@ -1018,6 +1043,52 @@ fn discover_reads_the_newest_common_crawl_once() {
         (&again["skipped"], &again["found"]),
         (&json!(true), &json!(0))
     );
+}
+
+#[test]
+fn discover_asks_a_search_engine_for_board_pages() {
+    let stub = stub();
+    let home = Home::new("websearch", &stub);
+    let args = [
+        "discover", "--from", "exa", "--query", "robotics", "--query", "fintech", "--json",
+    ];
+    let r = home.json(&args);
+    assert_eq!(r["finder"], "exa");
+    assert_eq!(
+        (&r["found"], &r["unreadable"]),
+        (&json!(2), &json!(2)),
+        "a board named by a job page and its own page counts once: {r:#}"
+    );
+    assert!(
+        (r["costUsd"].as_f64().unwrap() - 0.194).abs() < 1e-9,
+        "{r:#}"
+    );
+    assert_eq!(r["checked"]["live"], 2);
+
+    let r = home.json(&["discover", "--from", "parallel", "--json"]);
+    assert_eq!((&r["found"], &r["new"]), (&json!(1), &json!(1)), "{r:#}");
+    assert!(r.get("costUsd").is_none(), "Parallel states no cost");
+    let searches = |path: &str| {
+        stub.log
+            .lock()
+            .unwrap()
+            .iter()
+            .filter(|t| *t == path)
+            .count()
+    };
+    assert_eq!(
+        (searches("/search"), searches("/v1/search")),
+        (2, 12),
+        "one search per query, a dozen by default"
+    );
+
+    let out = home
+        .cmd(&["discover", "--from", "exa", "--json"])
+        .env_remove("EXA_API_KEY")
+        .output()
+        .unwrap();
+    assert!(!out.status.success());
+    assert!(String::from_utf8_lossy(&out.stderr).contains("EXA_API_KEY is not set"));
 }
 
 #[test]

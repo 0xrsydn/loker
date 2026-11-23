@@ -127,7 +127,7 @@ enum Command {
     /// Exits non-zero if any source fails.
     /// Find company boards (Ashby, Greenhouse, Lever), then ask each new one's ATS whether it exists and has jobs.
     Discover {
-        /// `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.
+        /// `commoncrawl` (Common Crawl's URL index), `exa` or `parallel` (web search; needs EXA_API_KEY or PARALLEL_API_KEY), or a file of board URLs or ids (`ashby:<slug>`), one per line.
         #[arg(long, default_value = "commoncrawl")]
         from: String,
         /// Common Crawl crawl id, e.g. CC-MAIN-2026-43 (default: the newest).
@@ -136,6 +136,9 @@ enum Command {
         /// Read a crawl again although it was read before.
         #[arg(long)]
         again: bool,
+        /// With exa or parallel: a search, repeatable; up to 100 results each, about $0.10 (default: a dozen roles and sectors).
+        #[arg(long = "query")]
+        queries: Vec<String>,
         /// Check at most this many unchecked boards (default: all; 0 checks none).
         #[arg(long)]
         check: Option<u32>,
@@ -411,6 +414,7 @@ async fn main() -> anyhow::Result<()> {
             from,
             crawl,
             again,
+            queries,
             check,
             json,
         } => {
@@ -419,6 +423,7 @@ async fn main() -> anyhow::Result<()> {
                     from,
                     crawl,
                     again,
+                    queries,
                     check,
                 })
                 .await?;
@@ -696,6 +701,9 @@ fn print_discover(r: &DiscoverReport) {
             "{}: {} boards, {} new, {} unreadable",
             r.finder, r.found, r.new, r.unreadable
         );
+    }
+    if let Some(cost) = r.cost_usd {
+        println!("search cost: ${cost:.3}");
     }
     println!("checked: {}", tally(&r.checked));
     println!("boards:  {}", tally(&r.boards));

@@ -1042,13 +1042,16 @@ pub struct IngestOutcome {
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct DiscoverParams {
-    /// Where to look for company boards: `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.
+    /// Where to look for company boards: `commoncrawl` (Common Crawl's URL index), `exa` or `parallel` (a web search API, keyed by `EXA_API_KEY` or `PARALLEL_API_KEY`), or a file of board URLs or ids (`ashby:<slug>`), one per line.
     pub from: String,
     /// A Common Crawl crawl id such as `CC-MAIN-2026-43`; default the newest.
     pub crawl: Option<String>,
     /// Read a crawl again although it was read before.
     #[serde(default)]
     pub again: bool,
+    /// For `exa` and `parallel`: what to search for, one search each, up to 100 results apiece, kept to board pages on the three ATS hosts; default a dozen roles and sectors.
+    #[serde(default)]
+    pub queries: Vec<String>,
     /// Check at most this many boards against their ATS: unchecked ones first (oldest found first), then any last checked over 7 days ago (or fetched by ingest), oldest first; default all, 0 checks none.
     pub check: Option<u32>,
 }
@@ -1058,7 +1061,7 @@ pub struct DiscoverParams {
 #[serde(rename_all = "camelCase")]
 pub struct DiscoverReport {
     pub contract_version: u32,
-    /// What was read: `commoncrawl:<crawl>` or `file:<name>`.
+    /// What was read: `commoncrawl:<crawl>`, `exa`, `parallel` or `file:<name>`.
     pub finder: String,
     /// The crawl was read before, so only checking ran (`again` reads it anew).
     pub skipped: bool,
@@ -1068,11 +1071,14 @@ pub struct DiscoverReport {
     pub new: u32,
     /// URLs or lines that name no board.
     pub unreadable: u32,
+    /// What the search engine said the searches cost, in US dollars; only Exa says.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub cost_usd: Option<f64>,
     /// Boards asked about in this run (new ones and re-checks), by what their ATS answered now; `failed` got no answer and is asked again next run.
     pub checked: BoardTally,
     /// Every board loker knows, by status; `failed` counts unchecked boards whose last check got no answer.
     pub boards: BoardTally,
-    /// The first check failures.
+    /// The first failures: searches that got no answer, then board checks.
     pub errors: Vec<String>,
 }
 

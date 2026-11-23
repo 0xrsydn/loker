@@ -24,8 +24,16 @@
       ]
     },
     "from": {
-      "description": "Where to look for company boards: `commoncrawl` (Common Crawl's URL index), or a file of board URLs or ids (`ashby:<slug>`), one per line.",
+      "description": "Where to look for company boards: `commoncrawl` (Common Crawl's URL index), `exa` or `parallel` (a web search API, keyed by `EXA_API_KEY` or `PARALLEL_API_KEY`), or a file of board URLs or ids (`ashby:<slug>`), one per line.",
       "type": "string"
+    },
+    "queries": {
+      "default": [],
+      "description": "For `exa` and `parallel`: what to search for, one search each, up to 100 results apiece, kept to board pages on the three ATS hosts; default a dozen roles and sectors.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
     }
   },
   "required": [
