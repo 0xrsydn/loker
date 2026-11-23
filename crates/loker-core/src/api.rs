@@ -1049,7 +1049,7 @@ pub struct DiscoverParams {
     /// Read a crawl, or send a search query, again although an earlier run did.
     #[serde(default)]
     pub again: bool,
-    /// For `exa` and `parallel`: what to search for, one search each, up to 100 results apiece, kept to board pages on the three ATS hosts; default a dozen roles and sectors.
+    /// For `exa` and `parallel`: what to search for; each query is one search per ATS (34 Ashby, 33 Greenhouse and 33 Lever results), kept to that ATS's board hosts; default a dozen roles and sectors.
     #[serde(default)]
     pub queries: Vec<String>,
     /// Check at most this many boards against their ATS: unchecked ones first (oldest found first), then any last checked over 7 days ago (or fetched by ingest), oldest first; default all, 0 checks none.
@@ -1092,7 +1092,7 @@ pub struct SearchTally {
     pub run: u32,
     /// Queries an earlier run sent, not sent again (`again` sends them).
     pub skipped: u32,
-    /// Known boards the first search was told to leave out, up to the engine's cap (Exa 1,200, Parallel 197): those earlier searches returned, newest first, then live boards with the most jobs. Each query also leaves out what the ones before it found.
+    /// Known boards the first query was told to leave out, summed over its three searches (one per ATS), each up to the engine's cap (Exa 1,200, Parallel 199): that ATS's boards earlier searches returned, newest first, then its live boards with the most jobs. Each query also leaves out what the ones before it found.
     pub excluded: u32,
 }
 

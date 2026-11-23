@@ -373,9 +373,10 @@ Combinator's 429.
   failure. A block's sort key (SURT) is lower-cased, so the board comes from
   each record's `url`, which keeps Lever's case. A crawl is read once
   (`discovery_runs`).
-- **Exa and Parallel** (board finders; `websearch.rs`): one POST per query,
-  up to 100 results, limited to the ATS hosts (Exa takes the board
-  hostnames; Parallel takes apex domains, which match their subdomains, and
+- **Exa and Parallel** (board finders; `websearch.rs`): three POSTs per
+  query, one per ATS, sharing 100 results (34, 33, 33), each limited to that
+  ATS's hosts (Exa takes the board hostnames; Parallel takes the apex
+  domain, which matches its subdomains, and
   answered 402 when measured, so only its stubbed shape is tested). Each
   result's URL goes through `Board::from_url` like a file's lines; titles
   and excerpts are ignored, since the check names the company. A failed
@@ -384,9 +385,13 @@ Combinator's 429.
   `discovery_runs` row (`exa:<query>`, lower case, spaces collapsed), so it
   isn't paid for twice. The engine is the only one that knows what else it
   has, so loker sends what it knows instead: each request's exclude list
-  (`Store::search_exclusions`) holds boards any search returned, newest
-  first, then live boards by job count, cut to the engine's cap, as one path
-  per board on its main host (`websearch::board_path`). A board on another
+  (`Store::search_exclusions`) holds that ATS's boards any search returned,
+  newest first, then its live boards by job count, cut to the engine's cap
+  per request, as one path per board on its main host
+  (`websearch::board_path`). One search per ATS is what makes the cap go
+  far: three lists hold about 2,700 boards (all of Lever's) for the same
+  cost, since both engines charge by result. It also stops Exa's lean
+  to Ashby from crowding out the other two. A board on another
   host (`boards.greenhouse.io`) can still come back; it's only counted
   again. Excluding helps more than it seems: the boards searches find are
   the ones they find again, while most crawl-only boards never come up.

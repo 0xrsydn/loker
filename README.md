@@ -185,8 +185,9 @@ loads as a file. Checking those 509 took 113 s: 503 live, 6 empty.
 
 `--from exa` and `--from parallel` ask a web search API for board pages
 instead, which finds the newer, smaller companies a crawl misses. Each
-`--query` is one search for up to 100 pages on the three ATS hosts, about
-$0.10 on either; with no `--query` a dozen roles and sectors are searched.
+`--query` asks for up to 100 board pages, a third from each ATS (one search
+per ATS), about $0.10 on either; with no `--query` a dozen roles and
+sectors are searched.
 The key comes from `EXA_API_KEY` or `PARALLEL_API_KEY`, and the report
 shows the cost when the engine states it (Exa does). On 2026-11-23 the
 default dozen cost $1.16 on Exa and named 581 boards, 292 of them not in
@@ -196,10 +197,13 @@ A query is sent once: running it again skips it, like a crawl, unless
 `--again`. Every search also tells the engine which known boards to leave
 out, so its results go to boards loker doesn't have: first the boards
 earlier searches returned, then the live boards with the most jobs, up to
-the engine's limit (Exa takes 1,200 and refuses more, Parallel 197).
-Boards one query finds are left out of the next. On six new queries this
-found 171 new boards for $0.50, where the same queries with nothing left
-out found 117 for $0.58.
+the engine's limit per search (Exa takes 1,200 and refuses more, Parallel
+199). Searching each ATS on its own gives each its own list, so about
+2,700 known boards are left out instead of 1,200, and Lever and Greenhouse
+get results Exa would otherwise give to Ashby. Boards one query finds are
+left out of the next. On six new queries this found 235 new live boards
+for $0.48, where one search across the three found 143 for $0.49, and
+with nothing left out about 117 new boards cost $0.58.
 
 To fetch what it finds, turn it on in config.toml:
 

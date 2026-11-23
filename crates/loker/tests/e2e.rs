@@ -1067,11 +1067,11 @@ fn discover_asks_a_search_engine_for_board_pages() {
     assert_eq!(r["finder"], "exa");
     assert_eq!(
         (&r["found"], &r["unreadable"]),
-        (&json!(2), &json!(2)),
+        (&json!(2), &json!(6)),
         "a board named by a job page and its own page counts once: {r:#}"
     );
     assert!(
-        (r["costUsd"].as_f64().unwrap() - 0.194).abs() < 1e-9,
+        (r["costUsd"].as_f64().unwrap() - 6.0 * 0.097).abs() < 1e-9,
         "{r:#}"
     );
     assert_eq!(r["checked"]["live"], 2);
@@ -1086,9 +1086,24 @@ fn discover_asks_a_search_engine_for_board_pages() {
             .map(|v| v.as_str().unwrap().to_string())
             .collect::<Vec<_>>()
     };
+    let sent = |i: usize, field: &str| stub.bodies.lock().unwrap()[i].pointer(field).cloned();
+    assert_eq!(
+        (0..3)
+            .map(|i| (
+                sent(i, "/includeDomains/0").unwrap(),
+                sent(i, "/numResults").unwrap()
+            ))
+            .collect::<Vec<_>>(),
+        [
+            (json!("jobs.ashbyhq.com"), json!(34)),
+            (json!("boards.greenhouse.io"), json!(33)),
+            (json!("jobs.lever.co"), json!(33)),
+        ],
+        "a query is one search per ATS, sharing 100 results"
+    );
     assert!(excluded(0, "/excludeDomains").is_empty());
     assert!(
-        excluded(1, "/excludeDomains").contains(&"job-boards.greenhouse.io/acme".to_string()),
+        excluded(4, "/excludeDomains").contains(&"job-boards.greenhouse.io/acme".to_string()),
         "a query leaves out what the one before it found"
     );
 
@@ -1111,8 +1126,9 @@ fn discover_asks_a_search_engine_for_board_pages() {
     );
     assert!(r.get("costUsd").is_none(), "Parallel states no cost");
     assert_eq!(
-        excluded(2, "/advanced_settings/source_policy/exclude_domains").len(),
-        2
+        excluded(7, "/advanced_settings/source_policy/exclude_domains"),
+        ["job-boards.greenhouse.io/acme"],
+        "each ATS's search leaves out that ATS's known boards"
     );
     let searches = |path: &str| {
         stub.log
@@ -1124,8 +1140,8 @@ fn discover_asks_a_search_engine_for_board_pages() {
     };
     assert_eq!(
         (searches("/search"), searches("/v1/search")),
-        (2, 12),
-        "one search per query, a dozen by default"
+        (6, 36),
+        "three searches per query, a dozen queries by default"
     );
     home.json(&[
         "discover",
@@ -1136,7 +1152,7 @@ fn discover_asks_a_search_engine_for_board_pages() {
         "--again",
         "--json",
     ]);
-    assert_eq!(searches("/search"), 3, "--again sends a query anew");
+    assert_eq!(searches("/search"), 9, "--again sends a query anew");
 
     let out = home
         .cmd(&["discover", "--from", "exa", "--query", "unseen", "--json"])

@@ -50,7 +50,7 @@
     "SearchTally": {
       "properties": {
         "excluded": {
-          "description": "Known boards the first search was told to leave out, up to the engine's cap (Exa 1,200, Parallel 197): those earlier searches returned, newest first, then live boards with the most jobs. Each query also leaves out what the ones before it found.",
+          "description": "Known boards the first query was told to leave out, summed over its three searches (one per ATS), each up to the engine's cap (Exa 1,200, Parallel 199): that ATS's boards earlier searches returned, newest first, then its live boards with the most jobs. Each query also leaves out what the ones before it found.",
           "format": "uint32",
           "minimum": 0,
           "type": "integer"

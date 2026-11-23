@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::time::Duration;
 
 use loker_core::board::{Ats, Board};
@@ -10,17 +10,32 @@ use crate::{HttpClient, post_json, segment, url};
 const RESULTS_PER_QUERY: u32 = 100;
 const TIMEOUT: Duration = Duration::from_secs(60);
 
-pub const BOARD_HOSTS: [&str; 7] = [
-    "jobs.ashbyhq.com",
-    "boards.greenhouse.io",
-    "job-boards.greenhouse.io",
-    "boards.eu.greenhouse.io",
-    "job-boards.eu.greenhouse.io",
-    "jobs.lever.co",
-    "jobs.eu.lever.co",
-];
+pub fn board_hosts(ats: Ats) -> &'static [&'static str] {
+    match ats {
+        Ats::Ashby => &["jobs.ashbyhq.com"],
+        Ats::Greenhouse => &[
+            "boards.greenhouse.io",
+            "job-boards.greenhouse.io",
+            "boards.eu.greenhouse.io",
+            "job-boards.eu.greenhouse.io",
+        ],
+        Ats::Lever => &["jobs.lever.co", "jobs.eu.lever.co"],
+    }
+}
 
-const ATS_DOMAINS: [&str; 3] = ["ashbyhq.com", "greenhouse.io", "lever.co"];
+fn ats_domain(ats: Ats) -> &'static str {
+    match ats {
+        Ats::Ashby => "ashbyhq.com",
+        Ats::Greenhouse => "greenhouse.io",
+        Ats::Lever => "lever.co",
+    }
+}
+
+pub fn results_for(ats: Ats) -> u32 {
+    let each = RESULTS_PER_QUERY / Ats::ALL.len() as u32;
+    let rest = RESULTS_PER_QUERY % Ats::ALL.len() as u32;
+    each + u32::from(ats == Ats::ALL[0]) * rest
+}
 
 pub const DEFAULT_QUERIES: [&str; 12] = [
     "software engineer",
@@ -64,7 +79,7 @@ impl Engine {
     pub fn exclude_cap(self) -> u32 {
         match self {
             Engine::Exa => 1200,
-            Engine::Parallel => 200 - ATS_DOMAINS.len() as u32,
+            Engine::Parallel => 199,
         }
     }
 
@@ -85,6 +100,7 @@ impl Engine {
         client: &HttpClient,
         key: &str,
         query: &str,
+        ats: Ats,
         exclude: &[String],
     ) -> anyhow::Result<(Vec<String>, Option<f64>)> {
         let (endpoint, body) = match self {
@@ -93,21 +109,21 @@ impl Engine {
                 json!({
                     "query": query,
                     "type": "auto",
-                    "numResults": RESULTS_PER_QUERY,
-                    "includeDomains": BOARD_HOSTS,
+                    "numResults": results_for(ats),
+                    "includeDomains": board_hosts(ats),
                     "excludeDomains": exclude,
                 }),
             ),
             Engine::Parallel => (
                 url("https://api.parallel.ai", "/v1/search"),
                 json!({
-                    "objective": format!("Job postings on company boards hosted by Ashby, Greenhouse or Lever: {query}"),
+                    "objective": format!("Job postings on company boards hosted by {}: {query}", ats.as_str()),
                     "search_queries": [query],
                     "mode": "fast",
                     "advanced_settings": {
-                        "max_results": RESULTS_PER_QUERY,
+                        "max_results": results_for(ats),
                         "source_policy": {
-                            "include_domains": ATS_DOMAINS,
+                            "include_domains": [ats_domain(ats)],
                             "exclude_domains": exclude,
                         },
                     },
@@ -152,38 +168,60 @@ pub async fn candidates(
     known: Vec<Board>,
 ) -> anyhow::Result<Searched> {
     let cap = engine.exclude_cap() as usize;
-    let mut exclude: Vec<Board> = known;
-    exclude.truncate(cap);
-    let excluded = exclude.len() as u32;
+    let mut exclude: HashMap<Ats, Vec<Board>> = HashMap::new();
+    for b in known {
+        let list = exclude.entry(b.ats).or_default();
+        if list.len() < cap {
+            list.push(b);
+        }
+    }
+    let excluded = exclude.values().map(Vec::len).sum::<usize>() as u32;
     let mut found: Vec<Option<Board>> = Vec::new();
     let mut ran = Vec::new();
     let mut cost_usd: Option<f64> = None;
     let mut errors = Vec::new();
+    let mut answered = 0;
     for query in queries {
-        let paths: Vec<String> = exclude.iter().map(board_path).collect();
-        match engine.search(client, key, query, &paths).await {
-            Ok((urls, cost)) => {
-                let boards: Vec<Option<Board>> = urls.iter().map(|u| Board::from_url(u)).collect();
-                let known: HashSet<String> = exclude.iter().map(Board::key).collect();
-                let mut keys = HashSet::new();
-                let mut fresh = Vec::new();
-                for b in boards.iter().flatten() {
-                    if keys.insert(b.key()) && !known.contains(&b.key()) {
-                        fresh.push(b.clone());
+        let mut keys = HashSet::new();
+        let mut failed = false;
+        for ats in Ats::ALL {
+            let paths: Vec<String> = exclude
+                .get(&ats)
+                .map(|list| list.iter().map(board_path).collect())
+                .unwrap_or_default();
+            match engine.search(client, key, query, ats, &paths).await {
+                Ok((urls, cost)) => {
+                    answered += 1;
+                    let boards: Vec<Option<Board>> =
+                        urls.iter().map(|u| Board::from_url(u)).collect();
+                    for b in boards.iter().flatten() {
+                        keys.insert(b.key());
+                        let list = exclude.entry(b.ats).or_default();
+                        if !list.iter().any(|e| e.key() == b.key()) {
+                            list.insert(0, b.clone());
+                            list.truncate(cap);
+                        }
+                    }
+                    found.extend(boards);
+                    if let Some(c) = cost {
+                        cost_usd = Some(cost_usd.unwrap_or(0.0) + c);
                     }
                 }
-                ran.push((query.clone(), keys.len() as u32));
-                exclude.splice(0..0, fresh);
-                exclude.truncate(cap);
-                found.extend(boards);
-                if let Some(c) = cost {
-                    cost_usd = Some(cost_usd.unwrap_or(0.0) + c);
+                Err(e) => {
+                    failed = true;
+                    errors.push(format!(
+                        "{} {} \"{query}\": {e:#}",
+                        engine.name(),
+                        ats.as_str()
+                    ));
                 }
             }
-            Err(e) => errors.push(format!("{} \"{query}\": {e:#}", engine.name())),
+        }
+        if !failed {
+            ran.push((query.clone(), keys.len() as u32));
         }
     }
-    if !errors.is_empty() && errors.len() == queries.len() {
+    if answered == 0 && !errors.is_empty() {
         anyhow::bail!("{}", errors.join("; "));
     }
     Ok(Searched {

@@ -29,7 +29,7 @@
     },
     "queries": {
       "default": [],
-      "description": "For `exa` and `parallel`: what to search for, one search each, up to 100 results apiece, kept to board pages on the three ATS hosts; default a dozen roles and sectors.",
+      "description": "For `exa` and `parallel`: what to search for; each query is one search per ATS (34 Ashby, 33 Greenhouse and 33 Lever results), kept to that ATS's board hosts; default a dozen roles and sectors.",
       "items": {
         "type": "string"
       },

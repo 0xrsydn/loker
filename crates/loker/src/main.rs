@@ -136,7 +136,7 @@ enum Command {
         /// Read a crawl, or send a search query, again although an earlier run did.
         #[arg(long)]
         again: bool,
-        /// With exa or parallel: a search, repeatable; up to 100 results each, about $0.10 (default: a dozen roles and sectors).
+        /// With exa or parallel: a search, repeatable; up to 100 results each, a third per ATS, about $0.10 (default: a dozen roles and sectors).
         #[arg(long = "query")]
         queries: Vec<String>,
         /// Check at most this many unchecked boards (default: all; 0 checks none).

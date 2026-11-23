@@ -132,3 +132,18 @@ exceed 1200"); in two probes (10 and 25 results) none of the excluded
 boards came back, and in the runs above about 3 did, likely under another
 Greenhouse host. The cost falls
 because Exa returns fewer than 100 results when it has fewer left.
+
+One search per ATS (34 Ashby, 33 Greenhouse, 33 Lever results, each with
+its own list of up to 1,200), against one search across the three, on six
+more unseen queries ("frontend engineer", "developer tools company", "data
+engineer", "recruiter startup", "insurance technology", "gaming company")
+from the same database, every new board checked:
+
+| searches per query | left out | new live boards | cost | per live board |
+|---|---|---|---|---|
+| one, all ATSs | 1,200 | 143 (97 Ashby, 21 Greenhouse, 25 Lever) | $0.49 | $0.0034 |
+| one per ATS | 2,747 | 235 (87 Ashby, 32 Greenhouse, 116 Lever) | $0.48 | $0.0020 |
+
+Lever gains most: in one search Exa ranks Ashby pages first, so Lever's
+boards rarely made the 100. A second run of the split returned the same
+boards, and loker's version matched the prototype's (251 new, 235 live).

@@ -1103,17 +1103,18 @@ impl Store {
     pub async fn search_exclusions(
         &self,
         finders: &[&str],
-        limit: u32,
+        per_ats: u32,
     ) -> anyhow::Result<Vec<Board>> {
         let rows = sqlx::query(
-            "SELECT b.ats, b.slug FROM boards b LEFT JOIN \
+            "SELECT ats, slug FROM (SELECT b.ats, b.slug, row_number() OVER (PARTITION BY b.ats \
+             ORDER BY s.key IS NULL, s.seen DESC, coalesce(b.jobs, 0) DESC, b.key) AS n \
+             FROM boards b LEFT JOIN \
              (SELECT key, max(found_at) AS seen FROM board_finds \
               WHERE finder IN (SELECT value FROM json_each(?)) GROUP BY key) s ON s.key = b.key \
-             WHERE s.key IS NOT NULL OR b.status = 'live' \
-             ORDER BY s.key IS NULL, s.seen DESC, coalesce(b.jobs, 0) DESC, b.key LIMIT ?",
+             WHERE s.key IS NOT NULL OR b.status = 'live') WHERE n <= ? ORDER BY ats, n",
         )
         .bind(serde_json::to_string(finders)?)
-        .bind(i64::from(limit))
+        .bind(i64::from(per_ats))
         .fetch_all(&self.pool)
         .await?;
         Ok(rows
