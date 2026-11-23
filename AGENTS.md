@@ -48,6 +48,7 @@ eval/pay/                manual eval of pay read from descriptions, with a holdo
 eval/visa/               manual eval of visa sponsorship read from descriptions; not in CI
 eval/experience/         manual eval of required years read from descriptions; not in CI
 eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
+eval/discovery/          manual eval of discovered boards: real, named right, how rich; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 lint/                    comment ratchet: no new comments, the count only goes down
 ```
