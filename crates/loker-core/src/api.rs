@@ -9,7 +9,7 @@ use crate::board::BoardStatus;
 use crate::country;
 use crate::model::{Job, Scope, Seniority, Sponsorship};
 use crate::role::{self, Modifier, Role, RoleFilter};
-use crate::store::{Found, Store};
+use crate::store::{SearchFilter, Store};
 use crate::verdict::{Verdict, VerdictKind, Viewer, eligible_for};
 
 pub const CONTRACT_VERSION: u32 = 1;
@@ -286,6 +286,30 @@ fn viewer(country: Option<&str>, tz: Option<f64>) -> Result<Option<Viewer>> {
         .transpose()
 }
 
+fn role_ids(filters: &[RoleFilter]) -> Result<String> {
+    let ids: Vec<Role> = Role::ALL
+        .iter()
+        .copied()
+        .filter(|r| {
+            filters
+                .iter()
+                .any(|f| matches!(*f, RoleFilter::Role(want) if r.within(want)))
+        })
+        .collect();
+    Ok(serde_json::to_string(&ids).map_err(anyhow::Error::from)?)
+}
+
+fn modifier_ids(filters: &[RoleFilter]) -> Result<String> {
+    let ids: Vec<Modifier> = filters
+        .iter()
+        .filter_map(|f| match *f {
+            RoleFilter::Modifier(m) => Some(m),
+            RoleFilter::Role(_) => None,
+        })
+        .collect();
+    Ok(serde_json::to_string(&ids).map_err(anyhow::Error::from)?)
+}
+
 pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult> {
     let limit = p.limit.unwrap_or(DEFAULT_LIMIT).clamp(1, MAX_LIMIT);
     let viewer = viewer(p.country.as_deref(), p.tz)?;
@@ -309,48 +333,63 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         None => None,
     };
 
-    const BATCH: u32 = 200;
     let offset = p.offset.unwrap_or(0);
-    let country = viewer.as_ref().map(|v| v.country.as_str());
-    let (mut read, mut total, mut full, mut jobs) = (0u32, 0u32, 0u32, Vec::new());
-    loop {
-        let rows = store
-            .search_with(&p.q, p.any_word, country, BATCH, read)
-            .await?;
-        let n = rows.len() as u32;
-        read += n;
-        for Found { job, partial } in rows {
-            let eligible = viewer.as_ref().map(|v| eligible_for(&job.eligibility, v));
-            if eligible.as_ref().is_some_and(|v| v.kind > worst) {
-                continue;
-            }
-            if !p.role.is_empty() && !job.role.as_ref().is_some_and(|r| r.matches(&p.role)) {
-                continue;
-            }
-            if !p.seniority.is_empty() && !job.seniority.is_some_and(|s| p.seniority.contains(&s)) {
-                continue;
-            }
-            if let (Some(years), Some(e)) = (p.experience_years, &job.experience)
-                && e.min_years > years
-            {
-                continue;
-            }
-            if let Some(after) = posted_after
-                && !job.posted_at.is_some_and(|t| t >= after)
-            {
-                continue;
-            }
-            total += 1;
-            full += u32::from(!partial);
-            if total > offset && jobs.len() < limit as usize {
-                jobs.push(Hit::new(job, eligible, partial, p.view));
-            }
+    let filter = SearchFilter {
+        q: p.q.clone(),
+        any_word: p.any_word,
+        country: viewer.as_ref().map(|v| v.country.clone()),
+        posted_after: posted_after.map(|t| t.to_rfc3339_opts(chrono::SecondsFormat::Secs, true)),
+        seniority: (!p.seniority.is_empty())
+            .then(|| serde_json::to_string(&p.seniority))
+            .transpose()
+            .map_err(anyhow::Error::from)?,
+        max_years: p.experience_years.map(i64::from),
+        roles: (!p.role.is_empty())
+            .then(|| role_ids(&p.role))
+            .transpose()?,
+        modifiers: (!p.role.is_empty())
+            .then(|| modifier_ids(&p.role))
+            .transpose()?,
+    };
+    let (total, full, page) = match &viewer {
+        None => {
+            let (total, full) = store.search_count(&filter).await?;
+            let page: Vec<(String, Option<Verdict>, bool)> = store
+                .search_page(&filter, limit, offset)
+                .await?
+                .into_iter()
+                .map(|(id, partial)| (id, None, partial))
+                .collect();
+            (total, full, page)
         }
-        if n < BATCH {
-            break;
+        Some(viewer) => {
+            let (mut total, mut full) = (0u32, 0u32);
+            let mut page = Vec::new();
+            for c in store.search_candidates(&filter).await? {
+                let verdict = eligible_for(&c.eligibility, viewer);
+                if verdict.kind > worst {
+                    continue;
+                }
+                total += 1;
+                full += u32::from(!c.partial);
+                if total > offset && page.len() < limit as usize {
+                    page.push((c.id, Some(verdict), c.partial));
+                }
+            }
+            (total, full, page)
         }
-    }
-    let notice = if total == 0 && store.counts().await?.iter().all(|(_, n)| *n == 0) {
+    };
+    let ids: Vec<String> = page.iter().map(|(id, ..)| id.clone()).collect();
+    let jobs: Vec<Hit> = store
+        .get_in_order(&ids)
+        .await?
+        .into_iter()
+        .zip(page)
+        .filter_map(|(job, (_, verdict, partial))| {
+            job.map(|job| Hit::new(job, verdict, partial, p.view))
+        })
+        .collect();
+    let notice = if total == 0 && !store.has_active_jobs().await? {
         Some(EMPTY_STORE.to_string())
     } else {
         None

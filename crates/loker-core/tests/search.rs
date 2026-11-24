@@ -387,3 +387,260 @@ async fn a_country_list_drops_only_jobs_that_exclude_everyone_else() {
         );
     }
 }
+
+fn varied_jobs(n: usize) -> Vec<loker_core::model::NewJob> {
+    use loker_core::model::{Elsewhere, TzStrength, TzWindow, Workplace};
+    let mut seed: u64 = 0x9e37_79b9_7f4a_7c15;
+    let mut next = move |m: usize| {
+        seed ^= seed << 13;
+        seed ^= seed >> 7;
+        seed ^= seed << 17;
+        (seed % m as u64) as usize
+    };
+    let titles = [
+        "Senior Backend Engineer",
+        "Junior Data Analyst",
+        "Staff Machine Learning Engineer",
+        "Account Executive",
+        "Engineering Intern",
+        "Forward Deployed Engineer",
+        "Product Designer",
+        "Lead Data Engineer",
+    ];
+    let texts = [
+        None,
+        Some("We need 3+ years of experience with Go."),
+        Some("At least 7 years of experience building data systems."),
+        Some("We sponsor visas. 2+ years of experience required."),
+    ];
+    let now = chrono::Utc::now();
+    (0..n)
+        .map(|i| {
+            let mut j = job(
+                "jobicy",
+                &format!("p{i}"),
+                ["Acme", "Globex", "Initech"][next(3)],
+                &format!("{} {i}", titles[next(titles.len())]),
+                Scope::Unknown,
+                0.8,
+            );
+            let e = &mut j.eligibility;
+            e.workplace = [
+                Workplace::Remote,
+                Workplace::Hybrid,
+                Workplace::Onsite,
+                Workplace::Unknown,
+            ][next(4)];
+            e.elsewhere = [Elsewhere::Excluded, Elsewhere::NotStated, Elsewhere::Open][next(3)];
+            e.countries = ["US", "ID", "DE", "BR"]
+                .iter()
+                .filter(|_| next(3) == 0)
+                .map(|c| c.to_string())
+                .collect();
+            e.regions = ["Europe", "APAC", "Atlantis", "LATAM"]
+                .iter()
+                .filter(|_| next(4) == 0)
+                .map(|r| r.to_string())
+                .collect();
+            e.tz = (next(3) == 0).then(|| TzWindow {
+                from: [-8.0, 0.0, 5.0][next(3)],
+                to: [2.0, 9.0, 12.0][next(3)],
+                strength: if next(2) == 0 {
+                    TzStrength::Required
+                } else {
+                    TzStrength::Preferred
+                },
+            });
+            j.description_md = texts[next(texts.len())].map(str::to_string);
+            j.posted_at = [None, Some(2), Some(40), Some(400)][next(4)]
+                .map(|d| now - chrono::Duration::days(d));
+            j
+        })
+        .collect()
+}
+
+async fn every_hit(s: &loker_core::store::Store, p: &SearchParams) -> (u32, u32, Vec<String>) {
+    let mut ids = Vec::new();
+    let mut offset = 0;
+    loop {
+        let r = search_jobs(
+            s,
+            SearchParams {
+                limit: Some(100),
+                offset: Some(offset),
+                view: View::Titles,
+                ..p.clone()
+            },
+        )
+        .await
+        .unwrap();
+        ids.extend(r.jobs.iter().map(|h| h.id().to_string()));
+        match r.next_offset {
+            Some(o) => offset = o,
+            None => return (r.total, r.full_matches, ids),
+        }
+    }
+}
+
+#[tokio::test]
+async fn sql_filters_keep_exactly_the_jobs_the_rules_keep() {
+    use loker_core::api::MinVerdict;
+    use loker_core::role::{Modifier, Role, RoleFilter};
+    use loker_core::verdict::{Viewer, eligible_for};
+    let s = store("parity").await;
+    ingest(&s, "jobicy", &varied_jobs(300)).await;
+    let jobs: std::collections::HashMap<String, loker_core::model::Job> = {
+        let (_, _, ids) = every_hit(&s, &SearchParams::default()).await;
+        assert_eq!(ids.len(), 300);
+        s.get(&ids)
+            .await
+            .unwrap()
+            .into_iter()
+            .map(|j| (j.id.clone(), j))
+            .collect()
+    };
+    let mut seed: u64 = 7;
+    let mut next = move |m: usize| {
+        seed = seed
+            .wrapping_mul(6364136223846793005)
+            .wrapping_add(1442695040888963407);
+        ((seed >> 33) % m as u64) as usize
+    };
+    let mut narrowed = 0;
+    let mut by_query: std::collections::HashMap<(String, bool), Vec<String>> = Default::default();
+    for _ in 0..100 {
+        let country = [None, Some("ID"), Some("DE"), Some("US"), Some("BR")][next(5)];
+        let p = SearchParams {
+            q: ["", "engineer", "data analyst", "designer intern"][next(4)].into(),
+            any_word: next(4) == 0,
+            country: country.map(str::to_string),
+            tz: country.and([None, Some(7.0), Some(-5.0)][next(3)]),
+            min_verdict: country
+                .and([None, Some(MinVerdict::Maybe), Some(MinVerdict::Yes)][next(3)]),
+            seniority: [
+                vec![],
+                vec![Seniority::Senior],
+                vec![Seniority::Junior, Seniority::Intern],
+            ][next(3)]
+            .clone(),
+            experience_years: [None, Some(3)][next(2)],
+            posted_within_days: [None, Some(30), Some(365)][next(3)],
+            role: [
+                vec![],
+                vec![RoleFilter::Role(Role::Engineering)],
+                vec![
+                    RoleFilter::Role(Role::Data),
+                    RoleFilter::Modifier(Modifier::ForwardDeployed),
+                ],
+            ][next(3)]
+            .clone(),
+            ..Default::default()
+        };
+        let key = (p.q.clone(), p.any_word);
+        if !by_query.contains_key(&key) {
+            let (_, _, ids) = every_hit(
+                &s,
+                &SearchParams {
+                    q: p.q.clone(),
+                    any_word: p.any_word,
+                    ..Default::default()
+                },
+            )
+            .await;
+            by_query.insert(key.clone(), ids);
+        }
+        let matching = by_query[&key].clone();
+        let viewer = p.country.as_ref().map(|c| Viewer {
+            country: c.clone(),
+            tz: p.tz,
+            accept_onsite_in: vec![],
+        });
+        let worst = match p.min_verdict {
+            Some(MinVerdict::Yes) => VerdictKind::Yes,
+            Some(MinVerdict::Maybe) => VerdictKind::Maybe,
+            None => VerdictKind::Unknown,
+        };
+        let after = p
+            .posted_within_days
+            .map(|d| chrono::Utc::now() - chrono::Duration::days(i64::from(d)));
+        let matched = matching.len();
+        let expected: Vec<String> = matching
+            .into_iter()
+            .filter(|id| {
+                let j = &jobs[id];
+                viewer
+                    .as_ref()
+                    .is_none_or(|v| eligible_for(&j.eligibility, v).kind <= worst)
+                    && (p.role.is_empty() || j.role.as_ref().is_some_and(|r| r.matches(&p.role)))
+                    && (p.seniority.is_empty()
+                        || j.seniority.is_some_and(|l| p.seniority.contains(&l)))
+                    && p.experience_years
+                        .zip(j.experience.as_ref())
+                        .is_none_or(|(y, e)| e.min_years <= y)
+                    && after.is_none_or(|a| j.posted_at.is_some_and(|t| t >= a))
+            })
+            .collect();
+        let (total, _, got) = every_hit(&s, &p).await;
+        assert_eq!(got, expected, "{p:?}");
+        assert_eq!(total as usize, expected.len(), "{p:?}");
+        narrowed += usize::from(!expected.is_empty() && expected.len() < matched);
+    }
+    assert!(
+        narrowed >= 30,
+        "only {narrowed} searches were narrowed by a filter"
+    );
+}
+
+#[tokio::test]
+async fn rows_derived_by_older_rules_are_derived_again_on_open() {
+    let s = store("restamp").await;
+    let mut j = job(
+        "jobicy",
+        "r1",
+        "Co",
+        "Senior Go Engineer",
+        Scope::Worldwide,
+        0.8,
+    );
+    j.description_md = Some("- 5+ years of experience with Go".into());
+    ingest(&s, "jobicy", &[j]).await;
+    drop(s);
+    let path = std::env::temp_dir()
+        .join(format!("loker-test-{}-restamp", std::process::id()))
+        .join("loker.db");
+    let pool = sqlx::SqlitePool::connect(&format!("sqlite://{}", path.display()))
+        .await
+        .unwrap();
+    sqlx::query("UPDATE canonical_jobs SET derived_stamp = 0, seniority = NULL, min_years = NULL, experience = NULL")
+        .execute(&pool)
+        .await
+        .unwrap();
+    pool.close().await;
+    let s = loker_core::store::Store::open(&path).await.unwrap();
+    let r = search_jobs(
+        &s,
+        SearchParams {
+            seniority: vec![Seniority::Senior],
+            experience_years: Some(4),
+            view: View::Compact,
+            ..Default::default()
+        },
+    )
+    .await
+    .unwrap();
+    assert_eq!(r.total, 0);
+    let r = search_jobs(
+        &s,
+        SearchParams {
+            seniority: vec![Seniority::Senior],
+            view: View::Compact,
+            ..Default::default()
+        },
+    )
+    .await
+    .unwrap();
+    match &r.jobs[..] {
+        [Hit::Compact(c)] => assert_eq!(c.min_years, Some(5)),
+        other => panic!("{other:?}"),
+    }
+}

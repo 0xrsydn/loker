@@ -28,6 +28,7 @@ crates/loker-core/       domain and rules, no network
   src/eligibility_text.rs where a remote job may be done from, read from its description at ingest
   src/country.rs         country, state, province and city names -> ISO codes; region tables
   src/dedup.rs           which listings are one job; no IO
+  src/derived.rs         what search filters on, derived when a job is written; its rules stamp
   src/board.rs           which Ashby, Greenhouse or Lever board a URL names; board keys
   src/verdict.rs         can this viewer apply? (country, timezone)
   src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
@@ -49,6 +50,7 @@ eval/visa/               manual eval of visa sponsorship read from descriptions;
 eval/experience/         manual eval of required years read from descriptions; not in CI
 eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
 eval/discovery/          manual eval of discovered boards: real, named right, how rich; not in CI
+eval/scale/              manual eval of search at scale: same results as an older binary, latency; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 lint/                    comment ratchet: no new comments, the count only goes down
 ```
@@ -78,6 +80,10 @@ in that database.
   the diff. A test fails until you do. Keep changes additive within v1.
 - **Migrations:** add a new numbered file. Never edit one that has shipped;
   sqlx checks their checksums.
+- **Search filters:** a filter runs in SQL over a derived column
+  (`derived.rs`, `store.rs`), so a new one needs a column written in
+  `DerivedCols`, a place in both covering indexes, and a case in
+  `sql_filters_keep_exactly_the_jobs_the_rules_keep`.
 - **SQL strings:** sqlx 0.9 rejects SQL built with `format!`. Use string
   literals, or `concat!` inside a `macro_rules!` as `store.rs` does.
 - **Stored job JSON:** `NewJob` is stored and hashed. A new field must be

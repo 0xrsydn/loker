@@ -4,6 +4,7 @@ pub mod classify;
 pub mod config;
 pub mod country;
 pub mod dedup;
+pub mod derived;
 pub mod eligibility_text;
 pub mod experience_text;
 pub mod home;

@@ -13,7 +13,8 @@ use sqlx::sqlite::{
 use crate::board::{Ats, Board, BoardCheck, BoardStatus};
 use crate::classify;
 use crate::dedup::{self, Linked, Member, Plan};
-use crate::model::{IngestStats, Job, JobSource, NewJob, SourceKind};
+use crate::derived;
+use crate::model::{Eligibility, IngestStats, Job, JobSource, NewJob, SourceKind};
 use crate::normalize::{company_key, title_key};
 
 pub struct Store {
@@ -28,30 +29,104 @@ macro_rules! sources_col {
     };
 }
 
-/// Drops jobs restricted to countries that don't include the viewer (bound
-/// as `?N`, NULL for no viewer). It must never be stricter than
-/// `verdict::eligible_for`: search pages until the limit fills, so this is only
-/// an optimization.
-macro_rules! viewer_location {
-    ($n:literal) => {
-        concat!(
-            "(?",
-            $n,
-            " IS NULL OR c.remote_scope <> 'countries' ",
-            "OR COALESCE(json_extract(c.job, '$.eligibility.elsewhere'), 'excluded') <> 'excluded' ",
-            "OR EXISTS ",
-            "(SELECT 1 FROM json_each(c.job, '$.eligibility.countries') WHERE value = ?",
-            $n,
-            "))"
-        )
+macro_rules! search_filters {
+    () => {
+        " AND c.status = 'active'
+          AND (?3 IS NULL OR (IFNULL(c.scope, '') NOT IN ('onsite', 'hybrid')
+               AND (c.scope <> 'countries'
+                    OR COALESCE(json_extract(c.eligibility, '$.elsewhere'), 'excluded') <> 'excluded'
+                    OR EXISTS (SELECT 1 FROM json_each(c.eligibility, '$.countries') WHERE value = ?3))))
+          AND (?4 IS NULL OR julianday(c.posted) >= julianday(?4))
+          AND (?5 IS NULL OR c.seniority IN (SELECT value FROM json_each(?5)))
+          AND (?6 IS NULL OR c.min_years IS NULL OR c.min_years <= ?6)
+          AND (?7 IS NULL
+               OR json_extract(c.role, '$.primary') IN (SELECT value FROM json_each(?7))
+               OR EXISTS (SELECT 1 FROM json_each(c.role, '$.secondary')
+                          WHERE value IN (SELECT value FROM json_each(?7)))
+               OR EXISTS (SELECT 1 FROM json_each(c.role, '$.modifiers')
+                          WHERE value IN (SELECT value FROM json_each(?8))))"
+    };
+}
+
+macro_rules! fts_from {
+    () => {
+        " FROM jobs_fts JOIN canonical_jobs c ON c.fts_rowid = jobs_fts.rowid WHERE jobs_fts MATCH ?1"
+    };
+}
+
+macro_rules! fts_all_words {
+    () => {
+        "(jobs_fts.rowid IN (SELECT rowid FROM jobs_fts WHERE jobs_fts MATCH ?2))"
+    };
+}
+
+macro_rules! fts_order {
+    () => {
+        " ORDER BY CASE WHEN ?9 THEN 0 ELSE all_words END DESC,
+                   bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id"
+    };
+}
+
+macro_rules! list_from {
+    () => {
+        " FROM canonical_jobs c WHERE 1"
+    };
+}
+
+macro_rules! list_order {
+    () => {
+        " ORDER BY c.posted DESC, c.id"
+    };
+}
+
+macro_rules! job_cols {
+    () => {
+        "c.id, c.job, c.first_seen, c.status, c.role, c.seniority, c.visa, c.experience, "
     };
 }
 
 pub const STALE_AFTER_DAYS: i64 = 30;
 
-pub struct Found {
-    pub job: Job,
+#[derive(Debug, Clone, Default)]
+pub struct SearchFilter {
+    pub q: String,
+    pub any_word: bool,
+    pub country: Option<String>,
+    pub posted_after: Option<String>,
+    pub seniority: Option<String>,
+    pub max_years: Option<i64>,
+    pub roles: Option<String>,
+    pub modifiers: Option<String>,
+}
+
+pub struct Candidate {
+    pub id: String,
     pub partial: bool,
+    pub eligibility: Eligibility,
+}
+
+type SqliteQuery<'q> = sqlx::query::Query<'q, sqlx::Sqlite, sqlx::sqlite::SqliteArguments>;
+
+impl SearchFilter {
+    fn fts(&self) -> Option<(String, String)> {
+        fts_query(&self.q, true).zip(fts_query(&self.q, false))
+    }
+
+    fn bind<'q>(
+        &'q self,
+        query: SqliteQuery<'q>,
+        fts: &'q Option<(String, String)>,
+    ) -> SqliteQuery<'q> {
+        query
+            .bind(fts.as_ref().map(|f| f.0.as_str()))
+            .bind(fts.as_ref().map(|f| f.1.as_str()))
+            .bind(self.country.as_deref())
+            .bind(self.posted_after.as_deref())
+            .bind(self.seniority.as_deref())
+            .bind(self.max_years)
+            .bind(self.roles.as_deref())
+            .bind(self.modifiers.as_deref())
+    }
 }
 
 pub struct Batch {
@@ -88,15 +163,61 @@ impl Store {
         let store = Self { pool };
         store.rebuild_pending().await?;
         store.classify_pending().await?;
+        store.derive_pending().await?;
         Ok(store)
     }
 
+    async fn derive_pending(&self) -> anyhow::Result<()> {
+        const CHUNK: i64 = 4000;
+        let stamp = *derived::STAMP;
+        loop {
+            let pending: Vec<(String, String)> =
+                sqlx::query_as("SELECT id, job FROM canonical_jobs WHERE derived_stamp < ?1 OR derived_stamp > ?1 LIMIT ?2",
+                )
+                .bind(stamp)
+                .bind(CHUNK)
+                    .fetch_all(&self.pool)
+                    .await?;
+            if pending.is_empty() {
+                return Ok(());
+            }
+            let threads = std::thread::available_parallelism().map_or(1, |n| n.get());
+            let per = pending.len().div_ceil(threads);
+            let cols: Vec<DerivedCols> = std::thread::scope(|scope| {
+                let handles: Vec<_> = pending
+                    .chunks(per)
+                    .map(|chunk| {
+                        scope.spawn(move || {
+                            chunk
+                                .iter()
+                                .map(|(_, job)| DerivedCols::of(&serde_json::from_str(job)?))
+                                .collect::<anyhow::Result<Vec<_>>>()
+                        })
+                    })
+                    .collect();
+                handles
+                    .into_iter()
+                    .map(|h| h.join().expect("deriving panicked"))
+                    .collect::<anyhow::Result<Vec<Vec<_>>>>()
+            })?
+            .into_iter()
+            .flatten()
+            .collect();
+            let mut tx = self.pool.begin().await?;
+            for ((id, _), c) in pending.iter().zip(&cols) {
+                c.write(&mut tx, id).await?;
+            }
+            tx.commit().await?;
+        }
+    }
+
     async fn classify_pending(&self) -> anyhow::Result<()> {
-        let pending: Vec<(String, String)> =
-            sqlx::query_as("SELECT id, job FROM canonical_jobs WHERE role_stamp != ?")
-                .bind(classify::STAMP)
-                .fetch_all(&self.pool)
-                .await?;
+        let pending: Vec<(String, String)> = sqlx::query_as(
+            "SELECT id, job FROM canonical_jobs WHERE role_stamp < ?1 OR role_stamp > ?1",
+        )
+        .bind(classify::STAMP)
+        .fetch_all(&self.pool)
+        .await?;
         if pending.is_empty() {
             return Ok(());
         }
@@ -372,70 +493,134 @@ impl Store {
         limit: u32,
         offset: u32,
     ) -> anyhow::Result<Vec<Job>> {
-        let found = self
-            .search_with(query, false, country, limit, offset)
-            .await?;
-        Ok(found.into_iter().map(|f| f.job).collect())
+        let filter = SearchFilter {
+            q: query.to_string(),
+            country: country.map(str::to_string),
+            ..Default::default()
+        };
+        let ids: Vec<String> = self
+            .search_page(&filter, limit, offset)
+            .await?
+            .into_iter()
+            .map(|(id, _)| id)
+            .collect();
+        Ok(self
+            .get_in_order(&ids)
+            .await?
+            .into_iter()
+            .flatten()
+            .collect())
     }
 
-    pub async fn search_with(
-        &self,
-        query: &str,
-        any_word: bool,
-        country: Option<&str>,
-        limit: u32,
-        offset: u32,
-    ) -> anyhow::Result<Vec<Found>> {
-        let (Some(any), Some(all)) = (fts_query(query, true), fts_query(query, false)) else {
-            let rows = sqlx::query(concat!(
-                "SELECT c.*, ",
-                sources_col!(),
-                " FROM canonical_jobs c WHERE c.status = 'active' AND ",
-                viewer_location!("1"),
-                " ORDER BY c.posted_at DESC, c.id LIMIT ?2 OFFSET ?3"
-            ))
-            .bind(country)
-            .bind(limit)
-            .bind(offset)
-            .fetch_all(&self.pool)
-            .await?;
-            return rows
-                .iter()
-                .map(|r| {
-                    Ok(Found {
-                        job: row_to_job(r)?,
-                        partial: false,
-                    })
-                })
-                .collect();
+    pub async fn search_count(&self, f: &SearchFilter) -> anyhow::Result<(u32, u32)> {
+        let fts = f.fts();
+        let sql = if fts.is_some() {
+            concat!(
+                "SELECT count(*), IFNULL(sum(all_words), 0) FROM (SELECT ",
+                fts_all_words!(),
+                " AS all_words",
+                fts_from!(),
+                search_filters!(),
+                ")"
+            )
+        } else {
+            concat!(
+                "SELECT count(*), count(*) FROM (SELECT 1",
+                list_from!(),
+                search_filters!(),
+                ")"
+            )
         };
-        let rows = sqlx::query(concat!(
-            "SELECT c.*, ",
-            sources_col!(),
-            ", jobs_fts.job_id IN (SELECT job_id FROM jobs_fts WHERE jobs_fts MATCH ?5) AS all_words
-             FROM jobs_fts JOIN canonical_jobs c ON c.id = jobs_fts.job_id
-             WHERE jobs_fts MATCH ?1 AND c.status = 'active' AND ",
-            viewer_location!("2"),
-            " ORDER BY CASE WHEN ?6 THEN 0 ELSE all_words END DESC,
-                       bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id
-              LIMIT ?3 OFFSET ?4"
-        ))
-        .bind(any)
-        .bind(country)
-        .bind(limit)
-        .bind(offset)
-        .bind(all)
-        .bind(any_word)
-        .fetch_all(&self.pool)
-        .await?;
-        rows.iter()
+        let (total, full): (i64, i64) = f
+            .bind(sqlx::query(sql), &fts)
+            .fetch_one(&self.pool)
+            .await
+            .map(|r| (r.get(0), r.get(1)))?;
+        Ok((total as u32, full as u32))
+    }
+
+    pub async fn search_candidates(&self, f: &SearchFilter) -> anyhow::Result<Vec<Candidate>> {
+        let fts = f.fts();
+        let sql = if fts.is_some() {
+            concat!(
+                "SELECT c.id, c.eligibility, ",
+                fts_all_words!(),
+                " AS all_words",
+                fts_from!(),
+                search_filters!(),
+                fts_order!()
+            )
+        } else {
+            concat!(
+                "SELECT c.id, c.eligibility, 1 AS all_words",
+                list_from!(),
+                search_filters!(),
+                list_order!()
+            )
+        };
+        let mut query = f.bind(sqlx::query(sql), &fts);
+        if fts.is_some() {
+            query = query.bind(f.any_word);
+        }
+        query
+            .fetch_all(&self.pool)
+            .await?
+            .iter()
             .map(|r| {
-                Ok(Found {
-                    job: row_to_job(r)?,
-                    partial: !r.try_get::<bool, _>("all_words")?,
+                Ok(Candidate {
+                    id: r.get("id"),
+                    partial: !r.get::<bool, _>("all_words"),
+                    eligibility: serde_json::from_str(&r.get::<String, _>("eligibility"))?,
                 })
             })
             .collect()
+    }
+
+    pub async fn search_page(
+        &self,
+        f: &SearchFilter,
+        limit: u32,
+        offset: u32,
+    ) -> anyhow::Result<Vec<(String, bool)>> {
+        let fts = f.fts();
+        let sql = if fts.is_some() {
+            concat!(
+                "SELECT c.id, ",
+                fts_all_words!(),
+                " AS all_words",
+                fts_from!(),
+                search_filters!(),
+                fts_order!(),
+                " LIMIT ?10 OFFSET ?11"
+            )
+        } else {
+            concat!(
+                "SELECT c.id, 1 AS all_words",
+                list_from!(),
+                search_filters!(),
+                list_order!(),
+                " LIMIT ?10 OFFSET ?11"
+            )
+        };
+        f.bind(sqlx::query(sql), &fts)
+            .bind(f.any_word)
+            .bind(limit)
+            .bind(offset)
+            .fetch_all(&self.pool)
+            .await?
+            .iter()
+            .map(|r| Ok((r.get("id"), !r.try_get::<bool, _>("all_words")?)))
+            .collect()
+    }
+
+    pub async fn get_in_order(&self, ids: &[String]) -> anyhow::Result<Vec<Option<Job>>> {
+        let mut found: std::collections::HashMap<String, Job> = self
+            .get(ids)
+            .await?
+            .into_iter()
+            .map(|j| (j.id.clone(), j))
+            .collect();
+        Ok(ids.iter().map(|id| found.remove(id)).collect())
     }
 
     pub async fn role_questions(
@@ -509,7 +694,8 @@ impl Store {
 
     pub async fn get(&self, ids: &[String]) -> anyhow::Result<Vec<Job>> {
         let rows = sqlx::query(concat!(
-            "SELECT c.*, ",
+            "SELECT ",
+            job_cols!(),
             sources_col!(),
             " FROM canonical_jobs c WHERE c.id IN (SELECT value FROM json_each(?1))"
         ))
@@ -525,6 +711,14 @@ impl Store {
                 .fetch_all(&self.pool)
                 .await?,
         )
+    }
+
+    pub async fn has_active_jobs(&self) -> anyhow::Result<bool> {
+        Ok(sqlx::query_scalar(
+            "SELECT EXISTS (SELECT 1 FROM canonical_jobs WHERE status = 'active')",
+        )
+        .fetch_one(&self.pool)
+        .await?)
     }
 
     pub async fn counts(&self) -> anyhow::Result<Vec<(String, i64)>> {
@@ -841,10 +1035,7 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     .fetch_all(&mut *conn)
     .await?;
     if rows.is_empty() {
-        sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
-            .bind(cid)
-            .execute(&mut *conn)
-            .await?;
+        drop_fts(&mut *conn, cid).await?;
         sqlx::query("DELETE FROM canonical_jobs WHERE id = ?")
             .bind(cid)
             .execute(&mut *conn)
@@ -898,18 +1089,41 @@ async fn rebuild_canonical(conn: &mut SqliteConnection, cid: &str, ts: &str) -> 
     .bind(cid)
     .execute(&mut *conn)
     .await?;
-    sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?")
+    DerivedCols::of(&m)?.write(&mut *conn, cid).await?;
+    let kept = drop_fts(&mut *conn, cid).await?;
+    let rowid = sqlx::query(
+        "INSERT INTO jobs_fts (rowid, job_id, title, company, description) VALUES (?, ?, ?, ?, ?)",
+    )
+    .bind(kept)
+    .bind(cid)
+    .bind(&m.title)
+    .bind(&m.company)
+    .bind(&m.description_md)
+    .execute(&mut *conn)
+    .await?
+    .last_insert_rowid();
+    sqlx::query("UPDATE canonical_jobs SET fts_rowid = ? WHERE id = ?")
+        .bind(rowid)
         .bind(cid)
-        .execute(&mut *conn)
-        .await?;
-    sqlx::query("INSERT INTO jobs_fts (job_id, title, company, description) VALUES (?, ?, ?, ?)")
-        .bind(cid)
-        .bind(&m.title)
-        .bind(&m.company)
-        .bind(&m.description_md)
         .execute(&mut *conn)
         .await?;
     Ok(())
+}
+
+async fn drop_fts(conn: &mut SqliteConnection, cid: &str) -> anyhow::Result<Option<i64>> {
+    let rowid: Option<i64> =
+        sqlx::query_scalar("SELECT fts_rowid FROM canonical_jobs WHERE id = ?")
+            .bind(cid)
+            .fetch_optional(&mut *conn)
+            .await?
+            .flatten();
+    match rowid {
+        Some(r) => sqlx::query("DELETE FROM jobs_fts WHERE rowid = ?").bind(r),
+        None => sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?").bind(cid),
+    }
+    .execute(&mut *conn)
+    .await?;
+    Ok(rowid)
 }
 
 async fn role_json(conn: &mut SqliteConnection, job: &NewJob) -> anyhow::Result<Option<String>> {
@@ -925,6 +1139,61 @@ async fn role_json(conn: &mut SqliteConnection, job: &NewJob) -> anyhow::Result<
         .transpose()?)
 }
 
+fn plain<T: serde::Serialize>(value: &T) -> anyhow::Result<String> {
+    match serde_json::to_value(value)? {
+        serde_json::Value::String(s) => Ok(s),
+        other => anyhow::bail!("expected a string, got {other}"),
+    }
+}
+
+struct DerivedCols {
+    eligibility: String,
+    scope: String,
+    posted: Option<String>,
+    seniority: Option<String>,
+    visa: Option<String>,
+    experience: Option<String>,
+    min_years: Option<i64>,
+}
+
+impl DerivedCols {
+    fn of(job: &NewJob) -> anyhow::Result<Self> {
+        let d = derived::derive(job);
+        Ok(Self {
+            eligibility: serde_json::to_string(&job.eligibility)?,
+            scope: plain(&job.eligibility.scope())?,
+            posted: job.posted_at.as_ref().map(plain).transpose()?,
+            seniority: d.seniority.as_ref().map(plain).transpose()?,
+            visa: d.visa.as_ref().map(serde_json::to_string).transpose()?,
+            min_years: d.experience.as_ref().map(|e| i64::from(e.min_years)),
+            experience: d
+                .experience
+                .as_ref()
+                .map(serde_json::to_string)
+                .transpose()?,
+        })
+    }
+
+    async fn write(&self, conn: &mut SqliteConnection, id: &str) -> anyhow::Result<()> {
+        sqlx::query(
+            "UPDATE canonical_jobs SET eligibility = ?, scope = ?, posted = ?, seniority = ?, visa = ?,
+               experience = ?, min_years = ?, derived_stamp = ? WHERE id = ?",
+        )
+        .bind(&self.eligibility)
+        .bind(&self.scope)
+        .bind(&self.posted)
+        .bind(&self.seniority)
+        .bind(&self.visa)
+        .bind(&self.experience)
+        .bind(self.min_years)
+        .bind(*derived::STAMP)
+        .bind(id)
+        .execute(conn)
+        .await?;
+        Ok(())
+    }
+}
+
 fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     let parse_ts = |s: String| -> anyhow::Result<DateTime<Utc>> {
         Ok(DateTime::parse_from_rfc3339(&s)?.with_timezone(&Utc))
@@ -932,30 +1201,23 @@ fn row_to_job(r: &sqlx::sqlite::SqliteRow) -> anyhow::Result<Job> {
     let mut sources: Vec<JobSource> = serde_json::from_str(&r.get::<String, _>("sources"))?;
     sources.sort_by(|a, b| a.source.cmp(&b.source));
     let m: NewJob = serde_json::from_str(&r.get::<String, _>("job"))?;
-    // Parsed once for every reader, and only when a source field leaves one to read.
-    let posting = (m.visa.is_none() || m.experience.is_none())
-        .then(|| {
-            m.description_md
-                .as_deref()
-                .map(crate::posting::Posting::parse)
-        })
-        .flatten();
+    let column = |name: &str| r.get::<Option<String>, _>(name);
     Ok(Job {
         id: r.get("id"),
-        seniority: crate::normalize::seniority(m.seniority.as_deref(), &m.title),
+        seniority: column("seniority")
+            .map(|s| serde_json::from_value(serde_json::Value::String(s)))
+            .transpose()?,
         title: m.title,
         company: m.company,
         employment_type: m.employment_type,
         eligibility: m.eligibility,
         pay: m.pay,
-        visa: m
-            .visa
-            .clone()
-            .or_else(|| posting.as_ref().and_then(crate::visa_text::read)),
-        experience: m
-            .experience
-            .clone()
-            .or_else(|| posting.as_ref().and_then(crate::experience_text::read)),
+        visa: column("visa")
+            .map(|v| serde_json::from_str(&v))
+            .transpose()?,
+        experience: column("experience")
+            .map(|e| serde_json::from_str(&e))
+            .transpose()?,
         tech_tags: m.tech_tags,
         url: m.apply_url.unwrap_or(m.canonical_url),
         posted_at: m.posted_at,

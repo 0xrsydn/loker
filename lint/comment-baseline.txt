@@ -9,7 +9,7 @@
 3 crates/loker-core/src/normalize.rs
 7 crates/loker-core/src/pay_text.rs
 21 crates/loker-core/src/posting.rs
-11 crates/loker-core/src/store.rs
+6 crates/loker-core/src/store.rs
 2 crates/loker-core/src/verdict.rs
 5 crates/loker-core/src/visa_text.rs
 1 crates/loker-core/tests/role.rs

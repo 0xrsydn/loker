@@ -125,17 +125,38 @@ the job is.
 **Storage.** A canonical job is a row holding its merged job as JSON
 (`canonical_jobs.job`, a `NewJob`), hashed as a whole together with its
 status, so an unchanged rebuild writes nothing. SQL reads only generated
-columns (`canonical_url`, `remote_scope`, `posted_at`, `title`, `company`) and
-JSON paths (`tests/storage.rs` pins each one).
+columns (`canonical_url`, `remote_scope`, `posted_at`, `title`, `company`),
+JSON paths (`tests/storage.rs` pins each one) and the derived columns below.
+
+**Derived columns.** What search filters on is written next to the JSON
+whenever a canonical job is written (`derived.rs`): eligibility, scope,
+posting date, seniority, visa, experience and its minimum years. Seniority,
+visa and experience are rules over the title and description, so each row
+carries `derived_stamp`, a hash of the rule sources (`derived::STAMP`); when
+the store opens, rows with another stamp are derived again from the stored
+JSON, in parallel, with no re-fetch. A rule change costs one pass over the
+jobs on the next open (about a millisecond a job), instead of a regex pass
+over every match on every search. Two covering indexes hold every filtered
+column, `canonical_jobs_search` (by id, for a full-text match) and
+`canonical_jobs_listing` (by status and date), so counting and filtering
+never read a row's JSON; `scope` and `posted` copy the generated columns
+because SQLite can't cover a query with an index on a generated column.
 
 **Search.** Any word of the query matches. Jobs with every word rank first,
 then by bm25 with a title match weighted five times: `eval/search` found
 all-words-first as good as score alone, and it never comes back empty when
 some word matches; a title weight of 5 beats 1, and 10 is no better. The
-verdict, level, role and years filters are derived when a job is read, so
-they run in Rust over every match: the only way to fill a page and count
-`total`, and a few thousand rows take milliseconds. The SQL pre-filter on
-the viewer's country must never be stricter than the verdict.
+level, years, role and date filters and `total` run in SQL over the derived
+columns, and only the page's jobs are read in full. The verdict stays in
+Rust (regions resolve through `country.rs`): with a `country`, SQL drops
+on-site and hybrid jobs (always `no`, since a search accepts no on-site city)
+and jobs restricted to other countries, and Rust takes the verdict of the
+rest from their eligibility column alone. That SQL must never be stricter
+than the verdict; `sql_filters_keep_exactly_the_jobs_the_rules_keep` in
+`tests/search.rs` checks every filter against the rules, and `eval/scale`
+compares results and latency with an older binary on a real database.
+Search work grows with the matches, at one to three microseconds each plus
+the bm25 sort of a full-text match, and the page costs the same at any size.
 
 **Fetching.** `ingest --all` and `verify` fetch concurrently, limited per API
 host (`Source::host`): `FETCHES_PER_HOST` in flight, starts `HOST_START_GAP`
@@ -188,8 +209,8 @@ exactly while one of its listings is live. A complete fetch's ids come from
 its raw items, so an item that fails to transform still counts as present;
 if any item has no id, the fetch closes nothing.
 
-**Seniority.** Derived when a job is read, like a verdict, so every stored
-job has it without a re-fetch: level words in the title first, else the level
+**Seniority.** A derived column, so every stored job has it without a
+re-fetch: level words in the title first, else the level
 the source states (`normalize::seniority`). About 40% of jobs name a level.
 Jobicy's `jobLevel` "Director" is ignored: it is set on account executives
 and BDRs as often as on directors.
@@ -224,7 +245,7 @@ mentions sponsorship (an interview question, an HR duty): a wrong
 field of its own (`NewJob::visa`, Y Combinator's three fixed values) fills it
 at ingest and wins (YC's "US citizenship/visa not required" says nothing
 about sponsorship); otherwise `visa_text.rs` reads it from the description
-when a job is read (like seniority), so a rule change needs no re-fetch.
+into a derived column (like seniority), so a rule change needs no re-fetch.
 `eval/visa` measures the reading.
 
 **Experience.** `experience.minYears` is the years a job requires (0 when
@@ -232,8 +253,8 @@ it says none is needed), with `maxYears` for a range and the phrase it was
 read from; absent when no number is stated ("several years" is none). It is
 separate from seniority: a title's level and the years asked don't line up
 across companies. Y Combinator's own field (`minExperience`) fills it at
-ingest and wins; otherwise `experience_text.rs` reads the description when
-a job is read. Only required years count: a preferred heading or "5+ years
+ingest and wins; otherwise `experience_text.rs` reads the description into
+a derived column. Only required years count: a preferred heading or "5+ years
 preferred" doesn't; of several required numbers the largest is the bar, of
 alternatives ("5 years with a bachelor's or 3 with a master's") or levels
 ("For Senior: 6+") the smallest. A number too high would hide a job from
@@ -462,6 +483,7 @@ Nothing here is needed now; each change waits for its trigger.
 | A read pool beside the one writer connection `Store::open` opens | A long-running server with concurrent clients (REST) |
 | More signals inside `dedup::cluster` (location, apply-URL domain) to tell apart listings that share a key | `sources eval` shows blocked keys hiding real separate jobs |
 | Fuzzy matching across keys (a new candidate query, e.g. by company) | `sources eval` or real use shows missed merges. A real design change, not a tweak. |
+| One query for a search's count and page (a window function), role ids as a plain column, or an estimated `total` past some size | Searches that match most of the jobs take over a second in `eval/scale` on a database people actually have |
 
 New kinds of data (company profiles, salary data, application tracking) get
 their own types and follow the same pipeline; they don't go into `NewJob`.

@@ -120,6 +120,13 @@ takes its link and text from the employer board, its eligibility from the most
 confident source, and lists every source it came from (`sources`) so
 aggregators that require attribution (Remote OK, Jobicy) get their link.
 
+Search reads level, years, visa and eligibility from columns written with
+each job, not from the description, so a search costs a few microseconds per
+matching job and the page itself costs the same at any size (`eval/scale`:
+a median of 0.7 s over 305k jobs). When the rules that read them change, the
+next command re-reads every stored job once before it answers, about a
+millisecond a job.
+
 ### Who can apply
 
 Each job records where it is open (worldwide, countries, regions such as APAC
@@ -302,8 +309,11 @@ gain a comment line (see AGENTS.md).
 - `crates/loker-core/tests/`: dedup rules (order independence, blocked merges,
   a table of `dedup::cluster` cases),
   lifecycle (closing, reopening, truncated fetches, expiry with a moved clock),
-  search (eligible jobs behind many ineligible ones, offset paging) and storage
-  (every JSON path the SQL reads still resolves).
+  search (eligible jobs behind many ineligible ones, offset paging, every SQL
+  filter against the rules it stands for) and storage (every JSON path the SQL
+  reads still resolves).
+- `eval/scale/` (manual): an older and a newer binary on copies of a real or
+  synthetic database, the same results case by case, and their latency.
 - `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one
   hand-written payload per adapter: ingest, idempotent re-runs, order
   independence, CLI = MCP parity, closing through a real fetch, `verify`,
