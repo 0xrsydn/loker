@@ -1300,6 +1300,7 @@ dependencies = [
  "percent-encoding",
  "proptest",
  "regex",
+ "regex-automata",
  "schemars",
  "serde",
  "serde_json",

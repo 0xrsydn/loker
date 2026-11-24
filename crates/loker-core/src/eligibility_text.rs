@@ -1,6 +1,9 @@
 use std::sync::LazyLock;
 
 use regex::Regex;
+use regex_automata::meta::Regex as MetaRegex;
+use regex_automata::util::captures::Captures;
+use regex_automata::{Anchored, Input};
 
 use crate::model::{Eligibility, Elsewhere, TzStrength, TzWindow, Workplace};
 
@@ -14,11 +17,114 @@ pub struct Stated {
     pub evidence: Vec<String>,
 }
 
-static WHERE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(
+struct Gated {
+    gate: Regex,
+    real: MetaRegex,
+}
+
+#[derive(Clone, Copy)]
+struct Found<'t> {
+    text: &'t str,
+    start: usize,
+    end: usize,
+}
+
+impl<'t> Found<'t> {
+    fn start(&self) -> usize {
+        self.start
+    }
+    fn end(&self) -> usize {
+        self.end
+    }
+    fn as_str(&self) -> &'t str {
+        &self.text[self.start..self.end]
+    }
+}
+
+struct Hit<'t> {
+    text: &'t str,
+    caps: Captures,
+}
+
+impl<'t> Hit<'t> {
+    fn found(&self, span: Option<regex_automata::Span>) -> Option<Found<'t>> {
+        span.map(|s| Found {
+            text: self.text,
+            start: s.start,
+            end: s.end,
+        })
+    }
+    fn get(&self, i: usize) -> Option<Found<'t>> {
+        self.found(self.caps.get_group(i))
+    }
+    fn name(&self, n: &str) -> Option<Found<'t>> {
+        self.found(self.caps.get_group_by_name(n))
+    }
+}
+
+struct Hits<'t> {
+    re: &'t Gated,
+    text: &'t str,
+    pos: usize,
+}
+
+impl Hits<'_> {
+    fn skip_to(&mut self, pos: usize) {
+        self.pos = pos;
+        while !self.text.is_char_boundary(self.pos) {
+            self.pos += 1;
+        }
+    }
+}
+
+impl<'t> Iterator for Hits<'t> {
+    type Item = Hit<'t>;
+    fn next(&mut self) -> Option<Hit<'t>> {
+        while self.pos <= self.text.len() {
+            let candidate = self.re.gate.find_at(self.text, self.pos)?.start();
+            let input = Input::new(self.text)
+                .span(candidate..self.text.len())
+                .anchored(Anchored::Yes);
+            let mut caps = self.re.real.create_captures();
+            self.re.real.search_captures(&input, &mut caps);
+            if let Some(m) = caps.get_match() {
+                self.skip_to(m.end().max(candidate + 1));
+                return Some(Hit {
+                    text: self.text,
+                    caps,
+                });
+            }
+            self.skip_to(candidate + 1);
+        }
+        None
+    }
+}
+
+impl Gated {
+    fn new(pattern: &str) -> Gated {
+        Gated {
+            gate: Regex::new(&pattern.replace(r"\b", "")).unwrap(),
+            real: MetaRegex::new(pattern).unwrap(),
+        }
+    }
+
+    fn captures_iter<'t>(&'t self, text: &'t str) -> Hits<'t> {
+        Hits {
+            re: self,
+            text,
+            pos: 0,
+        }
+    }
+
+    fn is_match(&self, text: &str) -> bool {
+        self.captures_iter(text).next().is_some()
+    }
+}
+
+static WHERE: LazyLock<Gated> = LazyLock::new(|| {
+    Gated::new(
         r"(?i)\b(?:location\s*:\s*(?:(?:fully\s+)?remote\s*(?:[-–—,(]|\bin\b|\bfrom\b)?)?|(?:located|based)\s+in\s+and\s+(?:authori[sz]ed|eligible)\s+to\s+work\s+in|(?:based|located|living|residing|reside|resident|live)\s+(?:anywhere\s+)?(?:in|within)|(?:hiring|hire|recruiting)\s+(?:for\s+this\s+(?:role|position)\s+)?(?:across|in|within)|remote(?:ly)?(?:\s+based)?\s+(?:in|within|from)|fully\s+remote,?\s+(?:based\s+)?(?:in|within)|work(?:ing)?\s+(?:remotely\s+)?from(?:\s+anywhere\s+(?:in|within))?|anywhere\s+(?:in|within)|(?:eligible|authori[sz]ed|permitted|able)\s+to\s+(?:live\s+and\s+)?work\s+(?:remotely\s+)?in|open\s+to\s+(?:candidates|applicants|people|residents)\s+(?:based\s+)?(?:in|from))\s+([^.;!?()\n]{2,120})",
     )
-    .unwrap()
 });
 
 static NOT_THE_HIRE: LazyLock<Regex> = LazyLock::new(|| {
@@ -38,17 +144,18 @@ static OPEN_ENDED: LazyLock<Regex> =
 
 static STATES: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(?i)\bstates\b").unwrap());
 
-static WORLDWIDE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(?i)(?:\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work(?:ing)?|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b)(?P<next>\s+\w+)?").unwrap()
+static WORLDWIDE: LazyLock<Gated> = LazyLock::new(|| {
+    Gated::new(
+        r"(?i)(?:\bno\s+geographic(?:al)?\s+restrictions?\b|\b(?:work(?:ing)?|hire|hiring)\s+(?:from\s+)?anywhere\s+in\s+the\s+world\b|\bopen\s+to\s+(?:candidates|applicants)\s+worldwide\b)(?P<next>\s+\w+)?",
+    )
 });
 
-static HOURS: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(&format!(
+static HOURS: LazyLock<Gated> = LazyLock::new(|| {
+    Gated::new(&format!(
         r"(?i)\b(?:(?P<z1>{Z})\s*(?:time\s*zone)?\s*\(?\s*(?:\+\s*/\s*-|±|\+-|plus\s+or\s+minus)\s*(?P<n1>\d{{1,2}}|{N})\s*(?:hours?|hrs?|h)\b|within\s+(?P<n2>\d{{1,2}}|{N})\s+hours?\s+of\s+(?P<z2>{Z})|between\s+(?P<a>{Z})\s+and\s+(?P<b>{Z})|(?P<c>UTC\s*[+-]\s*\d{{1,2}})\s*(?:to|-|–)\s*(?P<d>UTC\s*[+-]\s*\d{{1,2}}))",
         N = "one|two|three|four|five|six",
         Z = r"UTC\s*[+-]\s*\d{1,2}|GMT\s*[+-]\s*\d{1,2}|CEST|CET|EET|WET|GMT|UTC|BST|EST|EDT|ET|CST|CT|MST|MT|PST|PDT|PT|IST|SGT|AEST|AEDT|JST"
     ))
-    .unwrap()
 });
 
 static PREFERRED: LazyLock<Regex> =
@@ -80,7 +187,7 @@ fn zone(z: &str) -> Option<f64> {
 }
 
 fn hours(text: &str) -> Option<(TzWindow, String)> {
-    let c = HOURS.captures(text)?;
+    let c = HOURS.captures_iter(text).next()?;
     let g = |n: &str| c.name(n).map(|m| m.as_str());
     let (from, to) = if let (Some(z), Some(n)) = (g("z1").or(g("z2")), g("n1").or(g("n2"))) {
         let n = match n.to_lowercase().as_str() {
@@ -194,11 +301,15 @@ fn window(s: &str, mut a: usize, b: usize) -> &str {
 }
 
 pub fn open_wider(text: &str) -> bool {
-    static OPEN: LazyLock<Regex> = LazyLock::new(|| {
-        Regex::new(r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\bwherever\s+you\s+(?:like|want|choose|prefer)\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b").unwrap()
+    static OPEN: LazyLock<Gated> = LazyLock::new(|| {
+        Gated::new(
+            r"(?i)\bno\s+geographic(?:al)?\s+restrictions?\b|\banywhere\s+in\s+the\s+world\b|\bremote\s+worldwide\b|\b(?:hire|hiring)\s+(?:worldwide|globally|internationally)\b|\blive\s+anywhere\b|\bfrom\s+wherever\s+you\s+are\b|\bwherever\s+you\s+(?:like|want|choose|prefer)\b|\blocation:\s*international\b|\bany\s+time\s*zones?\b|\bbased\s+outside\b",
+        )
     });
-    static ANYWHERE: LazyLock<Regex> = LazyLock::new(|| {
-        Regex::new(r"(?i)\b(?:work|working)\s+(?:flexibly\s+|remotely\s+)?from\s+anywhere\b(?P<next>\s+\w+)?").unwrap()
+    static ANYWHERE: LazyLock<Gated> = LazyLock::new(|| {
+        Gated::new(
+            r"(?i)\b(?:work|working)\s+(?:flexibly\s+|remotely\s+)?from\s+anywhere\b(?P<next>\s+\w+)?",
+        )
     });
     let text = text.replace(['*', '_'], "");
     OPEN.is_match(&text)
