@@ -1040,7 +1040,7 @@ pub fn live_checks(r: &VerifyReport) -> Vec<DoctorCheck> {
 #[derive(Debug, Clone, Default, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IngestParams {
-    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.
+    /// Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`, `recruitee:<board>`, `smartrecruiters:<company>`.
     pub source: String,
     /// Pages to fetch where the source paginates (himalayas and workable: 20 jobs a page; ycombinator: 40 companies a page), default 3, at most 50.
     pub pages: Option<u32>,

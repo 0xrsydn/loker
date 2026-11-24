@@ -13,16 +13,26 @@ pub enum Ats {
     Ashby,
     Greenhouse,
     Lever,
+    Recruitee,
+    SmartRecruiters,
 }
 
 impl Ats {
-    pub const ALL: [Ats; 3] = [Ats::Ashby, Ats::Greenhouse, Ats::Lever];
+    pub const ALL: [Ats; 5] = [
+        Ats::Ashby,
+        Ats::Greenhouse,
+        Ats::Lever,
+        Ats::Recruitee,
+        Ats::SmartRecruiters,
+    ];
 
     pub fn as_str(self) -> &'static str {
         match self {
             Ats::Ashby => "ashby",
             Ats::Greenhouse => "greenhouse",
             Ats::Lever => "lever",
+            Ats::Recruitee => "recruitee",
+            Ats::SmartRecruiters => "smartrecruiters",
         }
     }
 
@@ -300,11 +310,51 @@ impl Board {
                 ("v0", "postings") => (Ats::Lever, segment(2)?.to_string()),
                 _ => return None,
             },
-            _ => return None,
+            "jobs.smartrecruiters.com" | "careers.smartrecruiters.com" => (
+                Ats::SmartRecruiters,
+                page_slug(segment(0)?, SMARTRECRUITERS_PATHS)?,
+            ),
+            "api.smartrecruiters.com" => match (segment(0)?, segment(1)?) {
+                ("v1", "companies") => (Ats::SmartRecruiters, segment(2)?.to_string()),
+                _ => return None,
+            },
+            _ => match host.strip_suffix(".recruitee.com") {
+                Some(sub) if !sub.contains('.') && !RECRUITEE_HOSTS.contains(&sub) => {
+                    (Ats::Recruitee, sub.to_string())
+                }
+                _ => return None,
+            },
         };
         Board::new(ats, &slug)
     }
 }
+
+const RECRUITEE_HOSTS: &[&str] = &[
+    "www",
+    "api",
+    "app",
+    "blog",
+    "help",
+    "support",
+    "status",
+    "docs",
+    "developers",
+    "partners",
+    "marketplace",
+    "academy",
+    "community",
+    "cdn",
+    "static",
+    "assets",
+    "mail",
+    "go",
+    "info",
+    "learn",
+    "careers",
+    "integrations",
+];
+
+const SMARTRECRUITERS_PATHS: &[&str] = &["oneclick-ui", "sr-jobs", "api", "static", "ni"];
 
 const FILE_EXTENSIONS: [&str; 9] = [
     ".txt", ".xml", ".ico", ".js", ".css", ".png", ".svg", ".json", ".html",
@@ -383,6 +433,35 @@ mod tests {
             ("jobs.lever.co/apryse", Some("lever:apryse")),
             ("https://www.jobs.lever.co/apryse", Some("lever:apryse")),
             ("https://jobs.lever.co/a%2Fb/1", None),
+            (
+                "https://bunq.recruitee.com/o/senior-copywriter-1",
+                Some("recruitee:bunq"),
+            ),
+            (
+                "https://Bunq.recruitee.com/api/offers/",
+                Some("recruitee:bunq"),
+            ),
+            ("https://www.recruitee.com/pricing", None),
+            ("https://recruitee.com/", None),
+            ("https://api.recruitee.com/c/1", None),
+            ("https://a.b.recruitee.com/o/x", None),
+            (
+                "https://jobs.smartrecruiters.com/BoschGroup/744000163514929-estagio",
+                Some("smartrecruiters:BoschGroup"),
+            ),
+            (
+                "https://careers.smartrecruiters.com/Visa",
+                Some("smartrecruiters:Visa"),
+            ),
+            (
+                "https://api.smartrecruiters.com/v1/companies/BoschGroup/postings?limit=1",
+                Some("smartrecruiters:BoschGroup"),
+            ),
+            (
+                "https://jobs.smartrecruiters.com/oneclick-ui/company/BoschGroup/publication/1",
+                None,
+            ),
+            ("https://jobs.smartrecruiters.com/", None),
             ("https://example.com/jobs.lever.co/apryse", None),
             ("https://notjobs.lever.co/apryse", None),
             ("ftp://jobs.lever.co/apryse", None),
@@ -457,6 +536,8 @@ mod tests {
             ("ashby:Hippocratic AI", "ashby:hippocratic ai"),
             ("greenhouse:Stripe", "greenhouse:stripe"),
             ("lever:Palantir", "lever:Palantir"),
+            ("recruitee:Bunq", "recruitee:bunq"),
+            ("smartrecruiters:BoschGroup", "smartrecruiters:boschgroup"),
         ];
         for (id, key) in cases {
             assert_eq!(Board::from_id(id).unwrap().key(), key, "{id}");

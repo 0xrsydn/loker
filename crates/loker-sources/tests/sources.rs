@@ -12,6 +12,8 @@ fn only_boards_that_list_nothing_but_remote_jobs_are_remote_only() {
         ("greenhouse:acme", false),
         ("ashby:acme", false),
         ("lever:acme", false),
+        ("recruitee:acme", false),
+        ("smartrecruiters:acme", false),
     ];
     assert_eq!(cases.len(), SOURCES.len(), "a row for every source");
     for (id, remote_only) in cases {

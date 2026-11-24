@@ -33,7 +33,7 @@
       ]
     },
     "source": {
-      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`.",
+      "description": "Source instance: `himalayas`, `jobicy`, `remoteok`, `weworkremotely`, `workable`, `ycombinator`, `greenhouse:<board>`, `ashby:<board>`, `lever:<site>`, `recruitee:<board>`, `smartrecruiters:<company>`.",
       "type": "string"
     }
   },

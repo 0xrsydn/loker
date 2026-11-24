@@ -336,6 +336,52 @@ pub async fn check_board(client: &HttpClient, board: &Board) -> anyhow::Result<B
                 company,
             ))
         }
+        Ats::Recruitee => {
+            let host = format!("{}.recruitee.com", board.slug.to_lowercase());
+            let api = crate::host_url(&host, "/api/offers/");
+            let Some(body) = get_json_unless_missing(client, &api).await? else {
+                return Ok(missing);
+            };
+            let offers = body
+                .get("offers")
+                .and_then(Value::as_array)
+                .map(Vec::as_slice)
+                .unwrap_or_default();
+            let company = offers
+                .iter()
+                .find_map(|o| o.get("company_name")?.as_str())
+                .and_then(|name| Company::new(name, None));
+            Ok(BoardCheck::answered(
+                board.slug.to_lowercase(),
+                !offers.is_empty(),
+                Some(offers.len() as u32),
+                company,
+            ))
+        }
+        Ats::SmartRecruiters => {
+            let api = url(
+                "https://api.smartrecruiters.com",
+                &format!("/v1/companies/{slug}/postings?limit=1"),
+            );
+            let Some(body) = get_json_unless_missing(client, &api).await? else {
+                return Ok(missing);
+            };
+            let total = body.get("totalFound").and_then(Value::as_u64).unwrap_or(0);
+            let first = body.pointer("/content/0/company");
+            let spelled = first
+                .and_then(|c| c.get("identifier")?.as_str())
+                .filter(|id| id.eq_ignore_ascii_case(&board.slug))
+                .map_or_else(|| board.slug.clone(), String::from);
+            let company = first
+                .and_then(|c| c.get("name")?.as_str())
+                .and_then(|name| Company::new(name, None));
+            Ok(BoardCheck::answered(
+                spelled,
+                total > 0,
+                Some(total as u32),
+                company,
+            ))
+        }
     }
 }
 

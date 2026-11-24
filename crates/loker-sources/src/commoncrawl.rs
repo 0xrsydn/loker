@@ -14,10 +14,13 @@ const DATA: &str = "https://data.commoncrawl.org";
 const CLUSTER_TIMEOUT: Duration = Duration::from_secs(900);
 const BLOCK_PAUSE: Duration = Duration::from_millis(200);
 
-pub const HOSTS: [&str; 7] = [
+pub const HOSTS: [&str; 10] = [
     "co,lever,eu,jobs)/",
     "co,lever,jobs)/",
     "com,ashbyhq,jobs)/",
+    "com,recruitee,",
+    "com,smartrecruiters,careers)/",
+    "com,smartrecruiters,jobs)/",
     "io,greenhouse,boards)/",
     "io,greenhouse,eu,boards)/",
     "io,greenhouse,eu,job-boards)/",

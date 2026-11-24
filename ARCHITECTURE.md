@@ -358,6 +358,24 @@ Combinator's 429.
   verdicts and no wrong ones. A location of just "Remote" may carry the
   employer's own country, so it stays unknown, as does a lone city (the
   normalizer's rule).
+- *Recruitee:* one request per board (`<slug>.recruitee.com/api/offers/`)
+  returns every published offer with its description, so the fetch is the
+  complete board. Flags say remote, hybrid or on-site; a remote offer's
+  locations are read as the countries it is open to, like Lever's (not yet
+  measured in `eval/eligibility` for either new ATS). Pay is a min, max,
+  currency and period when given; `close_at` is the expiry. The canonical
+  URL is the offer's careers page, often on the company's own domain.
+- *SmartRecruiters:* the postings list (pages of 100) has no descriptions;
+  each posting's own request does. A daily ingest asks only for postings
+  that are new or whose list entry changed (id, title, release date, job ad,
+  reference, location): the rest reuse the stored raw item
+  (`Store::live_raw`), so a re-ingest of a 223-posting board is three list
+  requests, 1.7 s instead of 16 s. At most four are in flight per board.
+  `verify` has no store and asks for the first 20 only. Internal postings
+  are skipped. A company it doesn't know answers with an empty list. The
+  experience level is used only where it names one level (`internship`,
+  `entry_level`, `director`, `executive`): "Mid-Senior" and "Associate"
+  span several.
 - *Remote OK:* the first array element is a legal notice. Salaries are USD a
   year, 0 means not given, and the pay bounds drop junk values.
 - *We Work Remotely:* RSS. The all-jobs feed holds only about ten of each

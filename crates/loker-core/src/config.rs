@@ -215,7 +215,8 @@ id = "weworkremotely"
 # pages = 10           # 20 jobs per page
 # country = "PH"       # only jobs Workable places in this country; or a list: ["PH", "ID"]
 
-# A company's own board: greenhouse:<slug>, ashby:<slug> or lever:<site>.
+# A company's own board: greenhouse:<slug>, ashby:<slug>, lever:<site>,
+# recruitee:<slug> or smartrecruiters:<company>.
 # [[sources]]
 # id = "ashby:clera"
 # company = "Clera"    # display name; Ashby and Lever only give the slug

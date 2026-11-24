@@ -228,6 +228,25 @@ fn route(target: &str, shrink: bool) -> (&'static str, Value) {
         "/api/v2/remote-jobs" => ("200 OK", json!({ "jobs": jobicy() })),
         "/v0/postings/initech" if query.contains("skip=0") => ("200 OK", Value::Array(lever())),
         "/v0/postings/initech" => ("200 OK", json!([])),
+        "/umbrella.recruitee.com/api/offers/" => ("200 OK", json!({ "offers": recruitee() })),
+        "/v1/companies/Initrode/postings" if query.contains("offset=0") => {
+            let mut listed: Vec<Value> = smartrecruiters()
+                .into_iter()
+                .map(|mut p| {
+                    p.as_object_mut().unwrap().remove("jobAd");
+                    p
+                })
+                .collect();
+            if shrink {
+                listed.pop();
+            }
+            (
+                "200 OK",
+                json!({ "offset": 0, "limit": 100, "totalFound": listed.len(), "content": listed }),
+            )
+        }
+        "/v1/companies/Initrode/postings/sr-1" => ("200 OK", smartrecruiters()[0].clone()),
+        "/v1/companies/Initrode/postings/sr-2" => ("200 OK", smartrecruiters()[1].clone()),
         "/api/alpha/decisions" => (
             "200 OK",
             json!({
@@ -442,6 +461,71 @@ fn lever() -> Vec<Value> {
             "lists": [], "additional": "",
             "salaryRange": { "currency": "USD", "interval": "per-year-salary", "min": 60000, "max": 80000 }
         }),
+    ]
+}
+
+fn recruitee() -> Vec<Value> {
+    vec![
+        json!({
+            "id": 501, "title": "Platform Engineer", "company_name": "Umbrella", "status": "published",
+            "careers_url": "https://careers.umbrella.example/o/platform-engineer",
+            "careers_apply_url": "https://careers.umbrella.example/o/platform-engineer/c/new",
+            "remote": true, "hybrid": false, "on_site": false,
+            "locations": [{ "city": "Berlin", "country": "Germany", "country_code": "DE" },
+                          { "city": "Lisbon", "country": "Portugal", "country_code": "PT" }],
+            "location": "Berlin, Germany", "country_code": "DE",
+            "department": "Engineering", "employment_type_code": "fulltime_permanent",
+            "experience_code": "mid_level",
+            "salary": { "min": "5000", "max": "6500", "period": "month", "currency": "EUR" },
+            "published_at": "2026-09-25 10:00:00 UTC", "close_at": null,
+            "description": "<p>Run the platform.</p>", "requirements": "<ul><li>Rust</li></ul>"
+        }),
+        json!({
+            "id": 502, "title": "Office Manager", "company_name": "Umbrella", "status": "published",
+            "careers_url": "https://careers.umbrella.example/o/office-manager",
+            "remote": false, "hybrid": true, "on_site": false,
+            "locations": [{ "city": "Amsterdam", "country": "Netherlands", "country_code": "NL" }],
+            "employment_type_code": "parttime_permanent",
+            "salary": { "min": null, "max": null, "period": "month", "currency": "EUR" },
+            "published_at": "2026-09-26 10:00:00 UTC",
+            "description": "<p>Keep the office running.</p>", "requirements": ""
+        }),
+    ]
+}
+
+fn smartrecruiters() -> Vec<Value> {
+    let posting = |id: &str, title: &str, location: Value, text: &str| {
+        json!({
+            "id": id, "name": title, "visibility": "PUBLIC", "active": true,
+            "releasedDate": "2026-09-27T10:00:00.000Z", "jobAdId": format!("ad-{id}"),
+            "company": { "identifier": "Initrode", "name": "Initrode Group" },
+            "location": location,
+            "typeOfEmployment": { "id": "permanent", "label": "Full-time" },
+            "experienceLevel": { "id": "mid_senior_level", "label": "Mid-Senior Level" },
+            "function": { "id": "engineering", "label": "Engineering" },
+            "postingUrl": format!("https://jobs.smartrecruiters.com/Initrode/{id}-x"),
+            "applyUrl": format!("https://jobs.smartrecruiters.com/Initrode/{id}-x?oga=true"),
+            "jobAd": { "sections": {
+                "jobDescription": { "title": "Job Description", "text": text },
+                "qualifications": { "title": "Qualifications", "text": "<p>5+ years of experience.</p>" }
+            }}
+        })
+    };
+    vec![
+        posting(
+            "sr-1",
+            "Site Reliability Engineer",
+            json!({ "city": "Warsaw", "country": "pl", "remote": true, "hybrid": false,
+                    "fullLocation": "Warsaw, Poland" }),
+            "<p>Keep it up.</p>",
+        ),
+        posting(
+            "sr-2",
+            "Plant Technician",
+            json!({ "city": "Lyon", "country": "fr", "remote": false, "hybrid": false,
+                    "fullLocation": "Lyon, France" }),
+            "<p>Fix machines.</p>",
+        ),
     ]
 }
 
@@ -963,6 +1047,53 @@ fn an_ashby_slug_keeps_its_spaces_and_case() {
 }
 
 #[test]
+fn recruitee_and_smartrecruiters_boards_are_read() {
+    let stub = stub();
+    let home = Home::new("recruitee-sr", &stub);
+    let r = home.ingest("recruitee:Umbrella");
+    assert_eq!(r["new"], 2, "{r:#}");
+    let jobs = home.json(&["search", "platform", "--json"]);
+    let job = &jobs["jobs"][0];
+    assert_eq!(job["company"], "Umbrella", "{job:#}");
+    assert_eq!(
+        job["eligibility"]["countries"],
+        json!(["DE", "PT"]),
+        "{job:#}"
+    );
+    assert_eq!(job["pay"]["base"][0]["currency"], "EUR", "{job:#}");
+    assert_eq!(job["seniority"], "mid", "{job:#}");
+
+    let details = || {
+        stub.log
+            .lock()
+            .unwrap()
+            .iter()
+            .filter(|t| t.starts_with("/v1/companies/Initrode/postings/"))
+            .count()
+    };
+    let r = home.ingest("smartrecruiters:Initrode");
+    assert_eq!((r["new"].as_u64(), details()), (Some(2), 2), "{r:#}");
+    let jobs = home.json(&["search", "reliability", "--json"]);
+    let job = &jobs["jobs"][0];
+    assert_eq!(job["company"], "Initrode Group", "{job:#}");
+    assert_eq!(job["eligibility"]["countries"], json!(["PL"]), "{job:#}");
+    assert_eq!(job["experience"]["minYears"], 5, "{job:#}");
+
+    let r = home.ingest("smartrecruiters:Initrode");
+    assert_eq!(
+        (r["unchanged"].as_u64(), details()),
+        (Some(2), 2),
+        "an unchanged posting's description is not asked for again: {r:#}"
+    );
+    stub.shrink.store(true, Ordering::SeqCst);
+    let r = home.ingest("smartrecruiters:Initrode");
+    assert_eq!(
+        r["closed"], 1,
+        "a posting gone from the list is closed: {r:#}"
+    );
+}
+
+#[test]
 fn a_host_that_asks_to_slow_down_is_paused_then_asked_again() {
     let stub = stub();
     let home = Home::new("throttled", &stub);
@@ -1067,11 +1198,11 @@ fn discover_asks_a_search_engine_for_board_pages() {
     assert_eq!(r["finder"], "exa");
     assert_eq!(
         (&r["found"], &r["unreadable"]),
-        (&json!(2), &json!(6)),
+        (&json!(2), &json!(10)),
         "a board named by a job page and its own page counts once: {r:#}"
     );
     assert!(
-        (r["costUsd"].as_f64().unwrap() - 6.0 * 0.097).abs() < 1e-9,
+        (r["costUsd"].as_f64().unwrap() - 10.0 * 0.097).abs() < 1e-9,
         "{r:#}"
     );
     assert_eq!(r["checked"]["live"], 2);
@@ -1088,22 +1219,24 @@ fn discover_asks_a_search_engine_for_board_pages() {
     };
     let sent = |i: usize, field: &str| stub.bodies.lock().unwrap()[i].pointer(field).cloned();
     assert_eq!(
-        (0..3)
+        (0..5)
             .map(|i| (
                 sent(i, "/includeDomains/0").unwrap(),
                 sent(i, "/numResults").unwrap()
             ))
             .collect::<Vec<_>>(),
         [
-            (json!("jobs.ashbyhq.com"), json!(34)),
-            (json!("boards.greenhouse.io"), json!(33)),
-            (json!("jobs.lever.co"), json!(33)),
+            (json!("jobs.ashbyhq.com"), json!(20)),
+            (json!("boards.greenhouse.io"), json!(20)),
+            (json!("jobs.lever.co"), json!(20)),
+            (json!("recruitee.com"), json!(20)),
+            (json!("jobs.smartrecruiters.com"), json!(20)),
         ],
         "a query is one search per ATS, sharing 100 results"
     );
     assert!(excluded(0, "/excludeDomains").is_empty());
     assert!(
-        excluded(4, "/excludeDomains").contains(&"job-boards.greenhouse.io/acme".to_string()),
+        excluded(6, "/excludeDomains").contains(&"job-boards.greenhouse.io/acme".to_string()),
         "a query leaves out what the one before it found"
     );
 
@@ -1126,7 +1259,7 @@ fn discover_asks_a_search_engine_for_board_pages() {
     );
     assert!(r.get("costUsd").is_none(), "Parallel states no cost");
     assert_eq!(
-        excluded(7, "/advanced_settings/source_policy/exclude_domains"),
+        excluded(11, "/advanced_settings/source_policy/exclude_domains"),
         ["job-boards.greenhouse.io/acme"],
         "each ATS's search leaves out that ATS's known boards"
     );
@@ -1140,8 +1273,8 @@ fn discover_asks_a_search_engine_for_board_pages() {
     };
     assert_eq!(
         (searches("/search"), searches("/v1/search")),
-        (6, 36),
-        "three searches per query, a dozen queries by default"
+        (10, 60),
+        "five searches per query, a dozen queries by default"
     );
     home.json(&[
         "discover",
@@ -1152,7 +1285,7 @@ fn discover_asks_a_search_engine_for_board_pages() {
         "--again",
         "--json",
     ]);
-    assert_eq!(searches("/search"), 9, "--again sends a query anew");
+    assert_eq!(searches("/search"), 15, "--again sends a query anew");
 
     let out = home
         .cmd(&["discover", "--from", "exa", "--query", "unseen", "--json"])

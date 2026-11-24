@@ -1,4 +1,4 @@
-use std::collections::BTreeSet;
+use std::collections::{BTreeSet, HashMap};
 use std::path::Path;
 use std::str::FromStr;
 use std::time::Duration;
@@ -17,6 +17,7 @@ use crate::derived;
 use crate::model::{Eligibility, IngestStats, Job, JobSource, NewJob, SourceKind};
 use crate::normalize::{company_key, title_key};
 
+#[derive(Clone)]
 pub struct Store {
     pool: SqlitePool,
 }
@@ -487,6 +488,22 @@ impl Store {
         .await?;
         tx.commit().await?;
         Ok(stats)
+    }
+
+    pub async fn live_raw(
+        &self,
+        source_id: &str,
+    ) -> anyhow::Result<HashMap<String, serde_json::Value>> {
+        let rows: Vec<(String, String)> = sqlx::query_as(
+            "SELECT source_job_id, raw_data FROM source_jobs WHERE source_id = ? AND status = 'live'",
+        )
+        .bind(source_id)
+        .fetch_all(&self.pool)
+        .await?;
+        Ok(rows
+            .into_iter()
+            .filter_map(|(id, raw)| Some((id, serde_json::from_str(&raw).ok()?)))
+            .collect())
     }
 
     pub async fn record_failure(&self, source_id: &str, error: &str) -> anyhow::Result<()> {

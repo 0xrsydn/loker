@@ -10,7 +10,7 @@ Indonesia at UTC+7", not just "remote".
 
 > Status: early foundation. Sources: Himalayas, Jobicy, Remote OK, We Work
 > Remotely, Workable (opt-in), Y Combinator's board, and any company's
-> Greenhouse, Ashby or Lever board. CLI and MCP (stdio). REST and the web UI
+> Greenhouse, Ashby, Lever, Recruitee or SmartRecruiters board. CLI and MCP (stdio). REST and the web UI
 > come next.
 
 ## Try it
@@ -30,7 +30,8 @@ cargo run -- search --role ai,data --country ID --compact      # by role, any le
 cargo run -- roles enrich                      # optional: Jev classifies roles (needs [providers.jev] and OPENROUTER_API_KEY)
 cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100   # everything you can apply to, one line each
 cargo run -- get j_6b78581675                  # full details for ids from a search
-cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>
+cargo run -- ingest ashby:clera                # one company's board: ashby:<slug>, greenhouse:<slug>, lever:<site>,
+                                               #   recruitee:<slug>, smartrecruiters:<company>
 cargo run -- ingest remoteok                   # also: jobicy, weworkremotely
 cargo run -- ingest workable --country PH       # Workable's search, remote jobs; opt-in (not a published API)
 cargo run -- ingest ycombinator --pages 50      # YC's whole board: a sitemap, then one request per company (~2 h)
@@ -151,8 +152,8 @@ it.
 ### Jobs close
 
 A listing closes when a complete fetch of its source no longer has it (a
-company's Greenhouse, Ashby or Lever board), when the source's own expiry passes
-(Himalayas), or after 30 days unseen (the backstop for feeds that only return
+company's own board), when the source's own expiry passes
+(Himalayas, Recruitee), or after 30 days unseen (the backstop for feeds that only return
 their newest jobs). It reopens when seen again. A job stays active while any
 of its listings is live. A fetch that would close more than half of a source's
 listings closes nothing and reports them as `held`.
@@ -167,13 +168,15 @@ its configured parameters.
 
 ### Finding company boards
 
-Greenhouse, Ashby and Lever publish no list of their boards, so loker finds
+The ATSs publish no list of their boards, so loker finds
 them. `loker discover` reads board URLs or ids, stores each board once, then
 asks each new board's API whether it exists: `live` (open jobs), `empty`,
 `missing`, or `private` (jobs not for the public: an internal, referral-only
 or talent-community board, or a LinkedIn mirror, told by its name). Each board is stored under a key, so two spellings of one board
-count once: Ashby and Greenhouse slugs ignore case, Lever's don't
-(`lever:Palantir` is not `lever:palantir`). Slugs keep their spaces (`ashby:Hippocratic AI`),
+count once: Ashby, Greenhouse, Recruitee and SmartRecruiters slugs ignore
+case, Lever's don't (`lever:Palantir` is not `lever:palantir`).
+SmartRecruiters answers a company it doesn't know with an empty list, so
+such a board reads as `empty`, not `missing`. Slugs keep their spaces (`ashby:Hippocratic AI`),
 and a check stores the spelling the ATS itself uses, with the company's name
 (`agiholdings` is "American Growth Insurance", "Kaseya Careers" is "Kaseya")
 and, from Ashby, its website.
@@ -188,17 +191,21 @@ cargo run -- discover --from exa --query "robotics startup"   # web search, paid
 ```
 
 By default it reads [Common Crawl](https://commoncrawl.org)'s URL index, a
-free monthly crawl of the web, for URLs on the three ATS hosts (EU hosts
-included), without its rate-limited query server. Each crawl is read
-once; `--again` reads it anew. CC-MAIN-2026-43 named 5,582 boards in 31 s
-(1,079 Ashby, 4,173 Greenhouse, 330 Lever). A crawl misses newer and smaller
+free monthly crawl of the web, for URLs on the ATS hosts (EU hosts and
+every `*.recruitee.com` included), without its rate-limited query server.
+Each crawl is read once; `--again` reads it anew. CC-MAIN-2026-43 named
+5,582 boards in 31 s (1,079 Ashby, 4,173 Greenhouse, 330 Lever);
+CC-MAIN-2026-47 named 7,505 in 40 s (1,119 Ashby, 4,591 Greenhouse, 63
+Lever, 829 Recruitee, 903 SmartRecruiters), and of 20 random Recruitee and
+20 SmartRecruiters boards from it, 13 and 14 were live, with 281 and 1,504
+jobs. A crawl misses newer and smaller
 companies: it had 288 of the 509 boards on forwarddeployed.fun, whose list
 loads as a file. Checking those 509 took 113 s: 503 live, 6 empty.
 
 `--from exa` and `--from parallel` ask a web search API for board pages
 instead, which finds the newer, smaller companies a crawl misses. Each
-`--query` asks for up to 100 board pages, a third from each ATS (one search
-per ATS), about $0.10 on either; with no `--query` a dozen roles and
+`--query` asks for up to 100 board pages, a fifth from each ATS (one search
+per ATS), about $0.15 on either; with no `--query` a dozen roles and
 sectors are searched.
 The key comes from `EXA_API_KEY` or `PARALLEL_API_KEY`, and the report
 shows the cost when the engine states it (Exa does). On 2026-11-23 the
@@ -283,7 +290,7 @@ prints exactly what the MCP tool returns as structured content.
 | Crate | Role |
 |---|---|
 | `loker-core` | Domain model, eligibility verdicts, `normalize` (match keys, URLs, pay, locations), `dedup` (which listings are one job and what that job says, with no IO), the SQLite store that loads rows for those rules and writes their answers, and `api`: the typed v1 contract plus the store-only operations. No transport code. |
-| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, We Work Remotely, Y Combinator, Greenhouse, Ashby, Lever; `Source` dispatch and `ingest`, the one fetch → transform → store path |
+| `loker-sources` | Adapters (`fetch` + `transform` each): Himalayas, Jobicy, Remote OK, We Work Remotely, Y Combinator, Greenhouse, Ashby, Lever, Recruitee, SmartRecruiters; `Source` dispatch and `ingest`, the one fetch → transform → store path |
 | `loker` | `App`, the handle every adapter holds; the CLI (`main.rs`) and MCP adapter (`mcp.rs`) |
 
 The v1 contract is committed as JSON Schemas in `schema/v1/` (`loker schema

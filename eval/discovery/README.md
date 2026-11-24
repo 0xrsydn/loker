@@ -5,7 +5,7 @@ whether the company name a check stores is the company, and how rich the
 jobs on discovered boards are next to configured boards and aggregators.
 Run it by hand after changing a finder, `Board::from_url`, `check_board` or
 an employer-board adapter; it isn't part of CI. It sends thousands of
-requests to the Greenhouse, Ashby and Lever APIs, so run it rarely.
+requests to the ATS APIs, so run it rarely.
 
 ```sh
 export LOKER_HOME=$(mktemp -d)

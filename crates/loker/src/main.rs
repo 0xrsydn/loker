@@ -27,7 +27,7 @@ struct Cli {
 enum Command {
     /// Fetch a source once and store what it returns (or every configured source with --all).
     Ingest {
-        /// Source: himalayas, jobicy, remoteok, weworkremotely, workable, ycombinator, greenhouse:<board>, ashby:<board>, lever:<site>.
+        /// Source: himalayas, jobicy, remoteok, weworkremotely, workable, ycombinator, greenhouse:<board>, ashby:<board>, lever:<site>, recruitee:<board>, smartrecruiters:<company>.
         #[arg(required_unless_present = "all")]
         source: Option<String>,
         /// Every enabled source in config.toml; exits non-zero if any fails.

@@ -29,7 +29,7 @@ crates/loker-core/       domain and rules, no network
   src/country.rs         country, state, province and city names -> ISO codes; region tables
   src/dedup.rs           which listings are one job; no IO
   src/derived.rs         what search filters on, derived when a job is written; its rules stamp
-  src/board.rs           which Ashby, Greenhouse or Lever board a URL names; board keys
+  src/board.rs           which ATS board (Ashby, Greenhouse, Lever, Recruitee, SmartRecruiters) a URL names; board keys
   src/verdict.rs         can this viewer apply? (country, timezone)
   src/role.rs            role vocabulary: function hierarchy, modifiers, JobRole
   src/classify.rs        which role a job is: title, then category, then description

@@ -20,6 +20,8 @@ pub fn board_hosts(ats: Ats) -> &'static [&'static str] {
             "job-boards.eu.greenhouse.io",
         ],
         Ats::Lever => &["jobs.lever.co", "jobs.eu.lever.co"],
+        Ats::Recruitee => &["recruitee.com"],
+        Ats::SmartRecruiters => &["jobs.smartrecruiters.com", "careers.smartrecruiters.com"],
     }
 }
 
@@ -28,6 +30,8 @@ fn ats_domain(ats: Ats) -> &'static str {
         Ats::Ashby => "ashbyhq.com",
         Ats::Greenhouse => "greenhouse.io",
         Ats::Lever => "lever.co",
+        Ats::Recruitee => "recruitee.com",
+        Ats::SmartRecruiters => "smartrecruiters.com",
     }
 }
 
@@ -148,6 +152,8 @@ pub fn board_path(board: &Board) -> String {
         Ats::Ashby => "jobs.ashbyhq.com",
         Ats::Greenhouse => "job-boards.greenhouse.io",
         Ats::Lever => "jobs.lever.co",
+        Ats::Recruitee => return format!("{}.recruitee.com", board.slug.to_lowercase()),
+        Ats::SmartRecruiters => "jobs.smartrecruiters.com",
     };
     format!("{host}/{}", segment(&board.slug))
 }

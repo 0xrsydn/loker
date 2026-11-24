@@ -6,7 +6,9 @@ pub mod himalayas;
 pub mod jev;
 pub mod jobicy;
 pub mod lever;
+pub mod recruitee;
 pub mod remoteok;
+pub mod smartrecruiters;
 pub mod websearch;
 pub mod weworkremotely;
 pub mod workable;
@@ -44,6 +46,8 @@ pub const SOURCES: &[&str] = &[
     "greenhouse:<board>",
     "ashby:<board>",
     "lever:<site>",
+    "recruitee:<board>",
+    "smartrecruiters:<company>",
 ];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -57,6 +61,8 @@ pub enum Source {
     Greenhouse(String),
     Ashby(String),
     Lever(String),
+    Recruitee(String),
+    SmartRecruiters(String),
 }
 
 impl Source {
@@ -85,6 +91,8 @@ impl Source {
             Some(("greenhouse", b)) => Ok(Source::Greenhouse(board(b)?)),
             Some(("ashby", b)) => Ok(Source::Ashby(board(b)?)),
             Some(("lever", b)) => Ok(Source::Lever(board(b)?)),
+            Some(("recruitee", b)) => Ok(Source::Recruitee(board(b)?)),
+            Some(("smartrecruiters", b)) => Ok(Source::SmartRecruiters(board(b)?)),
             Some(_) => Err(bad()),
         }
     }
@@ -100,12 +108,18 @@ impl Source {
             Source::Greenhouse(b) => format!("greenhouse:{}", b.to_lowercase()),
             Source::Ashby(b) => format!("ashby:{}", b.to_lowercase()),
             Source::Lever(b) => format!("lever:{}", b.to_lowercase()),
+            Source::Recruitee(b) => format!("recruitee:{}", b.to_lowercase()),
+            Source::SmartRecruiters(b) => format!("smartrecruiters:{}", b.to_lowercase()),
         }
     }
 
     pub fn kind(&self) -> SourceKind {
         match self {
-            Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => SourceKind::Employer,
+            Source::Greenhouse(_)
+            | Source::Ashby(_)
+            | Source::Lever(_)
+            | Source::Recruitee(_)
+            | Source::SmartRecruiters(_) => SourceKind::Employer,
             _ => SourceKind::Aggregator,
         }
     }
@@ -117,6 +131,14 @@ impl Source {
                 .and_then(Value::as_str)
                 .filter(|c| c.len() == 2 && c.chars().all(|ch| ch.is_ascii_alphabetic()))
                 .map(str::to_uppercase),
+            Source::Recruitee(_) => raw
+                .get("country_code")
+                .and_then(Value::as_str)
+                .and_then(alpha2),
+            Source::SmartRecruiters(_) => raw
+                .pointer("/location/country")
+                .and_then(Value::as_str)
+                .and_then(alpha2),
             _ => None,
         }
     }
@@ -128,9 +150,12 @@ impl Source {
             | Source::RemoteOk
             | Source::WeWorkRemotely
             | Source::Workable => true,
-            Source::Ycombinator | Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => {
-                false
-            }
+            Source::Ycombinator
+            | Source::Greenhouse(_)
+            | Source::Ashby(_)
+            | Source::Lever(_)
+            | Source::Recruitee(_)
+            | Source::SmartRecruiters(_) => false,
         }
     }
 
@@ -143,9 +168,11 @@ impl Source {
     /// missing items mean nothing.
     pub fn complete_id(&self, raw: &Value) -> Option<Option<String>> {
         match self {
-            Source::Greenhouse(_) | Source::Ashby(_) | Source::Lever(_) => {
-                Some(raw.get("id").and_then(as_string))
-            }
+            Source::Greenhouse(_)
+            | Source::Ashby(_)
+            | Source::Lever(_)
+            | Source::Recruitee(_)
+            | Source::SmartRecruiters(_) => Some(raw.get("id").and_then(as_string)),
             _ => None,
         }
     }
@@ -161,10 +188,17 @@ impl Source {
             Source::Greenhouse(_) => "boards-api.greenhouse.io",
             Source::Ashby(_) => "api.ashbyhq.com",
             Source::Lever(_) => "api.lever.co",
+            Source::Recruitee(_) => "recruitee.com",
+            Source::SmartRecruiters(_) => "api.smartrecruiters.com",
         }
     }
 
-    async fn fetch(&self, client: &HttpClient, p: &IngestParams) -> anyhow::Result<Vec<Value>> {
+    async fn fetch(
+        &self,
+        client: &HttpClient,
+        p: &IngestParams,
+        store: Option<&Store>,
+    ) -> anyhow::Result<Vec<Value>> {
         let pages = p.pages.unwrap_or(3).clamp(1, 50);
         match self {
             Source::Himalayas => himalayas::fetch(client, pages, p.country.as_deref()).await,
@@ -176,6 +210,14 @@ impl Source {
             Source::Greenhouse(b) => greenhouse::fetch(client, b).await,
             Source::Ashby(b) => ashby::fetch(client, b).await,
             Source::Lever(b) => lever::fetch(client, b).await,
+            Source::Recruitee(b) => recruitee::fetch(client, b).await,
+            Source::SmartRecruiters(b) => {
+                let stored = match store {
+                    Some(s) => Some(s.live_raw(&self.id()).await?),
+                    None => None,
+                };
+                smartrecruiters::fetch(client, b, stored).await
+            }
         }
     }
 
@@ -191,6 +233,8 @@ impl Source {
             Source::Greenhouse(b) => greenhouse::transform(&id, b, raw),
             Source::Ashby(b) => ashby::transform(&id, b, raw),
             Source::Lever(b) => lever::transform(&id, b, raw),
+            Source::Recruitee(b) => recruitee::transform(&id, b, raw),
+            Source::SmartRecruiters(b) => smartrecruiters::transform(&id, b, raw),
         }
     }
 }
@@ -201,6 +245,8 @@ impl Source {
             Source::Ashby(slug) => Board::new(Ats::Ashby, slug),
             Source::Greenhouse(slug) => Board::new(Ats::Greenhouse, slug),
             Source::Lever(slug) => Board::new(Ats::Lever, slug),
+            Source::Recruitee(slug) => Board::new(Ats::Recruitee, slug),
+            Source::SmartRecruiters(slug) => Board::new(Ats::SmartRecruiters, slug),
             _ => None,
         }
     }
@@ -212,6 +258,8 @@ impl From<&Board> for Source {
             Ats::Ashby => Source::Ashby(b.slug.clone()),
             Ats::Greenhouse => Source::Greenhouse(b.slug.clone()),
             Ats::Lever => Source::Lever(b.slug.clone()),
+            Ats::Recruitee => Source::Recruitee(b.slug.clone()),
+            Ats::SmartRecruiters => Source::SmartRecruiters(b.slug.clone()),
         }
     }
 }
@@ -235,7 +283,11 @@ pub struct Fetched {
     pub complete_ids: Option<BTreeSet<String>>,
 }
 
-pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetched> {
+pub async fn fetch_batch(
+    client: &HttpClient,
+    p: &IngestParams,
+    store: Option<&Store>,
+) -> Result<Fetched> {
     let source = Source::parse(&p.source)?;
     if p.country.is_some() && !matches!(source, Source::Himalayas | Source::Workable) {
         return Err(Error::Invalid(format!(
@@ -254,7 +306,7 @@ pub async fn fetch_batch(client: &HttpClient, p: &IngestParams) -> Result<Fetche
             )));
         }
     }
-    let raw = source.fetch(client, p).await?;
+    let raw = source.fetch(client, p, store).await?;
     let complete_ids: Option<BTreeSet<String>> = raw
         .iter()
         .map(|item| source.complete_id(item))
@@ -387,7 +439,11 @@ fn joined<T>(done: std::result::Result<Result<T>, JoinError>) -> Result<T> {
     done.unwrap_or_else(|e| Err(Error::Internal(anyhow::anyhow!("task failed: {e}"))))
 }
 
-fn fetch_all(client: &HttpClient, targets: Vec<IngestParams>) -> Paced<Result<Fetched>> {
+fn fetch_all(
+    client: &HttpClient,
+    store: Option<&Store>,
+    targets: Vec<IngestParams>,
+) -> Paced<Result<Fetched>> {
     Paced::start(
         targets,
         |p| {
@@ -397,13 +453,14 @@ fn fetch_all(client: &HttpClient, targets: Vec<IngestParams>) -> Paced<Result<Fe
         },
         |p| {
             let client = client.clone();
-            async move { fetch_batch(&client, &p).await }
+            let store = store.cloned();
+            async move { fetch_batch(&client, &p, store.as_ref()).await }
         },
     )
 }
 
 pub async fn ingest(store: &Store, client: &HttpClient, p: IngestParams) -> Result<IngestStats> {
-    let fetched = fetch_batch(client, &p).await;
+    let fetched = fetch_batch(client, &p, Some(store)).await;
     store_fetched(store, &p.source, fetched).await
 }
 
@@ -477,7 +534,7 @@ pub async fn verify(client: &HttpClient, targets: Vec<IngestParams>) -> Result<V
         })
         .collect();
     let mut checks: Vec<Option<SourceCheck>> = names.iter().map(|_| None).collect();
-    let mut fetches = fetch_all(client, one_page);
+    let mut fetches = fetch_all(client, None, one_page);
     while let Some((i, fetched)) = fetches.next().await {
         checks[i] = Some(match joined(fetched) {
             Ok(f) => check_fetch(&f, chrono::Utc::now()),
@@ -509,7 +566,7 @@ pub async fn ingest_all(
     }
     let names: Vec<String> = sources.iter().map(|p| p.source.clone()).collect();
     let mut outcomes: Vec<Option<IngestOutcome>> = names.iter().map(|_| None).collect();
-    let mut fetches = fetch_all(client, sources);
+    let mut fetches = fetch_all(client, Some(store), sources);
     while let Some((i, fetched)) = fetches.next().await {
         let source = names[i].clone();
         let outcome = match store_fetched(store, &source, joined(fetched)).await {
@@ -876,6 +933,17 @@ fn html_to_md(html: Option<&str>) -> anyhow::Result<Option<String>> {
     match html.map(str::trim).filter(|h| !h.is_empty()) {
         Some(h) => Ok(Some(htmd::convert(h)?)),
         None => Ok(None),
+    }
+}
+
+fn alpha2(code: &str) -> Option<String> {
+    (code.len() == 2 && code.chars().all(|c| c.is_ascii_alphabetic())).then(|| code.to_uppercase())
+}
+
+fn host_url(host: &str, path: &str) -> String {
+    match std::env::var("LOKER_FETCH_BASE") {
+        Ok(base) if !base.is_empty() => format!("{}/{host}{path}", base.trim_end_matches('/')),
+        _ => format!("https://{host}{path}"),
     }
 }
 
