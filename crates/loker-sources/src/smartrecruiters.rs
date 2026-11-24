@@ -120,6 +120,49 @@ struct Item {
     type_of_employment: Option<Label>,
     experience_level: Option<Label>,
     job_ad: Option<JobAd>,
+    #[serde(default)]
+    custom_field: Vec<CustomField>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct CustomField {
+    field_label: Option<String>,
+    value_label: Option<String>,
+}
+
+const WORK_MODE_FIELDS: [&str; 7] = [
+    "job location",
+    "work model",
+    "home based?",
+    "remote eligible",
+    "workplace type",
+    "work arrangement",
+    "location type",
+];
+
+fn work_mode(fields: &[CustomField]) -> Option<Workplace> {
+    fields.iter().find_map(|f| {
+        let label = f.field_label.as_deref()?.trim().to_lowercase();
+        if !WORK_MODE_FIELDS.contains(&label.as_str()) {
+            return None;
+        }
+        let value = f.value_label.as_deref()?.trim().to_lowercase();
+        let yes_no = matches!(label.as_str(), "home based?" | "remote eligible");
+        if value.starts_with("hybrid") {
+            Some(Workplace::Hybrid)
+        } else if value.starts_with("remote") || (yes_no && value == "yes") {
+            Some(Workplace::Remote)
+        } else if ["on-site", "onsite", "on site", "office", "in office"]
+            .iter()
+            .any(|w| value.starts_with(w))
+            || (yes_no && value == "no")
+        {
+            Some(Workplace::Onsite)
+        } else {
+            None
+        }
+    })
 }
 
 #[derive(Deserialize)]
@@ -185,15 +228,13 @@ pub fn transform(source_id: &str, company: &str, raw: Value) -> anyhow::Result<N
         })
     });
     let text = place.unwrap_or_default();
-    let eligibility = match &item.location {
-        Some(l) if l.remote => eligibility_from_text(&text, Some(true)),
-        Some(l) if l.hybrid => Eligibility {
-            workplace: Workplace::Hybrid,
-            ..eligibility_from_text(&text, Some(false))
-        },
-        Some(_) => eligibility_from_text(&text, Some(false)),
-        None => eligibility_from_text(&text, None),
-    };
+    let mode = work_mode(&item.custom_field).or_else(|| {
+        item.location.as_ref().map(|l| match (l.remote, l.hybrid) {
+            (true, _) => Workplace::Remote,
+            (_, true) => Workplace::Hybrid,
+            _ => Workplace::Onsite,
+        })
+    });
 
     let mut html = String::new();
     if let Some(s) = item.job_ad.and_then(|a| a.sections) {
@@ -215,6 +256,20 @@ pub fn transform(source_id: &str, company: &str, raw: Value) -> anyhow::Result<N
             html.push_str(&body);
         }
     }
+
+    let description_md = html_to_md(Some(&html))?;
+    let eligibility = match mode {
+        Some(Workplace::Remote) => {
+            let stated = format!("{}\n{}", item.name, description_md.as_deref().unwrap_or(""));
+            crate::remote_listed("SmartRecruiters", &text, &stated, true)
+        }
+        Some(Workplace::Hybrid) => Eligibility {
+            workplace: Workplace::Hybrid,
+            ..eligibility_from_text(&text, Some(false))
+        },
+        Some(_) => eligibility_from_text(&text, Some(false)),
+        None => eligibility_from_text(&text, None),
+    };
 
     let label = |l: &Option<Label>| {
         l.as_ref()
@@ -252,7 +307,7 @@ pub fn transform(source_id: &str, company: &str, raw: Value) -> anyhow::Result<N
         eligibility,
         pay: None,
         tech_tags: Vec::new(),
-        description_md: html_to_md(Some(&html))?,
+        description_md,
         posted_at: item
             .released_date
             .as_deref()

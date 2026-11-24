@@ -234,6 +234,57 @@ Wrong noes fell from 11 to 6 (Opus), wrong yeses from 4 to 2, but a no is
 still right 89% of the time against 97% for the other sources, and
 DeepSeek's 20 jobs alone give 8 wrong noes. Workable stays opt-in.
 
+### Recruitee and SmartRecruiters (2026-11-24)
+
+Three snapshots, each of random boards Common Crawl named (CC-MAIN-2026-47)
+and none shared: `snapshot-ats.db` (116 boards, 5,219 jobs),
+`snapshot-ats2.db` (111, 2,703) and `snapshot-ats3.db` (4,643), with
+SmartRecruiters companies over 400 postings left out. Remote jobs are rare
+on these boards (18% of Recruitee offers, 4% of SmartRecruiters postings),
+so each set (`sample-ats`, `sample-ats2`, `sample-ats3`) is 60 jobs per ATS,
+up to 30 flagged remote and the rest of any kind, 3 per company at most.
+Labellers agree on 580/600, 538/600 and 574/600 verdicts.
+
+`ats` was the first test, read for the rules; `ats2` was scored once, then
+read; `ats3` was scored once with the Workable rule below, and the final rule
+was picked after seeing its totals, not its jobs.
+
+| rules | set | Opus: yes right / wrong yes / wrong no | DeepSeek v4.1: same | unknown |
+|---|---|---|---|---|
+| as first shipped (c488bb0) | ats | 16/23 / 3 / 13 | 17/23 / 4 / 20 | 0 |
+| | ats2 | 26/35 / 2 / 7 | 27/35 / 7 / 50 | 0 |
+| | ats3 | 17/23 / 0 / 2 | 19/23 / 4 / 16 | 0 |
+| Workable's rule (others `not_stated`) | ats2 | 29/42 / 6 / 0 | 30/42 / 11 / 9 | 158 |
+| | ats3 | 17/23 / 0 / 0 | 19/23 / 4 / 6 | 200 |
+| **now** | ats | 18/22 / 1 / 11 | 19/22 / 1 / 18 | 0 |
+| | ats2 | 29/42 / 6 / 1 | 30/42 / 11 / 42 | 0 |
+| | ats3 | 17/23 / 0 / 1 | 19/23 / 4 / 7 | 10 |
+
+What changed:
+- **A remote job's places come from the title and description first**
+  (`remote_listed`, Workable's rule): "100% Remote, Worldwide", "Remote in
+  Germany or France", "Remote (LATAM Based)", "REMOTE IN BRAZIL ... must be
+  based in Brazil" were read as the board's one office.
+- **Otherwise the board's place is the limit.** Workable's choice, `not_stated`
+  for everyone else, made 200 of ats3's verdicts unknown, and the labellers
+  call 198 (Opus) and 199 (DeepSeek) of them no: on these boards the listed
+  place usually is the limit. `open` when the posting hints it is open more
+  widely.
+- **SmartRecruiters work-mode fields win** over the location's flags ("Home
+  based?: Hybrid", "Job Location: On-Site Waltham", "Remote Eligible: Yes").
+- **A Recruitee offer flagged remote and on-site or hybrid** is unsettled, a
+  maybe in its countries.
+
+Left: a remote posting whose board place is the employer's and whose text
+names no place ("Fully remote ... In which country are you based?") is a
+wrong no; "Location: Asia Pacific, Japan" with "must reside in Japan" reads
+as all of APAC (4 of ats2's 6 wrong yeses). Dropping a region when a country
+inside it is also named fixed that and broke Workable's "Location: Europe,
+United Kingdom" (open to Europe), so it was dropped. The rest of the wrong
+yeses are remote flags the posting contradicts in German ("Hybrider
+Arbeitsplatz") or by travel ("reside in the territory"). Every other set
+scores as before.
+
 ### Y Combinator (2026-11-21)
 
 The board's location has a grammar ("City, ST, CC" offices, "Remote (US;

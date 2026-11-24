@@ -2,8 +2,7 @@ use std::time::Duration;
 
 use anyhow::Context;
 use chrono::DateTime;
-use loker_core::eligibility_text;
-use loker_core::model::{Eligibility, Elsewhere, NewJob, Workplace};
+use loker_core::model::{Eligibility, NewJob, Workplace};
 use loker_core::normalize::{eligibility_from_text, employment_type};
 use serde::Deserialize;
 use serde_json::Value;
@@ -85,7 +84,7 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
     let description_md = html_to_md(Some(&posting_html(&raw)))?;
     let description = description_md.as_deref().unwrap_or("");
     let eligibility = match s(&raw, "workplace").as_deref() {
-        Some("remote") => remote(&text, description),
+        Some("remote") => crate::remote_listed("Workable", &text, description, false),
         Some("on_site") => eligibility_from_text(&text, Some(false)),
         Some("hybrid") => Eligibility {
             workplace: Workplace::Hybrid,
@@ -116,47 +115,6 @@ pub fn transform(raw: Value) -> anyhow::Result<NewJob> {
         experience: None,
         raw,
     })
-}
-
-fn remote(place: &str, description: &str) -> Eligibility {
-    let raw = Some(place.to_string());
-    if let Some(s) = eligibility_text::stated(description)
-        && !s.only_cities
-        && (!s.countries.is_empty() || !s.regions.is_empty())
-    {
-        let named = [s.regions, s.countries].concat().join("; ");
-        return Eligibility {
-            raw,
-            evidence: Some(format!(
-                "description: {}",
-                s.evidence.join(" … ").chars().take(280).collect::<String>()
-            )),
-            ..eligibility_from_text(&named, Some(true))
-        };
-    }
-    if eligibility_text::stated(description).is_some_and(|s| s.worldwide) {
-        return Eligibility {
-            raw,
-            elsewhere: Elsewhere::Open,
-            ..eligibility_from_text("", Some(true))
-        };
-    }
-    let (elsewhere, evidence) = if eligibility_text::open_wider(description) {
-        (
-            Elsewhere::Open,
-            "Workable lists a place; the posting suggests it is open more widely",
-        )
-    } else {
-        (
-            Elsewhere::NotStated,
-            "Workable lists a place, which may be the employer's, not a limit",
-        )
-    };
-    Eligibility {
-        elsewhere,
-        evidence: Some(evidence.into()),
-        ..eligibility_from_text(place, Some(true))
-    }
 }
 
 fn posting_html(raw: &Value) -> String {

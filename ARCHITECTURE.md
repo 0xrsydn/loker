@@ -360,9 +360,14 @@ Combinator's 429.
   normalizer's rule).
 - *Recruitee:* one request per board (`<slug>.recruitee.com/api/offers/`)
   returns every published offer with its description, so the fetch is the
-  complete board. Flags say remote, hybrid or on-site; a remote offer's
-  locations are read as the countries it is open to, like Lever's (not yet
-  measured in `eval/eligibility` for either new ATS). Pay is a min, max,
+  complete board. Flags say remote, hybrid or on-site, and an offer can set
+  several: remote with hybrid or on-site is read as unsettled (a maybe in
+  its countries). A remote offer goes through `remote_listed`, shared with
+  Workable: places the title or description names win and "worldwide" opens
+  it. Otherwise, unlike Workable's, its listed place is the limit (`open`
+  when the posting hints so): labellers called 198 of 200 verdicts for
+  viewers outside it no (`eval/eligibility`, sets `ats` to `ats3`). Pay is a
+  min, max,
   currency and period when given; `close_at` is the expiry. The canonical
   URL is the offer's careers page, often on the company's own domain.
 - *SmartRecruiters:* the postings list (pages of 100) has no descriptions;
@@ -375,7 +380,10 @@ Combinator's 429.
   are skipped. A company it doesn't know answers with an empty list. The
   experience level is used only where it names one level (`internship`,
   `entry_level`, `director`, `executive`): "Mid-Senior" and "Associate"
-  span several.
+  span several. A company's own work-mode field ("Job Location", "Work
+  Model", "Home based?", "Remote Eligible") wins over the location's
+  `remote` and `hybrid` flags, which it often contradicts. A remote posting
+  takes the same rule as a remote Recruitee offer.
 - *Remote OK:* the first array element is a legal notice. Salaries are USD a
   year, 0 means not given, and the pay bounds drop junk values.
 - *We Work Remotely:* RSS. The all-jobs feed holds only about ten of each

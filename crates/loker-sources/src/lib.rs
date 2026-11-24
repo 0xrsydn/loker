@@ -19,8 +19,12 @@ use loker_core::api::{
     Result, SourceCheck, VerifyReport,
 };
 use loker_core::board::{Ats, Board};
-use loker_core::model::{IngestStats, NewJob, Scope, SourceKind, Workplace};
+use loker_core::eligibility_text;
+use loker_core::model::{
+    Eligibility, Elsewhere, IngestStats, NewJob, Scope, SourceKind, Workplace,
+};
 use loker_core::normalize;
+use loker_core::normalize::eligibility_from_text;
 use loker_core::store::{Batch, SourceMeta, Store};
 use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
 use serde_json::Value;
@@ -933,6 +937,51 @@ fn html_to_md(html: Option<&str>) -> anyhow::Result<Option<String>> {
     match html.map(str::trim).filter(|h| !h.is_empty()) {
         Some(h) => Ok(Some(htmd::convert(h)?)),
         None => Ok(None),
+    }
+}
+
+fn remote_listed(board: &str, place: &str, description: &str, place_limits: bool) -> Eligibility {
+    let raw = Some(place.to_string());
+    if let Some(s) = eligibility_text::stated(description)
+        && !s.only_cities
+        && (!s.countries.is_empty() || !s.regions.is_empty())
+    {
+        let named = [s.regions, s.countries].concat().join("; ");
+        return Eligibility {
+            raw,
+            evidence: Some(format!(
+                "description: {}",
+                s.evidence.join(" … ").chars().take(280).collect::<String>()
+            )),
+            ..eligibility_from_text(&named, Some(true))
+        };
+    }
+    if eligibility_text::stated(description).is_some_and(|s| s.worldwide) {
+        return Eligibility {
+            raw,
+            elsewhere: Elsewhere::Open,
+            ..eligibility_from_text("", Some(true))
+        };
+    }
+    let wider = eligibility_text::open_wider(description);
+    if place_limits && !wider {
+        return eligibility_from_text(place, Some(true));
+    }
+    let (elsewhere, evidence) = if wider {
+        (
+            Elsewhere::Open,
+            format!("{board} lists a place; the posting suggests it is open more widely"),
+        )
+    } else {
+        (
+            Elsewhere::NotStated,
+            format!("{board} lists a place, which may be the employer's, not a limit"),
+        )
+    };
+    Eligibility {
+        elsewhere,
+        evidence: Some(evidence),
+        ..eligibility_from_text(place, Some(true))
     }
 }
 

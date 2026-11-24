@@ -29,6 +29,56 @@
    "US": "unknown"
   }
  },
+ "v1|j_00de1b4b36": {
+  "evidence": "\"fullLocation\": \"Fort Worth, TX, United States\", \"remote\": false; \"Must be able to work at least one showroom shift per month\"; \"Commute to customers' homes\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_00e0149634": {
+  "evidence": "\"CHALONS EN CHAMPAGNE, , France\", \"remote\": false; \"au sein de votre magasin\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_00ee87c829": {
+  "evidence": "\"provide engineering services at our office in Missoula, Montana\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_01021d636b": {
+  "evidence": "Location: NYC preferred, but remote options available for the right candidate.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_011adcde23": {
+  "evidence": "\"Fully remote — work from anywhere\" but board locations: \"Kazakhstan\" (Almaty)",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
  "v1|j_0170758b85": {
   "evidence": "On-site in Singapore, Singapore.",
   "verdicts": {
@@ -59,12 +109,72 @@
    "US": "yes"
   }
  },
+ "v1|j_022e196de9": {
+  "evidence": "\"Work Arrangement\": \"On-site\"; \"Steinach, Germany\"; \"hands-on in unserer Produktion\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_029968ffc0": {
+  "evidence": "\"Joe Cooper CDJR of Yukon\"; \"Load and unload delivery truck accordingly.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_02a930e410": {
+  "evidence": "\"Work Arrangement\": \"On-site\"; \"LGC Site\": \"Homebased, Germany\"; \"Our locations include Petaluma (USA), Kulmbach and Berlin (Germany)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_02e8c714a9": {
   "evidence": "\"SEA Applicants\"; locations: \"TELECOMMUTE\", \"Indonesia\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
    "ID": "yes",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_03440bb268": {
+  "evidence": "\"Greencross Vet Hospital | Werribee, VIC\"; \"Provide hands-on clinical support\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_039cbd9f2a": {
+  "evidence": "\"hybrid\": true, \"remote\": false; \"een eigen vaste werkplek op ons kantoor in Houten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_03ad2dd23b": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"ben je met je collega op pad in de regio Almelo\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
    "IN": "no",
    "US": "no"
   }
@@ -99,6 +209,36 @@
    "US": "no"
   }
  },
+ "v1|j_0428fb9463": {
+  "evidence": "\"remote\": true; \"I live outside the Warsaw metropolitan area and prefer a fully remote role\"; \"hybrid work (3 days from office, 2 days from home...)\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
+ "v1|j_0443fc17fc": {
+  "evidence": "\"fullLocation\": \"Madrid, MD, Spain\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_044802286f": {
+  "evidence": "\"fully remote role, giving you the flexibility to work from anywhere\"; \"Weekdays: 5:00 PM – 10:00 PM GMT-4\"; board locations: South Africa, Türkiye, Morocco, Argentina, Colombia, Malaysia",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
  "v1|j_044b8add63": {
   "evidence": "This is a full-time, remote position based in the United States.",
   "verdicts": {
@@ -107,6 +247,76 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_04a11ef75b": {
+  "evidence": "\"hybrid\": true, \"remote\": false; \"Standort Wendlingen am Neckar\", \"Boßlerstraße 45\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_04e31bad5c": {
+  "evidence": "\"The position will be based in BenQ Italy HQ in Sesto S. Giovanni (Milan)\"; \"Applicants must be EU resident or have an existing work permit allowing them to work freely in Italy\"; \"hybrid\": true, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_053235406c": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Colomiers, Occitanie, France\"; \"Au sein de l'usine de production\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_058d1d86f2": {
+  "evidence": "\"on_site\": true; \"Spuistraat 175, Amsterdam\"; \"Do you live in/near Amsterdam?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_059b81e1d8": {
+  "evidence": "\"fullLocation\": \"Porto, Porto, Portugal\", \"hybrid\": true, \"remote\": false; \"a flexible Hybrid Work Policy\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_05ad3a8981": {
+  "evidence": "\"Workplace Type\": \"Remote\"; \"Country/Region\": \"United States\"; \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_05b0e96f6e": {
+  "evidence": "\"Work in fully remote position\"; \"Ideally you are located in a 100 mile radius of Anaheim, CA but other West Coast locations will be considered.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_05efc454b0": {
@@ -149,8 +359,28 @@
    "US": "yes"
   }
  },
+ "v1|j_063c94e002": {
+  "evidence": "\"typically working together on-site with the client\"; location Copenhagen, Denmark",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_06460a9183": {
   "evidence": "\"country\": \"CN\", \"workplaceType\": \"onsite\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_06689db22c": {
+  "evidence": "\"fullLocation\": \"Noisy-le-Grand, IDF, France\", \"hybrid\": true, \"remote\": false; \"Un mode de travail hybride\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -167,6 +397,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_06f7e499fd": {
+  "evidence": "\"remote\": false; \"Saguenay, QC, Canada\"; \"Terminal maritime de Grande-Anse\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_0704f34ec8": {
@@ -186,6 +426,26 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_073dd73a24": {
+  "evidence": "\"on_site\": true; \"Nieuwe Rijn 9, Leiden\"; \"Je woont in of nabij Leiden.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_07a13932eb": {
+  "evidence": "\"full-time remote role (8 hours + 1 hour lunch) with mandatory availability between 9:30 and 17:30 CET\"; location \"Remote\" Bratislava, Slovakia; \"all national holidays in your country\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
    "US": "no"
   }
  },
@@ -209,6 +469,16 @@
    "US": "no"
   }
  },
+ "v1|j_07e6a97956": {
+  "evidence": "\"Istanbul, , Turkey\", hybrid: true; \"A flexible, hybrid work schedule\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0867bf7308": {
   "evidence": "\"workplace\": \"remote\", \"locations\": [\"TELECOMMUTE\", \"United States\"]",
   "verdicts": {
@@ -217,6 +487,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_0871cde152": {
+  "evidence": "\"address\": \"7th fl, 562 Nonhyeon-ro, Gangnam District, Seoul, Republic of Korea\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_088f6ee621": {
+  "evidence": "De audits vinden voornamelijk plaats op locatie bij klanten in Frankrijk",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_089d52488c": {
@@ -229,8 +519,28 @@
    "US": "no"
   }
  },
+ "v1|j_08bd339fa0": {
+  "evidence": "\"Location: Weld Range, Western Australia FIFO ex-Perth\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_08c016cf4c": {
   "evidence": "\"Residing in UAE\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_096cedccb6": {
+  "evidence": "\"Hybrid working – 3 days in the office during probation\"; \"Tuggerah, NSW, Australia\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -249,6 +559,16 @@
    "US": "no"
   }
  },
+ "v1|j_09ad92fb74": {
+  "evidence": "\"Fully remote position with flexible working hours\"; \"experience collaborating remotely across time zones\"; \"In which country are you currently based and will be working from?\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_09afb55877": {
   "evidence": "Remote",
   "verdicts": {
@@ -259,6 +579,16 @@
    "US": "unknown"
   }
  },
+ "v1|j_09ebc20dd0": {
+  "evidence": "Hybrid working mode, plus up to 3 months of the year work from anywhere; \"Are you able to commute to our Barcelona office a couple of times a week, if needed?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_09fc122e72": {
   "evidence": "\"workplace\": \"remote\", \"locations\": [\"TELECOMMUTE\", \"Chennai, Tamil Nadu, India\"]; \"Work from home\"",
   "verdicts": {
@@ -266,6 +596,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_0a287b1fa5": {
+  "evidence": "\"Open to candidates based anywhere in Latin America\"; \"availability during U.S. Central core hours\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -319,6 +659,16 @@
    "US": "no"
   }
  },
+ "v1|j_0b495e54fe": {
+  "evidence": "\"fullLocation\": \"Cergy, IDF, France\", \"hybrid\": true, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0b7ceb5670": {
   "evidence": "Hybrid in San Francisco, California, United States.",
   "verdicts": {
@@ -349,6 +699,26 @@
    "US": "yes"
   }
  },
+ "v1|j_0be4763487": {
+  "evidence": "\"hybrid\": true; \"Bois-Colombes, IDF, France\"; \"Hybrid work schedule\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0bfa50586a": {
+  "evidence": "\"fullLocation\": \"Hamburg, , Germany\", \"hybrid\": true, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0c6babf894": {
   "evidence": "You will work remotely from Bulgaria... Legally eligible to work in Bulgaria on an ongoing basis.",
   "verdicts": {
@@ -357,6 +727,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_0c73b9f469": {
+  "evidence": "\"Policy: On-site, 5 days in-office in San Francisco.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0cd8a39077": {
+  "evidence": "P2P Node.js Engineer (100% Remote, Worldwide)",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
   }
  },
  "v1|j_0cdcc4b9e1": {
@@ -399,6 +789,16 @@
    "US": "no"
   }
  },
+ "v1|j_0e1c8b7c2b": {
+  "evidence": "This is a 12 to 18 months fixed term contract role located in London... A valid UK working permit is mandatory for this role. ... minimum of 3 days per week in the office",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0e5249cc8b": {
   "evidence": "\"location\": \"San Francisco, CA, US\"",
   "verdicts": {
@@ -407,6 +807,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_0e9b097e51": {
+  "evidence": "\"This role can be done remotely as long as you're willing to work on the Americas time zone.\"; Country/Region: \"United States\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_0ea1423ae7": {
@@ -419,8 +829,28 @@
    "US": "no"
   }
  },
+ "v1|j_0efd3373ac": {
+  "evidence": "hybrid: true, remote: false; location \"Suomi - Finland, Uusimaa\"; offices \"Turku - Åbo\", \"Helsinki - Helsingfors\", \"Maarianhamina - Mariehamn\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0f0622eaca": {
   "evidence": "locations: [\"TELECOMMUTE\", \"United States\"]; \"Flexible hours, fully remote.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_0f333b6a55": {
+  "evidence": "\"Job Location\": \"Remote\"; \"Country/Region\": \"United States\"; \"remote\": true",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -449,6 +879,36 @@
    "US": "no"
   }
  },
+ "v1|j_0f885fa587": {
+  "evidence": "This is a remote position that is available in any state/region in Poland.; locations: Czechia, Hungary, Romania, Bulgaria, Slovakia, Serbia",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0f8ef63199": {
+  "evidence": "\"address\": \"Neurather Ring 1\", \"city\": \"Köln\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_0f95c091bd": {
+  "evidence": "\"Emmerich am Rhein, Nordrhein-Westfalen, Deutschland\"; \"Remote-Tätigkeit möglich\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_0fa724ad10": {
   "evidence": "\"region\": \"USA Only\"; title: US Area Sales Director (CPG) - Georgia",
   "verdicts": {
@@ -469,8 +929,38 @@
    "US": "yes"
   }
  },
+ "v1|j_1049d6cdec": {
+  "evidence": "\"Bereid om op wisselende locaties door heel Nederland te werken en indien nodig in de kost te gaan.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_104db5c005": {
+  "evidence": "本ポジションはWizcorpでの雇用期間中、日本国内に在住していただく必要があります。",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_10a870df45": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Limassol, Limassol, Cyprus\"]; \"Opportunity to cooperate fully remotely\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_10baae5ec5": {
+  "evidence": "We are seeking a **Graphic and web designer** in Malaysia",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -487,6 +977,26 @@
    "ID": "maybe",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_11168b61e1": {
+  "evidence": "\"Remote-first: Work from anywhere in the UK.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_111a7d90f7": {
+  "evidence": "hybrides Arbeiten mit Homeoffice-Anteil; Darmstadt, Hessen, Deutschland",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_11c7288199": {
@@ -509,10 +1019,40 @@
    "US": "no"
   }
  },
+ "v1|j_1259ae74a8": {
+  "evidence": "\"This role is open to candidates located in the Garden City/Long Island, NY metropolitan area\"; \"requires travel to multiple retail locations\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_12fa62aef4": {
   "evidence": "\"Trabalho 100% remoto (trabalhe de onde quiser)\"; \"Férias flexíveis (além do regime CLT)\"; location Rio de Janeiro, Brazil",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_12fba5f4f6": {
+  "evidence": "\"A residential position with accommodation provided on site\"; \"Ardingly: 03.07.27– 13.08.27\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_131199aa64": {
+  "evidence": "\"hybrid\": true, \"location\": \"Hilversum, Noord-Holland, Netherlands\"; \"Are you currently located in the Netherland\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -527,6 +1067,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_1361e89965": {
+  "evidence": "Als Calculator bij Tosec in Zwolle ... loop je makkelijk de werkvloer op",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_137fce3ac3": {
@@ -579,8 +1129,48 @@
    "US": "maybe"
   }
  },
+ "v1|j_140f8cf2d2": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Backnang, Baden-Württemberg, Deutschland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_141835c838": {
+  "evidence": "\"fullLocation\": \"Bengaluru, KA, India\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_14541f2899": {
+  "evidence": "\"Standort: Dachstein West (Gosau, Russbach, Annaberg)\"; \"Bei der Betreuung unserer Anlagen bist Du am Berg flexibel unterwegs\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_145893882e": {
   "evidence": "Headquarters: Remote, United States",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_14ce799f59": {
+  "evidence": "\"fullLocation\": \"Washington, DC, United States\", \"remote\": true",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -599,6 +1189,36 @@
    "US": "no"
   }
  },
+ "v1|j_1527de9b6d": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Miami, FL, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1530159764": {
+  "evidence": "\"hybrid\": true; \"Business controller | Lister Furkaplateau, Utrecht Lunetten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_154ef6936f": {
+  "evidence": "\"fullLocation\": \"Cergy, , France\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_15868f312a": {
   "evidence": "jobGeo: \"USA\"; \"Location: Midwest (IL, IN, MI, OH, WI) - Travel up to 70% of the time\"; \"external field position\"",
   "verdicts": {
@@ -607,6 +1227,46 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_15a34e2d0b": {
+  "evidence": "\"Lead Cybersecurity Engineer (UK)\"; \"Please confirm you hold the right to live and work in UK with no restrictions\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_15ca69312e": {
+  "evidence": "\"on_site\": true, \"location\": \"Reading, England, United Kingdom\"; \"Do you currently reside in the UK?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1641838be2": {
+  "evidence": "\"Workplace Type\": \"Onsite\"; \"fullLocation\": \"Carlsbad, CA, United States\", \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_16460b7cba": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"You live in (or near) Den Bosch\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_1683857016": {
@@ -679,6 +1339,16 @@
    "US": "no"
   }
  },
+ "v1|j_171eb22248": {
+  "evidence": "\"fullLocation\": \"Fernitz bei Graz, Steiermark, Austria\", \"hybrid\": true; \"Conduct on-site visits\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_1755424587": {
   "evidence": "\"location\": \"Remote (US)\"",
   "verdicts": {
@@ -687,6 +1357,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_176dffc6ad": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Obdam, Noord-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_17d82a1324": {
@@ -699,6 +1379,36 @@
    "US": "no"
   }
  },
+ "v1|j_17f734f76c": {
+  "evidence": "\"Quito, Pichincha, Ecuador\"; \"remote\": false; \"lead and grow its operations in Ecuador\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_181f4968e3": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"projecten verspreid over heel Limburg\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1852b14287": {
+  "evidence": "\"Global, Remote\"; \"We hire globally, and this particular role requires a minimum four-hour daily overlap with US Eastern business hours.\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "yes"
+  }
+ },
  "v1|j_1864763ae0": {
   "evidence": "\"Anywhere in the World\"",
   "verdicts": {
@@ -707,6 +1417,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_1866634d96": {
+  "evidence": "\"hybrid\": true, \"location\": \"Amersfoort, Utrecht, Netherlands\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_189f69d6a2": {
@@ -739,6 +1459,36 @@
    "US": "no"
   }
  },
+ "v1|j_1912e7df20": {
+  "evidence": "\"hybrid\": true; \"Zoetermeer\"; \"opdrachten bij organisaties in de Randstad\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_191d76b7f8": {
+  "evidence": "\"Goederentreinen rijdt op verschillende trajecten door Nederland\"; \"Actief bent in de belangrijke havengebieden in Rotterdam en Amsterdam\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_19375a5651": {
+  "evidence": "\"Voor ons cluster FinTech in Amsterdam\"; \"Een hybride werkomgeving, waarin thuiswerken tot de mogelijkheden behoort\"; on_site: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_19389e6a70": {
   "evidence": "workplace: remote; locations: [\"TELECOMMUTE\", \"Florianópolis, Santa Catarina, Brazil\"]",
   "verdicts": {
@@ -751,6 +1501,16 @@
  },
  "v1|j_1952d70939": {
   "evidence": "\"Location: Tokyo office (hybrid, 3 days a week in the office)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_198ab3c200": {
+  "evidence": "\"formation à la fois à l’école et en salon\"; \"Adresse postale : 17 Place du Maréchal Juin, 78600 MAISONS LAFFITTE\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -787,6 +1547,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_19ecf7057c": {
+  "evidence": "UKAEA is an onsite organisation, and this role requires regular onsite presence (usually between 3-5 days in any given week)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_19fb338112": {
+  "evidence": "\"on_site\": true; \"für unser Kino in Saarbrücken\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_1a63025e7e": {
@@ -849,6 +1629,46 @@
    "US": "yes"
   }
  },
+ "v1|j_1b17bec541": {
+  "evidence": "\"Maastricht UMC+, P. Debeylaan 25\"; on_site: true; \"het is een voorwaarde dat je in Nederland mag werken\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1b3cf58181": {
+  "evidence": "\"fullLocation\": \"Zürich, ZH, Switzerland\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1b4aa310ad": {
+  "evidence": "\"Goederentreinen rijdt op verschillende trajecten in Nederland en Duitsland\"; \"Regelmatig onderweg overnacht\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1bb62fd86f": {
+  "evidence": "Es besteht auch die Möglichkeit im Home-Office innerhalb Deutschlands zu arbeiten",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_1c4b609a51": {
   "evidence": "jobGeo: Czechia, Germany, Israel, Netherlands, UK",
   "verdicts": {
@@ -857,6 +1677,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_1ca8db299a": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Bethesda, MD, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_1cdf337fe9": {
@@ -909,8 +1739,118 @@
    "US": "yes"
   }
  },
+ "v1|j_1dc78ea18c": {
+  "evidence": "9-month engagement (UK Remote)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1dd0940447": {
+  "evidence": "\"hybrid\": true, \"name\": \"Cairo Office\", \"location\": \"Maadi, Al Qāhirah, Egypt\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1de270a48b": {
+  "evidence": "hybrid: true, \"Marienthal, Rheinland-Pfalz, Deutschland\"; \"ermöglichen wir es dir teilweise remote zu arbeiten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1df9ff09e0": {
+  "evidence": "\"Verteilung von Wochenzeitungen und Anzeigenblättern am Samstag\"; \"Zustellbezirk in Wohnortnähe\"; on_site: true, Krumbach, Bayern",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1dfbe0513d": {
+  "evidence": "Remote-first: Je kunt overal in Nederland werken.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1e03e67a3f": {
+  "evidence": "\"on_site\": true; \"This role is open to candidates located in the Napa Valley metropolitan area\"; \"travel to multiple retail locations\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_1e76cef320": {
   "evidence": "\"workplaceType\": \"onsite\"; \"If the posting is specified as Onsite, you are required to work from an office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1e94c5e667": {
+  "evidence": "\"This is a fully remote role with flexible scheduling.\" Board location: New York, United States; \"We strongly prefer candidates based in New York City\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_1eb79b94c0": {
+  "evidence": "Board: \"remote\": true, location Warsaw, Poland; \"Good command of written and spoken Polish\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1eb94bb72c": {
+  "evidence": "this is a fully remote role in Australia, requiring to work Monday to Friday, 8 am - 5 pm AEDT",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1eca143c7b": {
+  "evidence": "\"fullLocation\": \"Brooklyn, New York, United States\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1f0ad9be1b": {
+  "evidence": "\"on_site\": true; Betreuung unserer Rehabilitand/innen im Speisesaal; Thüringen - Bad Liebenstein",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -925,6 +1865,26 @@
    "BR": "no",
    "DE": "no",
    "ID": "yes",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1fa03460dd": {
+  "evidence": "\"fullLocation\": \"Reading, England, United Kingdom\", \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_1fa4c9f582": {
+  "evidence": "\"7149 Logistics Lane\", \"Fort Mill, South Carolina, United States\", \"remote\": false, \"hybrid\": false; \"Ability to walk manufacturing floors for extended periods.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
    "IN": "no",
    "US": "no"
   }
@@ -949,6 +1909,16 @@
    "US": "no"
   }
  },
+ "v1|j_205063f67b": {
+  "evidence": "\"hybrid\": true; \"Maandag werk je op ons kantoor in Rotterdam\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_206730cd05": {
   "evidence": "\"region\": \"Asia Only\"; \"Work Location - Work From Home\"",
   "verdicts": {
@@ -956,6 +1926,16 @@
    "DE": "no",
    "ID": "yes",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_2071530173": {
+  "evidence": "\"on_site\": true; \"Aktiver Verkauf und Kundenberatung auf der Fläche\" at \"TreeHut @ Landquart Fashion Outlet\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -1019,8 +1999,38 @@
    "US": "yes"
   }
  },
+ "v1|j_2210faf6d2": {
+  "evidence": "This is a hands-on nursing role... Greencross Vets Mt Gravatt | Brisbane, QLD",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_22d61ae490": {
+  "evidence": "\"remote\": true, locations name \"LATAM\"; \"100% Remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_22f4581adf": {
   "evidence": "This role is offered in **Sweden only**",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2336a46f12": {
+  "evidence": "\"hybrid\": true, \"Johannesburg, Gauteng, South Africa\"; \"strengthen our Johannesburg-based team\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1099,6 +2109,16 @@
    "US": "no"
   }
  },
+ "v1|j_259f77b263": {
+  "evidence": "\"on_site\": true; Durchführung der Arbeiten in der Werkstatt und bei Bedarf direkt in den Kundenbetrieben; Dormagen",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_26395acee1": {
   "evidence": "**Headquarters:** San Francisco Bay Area or Remote (U.S.)",
   "verdicts": {
@@ -1111,6 +2131,26 @@
  },
  "v1|j_265171a845": {
   "evidence": "Employees are expected to be on-site 3 days per week (Monday, Tuesday, and Thursday).",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_266b21b810": {
+  "evidence": "\"on_site\": true, \"Papendrecht, Zuid-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_269b2ea870": {
+  "evidence": "\"Location: Utrecht, the Netherlands 💼 Hybrid\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1199,6 +2239,26 @@
    "US": "no"
   }
  },
+ "v1|j_287eb39e6f": {
+  "evidence": "werkstudent bij De Brauw in Amsterdam; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2882bd8c62": {
+  "evidence": "\"on_site\": true; Je woont in (de omgeving van) Den Bosch",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_28a54c62c9": {
   "evidence": "\"region\": \"USA Only\"; \"This is a full-time or part-time REMOTE position.\"",
   "verdicts": {
@@ -1229,6 +2289,16 @@
    "US": "yes"
   }
  },
+ "v1|j_297d5b3b42": {
+  "evidence": "\"Notre Dame, IN, United States\", \"remote\": false; \"Ability to work in person, non-standard work hours\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_29a47ce5f3": {
   "evidence": "New York, San Francisco, Seattle, Washington DC, or Remote / Remote (US)",
   "verdicts": {
@@ -1237,6 +2307,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_29a5adf4db": {
+  "evidence": "\"you may be expected to work onsite in the office up to 5 days per week\"; \"interns must be based in the Bay Area for the extent of their internship\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_29d86b123a": {
@@ -1261,6 +2341,46 @@
  },
  "v1|j_2a57f9631e": {
   "evidence": "\"workplaceType\": \"hybrid\"; \"country\": \"US\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2a817016ad": {
+  "evidence": "\"La Rochelle, Nouvelle-Aquitaine, France\", \"remote\": false; \"Réaliser les travaux de soudage\"; \"Environnement Production et magasin\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2b2fcce4a6": {
+  "evidence": "\"184 Lynden Road\", \"Brantford, ON, Canada\", \"remote\": false; \"unload, stock, and retrieve merchandise in the backroom of the store\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2b53aa2647": {
+  "evidence": "\"Remote, Hong Kong\", \"Remote, Shenzhen\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2c44fa4003": {
+  "evidence": "\"fullLocation\": \"Perth, WA, Australia\", \"remote\": true; Country/Region: Australia",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1299,6 +2419,16 @@
    "US": "no"
   }
  },
+ "v1|j_2c92b85037": {
+  "evidence": "\"remote\": true, New Brunswick, New Jersey, United States; \"The position is based in an on-site office environment\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_2cac462ba8": {
   "evidence": "\"location\": \"Philippines\"",
   "verdicts": {
@@ -1319,6 +2449,16 @@
    "US": "no"
   }
  },
+ "v1|j_2d00f41bd9": {
+  "evidence": "\"Télétravail – France\", \"Stage 100 % à distance\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2d01014ffd": {
   "evidence": "State Residency in FL, GA, SC, NC, NJ, PA, DE, VA, KY, TN, IN, MI, MO, MN, AL, TX, OK, CO, NM, AZ, UT, or NV; 9:00 a.m. to 6:00 p.m. (EST) weekdays",
   "verdicts": {
@@ -1327,6 +2467,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_2d273a5ca4": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Standplaats: Woudenberg, Amsterdam of Sliedrecht\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_2d33106c98": {
@@ -1347,6 +2497,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_2d6daab5b3": {
+  "evidence": "\"remote\": false, \"on_site\": true; \"Standplaats Woudenberg of Barneveld\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_2d6f18bb01": {
@@ -1379,6 +2539,26 @@
    "US": "no"
   }
  },
+ "v1|j_2e18b3ad41": {
+  "evidence": "\"on_site\": true, \"Hilversum, Noord-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2e226cc256": {
+  "evidence": "\"Poste situé à STRASBOURG\"; location remote: false, hybrid: false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_2e3156bac5": {
   "evidence": "\"region\": \"Asia Only\"; \"Work Type : Remote- Independent Contractor\"; \"prompt attendance during Australian business hours (8:30 AM to 5:30 PM Brisbane time / AEST)\"",
   "verdicts": {
@@ -1393,6 +2573,16 @@
   "evidence": "workplace: remote; locations: [\"TELECOMMUTE\", \"Brazil\"]",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_2e89ccc6fc": {
+  "evidence": "\"on_site\": true; \"Flexibility to be on-site regularly\"; \"Boston, Massachusetts, United States\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -1469,6 +2659,26 @@
    "US": "maybe"
   }
  },
+ "v1|j_3080e9219a": {
+  "evidence": "\"250 Parramatta Road\", \"Homebush West, NSW, Australia\", \"remote\": false; \"be eligible for veterinary registration within NSW\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_30ee33bd0b": {
+  "evidence": "\"This position requires occasional office work, are you willing to relocate to Slovakia?\"; \"For our Bratislava / Košice / Zvolen / Žilina / Brno office or remote\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_30ff05e838": {
   "evidence": "\"Located in CET timezone (+/- 3 hours), we are unable to consider applications from candidates in other time zones.\"",
   "verdicts": {
@@ -1477,6 +2687,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_3104f016ee": {
+  "evidence": "\"remote\": true, Nashville, TN, United States; \"Desired Location of Candidate: Nashville, TN\"; \"Resides in and be able to travel within the territory for which you are assigned.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_312b6ce30d": {
@@ -1509,6 +2729,26 @@
    "US": "no"
   }
  },
+ "v1|j_31a308ab78": {
+  "evidence": "locations: [{\"city\": \"Bratislava\", \"country\": \"Slovakia\", \"name\": \"Remote\"}]; \"mandatory availability between 9:30 and 17:30 CET\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_31dc926c5d": {
+  "evidence": "\"📍 Location: Utrecht, the Netherlands 💼 Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_31fb004d4a": {
   "evidence": "\"workplaceType\": \"onsite\"; \"If the posting is specified as Onsite, you are required to work from an office.\"",
   "verdicts": {
@@ -1519,8 +2759,38 @@
    "US": "no"
   }
  },
+ "v1|j_32757e6815": {
+  "evidence": "\"remote\": false; \"When in a showroom, serves as first contact to greet all clients who visit our showroom\"; \"Plumstead Township, PA, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_32b4c809f2": {
+  "evidence": "\"hybrid\": true; \"Een hybride werkomgeving, waarin thuiswerken tot de mogelijkheden behoort\"; \"Amsterdam\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_331f5d4c4a": {
   "evidence": "\"On-site, five days per week in San Francisco, California.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3344331e48": {
+  "evidence": "\"hybrid\": true, \"Sebes, Alba, Romania\"; \"Performing on-site and remote fixes\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1549,11 +2819,31 @@
    "US": "no"
   }
  },
+ "v1|j_33fe75a1a1": {
+  "evidence": "\"hybrid\": true; \"Atlanta, GA - must be based in the Atlanta area... you can expect to go in 1-3x per month when needed\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_34377d3395": {
   "evidence": "\"It is a hybrid role with expectations that you are working from our Boston, MA office at least 3 days per week if hired.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3438cea9df": {
+  "evidence": "\"100 Prozent Mobile Office\" vs. \"Am Standort Augsburg suchen wir Dich\"; \"einen hohen Anteil der Arbeitszeit aus dem Mobile Office zu arbeiten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -1567,6 +2857,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_3463fe1d0d": {
+  "evidence": "\"en CDI, à Lille\"; \"Télétravail possible\": \"Non\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_346df0c0de": {
@@ -1589,6 +2889,16 @@
    "US": "yes"
   }
  },
+ "v1|j_3529cca04e": {
+  "evidence": "\"Remote (LATAM Based)\"; \"100% Remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_353532abc3": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"São Paulo, São Paulo, Brazil\"]; \"Fully remote cooperation\"; \"Fixed schedule: Monday–Friday, 09:00–18:00 or 12:00–21:00 (Pacific/Gambier, UTC−9)\"",
   "verdicts": {
@@ -1609,6 +2919,16 @@
    "US": "no"
   }
  },
+ "v1|j_356e5f5eba": {
+  "evidence": "\"Warsaw, Masovian Voivodeship, Poland\", remote: true; \"join a 12+ person Polish engineering team\"; \"travel occasionally to the client in the Netherlands or to our Kraków office\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3591796fe2": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"India\"], \"workplace\": \"remote\"",
   "verdicts": {
@@ -1616,6 +2936,56 @@
    "DE": "no",
    "ID": "no",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_35be761804": {
+  "evidence": "\"fullLocation\": \"Auckland, Auckland, New Zealand\", \"remote\": true; Country/Region: \"Australia\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_362fa97456": {
+  "evidence": "\"address\": \"Anywhere\", \"city\": \"Hamburg\", \"country\": \"de\", \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3644d9d4e2": {
+  "evidence": "Location: \"Remote-CA\"; \"Remote Eligible\": \"Yes\"; \"PALO ALTO, CA, United States\"; \"requires visibility across PMG locations\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_365a5b176f": {
+  "evidence": "\"fullLocation\": \"Hong Kong, , Hong Kong\", \"remote\": false; \"持有有效的香港地产代理监管局（EAA）牌照\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_366ac8dadb": {
+  "evidence": "\"Availability for hybrid model: minimum 3 days per week onsite in our Bratislava office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -1631,6 +3001,26 @@
  },
  "v1|j_367c4a84be": {
   "evidence": "\"workplaceType\": \"hybrid\", \"country\": \"BR\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3686481e18": {
+  "evidence": "\"fullLocation\": \"Casablanca, , Morocco\", \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_36ce4b0152": {
+  "evidence": "\"Lanzarote, CN, Spain\", \"remote\": false; in-store sales role",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1669,6 +3059,26 @@
    "US": "no"
   }
  },
+ "v1|j_37416ddc5d": {
+  "evidence": "\"on_site\": true, \"hybrid\": true, \"remote\": false; \"Delft, Zuid-Holland, Nederland\"; \"werkzaamheden ... in woningbouwprojecten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_37ab56c462": {
+  "evidence": "\"fullLocation\": \"Stuttgart, BW, Germany\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_37c1934b49": {
   "evidence": "\"location\": \"Hong Kong; Singapore; Taiwan\"",
   "verdicts": {
@@ -1685,6 +3095,16 @@
    "BR": "no",
    "DE": "no",
    "ID": "yes",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_382e47bd3d": {
+  "evidence": "\"on_site\": true, \"remote\": false, \"location\": \"Negombo, Western Province, Sri Lanka\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
    "IN": "no",
    "US": "no"
   }
@@ -1709,6 +3129,16 @@
    "US": "yes"
   }
  },
+ "v1|j_38d23338d5": {
+  "evidence": "\"hybrid\": true; \"Mechelen, Antwerpen, België\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_38d69e2d8b": {
   "evidence": "\"This is a fully remote opportunity and can be worked from any location in the United States.\"",
   "verdicts": {
@@ -1719,6 +3149,26 @@
    "US": "yes"
   }
  },
+ "v1|j_38fc10cab8": {
+  "evidence": "\"Based in Argentina.\"; \"Are you currently located in Argentina?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_390d79abc5": {
+  "evidence": "\"city\": \"Copenhagen\", \"country\": \"dk\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3952ff9afd": {
   "evidence": "\"Fully remote, based outside the US.\"",
   "verdicts": {
@@ -1726,6 +3176,16 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_3993f59689": {
+  "evidence": "\"on_site\": true; \"Sliedrecht, Zuid-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -1741,6 +3201,26 @@
  },
  "v1|j_39b1b6093f": {
   "evidence": "This position is located in NYC and requires a minimum of 3 days/week in office.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3a05765957": {
+  "evidence": "\"on_site\": true; \"You live in Gibraltar (or nearby)\"; \"Do you have the right to work in Gibraltar?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3a0cf404f8": {
+  "evidence": "\"hybrid working model. You travel to clients (20%) and Bluecrux offices (Barcelona ES, Mechelen/Aalst BE, Zug CH – Min 40%)\"; \"Applicants for employment in Belgium must have work authorization\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1779,6 +3259,16 @@
    "US": "no"
   }
  },
+ "v1|j_3bc7db6b22": {
+  "evidence": "\"Worcester, England, United Kingdom\", remote: false; \"A full UK driving license is required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3c6c94160a": {
   "evidence": "locationRestrictions: [\"Pakistan\"]",
   "verdicts": {
@@ -1809,6 +3299,26 @@
    "US": "no"
   }
  },
+ "v1|j_3cd5e633cb": {
+  "evidence": "\"fullLocation\": \"Brisbane, QLD, Australia\", \"remote\": true; Country/Region: Australia",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3ce05d113d": {
+  "evidence": "\"hybrid\": true, \"location\": \"Naarden, Noord-Holland, Nederland\"; \"development team based entirely in the Netherlands\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3d24e99b71": {
   "evidence": "\"workplaceType\": \"OnSite\"; \"We work in person five days a week in San Francisco, New York, and London.\"",
   "verdicts": {
@@ -1819,8 +3329,68 @@
    "US": "no"
   }
  },
+ "v1|j_3d49428cf9": {
+  "evidence": "\"Werken op afstand\" but \"Je bent het aanspreekpunt voor klanten op locatie\"; \"Dijksma Koudetechniek in Emmeloord\"; \"Een bus van de zaak (ook voor woon-werkverkeer)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3d6515042e": {
+  "evidence": "Based in Sydney this role; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3d734cc9aa": {
+  "evidence": "\"Work Location: Bangkok, Thailand\"; \"Work Setup: Hybrid ( 3 Days in a week onsite)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3e5457a756": {
+  "evidence": "\"Ort: Deutschland Remote\"; \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_3e60573854": {
   "evidence": "workplaceType \"Hybrid\"; location \"Vienna, Austria\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3e78158e69": {
+  "evidence": "\"Remote Eligible\": \"No\"; \"LPCH - Main Bldg - PALO ALTO\"; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3eab82eff5": {
+  "evidence": "\"Workplace Type\": \"Onsite\"; \"Legally authorized to work in Hong Kong.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -1837,6 +3407,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_3efc80712a": {
+  "evidence": "\"Remote job\"; locations: \"Quito\", \"Ecuador\"; \"Do you need any specific type of visa now or in the future to work in Ecuador?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_3f0a2ed279": {
+  "evidence": "\"fullLocation\": \"Oberursel, HE, Germany\", \"remote\": true; \"Hybrider Arbeitsplatz\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_3f613f6fc9": {
@@ -1863,6 +3453,16 @@
   "evidence": "\"workplace\": \"remote\", \"locations\": [\"TELECOMMUTE\", \"Brazil\"]; \"remote format with flexible hours\"",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4098ebf9bc": {
+  "evidence": "\"Hybrid work model\"; \"allowing up to two (out of 5) days of working from home\"; \"Utrecht, Utrecht, Netherlands\"",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -1949,11 +3549,61 @@
    "US": "no"
   }
  },
+ "v1|j_41e3f1b4dd": {
+  "evidence": "\"fullLocation\": \"Nanaimo, BC, Canada\", \"hybrid\": false, \"remote\": false; \"retrieve merchandise in the backroom of the store\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_42242ba5a2": {
+  "evidence": "\"location\": \"Remote job\"; \"remote\": true, \"hybrid\": true, \"on_site\": true; city Geneva; \"connecting with experienced major and principal gifts fundraisers across different countries\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
+ "v1|j_42384e3abb": {
+  "evidence": "\"Remote in Germany or France\"; \"as long as you have a residency in Germany or France\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_425123c467": {
   "evidence": "\"On-site in San Francisco, California. The role works in person six days per week.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_428b7423c3": {
+  "evidence": "\"fullLocation\": \"Paris, IDF, France\", \"hybrid\": true; \"Hybrid work organization (2 office days per week)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4292949f99": {
+  "evidence": "\"name\": \"Remote - Europe\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -1979,12 +3629,62 @@
    "US": "no"
   }
  },
+ "v1|j_43903d38a0": {
+  "evidence": "\"fullLocation\": \"Oberursel, HE, Germany\", \"remote\": true; \"Hybrider Arbeitsplatz\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_43b4f1014e": {
+  "evidence": "\"remote\": false, \"on_site\": true; \"Je woont in een straal van 30km van Wolvega.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_43dff230dd": {
+  "evidence": "\"APAC Senior Operations Manager (China-Based)\"; \"Are you willing to stay/relocate in Yiwu City, Zhejiang Province, China?\"; on_site: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_43e1d2f15b": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Indonesia\"], \"workplace\": \"remote\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
    "ID": "yes",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4457e2c99b": {
+  "evidence": "Sede di lavoro: GIUSSANO; ricevi le consegne... tenuta del magazzino",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4461f4dc67": {
+  "evidence": "Location: Hybrid, 3 days in-office SF.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
    "IN": "no",
    "US": "no"
   }
@@ -2049,6 +3749,36 @@
    "US": "no"
   }
  },
+ "v1|j_4597804826": {
+  "evidence": "\"fullLocation\": \"Windsor, Ontario, Canada\", \"remote\": false; \"we are entering our Residents' Home\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4677bea076": {
+  "evidence": "\"Location: Jeffersonville, OH — On-site\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_467edf24a6": {
+  "evidence": "Hybrid position ... 3 days of remote work per week; Bois-Colombes, IDF, France",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_46b3b970a8": {
   "evidence": "\"Location: Global, fully remote\"; \"Schedule: Flexible—you choose the hours\"",
   "verdicts": {
@@ -2057,6 +3787,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_471048dd5a": {
+  "evidence": "\"remote\": false, \"on_site\": true; \"Standplaats: Assendelft, Noord-Holland, Nederland\"; \"Projecten Landelijk maar voornamelijk midden Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_4818bcf7df": {
@@ -2089,6 +3829,16 @@
    "US": "yes"
   }
  },
+ "v1|j_483bddd051": {
+  "evidence": "\"HYBRID - MID SHIFT\"; \"fullLocation\": \"Pasig City, , Philippines\", \"hybrid\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_48592e7d24": {
   "evidence": "\"country\": \"MY\", \"workplaceType\": \"onsite\"",
   "verdicts": {
@@ -2097,6 +3847,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_487987ae21": {
+  "evidence": "\"location\": \"Homeoffice\"; \"setzt dieses selbstständig in deiner Region ... um\"; \"deinen Wohnort bzw. die Regionen, in denen du hauptsächlich fotografieren möchtest\"",
+  "verdicts": {
+   "BR": "unknown",
+   "DE": "unknown",
+   "ID": "unknown",
+   "IN": "unknown",
+   "US": "unknown"
   }
  },
  "v1|j_4896b76d92": {
@@ -2109,11 +3869,31 @@
    "US": "maybe"
   }
  },
+ "v1|j_495484f0dd": {
+  "evidence": "\"on_site\": true, \"location\": \"Graz, Steiermark, Österreich\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_498410eaf3": {
   "evidence": "\"This is an on-site role based in San Francisco, CA. Candidates must be willing to work from the San Francisco office.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_499dde71a5": {
+  "evidence": "📍 Location: Germany (home-office based) 💼 Remote with approx. 50% field travel",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -2129,6 +3909,16 @@
    "US": "no"
   }
  },
+ "v1|j_49b2096b05": {
+  "evidence": "\"Option to be located in Adelaide, Sydney, Melbourne or Brisbane\"; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_49ba898677": {
   "evidence": "open to candidates based in 55 countries, including Pakistan, United States, United Kingdom, Canada, Germany, India, France, Netherlands.",
   "verdicts": {
@@ -2139,6 +3929,16 @@
    "US": "yes"
   }
  },
+ "v1|j_49bf1de8f8": {
+  "evidence": "This role in based in Sebes, Romania . Are you living there/ willing to relocate?",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_4a17db0ef2": {
   "evidence": "\"Proof of eligibility to work in the United States is required.\"; \"#LI-Hybrid\"; \"We expect employees to be in the office at least three days per week.\"",
   "verdicts": {
@@ -2146,6 +3946,26 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4a4c6e06c8": {
+  "evidence": "\"address\": \"Anywhere\", \"city\": \"Hamburg\", \"country\": \"de\", \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4a91e122a6": {
+  "evidence": "\"This is a fully remote role based in India, with working hours aligned to US Eastern Time, 9:00 AM to 5:00 PM ET\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
    "US": "no"
   }
  },
@@ -2169,11 +3989,41 @@
    "US": "no"
   }
  },
+ "v1|j_4bb2ac0d0a": {
+  "evidence": "\"fullLocation\": \"Bridgwater, England, United Kingdom\", \"remote\": true; \"helping businesses across the UK\"; \"Engage in face-to-face and virtual consultations\"; \"A full UK driving license is required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4c1463585b": {
+  "evidence": "This role is remote eligible. ... open to any candidates that maintain permanent residence in the United States. / This role is hybrid and open to candidates based in Los Angeles or Orange County, CA.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_4c7f230ecb": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Germany\"], \"workplace\": \"remote\"",
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_4d776bf917": {
+  "evidence": "Für unseren Standort in Oberding nahe dem Flughafen München",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -2187,6 +4037,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_4de88dd0c9": {
+  "evidence": "\"100% remote cooperation.\" \"What is your current place of residence?\"",
+  "verdicts": {
+   "BR": "unknown",
+   "DE": "unknown",
+   "ID": "unknown",
+   "IN": "unknown",
+   "US": "unknown"
   }
  },
  "v1|j_4e0b2f46b4": {
@@ -2229,6 +4089,16 @@
    "US": "no"
   }
  },
+ "v1|j_4ec9a1da59": {
+  "evidence": "\"Are you able to commit to the office Monday to Friday in Eindhoven/NL?\" on_site: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_4edba61c4f": {
   "evidence": "\"Fully remote, based outside the US.\"; \"locations\": [\"TELECOMMUTE\", \"Berlin, Berlin, Germany\"]",
   "verdicts": {
@@ -2236,6 +4106,16 @@
    "DE": "yes",
    "ID": "yes",
    "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_4f2d445723": {
+  "evidence": "hybrid: true, \"Hilversum, Noord-Holland, Netherlands\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
    "US": "no"
   }
  },
@@ -2269,6 +4149,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_50064ba9ae": {
+  "evidence": "\"fullLocation\": \"Reims, Grand Est, France\", \"hybrid\": true; \"Télétravail à hauteur de 2 jours / semaine\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_50a5c5e266": {
   "evidence": "This role will be remote, and based in Singapore.",
   "verdicts": {
@@ -2297,6 +4187,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_516c129f1e": {
+  "evidence": "en CDI, à Paris",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_51e8e9813d": {
@@ -2339,6 +4239,46 @@
    "US": "no"
   }
  },
+ "v1|j_5298383d0d": {
+  "evidence": "on_site: true, \"Zundert, Noord-Brabant, Nederland\"; \"in de winkel te helpen\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_52ca6e7004": {
+  "evidence": "\"hybrid\": true, \"location\": \"Halle, Vlaams Gewest, België\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_52e24e85fb": {
+  "evidence": "\"remote\": false, \"hybrid\": false; \"Berlin\"; \"Dich erwartet ein helles Büro\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_52fe13f7ba": {
+  "evidence": "\"fullLocation\": \"Shrewsbury, England, United Kingdom\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_53ac8a56a6": {
   "evidence": "jobGeo: \"Mexico\"",
   "verdicts": {
@@ -2359,8 +4299,28 @@
    "US": "yes"
   }
  },
+ "v1|j_53fa6cf44c": {
+  "evidence": "\"poste basé sur notre site de Faverges (74)\"; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5406bf1129": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Mexico\"]; \"open to people based in the countries listed in this post\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5462f5b8a7": {
+  "evidence": "\"remote\": false, \"on_site\": true; \"Werken op de bouw\"; \"projecten in de Randstad\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2419,6 +4379,16 @@
    "US": "yes"
   }
  },
+ "v1|j_5583a427f7": {
+  "evidence": "\"hybrid\": true, \"location\": \"München, Bayern, Deutschland\", \"street\": \"Thomas-Dehler-Straße 25\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_558a8de347": {
   "evidence": "\"location\": \"New York City\"",
   "verdicts": {
@@ -2427,6 +4397,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_55c6ddb595": {
+  "evidence": "\"Remote (US, Canada, Europe) - East Coast Preferred\"; description: \"Location: Remote (US, Canada) - East Coast Preferred\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_560e387c87": {
@@ -2459,6 +4439,26 @@
    "US": "no"
   }
  },
+ "v1|j_5705fc0b85": {
+  "evidence": "\"India - Remote\", \"Applicable to candidates based in India\", \"Remote, India (IST)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1|j_57458d74c5": {
+  "evidence": "\"The Operations Executive (Warehouse) is expected to be on site 5 days a week.\" Amsterdam",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5768c76847": {
   "evidence": "workplace: remote; locations: [\"TELECOMMUTE\", \"India\"]",
   "verdicts": {
@@ -2479,8 +4479,28 @@
    "US": "no"
   }
  },
+ "v1|j_57bcdbabd3": {
+  "evidence": "\"Cairo\", hybrid: true, \"Trimetis Services Egypt is looking for\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_57df1ffee9": {
   "evidence": "location: \"Australia; Malaysia; Singapore; United Arab Emirates\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_57ecc05f1d": {
+  "evidence": "\"LGC Site\": \"Homebased, UK\"; \"Country/Region\": \"United Kingdom\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2539,8 +4559,48 @@
    "US": "no"
   }
  },
+ "v1|j_59212c4848": {
+  "evidence": "\"This position will require an in-office presence. Do you currently live within a commutable distance of where this position is based (Frisco, TX)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_592cd8cc50": {
   "evidence": "locations: \"TELECOMMUTE\", \"Philippines\"; workplace: remote",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_59bb15b7c3": {
+  "evidence": "\"on_site\": true, \"remote\": false, \"location\": \"Rüsselsheim, Hessen, Deutschland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_59c170e02a": {
+  "evidence": "Experienced Blade Technicians – UK & Europe 2027; \"We are seeking skilled in-field technicians\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5a1a638575": {
+  "evidence": "\"fullLocation\": \"Manila, NCR, Philippines\"; \"requires to work both in the central office and on client site/s when required\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2559,8 +4619,38 @@
    "US": "no"
   }
  },
+ "v1|j_5a46c55443": {
+  "evidence": "\"fullLocation\": \"Thuan Thanh, Bac Ninh Province, Vietnam\", \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5a560ca1f5": {
+  "evidence": "Location: Atlanta, GA (Hybrid) - only have to go in as needed. Maybe 1-2x per month",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5a95a2ce6d": {
   "evidence": "\"location\": \"France\"; \"La zone à couvrir est Strasbourg et alentours\"; \"capacité de se déplacer dans une zone géographique définie (environ 2h de son domicile)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5a9ccd184f": {
+  "evidence": "\"fullLocation\": \"Carate Brianza, , Italy\"; \"Disponibilità a trasferte presso clienti in Italia\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2589,6 +4679,16 @@
    "US": "no"
   }
  },
+ "v1|j_5b7dcb5510": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Maastricht, Limburg, Nederland\"; \"Je vervult nacht- en weekenddiensten\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5b97965c16": {
   "evidence": "This role will be remote, and based in the United States.",
   "verdicts": {
@@ -2597,6 +4697,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_5bb55407aa": {
+  "evidence": "\"Hybride werken, thuis en op onze flexplekken in Houten, Rotterdam, Amsterdam en Goes\"; \"bereidheid om locaties door heel Nederland te bezoeken\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_5c957a15f5": {
@@ -2609,8 +4719,48 @@
    "US": "no"
   }
  },
+ "v1|j_5cc161cb0c": {
+  "evidence": "This position will be primarily based in an office in Washington D.C.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5d0275c71f": {
   "evidence": "location: \"Hong Kong; Malaysia; Singapore\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5d11a65028": {
+  "evidence": "\"hybrid\": true, \"remote\": false, \"location\": \"Bergschenhoek, Zuid-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5d44302256": {
+  "evidence": "This hybrid position requires candidates to be based in Pune with 3-4 days of in-office collaboration per week.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5d7c9d0f21": {
+  "evidence": "\"Please confirm that you hold the right to live and work in the UK without restrictions.\"; \"practical completion of recovery service jobs on customer premises\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2629,6 +4779,16 @@
    "US": "no"
   }
  },
+ "v1|j_5ddaeb3f49": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Attend every scheduled session at Soho House Amsterdam.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5e4e79b4bb": {
   "evidence": "locationRestrictions include \"Brazil\", \"India\", \"Indonesia\"; Germany and United States not listed; timezoneRestrictions include -3, 5.5, 7",
   "verdicts": {
@@ -2639,10 +4799,40 @@
    "US": "no"
   }
  },
+ "v1|j_5e5e908963": {
+  "evidence": "\"Remote Eligible\": \"No\"; \"PALO ALTO, CA, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_5e6420b16d": {
   "evidence": "Remote - experts based in Latin America and the Caribbean. Selected countries include: Brazil, Colombia, Argentina, ...",
   "verdicts": {
    "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5e94b2ba9c": {
+  "evidence": "Auerbachstraße 110, Stuttgart, BW, Germany",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5ed384fabb": {
+  "evidence": "Hungary (home-based) 📍 Warsaw (Lomianki) Poland (Hybrid)📍 Bury, United Kingdom (Hybrid) 📍 Milan, Italy (Hybrid)",
+  "verdicts": {
+   "BR": "no",
    "DE": "no",
    "ID": "no",
    "IN": "no",
@@ -2659,6 +4849,36 @@
    "US": "no"
   }
  },
+ "v1|j_5f641587de": {
+  "evidence": "\"hybrid\": true; \"Athens, , Greece\"; \"in a hybrid working model\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5f7c605b01": {
+  "evidence": "Lieu : Centre commercial, rue de Monthéty, 77340 Pontault-combault",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_5fe7b815bb": {
+  "evidence": "\"remote\": true; \"North Ryde, NSW, Australia\"; \"across a large national network\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_606d27a997": {
   "evidence": "\"Headquarters: CA - San Francisco HQ; CA-Remote\"; \"We are unable to accommodate remote work from Hawaii, Alaska or Puerto Rico at this time.\"",
   "verdicts": {
@@ -2667,6 +4887,36 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_607977e3a2": {
+  "evidence": "\"We are a 100% remote company from Belgium\"; \"You must live and work between the UTC-01:00 and UTC+03:00 time zones.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_61413129dc": {
+  "evidence": "\"Director, AI Innovation and Transformation (UK Remote)\"; location: Newcastle upon Tyne, United Kingdom, remote: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_619019981f": {
+  "evidence": "\"fullLocation\": \"Bengaluru, KA, India\", \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
+   "US": "no"
   }
  },
  "v1|j_61deaeb530": {
@@ -2749,6 +4999,16 @@
    "US": "yes"
   }
  },
+ "v1|j_62c287004c": {
+  "evidence": "\"remote\": true; \"location\": \"Remote job\", \"country\": \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_62d5f94de8": {
   "evidence": "region: Anywhere in the World; The schedule for the first four weeks of our training period is 10 AM - 6 PM EST. The first week of training is mandatory",
   "verdicts": {
@@ -2779,6 +5039,16 @@
    "US": "yes"
   }
  },
+ "v1|j_63358b74e0": {
+  "evidence": "\"hybrid\": true, \"fullLocation\": \"Pasig, NCR, Philippines\"; \"Hybrid work setup\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6364847b87": {
   "evidence": "locationRestrictions: [\"Indonesia\"], timezoneRestrictions: [7, 8, 9]",
   "verdicts": {
@@ -2797,6 +5067,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_648ec6a42f": {
+  "evidence": "working remotely with flexible hours; Portland, OR, United States; remote: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_64935f5cd3": {
@@ -2819,6 +5099,26 @@
    "US": "yes"
   }
  },
+ "v1|j_6502fb5da7": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Leeds, England, United Kingdom\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_65110fbda8": {
+  "evidence": "\"hybrid\": true; \"join our Growth team in our Hyderabad office\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6522f254ee": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Bengaluru, Karnataka, India\"], \"workplace\": \"remote\"",
   "verdicts": {
@@ -2839,8 +5139,48 @@
    "US": "maybe"
   }
  },
+ "v1|j_659e65fc94": {
+  "evidence": "\"hybrid\": true; \"Den Haag, Zuid-Holland, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_65ad2b713b": {
+  "evidence": "\"this particular role requires you to be based in Latin America with at least four hours of daily overlap with US Eastern hours\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6632d06546": {
+  "evidence": "\"on_site\": true, \"remote\": false; \"Verteilung von Wochenzeitungen und Anzeigenblättern am Samstag\"; \"Zustellbezirk in Wohnortnähe\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_66897f2a33": {
   "evidence": "location: \"United Arab Emirates; United Kingdom\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_668e89f803": {
+  "evidence": "\"Location: Charlotte / Houston / Boston\"; \"Most of our clients now require a minimum of 3 days per week in the office\"; \"For this role a valid work authorization for the US is mandatory.\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2854,6 +5194,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_66d497cdd9": {
+  "evidence": "\"Lieu de travail Genève, Lausanne, Sion, Fribourg, Soleure, Bâle ou Zurich (missions / projets dans toute la Suisse)\"; location country: ch, remote: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -2891,6 +5241,16 @@
  },
  "v1|j_67cfc00ad0": {
   "evidence": "\"country\": \"GB\", \"workplaceType\": \"onsite\"; \"If the posting is specified as Onsite, you are required to work from an office.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_680e5c3960": {
+  "evidence": "\"on_site\": true, \"location\": \"Sliedrecht, Zuid-Holland, Nederland\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -2949,8 +5309,28 @@
    "US": "no"
   }
  },
+ "v1|j_6888f22228": {
+  "evidence": "\"remote\": true; locations: Warsaw, Poland; \"Remote cooperation.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_68a0d56bc7": {
   "evidence": "\"workplaceType\": \"hybrid\"; \"Many teams do offer hybrid options (WFH a day or two a week)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_68b52a0a4e": {
+  "evidence": "\"Warszawa (tryb hybrydowy)\"; \"Połączenie stałych dni pracy w biurze z elastyczną pracą zdalną\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3049,6 +5429,16 @@
    "US": "yes"
   }
  },
+ "v1|j_697ddb6963": {
+  "evidence": "\"hybrid\": true, \"location\": \"Toronto, Ontario, Canada\"; \"eligibility to work in Canada\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6a5cb48382": {
   "evidence": "\"San Francisco, California, USA\"; \"We operate as a hybrid workplace\"; \"#LI-Hybrid\"",
   "verdicts": {
@@ -3079,6 +5469,56 @@
    "US": "yes"
   }
  },
+ "v1|j_6c43d17e12": {
+  "evidence": "\"Remote, United Kingdom\"; \"Candidates must be able to demonstrate a pre-existing right to work and travel within the UK.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6c67e2696a": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Maadi as Sarayat Al Gharbeyah, Cairo Governorate, Egypt\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6c8d4340dd": {
+  "evidence": "\"on_site\": true, \"location\": \"San Francisco, California, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6c9416b392": {
+  "evidence": "\"on_site\": true, \"remote\": false, \"location\": \"Zwolle, Overijssel, Nederland\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6c94df3b0b": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Wauwatosa, WI, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_6ce7ef34ff": {
   "evidence": "\"Work location: Remote\"; locationRestrictions: [\"United States\"]",
   "verdicts": {
@@ -3099,6 +5539,26 @@
    "US": "no"
   }
  },
+ "v1|j_6d84fb24d8": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"New York, NY, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_6d8e558a9a": {
+  "evidence": "\"Country/Region\": \"South Africa\"; \"Contracted Office\": \"Home Based\"; \"fullLocation\": \"Cape Town, Western Cape, South Africa\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_6e2e2eff36": {
   "evidence": "\"Entirely remote, working from anywhere in the world\"; \"flexible schedule\"",
   "verdicts": {
@@ -3111,6 +5571,16 @@
  },
  "v1|j_6e77ca3d3b": {
   "evidence": "\"location\": \"Portugal\"; offices: \"Spain\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_6f01cd3f84": {
+  "evidence": "\"You will need to be based in Australia for this role, with Perth as our preferred location\"; \"hybrid\": true",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3147,6 +5617,16 @@
    "ID": "maybe",
    "IN": "maybe",
    "US": "maybe"
+  }
+ },
+ "v1|j_70029a7916": {
+  "evidence": "\"on_site\": true, \"location\": \"Schwanenstadt, Oberösterreich, Österreich\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_702e3aba30": {
@@ -3239,6 +5719,16 @@
    "US": "yes"
   }
  },
+ "v1|j_71d29e6acf": {
+  "evidence": "\"The role is based in the Philippines.\"; location: Manila, NCR, Philippines, remote: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_71db67eb7a": {
   "evidence": "Fully remote — work from anywhere in the world, with no country restriction.",
   "verdicts": {
@@ -3259,6 +5749,36 @@
    "US": "no"
   }
  },
+ "v1|j_728b83532d": {
+  "evidence": "\"This position requires working in a hybrid model in our Warsaw office.\" \"3 days from office, 2 days from home\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_72ac8dabbc": {
+  "evidence": "\"Location: Marie Curie Burgess Hill Store\"; remote: false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_730d827253": {
+  "evidence": "\"Centre Commercial Val D'Yerres 2, Quincy-sous-Sénart, France\"; remote: false; \"l'expérience des KIABERS en magasin\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_730ec37d2a": {
   "evidence": "location: \"Dallas, Texas\"; \"This remote role\"",
   "verdicts": {
@@ -3269,8 +5789,38 @@
    "US": "maybe"
   }
  },
+ "v1|j_73235c99a6": {
+  "evidence": "\"Remote (NL)\"; \"Remote-first: Work from anywhere in The Netherlands. We stay connected through monthly in-person team days\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_73490f2660": {
+  "evidence": "\"fullLocation\": \"Waltham, MA, United States\", \"remote\": true; but \"Job Location\" ... \"valueLabel\": \"Hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_7364e9a425": {
   "evidence": "\"Toronto, Canada\"; \"This role will be in-office on a hybrid schedule — Team Members will be expected to work in the office at least 3 days per week\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_7369134be2": {
+  "evidence": "\"fullLocation\": \"Brooklyn, New York, United States\", \"hybrid\": false, \"remote\": false",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3319,8 +5869,28 @@
    "US": "yes"
   }
  },
+ "v1|j_75890cba57": {
+  "evidence": "\"on_site\": true, \"remote\": false, \"location\": \"Gelsenkirchen, Nordrhein-Westfalen, Deutschland\"; \"eigenem, festem Arbeitsplatz im Technikbüro\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_75a80df94d": {
   "evidence": "locations: \"TELECOMMUTE\", \"Makati, Philippines\"; \"100% Remote / Work-From-Home setup\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_76802eb73f": {
+  "evidence": "\"Residential role - live and work in Waihi\"; \"Applicants must be eligible to work in New Zealand.\"; remote: false",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3351,6 +5921,26 @@
  },
  "v1|j_776d319ed1": {
   "evidence": "\"Based in London or Paris and on-site five days a week\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_7791604800": {
+  "evidence": "\"per lavorare in Claranet Italia occorre avere residenza italiana\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_77abff3a5c": {
+  "evidence": "Location: Croatia (working remotely)",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3399,8 +5989,48 @@
    "US": "no"
   }
  },
+ "v1|j_7892a7b9e2": {
+  "evidence": "location: \"Coburg, Bavaria, Germany\", \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_789540d8ac": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Philippines\"]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_78ce1854a8": {
+  "evidence": "\"Route du Belvédère 20\", \"Leysin, VD, Switzerland\", \"remote\": false; \"Take part in the daily life of the camp\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_78e193b53b": {
+  "evidence": "\"fullLocation\": \"Indianapolis, IN, United States\", \"hybrid\": false, ... \"remote\": false; \"Operating from our 92,000 square foot production facility\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_790eb11d55": {
+  "evidence": "\"fullLocation\": \"Basse-Goulaine, Pays de la Loire, France\", \"hybrid\": false, ... \"remote\": false; \"Vous êtes le premier sourire du magasin\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3419,6 +6049,16 @@
    "US": "yes"
   }
  },
+ "v1|j_791e5e8a4a": {
+  "evidence": "\"Principal Software Engineer Backend Technologies, Platform (UK Remote)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_793d7bf30a": {
   "evidence": "\"This is a remote role located within the contiguous U.S.\"; \"region\": \"USA Only\"",
   "verdicts": {
@@ -3427,6 +6067,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_797ed60a6b": {
+  "evidence": "\"fullLocation\": \"Bruxelles, Bruxelles, Belgium\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_7983788e8b": {
@@ -3479,6 +6129,16 @@
    "US": "yes"
   }
  },
+ "v1|j_7a145bfd8e": {
+  "evidence": "\"fullLocation\": \"Bayamón, Bayamón, Puerto Rico\", \"hybrid\": false, ... \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7a59a4ef8a": {
   "evidence": "\"US Only\"",
   "verdicts": {
@@ -3487,6 +6147,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_7a5a5c6caf": {
+  "evidence": "\"on_site\": true; \"62 rue Pierre Charron\", Paris",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_7aca6d89a4": {
@@ -3529,6 +6199,16 @@
    "US": "no"
   }
  },
+ "v1|j_7b1125b5fc": {
+  "evidence": "\"on_site\": true; \"Rue de l'aéropostale 8\", Grâce-Hollogne, Belgique",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7b476cbd1e": {
   "evidence": "jobGeo: \"EMEA,  LATAM,  Canada,  USA\"; \"A fully remote environment\"",
   "verdicts": {
@@ -3539,8 +6219,38 @@
    "US": "yes"
   }
  },
+ "v1|j_7b59d1fee4": {
+  "evidence": "\"fullLocation\": \"Zürich, ZH, Switzerland\", \"hybrid\": true, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_7b876c7617": {
+  "evidence": "\"fullLocation\": \"Las Condes, Región Metropolitana, Chile\", \"hybrid\": false, \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7ba3ae64cc": {
   "evidence": "jobGeo: \"USA\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_7bde88fdf9": {
+  "evidence": "\"fullLocation\": \"Albuquerque, NM, United States\", \"remote\": true",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3554,6 +6264,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_7c1f7d0276": {
+  "evidence": "on_site: true; KULT St. Pölten, Dr. Adolf-Schärf-Straße 5, Österreich",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -3579,6 +6299,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_7c44df936d": {
+  "evidence": "\"on_site\": true; \"Op de beschermd wonen locatie\", Emmeloord",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7cb57acba1": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"Cavite, Calabarzon, Philippines\"]; \"100% remote, work-from-home setup\"",
   "verdicts": {
@@ -3597,6 +6327,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_7d47d82b31": {
+  "evidence": "Deze functie vraagt een fulltime aanwezigheid op ons kantoor in Rotterdam",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_7d957d2044": {
@@ -3649,6 +6389,16 @@
    "US": "no"
   }
  },
+ "v1|j_7e2054a01c": {
+  "evidence": "\"Je start vanuit huis met je eigen werkbus en gaat op pad naar onze vaste opdrachtgevers in de regio Rotterdam en soms Den Haag\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_7e75f9be94": {
   "evidence": "This is a field-based, per-diem position requiring travel to patients' homes. Although the position may be listed as \"remote,\" it is not a work-from-home or telehealth role.",
   "verdicts": {
@@ -3667,6 +6417,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_7efc92751a": {
+  "evidence": "\"hybrid\": true, \"Charlotte, NC, United States\"; \"Employees must be available to work onsite in a client location or a CapTech office as requested\"; \"#LI- Onsite\"; \"Applicants must be authorized to work directly for any employer in the United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_7f4b169f7f": {
+  "evidence": "\"fullLocation\": \"Atlanta, GA, United States\", \"hybrid\": true, ... \"remote\": false; \"Remote/hybrid flexibility\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_80112af983": {
@@ -3739,6 +6509,16 @@
    "US": "yes"
   }
  },
+ "v1|j_8122361917": {
+  "evidence": "\"Lieu : poste basé dans la région de Nantes\"; \"Technicien itinérant dans la région de Nantes\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_81ce29250e": {
   "evidence": "Based in Europe or a nearby time zone, with at least 2 to 3 hours of daily overlap with CET; remote-first, so it can be executed from anywhere in Europe or nearby time zones, with the ability to operate in GMT to GMT+4 time zones preferred.",
   "verdicts": {
@@ -3759,6 +6539,16 @@
    "US": "maybe"
   }
  },
+ "v1|j_82a92ec18d": {
+  "evidence": "\"remote\": true; locations: \"Argentina\", \"Brasil\"; \"100% Remote\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_8361ed0e74": {
   "evidence": "\"location\": \"NY, SF or Remote / Remote (US)\"",
   "verdicts": {
@@ -3767,6 +6557,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_83cc5ec303": {
+  "evidence": "\"remote\": false; \"Amenable to report in Didipio and Makati\"; \"Accommodation and food provided on site\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_83f74e4d71": {
+  "evidence": "flexible Arbeitsweise (remote oder vor Ort); location: Homeoffice; locations: München, Deutschland",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_83fc366cfb": {
@@ -3787,6 +6597,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_8405e97fb7": {
+  "evidence": "You can work remotely from nearly any location in the United States. ... remote-first organization based exclusively in the United States",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_8408b149ff": {
@@ -3899,6 +6719,16 @@
    "US": "no"
   }
  },
+ "v1|j_862f173134": {
+  "evidence": "\"remote\": true; locations: \"Ecuador\", \"Mexico\"; \"Availability to work US hours\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_8686038a15": {
   "evidence": "\"addressCountry\": \"France\", \"workplaceType\": \"Remote\"; \"Télétravail complet possible\"",
   "verdicts": {
@@ -3927,6 +6757,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_86fe007eb0": {
+  "evidence": "\"Workplace Type\": \"Hybrid\"; \"Sliema, Tas-Sliema, Malta\"; \"Joining our team of European Customer Account Advisors in Malta\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_8766f862d9": {
@@ -3959,6 +6799,16 @@
    "US": "no"
   }
  },
+ "v1|j_8857dbfdfd": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"San Diego, CA, United States\"; \"#LI-REMOTE\"; but also \"a hybrid work schedule\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
  "v1|j_88eace9909": {
   "evidence": "We work in person five days a week in San Francisco, New York, and London.",
   "verdicts": {
@@ -3971,6 +6821,26 @@
  },
  "v1|j_893d7f6518": {
   "evidence": "Open to on-site or hybrid work across MENA, with regular travel to client sites.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_89a83703d5": {
+  "evidence": "Home-Office Verträge; FlexWork: Bis zu 3 Monate pro Jahr remote aus dem europäischen Ausland arbeiten; locations: Berlin, Leipzig, München, Walldorf (Germany)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_89b14ae17a": {
+  "evidence": "Location: Field-based across the South West, including Bristol.",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -3997,6 +6867,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_8a4477ed2d": {
+  "evidence": "\"Home Based - England\"; \"you will need to live in the region as travel across the region is a requirement of the role\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_8a6a6760fd": {
@@ -4039,6 +6919,26 @@
    "US": "maybe"
   }
  },
+ "v1|j_8c2b8a5afc": {
+  "evidence": "\"can be based in Sydney, Adelaide, Perth, or Brisbane\"; \"hybrid\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_8ca4e70452": {
+  "evidence": "\"one of their Long Term Care Homes located in Kitchener, On.\"; \"remote\": false",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_8d19df56c5": {
   "evidence": "\"Location: Berlin office / Germany remote\"",
   "verdicts": {
@@ -4057,6 +6957,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_8d61a63e04": {
+  "evidence": "\"Location: United States – Remote (Must reside in the Eastern Time Zone)\"; \"Work remotely from anywhere in the East or Central US regions\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_8d9d02592d": {
@@ -4099,6 +7009,16 @@
    "US": "no"
   }
  },
+ "v1|j_8e38fe5f02": {
+  "evidence": "\"or remotely (up to 100% remote)... This position is not open to candidates residing in New York, New Jersey, Pennsylvania, Texas, California, or the U.S. Territories.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_8e439fbcc3": {
   "evidence": "You can work anywhere in the Philippines. ... Job opening exclusive only to Filipino locals",
   "verdicts": {
@@ -4129,6 +7049,16 @@
    "US": "no"
   }
  },
+ "v1|j_8fb1ea772b": {
+  "evidence": "\"United Kingdom -Remote Office\"; \"work remotely, with the flexibility to lead in-person customer workshops in your market\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_900d0062cc": {
   "evidence": "Hybrid role based in Munich, Germany, with four days per week on-site.",
   "verdicts": {
@@ -4137,6 +7067,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_9011b4688b": {
+  "evidence": "\"Location: Remote (US)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_90449725cb": {
@@ -4159,6 +7099,16 @@
    "US": "yes"
   }
  },
+ "v1|j_90d1de3b4f": {
+  "evidence": "\"location\": \"Remote job\", \"remote\": true, \"country\": \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_911714ce95": {
   "evidence": "\"Remote (deutschlandweit)\"; \"Home-Office (deutschlandweit)\"",
   "verdicts": {
@@ -4167,6 +7117,26 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_91c572dec2": {
+  "evidence": "\"Sydney, NSW, Australia\"; \"flexibility with our hybrid work model\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_921e549289": {
+  "evidence": "Remote (US, Canada, Europe) - East Coast Preferred; United States (remote) · EMEA (Netherlands HQ / UK remote)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_92c05874a2": {
@@ -4289,6 +7259,16 @@
    "US": "no"
   }
  },
+ "v1|j_95666a697c": {
+  "evidence": "\"This position is Full-time, Exempt, Remote and required to travel Monday-Friday\"; Country/Region: \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_957760a2a9": {
   "evidence": "We're currently hiring for a physician who is based in PST and can work evening hours on Saturdays and during the week.",
   "verdicts": {
@@ -4351,6 +7331,26 @@
  },
  "v1|j_98f49c110a": {
   "evidence": "\"This role is based out of our Madrid office. We are an office-first company and value in-person collaboration; we do not offer remote-only roles.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_995028c4ec": {
+  "evidence": "\"remote\": true, \"Los Angeles, CA, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_9a30b5baca": {
+  "evidence": "\"community-based role supporting our elderly customers in their own homes across South West Sydney. You will be required to travel between clients\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -4429,6 +7429,16 @@
    "US": "yes"
   }
  },
+ "v1|j_9c152264b6": {
+  "evidence": "\"Location: Remote\"; board: \"Palmetto, GA, United States\", remote: true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_9c96afe767": {
   "evidence": "On-site in Berlin, Germany.",
   "verdicts": {
@@ -4467,6 +7477,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_9d35f3b3b3": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Guadalajara, Jal., Mexico\"; \"Perks you enjoy at KMS Mexico\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_9dede8a507": {
@@ -4529,6 +7549,16 @@
    "US": "unknown"
   }
  },
+ "v1|j_9f112866ed": {
+  "evidence": "This is a remote position based in the United States. ... our staff work within the US",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_9f2fdd3d7b": {
   "evidence": "\"Stoke-on-Trent, England, United Kingdom\"; \"United Kingdom - Remote\"; \"A base location within easy reach of your agreed territory\"",
   "verdicts": {
@@ -4544,6 +7574,16 @@
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_a0446601d3": {
+  "evidence": "Senior AI Engineer (f/m/d) - Remote in Germany; you decide when & where to work (as long as you have a residency in Germany)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -4597,6 +7637,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_a19c6a9c99": {
+  "evidence": "\"hybrid\": true, \"location\": \"Homeoffice\"; Berliner Büro, Hamburger Büro, Kölner Büro; Bis zu sechs Wochen im Jahr kannst du innerhalb der EU remote arbeiten",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_a1b069c62c": {
@@ -4697,6 +7747,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_a5330bbad5": {
+  "evidence": "\"Location: Remote in the US, ET or CT hours are required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_a538a50fe3": {
@@ -4829,6 +7889,16 @@
    "US": "no"
   }
  },
+ "v1|j_a94f6524f5": {
+  "evidence": "\"New Hampshire - Field Role\"; \"on_site\": true; \"Must possess valid documentation to establish identity and U.S. employment eligibility\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_aa2b54a624": {
   "evidence": "The position is predominantly remote in Germany, with occasional travel to company locations when required.",
   "verdicts": {
@@ -4909,11 +7979,61 @@
    "US": "no"
   }
  },
+ "v1|j_ac2792b511": {
+  "evidence": "Germany | Working Student in Consulting; Remote working environment",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ac8259ee79": {
   "evidence": "You can live anywhere. We are remote and we hire worldwide. The one hard requirement is that you can take client calls during US Eastern business hours",
   "verdicts": {
    "BR": "yes",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ad41ce4083": {
+  "evidence": "\"address\": \"Anywhere\", \"city\": \"Berlin\", \"country\": \"de\", \"remote\": true",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "yes",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
+ "v1|j_ad436e7c3a": {
+  "evidence": "Cologne (hybrid) or Berlin (remote); Do you currently live in Cologne or Berlin, or within a commuting distance of up to 50 km?; team time in the Cologne office (on-site days depending on your location)",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ad5b799894": {
+  "evidence": "\"Remote, United Kingdom\"; \"Candidates must be able to demonstrate a pre-existing right to work and travel within the UK.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ae072427ce": {
+  "evidence": "\"Schaumburg, IL, United States\", remote: true; \"Embrace the flexibility of remote, hybrid, and flexible work options.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "yes"
@@ -4989,6 +8109,16 @@
    "US": "no"
   }
  },
+ "v1|j_b0c05208b2": {
+  "evidence": "Sie arbeiten remote von Ihrem Homeoffice aus ... Wohnsitz in Nordrhein-Westfalen (Cologne, Dortmund), Hamburg, Frankfurt oder Stuttgart region",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_b0d411c6ab": {
   "evidence": "locationRestrictions: [\"United States\"]",
   "verdicts": {
@@ -4997,6 +8127,26 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_b13d7818b8": {
+  "evidence": "\"fullLocation\": \"Bethesda, MD, United States\", \"remote\": true",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_b142708cab": {
+  "evidence": "\"Job Location\": \"Remote\", \"Birmingham, AL, United States\"; \"Territory Manager - Alabama, Mississippi, Fl Panhandle\"; \"ability to travel extensively within the assigned territory\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_b14aeeb641": {
@@ -5089,6 +8239,16 @@
    "US": "yes"
   }
  },
+ "v1|j_b4b5ddd0ff": {
+  "evidence": "\"Austin, TX, United States\", remote: true; \"This is a part-time, remote role\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_b4d73e8585": {
   "evidence": "\"location\": \"Spain\"; offices: \"Canada\"; \"€67.000—€106.000 EUR\"",
   "verdicts": {
@@ -5149,6 +8309,16 @@
    "US": "no"
   }
  },
+ "v1|j_b68865b184": {
+  "evidence": "\"Und das alles komplett remote\"; \"FlexWork: Bis zu 3 Monate pro Jahr remote aus dem europäischen Ausland arbeiten\"; \"country\": \"Germany\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_b6e1d5f353": {
   "evidence": "\"Location: Global, fully remote\"; \"Flexible-you choose the hours and days you work\"",
   "verdicts": {
@@ -5199,8 +8369,28 @@
    "US": "yes"
   }
  },
+ "v1|j_ba29f75cdd": {
+  "evidence": "This role can be performed remotely from anywhere in Australia.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ba2bc45c02": {
   "evidence": "jobGeo: \"USA\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_ba332df7e4": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Philadelphia, PA, United States\"; \"Our policy on visa sponsorship for US based positions\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5229,8 +8419,28 @@
    "US": "maybe"
   }
  },
+ "v1|j_ba626c51dc": {
+  "evidence": "\"Remote in Germany\"; \"you decide when & where to work (as long as you have a residency in Germany)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_bafaecdb6a": {
   "evidence": "Applicants must have the right to work in the United Kingdom at the time of application and for the duration of employment.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_bafcf53b5c": {
+  "evidence": "\"Poste situé à Marseille\"; \"Un fonctionnement à distance indiqué dans le besoin\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5267,6 +8477,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_bcd7fc9386": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Washington, DC, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_bcdf9b794f": {
@@ -5329,6 +8549,16 @@
    "US": "yes"
   }
  },
+ "v1|j_bf45f5dd00": {
+  "evidence": "\"This role requires candidates to be based in Poland.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_bf6e8270dc": {
   "evidence": "Senior Platform Engineer (Onsite - SF)",
   "verdicts": {
@@ -5371,6 +8601,26 @@
  },
  "v1|j_bfb7761661": {
   "evidence": "\"onboarding of new manufacturers and/or dealers in your defined region of the UK\"; \"role is field based\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c02d731be1": {
+  "evidence": "locations: \"Philippines\" (Manila), remote: true; \"Do you need any specific type of visa now or in the future to work in the Philippines?\"; \"Availability to work US hours\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c0353a2d29": {
+  "evidence": "\"Home based?\": \"Hybrid\"; Location: Mumbai",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5459,6 +8709,16 @@
    "US": "no"
   }
  },
+ "v1|j_c250d0bea6": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Princeton, NJ, United States\"; Ability to travel as needed throughout North America.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_c25221e540": {
   "evidence": "\"location\": \"Barcelona, CT, ES / Barcelona, Catalonia, ES\"",
   "verdicts": {
@@ -5467,6 +8727,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_c28859bc97": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"New York, NY, United States\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_c2f5f51f51": {
@@ -5599,11 +8869,31 @@
    "US": "yes"
   }
  },
+ "v1|j_c6c5c151a7": {
+  "evidence": "\"Remote in the USA\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_c6d30b44a5": {
   "evidence": "This role will be in-office on a hybrid schedule following the establishment of a Lyft office in Nashville — Team Members will be expected to work in the office 3 days per week",
   "verdicts": {
    "BR": "no",
    "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_c819fc4cd6": {
+  "evidence": "\"remote\": true, \"fullLocation\": \"Stuttgart, BADEN-WURTTEMBERG, Germany\"; \"einen hybriden Ansatz für Homeoffice\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
    "ID": "no",
    "IN": "no",
    "US": "no"
@@ -5619,6 +8909,16 @@
    "US": "no"
   }
  },
+ "v1|j_c87580eb82": {
+  "evidence": "\"address\": \"Anywhere\", \"country\": \"de\", \"remote\": true; \"Remotely working or within our beautiful office – it is up to you (!)\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "yes",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
+  }
+ },
  "v1|j_c931b92792": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"United Kingdom\"], \"workplace\": \"remote\"",
   "verdicts": {
@@ -5627,6 +8927,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_cac1870ff3": {
+  "evidence": "\"remote\": true, \"country\": \"United States\"; \"Are you legally authorized to work in the United States for any employer?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_caf34019f7": {
@@ -5669,6 +8979,16 @@
    "US": "no"
   }
  },
+ "v1|j_cb74c20126": {
+  "evidence": "Location: Spain or Belgium, but remote set up is also possible within European E&C Group Locations",
+  "verdicts": {
+   "BR": "no",
+   "DE": "maybe",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_cb9d9913a9": {
   "evidence": "We prefer candidates based in one of our hub cities: Edmonton, Toronto, Vancouver, or Kitchener-Waterloo. We're also open to exceptional candidates working remotely in Canada.",
   "verdicts": {
@@ -5687,6 +9007,16 @@
    "ID": "no",
    "IN": "no",
    "US": "maybe"
+  }
+ },
+ "v1|j_cc390a1992": {
+  "evidence": "\"Field-based across the North East and North, from Newcastle upon Tyne to Sheffield\"; \"Do you have valid right to live and work in the UK?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_cc4ded55e3": {
@@ -5709,8 +9039,28 @@
    "US": "no"
   }
  },
+ "v1|j_cc64a3f2de": {
+  "evidence": "BETSOL is hiring remote ... \"fullLocation\": \"Broomfield, CO, United States\"; comfortable working standard Eastern-time business hours",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_cc984af034": {
   "evidence": "\"country\": \"SG\", \"workplaceType\": \"hybrid\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_ccb6ce2a74": {
+  "evidence": "\"fullLocation\": \"Cape Town, Western Cape, South Africa\"; Work Environment: Full‑time, office‑based role",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5759,6 +9109,16 @@
    "US": "yes"
   }
  },
+ "v1|j_cd7ec7c4f9": {
+  "evidence": "\"Fully remote role supporting NSF. You may occasionally be asked to come on site in Alexandria, VA, about once or twice a year.\"; country: United States",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_cdca0ced52": {
   "evidence": "\"Fully remote, based outside the US.\"",
   "verdicts": {
@@ -5776,6 +9136,26 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_cee217abc9": {
+  "evidence": "Candidate must live in territory: Illinois, Michigan, Wisconsin, and Minnesota; This position requires current U.S. work authorization",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1|j_cf030d3c18": {
+  "evidence": "\"India - Remote\", \"Applicable to candidates based in India\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
    "US": "no"
   }
  },
@@ -5829,8 +9209,28 @@
    "US": "no"
   }
  },
+ "v1|j_d14958ab8e": {
+  "evidence": "\"Candidates must live in D.C., Maryland or Virginia and participate in person in a networking event, client meeting, industry day, or local conference approximately every other week.\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_d154712601": {
   "evidence": "Berlin, Germany; Chemnitz, Sachsen, Germany; Dresden, Sachsen, Germany ... we offer flexible working time models and the option of hybrid work",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_d1aefa67a2": {
+  "evidence": "\"Regional covering North-West and North Wales\"; \"Willingness to travel throughout the North West.\"; locations: London, Warrington - UK",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5871,6 +9271,16 @@
  },
  "v1|j_d2e83976d0": {
   "evidence": "location: \"Toronto, Ontario\"; \"Remote Work Environment\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_d3035a1bf2": {
+  "evidence": "\"Bunschoten\", \"Nederland\"; \"werk je zelfstandig op locatie\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -5927,6 +9337,16 @@
    "ID": "no",
    "IN": "no",
    "US": "no"
+  }
+ },
+ "v1|j_d526401b11": {
+  "evidence": "\"fullLocation\": \"Wauwatosa, WI, United States\", \"remote\": true; Region: \"North America (NA)\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
   }
  },
  "v1|j_d526a1457f": {
@@ -6099,6 +9519,16 @@
    "US": "no"
   }
  },
+ "v1|j_dd3c6b78b7": {
+  "evidence": "The applicant MUST be based in Brazil",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_dd3e04df05": {
   "evidence": "Location: Remote (West Bengal, Gujarat, Maharashtra) Working Hours: Eastern Standard Time (EST)",
   "verdicts": {
@@ -6107,6 +9537,16 @@
    "ID": "no",
    "IN": "yes",
    "US": "no"
+  }
+ },
+ "v1|j_dd98674acd": {
+  "evidence": "\"fullLocation\": \"Seattle, WA, United States\", \"remote\": true; \"#LI-REMOTE\"; but \"paid parental leave and a hybrid work schedule\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_ddd7c78eb5": {
@@ -6136,6 +9576,16 @@
    "DE": "no",
    "ID": "no",
    "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_def654f312": {
+  "evidence": "\"India - Remote\", \"Applicable to candidates based in India\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "yes",
    "US": "no"
   }
  },
@@ -6239,6 +9689,16 @@
    "US": "no"
   }
  },
+ "v1|j_e1ff91413c": {
+  "evidence": "\"fullLocation\": \"London, , United Kingdom\", \"remote\": true; \"A full UK driving license is required\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_e21269d363": {
   "evidence": "\"Location: Global, fully remote\"; \"Flexible—you choose the hours\"",
   "verdicts": {
@@ -6337,6 +9797,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_e62c517abf": {
+  "evidence": "\"address\": \"Anywhere\", \"country\": \"de\", \"remote\": true",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "yes",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "maybe"
   }
  },
  "v1|j_e6939b19d4": {
@@ -6489,6 +9959,16 @@
    "US": "no"
   }
  },
+ "v1|j_eb9cfabd9f": {
+  "evidence": "This position requires you to reside in Japan during your employment with Wizcorp.",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_ebba3d5cfc": {
   "evidence": "\"locations\": [\"TELECOMMUTE\", \"United Kingdom\"]",
   "verdicts": {
@@ -6521,6 +10001,16 @@
  },
  "v1|j_ed3ed02a98": {
   "evidence": "\"country\": \"SG\", \"workplaceType\": \"hybrid\"; \"particularly interested in applicants who have a current right to work in Singapore\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_edb155ff47": {
+  "evidence": "location: \"Homeoffice\"; locations: \"Sternenmarkt Bern\", Bundesgasse 7, 3011 Bern, Schweiz",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -6629,6 +10119,16 @@
    "US": "yes"
   }
  },
+ "v1|j_efc2cea3a4": {
+  "evidence": "full-time remote role (8 hours + 1 hour lunch) with mandatory availability between 9:30 and 17:30 CET; location: Bratislava, Slovakia \"Remote\"",
+  "verdicts": {
+   "BR": "maybe",
+   "DE": "maybe",
+   "ID": "maybe",
+   "IN": "maybe",
+   "US": "no"
+  }
+ },
  "v1|j_f049912a3e": {
   "evidence": "jobGeo: \"Australia\"; \"Strategic Enterprise Account Executive (Sydney or Melbourne)\"",
   "verdicts": {
@@ -6699,6 +10199,16 @@
    "US": "no"
   }
  },
+ "v1|j_f19c036c58": {
+  "evidence": "Baden, Schweiz, Brown Boveri Strasse 7; hybrid: true; location: Homeoffice",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_f1dc9f0047": {
   "evidence": "\"San Francisco, CA, New York, NY, Portland, OR, or Remote within United States\"",
   "verdicts": {
@@ -6739,11 +10249,41 @@
    "US": "maybe"
   }
  },
+ "v1|j_f2497d4ecc": {
+  "evidence": "\"Italy Tutor\"; locations all in Italy; \"This is a remote job\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_f26c252ab1": {
   "evidence": "\"addressCountry\": \"US | EU\", \"location\": \"Remote\"; \"We provide support across EU and US time zones, and we're hiring in both.\"",
   "verdicts": {
    "BR": "no",
    "DE": "yes",
+   "ID": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1|j_f326ebe0e6": {
+  "evidence": "Offer available only for candidates eligible to work and live in Poland; Hybrid in Warsaw (2 days per week in the office) / Full remote from Poland",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f39e6b6cc6": {
+  "evidence": "\"fullLocation\": \"Philadelphia, PA, United States\", \"remote\": true; Applicants for employment in the US must have valid work authorization",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
    "ID": "no",
    "IN": "no",
    "US": "yes"
@@ -6829,6 +10369,16 @@
    "US": "no"
   }
  },
+ "v1|j_f4bb166dae": {
+  "evidence": "Fully Remote: Work from anywhere in the world while collaborating with a global team.",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "yes",
+   "ID": "yes",
+   "IN": "yes",
+   "US": "yes"
+  }
+ },
  "v1|j_f4c418ed68": {
   "evidence": "jobGeo: \"USA\"; #LI-Remote",
   "verdicts": {
@@ -6851,6 +10401,16 @@
  },
  "v1|j_f50197e4e4": {
   "evidence": "\"workplace\": \"remote\", \"locations\": [\"TELECOMMUTE\", \"United Kingdom\"]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f588e95dbb": {
+  "evidence": "\"hybrid\": true, \"remote\": true, locations: \"Geneva, 1202\", Switzerland",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -6909,6 +10469,16 @@
    "US": "no"
   }
  },
+ "v1|j_f75a964c0e": {
+  "evidence": "\"For which location are you applying?\" Taipei / Hong Kong; \"Do you have citizenship or a work permit for the country that you're applying for?\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
  "v1|j_f76efb4a4d": {
   "evidence": "\"Hong Kong; Singapore; Taiwan; United Kingdom\"",
   "verdicts": {
@@ -6937,6 +10507,16 @@
    "ID": "yes",
    "IN": "yes",
    "US": "yes"
+  }
+ },
+ "v1|j_f81283fd71": {
+  "evidence": "\"fullLocation\": \"Beverly Hills, CA, United States\", \"remote\": true; \"#LI-REMOTE\"; but \"paid parental leave and a hybrid work schedule\"",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "maybe"
   }
  },
  "v1|j_f83259dc57": {
@@ -7011,6 +10591,16 @@
  },
  "v1|j_f9a52b2eeb": {
   "evidence": "\"Location: Remote, UK-based with regular travel to customer sites\"; locationRestrictions: [\"United Kingdom\"]",
+  "verdicts": {
+   "BR": "no",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1|j_f9f8846dfc": {
+  "evidence": "\"Hybrid working mode\"; \"Do you have a valid work permit to work in Spain?\"; \"If you are not currently based in Spain, are you willing to relocate?\"",
   "verdicts": {
    "BR": "no",
    "DE": "no",
@@ -7177,6 +10767,16 @@
    "ID": "no",
    "IN": "no",
    "US": "yes"
+  }
+ },
+ "v1|j_fe5c23ae3c": {
+  "evidence": "Location name \"Latam\", \"Este trabajo es remoto\"; \"Modalidad de trabajo 100% remota\"; \"Horarios flexibles\"",
+  "verdicts": {
+   "BR": "yes",
+   "DE": "no",
+   "ID": "no",
+   "IN": "no",
+   "US": "no"
   }
  },
  "v1|j_fe9b69a203": {

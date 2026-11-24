@@ -93,8 +93,22 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
     } else {
         places.join("; ")
     };
-    let eligibility = if item.remote {
-        eligibility_from_text(&text, Some(true))
+    let mut html = item.description.unwrap_or_default();
+    if let Some(req) = item.requirements.filter(|r| !r.trim().is_empty()) {
+        html.push_str("<h3>Requirements</h3>");
+        html.push_str(&req);
+    }
+    let description_md = html_to_md(Some(&html))?;
+
+    let eligibility = if item.remote && (item.hybrid || item.on_site) {
+        eligibility_from_text(&text, None)
+    } else if item.remote {
+        let stated = format!(
+            "{}\n{}",
+            item.title,
+            description_md.as_deref().unwrap_or("")
+        );
+        crate::remote_listed("Recruitee", &text, &stated, true)
     } else if item.hybrid {
         Eligibility {
             workplace: Workplace::Hybrid,
@@ -105,12 +119,6 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
     } else {
         eligibility_from_text(&text, None)
     };
-
-    let mut html = item.description.unwrap_or_default();
-    if let Some(req) = item.requirements.filter(|r| !r.trim().is_empty()) {
-        html.push_str("<h3>Requirements</h3>");
-        html.push_str(&req);
-    }
 
     Ok(NewJob {
         source_id: source_id.into(),
@@ -133,7 +141,7 @@ pub fn transform(source_id: &str, board: &str, raw: Value) -> anyhow::Result<New
             )
         }),
         tech_tags: Vec::new(),
-        description_md: html_to_md(Some(&html))?,
+        description_md,
         posted_at: item
             .published_at
             .as_deref()

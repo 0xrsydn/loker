@@ -31,6 +31,9 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        "workable3": [os.path.join(HERE, "snapshot-workable3.db")],
        "workable4": [os.path.join(HERE, "snapshot-workable4.db")],
        "yc": [os.path.join(HERE, "snapshot-yc2.db")],
+       "ats": [os.path.join(HERE, "snapshot-ats.db")],
+       "ats2": [os.path.join(HERE, "snapshot-ats2.db")],
+       "ats3": [os.path.join(HERE, "snapshot-ats3.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
@@ -40,7 +43,8 @@ MAX_CHARS = 12000
 VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
 NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia"}
 KINDS = ["yes", "maybe", "unknown", "no"]
-FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "ycombinator", "greenhouse", "ashby", "lever"]
+FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "ycombinator", "greenhouse", "ashby", "lever",
+            "recruitee", "smartrecruiters"]
 
 BOARD = {
     "himalayas": "Himalayas lists remote jobs only. An empty locationRestrictions means the employer hires from "
@@ -55,6 +59,11 @@ BOARD = {
     "greenhouse": "An employer's own job board (Greenhouse); it lists on-site, hybrid and remote jobs.",
     "ashby": "An employer's own job board (Ashby); it lists on-site, hybrid and remote jobs.",
     "lever": "An employer's own job board (Lever); it lists on-site, hybrid and remote jobs.",
+    "recruitee": "An employer's own job board (Recruitee); it lists on-site, hybrid and remote jobs. remote, hybrid "
+                 "and on_site say how the job is done and locations are its places, both as the employer set them.",
+    "smartrecruiters": "An employer's own job board (SmartRecruiters); it lists on-site, hybrid and remote jobs. "
+                       "location.remote and location.hybrid say how the job is done and location is its place, "
+                       "both as the employer set them.",
 }
 DROP = re.compile(r"(?i)url|logo|link|slug|guid|^id$|_id$|date|epoch|compliance|^ai_|metadata|compensation|salary|"
                   r"apply|excerpt|content|description|^lists$|^text$|^title$|^position$|^jobTitle$|tags|categories$|"
@@ -223,6 +232,28 @@ def sample_yc():
     old = set(seen) | {j for j, d in pool.items() if any(url(l) in seen_urls for l in d["listings"])}
     print(f"yc ({len(old & set(pool))} of {len(pool)} left out as read while writing the parser):")
     save("yc.json", draw(pool, 60, 3, random.Random("elig-yc"), exclude=old))
+
+
+def flagged_remote(job):
+    raw = primary(job)["raw"]
+    place = raw.get("location")
+    return raw.get("remote") is True or (isinstance(place, dict) and place.get("remote") is True)
+
+
+def sample_ats(name="ats"):
+    if os.path.exists(os.path.join(HERE, f"{name}.json")):
+        sys.exit(f"{name} already drawn")
+    pool = jobs(DBS[name])
+    rng = random.Random(f"elig-{name}")
+    remote = {j: d for j, d in pool.items() if flagged_remote(d)}
+    print(f"{name}, remote-flagged first:")
+    out = draw(remote, 30, 3, rng)
+    rest = {j: d for j, d in pool.items() if j not in remote}
+    print(f"{name}, the rest:")
+    others = draw(rest, 60, 3, rng)
+    for f in ("recruitee", "smartrecruiters"):
+        out[f] = sorted(out[f] + others[f][:60 - len(out[f])])
+    save(f"{name}.json", {f: out[f] for f in ("recruitee", "smartrecruiters")})
 
 
 def set_ids(name=None):
@@ -409,7 +440,7 @@ def score():
         fr = [r for r in rows if family(primary(js[r[0]])["source"]) == f]
         fy, fn = [r for r in fr if r[3] == "yes"], [r for r in fr if r[3] == "no"]
         print(f"    {f:15} {sum(r[2] != 'yes' for r in fy):3}/{len(fy):<4} {sum(r[2] == 'yes' for r in fn):3}/{len(fn):<4}")
-    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable4"):
+    if "-v" in sys.argv and SET not in ("holdout", "holdout2", "workable4", "ats3"):
         bad = sorted({r[0] for r in rows if (r[3] == "yes" and r[2] != "yes") or (r[3] == "no" and r[2] == "yes")})
         for j in bad:
             print(f"\n{j} [{primary(js[j])['source']}] {js[j]['title'][:60]}")
@@ -422,7 +453,8 @@ if __name__ == "__main__":
     cmds = {"parity": parity, "sample": sample, "sample2": sample2, "sample-workable": sample_workable, "sample-workable2": lambda: sample_workable("workable2"),
             "sample-workable3": lambda: sample_workable("workable3"),
             "sample-workable4": lambda: sample_workable("workable4"),
-            "sample-yc": sample_yc, "label": label, "agree": agree, "score": score}
+            "sample-yc": sample_yc, "sample-ats": sample_ats, "sample-ats2": lambda: sample_ats("ats2"),
+            "sample-ats3": lambda: sample_ats("ats3"), "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()

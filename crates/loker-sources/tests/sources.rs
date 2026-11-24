@@ -45,3 +45,31 @@ fn a_remote_lever_job_in_a_place_no_rule_reads_takes_lever_s_country() {
         assert_eq!(wire["scope"], scope, "{location}: {wire}");
     }
 }
+
+#[test]
+fn a_smartrecruiters_work_mode_field_wins_over_the_location_flags() {
+    let sr = Source::parse("smartrecruiters:acme").unwrap();
+    let cases = [
+        (true, None, "remote"),
+        (true, Some(("Home based?", "Hybrid")), "hybrid"),
+        (true, Some(("Job Location", "On-Site Waltham")), "onsite"),
+        (false, Some(("Remote Eligible", "Yes")), "remote"),
+        (false, Some(("Work Model", "Onsite")), "onsite"),
+        (false, Some(("Brands", "Hybrid Co")), "onsite"),
+    ];
+    for (remote, field, workplace) in cases {
+        let custom: Vec<_> = field
+            .map(|(l, v)| serde_json::json!({ "fieldLabel": l, "valueLabel": v }))
+            .into_iter()
+            .collect();
+        let raw = serde_json::json!({
+            "id": "1", "name": "Engineer", "customField": custom,
+            "location": { "city": "Boston", "country": "us", "remote": remote, "hybrid": false,
+                          "fullLocation": "Boston, MA, United States" },
+            "jobAd": { "sections": { "jobDescription": { "title": "", "text": "<p>Build.</p>" } } }
+        });
+        let job = loker_sources::job_from_raw(&sr, raw, None, None).unwrap();
+        let wire = serde_json::to_value(&job.eligibility).unwrap();
+        assert_eq!(wire["workplace"], workplace, "{field:?}: {wire}");
+    }
+}
