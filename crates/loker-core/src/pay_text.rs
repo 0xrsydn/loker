@@ -1,3 +1,4 @@
+use std::cell::LazyCell;
 use std::sync::LazyLock;
 
 use regex::Regex;
@@ -9,6 +10,12 @@ const CUR: &str = r"(?:Php|Rp|US\$|CA\$|C\$|AU\$|A\$|NZ\$|S\$|SG\$|HK\$|R\$|\$|�
 const CODE: &str = r"(?:\b(?:USD|EUR|GBP|CAD|AUD|NZD|SGD|HKD|INR|IDR|PHP|MYR|THB|VND|KRW|TWD|CNY|AED|SAR|ILS|TRY|CHF|JPY|BRL|MXN|ARS|CLP|COP|PEN|PLN|CZK|HUF|RON|SEK|NOK|DKK|ZAR|NGN|KES|EGP|PKR|BDT)\b|€|£)";
 /// A figure: "120,000", "15,00,000", "2.800" (thousands), "24.50".
 const NUM: &str = r"\d{1,3}(?:\.\d{3})+\b|\d[\d,]*(?:\.\d+)?";
+const CURRENCY_CODES: &[&str] = &[
+    "USD", "EUR", "GBP", "CAD", "AUD", "NZD", "SGD", "HKD", "INR", "IDR", "PHP", "MYR", "THB",
+    "VND", "KRW", "TWD", "CNY", "AED", "SAR", "ILS", "TRY", "CHF", "JPY", "BRL", "MXN", "ARS",
+    "CLP", "COP", "PEN", "PLN", "CZK", "HUF", "RON", "SEK", "NOK", "DKK", "ZAR", "NGN", "KES",
+    "EGP", "PKR", "BDT",
+];
 const SUFFIX: &str = r"(?:[kK]\b|MM?\b|\s?million\b)";
 
 static RANGE: LazyLock<Regex> = LazyLock::new(|| {
@@ -53,26 +60,40 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
         (Vec::<Money>::new(), Vec::new(), Vec::<String>::new());
     let mut base_lines = Vec::new();
     for (i, line) in lines.iter().enumerate() {
+        if !has_number_char(line) {
+            continue;
+        }
+        let last_base = base_lines.last().copied();
         // A period above counts only from a heading, not from a paragraph.
-        let heading: String = lines[i.saturating_sub(2)..i]
-            .iter()
-            .filter(|l| l.chars().count() < 80)
-            .copied()
-            .collect::<Vec<_>>()
-            .join(" ");
-        let around = lines[i.saturating_sub(2)..(i + 4).min(lines.len())].join(" ");
-        let intro = lines[i.saturating_sub(5)..i].join(" ");
-        let pay_context =
-            PAY_WORDS.is_match(&around) || base_lines.last().is_some_and(|b: &usize| i - b <= 3);
-        let label = i
-            .checked_sub(1)
-            .map(|j| lines[j])
-            .filter(|l| l.chars().count() <= 60 && !has_money(l) && names_something(l));
+        let heading = LazyCell::new(|| {
+            lines[i.saturating_sub(2)..i]
+                .iter()
+                .filter(|l| l.chars().count() < 80)
+                .copied()
+                .collect::<Vec<_>>()
+                .join(" ")
+        });
+        let intro = LazyCell::new(|| lines[i.saturating_sub(5)..i].join(" "));
+        let pay_context = LazyCell::new(|| {
+            PAY_WORDS.is_match(&lines[i.saturating_sub(2)..(i + 4).min(lines.len())].join(" "))
+                || last_base.is_some_and(|b| i - b <= 3)
+        });
+        let label = LazyCell::new(|| {
+            i.checked_sub(1)
+                .map(|j| lines[j])
+                .filter(|l| l.chars().count() <= 60 && !has_money(l) && names_something(l))
+        });
         let mut line_has_base = false;
         for sentence in sentences(line) {
             let mut used = false;
+            if !has_number_char(sentence) || !may_name_currency(sentence) {
+                continue;
+            }
             for m in RANGE.captures_iter(sentence) {
-                let Some(found) = figure(sentence, &intro, &heading, pay_context, &m) else {
+                if currency(&m).is_none() {
+                    continue;
+                }
+                let Some(found) = figure(sentence, &intro, &heading, &pay_context, &m) else {
                     continue;
                 };
                 match found {
@@ -92,7 +113,7 @@ pub fn pay_from_text(text: &str) -> Option<Pay> {
                             .captures(&sentence[at.end()..])
                             .map(|c| c["l"].trim().to_string())
                             .or(prefix)
-                            .or_else(|| label.map(str::to_string));
+                            .or_else(|| (*label).map(str::to_string));
                         if !base.contains(&money) {
                             base.push(money);
                         }
@@ -153,7 +174,7 @@ fn figure(
     sentence: &str,
     above: &str,
     heading: &str,
-    pay_context: bool,
+    pay_context: &LazyCell<bool, impl FnOnce() -> bool>,
     m: &regex::Captures,
 ) -> Option<Found> {
     let all = m.get(0)?;
@@ -170,7 +191,7 @@ fn figure(
     // With no pay words around, only a range with its period counts:
     // "$10,000–$25,000 USD annually", not "an average of $1,800 annually".
     let stated = period_after(after);
-    let pay_context = pay_context
+    let pay_context = **pay_context
         || head(after, 8)
             .trim_start()
             .to_lowercase()
@@ -269,7 +290,21 @@ fn dollar_country(text: &str) -> Option<&'static str> {
     }
 }
 
+fn has_number_char(text: &str) -> bool {
+    text.chars().any(char::is_numeric)
+}
+
+fn may_name_currency(text: &str) -> bool {
+    text.contains(['$', '€', '£', '₹', '₱'])
+        || text.contains("Rp")
+        || text.contains("Php")
+        || CURRENCY_CODES.iter().any(|c| text.contains(c))
+}
+
 fn has_money(text: &str) -> bool {
+    if !has_number_char(text) || !may_name_currency(text) {
+        return false;
+    }
     RANGE.captures_iter(text).any(|m| currency(&m).is_some())
 }
 
