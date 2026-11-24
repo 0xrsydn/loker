@@ -3,7 +3,27 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 use crate::model::{Experience, ExperienceMethod};
-use crate::posting::{LineKind, PREFERRED, Posting, Section, sentences};
+use crate::posting::{Gate, LineKind, PREFERRED, Posting, Section, sentences};
+
+static YEAR_GATE: LazyLock<Gate> = LazyLock::new(|| Gate::new(&["year", "yr", "yoe"]));
+static LINE_GATE: LazyLock<Gate> =
+    LazyLock::new(|| Gate::new(&["year", "yr", "yoe", "experience", "grad"]));
+static NONE_NEEDED_GATE: LazyLock<Gate> =
+    LazyLock::new(|| Gate::new(&["year", "experience", "grad"]));
+static NUMBER_GATE: LazyLock<Gate> = LazyLock::new(|| {
+    Gate::new(&[
+        "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
+        "twelve", "fifteen",
+    ])
+});
+
+fn may_state_years(sentence: &str) -> bool {
+    YEAR_GATE.may_match(sentence)
+        && (sentence
+            .chars()
+            .any(|c| c.is_ascii_digit() || (!c.is_ascii() && c.is_numeric()))
+            || NUMBER_GATE.may_match(sentence))
+}
 
 const NUM: &str = r"\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|fifteen";
 
@@ -80,7 +100,12 @@ pub fn read(posting: &Posting) -> Option<Experience> {
     let mut levels = false;
     let mut level_block = false;
     for line in &posting.lines {
-        let bare = A_YEAR.replace_all(&line.text, "$1 1 year");
+        let line_may_matter = LINE_GATE.may_match(&line.text);
+        let bare = if line_may_matter {
+            A_YEAR.replace_all(&line.text, "$1 1 year")
+        } else {
+            std::borrow::Cow::Borrowed(line.text.as_str())
+        };
         let bare = bare.as_ref();
         if LEVEL_PREFIX.is_match(bare.trim_start_matches(['-', '•', '+', ' ']))
             && bare.trim_end().ends_with(':')
@@ -89,25 +114,35 @@ pub fn read(posting: &Posting) -> Option<Experience> {
             continue;
         }
         // A heading that states years ("Experience: 5+ years:") is read.
-        if line.kind == LineKind::Heading && !YEARS.is_match(bare) {
+        if line.kind == LineKind::Heading && !(line_may_matter && YEARS.is_match(bare)) {
             level_block = false;
             continue;
         }
         let preferred_section = line.section == Section::Preferred;
+        if !line_may_matter {
+            if !preferred_section && !sentences(bare).is_empty() {
+                last_had_claim = false;
+            }
+            continue;
+        }
         for sentence in sentences(bare) {
-            if none_needed.is_none() && NONE_NEEDED.is_match(sentence) {
+            if none_needed.is_none()
+                && NONE_NEEDED_GATE.may_match(sentence)
+                && NONE_NEEDED.is_match(sentence)
+            {
                 none_needed = Some(sentence.to_string());
             }
             if preferred_section {
                 continue;
             }
-            let found = if SOMEONE.is_match(sentence) {
+            let found = if !may_state_years(sentence) || SOMEONE.is_match(sentence) {
                 Vec::new()
             } else {
                 claims(sentence)
             };
-            levels |= (level_block || LEVEL_PREFIX.is_match(sentence)) && !found.is_empty();
-            if OR_START.is_match(sentence)
+            levels |= !found.is_empty() && (level_block || LEVEL_PREFIX.is_match(sentence));
+            if !found.is_empty()
+                && OR_START.is_match(sentence)
                 && last_had_claim
                 && let (Some(last), Some(first)) = (required.last_mut(), found.first())
             {

@@ -3,7 +3,21 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 use crate::model::{Sponsorship, Visa};
-use crate::posting::{Posting, sentences};
+use crate::posting::{Gate, Posting, sentences};
+
+static CONTEXT_GATE: LazyLock<Gate> = LazyLock::new(|| {
+    Gate::new(&[
+        "visa",
+        "permit",
+        "h1",
+        "h-1",
+        "immigration",
+        "sponsorship",
+        "to work",
+        "work authori",
+        "right to work",
+    ])
+});
 
 static CONTEXT: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(?i)\bvisas?\b|work permits?|\bH-?1-?B\b|\bimmigration\b|(?:company|employer|employment|work)\s+sponsorship|(?:authori[sz]\w*|eligib\w*|permitted|able) to work\b|right to work\b|work authori[sz]ation").unwrap()
@@ -66,6 +80,9 @@ pub fn read(posting: &Posting) -> Option<Visa> {
             }
             _ => line.text.clone(),
         };
+        if !CONTEXT_GATE.may_match(&text) {
+            continue;
+        }
         // A question ("Do you need sponsorship?") states nothing.
         for sentence in sentences(&text).into_iter().filter(|s| !s.ends_with('?')) {
             if let Some(s) = read_sentence(sentence)

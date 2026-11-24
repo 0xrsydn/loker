@@ -50,11 +50,66 @@ pub static PREFERRED: LazyLock<Regex> = LazyLock::new(|| {
 static HEADING_REQUIRED: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)\b(?:minimum|required|requirements|must)\b").unwrap());
 
-static ESCAPE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"\\([[:punct:]])").unwrap());
+pub(crate) struct Gate(Vec<&'static str>);
+
+impl Gate {
+    pub(crate) fn new(words: &[&'static str]) -> Gate {
+        Gate(words.to_vec())
+    }
+
+    pub(crate) fn may_match(&self, text: &str) -> bool {
+        if text.contains(['\u{17f}', '\u{212a}']) {
+            return true;
+        }
+        let lower = text.to_ascii_lowercase();
+        self.0.iter().any(|word| lower.contains(word))
+    }
+}
+
+fn unescape(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut rest = text;
+    while let Some(at) = rest.find('\\') {
+        out.push_str(&rest[..at]);
+        let after = &rest[at + 1..];
+        match after.chars().next() {
+            Some(c) if c.is_ascii_punctuation() => {
+                out.push(c);
+                rest = &after[1..];
+            }
+            _ => {
+                out.push('\\');
+                rest = after;
+            }
+        }
+    }
+    out.push_str(rest);
+    out
+}
+
+static PREFERRED_GATE: LazyLock<Gate> = LazyLock::new(|| {
+    Gate::new(&[
+        "prefer",
+        "ideally",
+        "nice",
+        "bonus",
+        "plus",
+        "desir",
+        "advantage",
+        "good to have",
+        "would be great",
+        "stand out",
+        "extra credit",
+    ])
+});
 
 impl Posting {
     pub fn parse(text: &str) -> Posting {
-        let text = ESCAPE.replace_all(text, "$1");
+        let text = if text.contains('\\') {
+            std::borrow::Cow::Owned(unescape(text))
+        } else {
+            std::borrow::Cow::Borrowed(text)
+        };
         let mut section = Section::Other;
         let mut lines = Vec::new();
         for raw in text.lines() {
@@ -66,7 +121,10 @@ impl Posting {
             let kind = kind(raw, bare);
             if kind == LineKind::Heading {
                 // Any other heading ("Requirements", "About us") ends a preferred list.
-                section = if PREFERRED.is_match(bare) && !HEADING_REQUIRED.is_match(bare) {
+                section = if PREFERRED_GATE.may_match(bare)
+                    && PREFERRED.is_match(bare)
+                    && !HEADING_REQUIRED.is_match(bare)
+                {
                     Section::Preferred
                 } else {
                     Section::Other
@@ -100,33 +158,35 @@ fn kind(raw: &str, bare: &str) -> LineKind {
     }
 }
 
+fn push_trimmed<'a>(sentence: &'a str, out: &mut Vec<&'a str>) {
+    let trimmed = sentence
+        .trim()
+        .trim_start_matches(['#', '>', '-', '•', '+', ' '])
+        .trim();
+    if !trimmed.is_empty() {
+        out.push(trimmed);
+    }
+}
+
 /// A line split at sentence ends, each trimmed of heading and list marks.
 /// An initialism ("U.S.") is not an end.
 pub fn sentences(line: &str) -> Vec<&str> {
     let b = line.as_bytes();
     let mut out = Vec::new();
     let mut from = 0;
-    for i in 0..b.len() {
-        let end = matches!(b[i], b'.' | b'!' | b'?')
-            && b.get(i + 1).is_none_or(|c| c.is_ascii_whitespace())
+    for (i, _) in line.match_indices(['.', '!', '?']) {
+        let end = b.get(i + 1).is_none_or(|c| c.is_ascii_whitespace())
             && !(b[i] == b'.'
                 && i >= 1
                 && b[i - 1].is_ascii_uppercase()
                 && (i < 2 || !b[i - 2].is_ascii_alphabetic()));
         if end {
-            out.push(&line[from..=i]);
+            push_trimmed(&line[from..=i], &mut out);
             from = i + 1;
         }
     }
-    out.push(&line[from..]);
-    out.into_iter()
-        .map(|s| {
-            s.trim()
-                .trim_start_matches(['#', '>', '-', '•', '+', ' '])
-                .trim()
-        })
-        .filter(|s| !s.is_empty())
-        .collect()
+    push_trimmed(&line[from..], &mut out);
+    out
 }
 
 #[cfg(test)]
