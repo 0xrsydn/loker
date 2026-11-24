@@ -21,6 +21,30 @@ pub struct Store {
     pool: SqlitePool,
 }
 
+const OUTDATED_LISTINGS: &str =
+    "SELECT source_id, source_job_id, canonical_job_id, company_key, title_key, 'expired'
+     FROM source_jobs INDEXED BY source_jobs_expiry
+     WHERE status = 'live' AND expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1)
+     UNION ALL
+     SELECT source_id, source_job_id, canonical_job_id, company_key, title_key, 'stale'
+     FROM source_jobs INDEXED BY source_jobs_stale
+     WHERE status = 'live' AND julianday(fetched_at) < julianday(?2)
+       AND NOT (expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1))";
+
+const SOURCES_OF_LISTING: &str = "SELECT count(DISTINCT o.source_id) FROM source_jobs s
+     JOIN source_jobs o ON o.canonical_job_id = s.canonical_job_id AND +o.status = 'live'
+     WHERE s.source_id = ? AND s.source_job_id = ?";
+
+const LISTINGS_OF_KEY: &str =
+    "SELECT s.source_id, s.source_job_id, s.canonical_job_id FROM source_jobs s
+     JOIN canonical_jobs c ON c.id = s.canonical_job_id
+     WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL AND +s.status = 'live'
+     ORDER BY c.first_seen, c.id, s.source_id, s.source_job_id";
+
+const LISTINGS_OF_SOURCE: &str =
+    "SELECT source_job_id, canonical_job_id, company_key, title_key FROM source_jobs
+     WHERE source_id = ? AND status = 'live'";
+
 macro_rules! sources_col {
     () => {
         "(SELECT json_group_array(json_object('source', s.source_id, 'url', s.source_url))
@@ -394,13 +418,10 @@ impl Store {
         }
 
         if let Some(ids) = &complete_ids {
-            let live: Vec<(String, String, String, String)> = sqlx::query_as(
-                "SELECT source_job_id, canonical_job_id, company_key, title_key FROM source_jobs
-                 WHERE source_id = ? AND status = 'live'",
-            )
-            .bind(&source.id)
-            .fetch_all(&mut *tx)
-            .await?;
+            let live: Vec<(String, String, String, String)> = sqlx::query_as(LISTINGS_OF_SOURCE)
+                .bind(&source.id)
+                .fetch_all(&mut *tx)
+                .await?;
             let absent: Vec<_> = live.iter().filter(|r| !ids.contains(&r.0)).collect();
             if ids.is_empty() || absent.len() * 2 > live.len() {
                 stats.held = absent.len() as u32;
@@ -415,18 +436,12 @@ impl Store {
         }
 
         let stale_before = (now - chrono::Duration::days(STALE_AFTER_DAYS)).to_rfc3339();
-        let expired: Vec<(String, String, String, String, String, String)> = sqlx::query_as(
-            "SELECT source_id, source_job_id, canonical_job_id, company_key, title_key,
-               CASE WHEN expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1)
-                    THEN 'expired' ELSE 'stale' END
-             FROM source_jobs
-             WHERE status = 'live' AND ((expires_at IS NOT NULL AND julianday(expires_at) < julianday(?1))
-                                        OR julianday(fetched_at) < julianday(?2))",
-        )
-        .bind(&ts)
-        .bind(&stale_before)
-        .fetch_all(&mut *tx)
-        .await?;
+        let expired: Vec<(String, String, String, String, String, String)> =
+            sqlx::query_as(OUTDATED_LISTINGS)
+                .bind(&ts)
+                .bind(&stale_before)
+                .fetch_all(&mut *tx)
+                .await?;
         for (sid, sjid, cid, ck, tk, reason) in expired {
             mark_gone(&mut tx, &sid, &sjid, &reason, &ts).await?;
             rebuild.insert(cid);
@@ -445,15 +460,11 @@ impl Store {
         }
 
         for (source_job_id, key) in &changed {
-            let sources: i64 = sqlx::query_scalar(
-                "SELECT count(DISTINCT o.source_id) FROM source_jobs s
-                 JOIN source_jobs o ON o.canonical_job_id = s.canonical_job_id AND o.status = 'live'
-                 WHERE s.source_id = ? AND s.source_job_id = ?",
-            )
-            .bind(&source.id)
-            .bind(source_job_id)
-            .fetch_one(&mut *tx)
-            .await?;
+            let sources: i64 = sqlx::query_scalar(SOURCES_OF_LISTING)
+                .bind(&source.id)
+                .bind(source_job_id)
+                .fetch_one(&mut *tx)
+                .await?;
             if sources > 1 {
                 stats.merged += 1;
             }
@@ -910,23 +921,18 @@ async fn recluster(
     ts: &str,
     rebuild: &mut BTreeSet<String>,
 ) -> anyhow::Result<bool> {
-    let members: Vec<Member> = sqlx::query_as::<_, (String, String, String)>(
-        "SELECT s.source_id, s.source_job_id, s.canonical_job_id FROM source_jobs s
-         JOIN canonical_jobs c ON c.id = s.canonical_job_id
-         WHERE s.company_key = ? AND s.title_key = ? AND s.job IS NOT NULL AND s.status = 'live'
-         ORDER BY c.first_seen, c.id, s.source_id, s.source_job_id",
-    )
-    .bind(&key.0)
-    .bind(&key.1)
-    .fetch_all(&mut *conn)
-    .await?
-    .into_iter()
-    .map(|(source_id, source_job_id, canonical_id)| Member {
-        source_id,
-        source_job_id,
-        canonical_id,
-    })
-    .collect();
+    let members: Vec<Member> = sqlx::query_as::<_, (String, String, String)>(LISTINGS_OF_KEY)
+        .bind(&key.0)
+        .bind(&key.1)
+        .fetch_all(&mut *conn)
+        .await?
+        .into_iter()
+        .map(|(source_id, source_job_id, canonical_id)| Member {
+            source_id,
+            source_job_id,
+            canonical_id,
+        })
+        .collect();
     let plan = dedup::cluster(key, &members);
     match &plan {
         Plan::Keep => {}
@@ -1117,12 +1123,12 @@ async fn drop_fts(conn: &mut SqliteConnection, cid: &str) -> anyhow::Result<Opti
             .fetch_optional(&mut *conn)
             .await?
             .flatten();
-    match rowid {
-        Some(r) => sqlx::query("DELETE FROM jobs_fts WHERE rowid = ?").bind(r),
-        None => sqlx::query("DELETE FROM jobs_fts WHERE job_id = ?").bind(cid),
+    if let Some(r) = rowid {
+        sqlx::query("DELETE FROM jobs_fts WHERE rowid = ?")
+            .bind(r)
+            .execute(&mut *conn)
+            .await?;
     }
-    .execute(&mut *conn)
-    .await?;
     Ok(rowid)
 }
 
@@ -1426,5 +1432,41 @@ impl Store {
                 Some((status, r.get("failed"), r.get::<i64, _>("n") as u32))
             })
             .collect())
+    }
+}
+
+#[cfg(test)]
+mod plans {
+    use super::*;
+
+    #[tokio::test]
+    async fn ingest_lookups_use_their_index_at_any_size() {
+        let dir = std::env::temp_dir().join(format!("loker-plans-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let store = Store::open(&dir.join("loker.db")).await.unwrap();
+        for (sql, index) in [
+            (OUTDATED_LISTINGS, "source_jobs_expiry"),
+            (OUTDATED_LISTINGS, "source_jobs_stale"),
+            (SOURCES_OF_LISTING, "source_jobs_canonical"),
+            (LISTINGS_OF_KEY, "source_jobs_key"),
+            (
+                LISTINGS_OF_SOURCE,
+                "source_jobs_live (status=? AND source_id=?)",
+            ),
+        ] {
+            let plan: Vec<String> =
+                sqlx::raw_sql(sqlx::AssertSqlSafe(format!("EXPLAIN QUERY PLAN {sql}")))
+                    .fetch_all(&store.pool)
+                    .await
+                    .unwrap()
+                    .iter()
+                    .map(|r| r.get("detail"))
+                    .collect();
+            assert!(
+                plan.iter().any(|l| l.contains(index))
+                    && !plan.iter().any(|l| l.starts_with("SCAN")),
+                "{sql}\n{plan:#?}"
+            );
+        }
     }
 }

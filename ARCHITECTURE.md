@@ -168,6 +168,19 @@ stay on one task, in the order fetches finish; that is safe because dedup
 depends only on what is stored, never on ingest order. Pauses between pages
 of one source (Himalayas, Workable, YC) stay in the adapter.
 
+**Ingest cost.** Writing a listing reads and writes only rows found by a key:
+the listing by (source, id), its dedup key by (company, title), its job by id,
+its full-text row by `fts_rowid`. Nothing a batch runs reads every listing.
+The check for expired and stale listings walks two expression indexes on
+`julianday(...)`, partial to live rows, named with `INDEXED BY`. SQLite has no
+statistics here (no `ANALYZE`), and `status` alone is not selective, so a
+statement that also filters on it writes `+status` to keep the planner on the
+selective index. `ingest_lookups_use_their_index_at_any_size` (in `store.rs`)
+checks the plans of the hot statements, which are named constants there.
+Reading descriptions (pay, eligibility, visa, experience) costs more than the
+writes; each reader skips text that can't hold a match before any exact regex
+runs. `eval/scale` replays a real ingest offline and compares the databases.
+
 **Boards.** `loker discover` collects candidate boards from a finder (Common
 Crawl, Exa or Parallel search, or a file of URLs or ids), turns each into a `Board` (`board.rs`, no IO), and keeps one
 row per `Board::key` in `boards`, with every finder that named it in

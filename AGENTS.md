@@ -84,6 +84,11 @@ in that database.
   (`derived.rs`, `store.rs`), so a new one needs a column written in
   `DerivedCols`, a place in both covering indexes, and a case in
   `sql_filters_keep_exactly_the_jobs_the_rules_keep`.
+- **Query plans:** SQLite plans without statistics, so a new index (above all
+  one that starts with `status`) can turn a keyed lookup into a scan of every
+  listing, and nothing fails. Hot ingest statements are constants in
+  `store.rs` with a plan test; replay an ingest with `eval/scale` after
+  adding an index.
 - **SQL strings:** sqlx 0.9 rejects SQL built with `format!`. Use string
   literals, or `concat!` inside a `macro_rules!` as `store.rs` does.
 - **Stored job JSON:** `NewJob` is stored and hashed. A new field must be
