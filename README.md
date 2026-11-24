@@ -108,6 +108,10 @@ j_6b78581675  Senior Engineer, Service Delivery — dell
 Data lives in `~/.loker/loker.db` (override with `LOKER_HOME`; inside the repo,
 `.envrc` points it at `./.loker-dev` so development never touches your real data).
 Running `ingest` twice is safe: unchanged jobs are only marked as seen again.
+Storing a job costs a few milliseconds and doesn't grow with the database:
+replaying 19k jobs from 360 boards offline takes 84 s the first time and 22 s
+again (`eval/scale ingest`); the rest of an `ingest --all` is waiting on the
+boards' APIs.
 
 ### One job, many listings
 
@@ -124,8 +128,8 @@ Search reads level, years, visa and eligibility from columns written with
 each job, not from the description, so a search costs a few microseconds per
 matching job and the page itself costs the same at any size (`eval/scale`:
 a median of 0.7 s over 305k jobs). When the rules that read them change, the
-next command re-reads every stored job once before it answers, about a
-millisecond a job.
+next command re-reads every stored job once before it answers, about
+0.3 ms a job.
 
 ### Who can apply
 
@@ -313,7 +317,8 @@ gain a comment line (see AGENTS.md).
   filter against the rules it stands for) and storage (every JSON path the SQL
   reads still resolves).
 - `eval/scale/` (manual): an older and a newer binary on copies of a real or
-  synthetic database, the same results case by case, and their latency.
+  synthetic database, the same results case by case, and their latency; and
+  an offline replay of a real ingest, the same database from both.
 - `crates/loker/tests/e2e.rs`: the real binary against a local stub serving one
   hand-written payload per adapter: ingest, idempotent re-runs, order
   independence, CLI = MCP parity, closing through a real fetch, `verify`,

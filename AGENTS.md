@@ -50,7 +50,7 @@ eval/visa/               manual eval of visa sponsorship read from descriptions;
 eval/experience/         manual eval of required years read from descriptions; not in CI
 eval/eligibility/        manual eval of per-viewer verdicts, rebuilt from stored raw items; not in CI
 eval/discovery/          manual eval of discovered boards: real, named right, how rich; not in CI
-eval/scale/              manual eval of search at scale: same results as an older binary, latency; not in CI
+eval/scale/              manual eval of search and ingest at scale: same results as an older binary, time; not in CI
 eval/golden/             24 jobs checked by hand, blind: rulings and how far the labels hold
 lint/                    comment ratchet: no new comments, the count only goes down
 ```

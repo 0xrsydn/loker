@@ -94,6 +94,68 @@ def synthesize(src, out, copies):
     print(f"{n} jobs -> {total}")
 
 
+def export(db, out):
+    src = sqlite3.connect(db)
+    with open(out, "w") as f:
+        for sid, company, raw in src.execute(
+            "SELECT source_id, json_extract(job, '$.company'), raw_data FROM source_jobs "
+            "WHERE raw_data <> '' ORDER BY source_id, rowid"
+        ):
+            f.write(json.dumps({"source": sid, "company": company, "raw": json.loads(raw)}) + "\n")
+
+
+TABLES = {
+    "canonical_jobs": "SELECT id, job, status, role, eligibility, scope, posted, seniority, visa, experience, "
+    "min_years FROM canonical_jobs ORDER BY id",
+    "source_jobs": "SELECT source_id, source_job_id, canonical_job_id, job, content_hash, status, company_key, "
+    "title_key FROM source_jobs ORDER BY source_id, source_job_id",
+    "jobs_fts": "SELECT c.id, f.title, f.company, f.description FROM canonical_jobs c "
+    "JOIN jobs_fts f ON f.rowid = c.fts_rowid ORDER BY c.id",
+}
+
+
+def contents(db):
+    con = sqlite3.connect(db)
+    return {name: con.execute(sql).fetchall() for name, sql in TABLES.items()}
+
+
+def ingest(a):
+    work = Path(a.work)
+    work.mkdir(parents=True, exist_ok=True)
+    items = work / "items.jsonl"
+    if not items.exists():
+        export(a.db, items)
+    print(f"{sum(1 for _ in open(items))} stored raw items from {a.db}")
+    dbs = {}
+    for side, binary in (("old", a.old), ("new", a.new)):
+        db = work / f"{side}.db"
+        if side == "old" and a.keep_old and db.exists():
+            print(f"old: kept {db}")
+            dbs[side] = contents(db)
+            continue
+        for f in work.glob(f"{side}.db*"):
+            f.unlink()
+        with open(items) as stdin:
+            r = subprocess.run([binary, str(db), str(a.passes)], stdin=stdin, capture_output=True, text=True,
+                               env=dict(os.environ, RUST_LOG="error"))
+        if r.returncode != 0:
+            print(f"{side}: {r.stderr.strip()[-300:]}")
+            return 1
+        for line in r.stdout.splitlines():
+            print(f"{side} {line}")
+        dbs[side] = contents(db)
+    same = True
+    for name in TABLES:
+        o, n = dbs["old"][name], dbs["new"][name]
+        if o == n:
+            print(f"{name}: identical, {len(o)} rows")
+            continue
+        same = False
+        diff = next((i for i, (x, y) in enumerate(zip(o, n)) if x != y), min(len(o), len(n)))
+        print(f"{name}: DIFFERENT, old {len(o)} rows, new {len(n)}, first difference at row {diff}")
+    return 0 if same else 1
+
+
 def summary(xs):
     xs = sorted(xs)
     p95 = xs[min(len(xs) - 1, int(round(0.95 * (len(xs) - 1))))]
@@ -180,9 +242,18 @@ def main():
     r.add_argument("--parallel", type=int, default=6)
     r.add_argument("--skip-old", action="store_true")
     r.add_argument("--old-cases", type=int, default=0)
+    i = sub.add_parser("ingest")
+    i.add_argument("--old", required=True)
+    i.add_argument("--new", required=True)
+    i.add_argument("--db", required=True)
+    i.add_argument("--work", default="eval/scale/work/ingest")
+    i.add_argument("--passes", type=int, default=2)
+    i.add_argument("--keep-old", action="store_true")
     a = p.parse_args()
     if a.cmd == "synthesize":
         synthesize(a.src, a.out, a.copies)
+    elif a.cmd == "ingest":
+        sys.exit(ingest(a))
     else:
         sys.exit(run(a))
 

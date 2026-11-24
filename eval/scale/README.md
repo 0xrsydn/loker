@@ -2,8 +2,9 @@
 
 Runs an older and a newer `loker` binary over copies of one database. It
 checks that they return the same results for every case, and times both.
-Run it by hand when changing how search works (`store.rs`, `api.rs`,
-`derived.rs`, a migration with indexes); it isn't part of CI. A faster
+Run it by hand when changing how search or ingest works (`store.rs`,
+`api.rs`, `derived.rs`, a description reader, a migration with indexes); it
+isn't part of CI. A faster
 search that returns different jobs is a regression, so parity comes first.
 
 ```sh
@@ -66,4 +67,47 @@ design") lists what to do once that matters on a real database.
 
 The first open after an upgrade costs about 1.2 ms per job, once. That is
 6 minutes at 305k. A later change to the derivation rules, which changes
-`derived::STAMP`, costs the same again.
+`derived::STAMP`, costs the same again; after the faster readers below, about
+0.3 ms a job (5.8 s at 19k).
+
+## Ingest
+
+`ingest` replays a real ingest offline. It exports every stored raw item of
+a database, feeds them board by board through `job_from_raw` and
+`Store::ingest` (the `replay` example in `loker-sources`) into a fresh
+database, twice: a first ingest, then a re-ingest of the same jobs. It does
+this with an old and a new `replay` build and compares the two databases row
+by row: canonical jobs (JSON and derived columns), listings and their links,
+and full-text rows. Timestamps are left out.
+
+```sh
+cargo build --release --example replay                     # in each checkout
+python3 scale_eval.py ingest --old OLD/target/release/examples/replay \
+  --new ../../target/release/examples/replay --db DB [--passes 2] [--keep-old]
+RUST_LOG=sqlx::query=debug replay OUT.db 1 < items.jsonl   # each statement's time
+```
+
+`--keep-old` reuses the old database from the last run. On 2026-11-24, real
+ingest of 360 boards (19,066 jobs), same machine as above:
+
+| | first ingest | re-ingest |
+|---|---|---|
+| old (1f53655) | 1,304 s (transform 104 s, store 1,199 s) | 179 s (101 s, 78 s) |
+| new | 84 s (16 s, 68 s) | 22.5 s (12 s, 10 s) |
+
+All three tables were identical. The old store's time grew with the whole
+database: a full-text scan for every new job, a scan of every live listing
+for every changed one, and a read of every live row per board for the
+expired-or-stale check. The description readers had to run the regex
+crate's slowest engine, because Unicode `\b` on non-ASCII text rules out its
+DFA; each now skips text that can't match, then runs the exact pattern.
+Over the 19k descriptions they took 132 s and now take 11 s, with
+byte-identical output (`readers` example):
+
+| reader | before | after |
+|---|---|---|
+| pay | 69–78 s | 2.7 s |
+| stated eligibility | 41–46 s | 3 s |
+| open to wider | 4.8 s | 1.8 s |
+| visa | 8.5 s | 1.6 s |
+| experience | 4.6 s | 2.1 s |

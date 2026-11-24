@@ -135,7 +135,7 @@ visa and experience are rules over the title and description, so each row
 carries `derived_stamp`, a hash of the rule sources (`derived::STAMP`); when
 the store opens, rows with another stamp are derived again from the stored
 JSON, in parallel, with no re-fetch. A rule change costs one pass over the
-jobs on the next open (about a millisecond a job), instead of a regex pass
+jobs on the next open (about 0.3 ms a job), instead of a regex pass
 over every match on every search. Two covering indexes hold every filtered
 column, `canonical_jobs_search` (by id, for a full-text match) and
 `canonical_jobs_listing` (by status and date), so counting and filtering
