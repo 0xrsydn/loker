@@ -79,6 +79,9 @@ enum Command {
         /// state none are kept.
         #[arg(long)]
         years: Option<u8>,
+        /// Keep only jobs posted in the last this many days; undated jobs are dropped.
+        #[arg(long, value_name = "DAYS")]
+        posted_within: Option<u32>,
         /// Return only id, title, company, link, scope, level, pay, years, date and verdict.
         #[arg(long)]
         compact: bool,
@@ -300,6 +303,7 @@ async fn main() -> anyhow::Result<()> {
             role,
             seniority,
             years,
+            posted_within,
             compact,
             titles,
             any_word,
@@ -330,6 +334,7 @@ async fn main() -> anyhow::Result<()> {
                         .map(|s| serde_json::from_value(serde_json::Value::String(s.clone())))
                         .collect::<Result<_, _>>()?,
                     experience_years: years,
+                    posted_within_days: posted_within,
                     view: if titles {
                         View::Titles
                     } else if compact {

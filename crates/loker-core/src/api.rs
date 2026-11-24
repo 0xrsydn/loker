@@ -75,6 +75,11 @@ pub struct SearchParams {
     /// The viewer's years of experience. Drops jobs that require more
     /// (`experience.minYears` above this); jobs that state no years are kept.
     pub experience_years: Option<u8>,
+    /// Keep only jobs posted in the last this many days, by the date the
+    /// source gives (`postedAt`). A board can keep a posting open for years,
+    /// so this hides old ones without closing them. Jobs with no posting date
+    /// are dropped.
+    pub posted_within_days: Option<u32>,
     /// Keep only jobs in any of these roles or with any of these modifiers:
     /// ids from `list_roles`, at any level (`engineering` takes in `backend`
     /// and `ai_engineering`; `forward_deployed` is a modifier). Jobs with no
@@ -294,6 +299,15 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         Some(MinVerdict::Maybe) => VerdictKind::Maybe,
         None => VerdictKind::Unknown,
     };
+    let posted_after = match p.posted_within_days {
+        Some(0) => {
+            return Err(Error::Invalid(
+                "`postedWithinDays` must be at least 1".into(),
+            ));
+        }
+        Some(n) => Some(Utc::now() - chrono::Duration::days(i64::from(n))),
+        None => None,
+    };
 
     const BATCH: u32 = 200;
     let offset = p.offset.unwrap_or(0);
@@ -318,6 +332,11 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             }
             if let (Some(years), Some(e)) = (p.experience_years, &job.experience)
                 && e.min_years > years
+            {
+                continue;
+            }
+            if let Some(after) = posted_after
+                && !job.posted_at.is_some_and(|t| t >= after)
             {
                 continue;
             }

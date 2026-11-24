@@ -284,6 +284,59 @@ async fn experience_filter_keeps_jobs_that_state_no_years() {
 }
 
 #[tokio::test]
+async fn posted_within_keeps_recent_jobs_and_drops_undated_ones() {
+    let s = store("posted").await;
+    let now = chrono::Utc::now();
+    let jobs: Vec<_> = [("new", Some(5)), ("old", Some(400)), ("undated", None)]
+        .into_iter()
+        .map(|(id, age)| {
+            let mut j = job(
+                "jobicy",
+                id,
+                "Co",
+                &format!("Engineer {id}"),
+                Scope::Worldwide,
+                0.8,
+            );
+            j.posted_at = age.map(|d| now - chrono::Duration::days(d));
+            j
+        })
+        .collect();
+    ingest(&s, "jobicy", &jobs).await;
+    let titles = |within: Option<u32>| {
+        let s = &s;
+        async move {
+            let r = search_jobs(
+                s,
+                SearchParams {
+                    posted_within_days: within,
+                    view: View::Titles,
+                    ..Default::default()
+                },
+            )
+            .await?;
+            let mut got: Vec<String> = r
+                .jobs
+                .iter()
+                .map(|h| match h {
+                    Hit::Titles(t) => t.title.clone(),
+                    _ => unreachable!(),
+                })
+                .collect();
+            got.sort();
+            Ok::<_, loker_core::api::Error>(got)
+        }
+    };
+    assert_eq!(titles(None).await.unwrap().len(), 3);
+    assert_eq!(titles(Some(30)).await.unwrap(), ["Engineer new"]);
+    assert_eq!(
+        titles(Some(730)).await.unwrap(),
+        ["Engineer new", "Engineer old"]
+    );
+    assert!(titles(Some(0)).await.is_err());
+}
+
+#[tokio::test]
 async fn a_country_list_drops_only_jobs_that_exclude_everyone_else() {
     let s = store("elsewhere").await;
     let jobs: Vec<_> = [

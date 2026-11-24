@@ -189,6 +189,15 @@
         "null"
       ]
     },
+    "postedWithinDays": {
+      "description": "Keep only jobs posted in the last this many days, by the date the\nsource gives (`postedAt`). A board can keep a posting open for years,\nso this hides old ones without closing them. Jobs with no posting date\nare dropped.",
+      "format": "uint32",
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
     "q": {
       "default": "",
       "description": "Full-text query over title, company and description; words also match\ntheir other forms (\"engineer\" finds \"engineering\"). Jobs with every word\ncome first, then jobs with only some, marked `partial`. Keep it to the\nrole and skills: where the viewer can work from is `country`, not a\nquery word. Empty lists the newest jobs.",

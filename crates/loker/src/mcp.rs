@@ -43,7 +43,8 @@ impl LokerMcp {
                        it to find what the viewer can apply to; `\"yes\"` keeps only settled ones. If only a few \
                        jobs qualify, say so: a short list is a good answer. `experienceYears: 3` drops \
                        jobs that require more than 3 years and keeps those that state none; `seniority: [\"junior\"]` keeps \
-                       only jobs at those levels; `role: [\"backend\", \"ai\"]` keeps only jobs in those roles (ids \
+                       only jobs at those levels; `postedWithinDays: 30` keeps only jobs posted in the last 30 days \
+                       (boards keep some postings open for years); `role: [\"backend\", \"ai\"]` keeps only jobs in those roles (ids \
                        from `list_roles`, any level: `engineering` takes in every engineering role; \
                        `forward_deployed` and `founding` are modifiers). To browse cheaply, use `view: \"compact\"` (about a third of the \
                        size) or `view: \"titles\"` (about 70 characters a job), then `get_jobs` for the picks. \
