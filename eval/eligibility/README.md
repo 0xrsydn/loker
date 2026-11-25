@@ -16,6 +16,7 @@ JUDGE=opus python3 eligibility_eval.py label [--set holdout]   # cached
 JUDGE=deepseek41 python3 eligibility_eval.py label [--set holdout]   # DeepSeek v4.1 via Pi (opencode-go), high reasoning
 python3 eligibility_eval.py agree [--set holdout]
 python3 eligibility_eval.py score [--set holdout] [--bin PATH] [-v]
+python3 eligibility_eval.py codes [--db PATH] [--top 60]   # codes after a place, and what they became
 ```
 
 ## How it works
@@ -327,3 +328,46 @@ are added.
 
 Jobs read while changing rules: every tuning-set miss listed by `score -v`.
 The holdout's text and labels were not read before it was scored.
+
+### Cities with state codes (2026-11-25)
+
+Each two-letter part of a location used to be read as a country, so in a
+"City, ST" office the state became a second country: California read as
+Canada, Colorado as Colombia, Idaho as Indonesia. A replay of the 2026-11-24
+crawl gave 2,888 of its 19,066 jobs a wrong country (fixed in 6bbbde5). No set above caught it.
+Their viewers' countries share almost no codes with US states (Delaware,
+Indiana, Idaho), and their jobs come mostly from remote boards, which rarely
+write "City, ST".
+
+`cities.json` covers that gap. It holds 60 Greenhouse, Ashby and Lever jobs
+from `snapshot-cities.db` (that crawl), each remote or of unknown workplace,
+with a code after a place, 2 per company at most. Half have a state code
+that is also a country code (CA, CO, IL, VA, ...). It adds three viewers
+whose countries those codes name: Canada (UTC-5), Israel (+2) and Colombia
+(-5). Its labels are cached under their own key (`v1+wide`), so the other
+sets keep five viewers. The fix was written against this crawl, so the set is
+a regression test, not a holdout. Labellers agree on 473/480 verdicts.
+
+| rules | Opus: yes right / wrong yes / wrong no | DeepSeek v4.1: same |
+|---|---|---|
+| before the fix (597aed0) | 27/40 / 10 / 2 | 24/40 / 14 / 3 |
+| **now (6bbbde5)** | **22/25 / 1 / 1** | **20/25 / 3 / 2** |
+
+The wrong yeses before were Canada 8, Israel 1 and Colombia 1 (Opus). The
+one left is a lone "Remote, CA". A code standing alone is read as a country,
+and the description shows this one meant California. Both labellers also
+call no what loker calls maybe for a US viewer when a job names only a city
+("San Francisco, CA") and not how it's worked: 8 by Opus, the same as
+before the fix. That is the city rule above (a city alone may be an office),
+not the codes.
+
+`codes` lists, for any database, each two-letter code that follows a place:
+how many jobs have it, how often it also appears among the job's countries,
+and its commonest places. `!` marks a US state code that does appear among
+the countries. Run it after a crawl from a new source or region: a state code
+read as a country shows up as a `!` row with a high "as country" count. On
+the crawl before the fix it showed CA 1,945 of 1,945, VA 383 and CO 228 as
+countries, and MH (Mumbai, as the Marshall Islands) 24. After the fix the
+only `!` row is CA, with 29 jobs that really do list Canada ("Remote
+(Canada)", "Toronto, ON").
+

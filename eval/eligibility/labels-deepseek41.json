@@ -1,4 +1,784 @@
 {
+ "v1+wide|j_0a67d3a83e": {
+  "evidence": "Remote (New York City, NY) / Remote (Durham, NC); \"Our company is entirely remote, and has been since we were founded in 2018... we schedule regular team meet-ups in our hubs across the US and, depending on the role, prioritize hiring in those hubs\"; benefits to \"all U.S based employees that are full-time\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_0a8ff8d933": {
+  "evidence": "\"**Location:** Dallas, Texas\" (board: \"Dallas, TX\", workplaceType \"Remote\")",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_11089f594a": {
+  "evidence": "Livingston, NJ / New York, NY / Sunnyvale, CA / San Francisco, CA / Bellevue, WA ... Frequent travel to prospective data center locations is required.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_173de12a64": {
+  "evidence": "offices: [{\"location\": \"Ohio, USA\", \"name\": \"US - Remote - Ohio\"}]; Title: US- Central North- EHS Manager",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_19ec476aaa": {
+  "evidence": "\"Remote (US), with roughly 25% travel to customers.\" Board: location \"Remote, US\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_22119b5cc4": {
+  "evidence": "Location-based hybrid policy: Currently, we expect all staff to be in one of our offices at least 25% of the time.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_234b93d6fd": {
+  "evidence": "The ideal candidate for this role will live in Houston Texas, USA. ... MUST be based in Texas",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_247957e516": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"Enjoy flexible working arrangements, including hybrid and remote work\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_25e43e91f8": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"lead our California policy efforts and help shape and advance state policy priorities across the West Coast\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_296aacfe0b": {
+  "evidence": "Board: location \"Remote, US\", workplaceType \"Remote\", secondary location \"San Francisco, CA\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_2a66482895": {
+  "evidence": "\"location\": \"Remote, US\", \"workplaceType\": \"Remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_2bdc399588": {
+  "evidence": "\"location\": \"North America\" ... **This role can be based remotely or in our SF HQ**",
+  "verdicts": {
+   "BR": "no",
+   "CA": "yes",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_309899993b": {
+  "evidence": "Location-based hybrid policy: Currently, we expect all staff to be in one of our offices at least 25% of the time.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_3189de924d": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_33f843225b": {
+  "evidence": "\"location\": \"Remote\", \"workplaceType\": \"Remote\", address country \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_3890c6dd28": {
+  "evidence": "\"location\": \"New York, NY\", \"isRemote\": true, \"workplaceType\": \"Remote\", address country \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_39b4077594": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"flexible working arrangements, including hybrid and remote work, along with the option to work from anywhere across the globe two weeks each year\" (temporary travel perk only); US benefits: \"401K plan with an employer match contribution up to 4%\", \"recognise 9 public holidays\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_3d82dab7c7": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"A flexible, fully remote work environment with the autonomy to establish practical ways of working\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_41a3b26216": {
+  "evidence": "Location: London, UK. \"Location-based hybrid policy: Currently, we expect all staff to be in one of our offices at least 25% of the time.\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_4c810645e4": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"This is primarily a remote role, but candidates must live within a reasonable driving distance or have easy regional flight access to accommodate these monthly multi-day on-site account visits\" ... \"supporting accounts in Montana and Utah\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_530c0db5f5": {
+  "evidence": "Board: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"Willingness and ability to travel periodically between TEEM target states and nationally as required (approx. 15–20%)\"; \"Geographic location within a key TEEM state (Illinois, Michigan, North Carolina, or Virginia)\" (desired only)",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_5320ac4051": {
+  "evidence": "Board fields: {\"country\": \"IN\", \"workplaceType\": \"remote\"} (remote, listed for India only); description requires \"the ability to work US Mountain Time business hours with globally distributed teams\" — US Mountain Time business hours fall at night in India (UTC+5.5), so even the listed country's offset cannot meet the required hours, and no other country is listed.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_5dd6e8b3ad": {
+  "evidence": "Board fields: \"isRemote\": true, \"workplaceType\": \"Remote\", \"location\": \"San Francisco, New York\", \"addressCountry\": \"USA\", secondaryLocations: {\"addressCountry\": \"Canada\", \"addressLocality\": \"Toronto\", \"addressRegion\": \"Ontario\"}, \"location\": \"Toronto, ON\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "yes",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_5fb48eea06": {
+  "evidence": "Board fields: {\"country\": \"US\", \"workplaceType\": \"remote\"} — remote, United States; the description states no other location and no working-hours requirement.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_6f30274ac9": {
+  "evidence": "Board fields: \"isRemote\": true, \"workplaceType\": \"Remote\", \"location\": \"Remote, US\", \"addressCountry\": \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_6fbf010ff8": {
+  "evidence": "Location: Arlington, VA. \"US Citizen\" — nothing in the posting says the role can be done remotely.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_72c6dac8c7": {
+  "evidence": "Board fields: \"isRemote\": true, \"workplaceType\": \"Remote\", \"location\": \"Charlotte, NC\", addressLocality \"Charlotte \", addressCountry \"United States\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_758bfda84a": {
+  "evidence": "Location: Washington, DC (office Arlington, VA). \"Eligibility Requirement:** U.S. Person\" — no remote statement.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_774622b254": {
+  "evidence": "Location: Seattle, WA; \"Catered lunch each day in our office and data center locations\" — city given with nothing stating the job can be done remotely.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_792c88a198": {
+  "evidence": "location: \"Washington, DC\"; offices: \"Washington, District of Columbia, United States\"; no remote statement; \"Eligibility Requirements: U.S. Person\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_7ade3bbd36": {
+  "evidence": "\"We are flexible with respect to geographic location, and the ideal candidate will be comfortable working remotely/work from home within the US or be based from Bethesda, MD office.\" plus board fields {\"country\": \"US\", \"workplaceType\": \"remote\"}; required hours \"core East Coast business hours (company hours are 8:00 AM-5:00 PM Eastern); available no later than 10:00 AM Eastern\" are fine from UTC-5 but the hire must be within the US.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_7dff1aa754": {
+  "evidence": "\"The ideal candidate for this role will be based in the Greater Boston Metro.\" (board fields {\"country\": \"US\", \"workplaceType\": \"remote\"}) — the specific statement ties the role to the Boston metro in the US, so only a US-based viewer is not ruled out, and it is unsettled whether the job is truly remote from elsewhere in the US.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_80e3f25a29": {
+  "evidence": "Board fields: \"country\": \"IN\", \"workplaceType\": \"remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "yes",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_8dcc510b29": {
+  "evidence": "location: \"Hybrid - New York, NY\"; \"#LI-Hybrid\"; \"Coinbase is a remote-first, but not remote-only company. Expect to get together quarterly for intense in-person working sessions called \"surges.\"\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_8ef1b2ec42": {
+  "evidence": "This role is based in our Presidio office in San Francisco, with frequent travel to customer sites in the US and abroad.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_95836f50f1": {
+  "evidence": "location: \"NY, US, CA, US, IL, US - Remote\"; \"#LI-Remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_98e893a589": {
+  "evidence": "location: \"Chantilly, VA\"; offices: \"Chantilly, Virginia, United States\"; no remote statement; \"Eligibility requirements: US Citizen\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_99c3f49f1d": {
+  "evidence": "Board fields: \"country\": \"US\", \"workplaceType\": \"remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_9b316ffc3e": {
+  "evidence": "Board: \"Remote, US\"; description: \"This is a remote role based within the Mountain or Southwest region.\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_acc53b18f9": {
+  "evidence": "Location: Remote, National Role ... lead high-stakes, consultative sales efforts with the largest Corrections agencies in the U.S. ... Willingness to travel 50% to engage directly with customers and partners across the U.S.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_aeefe7ac7c": {
+  "evidence": "location: Washington, DC, United States ... #LI-Onsite",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_af7f6fb555": {
+  "evidence": "Board: \"Remote, US\"; title: \"Solutions Engineer (US West)\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_b6a2cf873b": {
+  "evidence": "San Francisco, CA | New York City, NY | Seattle, WA ... Location-based hybrid policy: Currently, we expect all staff to be in one of our offices at least 25% of the time.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_b847ca0fa9": {
+  "evidence": "Board: \"location\": \"Denver, CO\", \"workplaceType\": \"Remote\"; title: \"Enterprise Account Executive (Colorado)\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_c29bd34b9d": {
+  "evidence": "location: Livingston, NJ / New York, NY / Sunnyvale, CA / Bellevue, WA ... Catered lunch each day in our office and data center locations",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_c5937fafe5": {
+  "evidence": "Board secondary location: \"Remote (US)\"; location: \"New York, NY (HQ)\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_c7bf339ab1": {
+  "evidence": "Warfighter Support SME to join our team in Arlington, VA",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_c7cf2310f0": {
+  "evidence": "join our SoC team at Baidu’s Sunnyvale office",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_c9f71481db": {
+  "evidence": "Board fields: \"country\": \"US\", \"workplaceType\": \"remote\"; description: \"work from anywhere across the globe two weeks each year\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_cde8afaacf": {
+  "evidence": "\"workplaceType\": \"Remote\", \"isRemote\": true; \"Location: North America / East\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "yes",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_cf6b558938": {
+  "evidence": "Board fields: \"country\": \"US\", \"workplaceType\": \"remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_d7b3db08ea": {
+  "evidence": "Board fields: {\"country\": \"US\", \"workplaceType\": \"remote\"} — the posting's location is the US, remote, with nothing offering work from elsewhere.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_d96bca1f1d": {
+  "evidence": "San Francisco, CA (On-site)",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_e027982121": {
+  "evidence": "\"Field Partner Sales Leader - US Federal\"; \"Location: Remote, Washington, DC metro\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_e55fbcc4a4": {
+  "evidence": "\"This role is onsite up to 3 days per week at our Mountain View office, San Francisco office, or both\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "no"
+  }
+ },
+ "v1+wide|j_eb0b5420c6": {
+  "evidence": "location: Chantilly, VA",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "maybe"
+  }
+ },
+ "v1+wide|j_ebe39f9d02": {
+  "evidence": "\"location\": \"Remote (US)\"; \"secondaryLocations\": [{\"location\": \"Remote (Canada)\"}]; \"workplaceType\": \"Remote\"",
+  "verdicts": {
+   "BR": "no",
+   "CA": "yes",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_eeb74e925c": {
+  "evidence": "Board fields: {\"country\": \"US\", \"workplaceType\": \"remote\"}; description only adds \"comfortable working independently in a fast-moving, remote environment\".",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_f931898349": {
+  "evidence": "Board fields: {\"country\": \"US\", \"workplaceType\": \"remote\"}; \"Enjoy flexible working arrangements, including hybrid and remote work, along with the option to work from anywhere across the globe two weeks each year\" (i.e. based in the US, only two weeks abroad).",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
+ "v1+wide|j_fc5e9dee96": {
+  "evidence": "\"Candidates must be able to work Monday to Friday 9:00 AM PST to 5:30 PM PST.\" and \"Ability to work remotely\"; board country is US, so only the US offset (12:00–20:30 ET) fits the required PST hours.",
+  "verdicts": {
+   "BR": "no",
+   "CA": "no",
+   "CO": "no",
+   "DE": "no",
+   "ID": "no",
+   "IL": "no",
+   "IN": "no",
+   "US": "yes"
+  }
+ },
  "v1|j_0043876220": {
   "evidence": "\"location\": \"Paris\" (no remote option; \"visa\": \"US citizen/visa only\")",
   "verdicts": {

@@ -1,5 +1,5 @@
 """Eligibility eval for loker: the verdict (yes / maybe / unknown / no) the
-current rules give five viewers, against verdicts labelled by Opus and
+current rules give five viewers (eight for `cities`), against verdicts labelled by Opus and
 DeepSeek from the whole posting. Run by hand; not part of CI. See README.md.
 
   python3 eligibility_eval.py parity [--db PATH]   # rebuilt eligibility vs what the snapshot stored
@@ -9,6 +9,7 @@ DeepSeek from the whole posting. Run by hand; not part of CI. See README.md.
   JUDGE=opus|deepseek41 python3 eligibility_eval.py label [--set holdout]   # deepseek: the old API judge
   python3 eligibility_eval.py agree [--set holdout] [--with deepseek41]
   python3 eligibility_eval.py score [--set holdout] [-v]
+  python3 eligibility_eval.py codes [--db PATH] [--top 60]   # two-letter codes after a place, and what they became
 
 Verdicts come from `crates/loker-sources/examples/eligibility.rs`, which
 re-reads every listing's stored raw item with the current adapters and
@@ -34,14 +35,21 @@ DBS = {"sample": [os.path.join(EVAL, "pay", "snapshot.db")],
        "ats": [os.path.join(HERE, "snapshot-ats.db")],
        "ats2": [os.path.join(HERE, "snapshot-ats2.db")],
        "ats3": [os.path.join(HERE, "snapshot-ats3.db")],
+       "cities": [os.path.join(HERE, "snapshot-cities.db")],
        "holdout2": [os.path.join(HERE, "snapshot-h2.db"), os.path.join(HERE, "snapshot-agg.db"),
                     os.path.join(HERE, "snapshot-h2-himalayas.db")]}
 BIN = os.path.join(REPO, "target", "release", "examples", "eligibility")
 PROMPT_VERSION = "v1"
 JUDGES = {"opus": "claude-opus-5-5", "deepseek": "deepseek-v4-pro", "deepseek41": "opencode-go/deepseek-v4.1-flash:high"}
 MAX_CHARS = 12000
-VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
-NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia"}
+BASE_VIEWERS = [("US", -5.0), ("DE", 1.0), ("BR", -3.0), ("IN", 5.5), ("ID", 7.0)]
+WIDE_VIEWERS = [("CA", -5.0), ("IL", 2.0), ("CO", -5.0)]
+WIDE_SETS = {"cities"}
+NAMES = {"US": "the United States", "DE": "Germany", "BR": "Brazil", "IN": "India", "ID": "Indonesia",
+         "CA": "Canada", "IL": "Israel", "CO": "Colombia"}
+STATE_COUNTRY_CODES = {"AL", "AR", "AZ", "CA", "CO", "DE", "GA", "ID", "IL", "IN", "KY", "LA", "MA", "MD", "ME", "MN",
+                       "MO", "MS", "MT", "NC", "NE", "PA", "SC", "SD", "TN", "VA"}
+CODE_AFTER_PLACE = re.compile(r"([^,;/|()]+),\s*([A-Za-z]{2})(?=\s*(?:[,;/|()]|$))")
 KINDS = ["yes", "maybe", "unknown", "no"]
 FAMILIES = ["himalayas", "jobicy", "remoteok", "weworkremotely", "workable", "ycombinator", "greenhouse", "ashby", "lever",
             "recruitee", "smartrecruiters"]
@@ -85,6 +93,7 @@ def arg(flag, default):
 
 
 SET = arg("--set", "sample")
+VIEWERS = BASE_VIEWERS + WIDE_VIEWERS if SET in WIDE_SETS else BASE_VIEWERS
 
 
 def family(source_id):
@@ -256,6 +265,48 @@ def sample_ats(name="ats"):
     save(f"{name}.json", {f: out[f] for f in ("recruitee", "smartrecruiters")})
 
 
+def stored_place(job):
+    return (job["stored"] or {}).get("raw") or ""
+
+
+def sample_cities():
+    if os.path.exists(os.path.join(HERE, "cities.json")):
+        sys.exit("cities already drawn")
+    pool = {j: d for j, d in jobs(DBS["cities"]).items()
+            if family(primary(d)["source"]) in ("greenhouse", "ashby", "lever")
+            and (d["stored"] or {}).get("workplace") in ("remote", "unknown")
+            and CODE_AFTER_PLACE.search(stored_place(d))}
+    clash = {j: d for j, d in pool.items()
+             if any(c.upper() in STATE_COUNTRY_CODES for _, c in CODE_AFTER_PLACE.findall(stored_place(d)))}
+    rest = {j: d for j, d in pool.items() if j not in clash}
+    rng = random.Random("elig-cities")
+    print("cities, a state code that is also a country code:")
+    a = draw(clash, 10, 2, rng)
+    print("cities, any other code after a place:")
+    b = draw(rest, 10, 2, rng)
+    save("cities.json", {f: sorted(a[f] + b[f]) for f in ("greenhouse", "ashby", "lever")})
+
+
+def codes():
+    js = jobs(arg("--db", DBS["cities"][0]))
+    n, as_country, us, places = Counter(), Counter(), Counter(), defaultdict(Counter)
+    for d in js.values():
+        e = d["stored"] or {}
+        countries = set(e.get("countries") or [])
+        for place, code in CODE_AFTER_PLACE.findall(e.get("raw") or ""):
+            code = code.upper()
+            n[code] += 1
+            as_country[code] += code in countries
+            us[code] += "US" in countries
+            places[code][place.strip()[-28:]] += 1
+    print(f"{len(js)} jobs; two-letter codes after a place, and how often each also stands in the job's countries")
+    print(f"  {'code':4} {'jobs':>6} {'as country':>10} {'US listed':>9}  places")
+    for code, k in n.most_common(int(arg("--top", "60"))):
+        flag = "!" if code in STATE_COUNTRY_CODES and as_country[code] else " "
+        top = ", ".join(f"{p} ({c})" for p, c in places[code].most_common(3))
+        print(f"{flag} {code:4} {k:6} {as_country[code]:10} {us[code]:9}  {top}")
+
+
 def set_ids(name=None):
     s = load(f"{name or SET}.json", {})
     return [j for f in FAMILIES for j in s.get(f, [])]
@@ -378,7 +429,7 @@ def ask_pi(prompt, n):
 
 
 def key(jid):
-    return f"{PROMPT_VERSION}|{jid}"
+    return f"{PROMPT_VERSION}+wide|{jid}" if SET in WIDE_SETS else f"{PROMPT_VERSION}|{jid}"
 
 
 def label():
@@ -454,7 +505,7 @@ if __name__ == "__main__":
             "sample-workable3": lambda: sample_workable("workable3"),
             "sample-workable4": lambda: sample_workable("workable4"),
             "sample-yc": sample_yc, "sample-ats": sample_ats, "sample-ats2": lambda: sample_ats("ats2"),
-            "sample-ats3": lambda: sample_ats("ats3"), "label": label, "agree": agree, "score": score}
+            "sample-ats3": lambda: sample_ats("ats3"), "sample-cities": sample_cities, "codes": codes, "label": label, "agree": agree, "score": score}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         sys.exit(__doc__)
     cmds[sys.argv[1]]()
