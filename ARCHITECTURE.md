@@ -100,6 +100,32 @@ unknown counts as remote only on a board that lists nothing but remote jobs
 (`Source::remote_only`; not Y Combinator, which lists on-site jobs too) or
 an employer board configured `remote = true`.
 
+A location is read in groups split by `;`, `/` and `|`. Inside a group, a
+two-letter code after a place ("Westminster, CO") is read in this order (`country::code_after_place`):
+
+1. If the code is a state or province of the nearest named city or country
+   in the group, or that country's own code, the job is in that country.
+   So "Mumbai, MH" is India and "Berlin, DE" is Germany.
+2. Otherwise a US state code means the US.
+3. Otherwise a country code means that country.
+4. Otherwise a code that only one table (Canadian provinces, or Indian,
+   Brazilian or Australian states) has means that country.
+
+A city whose country the code contradicts is a namesake and is dropped:
+"London, ON" is Canada only. A code that agrees with the city ("New York,
+NY") counts as that city and not as the whole country, so a remote job there
+still only names a city. A code standing alone ("Remote, CA") is still a
+country.
+
+*Why:* most boards write US offices as "City, ST". Reading the state as a
+country gave 2,888 of the 19,066 jobs in the 2026-11-24 crawl a wrong
+country: California read as Canada, Colorado as Colombia, Idaho as
+Indonesia. That told viewers in those countries they might apply. Step 2 can
+still misread an unlisted city abroad, such as "Casablanca, MA" or "Córdoba,
+AR", so `country.rs` lists the cities of the markets loker serves first.
+Y Combinator writes "City, ST, CC", and its adapter reads the last part as
+the country.
+
 ## Trade-offs
 
 The design chooses one kind of error over another. Each choice is deliberate.

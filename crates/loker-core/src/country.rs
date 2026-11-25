@@ -232,6 +232,21 @@ const CITIES: &[(&str, &str)] = &[
     ("chennai", "IN"),
     ("noida", "IN"),
     ("jakarta", "ID"),
+    ("bandung", "ID"),
+    ("surabaya", "ID"),
+    ("yogyakarta", "ID"),
+    ("semarang", "ID"),
+    ("medan", "ID"),
+    ("denpasar", "ID"),
+    ("bali", "ID"),
+    ("tangerang", "ID"),
+    ("bekasi", "ID"),
+    ("depok", "ID"),
+    ("batam", "ID"),
+    ("haifa", "IL"),
+    ("herzliya", "IL"),
+    ("jerusalem", "IL"),
+    ("ramat gan", "IL"),
     ("kuala lumpur", "MY"),
     ("bangkok", "TH"),
     ("manila", "PH"),
@@ -281,6 +296,58 @@ pub fn place_country(name: &str) -> Option<(&'static str, bool)> {
         .iter()
         .find(|(c, _)| *c == n)
         .map(|(_, code)| (*code, true))
+}
+
+const US_STATE_CODES: &[&str] = &[
+    "al", "ak", "az", "ar", "ca", "co", "ct", "de", "fl", "ga", "hi", "id", "il", "in", "ia", "ks",
+    "ky", "la", "me", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny",
+    "nc", "nd", "oh", "ok", "or", "pa", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "va", "wa", "wv",
+    "wi", "wy", "dc",
+];
+const CA_PROVINCE_CODES: &[&str] = &[
+    "ab", "bc", "mb", "nb", "nl", "ns", "nt", "nu", "on", "pe", "qc", "sk", "yt",
+];
+const IN_STATE_CODES: &[&str] = &[
+    "ap", "as", "br", "cg", "dl", "ga", "gj", "hp", "hr", "jh", "jk", "ka", "kl", "mh", "mp", "od",
+    "pb", "rj", "tn", "tg", "up", "uk", "wb",
+];
+const BR_STATE_CODES: &[&str] = &[
+    "ac", "al", "am", "ap", "ba", "ce", "df", "es", "go", "ma", "mg", "ms", "mt", "pa", "pb", "pe",
+    "pi", "pr", "rj", "rn", "ro", "rr", "rs", "sc", "se", "sp", "to",
+];
+const AU_STATE_CODES: &[&str] = &["nt", "sa", "wa"];
+
+fn subdivision_codes(country: &str) -> &'static [&'static str] {
+    match country {
+        "US" => US_STATE_CODES,
+        "CA" => CA_PROVINCE_CODES,
+        "IN" => IN_STATE_CODES,
+        "BR" => BR_STATE_CODES,
+        "AU" => AU_STATE_CODES,
+        _ => &[],
+    }
+}
+
+pub fn code_after_place(code: &str, place_country: Option<&str>) -> Option<&'static str> {
+    let code = code.trim().to_lowercase();
+    if let Some(near) = place_country.and_then(to_alpha2)
+        && (near.eq_ignore_ascii_case(&code) || subdivision_codes(near).contains(&code.as_str()))
+    {
+        return Some(near);
+    }
+    if US_STATE_CODES.contains(&code.as_str()) {
+        return Some("US");
+    }
+    if let Some(c) = to_alpha2(&code) {
+        return Some(c);
+    }
+    let mut owners = ["CA", "IN", "BR", "AU"]
+        .into_iter()
+        .filter(|c| subdivision_codes(c).contains(&code.as_str()));
+    match (owners.next(), owners.next()) {
+        (Some(c), None) => Some(c),
+        _ => None,
+    }
 }
 
 const EUROPE: &[&str] = &[

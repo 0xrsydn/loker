@@ -484,35 +484,76 @@ pub fn eligibility_from_text(text: &str, remote: Option<bool>) -> Eligibility {
     let mut worldwide = false;
     let mut unmapped = Vec::new();
     let mut city_countries = Vec::new();
-    for part in lower
-        .split([';', ',', '/', '|', '(', ')'])
-        .flat_map(|p| p.split(" or "))
-    {
-        let mut p = part
-            .trim()
-            .trim_matches(|c: char| c == '-' || c == '–')
-            .trim()
-            .to_string();
-        if WORLDWIDE.contains(&p.as_str()) {
-            worldwide = true;
-            continue;
+    for group in lower.split([';', '/', '|']) {
+        let mut parts: Vec<String> = Vec::new();
+        for part in group.split([',', '(', ')']).flat_map(|p| p.split(" or ")) {
+            let mut p = part
+                .trim()
+                .trim_matches(|c: char| c == '-' || c == '–')
+                .trim()
+                .to_string();
+            if WORLDWIDE.contains(&p.as_str()) {
+                worldwide = true;
+                continue;
+            }
+            for n in NOISE {
+                p = p.replace(n, " ");
+            }
+            let p = p.split_whitespace().collect::<Vec<_>>().join(" ");
+            let p = p
+                .trim_matches(|c: char| c == '-' || c == '–' || c == ':')
+                .trim();
+            if !p.is_empty() {
+                parts.push(p.to_string());
+            }
         }
-        for n in NOISE {
-            p = p.replace(n, " ");
+        let is_code = |p: &str| p.len() == 2 && p.chars().all(|c| c.is_ascii_alphabetic());
+        let named: Vec<Option<Place>> = parts
+            .iter()
+            .map(|p| (!is_code(p)).then(|| place(p)).flatten())
+            .collect();
+        let country_of = |pl: &Option<Place>| match pl {
+            Some(Place::Country(c) | Place::City(c)) => Some(*c),
+            _ => None,
+        };
+        let mut found: Vec<Option<Place>> = named.clone();
+        let mut namesake = vec![false; parts.len()];
+        for (i, p) in parts.iter().enumerate() {
+            if !is_code(p) {
+                continue;
+            }
+            let after_place =
+                i > 0 && !matches!(named[i - 1], Some(Place::Region(_) | Place::Worldwide));
+            if !after_place {
+                found[i] = place(p);
+                continue;
+            }
+            let near = named[..i]
+                .iter()
+                .rev()
+                .find_map(country_of)
+                .or_else(|| named[i + 1..].iter().find_map(country_of));
+            found[i] = country::code_after_place(p, near).map(Place::Country);
+            if let (Some(Place::City(city)), Some(Place::Country(code))) = (named[i - 1], found[i])
+            {
+                if city == code {
+                    found[i] = Some(Place::City(city));
+                } else {
+                    namesake[i - 1] = true;
+                }
+            }
         }
-        let p = p.split_whitespace().collect::<Vec<_>>().join(" ");
-        let p = p
-            .trim_matches(|c: char| c == '-' || c == '–' || c == ':')
-            .trim();
-        if p.is_empty() {
-            continue;
-        }
-        match place(p) {
-            Some(Place::Worldwide) => worldwide = true,
-            Some(Place::Region(r)) => regions.push(r.to_string()),
-            Some(Place::Country(c)) => countries.push(c.to_string()),
-            Some(Place::City(c)) => city_countries.push(c.to_string()),
-            None => unmapped.push(p.to_string()),
+        for (i, p) in parts.iter().enumerate() {
+            if namesake[i] {
+                continue;
+            }
+            match found[i] {
+                Some(Place::Worldwide) => worldwide = true,
+                Some(Place::Region(r)) => regions.push(r.to_string()),
+                Some(Place::Country(c)) => countries.push(c.to_string()),
+                Some(Place::City(c)) => city_countries.push(c.to_string()),
+                None => unmapped.push(p.to_string()),
+            }
         }
     }
     let only_cities =
