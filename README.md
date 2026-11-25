@@ -26,6 +26,7 @@ cargo run -- search golang rust kotlin        # every word first, then partial m
 cargo run -- search developer --seniority junior,intern   # levels from the title or source
 cargo run -- search backend --years 3   # drops jobs asking for more than 3 years; keeps jobs that state none
 cargo run -- search engineer --posted-within 30   # only jobs posted in the last 30 days; boards keep some open for years
+cargo run -- search engineer --sort newest   # newest first instead of best match; jobs with every word still lead
 cargo run -- search --role ai,data --country ID --compact      # by role, any level; `loker roles` lists them
 cargo run -- roles enrich                      # optional: Jev classifies roles (needs [providers.jev] and OPENROUTER_API_KEY)
 cargo run -- search --country ID --tz 7 --min-verdict yes --titles --limit 100   # everything you can apply to, one line each
@@ -248,7 +249,7 @@ claude mcp add loker -- loker mcp
 ```
 
 Tools: `search_jobs` (query, `anyWord`, `country`, `tz`, `limit`, `offset`,
-`minVerdict`, `seniority`, `experienceYears`, `role`, `view`; each job carries an eligibility verdict with a reason
+`minVerdict`, `seniority`, `experienceYears`, `role`, `view`, `sort`; each job carries an eligibility verdict with a reason
 and its role, and with `country` the result counts the matching jobs by verdict whatever `minVerdict` keeps), `get_jobs`, `list_roles` (the role vocabulary), `sources_eval`, `verify_sources`
 and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".

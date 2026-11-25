@@ -88,6 +88,7 @@ macro_rules! fts_all_words {
 macro_rules! fts_order {
     () => {
         " ORDER BY CASE WHEN ?9 THEN 0 ELSE all_words END DESC,
+                   CASE WHEN ?10 THEN c.posted END DESC,
                    bm25(jobs_fts, 1.0, 5.0, 1.0, 1.0), c.id"
     };
 }
@@ -116,6 +117,7 @@ pub const STALE_AFTER_DAYS: i64 = 30;
 pub struct SearchFilter {
     pub q: String,
     pub any_word: bool,
+    pub newest: bool,
     pub country: Option<String>,
     pub posted_after: Option<String>,
     pub seniority: Option<String>,
@@ -588,7 +590,7 @@ impl Store {
         };
         let mut query = f.bind(sqlx::query(sql), &fts);
         if fts.is_some() {
-            query = query.bind(f.any_word);
+            query = query.bind(f.any_word).bind(f.newest);
         }
         query
             .fetch_all(&self.pool)
@@ -619,7 +621,7 @@ impl Store {
                 fts_from!(),
                 search_filters!(),
                 fts_order!(),
-                " LIMIT ?10 OFFSET ?11"
+                " LIMIT ?11 OFFSET ?12"
             )
         } else {
             concat!(
@@ -627,11 +629,12 @@ impl Store {
                 list_from!(),
                 search_filters!(),
                 list_order!(),
-                " LIMIT ?10 OFFSET ?11"
+                " LIMIT ?11 OFFSET ?12"
             )
         };
         f.bind(sqlx::query(sql), &fts)
             .bind(f.any_word)
+            .bind(f.newest)
             .bind(limit)
             .bind(offset)
             .fetch_all(&self.pool)

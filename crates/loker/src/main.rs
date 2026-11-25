@@ -5,7 +5,7 @@ use loker::App;
 use loker_core::api::{
     BoardTally, CheckStatus, DiscoverParams, DiscoverReport, DoctorReport, GetJobsParams,
     GetJobsResult, Hit, IngestAllReport, IngestParams, MinVerdict, RoleEnrichReport, SearchHit,
-    SearchParams, SearchResult, SourcesEval, VerifyParams, VerifyReport, View,
+    SearchParams, SearchResult, Sort, SourcesEval, VerifyParams, VerifyReport, View,
 };
 use loker_core::home::loker_home;
 use loker_core::model::Seniority;
@@ -65,6 +65,9 @@ enum Command {
         /// Rank by score alone instead of putting jobs with every word first.
         #[arg(long)]
         any_word: bool,
+        /// `newest` orders by posting date instead of by how well jobs match.
+        #[arg(long, value_parser = ["relevance", "newest"], default_value = "relevance")]
+        sort: String,
         /// Keep only jobs whose verdict is at least this good (needs --country).
         #[arg(long, value_parser = ["yes", "maybe"])]
         min_verdict: Option<String>,
@@ -307,6 +310,7 @@ async fn main() -> anyhow::Result<()> {
             compact,
             titles,
             any_word,
+            sort,
             json,
         } => {
             let q = query.join(" ");
@@ -343,6 +347,11 @@ async fn main() -> anyhow::Result<()> {
                         View::Full
                     },
                     any_word,
+                    sort: if sort == "newest" {
+                        Sort::Newest
+                    } else {
+                        Sort::Relevance
+                    },
                 })
                 .await?;
             if json {

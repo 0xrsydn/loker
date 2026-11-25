@@ -92,6 +92,20 @@ pub struct SearchParams {
     /// scanning a long list. Get full details for the picks with `get_jobs`.
     #[serde(default)]
     pub view: View,
+    /// `relevance` (default): with a query, by how well jobs match; without
+    /// one, newest first. `newest`: by posting date, newest first, undated
+    /// jobs last. Jobs with every query word still come first unless `anyWord`.
+    #[serde(default)]
+    pub sort: Sort,
+}
+
+/// The order of a search's results.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum Sort {
+    #[default]
+    Relevance,
+    Newest,
 }
 
 /// The weakest verdict a search keeps.
@@ -361,6 +375,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
     let filter = SearchFilter {
         q: p.q.clone(),
         any_word: p.any_word,
+        newest: p.sort == Sort::Newest,
         country: viewer.as_ref().map(|v| v.country.clone()),
         posted_after: posted_after.map(|t| t.to_rfc3339_opts(chrono::SecondsFormat::Secs, true)),
         seniority: (!p.seniority.is_empty())

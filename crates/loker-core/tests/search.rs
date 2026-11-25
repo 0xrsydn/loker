@@ -3,7 +3,7 @@ mod common;
 use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
-use loker_core::api::{Hit, SearchParams, VerdictCounts, View, search_jobs};
+use loker_core::api::{Hit, SearchParams, Sort, VerdictCounts, View, search_jobs};
 use loker_core::model::{Elsewhere, Scope, Seniority};
 use loker_core::verdict::VerdictKind;
 
@@ -223,6 +223,66 @@ async fn ranking() {
             want,
             "a level filter keeps only jobs at those levels: {level:?}"
         );
+    }
+}
+
+#[tokio::test]
+async fn newest_orders_by_date_after_jobs_with_every_word() {
+    let s = store("newest").await;
+    let jobs: Vec<_> = [
+        ("a", "Rust Engineer", Some(1)),
+        ("b", "Senior Rust Engineer", Some(29)),
+        ("c", "Rust Engineer Rust", None),
+        ("d", "Rust Designer", Some(30)),
+    ]
+    .into_iter()
+    .map(|(id, title, day)| {
+        let mut j = job("jobicy", id, "Co", title, Scope::Worldwide, 0.8);
+        j.posted_at = day.map(days);
+        j
+    })
+    .collect();
+    ingest(&s, "jobicy", &jobs).await;
+    for (any_word, want) in [
+        (
+            false,
+            [
+                "Senior Rust Engineer",
+                "Rust Engineer",
+                "Rust Engineer Rust",
+                "Rust Designer",
+            ],
+        ),
+        (
+            true,
+            [
+                "Rust Designer",
+                "Senior Rust Engineer",
+                "Rust Engineer",
+                "Rust Engineer Rust",
+            ],
+        ),
+    ] {
+        for country in [None, Some("ID".to_string())] {
+            let p = SearchParams {
+                q: "rust engineer".into(),
+                any_word,
+                country,
+                sort: Sort::Newest,
+                view: View::Titles,
+                ..Default::default()
+            };
+            let r = search_jobs(&s, p.clone()).await.unwrap();
+            let got: Vec<String> = r
+                .jobs
+                .into_iter()
+                .map(|h| match h {
+                    Hit::Titles(t) => t.title,
+                    _ => unreachable!(),
+                })
+                .collect();
+            assert_eq!(got, want, "{p:?}");
+        }
     }
 }
 
