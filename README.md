@@ -342,3 +342,9 @@ Read-only mirror: https://git.rasyidanaf.com/0xrsydn/loker.
 
 Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or
 [MIT license](LICENSE-MIT) at your option.
+
+Copyright 2026 0xrsydn and the loker contributors. Copies and derived works
+keep the copyright notice (MIT) or the [NOTICE](NOTICE) file (Apache-2.0).
+
+If loker powers your site, service or agent, a link back to
+<https://github.com/0xrsydn/loker> is appreciated, though not required.
