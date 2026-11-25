@@ -521,13 +521,17 @@ fn print_search(r: &SearchResult) {
             }
         }
     }
+    let verdicts = r
+        .verdicts
+        .map(|v| format!(" ({} yes, {} maybe, {} unknown)", v.yes, v.maybe, v.unknown))
+        .unwrap_or_default();
     match r.next_offset {
         Some(n) => eprintln!(
-            "{} of {} result(s), {} with every word; more with --offset {n}",
+            "{} of {} result(s), {} with every word{verdicts}; more with --offset {n}",
             r.count, r.total, r.full_matches
         ),
         None => eprintln!(
-            "{} of {} result(s), {} with every word",
+            "{} of {} result(s), {} with every word{verdicts}",
             r.count, r.total, r.full_matches
         ),
     }

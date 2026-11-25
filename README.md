@@ -249,7 +249,7 @@ claude mcp add loker -- loker mcp
 
 Tools: `search_jobs` (query, `anyWord`, `country`, `tz`, `limit`, `offset`,
 `minVerdict`, `seniority`, `experienceYears`, `role`, `view`; each job carries an eligibility verdict with a reason
-and its role), `get_jobs`, `list_roles` (the role vocabulary), `sources_eval`, `verify_sources`
+and its role, and with `country` the result counts the matching jobs by verdict whatever `minVerdict` keeps), `get_jobs`, `list_roles` (the role vocabulary), `sources_eval`, `verify_sources`
 and `stats`. Bad input comes back as a tool
 error the model can read and fix, such as "unknown country `Narnia`".
 config.toml is read each time it is needed, so edits apply without

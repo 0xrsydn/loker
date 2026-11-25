@@ -129,10 +129,34 @@ pub struct SearchResult {
     pub jobs: Vec<Hit>,
     /// Pass as `offset` to get the next page; absent when this page is the last.
     pub next_offset: Option<u32>,
+    /// With `country`: the jobs matching every filter but `minVerdict`, by
+    /// verdict, to show what loosening it would add. Jobs whose verdict is
+    /// `no` are never returned, so they are not counted. Absent without `country`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub verdicts: Option<VerdictCounts>,
     /// Why there are no results when it isn't the query: nothing is stored
     /// yet. Absent otherwise.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notice: Option<String>,
+}
+
+/// How many matching jobs got each verdict.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct VerdictCounts {
+    pub yes: u32,
+    pub maybe: u32,
+    pub unknown: u32,
+}
+
+impl VerdictCounts {
+    fn add(&mut self, kind: VerdictKind) {
+        match kind {
+            VerdictKind::Yes => self.yes += 1,
+            VerdictKind::Maybe => self.maybe += 1,
+            VerdictKind::Unknown => self.unknown += 1,
+            VerdictKind::No => {}
+        }
+    }
 }
 
 pub const EMPTY_STORE: &str = "No jobs are stored yet: run `loker ingest --all` to fetch them (`loker doctor` checks the setup).";
@@ -351,7 +375,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
             .then(|| modifier_ids(&p.role))
             .transpose()?,
     };
-    let (total, full, page) = match &viewer {
+    let (total, full, page, verdicts) = match &viewer {
         None => {
             let (total, full) = store.search_count(&filter).await?;
             let page: Vec<(String, Option<Verdict>, bool)> = store
@@ -360,13 +384,15 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
                 .into_iter()
                 .map(|(id, partial)| (id, None, partial))
                 .collect();
-            (total, full, page)
+            (total, full, page, None)
         }
         Some(viewer) => {
             let (mut total, mut full) = (0u32, 0u32);
             let mut page = Vec::new();
+            let mut verdicts = VerdictCounts::default();
             for c in store.search_candidates(&filter).await? {
                 let verdict = eligible_for(&c.eligibility, viewer);
+                verdicts.add(verdict.kind);
                 if verdict.kind > worst {
                     continue;
                 }
@@ -376,7 +402,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
                     page.push((c.id, Some(verdict), c.partial));
                 }
             }
-            (total, full, page)
+            (total, full, page, Some(verdicts))
         }
     };
     let ids: Vec<String> = page.iter().map(|(id, ..)| id.clone()).collect();
@@ -400,6 +426,7 @@ pub async fn search_jobs(store: &Store, p: SearchParams) -> Result<SearchResult>
         total,
         full_matches: full,
         next_offset: (total > offset + limit).then_some(offset + limit),
+        verdicts,
         jobs,
         notice,
     })

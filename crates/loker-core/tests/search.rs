@@ -3,7 +3,7 @@ mod common;
 use std::collections::BTreeSet;
 
 use common::{days, ingest, job, store};
-use loker_core::api::{Hit, SearchParams, View, search_jobs};
+use loker_core::api::{Hit, SearchParams, VerdictCounts, View, search_jobs};
 use loker_core::model::{Elsewhere, Scope, Seniority};
 use loker_core::verdict::VerdictKind;
 
@@ -459,7 +459,10 @@ fn varied_jobs(n: usize) -> Vec<loker_core::model::NewJob> {
         .collect()
 }
 
-async fn every_hit(s: &loker_core::store::Store, p: &SearchParams) -> (u32, u32, Vec<String>) {
+async fn every_hit(
+    s: &loker_core::store::Store,
+    p: &SearchParams,
+) -> (u32, Option<VerdictCounts>, Vec<String>) {
     let mut ids = Vec::new();
     let mut offset = 0;
     loop {
@@ -477,7 +480,7 @@ async fn every_hit(s: &loker_core::store::Store, p: &SearchParams) -> (u32, u32,
         ids.extend(r.jobs.iter().map(|h| h.id().to_string()));
         match r.next_offset {
             Some(o) => offset = o,
-            None => return (r.total, r.full_matches, ids),
+            None => return (r.total, r.verdicts, ids),
         }
     }
 }
@@ -564,14 +567,11 @@ async fn sql_filters_keep_exactly_the_jobs_the_rules_keep() {
             .posted_within_days
             .map(|d| chrono::Utc::now() - chrono::Duration::days(i64::from(d)));
         let matched = matching.len();
-        let expected: Vec<String> = matching
+        let filtered: Vec<String> = matching
             .into_iter()
             .filter(|id| {
                 let j = &jobs[id];
-                viewer
-                    .as_ref()
-                    .is_none_or(|v| eligible_for(&j.eligibility, v).kind <= worst)
-                    && (p.role.is_empty() || j.role.as_ref().is_some_and(|r| r.matches(&p.role)))
+                (p.role.is_empty() || j.role.as_ref().is_some_and(|r| r.matches(&p.role)))
                     && (p.seniority.is_empty()
                         || j.seniority.is_some_and(|l| p.seniority.contains(&l)))
                     && p.experience_years
@@ -580,9 +580,28 @@ async fn sql_filters_keep_exactly_the_jobs_the_rules_keep() {
                     && after.is_none_or(|a| j.posted_at.is_some_and(|t| t >= a))
             })
             .collect();
-        let (total, _, got) = every_hit(&s, &p).await;
+        let kind = |id: &String| {
+            viewer
+                .as_ref()
+                .map(|v| eligible_for(&jobs[id].eligibility, v).kind)
+        };
+        let expected: Vec<String> = filtered
+            .iter()
+            .filter(|id| kind(id).is_none_or(|k| k <= worst))
+            .cloned()
+            .collect();
+        let counts = viewer.as_ref().map(|_| {
+            let n = |want| filtered.iter().filter(|id| kind(id) == Some(want)).count() as u32;
+            VerdictCounts {
+                yes: n(VerdictKind::Yes),
+                maybe: n(VerdictKind::Maybe),
+                unknown: n(VerdictKind::Unknown),
+            }
+        });
+        let (total, verdicts, got) = every_hit(&s, &p).await;
         assert_eq!(got, expected, "{p:?}");
         assert_eq!(total as usize, expected.len(), "{p:?}");
+        assert_eq!(verdicts, counts, "{p:?}");
         narrowed += usize::from(!expected.is_empty() && expected.len() < matched);
     }
     assert!(

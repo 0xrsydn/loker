@@ -932,6 +932,32 @@
       ],
       "type": "object"
     },
+    "VerdictCounts": {
+      "description": "How many matching jobs got each verdict.",
+      "properties": {
+        "maybe": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unknown": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "yes": {
+          "format": "uint32",
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "yes",
+        "maybe",
+        "unknown"
+      ],
+      "type": "object"
+    },
     "VerdictKind": {
       "enum": [
         "yes",
@@ -1023,6 +1049,17 @@
       "format": "uint32",
       "minimum": 0,
       "type": "integer"
+    },
+    "verdicts": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/VerdictCounts"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "With `country`: the jobs matching every filter but `minVerdict`, by\nverdict, to show what loosening it would add. Jobs whose verdict is\n`no` are never returned, so they are not counted. Absent without `country`."
     }
   },
   "required": [
